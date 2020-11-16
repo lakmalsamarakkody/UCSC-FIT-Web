@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Website\Home;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,35 +17,40 @@ use App\Http\Controllers\Website\Home;
 */
 
 
+
+
+
 /*
 |--------------------------------------------------------------------------
-| FIT WEB SITE ROUTES
+| WEBSITE ROUTES
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+use App\Http\Controllers\Website\Home;
  
-Route::get('/home',[Home::class,'index']);
+Route::get('/home', [Home::class,'index']);
 
 /*
 |--------------------------------------------------------------------------
-| FIT PORTAL ROUTES
+| PORTAL ROUTES
 |--------------------------------------------------------------------------
 */
-Route::get('/portal/login', function () {
-    return view('portal/login');
-});
+use App\Http\Controllers\Portal\Login;
+
+Route::get('/portal/login', [Login::class,'index']);
 
 /*
 |--------------------------------------------------------------------------
-| FIT ADMIN PORTAL ROUTES
+| ADMIN PORTAL ROUTES
 |--------------------------------------------------------------------------
 */
 
 
 /*
 |--------------------------------------------------------------------------
-| FIT STUDENT PORTAL ROUTES
+| STUDENT PORTAL ROUTES
 |--------------------------------------------------------------------------
 */
