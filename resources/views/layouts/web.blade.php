@@ -73,7 +73,7 @@
     </div>
   </footer><!-- #footer -->
 
-  <a href="#" class="back-to-top"><i class="la la-chevron-up"></i></a>
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
   <!-- JavaScript Libraries -->
   <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script>
