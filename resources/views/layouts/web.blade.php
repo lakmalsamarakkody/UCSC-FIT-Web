@@ -7,7 +7,7 @@
         <title>FIT - UCSC</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="/img/favicon.png">
+        <link rel="icon" type="image/png" href="{{ asset('img/fit-nav.png') }}">
 
         <!-- FONTS -->
             <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
@@ -33,7 +33,7 @@
   <header id="header">
 
       <div id="logo" class="pull-left">
-        <a href="#hero"><img src="img/fit.png" alt="" title="" style="width: 60px; padding: 0px 0px 0px 0px;"/></img></a>
+        <a href="#hero"><img src="img/fit-nav.png" alt="" title="" style="width: 60px; padding: 0px 0px 0px 0px;"/></a>
 
       </div>
 
