@@ -19,7 +19,7 @@
     
         <!-- STYLES -->
             <!-- BOOTSTRAP -->      <link rel="stylesheet" href="{{ asset('css/app.css') }}" >
-            <!-- CSS -->      <link rel="stylesheet" href="{{ asset('css/home.css') }}" >
+            <!-- CSS -->      <link rel="stylesheet" href="{{ asset('css/web.css') }}" >
             <!-- LINE AWESOME -->   <link rel="stylesheet" href="{{ asset('css/line-awesome/css/line-awesome.css') }}">
             <!-- ANIMATE -->        <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
         <!-- /STYLES -->
@@ -63,7 +63,7 @@
     <img src="{{ asset('img/invert-ucsc.png') }}" width=10% >
       <h1 style="text-align: left;">Foundation in <br>Information Technology</h1>
       <h3 style="color:#fff">University of Colombo School of Computing</h2>
-      <a href="#about" class="btn-get-started" style="width=25px">About FIT</a>
+      <a href="#about" class="btn-get-started" style="width=25%">About FIT</a>
     </div>
   </section><!-- #hero -->
 
@@ -148,7 +148,7 @@ The FIT, Foundation in Information Technology, programme consists of three cours
 
 
   <!-- Template Main Javascript File -->
-  <script src="{{ asset('js/home.js') }}"></script>
+  <script src="{{ asset('js/web.js') }}"></script>
 
 </body>
 
