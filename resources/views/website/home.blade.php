@@ -5,9 +5,9 @@
     Hero Section
   ============================-->
   <section id="hero" style="background-image: url({{ asset('img/hero-back.png') }});">
-    <div class="hero-container">
+    <div class="hero-container col-lg-6">
     <img src="{{ asset('img/invert-ucsc.png') }}" width=10% >
-      <h1 style="text-align: left;">Foundation in <br>Information Technology</h1>
+      <h1 style="text-align: left;">Foundation in Information Technology</h1>
       <h3 style="color:#fff">University of Colombo School of Computing</h2>
       <a href="#about" class="btn-get-started" style="width=25%">About FIT</a>
     </div>

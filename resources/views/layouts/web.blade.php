@@ -40,7 +40,6 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
           <li class="menu-active"><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
           <li><a href="#">Programme</a></li>
           <li><a href="#">Registration</a></li>
           <li><a href="#">Learning</a></li>
