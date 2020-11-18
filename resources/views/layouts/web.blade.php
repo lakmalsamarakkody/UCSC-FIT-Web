@@ -34,7 +34,7 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav ml-auto">
                             <!-- <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a> -->
-                            <a class="nav-link" href="test">Programme</a>
+                            <a class="nav-link" href="#">Programme</a>
                             <a class="nav-link" href="#">Registration</a>
                             <a class="nav-link" href="#">Learning</a>
                             <a class="nav-link" href="#">Examination</a>
