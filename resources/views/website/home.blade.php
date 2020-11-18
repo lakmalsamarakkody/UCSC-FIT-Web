@@ -31,7 +31,7 @@
     <section id="hero" style="background-image: url({{ asset('img/background/hero-back.png') }});">
         <div class="hero-container col-lg-6">
             <img src="{{ asset('img/logo/invert-ucsc.png') }}" width=10% >
-            <h1 style="text-align: left;">Foundation in Information Technology</h1>
+            <h1 style="text-align: left;"><span style="color:#000">F</span>oundation in <br><span style="color:#000">I</span>nformation <br><span style="color:#000">T</span>echnology</h1>
             <h3 style="color:#fff">University of Colombo School of Computing</h2>
             <a href="#about" class="btn-get-started" style="width=25%">About FIT</a>
         </div>
