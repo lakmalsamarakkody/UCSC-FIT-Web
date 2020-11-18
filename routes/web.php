@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Website\Home;
  
-Route::get('/home', [Home::class,'index']);
+Route::get('/', [Home::class,'index']);
 
 /*
 |--------------------------------------------------------------------------
