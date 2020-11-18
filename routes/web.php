@@ -36,6 +36,9 @@ Route::get('/home', [Home::class,'index']);
 use App\Http\Controllers\Website\Program;
 Route::get('/programme', [Program::class,'index']);
 
+use App\Http\Controllers\Website\Registration;
+Route::get('/registration',[Registration::class,'index']);
+
 /*
 |--------------------------------------------------------------------------
 | PORTAL ROUTES

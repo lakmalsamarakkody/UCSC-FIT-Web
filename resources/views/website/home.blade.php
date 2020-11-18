@@ -7,7 +7,7 @@
     <header id="header">
 
         <div id="logo" class="pull-left">
-            <a href="/"><img src="img/logo/fit.png" alt="" title="" style="width: 60px; padding: 0px 0px 0px 0px;"/></a>
+            <a href="/"><img src="img/logo/fit-nav.png" alt="" title="" style="width: 65px; padding: 0px 0px 0px 0px;"/></a>
 
         </div>
 
@@ -15,10 +15,11 @@
             <ul class="nav-menu">
             <li class="menu-active"><a href="/">Home</a></li>
             <li><a href="programme">Programme</a></li>
-            <li><a href="registration">Registration</a></li>
             <li><a href="learning">Learning</a></li>
             <li><a href="examination">Examination</a></li>
+            <li><a href="registration">Registration</a></li>
             <li><a href="contact-us">Contact Us</a></li>
+            <li><a href="portal/login">Login</a></li>
 
             </ul>
         </nav><!-- #nav-menu-container -->
@@ -28,9 +29,11 @@
     <!--==========================
     Hero Section
     ============================-->
-    <section id="hero" style="background-image: url({{ asset('img/background/hero-back.png') }});">
-        <div class="hero-container col-lg-6">
-            <img src="{{ asset('img/logo/invert-ucsc.png') }}" width=10% >
+    <section id="hero" style="background-image: url({{ asset('img/background/UCSC-Banner-cropped.jpg') }});">
+        <div class="hero-container col-lg-12">
+            <div class="row">
+                <div class="col-lg-12"> <img src="{{ asset('img/logo/invert-ucsc.png') }}" width="10%" /> </div>
+            </div>
             <h1 style="text-align: left;">Foundation in Information Technology</h1>
             <h3 style="color:#fff">University of Colombo School of Computing</h2>
             <a href="#about" class="btn-get-started" style="width=25%">About FIT</a>
@@ -54,9 +57,9 @@
                     <p>The FIT, Foundation in Information Technology, programme consists of three courses, namely, ICT Applications (FIT 103), English for ICT (FIT 203) and Mathematics for ICT (FIT 303). e-Learning based online system will be available for all registered students to follow courses at any time during the day. e-Testing based system will be used for the evaluation once the student is ready to take the test at University of Colombo School of Computing (UCSC) etesting lab. Hence, students could start the programme at any time during the year and they can take exams at any month during the year at testing centres. At the same time, several private institutes conduct face to face classes based on the FIT syllabuses.</p>
                     
                     <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="icon"><i class="fa fa-book-open"></i></div>
+                    <a href="programme"><div class="icon"><i class="fa fa-book"></i></div></a>
                     <h4 class="title"><a href="programme">Programme</a></h4>
-                    <p class="description">For Programme Structure</p>
+                    <p class="description">Go to Programme Structure</p>
                     </div>
 
                 </div>
@@ -67,4 +70,5 @@
         </section><!-- #about -->
 
     </main>
+
 @endsection
