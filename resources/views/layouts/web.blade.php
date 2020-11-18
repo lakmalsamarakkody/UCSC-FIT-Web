@@ -19,15 +19,14 @@
 
     <body>
 
-        <!-- NAVIGATION -->
+        
         <div class="container-fluid">
         <div class="row">
             <div class="col-12 text-right text-white bg-dark">Login</div>
-            <div class="col-12 text-center"><h4>Foundation In Information Technology</h4></div>
-
+            
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="home">Home</a>
+                    <a class="navbar-brand" href="home"><img src="{{ asset('images/fit.jpg') }}" width="279" height="181"/></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -43,6 +42,7 @@
                     </div>
                 </nav>
             </div>
+
         </div>
         </div>
         <!-- /NAVIGATION -->
