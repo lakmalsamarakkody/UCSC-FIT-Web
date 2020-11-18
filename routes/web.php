@@ -30,8 +30,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 use App\Http\Controllers\Website\Home;
- 
 Route::get('/', [Home::class,'index']);
+
+use App\Http\Controllers\Website\Program;
+Route::get('/programme', [Program::class,'index']);
 
 /*
 |--------------------------------------------------------------------------
