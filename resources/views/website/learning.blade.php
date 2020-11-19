@@ -2,31 +2,6 @@
 @section('content')
 
     <!--==========================
-    Header
-    ============================-->
-    <header id="header">
-
-        <div id="logo" class="pull-left">
-            <a href="/"><img src="img/logo/fit-nav.png" alt="" title="" style="width: 65px; padding: 0px 0px 0px 0px;"/></a>
-
-        </div>
-
-        <nav id="nav-menu-container">
-            <ul class="nav-menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="programme">Programme</a></li>
-            <li class="menu-active"><a href="learning">Learning</a></li>
-            <li><a href="examination">Examination</a></li>
-            <li><a href="registration">Registration</a></li>
-            <li><a href="contact-us">Contact Us</a></li>
-            <li><a href="portal/login">Login</a></li>
-
-            </ul>
-        </nav><!-- #nav-menu-container -->
-        </div>
-    </header><!-- #header -->
-
-    <!--==========================
     Hero Section
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/hero-back.png') }}); height:200px">
@@ -43,10 +18,10 @@
     <section id="programme" style="padding-top: 80px;">
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-1 order-1">
-            <h2 class="title">Learning for FIT</h2>
-            <br/>
-            <h4>What are the available Courses?</h4>
-            <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b>only in English medium.</b></p>
+                <h2 class="title">Learning for FIT</h2>
+                <br/>
+                <h4>What are the available Courses?</h4>
+                <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b>only in English medium.</b></p>
             </div>
         </div>
     </section><!-- #about -->
