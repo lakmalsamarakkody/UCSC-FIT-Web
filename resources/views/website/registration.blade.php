@@ -49,10 +49,10 @@
                 </div>
             
             </div>
-            <div class="col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="margin-top: 100px; padding-left: 90px;">
+            <div class="col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="margin-top: 100px; padding-left: 90px; margin-left:0px !important; padding-left: 50px !important;">
                 <div class="icon-box wow " data-wow-delay="0.2s">
                     <a href="{{ url('login') }}"><div class="icon"><i class="la la-sign-in-alt"></i></div></a>
-                    <h4 class="title"><a href="{{ url('login') }}">Already Registered</a></h4>
+                    <h4 class="title"><a href="{{ url('login') }}">Already Registered?</a></h4>
                     <p class="description">Login to FIT Portal</p>
                 </div>
             </div>
