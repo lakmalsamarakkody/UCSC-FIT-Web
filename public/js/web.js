@@ -5,6 +5,7 @@ jQuery(document).ready(function ($) {
     window.open(url, '_blank');
     return false;
   });
+  
   // Header fixed and Back to top button
   $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {
