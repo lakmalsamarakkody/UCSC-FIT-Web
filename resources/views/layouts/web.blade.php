@@ -61,13 +61,13 @@
             <li id="examination_nav"><a href="{{ url('/examination') }}">Examination</a></li>
             <li id="registration_nav"><a href="{{ url('/registration') }}">Registration</a></li>
             <li id="contact_nav"><a href="{{ url('/contact') }}">Contact Us</a></li>
-            <li id="login_nav"><a href="{{ url('/login') }}login">Login</a></li>
+            <li id="login_nav"><a href="{{ url('/login') }}">Login</a></li>
 
             </ul>
         </nav><!-- #nav-menu-container -->
         </div>
     </header><!-- #header -->
-    
+
         @yield('content')
 
     <!--==========================
