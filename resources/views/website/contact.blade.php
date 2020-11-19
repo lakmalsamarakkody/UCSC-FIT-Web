@@ -15,7 +15,7 @@
     <!--==========================
       Contact Section
     ============================-->
-    <section id="about">
+    <section id="about" style="padding-bottom: 0px; !important">
         <div class="container wow fadeInUp">
             <div class="section-header">
                 <h3 class="section-title">Contact</h3>
@@ -105,7 +105,7 @@
         <hr>
         <div class="row  about-container ">
             <div class="col-lg-8 content order-lg-1 order-1">               
-                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
+                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="">
                     <h1 class="title"><a href="mailto:edc@ucsc.cmb.ac.lk">Complaints </a></h1>
                     <p class="description"> If you want to make a complain about any service related to the FIT Programme,<br>
                         you are requested to contact the following staff members depending on your issue.<br>
@@ -121,26 +121,27 @@
                         <i class="fa fa-phone"></i><tab1> <a href="tel:+94114720511"></a>+94 11 4720511</a> (Working Hours Only) <br>
                         <i class="fa fa-address-card"><tab1></i> Coordinator (EDC),
                         <br><tab2>External Degrees Centre,
-                        <br><tab2>University of Colombo School of Computing,
-                        <br><tab2>No. 35, Reid Avenue, 
-                        <br><tab2>Colombo 07,
-                        <br><tab2>Sri Lanka.
+                        <br><tab2>UCSC
                     </p>
                     <p class="description">
                         <b>Dr. T. A. Weerasinghe</b><br>
                         <i class="fa fa-envelope"></i><tab1> <a href="mailto:taw@ucsc.cmb.ac.lk">taw@ucsc.cmb.ac.lk</a> <br>
                         <i class="fa fa-phone"></i><tab1> <a href="tel:+94112591080"></a>+94 11 2591080</a> (Working Hours Only) <br>
-                        <i class="fa fa-address-card"><tab1></i> University of Colombo School of Computing,
-                        <br><tab2>No. 35, Reid Avenue, 
-                        <br><tab2>Colombo 07,
-                        <br><tab2>Sri Lanka.
+                        <i class="fa fa-address-card"><tab1></i> Coordinator(FIT) and Coordinator (e-LC),
+                        <br><tab2>UCSC
+                    </p>
+                    <p class="description">
+                        <b>Prof. K. P. Hewagamage</b><br>
+                        <i class="fa fa-envelope"></i><tab1> <a href="mailto:kph@ucsc.cmb.ac.lk">taw@ucsc.cmb.ac.lk</a> <br>
+                        <i class="fa fa-phone"></i><tab1> <a href="tel:+94112158950"></a>+94 11 2158950</a> (Working Hours Only) <br>
+                        <i class="fa fa-address-card"><tab1></i>  Director,
+                        <br><tab2>UCSC
                     </p>
                 </div>
             </div>
         </div>
-        
-
-      </div>
+    </section><!-- #about -->       
+    <section id="contact">
         <!-- map -->
       <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7921.805945256399!2d79.861153!3d6.902206!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2db2c18a68712863!2sUniversity%20of%20Colombo%20School%20of%20Computing!5e0!3m2!1sen!2slk!4v1605773846216!5m2!1sen!2slk" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
 
