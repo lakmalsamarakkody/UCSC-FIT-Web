@@ -23,7 +23,6 @@
                 <br/>
                 <h4>What are the available Courses?</h4>
                 <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b>only in English medium.</b></p>
-
             </div>
         </div>
     </section><!-- #smain header -->
@@ -65,7 +64,6 @@
             <div class="myBox col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit303.png') }}); cursor: pointer;">
                 <a target="_blank"  href="{{ asset('documents/FIT-303/FIT-303-Mathematics_for_Computing.pdf') }}"></a>
             </div>
-            
         </div>
     </section><!-- #FIT 103 -->
 
@@ -73,15 +71,12 @@
     <section id="programme">
             <div class="row about-container">
                 <div class="col-lg-8 content order-lg-1 order-2">               
-
-
                     <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-top: 80px;">
                         <a href="learning"><div class="icon"><i class="fa fa-leanpub"></i></div></a>
                         <h4 class="title"><a href="learning">Learning</a></h4>
                         <p class="description">How you learn FIT</p>
                     </div>
                 </div>
-                
             </div>
     </section><!-- #NEXT STEP -->
 
