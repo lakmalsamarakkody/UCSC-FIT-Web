@@ -13,8 +13,9 @@
   <main id="main">
 
     <!--==========================
-      Programme Section
+      Learning Section
     ============================-->
+    <!-- smain header -->
     <section id="programme" style="padding-top: 80px;">
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-1 order-1">
@@ -24,7 +25,7 @@
                 <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b>only in English medium.</b></p>
             </div>
         </div>
-    </section><!-- #about -->
+    </section><!-- #main header -->
     <section id="programme" style="padding-top: 40px;">
             <div class="row about-container">
                 
