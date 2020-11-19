@@ -1301,11 +1301,17 @@ button[type="submit"]:hover {
   font-size: 13px;
 }
 
-#contact .form input,
-#contact .form textarea {
-  border-radius: 0;
+.form input,
+.form textarea {
+  border-radius: 10px;
+  border: 2px solid #23159c;
   box-shadow: none;
   font-size: 14px;
+}
+
+input[type=text] {
+  background-color: #fff;
+  font-weight: bold;
 }
 
 .faq {

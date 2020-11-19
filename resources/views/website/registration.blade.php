@@ -33,7 +33,7 @@
                     </div>
                     <form action="" method="post" role="form" class="contactForm">
                         <div class="form-group">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                        <input type="text" class="form-control" name="email" id="email" placeholder="Type Your Email Here"  data-rule="email" data-msg="Please enter a valid email" />
                         <div class="validation"></div>
                         </div>
                         <div class="text-center"><button type="submit">Sign Up Here</button></div>
