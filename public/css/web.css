@@ -773,24 +773,25 @@ body.mobile-nav-active #mobile-nav-toggle {
     font-size: 14px;
 }
 
-#learning .btn-get-started{
+#learning #vle_link{
     font-family: "Poppins", sans-serif;
     text-transform: uppercase;
     font-weight: 500;
     text-align: center;
     font-size: 16px;
-    letter-spacing: 1px;
     display: inline-block;
-    padding: 8px 28px;
+    letter-spacing: 1px;
     border-radius: 50px;
     transition: 0.5s;
     margin: 0px;
     border: 2px solid #23159c;
     color: #23159c;
-    width: 20% !important;
+    background: #fff;
+    width: 25% !important;
+    
 }
 
-#learning .btn-get-started:hover {
+#learning #vle_link:hover {
     color: #fff;
     background: #23159c;
     border: 2px solid  #23159c;
@@ -1421,3 +1422,9 @@ button[type="submit"]:hover {
     padding-top: 15px;
   }
 }
+
+@media only screen and (max-width: 768px) {
+    #learning #vle_link{
+        width: 100% !important;
+    } 
+ }
