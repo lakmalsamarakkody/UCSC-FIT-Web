@@ -16,21 +16,33 @@
       Contact Section
     ============================-->
     <section id="about" style="padding-bottom: 0px; !important">
-        <div class="container wow fadeInUp">
-            <div class="section-header">
-                <h3 class="section-title">Contact</h3>
-                <p class="section-description">Contact UCSC e-Learning Centre for any of your queries, we are happy to help you</p>
+        <div class="row  about-container ">
+            <div class="col-lg-8 content order-lg-1 order-1"> 
+            <!-- <div class="section-header" style="padding-bottom: 50px; !important"> -->
+                <h4>If you have a problem with regard to the FIT programme or related services from UCSC, please read the following guidelines for assistance.</h4>
+
+                <h5 style="color: rgb(155, 5, 5);"> <b>Check Frequently Asked Questions (FAQs) to see whether you could find the answer for your problem.</b> </h5>
+            
+            </div>
+            <div class="col-lg-4 content order-lg-2 order-2 "> 
+                <a class="float-right faq wow fadeInRight" target="_blank" href="http://fit.bit.lk/vle/pluginfile.php/2765/mod_resource/content/4/general.html"><i class="fa fa-question-circle"></i> FAQ</a>
+
+                <!-- <div class="icon-box wow " data-wow-delay="0.2s">
+                    <a href="{{ url('login') }}"><div class="icon"><i class="la la-sign-in-alt"></i></div></a>
+                    <h4 class="title"><a href="{{ url('login') }}">Already Registered</a></h4>
+                    <p class="description">Login to FIT Portal</p>
+                </div> -->
             </div>
         </div>
-
+        <hr style="padding-bottom: 20px; !important">
         <div class="row  about-container ">
             <div class="col-lg-8 content order-lg-1 order-1">               
-                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
-                    <h1 class="title"><a href="mailto:edc@ucsc.cmb.ac.lk">Administration Matters</a></h1>
-                    <p class="description">If your question is related to administration matters of FIT programme, 
+                <h2 class="title"><a href="mailto:edc@ucsc.cmb.ac.lk" style="color:#000">Administration Matters</a></h2>
+                <br/>
+                <h5>If your question is related to administration matters of FIT programme, 
                         <br>for example <b>registration, submitting applications for examination,</b> etc. please contact External Degrees Centre. 
-                        <br>It is recommended to check the FIT website ( <a href="www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you contact the relevant details.</p>
-                </div>
+                        <br>It is recommended to check the FIT website ( <a href="www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you contact the relevant details.
+                </h5>
             </div>
             <div class="col-lg-4 content order-lg-2 order-2">               
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
@@ -53,13 +65,13 @@
 
         <div class="row  about-container ">
             <div class="col-lg-8 content order-lg-1 order-1">               
-                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
-                    <h1 class="title"><a href="mailto:admin@fit.bit.lk">e-Learning Services</a></h1>
-                    <p class="description">If your question is related to e-learning services,
+                    <h2 class="title"><a href="mailto:admin@fit.bit.lk"  style="color:#000">e-Learning Services</a></h2>
+                    <h5 class="description">If your question is related to e-learning services,
                         <br>for example,<b>login into the Learning Management System </b>( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> )  
                         <b>online assignments and accessing online courses related issues,</b> etc. contact e-Learning Centre. 
-                        <br>If your question is about online course content, it is recommended to check the relevent discussion forum of the course and post your question before you contact relevant facilitator at e-Learning Centre. <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> (Check the VLE site for announcements)</p>
-                </div>
+                        <br>If your question is about online course content, it is recommended to check the relevent discussion forum of the course and post your question before you contact relevant facilitator at e-Learning Centre. <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> (Check the VLE site for announcements)
+                    </h5>
+                
             </div>
             <div class="col-lg-4 content order-lg-2 order-2">               
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
@@ -80,13 +92,11 @@
 
         <div class="row  about-container ">
             <div class="col-lg-8 content order-lg-1 order-1">               
-                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
-                    <h1 class="title"><a href="mailto:taw@ucsc.cmb.ac.lk">Academic Matters</a></h1>
-                    <p class="description">If your question is related to administration matters of FIT programme, 
+                    <h2 class="title"><a href="mailto:taw@ucsc.cmb.ac.lk"  style="color:#000">Academic Matters</a></h2>
+                    <h5 class="description">If your question is related to administration matters of FIT programme, 
                         <br>for example <b>registration, submitting applications for examination,</b> etc. please contact External Degrees Centre. 
                         <br>It is recommended to check the FIT website ( <a href="www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you contact the relevant details.
-                    </p>
-                </div>
+                    </h5>
             </div>
             <div class="col-lg-4 content order-lg-2 order-2">               
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
@@ -105,12 +115,11 @@
         <hr>
         <div class="row  about-container ">
             <div class="col-lg-8 content order-lg-1 order-1">               
-                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="">
-                    <h1 class="title"><a href="mailto:edc@ucsc.cmb.ac.lk">Complaints </a></h1>
-                    <p class="description"> If you want to make a complain about any service related to the FIT Programme,<br>
+                    <h2 class="title"><a href="mailto:edc@ucsc.cmb.ac.lk"  style="color:#000">Complaints </a></h2>
+                    <h5 class="description"> If you want to make a complain about any service related to the FIT Programme,<br>
                         you are requested to contact the following staff members depending on your issue.<br>
                         It is recommended to send your complain by email rather than contacting through phone, unless it is an urgent matter.
-                </div>
+                    </h5>
             </div>
             <div class="col-lg-4 content order-lg-2 order-2">               
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">

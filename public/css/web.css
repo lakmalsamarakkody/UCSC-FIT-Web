@@ -885,6 +885,36 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 
+ /* Registration
+ --------------------------------*/
+ button[type="submit"] {
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 28px;
+  border-radius: 50px;
+  transition: 0.5s;
+  margin: 0px;
+  border: 2px solid #23159c;
+  color: #23159c;
+
+  background:  #fff;
+  /* border: 1px;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s; */
+}
+
+button[type="submit"]:hover {
+  background: #23159c;
+  color: #fff;
+  border: 2px solid  #fff;
+}
+
+
 
 /* Facts Section
 --------------------------------*/
@@ -1277,16 +1307,31 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-size: 14px;
 }
 
-#contact .form button[type="submit"] {
-  background:  #23159c;
-  border: 0;
+.faq {
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 36px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 28px;
+  border-radius: 50px;
+  transition: 0.5s;
+  margin: 0px;
+  border: 2px solid #23159c;
+  color: #23159c;
+
+  background:  #fff;
+  /* border: 1px;
   padding: 10px 24px;
   color: #fff;
-  transition: 0.4s;
+  transition: 0.4s; */
 }
 
-#contact .form button[type="submit"]:hover {
-  background: #51d8ad;
+.faq:hover {
+  background: #23159c;
+  color: #fff;
+  border: 2px solid  #fff;
 }
 
 /*--------------------------------------------------------------
@@ -1294,7 +1339,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------------------------------------*/
 
 #footer {
-  background: #343b40;
+  background: #212b4b;
   padding: 30px 0;
   color: #fff;
   font-size: 14px;
