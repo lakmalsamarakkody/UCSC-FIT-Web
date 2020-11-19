@@ -6,7 +6,7 @@
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/hero-back.png') }}); height:200px">
         <div class="page-hero-container">
-            <h1 style="padding-top:30px">Programme</h1>
+            <h1 style="padding-top:30px">Programme Structure</h1>
         </div>
     </section><!-- #hero -->
 
@@ -19,11 +19,9 @@
     <section id="programme" style="padding-top: 80px;">
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-1 order-1">
-                <h2 class="title">Programme Structure</h2>
+                <h2 class="title">What are the available Courses?</h2>
                 <br/>
-                <h4>What are the available Courses?</h4>
-                <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b>only in English medium.</b></p>
-            </div>
+                <h4>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b>only in English medium.</b></h4>            </div>
         </div>
     </section><!-- #main header -->
 
