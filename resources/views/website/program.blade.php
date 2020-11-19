@@ -25,7 +25,7 @@
                 <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b>only in English medium.</b></p>
             </div>
         </div>
-    </section><!-- #smain header -->
+    </section><!-- #main header -->
 
     <!-- FIT 103 -->
     <section id="programme" style="padding-top: 40px;">
