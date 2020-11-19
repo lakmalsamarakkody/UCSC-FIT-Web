@@ -5,7 +5,7 @@
 
     // ACTIVE NAVIGATION ENTRY
     $(document).ready(function ($) {
-        $('#learning_nav').addClass("menu-active");
+        $('#examination_nav').addClass("menu-active");
     });
 
 </script>
@@ -15,17 +15,17 @@
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/hero-back.png') }}); height:200px">
         <div class="page-hero-container">
-            <h1 style="padding-top:30px">Learning for FIT</h1>
+            <h1 style="padding-top:30px">How to Apply FIT Exams?</h1>
         </div>
     </section><!-- #hero -->
 
   <main id="main">
 
     <!--==========================
-      Learning Section
+      Examination Section
     ============================-->
     <!-- smain header -->
-    <section id="learning" style="padding-top: 80px;">
+    <section id="examination" style="padding-top: 80px;">
         <div class="row about-container">
             <div class="col-lg-7 content order-lg-1 order-1">
                 <h2 class="title">Virtual Learning Environment</h2>
@@ -53,7 +53,7 @@
     </section><!-- #main header -->
 
     <!-- DETAILS -->
-    <section id="learning">
+    <section id="examination">
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-2 order-1" style="text-align: left;">
                 </div>
@@ -61,7 +61,7 @@
     </section><!-- #DETAILS -->
     
     <!-- NEXT STEP -->
-    <section id="learning">
+    <section id="examination">
             <div class="row about-container">
                 <div class="col-lg-8 content order-lg-1 order-2">               
 

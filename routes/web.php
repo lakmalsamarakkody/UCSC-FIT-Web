@@ -7,6 +7,7 @@ use App\Http\Controllers\Website\Program;
 use App\Http\Controllers\Website\Registration;
 use App\Http\Controllers\Website\Learning;
 use App\Http\Controllers\Website\Contact;
+use App\Http\Controllers\Website\Examination;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,8 @@ Route::get('/registration',[Registration::class,'index']);
 Route::get('/learning',[Learning::class,'index']);
 
 Route::get('/contact',[Contact::class,'index']);
+
+Route::get('/examination',[Examination::class,'index']);
 
 /*
 |--------------------------------------------------------------------------
