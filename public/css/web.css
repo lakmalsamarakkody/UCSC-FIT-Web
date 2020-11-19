@@ -886,6 +886,36 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 
+ /* Registration
+ --------------------------------*/
+ button[type="submit"] {
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 28px;
+  border-radius: 50px;
+  transition: 0.5s;
+  margin: 0px;
+  border: 2px solid #23159c;
+  color: #23159c;
+
+  background:  #fff;
+  /* border: 1px;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s; */
+}
+
+button[type="submit"]:hover {
+  background: #23159c;
+  color: #fff;
+  border: 2px solid  #fff;
+}
+
+
 
 /* Facts Section
 --------------------------------*/
@@ -1271,23 +1301,44 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-size: 13px;
 }
 
-#contact .form input,
-#contact .form textarea {
-  border-radius: 0;
+.form input,
+.form textarea {
+  border-radius: 10px;
+  border: 2px solid #23159c;
   box-shadow: none;
   font-size: 14px;
 }
 
-#contact .form button[type="submit"] {
-  background:  #23159c;
-  border: 0;
-  padding: 10px 24px;
-  color: #fff;
-  transition: 0.4s;
+input[type=text] {
+  background-color: #fff;
+  font-weight: bold;
 }
 
-#contact .form button[type="submit"]:hover {
-  background: #51d8ad;
+.faq {
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 36px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 28px;
+  border-radius: 50px;
+  transition: 0.5s;
+  margin: 0px;
+  border: 2px solid #23159c;
+  color: #23159c;
+
+  background:  #fff;
+  /* border: 1px;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s; */
+}
+
+.faq:hover {
+  background: #23159c;
+  color: #fff;
+  border: 2px solid  #fff;
 }
 
 /*--------------------------------------------------------------
@@ -1295,7 +1346,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------------------------------------*/
 
 #footer {
-  background: #343b40;
+  background: #212b4b;
   padding: 30px 0;
   color: #fff;
   font-size: 14px;
