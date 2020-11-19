@@ -24,11 +24,11 @@
                 <h4>All registered FIT students will receive a registration number and a password to access the online learning management system</h4>
                 <br/>
                 <p>Once your payment is confirmed for the registration, you will be notified with login details. It is mandatory to include a valid email address when you register for the FIT programme. Otherwise you have to contact External Degrees Centre of UCSC to find out the status of your registration.
-                    <br/>Tel: 011 - 4720511 / 011 - 4720513
+                    <br/><b>Tel: 011 - 4720511 / 011 - 4720513</b>
                 </p>
-                <p>Within 2 weeks of registration we will enroll you to the LMS online courses. If you could not access the LMS after 2 weeks with the given username and password, please contact the LMS administrator.about-container. 
-                    <br/>Email: admin@fit.bit.lk
-                    <br/>Tel: 011-2591080
+                <p>Within 2 weeks of registration we will enroll you to the LMS online courses. If you could not access the LMS after 2 weeks with the given username and password, please contact the LMS administrator.
+                    <b><br/>Email: admin@fit.bit.lk
+                    <br/>Tel: 011-2591080</b>
                 </p>
                 <p>There are three separate online courses for the FIT Programme. You can access online interactive e-learning content and discuss with other learners and online e-facilitators in the course.</p>
                 <p>Several private teaching institutes in Sri Lanka conduct classes based on the FIT curriculum. Students are kindly advised to directly contact these institutes if they are interested to attend face to face classes based on the FIT programme.</p>
@@ -58,9 +58,9 @@
 
 
                     <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-top: 80px;">
-                        <a href="learning"><div class="icon"><i class="fa fa-leanpub"></i></div></a>
-                        <h4 class="title"><a href="learning">Learning</a></h4>
-                        <p class="description">How you learn FIT</p>
+                        <a href="examination"><div class="icon"><i class="fa fa-leanpub"></i></div></a>
+                        <h4 class="title"><a href="examination">Examination</a></h4>
+                        <p class="description">How to sit for your FIT Examinations</p>
                     </div>
                 </div>
                 
