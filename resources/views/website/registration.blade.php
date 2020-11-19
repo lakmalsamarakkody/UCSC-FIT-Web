@@ -1,6 +1,14 @@
 @extends('layouts/web')
 @section('content')
 
+<script type="text/javascript">
+
+    // ACTIVE NAVIGATION ENTRY
+    $(document).ready(function ($) {
+        $('#registration_nav').addClass("menu-active");
+    });
+
+</script>
 
     <!--==========================
     Hero Section
