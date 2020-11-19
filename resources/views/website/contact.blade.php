@@ -45,17 +45,17 @@
                 </h5>
             </div>
             <div class="col-lg-4 content order-lg-2 order-2">               
-                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
+                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px; float: right !important;">
                     <h1 class="title">&nbsp;</h1>
                     <p class="description">
                         <b>Mrs. W. M. N. K. Weerasooriya</b><br>
-                        <i class="fa fa-envelope"></i> <a href="mailto:edc@ucsc.cmb.ac.lk">edc@ucsc.cmb.ac.lk</a> <br>
-                        <i class="fa fa-phone"></i> <a href="tel:+94114720511"></a>+94 11 4720511</a> (Working Hours Only) <br>
-                        <i class="fa fa-address-card"></i> Coordinator (External Degrees Centre),
-                        <br>University of Colombo School of Computing,
-                        <br>No. 35, Reid Avenue, 
-                        <br>Colombo 07,
-                        <br>Sri Lanka.
+                        <i class="fa fa-envelope"></i><tab1><a href="mailto:edc@ucsc.cmb.ac.lk">edc@ucsc.cmb.ac.lk</a> <br>
+                        <i class="fa fa-phone"></i><tab1><a href="tel:+94114720511"></a>+94 11 4720511</a> (Working Hours Only) <br>
+                        <i class="fa fa-address-card"></i><tab1>Coordinator (External Degrees Centre),
+                        <br><tab2>University of Colombo School of Computing,
+                        <br><tab2>No. 35, Reid Avenue, 
+                        <br><tab2>Colombo 07,
+                        <br><tab2>Sri Lanka.
                     </p>
                 </div>
             </div>

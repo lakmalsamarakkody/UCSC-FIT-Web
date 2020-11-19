@@ -3,7 +3,7 @@
 --------------------------------------------------------------*/
 dummydeclaration { padding-left: 4em; } /* Firefox ignores first declaration for some reason */
 tab1 { padding-left: 1em; }
-tab2 { padding-left: 2.5em; }
+tab2 { padding-left: 2.25em; }
 
 body {
   background: #fff;
