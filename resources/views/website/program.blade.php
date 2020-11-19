@@ -1,6 +1,12 @@
 @extends('layouts/web')
 @section('content')
+<script type="text/javascript">
 
+    $(document).ready(function ($) {
+        $('#programme_nav').addClass("menu-active");
+    });
+
+</script>
     <!--==========================
     Hero Section
     ============================-->

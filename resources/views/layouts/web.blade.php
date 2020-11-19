@@ -24,6 +24,21 @@
             <!-- WEB CSS -->      <link rel="stylesheet" href="{{ asset('css/web.css') }}" >
             <!-- ANIMATE -->        <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
         <!-- /STYLES -->
+
+        <!-- JavaScript Libraries -->
+        <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('lib/jquery/jquery-migrate.min.js') }}"></script>
+        <script src="{{ asset('lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
+        <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
+        <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
+        <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
+        <script src="{{ asset('lib/superfish/hoverIntent.js') }}"></script>
+        <script src="{{ asset('lib/superfish/superfish.min.js') }}"></script>
+
+
+        <!-- Template Main Javascript File -->
+        <script src="{{ asset('js/web.js') }}"></script>
     </head>
 
     <body>
@@ -40,13 +55,13 @@
 
         <nav id="nav-menu-container">
             <ul class="nav-menu">
-            <li id="home"><a href="/">Home</a></li>
-            <li><a href="programme">Programme</a></li>
-            <li><a href="learning">Learning</a></li>
-            <li><a href="examination">Examination</a></li>
-            <li><a href="registration">Registration</a></li>
-            <li><a href="contact-us">Contact Us</a></li>
-            <li><a href="portal/login">Login</a></li>
+            <li id="home_nav"><a href="/">Home</a></li>
+            <li id="programme_nav"><a href="programme">Programme</a></li>
+            <li id="learning_nav"><a href="learning">Learning</a></li>
+            <li id="examination_nav"><a href="examination">Examination</a></li>
+            <li id="registration_nav"><a href="registration">Registration</a></li>
+            <li id="contact_nav"><a href="contact-us">Contact Us</a></li>
+            <li id="login_nav"><a href="login">Login</a></li>
 
             </ul>
         </nav><!-- #nav-menu-container -->
@@ -76,20 +91,7 @@
 
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-    <!-- JavaScript Libraries -->
-    <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('lib/jquery/jquery-migrate.min.js') }}"></script>
-    <script src="{{ asset('lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
-    <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
-    <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
-    <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
-    <script src="{{ asset('lib/superfish/hoverIntent.js') }}"></script>
-    <script src="{{ asset('lib/superfish/superfish.min.js') }}"></script>
 
-
-    <!-- Template Main Javascript File -->
-    <script src="{{ asset('js/web.js') }}"></script>
 
     </body>
 </html>
