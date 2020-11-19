@@ -21,51 +21,28 @@
             <div class="col-lg-8 content order-lg-1 order-1">
                 <h2 class="title">Learning for FIT</h2>
                 <br/>
-                <h4>What are the available Courses?</h4>
-                <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b>only in English medium.</b></p>
+                <h4>Virtual Learning Environment</h4>
+                <p>All registered FIT students will receive a registration number and a password to access the online learning management system.</p>
+                <p>Once your payment is confirmed for the registration, you will be notified with login details. It is recommended to include a valid email address when you register for the FIT programme. Otherwise you have to contact External Degrees Centre of UCSC by phone (Tel: 011-4720511/3) to find out the status of your registration. Within 2 weeks of registration we will enroll you to the LMS online courses. If you could not access the LMS after 2 weeks with the given username and password, please contact the LMS administrator by email (admin@fit.bit.lk) or phone (Tel: 011-2591080).</p>
+                <p>There are three separate online courses for the FIT Programme. You can access online interactive e-learning content and discuss with other learners and online e-facilitators in the course.</p>
+                <p>Several private teaching institutes in Sri Lanka conduct classes based on the FIT curriculum. Students are kindly advised to directly contact these institutes if they are interested to attend face to face classes based on the FIT programme.</p>
+                <p>It is important to mention that all FIT exams will be conducted in English medium and all learning materials developed based on the curriculum are available in English.</p>   
+            </div>
+            <div class="myBox col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/screenshot-fit-bit-lk-vle.png') }}); cursor: pointer;">
+                <a target="_blank"  href="http://fit.bit.lk/vle"></a>
             </div>
         </div>
     </section><!-- #main header -->
-    <section id="programme" style="padding-top: 40px;">
-            <div class="row about-container">
-                
-            <div class="col-lg-8 content order-lg-1 order-1">
-                <strong>FIT 103: ICT Applications</strong>
-                <p>This course provides basic ICT (Information and Communication Technology) knowledge and skills required for the office environment. It ensures that the learner possesses required knowledge and skills to use office applications competently. It encompasses eight modules: (1) Computing for the Society, (2) Introduction to Computers, (3) Word Processing for Electronic Documents, (4) Spreadsheets for Calculation, (5) Multimedia and Electronic Presentation, (6) Data and Databases, (7) The Internet and Web Applications, and (8) Programming. Also, students could use Microsoft Office 365 as the office package when they sit for examination. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test and a two-hour practical test for Fundamentals of Computing course.</p>
 
-            </div>
-            <div class="myBox col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit103.png') }});  cursor: pointer;">
-                <a target="_blank" class="" href="{{ asset('documents/FIT-103/FIT-103-Fundamentals_of_Computing.pdf') }}"></a>
-            </div>
-        </div>
-    </section><!-- #about -->
+    <!-- DETAILS -->
     <section id="programme">
         <div class="row about-container">
-            <div class="myBox col-lg-4 background order-lg-1 order-2 wow fadeInLeft" style="background-image: url({{ asset('img/logo/fit203.png') }});  cursor: pointer;">
-                <a target="_blank" href="{{ asset('documents/FIT-203/FIT-203-English_for_Computing.pdf') }}"></a>
-            
-            </div>
-            <div class="col-lg-8 content order-lg-2 order-1" style="text-align: right;">
-                <strong>FIT 203: English for ICT</strong>
-                <p>This course has been designed to provide language and communication skills in English from beginners to intermediate learners who want to pursue studies as well as careers in Information Communication Technology (ICT). All four areas of competency in English language, such as Reading, Listening, Speaking and Writing will be covered in this syllabus and the learning activities are designed considering ICT working environment. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test to evaluate reading, listening capabilities and a two-hour practical test to evaluate speaking and writing skills.
-                </p>   
-            </div>
-            
+            <div class="col-lg-8 content order-lg-2 order-1" style="text-align: left;">
+                </div>
         </div>
-    </section><!-- #about -->
-    <section id="programme">
-        <div class="row about-container">
-            <div class="col-lg-8 content order-lg-1 order-1">
-                <strong>FIT 303: Mathematics for ICT</strong>
-                <p>Mathematics plays an important role in Information Technology. The aim of this course is to provide basic mathematical and statistical concepts. After successful completion of this course, the learner will possess problem solving and analytical skills together with required mathematical & statistical knowledge to solve problems in computing. Hence, this will be very useful for anyone who is planning to pursue a carrier in ICT or related sector. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test.
-                </p>
-            </div>
-            <div class="myBox col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit303.png') }}); cursor: pointer;">
-                <a target="_blank"  href="{{ asset('documents/FIT-303/FIT-303-Mathematics_for_Computing.pdf') }}"></a>
-            </div>
-            
-        </div>
-    </section><!-- #about -->
+    </section><!-- #DETAILS -->
+    
+    <!-- NEXT STEP -->
     <section id="programme">
             <div class="row about-container">
                 <div class="col-lg-8 content order-lg-1 order-2">               
@@ -79,7 +56,7 @@
                 </div>
                 
             </div>
-    </section><!-- #about -->
+    </section><!-- #NEXT STEP -->
 
   </main>
 
