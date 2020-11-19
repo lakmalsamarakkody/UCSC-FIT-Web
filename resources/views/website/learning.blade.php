@@ -43,26 +43,23 @@
     <section id="programme" style="padding-top: 80px;">
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-1 order-1">
-                <h2 class="title">Learning for FIT</h2>
-                <br/>
-                <h4>What are the available Courses?</h4>
-                <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b>only in English medium.</b></p>
-
+            <h2 class="title">Learning for FIT</h2>
+            <br/>
+            <h4>What are the available Courses?</h4>
+            <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b>only in English medium.</b></p>
             </div>
-        </section><!-- #about -->
-        <section id="programme" style="padding-top: 40px;">
+        </div>
+    </section><!-- #about -->
+    <section id="programme" style="padding-top: 40px;">
             <div class="row about-container">
                 
             <div class="col-lg-8 content order-lg-1 order-1">
                 <strong>FIT 103: ICT Applications</strong>
-                <p>This course provides basic ICT (Information and Communication Technology) knowledge and skills required for the office environment. It ensures that the learner possesses required knowledge and skills to use office applications competently. It encompasses eight modules: (1) Computing for the Society, (2) Introduction to Computers, (3) Word Processing for Electronic Documents, (4) Spreadsheets for Calculation, (5) Multimedia and Electronic Presentation, (6) Data and Databases, (7) The Internet and Web Applications, and (8) Programming. Also, students could use Microsoft Office 365 as the office package when they sit for examination. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test and a two-hour practical test for Fundamentals of Computing course.
-                    </p>
+                <p>This course provides basic ICT (Information and Communication Technology) knowledge and skills required for the office environment. It ensures that the learner possesses required knowledge and skills to use office applications competently. It encompasses eight modules: (1) Computing for the Society, (2) Introduction to Computers, (3) Word Processing for Electronic Documents, (4) Spreadsheets for Calculation, (5) Multimedia and Electronic Presentation, (6) Data and Databases, (7) The Internet and Web Applications, and (8) Programming. Also, students could use Microsoft Office 365 as the office package when they sit for examination. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test and a two-hour practical test for Fundamentals of Computing course.</p>
 
             </div>
             <div class="myBox col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit103.png') }});  cursor: pointer;">
-                <a target="_blank" class="" href="{{ asset('documents/FIT-103/FIT-103-Fundamentals_of_Computing.pdf') }}">
-                
-                </a>
+                <a target="_blank" class="" href="{{ asset('documents/FIT-103/FIT-103-Fundamentals_of_Computing.pdf') }}"></a>
             </div>
         </div>
     </section><!-- #about -->
