@@ -15,6 +15,7 @@
     <!--==========================
       Programme Section
     ============================-->
+    <!-- smain header -->
     <section id="programme" style="padding-top: 80px;">
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-1 order-1">
@@ -24,37 +25,36 @@
                 <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b>only in English medium.</b></p>
 
             </div>
-        </section><!-- #about -->
-        <section id="programme" style="padding-top: 40px;">
-            <div class="row about-container">
-                
+        </div>
+    </section><!-- #smain header -->
+
+    <!-- FIT 103 -->
+    <section id="programme" style="padding-top: 40px;">
+        <div class="row about-container">
             <div class="col-lg-8 content order-lg-1 order-1">
                 <strong>FIT 103: ICT Applications</strong>
-                <p>This course provides basic ICT (Information and Communication Technology) knowledge and skills required for the office environment. It ensures that the learner possesses required knowledge and skills to use office applications competently. It encompasses eight modules: (1) Computing for the Society, (2) Introduction to Computers, (3) Word Processing for Electronic Documents, (4) Spreadsheets for Calculation, (5) Multimedia and Electronic Presentation, (6) Data and Databases, (7) The Internet and Web Applications, and (8) Programming. Also, students could use Microsoft Office 365 as the office package when they sit for examination. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test and a two-hour practical test for Fundamentals of Computing course.
-                    </p>
-
+                <p>This course provides basic ICT (Information and Communication Technology) knowledge and skills required for the office environment. It ensures that the learner possesses required knowledge and skills to use office applications competently. It encompasses eight modules: (1) Computing for the Society, (2) Introduction to Computers, (3) Word Processing for Electronic Documents, (4) Spreadsheets for Calculation, (5) Multimedia and Electronic Presentation, (6) Data and Databases, (7) The Internet and Web Applications, and (8) Programming. Also, students could use Microsoft Office 365 as the office package when they sit for examination. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test and a two-hour practical test for Fundamentals of Computing course.</p>
             </div>
             <div class="myBox col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit103.png') }});  cursor: pointer;">
-                <a target="_blank" class="" href="{{ asset('documents/FIT-103/FIT-103-Fundamentals_of_Computing.pdf') }}">
-                
-                </a>
+                <a target="_blank" class="" href="{{ asset('documents/FIT-103/FIT-103-Fundamentals_of_Computing.pdf') }}"></a>
             </div>
         </div>
-    </section><!-- #about -->
+    </section><!-- #FIT 103 -->
+
+    <!-- FIT 203 -->
     <section id="programme">
         <div class="row about-container">
             <div class="myBox col-lg-4 background order-lg-1 order-2 wow fadeInLeft" style="background-image: url({{ asset('img/logo/fit203.png') }});  cursor: pointer;">
                 <a target="_blank" href="{{ asset('documents/FIT-203/FIT-203-English_for_Computing.pdf') }}"></a>
-            
             </div>
             <div class="col-lg-8 content order-lg-2 order-1" style="text-align: right;">
                 <strong>FIT 203: English for ICT</strong>
-                <p>This course has been designed to provide language and communication skills in English from beginners to intermediate learners who want to pursue studies as well as careers in Information Communication Technology (ICT). All four areas of competency in English language, such as Reading, Listening, Speaking and Writing will be covered in this syllabus and the learning activities are designed considering ICT working environment. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test to evaluate reading, listening capabilities and a two-hour practical test to evaluate speaking and writing skills.
-                </p>   
+                <p>This course has been designed to provide language and communication skills in English from beginners to intermediate learners who want to pursue studies as well as careers in Information Communication Technology (ICT). All four areas of competency in English language, such as Reading, Listening, Speaking and Writing will be covered in this syllabus and the learning activities are designed considering ICT working environment. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test to evaluate reading, listening capabilities and a two-hour practical test to evaluate speaking and writing skills.</p>   
             </div>
-            
         </div>
-    </section><!-- #about -->
+    </section><!-- FIT #103 -->
+
+    <!-- FIT 303 -->
     <section id="programme">
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-1 order-1">
@@ -67,7 +67,9 @@
             </div>
             
         </div>
-    </section><!-- #about -->
+    </section><!-- #FIT 103 -->
+
+    <!-- NEXT STEP -->
     <section id="programme">
             <div class="row about-container">
                 <div class="col-lg-8 content order-lg-1 order-2">               
@@ -81,7 +83,7 @@
                 </div>
                 
             </div>
-    </section><!-- #about -->
+    </section><!-- #NEXT STEP -->
 
   </main>
 
