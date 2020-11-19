@@ -2,31 +2,6 @@
 @section('content')
 
     <!--==========================
-    Header
-    ============================-->
-    <header id="header">
-
-        <div id="logo" class="pull-left">
-            <a href="/"><img src="img/logo/fit-nav.png" alt="" title="" style="width: 65px; padding: 0px 0px 0px 0px;"/></a>
-
-        </div>
-
-        <nav id="nav-menu-container">
-            <ul class="nav-menu">
-            <li><a href="/">Home</a></li>
-            <li class="menu-active"><a href="programme">Programme</a></li>
-            <li><a href="learning">Learning</a></li>
-            <li><a href="examination">Examination</a></li>
-            <li><a href="registration">Registration</a></li>
-            <li><a href="contact-us">Contact Us</a></li>
-            <li><a href="portal/login">Login</a></li>
-
-            </ul>
-        </nav><!-- #nav-menu-container -->
-        </div>
-    </header><!-- #header -->
-
-    <!--==========================
     Hero Section
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/hero-back.png') }}); height:200px">
