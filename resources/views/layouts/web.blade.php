@@ -55,13 +55,13 @@
 
         <nav id="nav-menu-container">
             <ul class="nav-menu">
-            <li id="home_nav"><a href="/">Home</a></li>
-            <li id="programme_nav"><a href="programme">Programme</a></li>
-            <li id="learning_nav"><a href="learning">Learning</a></li>
-            <li id="examination_nav"><a href="examination">Examination</a></li>
-            <li id="registration_nav"><a href="registration">Registration</a></li>
-            <li id="contact_nav"><a href="contact-us">Contact Us</a></li>
-            <li id="login_nav"><a href="login">Login</a></li>
+            <li id="home_nav"><a href="{{ url('/') }}">Home</a></li>
+            <li id="programme_nav"><a href="{{ url('/programme') }}">Programme</a></li>
+            <li id="learning_nav"><a href="{{ url('/learning') }}">Learning</a></li>
+            <li id="examination_nav"><a href="{{ url('/examination') }}">Examination</a></li>
+            <li id="registration_nav"><a href="{{ url('/registration') }}">Registration</a></li>
+            <li id="contact_nav"><a href="{{ url('/contact') }}">Contact Us</a></li>
+            <li id="login_nav"><a href="{{ url('/login') }}login">Login</a></li>
 
             </ul>
         </nav><!-- #nav-menu-container -->

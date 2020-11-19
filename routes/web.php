@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Website\Home;
+use App\Http\Controllers\Website\Program;
+use App\Http\Controllers\Website\Registration;
+use App\Http\Controllers\Website\Learning;
+use App\Http\Controllers\Website\Contact;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,18 +35,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-use App\Http\Controllers\Website\Home;
 Route::get('/', [Home::class,'index']);
-Route::get('/home', [Home::class,'index']);
 
-use App\Http\Controllers\Website\Program;
 Route::get('/programme', [Program::class,'index']);
 
-use App\Http\Controllers\Website\Registration;
 Route::get('/registration',[Registration::class,'index']);
 
-use App\Http\Controllers\Website\Learning;
 Route::get('/learning',[Learning::class,'index']);
+
+Route::get('/contact',[Contact::class,'index']);
 
 /*
 |--------------------------------------------------------------------------
