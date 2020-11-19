@@ -6,7 +6,7 @@
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/hero-back.png') }}); height:200px">
         <div class="page-hero-container">
-            <h1 style="padding-top:30px">Contact Us</h1>
+            <h1 style="padding-top:30px">Contact</h1>
         </div>
     </section><!-- #hero -->
 
@@ -18,8 +18,8 @@
     <section id="about" style="padding-bottom: 0px; !important">
         <div class="container wow fadeInUp">
             <div class="section-header">
-                <h3 class="section-title">Contact</h3>
-                <p class="section-description">Contact UCSC e-Learning Centre for any of your queries, we are happy to help you</p>
+                <h3 class="section-title">Contact UCSC for any of your queries</h3>
+                <p class="section-description">we are happy to help you</p>
             </div>
         </div>
 
@@ -37,14 +37,13 @@
                     <h1 class="title">&nbsp;</h1>
                     <p class="description">
                         <b>Mrs. W. M. N. K. Weerasooriya</b><br>
-                        <i class="fa fa-envelope"></i><tab1> <a href="mailto:edc@ucsc.cmb.ac.lk">edc@ucsc.cmb.ac.lk</a> <br>
-                        <i class="fa fa-phone"></i><tab1> <a href="tel:+94114720511"></a>+94 11 4720511</a> (Working Hours Only) <br>
-                        <i class="fa fa-address-card"><tab1></i> Coordinator (EDC),
-                        <br><tab2>External Degrees Centre,
-                        <br><tab2>University of Colombo School of Computing,
-                        <br><tab2>No. 35, Reid Avenue, 
-                        <br><tab2>Colombo 07,
-                        <br><tab2>Sri Lanka.
+                        <i class="fa fa-envelope"></i> <a href="mailto:edc@ucsc.cmb.ac.lk">edc@ucsc.cmb.ac.lk</a> <br>
+                        <i class="fa fa-phone"></i> <a href="tel:+94114720511"></a>+94 11 4720511</a> (Working Hours Only) <br>
+                        <i class="fa fa-address-card"></i> Coordinator (External Degrees Centre),
+                        <br>University of Colombo School of Computing,
+                        <br>No. 35, Reid Avenue, 
+                        <br>Colombo 07,
+                        <br>Sri Lanka.
                     </p>
                 </div>
             </div>
@@ -65,13 +64,13 @@
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
                     <h1 class="title">&nbsp;</h1>
                     <p class="description">
-                        <i class="fa fa-envelope"></i><tab1> <a href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a> <br>
-                        <i class="fa fa-phone"></i><tab1> <a href="tel:+94112591080"></a>+94 11 2591080</a> (Working Hours Only) <br>
-                        <i class="fa fa-address-card"><tab1></i>  e-Learning Centre,
-                        <br><tab2>University of Colombo School of Computing,
-                        <br><tab2>No. 35, Reid Avenue, 
-                        <br><tab2>Colombo 07,
-                        <br><tab2>Sri Lanka.
+                        <i class="fa fa-envelope"></i> <a href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a> <br>
+                        <i class="fa fa-phone"></i> <a href="tel:+94112591080"></a>+94 11 2591080</a> (Working Hours Only) <br>
+                        <i class="fa fa-address-card"></i>  e-Learning Centre,
+                        <br>University of Colombo School of Computing,
+                        <br>No. 35, Reid Avenue, 
+                        <br>Colombo 07,
+                        <br>Sri Lanka.
                     </p>
                 </div>
             </div>
@@ -93,11 +92,12 @@
                     <h1 class="title">&nbsp;</h1>
                     <p class="description">
                         <b>Dr. T. A. Weerasinghe</b><br>
-                        <i class="fa fa-envelope"></i><tab1> <a href="mailto:taw@ucsc.cmb.ac.lk">taw@ucsc.cmb.ac.lk</a> <br>
-                        <i class="fa fa-address-card"><tab1></i> University of Colombo School of Computing,
-                        <br><tab2>No. 35, Reid Avenue, 
-                        <br><tab2>Colombo 07,
-                        <br><tab2>Sri Lanka.
+                        <i class="fa fa-envelope"></i> <a href="mailto:taw@ucsc.cmb.ac.lk">taw@ucsc.cmb.ac.lk</a> <br>
+                        <i class="fa fa-address-card"></i> Coordinator (FIT) and Coordinator (e-LC),
+                        <br> University of Colombo School of Computing,
+                        <br>No. 35, Reid Avenue, 
+                        <br>Colombo 07,
+                        <br>Sri Lanka.
                     </p>
                 </div>
             </div>
@@ -117,25 +117,25 @@
                     <h1 class="title">&nbsp;</h1>
                     <p class="description">
                         <b>Mrs. W. M. N. K. Weerasooriya</b><br>
-                        <i class="fa fa-envelope"></i><tab1> <a href="mailto:edc@ucsc.cmb.ac.lk">edc@ucsc.cmb.ac.lk</a> <br>
-                        <i class="fa fa-phone"></i><tab1> <a href="tel:+94114720511"></a>+94 11 4720511</a> (Working Hours Only) <br>
-                        <i class="fa fa-address-card"><tab1></i> Coordinator (EDC),
-                        <br><tab2>External Degrees Centre,
-                        <br><tab2>UCSC
+                        <i class="fa fa-envelope"></i> <a href="mailto:edc@ucsc.cmb.ac.lk">edc@ucsc.cmb.ac.lk</a> <br>
+                        <i class="fa fa-phone"></i> <a href="tel:+94114720511"></a>+94 11 4720511</a> (Working Hours Only) <br>
+                        <i class="fa fa-address-card"></i> Coordinator (EDC),
+                        <br>External Degrees Centre,
+                        <br>UCSC
                     </p>
                     <p class="description">
                         <b>Dr. T. A. Weerasinghe</b><br>
-                        <i class="fa fa-envelope"></i><tab1> <a href="mailto:taw@ucsc.cmb.ac.lk">taw@ucsc.cmb.ac.lk</a> <br>
-                        <i class="fa fa-phone"></i><tab1> <a href="tel:+94112591080"></a>+94 11 2591080</a> (Working Hours Only) <br>
-                        <i class="fa fa-address-card"><tab1></i> Coordinator(FIT) and Coordinator (e-LC),
-                        <br><tab2>UCSC
+                        <i class="fa fa-envelope"></i> <a href="mailto:taw@ucsc.cmb.ac.lk">taw@ucsc.cmb.ac.lk</a> <br>
+                        <i class="fa fa-phone"></i> <a href="tel:+94112591080"></a>+94 11 2591080</a> (Working Hours Only) <br>
+                        <i class="fa fa-address-card"></i> Coordinator(FIT) and Coordinator (e-LC),
+                        <br>UCSC
                     </p>
                     <p class="description">
                         <b>Prof. K. P. Hewagamage</b><br>
-                        <i class="fa fa-envelope"></i><tab1> <a href="mailto:kph@ucsc.cmb.ac.lk">taw@ucsc.cmb.ac.lk</a> <br>
-                        <i class="fa fa-phone"></i><tab1> <a href="tel:+94112158950"></a>+94 11 2158950</a> (Working Hours Only) <br>
-                        <i class="fa fa-address-card"><tab1></i>  Director,
-                        <br><tab2>UCSC
+                        <i class="fa fa-envelope"></i> <a href="mailto:kph@ucsc.cmb.ac.lk">kph@ucsc.cmb.ac.lk</a> <br>
+                        <i class="fa fa-phone"></i> <a href="tel:+94112158950"></a>+94 11 2158950</a> (Working Hours Only) <br>
+                        <i class="fa fa-address-card"></i>  Director,
+                        <br>UCSC
                     </p>
                 </div>
             </div>
