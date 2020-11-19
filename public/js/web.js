@@ -1,5 +1,10 @@
 jQuery(document).ready(function ($) {
 
+  $(".myBox").click(function() {
+    var url = $(this).find("a").attr("href"); 
+    window.open(url, '_blank');
+    return false;
+  });
   // Header fixed and Back to top button
   $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {

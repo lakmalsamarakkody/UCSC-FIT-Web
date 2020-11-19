@@ -47,7 +47,6 @@
         About Us Section
         ============================-->
         <section id="about">
-        <div class="container">
             <div class="row about-container">
                 <div class="col-lg-8 content order-lg-1 order-2">
                     <h2 class="title">About FIT</h2>
@@ -58,16 +57,15 @@
                     <p>The FIT, Foundation in Information Technology, programme consists of three courses, namely, ICT Applications (FIT 103), English for ICT (FIT 203) and Mathematics for ICT (FIT 303). e-Learning based online system will be available for all registered students to follow courses at any time during the day. e-Testing based system will be used for the evaluation once the student is ready to take the test at University of Colombo School of Computing (UCSC) etesting lab. Hence, students could start the programme at any time during the year and they can take exams at any month during the year at testing centres. At the same time, several private institutes conduct face to face classes based on the FIT syllabuses.</p>
                     
                     <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
-                    <a href="programme"><div class="icon"><i class="fa fa-book"></i></div></a>
-                    <h4 class="title"><a href="programme">Programme</a></h4>
-                    <p class="description">Go to Programme Structure</p>
+                      <a href="programme"><div class="icon"><i class="fa fa-book"></i></div></a>
+                      <h4 class="title"><a href="programme">Programme</a></h4>
+                      <p class="description">Go to Programme Structure</p>
                     </div>
 
                 </div>
 
                 <div class="col-lg-4 background order-lg-2 order-1 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit.png') }}); margin-top: 100px"></div>
             </div>
-        </div>
         </section><!-- #about -->
 
     </main>
