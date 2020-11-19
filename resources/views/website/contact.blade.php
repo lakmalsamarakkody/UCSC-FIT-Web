@@ -39,7 +39,7 @@
                 </h5>
             </div>
             <div class="col-lg-4 content order-lg-2 order-2">               
-                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px; float: right !important;">
+                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
                     <h1 class="title">&nbsp;</h1>
                     <p class="description">
                         <b>Mrs. W. M. N. K. Weerasooriya</b><br>
