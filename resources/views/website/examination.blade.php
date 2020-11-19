@@ -24,57 +24,95 @@
     <!--==========================
       Examination Section
     ============================-->
-    <!-- smain header -->
     <section id="examination" style="padding-top: 80px;">
+        <!-- main header -->
         <div class="row about-container">
-            <div class="col-lg-7 content order-lg-1 order-1">
-                <h2 class="title">Virtual Learning Environment</h2>
+            <div class="col-lg-12 content order-lg-1 order-1">
+                <h2 class="title">Examination Environment</h2>
                 <br/>
-                <h4>All registered FIT students will receive a registration number and a password to access the online learning management system</h4>
+                <h4>Students, who are competent about the subject as given in the syllabus, <b>could sit for the examination at any time</b>. There is no requirement of following the online courses if a student feels competent in the relevant subjects.</h4>
                 <br/>
-                <p>Once your payment is confirmed for the registration, you will be notified with login details. It is mandatory to include a valid email address when you register for the FIT programme. Otherwise you have to contact External Degrees Centre of UCSC to find out the status of your registration.
-                    <br/><b>Tel: 011 - 4720511 / 011 - 4720513</b>
-                </p>
-                <p>Within 2 weeks of registration we will enroll you to the LMS online courses. If you could not access the LMS after 2 weeks with the given username and password, please contact the LMS administrator.
-                    <b><br/>Email: admin@fit.bit.lk
-                    <br/>Tel: 011-2591080</b>
-                </p>
-                <p>There are three separate online courses for the FIT Programme. You can access online interactive e-learning content and discuss with other learners and online e-facilitators in the course.</p>
-                <p>Several private teaching institutes in Sri Lanka conduct classes based on the FIT curriculum. Students are kindly advised to directly contact these institutes if they are interested to attend face to face classes based on the FIT programme.</p>
-                <p>It is important to mention that all FIT exams will be conducted in English medium and all learning materials developed based on the curriculum are available in English.</p>   
+                <p>However, <b>students should register for FIT and pay the examination fee, in order to sit for the exam.</b> All students are advised to take the model online e-Test at <a href="http://fit.bit.lk/vle"><b>VLE</b></a> before they take real FIT exams.</p>   
                 
-                <a target="_blank" href="http://fit.bit.lk/vle" class="btn-get-started">Go to VLE</a>
-            </div>
+                <table class="table table-responsive-sm table-hover">
+                    <thead>
+                        <tr>
+                            <td>Course Code</td>
+                            <td>Course Name</td>
+                            <td>Examination</td>
+                            <td>Description</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FIT 103</td>
+                            <td>ICT Applications</td>
+                            <td>2 hr e-Test and 2hr Practical Test</td>
+                            <td>Rs. 2250/= for e-Test and Rs. 3250/= for practical test will be charged. You are advised to take e-Test before the practical test.</td>
+                        </tr>
+                        <tr>
+                            <td>FIT 203</td>
+                            <td>English for ICT</td>
+                            <td>2 hr e-Test and 2hr Practical Test</td>
+                            <td>Rs. 2250/= for e-Test and Rs. 3250/= for practical test will be charged. You are advised to take e-Test before the practical test.</td>
+                        </tr>
+                        <tr>
+                            <td>FIT 303</td>
+                            <td>Mathematics for ICT</td>
+                            <td>2 hr e-Test only</td>
+                            <td>Rs. 2250/= will be charged for e-Test for this course.</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <div class="myBox col-lg-5 background order-lg-2 order-2 wow fadeInRight mt-3" style="background-image: url({{ asset('img/fit-bit-lk-vle.png') }}); cursor: pointer; background-size: cover;">
-                <a target="_blank"  href="http://fit.bit.lk/vle"></a>
+                <p>After registering, students could take examinations at any time. Generally, exams are conducted once in a month depending on the demand. Once the exam schedule is published in the VLE, you must come <b>with your national ID or any other acceptable proof of authentication</b> ( eg: passport, driving license, etc....) to prove your identity for the exam on the given date.</p>
             </div>
-        </div>
-    </section><!-- #main header -->
+        </div><!-- #main header -->
 
-    <!-- DETAILS -->
-    <section id="examination">
+        <!-- PAYMENT DETAILS -->
+        <div class="row about-container mt-5">
+            
+        </div><!-- #PAYMENT DETAILS -->
+
+        <!-- DETAILS -->
+        <div class="row about-container mt-5">
+            <div class="col-lg-8 content order-lg-1 order-1">               
+                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
+                    <h1 class="title">UCSC e-Testing Lab</h1>
+                    <p class="description">If your question is related to examination matters of FIT programme, 
+                        <br>for example <b>submitting applications for examination,</b> etc. please contact External Degrees Centre. 
+                        <br>It is recommended to check the FIT website ( <a href="www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you contact the relevant details.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 content order-lg-2 order-2">               
+                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
+                    <h1 class="title">&nbsp;</h1>
+                    <p class="description">
+                        <i class="fa fa-address-card"></i> University of Colombo School of Computing,
+                        <br>No. 35, Reid Avenue, 
+                        <br>Colombo 07,
+                        <br>Sri Lanka.
+                        <br><i class="fa fa-phone"></i> <a href="tel:+94112591080"></a>+94 11 2591080</a> (Working Hours Only)
+                    </p>
+                </div>
+            </div>
+        </div><!-- #DETAILS -->
+        
+        <!-- NEXT STEP -->
         <div class="row about-container">
-            <div class="col-lg-8 content order-lg-2 order-1" style="text-align: left;">
-                </div>
-        </div>
-    </section><!-- #DETAILS -->
-    
-    <!-- NEXT STEP -->
-    <section id="examination">
-            <div class="row about-container">
-                <div class="col-lg-8 content order-lg-1 order-2">               
+            <div class="col-lg-8 content order-lg-1 order-2">               
 
 
-                    <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-top: 80px;">
-                        <a href="examination"><div class="icon"><i class="fa fa-leanpub"></i></div></a>
-                        <h4 class="title"><a href="examination">Examination</a></h4>
-                        <p class="description">How to sit for your FIT Examinations</p>
-                    </div>
+                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-top: 80px;">
+                    <a href="registration"><div class="icon"><i class="fa fa-leanpub"></i></div></a>
+                    <h4 class="title"><a href="registration">Registration</a></h4>
+                    <p class="description">How to Register for FIT Programme</p>
                 </div>
-                
             </div>
-    </section><!-- #NEXT STEP -->
+            
+        </div><!-- #NEXT STEP -->
+    </section>
 
   </main>
 

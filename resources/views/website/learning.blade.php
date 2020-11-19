@@ -24,8 +24,8 @@
     <!--==========================
       Learning Section
     ============================-->
-    <!-- smain header -->
     <section id="learning" style="padding-top: 80px;">
+        <!-- smain header -->
         <div class="row about-container">
             <div class="col-lg-7 content order-lg-1 order-1">
                 <h2 class="title">Virtual Learning Environment</h2>
@@ -49,32 +49,25 @@
             <div class="myBox col-lg-5 background order-lg-2 order-2 wow fadeInRight mt-3" style="background-image: url({{ asset('img/fit-bit-lk-vle.png') }}); cursor: pointer; background-size: cover;">
                 <a target="_blank"  href="http://fit.bit.lk/vle'"></a>
             </div>
-        </div>
-    </section><!-- #main header -->
+        </div><!-- #main header -->
 
-    <!-- DETAILS -->
-    <section id="learning">
+        <!-- DETAILS -->
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-2 order-1" style="text-align: left;">
                 </div>
-        </div>
-    </section><!-- #DETAILS -->
+        </div><!-- #DETAILS -->
     
-    <!-- NEXT STEP -->
-    <section id="learning">
-            <div class="row about-container">
-                <div class="col-lg-8 content order-lg-1 order-2">               
-
-
-                    <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-top: 80px;">
-                        <a href="examination"><div class="icon"><i class="fa fa-leanpub"></i></div></a>
-                        <h4 class="title"><a href="examination">Examination</a></h4>
-                        <p class="description">How to sit for your FIT Examinations</p>
-                    </div>
+        <!-- NEXT STEP -->
+        <div class="row about-container">
+            <div class="col-lg-8 content order-lg-1 order-2">               
+                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-top: 80px;">
+                    <a href="examination"><div class="icon"><i class="fa fa-leanpub"></i></div></a>
+                    <h4 class="title"><a href="examination">Examination</a></h4>
+                    <p class="description">How to sit for your FIT Examinations</p>
                 </div>
-                
             </div>
-    </section><!-- #NEXT STEP -->
+        </div><!-- #NEXT STEP -->
+    </section>
 
   </main>
 
