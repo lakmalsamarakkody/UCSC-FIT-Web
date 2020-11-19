@@ -27,7 +27,7 @@
     <section id="examination" style="padding-top: 80px;">
         <!-- main header -->
         <div class="row about-container">
-            <div class="col-lg-12 content order-lg-1 order-1">
+            <div class="col-lg-8 content order-lg-1 order-1">
                 <h2 class="title">Examination Environment</h2>
                 <br/>
                 <h4>Students, who are competent about the subject as given in the syllabus, <b>could sit for the examination at any time</b>. There is no requirement of following the online courses if a student feels competent in the relevant subjects.</h4>
@@ -78,11 +78,11 @@
         <div class="row about-container mt-5">
             <div class="col-lg-8 content order-lg-1 order-1">               
                 <div class="wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
-                    <h1 class="title">UCSC e-Testing Lab</h1>
-                    <p class="description">If your question is related to examination matters of FIT programme, 
+                    <h2 class="title">UCSC e-Testing Lab</h2>
+                    <h5 class="description">If your question is related to examination matters of FIT programme, 
                         <br>for example <b>submitting applications for examination,</b> etc. please contact External Degrees Centre. 
                         <br>It is recommended to check the FIT website ( <a href="www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you contact the relevant details.
-                    </p>
+                    </h5>
                 </div>
             </div>
             <div class="col-lg-4 content order-lg-2 order-2">               
@@ -104,7 +104,7 @@
             <div class="col-lg-8 content order-lg-1 order-2">               
 
 
-                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-top: 80px;">
+                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
                     <a href="registration"><div class="icon"><i class="fa fa-leanpub"></i></div></a>
                     <h4 class="title"><a href="registration">Registration</a></h4>
                     <p class="description">How to Register for FIT Programme</p>

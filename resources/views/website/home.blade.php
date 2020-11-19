@@ -14,14 +14,16 @@
     Hero Section
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/UCSC-Banner-cropped.jpg') }});">
-        <div class="hero-container col-lg-12">
+        <div class="hero-container col-lg-8 order-lg-1 order-1">
             <div class="row">
-                <div class="col-lg-12"> <img src="{{ asset('img/logo/invert-ucsc.png') }}" width="10%" /> </div>
+                <div class="col-lg-12"> <img src="{{ asset('img/logo/invert-ucsc.png') }}" width="20%" /> </div>
             </div>
-            {{-- <h1 style="text-align: left;"><span style="color:#23159c">F</span>oundation in <span style="color:#23159c">I</span>nformation <span style="color:#23159c">T</span>echnology</h1> --}}
-            <h1 style="text-align: left;">Foundation in Information Technology</h1>
+            <!-- <h1 style="text-align: left;"><span style="color:#7e6fff">F</span>oundation in <br> <span style="color:#23159c">I</span>nformation <br><span style="color:#23159c">T</span>echnology</h1> -->
+            <h1 style="text-align: left;">Foundation in <br> Information Technology</h1>
             <h3 style="color:#fff">University of Colombo School of Computing</h2>
             <a href="#about" class="btn-get-started" style="width=25%">About FIT</a>
+        </div>
+        <div class="hero-container col-lg-8 order-lg-2 order-2">
         </div>
     </section><!-- #hero -->
 
