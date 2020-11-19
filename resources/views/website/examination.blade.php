@@ -1,6 +1,15 @@
 @extends('layouts/web')
 @section('content')
 
+<script type="text/javascript">
+
+    // ACTIVE NAVIGATION ENTRY
+    $(document).ready(function ($) {
+        $('#examination_nav').addClass("menu-active");
+    });
+
+</script>
+
     <!--==========================
     Hero Section
     ============================-->
@@ -13,10 +22,10 @@
   <main id="main">
 
     <!--==========================
-      Learning Section
+      Examination Section
     ============================-->
     <!-- smain header -->
-    <section id="learning" style="padding-top: 80px;">
+    <section id="examination" style="padding-top: 80px;">
         <div class="row about-container">
             <div class="col-lg-7 content order-lg-1 order-1">
                 <h2 class="title">Virtual Learning Environment</h2>
@@ -44,7 +53,7 @@
     </section><!-- #main header -->
 
     <!-- DETAILS -->
-    <section id="learning">
+    <section id="examination">
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-2 order-1" style="text-align: left;">
                 </div>
@@ -52,7 +61,7 @@
     </section><!-- #DETAILS -->
     
     <!-- NEXT STEP -->
-    <section id="learning">
+    <section id="examination">
             <div class="row about-container">
                 <div class="col-lg-8 content order-lg-1 order-2">               
 

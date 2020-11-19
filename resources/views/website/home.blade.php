@@ -3,9 +3,10 @@
 
 <script type="text/javascript">
 
-  $(document).ready(function ($) {
-    $('#home_nav').addClass("menu-active");
-  });
+    // ACTIVE NAVIGATION ENTRY
+    $(document).ready(function ($) {
+        $('#home_nav').addClass("menu-active");
+    });
 
 </script>
 
