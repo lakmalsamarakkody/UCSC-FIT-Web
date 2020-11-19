@@ -46,7 +46,7 @@
                 <h2 class="title">Programme Structure</h2>
                 <br/>
                 <h4>What are the available Courses?</h4>
-                <p>Foundation in Information Technology (FIT) programme consists of three courses and all examinations are conducted only in English medium.</p>
+                <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b>only in English medium.</b></p>
 
             </div>
         </section><!-- #about -->
