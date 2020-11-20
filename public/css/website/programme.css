@@ -1,0 +1,87 @@
+/* Programme Section
+--------------------------------*/
+
+#programme {
+    background: #fff;
+    padding: 0px 50px 0px 50px;
+  }
+  
+  #programme .about-container .background {
+    min-height: 300px;
+    background: center top no-repeat;
+    margin-bottom: 0px;
+  }
+  
+  #programme .about-container .content {
+    background: #fff;
+  }
+  
+  #programme .about-container .title {
+    color: #333;
+    font-weight: 700;
+    font-size: 32px;
+  }
+  
+  #programme .about-container p {
+    line-height: 26px;
+  }
+  
+  #programme .about-container p:last-child {
+    margin-bottom: 0;
+  }
+  
+  #programme .about-container .icon-box {
+    background: rgba(255, 255, 255, 0);
+    background-size: cover;
+    padding: 0 0 100px 0;
+  }
+  
+  #programme .about-container .icon-box .icon {
+    float: left;
+    background: #fff;
+    width: 64px;
+    height: 64px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid  #23159c;
+  }
+  
+  #programme .about-container .icon-box .icon i {
+    color:  #23159c;
+    font-size: 24px;
+  }
+  
+  #programme .about-container .icon-box .title {
+    margin-left: 80px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+  
+  #programme .about-container .icon-box .title a {
+    color: #111;
+  }
+  
+  #programme .about-container .icon-box .description {
+    margin-left: 80px;
+    line-height: 24px;
+    font-size: 14px;
+  }

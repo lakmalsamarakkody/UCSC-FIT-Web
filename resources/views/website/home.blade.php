@@ -55,7 +55,7 @@
         </section><!-- #about -->
 
         {{-- FAQ --}}
-        <section id="acordion">
+        <section id="faq">
             
             <div class="row about-container">
                 <div class="col-lg-8 content order-lg-1 order-2">
@@ -63,7 +63,7 @@
                 </div>
             </div>
 
-            <div id="accordion">
+            <div id="faq-accordion">
 
                 {{-- QUESTION 1 --}}
                 <div class="card border-0">
