@@ -1534,6 +1534,33 @@ input[type=text] {
 }
 /*----------------------------------------------------------------*/
 
+.faq-sm {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 28px;
+  border-radius: 50px;
+  transition: 0.5s;
+  margin: 0px;
+  border: 2px solid #23159c;
+  color: #23159c;
+
+  background:  #fff;
+  /* border: 1px;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s; */
+}
+
+.faq-sm:hover {
+  background: #23159c;
+  color: #fff;
+  border: 2px solid  #fff;
+}
+
+
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
   background-color: #eee;

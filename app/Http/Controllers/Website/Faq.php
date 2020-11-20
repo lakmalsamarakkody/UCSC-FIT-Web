@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class Faq extends Controller
 {
-    return view('website/faq');
+    public function index(){
+        return view('website/faq');
+    }
 }

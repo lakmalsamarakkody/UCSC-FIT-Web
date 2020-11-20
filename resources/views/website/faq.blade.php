@@ -54,14 +54,8 @@
 
         <nav id="nav-menu-container">
             <ul class="nav-menu">
-            <li id="home_nav"><a href="{{ url('/') }}">Home</a></li>
-            <li id="home_nav"><a href="#about">About</a></li>
-            <li id="programme_nav"><a href="{{ url('/programme') }}">Programme</a></li>
-            <li id="learning_nav"><a href="{{ url('/learning') }}">Learning</a></li>
-            <li id="examination_nav"><a href="{{ url('/examination') }}">Examination</a></li>
-            <li id="registration_nav"><a href="{{ url('/registration') }}">Registration</a></li>
-            <li id="contact_nav"><a href="{{ url('/contact') }}">Contact Us</a></li>
-            <li id="login_nav"><a href="{{ url('/login') }}">Login</a></li>
+
+            <li id="login_nav"><a href="{{ url('/login') }}">Back to Website</a></li>
 
             </ul>
         </nav><!-- #nav-menu-container -->
@@ -81,12 +75,8 @@
 
 
     <!-- Accordion -->
-    <section id="acordion">
-        <div class="row about-container">
-            <div class="col-lg-8 content order-lg-1 order-2">
-                <h2 class="title">Frequently Asked Questions</h2>
-            </div>
-        </div>
+    <section id="acordion" style="padding-top: 80px;">
+
         <div class=""> 
 
 

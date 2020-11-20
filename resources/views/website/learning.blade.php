@@ -75,6 +75,10 @@
                 <div class="col-lg-8 content order-lg-1 order-2">
                     <h2 class="title">Frequently Asked Questions</h2>
                 </div>
+                <div class="col-lg-4 content order-lg-2 order-2 "> 
+                    <a class="float-right faq-sm wow fadeInRight" target="_blank" href="{{ url('/faq') }}"><i class="fa fa-question-circle"></i> More FAQ</a>
+    
+                </div>
             </div>
             <div class=""> 
 
