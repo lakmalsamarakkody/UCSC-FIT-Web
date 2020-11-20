@@ -1,6 +1,10 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+html {
+  scroll-behavior: smooth;
+}
+
 dummydeclaration { padding-left: 4em; } /* Firefox ignores first declaration for some reason */
 tab1 { padding-left: 1em; }
 tab2 { padding-left: 2.25em; }
@@ -1530,38 +1534,29 @@ input[type=text] {
 }
 /*----------------------------------------------------------------*/
 
-.panel-group .panel {
-  border-radius: 2p;
-  box-shadow: none;
-  border-color: #333232;
-}
-
-.panel-default > .panel-heading {
-  padding: 0;
-  border-radius: 0;
-  color: #212121;
-  background-color: #a0a0a0;
-  border-color: #000000;
-}
-
-.panel-title {
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  font-weight: bold;
   font-size: 14px;
 }
 
-.panel-title > a {
-  display: block;
-  padding: 15px;
-  text-decoration: none;
-  background-color:rgb(221, 221, 221);
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+  background-color: #212b4b;
+  color: #fff;
+  border: none;
 }
 
-.more-less {
-  float: right;
-  color: #212b4b;
-}
 
-.panel-default > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #000000;
+.acc_container {
+  display: none;
 }
 
 /*--------------------------------------------------------------

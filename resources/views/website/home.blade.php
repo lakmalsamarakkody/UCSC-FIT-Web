@@ -61,54 +61,33 @@
             <h2 class="title">Frequently Asked Questions</h2>
         </div>
     </div>
-    <div class="col-md-12"> 
-        <div class="panel-group margin_0" id="accordion1">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
-                            <i class="rt-icon2-bubble highlight"></i>
-                            Lorem Ipsum
-                        </a>
-                    </h4>
-                </div>
-                <div style="height: 0px;" id="collapse1" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium amet ea dicta neque, ut quis omnis quos nam, pariatur, minus, fugit suscipit aspernatur sint ullam quas explicabo. Alias, officiis, dolor!
-                    </div>
+    <div class=""> 
+
+
+            <h2 class="acc_trigger title"><a href="#toggle1"><i class="fa fa-question-circle pr-3"></i>Why should I follow FIT?</a></h2>
+            <div class="acc_container">
+                <div class="block">
+                    <p class="">
+                        <ul>
+                            <li>It is a pre-degree program for those who wish to follow the <b>Bachelor of Information Technology (BIT)</b>  at UCSC. Moreover, it will be an added qualification for those who seek higher education in ICT or employment in the IT industry or BPO industry.</li>
+                        </ul>
+                    </p>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion1" href="#collapse2" class="collapsed">
-                            <i class="rt-icon2-bubble highlight"></i>
-                            Dolor Sit Amet
-                        </a>
-                    </h4>
-                </div>
-                <div style="height: 0px;" id="collapse2" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facere doloremque ut dolores laudantium nihil at, repudiandae est numquam fuga tempora totam sequi quidem saepe officiis sint beatae, magni fugit.
-                    </div>
+            
+            <h2 class="acc_trigger"><a href="#toggle2"><i class="fa fa-question-circle pr-3"></i>What are the certificates that I can collect by following FIT?</a></h2>
+            <div class="acc_container">
+                <div class="block">
+                    <p class="">
+                        <ul>
+                            <li>There are two certificates. When you pass all three e-Tests of FIT courses, you can get a certificate certifying your scores.</li>
+                            <li>When you complete all three e-Tests and two practical tests of FIT courses, you can get the final FIT certificate.</li>
+                        </ul>
+                    </p>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion1" href="#collapse3" class="collapsed">
-                            <i class="rt-icon2-bubble highlight"></i>
-                            Corporis Iste
-                        </a>
-                    </h4>
-                </div>
-                <div style="height: 0px;" id="collapse3" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. At nobis omnis delectus, asperiores quo obcaecati et iste corporis necessitatibus tempora aspernatur doloribus. Ut deleniti commodi dicta distinctio sit enim quidem!
-                    </div>
-                </div>
-            </div>    
-        </div> 
+
+      
         
     </div>
 </section>

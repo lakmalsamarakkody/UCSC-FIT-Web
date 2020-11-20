@@ -13,10 +13,7 @@
             <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
         <!-- /FONTS -->
 
-        <!-- SCRIPTS -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        <!-- /SCRIPTS -->
-    
+
         <!-- STYLES -->
             <!-- BOOTSTRAP -->      <link rel="stylesheet" href="{{ asset('css/app.css') }}" >
             <!-- FONT AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/all.css') }}">
@@ -28,7 +25,7 @@
         <!-- JavaScript Libraries -->
         <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('lib/jquery/jquery-migrate.min.js') }}"></script>
-        <script src="{{ asset('lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
         <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
         <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
@@ -36,7 +33,9 @@
         <script src="{{ asset('lib/superfish/hoverIntent.js') }}"></script>
         <script src="{{ asset('lib/superfish/superfish.min.js') }}"></script>
 
-
+        <!-- SCRIPTS -->
+        <!-- /SCRIPTS -->
+    
         <!-- Template Main Javascript File -->
         <script src="{{ asset('js/web.js') }}"></script>
     </head>
@@ -56,7 +55,7 @@
         <nav id="nav-menu-container">
             <ul class="nav-menu">
             <li id="home_nav"><a href="{{ url('/') }}">Home</a></li>
-            <li id="home_nav"><a href="{{ url('/#about') }}">About</a></li>
+            <li id="home_nav"><a href="#about">About</a></li>
             <li id="programme_nav"><a href="{{ url('/programme') }}">Programme</a></li>
             <li id="learning_nav"><a href="{{ url('/learning') }}">Learning</a></li>
             <li id="examination_nav"><a href="{{ url('/examination') }}">Examination</a></li>
