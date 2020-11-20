@@ -1,5 +1,6 @@
 jQuery(document).ready(function ($) {
 
+  // image dive linking to <a> tag
   $(".myBox").click(function() {
     var url = $(this).find("a").attr("href"); 
     window.open(url, '_blank');
@@ -75,7 +76,7 @@ jQuery(document).ready(function ($) {
   }
 
   // Smoth scroll on page hash links
-  $('a[href*="#"]:not([href="#"])').on('click', function () {
+  $('a[href*="#top"])').on('click', function () {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
 
       var target = $(this.hash);

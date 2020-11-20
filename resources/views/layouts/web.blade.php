@@ -91,7 +91,7 @@
         </div>
     </footer><!-- #footer -->
 
-    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <a href="#top" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
 
 
