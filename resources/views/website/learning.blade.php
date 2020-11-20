@@ -69,94 +69,104 @@
         </div><!-- #NEXT STEP -->
     </section>
 
-        <!-- Accordion -->
-        <section id="acordion">
-            <div class="row about-container">
-                <div class="col-lg-8 content order-lg-1 order-2">
-                    <h2 class="title">Frequently Asked Questions</h2>
+    {{-- FAQ --}}
+    <section id="faq">
+            
+        <div class="row about-container">
+            <div class="col-lg-8 content order-lg-1 order-2">
+                <h2 class="title">Frequently Asked Questions</h2>
+            </div>
+            <div class="col-lg-4 content order-lg-2 order-2 "> 
+                <a class="float-right faq-sm wow fadeInRight" href="{{ url('/faq') }}"><i class="fa fa-question-circle"></i>More FAQ</a>
+            </div>
+        </div>
+
+        <div id="accordion">
+
+            {{-- QUESTION 1 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingOne">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Does UCSC conduct classes for FIT?</h4>
+                    </button>
                 </div>
-                <div class="col-lg-4 content order-lg-2 order-2 "> 
-                    <a class="float-right faq-sm wow fadeInRight" target="_blank" href="{{ url('/faq') }}"><i class="fa fa-question-circle"></i> More FAQ</a>
-    
+            
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body pt-0 pt-0 pl-md-5">
+                        <b>No</b> UCSC will not conduct any face-to-face classes. Private institutes conduct face-to-face classes based on the FIT programme. However, UCSC will not undertake any responsibility or comment on their performances.
+                    </div>
                 </div>
             </div>
-            <div class=""> 
+            {{-- //QUESTION 1 --}}
 
-
-                    <h2 class="acc_trigger title"><a href="#toggle1"><i class="fa fa-question-circle pr-3"></i>Does UCSC conduct classes for FIT?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li><b>No</b> UCSC will not conduct any face-to-face classes. Private institutes conduct face-to-face classes based on the FIT programme. However, UCSC will not undertake any responsibility or comment on their performances.</li>
-                                </ul>
-                            </p>
-                        </div>
+            {{-- QUESTION 2 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingTwo">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Where can I learn for FIT?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                        You can follow online courses of FIT programme if you have some similar IT experience. Otherwise, you can select a private institute which conducts classes based on the FIT programme.
                     </div>
-                    
-                    <h2 class="acc_trigger"><a href="#toggle2"><i class="fa fa-question-circle pr-3"></i>Where can I learn for FIT?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li>You can follow online courses of FIT programme if you have some similar IT experience. Otherwise, you can select a private institute which conducts classes based on the FIT programme.</li>
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <h2 class="acc_trigger"><a href="#toggle3"><i class="fa fa-question-circle pr-3"></i>Are these online courses enough to complete FIT?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li>Online courses provide general guidance for a self-learning student. They are designed and developed based on the FIT curriculum. However, if you find difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.</li>
-                                    
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                                
-                    <h2 class="acc_trigger"><a href="#toggle4"><i class="fa fa-question-circle pr-3"></i>Should I go to Institute to complete FIT programme?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li>No there is no compulsory requirement. There are lot of self-learning students who follow FIT programme. However, if you find difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.</li>
-                                    
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                                                    
-                    <h2 class="acc_trigger"><a href="#toggle4"><i class="fa fa-question-circle pr-3"></i>How long will it take to get access to online system (LMS) after registration?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li>It will take 3-4 working days (after receiving your registration detail from the EDC) to create your account. If you have provided an email address, we will inform as soon as we create an account in the online system. If it is delayed more than two days, please contact External Degree Centre or e-Learning Centre. <a href="http://fit.bit.lk/contactUs">http://fit.bit.lk/contactUs</a> </li>
-                                    
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-
-                    <h2 class="acc_trigger"><a href="#toggle4"><i class="fa fa-question-circle pr-3"></i>Is there any different between old and new syllabus?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li>Yes, there are some differences and those improvements are done to enhance the FIT programme. All students are supposed to follow the current syllabus.</a> </li>
-                                    
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-
+                </div>
             </div>
-        </section>
-        <!-- .// Accordion -->
+            {{-- //QUESTION 2 --}}
 
+            {{-- QUESTION 3 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingThree">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Are these online courses enough to complete FIT?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                        Online courses provide general guidance for a self-learning student. They are designed and developed based on the FIT curriculum. However, if you find difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.
+                    </div>
+                </div>
+            </div>
+            {{-- //QUESTION 3 --}}
+
+            {{-- QUESTION 4 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingFour">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Should I go to Institute to complete FIT programme?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                        No there is no compulsory requirement. There are lot of self-learning students who follow FIT programme. However, if you find difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.
+                    </div>
+                </div>
+            </div>
+            {{-- //QUESTION 4 --}}
+
+            {{-- QUESTION 5 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingFive">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>How long will it take to get access to online system (LMS) after registration?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                    It will take 3-4 working days (after receiving your registration detail from the EDC) to create your account. If you have provided an email address, we will inform as soon as we create an account in the online system. If it is delayed more than two days, please contact <a href="{{ url('/contact')}}">External Degree Centre or e-Learning Centre.</a>
+                    </div>
+                </div>
+            </div>
+            {{-- //QUESTION 5 --}}
+
+        </div>
+
+    </section>
+    {{-- //FAQ --}}
 
   </main>
 
