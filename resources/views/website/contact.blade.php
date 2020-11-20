@@ -52,7 +52,7 @@
                     <p class="description"   style="margin-left:0px !important; padding-left: 0px !important;">
                         <b>Mrs. W. M. N. K. Weerasooriya</b><br>
                         <i class="fa fa-envelope"></i><tab1><a href="mailto:edc@ucsc.cmb.ac.lk">edc@ucsc.cmb.ac.lk</a> <br>
-                        <i class="fa fa-phone"></i><tab1><a href="tel:+94114720511"></a>+94 11 4720511</a> (Working Hours Only) <br>
+                        <i class="fa fa-phone"></i><tab1><a href="tel:+94114720511">+94 11 4720511</a> (Working Hours Only) <br>
                         <i class="fa fa-address-card"></i><tab1>Coordinator (External Degrees Centre),
                         <br><tab2>University of Colombo School of Computing,
                         <br><tab2>No. 35, Reid Avenue, 
@@ -79,7 +79,7 @@
                     <h1 class="title">&nbsp;</h1>
                     <p class="description"   style="margin-left:0px !important; padding-left: 0px !important;">
                         <i class="fa fa-envelope"></i><tab1><a href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a> <br>
-                        <i class="fa fa-phone"></i><tab1><a href="tel:+94112591080"></a>+94 11 2591080</a> (Working Hours Only) <br>
+                        <i class="fa fa-phone"></i><tab1><a href="tel:+94112591080">+94 11 2591080</a> (Working Hours Only) <br>
                         <i class="fa fa-address-card"></i><tab1>e-Learning Centre,
                         <br><tab2>University of Colombo School of Computing,
                         <br><tab2>No. 35, Reid Avenue, 
@@ -130,7 +130,7 @@
                     <p class="description"   style="margin-left:0px !important; padding-left: 0px !important;">
                         <b>Mrs. W. M. N. K. Weerasooriya</b><br>
                         <i class="fa fa-envelope"></i><tab1><a href="mailto:edc@ucsc.cmb.ac.lk">edc@ucsc.cmb.ac.lk</a> <br>
-                        <i class="fa fa-phone"></i><tab1><a href="tel:+94114720511"></a>+94 11 4720511</a> (Working Hours Only) <br>
+                        <i class="fa fa-phone"></i><tab1><a href="tel:+94114720511">+94 11 4720511</a> (Working Hours Only) <br>
                         <i class="fa fa-address-card"></i><tab1>Coordinator (EDC),
                         <br><tab2>External Degrees Centre,
                         <br><tab2>UCSC
@@ -138,14 +138,14 @@
                     <p class="description"   style="margin-left:0px !important; padding-left: 0px !important;">
                         <b>Dr. T. A. Weerasinghe</b><br>
                         <i class="fa fa-envelope"></i><tab1><a href="mailto:taw@ucsc.cmb.ac.lk">taw@ucsc.cmb.ac.lk</a> <br>
-                        <i class="fa fa-phone"></i><tab1><a href="tel:+94112591080"></a>+94 11 2591080</a> (Working Hours Only) <br>
+                        <i class="fa fa-phone"></i><tab1><a href="tel:+94112591080">+94 11 2591080</a> (Working Hours Only) <br>
                         <i class="fa fa-address-card"></i><tab1>Coordinator(FIT) and Coordinator (e-LC),
                         <br><tab2>UCSC
                     </p>
                     <p class="description"   style="margin-left:0px !important; padding-left: 0px !important;">
                         <b>Prof. K. P. Hewagamage</b><br>
                         <i class="fa fa-envelope"></i><tab1><a href="mailto:kph@ucsc.cmb.ac.lk">kph@ucsc.cmb.ac.lk</a> <br>
-                        <i class="fa fa-phone"></i><tab1><a href="tel:+94112158950"></a>+94 11 2158950</a> (Working Hours Only) <br>
+                        <i class="fa fa-phone"></i><tab1><a href="tel:+94112158950">+94 11 2158950</a> (Working Hours Only) <br>
                         <i class="fa fa-address-card"></i><tab1>Director,
                         <br><tab2>UCSC
                     </p>

@@ -68,7 +68,8 @@
                 <p>After registering, students could take examinations at any time. Generally, exams are conducted once in a month depending on the demand. Once the exam schedule is published in the VLE, you must come <b>with your national ID or any other acceptable proof of authentication</b> ( eg: passport, driving license, etc....) to prove your identity for the exam on the given date.</p>
             </div>
             
-            <div class="col-lg-4 background order-lg-2 order-2 wow fadeInRight">
+            <div class="myBox col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/vle-logo.png') }}); cursor: pointer; margin-top:200px;">
+                <a target="_blank"  href="http://fit.bit.lk/vle"></a>
 
             </div>
         </div><!-- #main header -->
