@@ -32,7 +32,7 @@
             
             </div>
             <div class="col-lg-4 content order-lg-2 order-2 "> 
-                <a class="float-right faq wow fadeInRight" target="_blank" href="http://fit.bit.lk/vle/pluginfile.php/2765/mod_resource/content/4/general.html"><i class="fa fa-question-circle"></i> FAQ</a>
+                <a class="float-right faq wow fadeInRight" target="_blank" href="{{ url('/faq') }}"><i class="fa fa-question-circle"></i> FAQ</a>
 
             </div>
         </div>
