@@ -87,15 +87,15 @@
     font-size: 14px;
   }
   
-#faq-accordion h4{
+#faq #accordion h4{
       color : #23159c;
   }
   
-#faq-accordion .btn:focus, .btn.focus {
+#faq #accordion .btn:focus, .btn.focus {
       outline: 0;
       box-shadow: none;
   }
   
-#faq-accordion .btn-link:hover, #accordion .btn-link:focus {
+#faq #accordion .btn-link:hover, #accordion .btn-link:focus {
       text-decoration: none;
   }
