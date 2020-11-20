@@ -98,7 +98,7 @@
                         <br><tab2>No. 35, Reid Avenue, 
                         <br><tab2>Colombo 07,
                         <br><tab2>Sri Lanka.
-                        <br><i class="fa fa-phone"></i><tab1><a href="tel:+94112591080"></a>+94 11 2591080</a> (Working Hours Only)
+                        <br><i class="fa fa-phone"></i><tab1><a href="tel:+94112591080">+94 11 2591080</a> (Working Hours Only)
                     </p>
                 </div>
             </div>
