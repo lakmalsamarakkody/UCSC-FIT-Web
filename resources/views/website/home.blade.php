@@ -55,7 +55,7 @@
         </section><!-- #about -->
 
 <!-- Accordion -->
-<section id="about">
+<section id="acordion">
     <div class="row about-container">
         <div class="col-lg-8 content order-lg-1 order-2">
             <h2 class="title">Frequently Asked Questions</h2>
