@@ -8,6 +8,7 @@ use App\Http\Controllers\Website\Registration;
 use App\Http\Controllers\Website\Learning;
 use App\Http\Controllers\Website\Contact;
 use App\Http\Controllers\Website\Examination;
+use App\Http\Controllers\Website\Faq;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,8 @@ Route::get('/learning',[Learning::class,'index']);
 Route::get('/contact',[Contact::class,'index']);
 
 Route::get('/examination',[Examination::class,'index']);
+
+Route::get('/faq',[Faq::class, 'index']);
 
 /*
 |--------------------------------------------------------------------------

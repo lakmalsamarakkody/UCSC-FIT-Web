@@ -1537,7 +1537,6 @@ input[type=text] {
     color : #23159c;
 }
 
-
 #accordion .btn:focus, .btn.focus {
     outline: 0;
     box-shadow: none;
