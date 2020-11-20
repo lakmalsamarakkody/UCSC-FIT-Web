@@ -116,25 +116,11 @@ jQuery(document).ready(function ($) {
     time: 1000
   });
  
-
-  // //Accordion
-
-  $(function () {
-    $('.acc_trigger a').click(function () {
-        $('.acc_trigger').next('.acc_container').slideUp();
-        $(this).closest('.acc_trigger').next('.acc_container').stop().slideDown();
+    //Oen link inside an Accordion
+    $("#accordion a").click(function() {
+        var url = $(this).attr("href"); 
+        window.open(url, '_blank');
         return false;
-    })
-
-    $('.expand').click(function () {
-        $('.acc_trigger').closest('.acc_trigger').next('.acc_container').slideDown();
-        return false;
-    })
-
-    $('.collapse').click(function () {
-        $('.acc_trigger').next('.acc_container').slideUp();
-        return false;
-    })
-});
+    });
 
 });
