@@ -78,59 +78,75 @@
             </div>
         </div><!-- #NEXT STEP -->
     </section>
-    <!-- Accordion -->
-    <section id="acordion">
+
+    {{-- FAQ --}}
+    <section id="faq">
+            
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-1 order-2">
                 <h2 class="title">Frequently Asked Questions</h2>
             </div>
-            <div class="col-lg-4 content order-lg-2 order-2 "> 
-                <a class="float-right faq-sm wow fadeInRight" target="_blank" href="{{ url('/faq') }}"><i class="fa fa-question-circle"></i> More FAQ</a>
-    
+            <div class="col-lg-4 content order-lg-2 order-2 ">
+                <a class="float-right faq-sm wow fadeInRight" href="{{ url('/faq') }}"><i class="fa fa-question-circle"></i>More FAQ</a>
             </div>
         </div>
-        <div class=""> 
 
+        <div id="accordion">
 
-                <h2 class="acc_trigger title"><a href="#toggle1"><i class="fa fa-question-circle pr-3"></i>How long will it take to complete FIT?</a></h2>
-                <div class="acc_container">
-                    <div class="block">
-                        <p class="">
-                            <ul>
-                                <li>Generally, it takes 8-10 months to complete all courses if it is very beginner. However, it depends on the past experience and your knowledge in the area.</b>  at UCSC. Moreover, it will be an added qualification for those who seek higher education in ICT or employment in the IT industry or BPO industry.</li>
-                            </ul>
-                        </p>
-                    </div>
+            {{-- QUESTION 1 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingOne">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>How long will it take to complete FIT?</h4>
+                    </button>
                 </div>
-                
-                <h2 class="acc_trigger title"><a href="#toggle2"><i class="fa fa-question-circle pr-3"></i>How can I make a complain about FIT programme?</a></h2>
-                <div class="acc_container">
-                    <div class="block">
-                        <p class="">
-                            <ul>
-                                <li>Please contact the relevant facilitator of the course, through a forum, message or email. Contact details are given in the online course page through FIT LMS. If it is a system related problem, contact VLE admin directly by using the e-mail admin@lms.bit.lk . If you are not satisfied with the reply, contact the coordinator of VLE through ( <a href="mailto:kph@ucsc.cmb.ac.lk">kph@ucsc.cmb.ac.lk</a>  ). If you are still not satisfied with the reply, send your complain in writing to the Director, UCSC by using the e-mail ( <a href="director@ucsc.cmb.ac.lk">director@ucsc.cmb.ac.lk</a>  ).</li>
-                            </ul>
-                        </p>
-                    </div>
-                </div>
-                
-                <h2 class="acc_trigger title"><a href="#toggle3"><i class="fa fa-question-circle pr-3"></i>How can I make a complain about FIT programme?</a></h2>
-                <div class="acc_container">
-                    <div class="block">
-                        <p class="">
-                            <ul>
-                                <li>Please email your suggestions, comments and feedback to head and coordinator of e-Learning Centre, UCSC through email ( <a href="mailto:kph@ucsc.cmb.ac.lk">kph@ucsc.cmb.ac.lk</a> ).</li>
-                            </ul>
-                        </p>
-                    </div>
-                </div>
-                
-
-        
             
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body pt-0 pt-0 pl-md-5">
+                        Generally, it takes 8-10 months to complete all courses if it is very beginner. However, it depends on the past experience and your knowledge in the area. Moreover, it will be an added qualification for those who seek higher education in ICT or employment in the IT industry or BPO industry.
+                    </div>
+                </div>
+            </div>
+            {{-- //QUESTION 1 --}}
+
+            {{-- QUESTION 2 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingTwo">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>How can I make a complain about FIT programme?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                        Please contact the relevant facilitator of the course, through a forum, message or email. Contact details are given in the <a href="{{ url('/contact') }}">contact us</a> page.
+                        <br/>If you are not satisfied with the reply, contact the coordinator of VLE through ( <a href="mailto:kph@ucsc.cmb.ac.lk">kph@ucsc.cmb.ac.lk</a> ).
+                        <br/>If you are still not satisfied with the reply, send your complain in writing to the Director, UCSC by using the e-mail (<a href="mailto:director@ucsc.cmb.ac.lk">director@ucsc.cmb.ac.lk</a>)
+                    </div>
+                </div>
+            </div>
+            {{-- //QUESTION 2 --}}
+
+            {{-- QUESTION 3 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingThree">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Is there any different between old and new syllabus?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                        Yes, there are some differences and those improvements are done to enhance the FIT programme. All students are supposed to follow the current syllabus.
+                    </div>
+                </div>
+            </div>
+            {{-- //QUESTION 3 --}}
+
         </div>
+
     </section>
-    <!-- .// Accordion -->
+    {{-- //FAQ --}}
 
   </main>
 
