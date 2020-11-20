@@ -1530,90 +1530,39 @@ input[type=text] {
 }
 /*----------------------------------------------------------------*/
 
-a:hover, a:focus{
-  text-decoration: none;
-  outline: none;
-}
-#accordion .panel{
-  border: none;
+.panel-group .panel {
+  border-radius: 2p;
   box-shadow: none;
-  border-radius: 0;
-  margin-bottom: 15px;
-}
-#accordion .panel-heading{
-  padding: 0;
-  border-radius:0;
-  border: none;
-}
-#accordion .panel-title a{
-  display: block;
-  padding: 14px 30px 14px 70px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
-  background:  #23159c;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.5s ease 0s;
-}
-#accordion .panel-title a.collapsed{
-  background: #f8f8f8;
-  color: #1e4276;
-}
-#accordion .panel-title a.collapsed:hover{
-  color:  #23159c;
-}
-#accordion .panel-title a:before{
-  content: "";
-  width: 55px;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 0;
-  left: -13px;
-  transform: skewX(-25deg);
-  transition: all 0.5s ease 0s;
-}
-#accordion .panel-title a.collapsed:hover:before{
-  background:  #23159c;
-}
-#accordion .panel-title a:after{
-  content: "\f047";
-  font-family: FontAwesome;
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  color: #fff;
-  transform: translateY(-50%);
-}
-#accordion .panel-title a.collapsed:after{
-  color: #9f9f9f;
-}
-#accordion .panel-title a.collapsed:hover:after{
-  color: #fff;
-}
-#accordion .panel-body{
-  font-size: 14px;
-  color: #5a3245;
-  line-height: 25px;
-  padding: 20px 15px 20px 40px;
-  position: relative;
-  border: none;
-  transition: all 0.5s ease 0s;
-}
-#accordion .panel-body:before{
-  content: "";
-  width: 5px;
-  height: 40px;
-  background:  #23159c;
-  position: absolute;
-  top: 30px;
-  left: 0;
-}
-#accordion .panel-body p{
-  margin-bottom: 0;
+  border-color: #333232;
 }
 
+.panel-default > .panel-heading {
+  padding: 0;
+  border-radius: 0;
+  color: #212121;
+  background-color: #a0a0a0;
+  border-color: #000000;
+}
+
+.panel-title {
+  font-size: 14px;
+}
+
+.panel-title > a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  background-color:rgb(221, 221, 221);
+}
+
+.more-less {
+  float: right;
+  color: #212b4b;
+}
+
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #000000;
+}
 
 /*--------------------------------------------------------------
 # Footer

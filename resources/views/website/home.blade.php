@@ -61,51 +61,55 @@
             <h2 class="title">Frequently Asked Questions</h2>
         </div>
     </div>
-    <div class="col-md-12">
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="col-md-12"> 
+        <div class="panel-group margin_0" id="accordion1">
             <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
+                <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Section-1
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+                            <i class="rt-icon2-bubble highlight"></i>
+                            Lorem Ipsum
                         </a>
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div style="height: 0px;" id="collapse1" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et facilisis mi. Nunc vitae pretium est, aliquet sagittis enim. Duis fringilla ipsum at velit gravida, ac luctus lorem euismod. Vivamus placerat dolor mi, vel feugiat dui egestas a. Fusce congue. </p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium amet ea dicta neque, ut quis omnis quos nam, pariatur, minus, fugit suscipit aspernatur sint ullam quas explicabo. Alias, officiis, dolor!
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
+                <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Section-2
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#collapse2" class="collapsed">
+                            <i class="rt-icon2-bubble highlight"></i>
+                            Dolor Sit Amet
                         </a>
                     </h4>
                 </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div style="height: 0px;" id="collapse2" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et facilisis mi. Nunc vitae pretium est, aliquet sagittis enim. Duis fringilla ipsum at velit gravida, ac luctus lorem euismod. Vivamus placerat dolor mi, vel feugiat dui egestas a. Fusce congue. </p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facere doloremque ut dolores laudantium nihil at, repudiandae est numquam fuga tempora totam sequi quidem saepe officiis sint beatae, magni fugit.
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
+                <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Section-3
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#collapse3" class="collapsed">
+                            <i class="rt-icon2-bubble highlight"></i>
+                            Corporis Iste
                         </a>
                     </h4>
                 </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div style="height: 0px;" id="collapse3" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et facilisis mi. Nunc vitae pretium est, aliquet sagittis enim. Duis fringilla ipsum at velit gravida, ac luctus lorem euismod. Vivamus placerat dolor mi, vel feugiat dui egestas a. Fusce congue. </p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. At nobis omnis delectus, asperiores quo obcaecati et iste corporis necessitatibus tempora aspernatur doloribus. Ut deleniti commodi dicta distinctio sit enim quidem!
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>    
+        </div> 
+        
     </div>
 </section>
 <!-- .// Accordion -->
