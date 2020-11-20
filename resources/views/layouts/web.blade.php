@@ -16,10 +16,11 @@
 
         <!-- STYLES -->
             <!-- BOOTSTRAP -->      <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+                                    <link rel="stylesheet" href="{{ asset('css/web.css') }}">
             <!-- FONT AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/all.css') }}">
             <!-- LINE AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/line-awesome/css/line-awesome.css') }}">
             <!-- ANIMATE -->        <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/website/core.css') }}">
+            {{-- <link rel="stylesheet" href="{{ asset('css/website/core.css') }}">
             <link rel="stylesheet" href="{{ asset('css/website/navigation.css') }}">
             <link rel="stylesheet" href="{{ asset('css/website/header.css') }}">
             <link rel="stylesheet" href="{{ asset('css/website/footer.css') }}">
@@ -30,7 +31,7 @@
             <link rel="stylesheet" href="{{ asset('css/website/examination.css') }}">
             <link rel="stylesheet" href="{{ asset('css/website/registration.css') }}">
             <link rel="stylesheet" href="{{ asset('css/website/contact-us.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/website/faq.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/website/faq.css') }}"> --}}
         <!-- /STYLES -->
 
         <!-- JavaScript Libraries -->
