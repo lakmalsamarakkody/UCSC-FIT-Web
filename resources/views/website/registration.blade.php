@@ -15,7 +15,7 @@
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/hero-back.png') }}); height:200px">
         <div class="page-hero-container">
-            <h1 style="padding-top:30px">How to Register for BIT?</h1>
+            <h1 style="padding-top:30px">How to Register for FIT?</h1>
         </div>
     </section><!-- #hero -->
 
