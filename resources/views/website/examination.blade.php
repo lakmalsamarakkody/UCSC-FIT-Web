@@ -116,119 +116,152 @@
         </div><!-- #NEXT STEP -->
     </section>
 
+    {{-- FAQ --}}
+    <section id="faq">
+            
+        <div class="row about-container">
+            <div class="col-lg-8 content order-lg-1 order-2">
+                <h2 class="title">Frequently Asked Questions</h2>
+            </div>
+            <div class="col-lg-4 content order-lg-2 order-2 "> 
+                <a class="float-right faq-sm wow fadeInRight" href="{{ url('/faq') }}"><i class="fa fa-question-circle"></i> More FAQ</a>
+            </div>
+        </div>
 
-        <!-- Accordion -->
-        <section id="acordion">
-            <div class="row about-container">
-                <div class="col-lg-8 content order-lg-1 order-2">
-                    <h2 class="title">Frequently Asked Questions</h2>
+        <div id="accordion">
+
+            {{-- QUESTION 1 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingOne">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>How long does it take to know FIT results?</h4>
+                    </button>
                 </div>
-                <div class="col-lg-4 content order-lg-2 order-2 "> 
-                    <a class="float-right faq-sm wow fadeInRight" target="_blank" href="{{ url('/faq') }}"><i class="fa fa-question-circle"></i> More FAQ</a>
-    
+            
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body pt-0 pt-0 pl-md-5">
+                        The official results will be issued within <b> two weeks</b> after the end of exam. It will take 2-3 weeks to issue FIT practical tests.
+                    </div>
                 </div>
             </div>
-            <div class=""> 
+            {{-- //QUESTION 1 --}}
 
-
-                    <h2 class="acc_trigger title"><a href="#toggle1"><i class="fa fa-question-circle pr-3"></i>How long does it take to know FIT results?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li>The official results will be issued within <b> two weeks</b> after the end of exam.</li>
-                                    <li>It will take 2-3 weeks to issue FIT practical tests.</li>
-                                </ul>
-                            </p>
-                        </div>
+            {{-- QUESTION 2 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingTwo">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>When practical test will be held?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                        If there is enough demand, the practical tests are also held once in a month. However, the time table could be varied depending on the demand and availability.
                     </div>
-                    
-                    <h2 class="acc_trigger"><a href="#toggle2"><i class="fa fa-question-circle pr-3"></i>When practical test will be held?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li>If there is enough demand, the practical tests are also held once in a month. However, the time table could be varied depending on the demand and availability.</li>
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <h2 class="acc_trigger"><a href="#toggle3"><i class="fa fa-question-circle pr-3"></i>Do I have to pass to obtain the certificate?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li><b>Yes</b> you have to pass relevant tests of FIT programme to obtain the certificates. The pass mark for any e-Test or practical test will be 50 marks.</li>
-                                    
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                                
-                    <h2 class="acc_trigger"><a href="#toggle4"><i class="fa fa-question-circle pr-3"></i>Do I have to do online course quizzes?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li>These online courses are self-learning optional resources for registered students. Your marks or performances in online courses will not be considered when deciding your final grade.</li>
-                                    
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                                                
-                    <h2 class="acc_trigger"><a href="#toggle5"><i class="fa fa-question-circle pr-3"></i>Does my practice quiz marks will be counted for final grade?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li><b>No</b> they will not be counted for final grade in the course. Final grade of a course depends on the e-Tests and practical.</li>
-                                    
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                                                                    
-                    <h2 class="acc_trigger"><a href="#toggle6"><i class="fa fa-question-circle pr-3"></i>Where can I take FIT exams?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li>You can take FIT exams at NODES Centres or at UCSC e-Testing Lab at the external degree centre.</li>
-                                    
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-
-                    <h2 class="acc_trigger"><a href="#toggle7"><i class="fa fa-question-circle pr-3"></i>If I am a repeat student (registered before {{ now()->year }}), do I have to follow the new syllabus when I take next exam?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li>You can select MS Office 2007 or 2003 when selecting the ICT Application course. There are no separate exams for students who registered before {{ now()->year }}.</li>
-                                    
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <h2 class="acc_trigger"><a href="#toggle8"><i class="fa fa-question-circle pr-3"></i>Do I have to do all e-Tests at once?</a></h2>
-                    <div class="acc_container">
-                        <div class="block">
-                            <p class="">
-                                <ul>
-                                    <li>No, there is no such a requirement. You can decide in the way you like to do. However, if you register for all e-Tests, you can do all these three e-Tests on the same day.</li>
-                                    
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-
+                </div>
             </div>
-        </section>
-        <!-- .// Accordion -->
+            {{-- //QUESTION 2 --}}
+
+            {{-- QUESTION 3 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingThree">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Do I have to pass to obtain the certificate?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                        <b>Yes</b>, you have to pass relevant tests of FIT programme to obtain the certificates. The pass mark for any e-Test or practical test will be 50 marks.
+                    </div>
+                </div>
+            </div>
+            {{-- //QUESTION 3 --}}
+
+            {{-- QUESTION 4 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingFour">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Do I have to do online course quizzes?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                        These online courses are self-learning optional resources for registered students. Your marks or performances in online courses will not be considered when deciding your final grade.
+                    </div>
+                </div>
+            </div>
+            {{-- //QUESTION 4 --}}
+
+            {{-- QUESTION 5 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingFive">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Does my practice quiz marks will be counted for final grade?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                        <b>No</b>, they will not be counted for final grade in the course. Final grade of a course depends on the e-Tests and practical.
+                    </div>
+                </div>
+            </div>
+            {{-- //QUESTION 5 --}}
+
+            {{-- QUESTION 6 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingSix">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Where can I take FIT exams?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                        You can take FIT exams at NODES Centres or at UCSC e-Testing Lab at the external degree centre.
+                    </div>
+                </div>
+            </div>
+            {{-- //QUESTION 6 --}}
+
+            {{-- QUESTION 7 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingSeven">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>If I am a repeat student (registered before {{ now()->year }}), do I have to follow the new syllabus when I take next exam?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                        You can select MS Office 2007 or 2003 when selecting the ICT Application course. There are no separate exams for students who registered before {{ now()->year }}.
+                    </div>
+                </div>
+            </div>
+            {{-- //QUESTION 7 --}}
+
+            {{-- QUESTION 8 --}}
+            <div class="card border-0">
+                <div class="card-header bg-transparent border-bottom-0" id="headingEight">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Do I have to do all e-Tests at once?</h4>
+                    </button>
+                </div>
+            
+                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
+                    <div class="card-body pt-0 pl-md-5">
+                        No, there is no such a requirement. You can decide in the way you like to do. However, if you register for all e-Tests, you can do all these three e-Tests on the same day.
+                    </div>
+                </div>
+            </div>
+            {{-- //QUESTION 8 --}}
+
+        </div>
+
+    </section>
+    {{-- //FAQ --}}
 
   </main>
 
