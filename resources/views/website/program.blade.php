@@ -71,7 +71,7 @@
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-1 order-2">               
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
-                    <a href="learning"><div class="icon"><i class="fa fa-leanpub"></i></div></a>
+                    <a href="learning"><div class="icon"><i class="fab fa-leanpub"></i></div></a>
                     <h4 class="title"><a href="learning">Learning</a></h4>
                     <p class="description">How you learn FIT</p>
                 </div>

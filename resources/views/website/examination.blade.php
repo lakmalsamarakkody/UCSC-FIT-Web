@@ -110,7 +110,7 @@
 
 
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
-                    <a href="registration"><div class="icon"><i class="fa fa-leanpub"></i></div></a>
+                    <a href="registration"><div class="icon"><i class="fa fa-hand-point-right"></i></div></a>
                     <h4 class="title"><a href="registration">Registration</a></h4>
                     <p class="description">How to Register for FIT Programme</p>
                 </div>

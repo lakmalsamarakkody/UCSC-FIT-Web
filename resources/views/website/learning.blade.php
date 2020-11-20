@@ -61,7 +61,7 @@
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-1 order-2">               
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-top: 80px;">
-                    <a href="examination"><div class="icon"><i class="fa fa-leanpub"></i></div></a>
+                    <a href="examination"><div class="icon"><i class="fas fa-file-alt"></i></div></a>
                     <h4 class="title"><a href="examination">Examination</a></h4>
                     <p class="description">How to sit for your FIT Examinations</p>
                 </div>
