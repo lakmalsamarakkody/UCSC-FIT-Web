@@ -15,23 +15,22 @@
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/hero-back.png') }}); height:200px">
         <div class="page-hero-container">
-            <h1 style="padding-top:30px">Registration</h1>
+            <h1 style="padding-top:30px">How to Register for FIT?</h1>
         </div>
     </section><!-- #hero -->
 
   <main id="main">
 
     <!--==========================
-      About Us Section
+      Registration Section
     ============================-->
-    <section id="about">
-        <div class="row about-container">
+    <section id="registration" style="padding-top: 80px;">
+        <div class="row about-container mb-5">
             <div class="col-lg-8 content order-lg-1 order-1">
-                <h2 class="title">How to Register for FIT?</h2>
+                <h2 class="title">There are no conditions to register for the FIT programme such as age or qualifications.</h2>
                 <br/>
-                <h4>There are no conditions to register for the FIT programme such as age or qualifications.</h4>
-                <p>Registration fees will be Rs. 2750. All registered students will receive a registration number and will be able to access all online courses. Students do not want to pay all registration, examination and other fees when they register for FIT programme. They can register FIT programme by paying only Rs. 2750 and when they are ready to take relevant exams they can pay examination fees.</p>
-              
+                <h4>Registration fees will be Rs. 2750. All registered students will receive a registration number and will be able to access all online courses. Students do not want to pay all registration, examination and other fees when they register for FIT programme. They can register FIT programme by paying only Rs. 2750 and when they are ready to take relevant exams they can pay examination fees.</h4>
+                <br/>
                 <p>
                     To <b>Register</b>, Sign up your email here and we'll send you an email with <b>login details and steps on how to Register for FIT</b>.
                 </p>
@@ -41,10 +40,10 @@
                     </div>
                     <form action="" method="post" role="form" class="contactForm">
                         <div class="form-group">
-                        <input type="text" class="form-control" name="email" id="email" placeholder="Type Your Email Here"  data-rule="email" data-msg="Please enter a valid email" />
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Type Your Email Here"  data-rule="email" data-msg="Please enter a valid email" />
                         <div class="validation"></div>
                         </div>
-                        <div class="text-center"><button type="submit">Sign Up Here</button></div>
+                        <div class="mt-4 text-center"><button type="submit">Sign Up Here</button></div>
                     </form>
                 </div>
             
@@ -58,7 +57,7 @@
             </div>
         </div>
         
-    </section><!-- #about -->
+    </section><!-- #registration -->
 
   </main>
 
