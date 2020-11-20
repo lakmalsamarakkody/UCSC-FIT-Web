@@ -82,7 +82,7 @@
 
         <div class="container">
         <div class="copyright">
-            Copyright &copy;  {{ now()->year }}<strong>UCSC</strong>. All Rights Reserved 
+            Copyright &copy;  {{ now()->year }}<strong> UCSC</strong>. All Rights Reserved 
         </div>
         <div class="credits">
             Designed by <strong>e-Learning Center- UCSC </strong>
