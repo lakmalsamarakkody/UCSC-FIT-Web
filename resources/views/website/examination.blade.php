@@ -68,21 +68,18 @@
                 <p>After registering, students could take examinations at any time. Generally, exams are conducted once in a month depending on the demand. Once the exam schedule is published in the VLE, you must come <b>with your national ID or any other acceptable proof of authentication</b> ( eg: passport, driving license, etc....) to prove your identity for the exam on the given date.</p>
             </div>
             
-            <div class="myBox col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/vle-logo.png') }}); cursor: pointer; margin-top:200px;">
+            <div class="myBox col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/exam.png') }}); cursor: pointer;">
                 <a target="_blank"  href="http://fit.bit.lk/vle"></a>
 
             </div>
         </div><!-- #main header -->
 
-        <!-- PAYMENT DETAILS -->
-        <div class="row about-container mt-5">
-            
-        </div><!-- #PAYMENT DETAILS -->
+
 
         <!-- DETAILS -->
-        <div class="row about-container mt-5">
+        <div class="row about-container mt-5" style="background-color:  rgba(255, 255, 255, 0) !important;">
             <div class="col-lg-8 content order-lg-1 order-1">               
-                <div class="wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px;">
+                <div class="wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 0px;">
                     <h2 class="title">UCSC e-Testing Lab</h2>
                     <h5 class="description">If your question is related to examination matters of FIT programme, 
                         <br>for example <b>submitting applications for examination,</b> etc. please contact External Degrees Centre. 
