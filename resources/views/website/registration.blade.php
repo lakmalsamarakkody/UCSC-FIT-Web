@@ -33,7 +33,7 @@
                 <p>Registration fees will be Rs. 2750. All registered students will receive a registration number and will be able to access all online courses. Students do not want to pay all registration, examination and other fees when they register for FIT programme. They can register FIT programme by paying only Rs. 2750 and when they are ready to take relevant exams they can pay examination fees.</p>
               
                 <p>
-                    To <b>Register</b>, Sign up your email here and we'll send you <b>login details and steps on how to Register for FIT</b>.
+                    To <b>Register</b>, Sign up your email here and we'll send you an email with <b>login details and steps on how to Register for FIT</b>.
                 </p>
                 <div class="form">
                     <div id="error">
