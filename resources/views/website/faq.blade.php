@@ -55,7 +55,7 @@
         <nav id="nav-menu-container">
             <ul class="nav-menu">
 
-            <li id="login_nav"><a href="{{ url('/login') }}">Back to Website</a></li>
+            <li id="login_nav"><a href="{{ url('/') }}">Back to Website</a></li>
 
             </ul>
         </nav><!-- #nav-menu-container -->

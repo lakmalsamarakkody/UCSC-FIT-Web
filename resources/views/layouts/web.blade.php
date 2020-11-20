@@ -55,7 +55,7 @@
         <nav id="nav-menu-container">
             <ul class="nav-menu">
             <li id="home_nav"><a href="{{ url('/') }}">Home</a></li>
-            <li id="home_nav"><a href="#about">About</a></li>
+            <li id="home_nav"><a href="{{ url('/#about') }}">About</a></li>
             <li id="programme_nav"><a href="{{ url('/programme') }}">Programme</a></li>
             <li id="learning_nav"><a href="{{ url('/learning') }}">Learning</a></li>
             <li id="examination_nav"><a href="{{ url('/examination') }}">Examination</a></li>
