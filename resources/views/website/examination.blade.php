@@ -116,6 +116,116 @@
         </div><!-- #NEXT STEP -->
     </section>
 
+
+        <!-- Accordion -->
+        <section id="acordion">
+            <div class="row about-container">
+                <div class="col-lg-8 content order-lg-1 order-2">
+                    <h2 class="title">Frequently Asked Questions</h2>
+                </div>
+            </div>
+            <div class=""> 
+
+
+                    <h2 class="acc_trigger title"><a href="#toggle1"><i class="fa fa-question-circle pr-3"></i>How long does it take to know FIT results?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li>The official results will be issued within <b> two weeks</b> after the end of exam.</li>
+                                    <li>It will take 2-3 weeks to issue FIT practical tests.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <h2 class="acc_trigger"><a href="#toggle2"><i class="fa fa-question-circle pr-3"></i>When practical test will be held?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li>If there is enough demand, the practical tests are also held once in a month. However, the time table could be varied depending on the demand and availability.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <h2 class="acc_trigger"><a href="#toggle3"><i class="fa fa-question-circle pr-3"></i>Do I have to pass to obtain the certificate?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li><b>Yes</b> you have to pass relevant tests of FIT programme to obtain the certificates. The pass mark for any e-Test or practical test will be 50 marks.</li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                                
+                    <h2 class="acc_trigger"><a href="#toggle4"><i class="fa fa-question-circle pr-3"></i>Do I have to do online course quizzes?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li>These online courses are self-learning optional resources for registered students. Your marks or performances in online courses will not be considered when deciding your final grade.</li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                                                
+                    <h2 class="acc_trigger"><a href="#toggle5"><i class="fa fa-question-circle pr-3"></i>Does my practice quiz marks will be counted for final grade?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li><b>No</b> they will not be counted for final grade in the course. Final grade of a course depends on the e-Tests and practical.</li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                                                                    
+                    <h2 class="acc_trigger"><a href="#toggle6"><i class="fa fa-question-circle pr-3"></i>Where can I take FIT exams?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li>You can take FIT exams at NODES Centres or at UCSC e-Testing Lab at the external degree centre.</li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+
+                    <h2 class="acc_trigger"><a href="#toggle7"><i class="fa fa-question-circle pr-3"></i>If I am a repeat student (registered before {{ now()->year }}), do I have to follow the new syllabus when I take next exam?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li>You can select MS Office 2007 or 2003 when selecting the ICT Application course. There are no separate exams for students who registered before {{ now()->year }}.</li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <h2 class="acc_trigger"><a href="#toggle8"><i class="fa fa-question-circle pr-3"></i>Do I have to do all e-Tests at once?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li>No, there is no such a requirement. You can decide in the way you like to do. However, if you register for all e-Tests, you can do all these three e-Tests on the same day.</li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+
+            </div>
+        </section>
+        <!-- .// Accordion -->
+
   </main>
 
 @endsection

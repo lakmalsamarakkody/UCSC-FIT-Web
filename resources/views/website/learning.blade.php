@@ -69,6 +69,91 @@
         </div><!-- #NEXT STEP -->
     </section>
 
+        <!-- Accordion -->
+        <section id="acordion">
+            <div class="row about-container">
+                <div class="col-lg-8 content order-lg-1 order-2">
+                    <h2 class="title">Frequently Asked Questions</h2>
+                </div>
+            </div>
+            <div class=""> 
+
+
+                    <h2 class="acc_trigger title"><a href="#toggle1"><i class="fa fa-question-circle pr-3"></i>Does UCSC conduct classes for FIT?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li><b>No</b> UCSC will not conduct any face-to-face classes. Private institutes conduct face-to-face classes based on the FIT programme. However, UCSC will not undertake any responsibility or comment on their performances.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <h2 class="acc_trigger"><a href="#toggle2"><i class="fa fa-question-circle pr-3"></i>Where can I learn for FIT?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li>You can follow online courses of FIT programme if you have some similar IT experience. Otherwise, you can select a private institute which conducts classes based on the FIT programme.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <h2 class="acc_trigger"><a href="#toggle3"><i class="fa fa-question-circle pr-3"></i>Are these online courses enough to complete FIT?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li>Online courses provide general guidance for a self-learning student. They are designed and developed based on the FIT curriculum. However, if you find difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.</li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                                
+                    <h2 class="acc_trigger"><a href="#toggle4"><i class="fa fa-question-circle pr-3"></i>Should I go to Institute to complete FIT programme?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li>No there is no compulsory requirement. There are lot of self-learning students who follow FIT programme. However, if you find difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.</li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                                                    
+                    <h2 class="acc_trigger"><a href="#toggle4"><i class="fa fa-question-circle pr-3"></i>How long will it take to get access to online system (LMS) after registration?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li>It will take 3-4 working days (after receiving your registration detail from the EDC) to create your account. If you have provided an email address, we will inform as soon as we create an account in the online system. If it is delayed more than two days, please contact External Degree Centre or e-Learning Centre. <a href="http://fit.bit.lk/contactUs">http://fit.bit.lk/contactUs</a> </li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+
+                    <h2 class="acc_trigger"><a href="#toggle4"><i class="fa fa-question-circle pr-3"></i>Is there any different between old and new syllabus?</a></h2>
+                    <div class="acc_container">
+                        <div class="block">
+                            <p class="">
+                                <ul>
+                                    <li>Yes, there are some differences and those improvements are done to enhance the FIT programme. All students are supposed to follow the current syllabus.</a> </li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+
+            </div>
+        </section>
+        <!-- .// Accordion -->
+
+
   </main>
 
 @endsection
