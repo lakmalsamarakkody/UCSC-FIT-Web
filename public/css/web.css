@@ -1532,31 +1532,19 @@ input[type=text] {
   line-height: 24px;
   font-size: 14px;
 }
-/*----------------------------------------------------------------*/
 
-/* Style the buttons that are used to open and close the accordion panel */
-.accordion {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  text-align: left;
-  border: none;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .accordion:hover {
-  background-color: #212b4b;
-  color: #fff;
-  border: none;
+#accordion h4{
+    color : #23159c;
 }
 
 
-.acc_container {
-  display: none;
+#accordion .btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+#accordion .btn-link:hover, #accordion .btn-link:focus {
+    text-decoration: none;
 }
 
 /*--------------------------------------------------------------
