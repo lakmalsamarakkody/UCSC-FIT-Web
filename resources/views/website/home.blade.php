@@ -14,16 +14,46 @@
     Hero Section
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/UCSC-Banner-cropped.jpg') }});">
-        <div class="hero-container col-lg-8 order-lg-1 order-1">
+        <div class="hero-container">
             <div class="row">
-                <div class="col-lg-12"> <img src="{{ asset('img/logo/invert-ucsc.png') }}" width="15%" /> </div>
+                <div class="col-lg-8 order-lg-1 order-1"> 
+                    <img src="{{ asset('img/logo/invert-ucsc.png') }}" width="15%" /> 
+            
+                    <!-- <h1 style="text-align: left;"><span style="color:#7e6fff">F</span>oundation in <br> <span style="color:#23159c">I</span>nformation <br><span style="color:#23159c">T</span>echnology</h1> -->
+                    <h1 style="text-align: left;">Foundation in <br> Information Technology</h1>
+                    <h3 style="color:#fff">University of Colombo School of Computing</h3>
+                    <a href="{{ url('/#about') }}" class="btn-get-started" style="width=25%">About FIT</a>
+                </div>                
+                <div class="col-lg-4 order-lg-2 order-2 announce mt-5 pb-5">
+                    <h1 class="title" style="padding-left:10px; color:#000">Announcements</h1>
+                    <div class="announcement wow fadeInRight" data-wow-delay="0.2s">
+                        <ul>
+                            <li>
+                                <p><a href="">December Exam Application now open</a> <br>
+                                    <span class=" float-right pr-4"><small>November 20, 2020</small></span> 
+                                 </p>
+                            </li>
+                            <li>
+                                <p><a href="">November Results Released</a> <br>
+                                    <span class=" float-right pr-4"><small>November 11, 2020</small></span> 
+                                 </p>
+                            </li>
+                            <li>
+                                <p><a href="">November Results Released</a> <br>
+                                    <span class=" float-right pr-4"><small>November 11, 2020</small></span> 
+                                 </p>
+                            </li>
+                            <li>
+                                <p><a href="">November Results Released</a> <br>
+                                    <span class=" float-right pr-4"><small>November 11, 2020</small></span> 
+                                 </p>
+                            </li>
+                        </ul>
+                        <div class="announce-footer pb-0">
+                            <p><a href="">More...</a></p>   </div>                     
+                    </div>
+                </div>
             </div>
-            <!-- <h1 style="text-align: left;"><span style="color:#7e6fff">F</span>oundation in <br> <span style="color:#23159c">I</span>nformation <br><span style="color:#23159c">T</span>echnology</h1> -->
-            <h1 style="text-align: left;">Foundation in <br> Information Technology</h1>
-            <h3 style="color:#fff">University of Colombo School of Computing</h2>
-            <a href="#about" class="btn-get-started" style="width=25%">About FIT</a>
-        </div>
-        <div class="hero-container col-lg-8 order-lg-2 order-2">
         </div>
     </section><!-- #hero -->
 

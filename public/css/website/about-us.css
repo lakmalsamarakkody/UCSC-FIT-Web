@@ -85,3 +85,41 @@
     line-height: 24px;
     font-size: 14px;
   }
+
+  .announce{
+    background-color: rgba(55, 3, 104, 0.466);
+    border-radius: 40px 0px 0px 40px;
+    text-align: left;
+  }
+
+  .announce>h1{
+    font-size: 24px !important;
+    padding-top: 20px !important; 
+    margin-top: 0px !important;
+    color: rgb(255, 255, 255) !important;
+  }
+
+  .announcement{
+    color: rgb(182, 182, 182);
+    padding-left: 10px;
+  }
+
+  .announcement>ul>li>p>a{
+    color: rgb(231, 198, 6) !important;
+    padding-left: 10px;
+  }
+  .announcement>a{
+    color: rgb(255, 255, 255) !important;
+    padding-left: 10px;
+  }
+
+  .announce-footer {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+  }
+
+  .announce-footer>p>a{
+    color: #fff;
+  }

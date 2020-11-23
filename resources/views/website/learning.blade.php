@@ -30,8 +30,8 @@
             <div class="col-lg-7 content order-lg-1 order-1">
                 <h2 class="title">Virtual Learning Environment</h2>
                 <br/>
-                <h4>All registered FIT students will receive a registration number and a password to access the online learning management system</h4>
-                <br/>
+                <p><b>All registered FIT students will receive a registration number and a password to access the online learning management system</b> </p>
+                
                 <p>Once your payment is confirmed for the registration, you will be notified with login details. It is mandatory to include a valid email address when you register for the FIT programme. Otherwise you have to contact External Degrees Centre of UCSC to find out the status of your registration.
                     <br/><b>Tel: <a href="tel:+94114720511">011 4720511 </a>/ <a href="tel:+94114720513">011 4720513</a> </b>
                 </p>

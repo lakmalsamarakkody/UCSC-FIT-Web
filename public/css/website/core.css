@@ -30,6 +30,11 @@ html {
   p {
     padding: 0;
     margin: 0 0 30px 0;
+    font-size: 14px;
+  }
+
+  table {
+    font-size: 14px;
   }
   
   h1,
@@ -37,7 +42,8 @@ html {
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  p {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     margin: 0 0 20px 0;

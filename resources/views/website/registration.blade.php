@@ -15,7 +15,7 @@
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/hero-back.png') }}); height:200px">
         <div class="page-hero-container">
-            <h1 style="padding-top:30px">How to Register for FIT?</h1>
+            <h1 style="padding-top:30px">Get Register for FIT</h1>
         </div>
     </section><!-- #hero -->
 
@@ -27,10 +27,12 @@
     <section id="registration" style="padding-top: 80px;">
         <div class="row about-container mb-5">
             <div class="col-lg-8 content order-lg-1 order-1">
-                <h2 class="title">There are no conditions to register for the FIT programme such as age or qualifications.</h2>
-                <br/>
-                <h4>Registration fees will be Rs. 2750. All registered students will receive a registration number and will be able to access all online courses. Students do not want to pay all registration, examination and other fees when they register for FIT programme. They can register FIT programme by paying only Rs. 2750 and when they are ready to take relevant exams they can pay examination fees.</h4>
-                <br/>
+                <h2 class="title">How to Register for FIT?</h2>
+
+                <p>There are <b>no conditions</b>  to register for the FIT programme such as age or qualifications.</p>
+                
+                <p>Registration fees will be <b>Rs. 2750.00</b>. All registered students will receive a registration number and will be able to access all online courses. Students do not have to pay all registration, examination and other fees when they register for FIT programme. They can register FIT programme by paying only <b> Rs. 2750.00</b> and when they are ready to take relevant exams they can pay examination fees for relevant subjects.</p>
+                
                 <p>
                     To <b>Register</b>, Sign up your email here and we'll send you an email with <b>login details and steps on how to Register for FIT</b>.
                 </p>

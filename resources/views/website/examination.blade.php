@@ -30,7 +30,7 @@
             <div class="col-lg-8 content order-lg-1 order-1">
                 <h2 class="title">Examination Environment</h2>
                 <br/>
-                <h4>Students, who are competent about the subject as given in the syllabus, <b>could sit for the examination at any time</b>. There is no requirement of following the online courses if a student feels competent in the relevant subjects.</h4>
+                <p>Students, who are competent about the subject as given in the syllabus, <b>could sit for the examination at any time</b>. There is no requirement of following the online courses if a student feels competent in the relevant subjects.</p>
                 <br/>
                 <p>However, <b>students should register for FIT and pay the examination fee, in order to sit for the exam.</b> All students are advised to take the model online e-Test at <a href="http://fit.bit.lk/vle"><b>VLE</b></a> before they take real FIT exams.</p>   
                 
@@ -81,10 +81,10 @@
             <div class="col-lg-8 content order-lg-1 order-1">               
                 <div class="wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 0px;">
                     <h2 class="title">UCSC e-Testing Lab</h2>
-                    <h5 class="description">If your question is related to examination matters of FIT programme, 
+                    <p class="description">If your question is related to examination matters of FIT programme, 
                         <br>for example <b>submitting applications for examination,</b> etc. please contact External Degrees Centre. 
                         <br>It is recommended to check the FIT website ( <a href="www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you contact the relevant details.
-                    </h5>
+                    </p>
                 </div>
             </div>
             <div class="col-lg-4 content order-lg-2 order-2">               
