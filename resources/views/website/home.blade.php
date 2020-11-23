@@ -15,7 +15,7 @@
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/UCSC-Banner-cropped.jpg') }});">
         <div class="hero-container">
-            <div class="row">
+            <div class="row container-fluid">
                 <div class="col-lg-8 order-lg-1 order-1"> 
                     <img src="{{ asset('img/logo/invert-ucsc.png') }}" width="15%" /> 
             

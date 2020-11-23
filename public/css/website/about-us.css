@@ -88,7 +88,7 @@
 
   .announce{
     background-color: rgba(55, 3, 104, 0.466);
-    border-radius: 40px 0px 0px 40px;
+    border-radius: 40px 40px 40px 40px;
     text-align: left;
   }
 
@@ -108,6 +108,10 @@
     color: rgb(231, 198, 6) !important;
     padding-left: 10px;
   }
+  .announcement>ul>li>p>a:hover{
+    color: rgb(238, 229, 180) !important;
+    padding-left: 10px;
+  }
   .announcement>a{
     color: rgb(255, 255, 255) !important;
     padding-left: 10px;
@@ -122,4 +126,7 @@
 
   .announce-footer>p>a{
     color: #fff;
+  }
+  .announce-footer>p>a:hover{
+    color: rgb(198, 156, 253);
   }
