@@ -26,7 +26,7 @@
                 </div>                
                 <div class="col-lg-4 order-lg-2 order-2 announce mt-5 pb-5">
                     <h1 class="title" style="padding-left:10px; color:#000">Announcements</h1>
-                    <div class="announcement wow fadeInRight" data-wow-delay="0.2s">
+                    <div class="announcement wow fadeIn" data-wow-delay="0.2s">
                         <ul>
                             <li>
                                 <p><a href="">December Exam Application now open</a> <br>
@@ -50,7 +50,7 @@
                             </li>
                         </ul>
                         <div class="announce-footer pb-0">
-                            <p><a href="">More...</a></p>   </div>                     
+                            <p><a href="">View All Announcements</a></p>   </div>                     
                     </div>
                 </div>
             </div>
@@ -72,9 +72,9 @@
                     <p>FIT is also a certification programme for employment seekers or school leavers to justify their knowledge and skills in ICT for their future endeavors. University of Colombo School of Computing (UCSC), which is the most reputed higher education institute in the field of computer science and Information Communication Technology in Sri Lanka, will issue these certificates once you successfully complete relevant assessment of the FIT programme.</p>
                     <p>The FIT, Foundation in Information Technology, programme consists of three courses, namely, ICT Applications (FIT 103), English for ICT (FIT 203) and Mathematics for ICT (FIT 303). e-Learning based online system will be available for all registered students to follow courses at any time during the day. e-Testing based system will be used for the evaluation once the student is ready to take the test at University of Colombo School of Computing (UCSC) etesting lab. Hence, students could start the programme at any time during the year and they can take exams at any month during the year at testing centres. At the same time, several private institutes conduct face to face classes based on the FIT syllabuses.</p>
                     
-                    <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
-                      <a href="programme"><div class="icon"><i class="fa fa-book"></i></div></a>
-                      <h4 class="title"><a href="programme">Programme</a></h4>
+                    <div class="icon-box wow fadeInUp" data-wow-delay="0.2s"  style="padding-top: 80px;">
+                      <a href="{{ url('/programme') }}"><div class="icon"><i class="fa fa-book"></i></div></a>
+                      <h4 class="title"><a href="{{ url('/programme') }}">Programme</a></h4>
                       <p class="description">Go to Programme Structure</p>
                     </div>
 
