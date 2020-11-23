@@ -51,6 +51,9 @@ Route::get('/examination',[Examination::class,'index']);
 
 Route::get('/faq',[Faq::class, 'index']);
 
+Route::get('/welcome',[Faq::class, 'index']);
+
+
 /*
 |--------------------------------------------------------------------------
 | PORTAL ROUTES
@@ -58,7 +61,7 @@ Route::get('/faq',[Faq::class, 'index']);
 */
 use App\Http\Controllers\Portal\Login;
 
-Route::get('/portal/login', [Login::class,'index']);
+Route::get('/login', [Login::class,'index']);
 
 /*
 |--------------------------------------------------------------------------
@@ -72,3 +75,7 @@ Route::get('/portal/login', [Login::class,'index']);
 | STUDENT PORTAL ROUTES
 |--------------------------------------------------------------------------
 */
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
