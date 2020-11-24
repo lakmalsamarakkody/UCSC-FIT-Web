@@ -60,9 +60,6 @@ Route::get('/announcements', [AnouncementsController::class, 'index']);
 | PORTAL ROUTES
 |--------------------------------------------------------------------------
 */
-use App\Http\Controllers\Portal\Login;
-
-Route::get('/login', [Login::class,'index']);
 
 /*
 |--------------------------------------------------------------------------
