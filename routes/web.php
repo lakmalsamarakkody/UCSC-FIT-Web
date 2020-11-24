@@ -79,4 +79,4 @@ Route::get('/login', [Login::class,'index']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/portal/staff/', [App\Http\Controllers\HomeController::class, 'index']);
