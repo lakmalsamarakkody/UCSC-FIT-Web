@@ -60,9 +60,6 @@ Route::get('/announcements', [AnouncementsController::class, 'index']);
 | PORTAL ROUTES
 |--------------------------------------------------------------------------
 */
-use App\Http\Controllers\Portal\Login;
-
-Route::get('/login', [Login::class,'index']);
 
 /*
 |--------------------------------------------------------------------------
@@ -79,4 +76,4 @@ Route::get('/login', [Login::class,'index']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/portal/staff/', [App\Http\Controllers\portal\HomeController::class, 'index']);
