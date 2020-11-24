@@ -23,8 +23,8 @@
 
 <main id="main">
     <section id="registration" style="padding-top: 80px;">
-        <div class="row about-container mb-5">
-            <div class="col-lg-7 content order-lg-1 order-2">
+        <div class="row about-container mb-5 pb-5">
+            <div class="col-lg-7 background order-lg-1 order-2 pb-5"  style="background-image: url({{ asset('img/logo/login.png') }});">
 
 
             </div>
@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="form-group row pt-4">
-                            <div class="col-md-6">
+                            <div class="col-md-12 text-right">
                                 <div class="form-check">
                                     <input class="form-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="form-group row mb-5">
-                            <div class="col-md-8 text-center">
+                            <div class="col-md-12 text-center">
                                 <button type="submit" class="">
                                     {{ __('Login') }}
                                 </button>
@@ -83,7 +83,7 @@
                         </div>
                     </form>
 
-                    <div class="col-lg-12 align-content-center">
+                    <div class="col-lg-12 text-center">
                         <a class="btn btn-link form-label" href="{{ route('password.request') }}">
                             {{ __('Forgot Your Password?') }}
                         </a>
