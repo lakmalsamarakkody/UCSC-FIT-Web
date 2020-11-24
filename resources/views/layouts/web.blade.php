@@ -88,8 +88,42 @@
     ============================-->
     <footer id="footer">
         <div class="footer-top">
-        <div class="container">
 
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>EXTERNAL DEGREES CENTRE</h2>
+                            <p>
+                            Co-ordinator,<br/>
+                            External Degree Centre of UCSC,<br/>
+                            University of Colombo School of Computing<br/>
+                            UCSC Building Complex,<br/>
+                            35, Reid Avenue,<br/>
+                            Colombo 00700
+                            </p>
+                            <p>
+                            Tel:  +94 -11- 2581245 / +94 -11- 2581247
+                            Fax:  +94 -11-2587239
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>STAY CONNECTED</h2>
+                            <i class="fab fa-twitter"></i>
+                            <i class="fab fa-facebook-f"></i>
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
         </div>
 
