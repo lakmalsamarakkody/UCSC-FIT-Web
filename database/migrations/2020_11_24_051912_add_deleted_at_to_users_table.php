@@ -23,7 +23,7 @@ class AddDeletedAtToUsersTable extends Migration
                 ['created_at'=> '2020-11-23 10:13:53',
                 'updated_at'=> '2020-11-23 10:13:53',
                 'name'=> 'dinusha',
-                'email'=>"kdd@ucsc.cm.ac.lk",
+                'email'=>"kdd@ucsc.cmb.ac.lk",
                 'password'=>'$2y$10$chLDig2zqSahPLNRnur.0O3xzyvjlzH54Jwsp.gblzj3Ltp.dfxkG'],
 
                 

@@ -86,12 +86,12 @@
     font-size: 14px;
 }
 
-#registration .about-container input[type="email"]{
+input[type="email"]{
     padding: 1.3rem 1rem 1.3rem 1rem;
     font-weight: bold;
 }
 
-#registration .about-container button[type="submit"] {
+button[type="submit"] {
     font-family: "Poppins", sans-serif;
     text-transform: uppercase;
     font-weight: 500;
@@ -111,8 +111,13 @@
     transition: 0.4s; */
 }
 
-#registration .about-container button[type="submit"]:hover {
+button[type="submit"]:hover {
     background: #23159c;
     color: #fff;
     border: 2px solid  #fff;
+}
+
+.form-label{
+    font-size: 14px;
+    font-weight: bold;
 }
