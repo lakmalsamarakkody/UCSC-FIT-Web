@@ -37,29 +37,9 @@
                             </li>
 
                             @endforeach
-                            {{-- <li>
-                                <p><a href="">December Exam Application now open</a> <br>
-                                    <span class=" float-right pr-4"><small>November 20, 2020</small></span> 
-                                 </p>
-                            </li>
-                            <li>
-                                <p><a href="">November Results Released</a> <br>
-                                    <span class=" float-right pr-4"><small>November 11, 2020</small></span> 
-                                 </p>
-                            </li>
-                            <li>
-                                <p><a href="">November Results Released</a> <br>
-                                    <span class=" float-right pr-4"><small>November 11, 2020</small></span> 
-                                 </p>
-                            </li>
-                            <li>
-                                <p><a href="">November Results Released</a> <br>
-                                    <span class=" float-right pr-4"><small>November 11, 2020</small></span> 
-                                 </p>
-                            </li> --}}
                         </ul>
                         <div class="announce-footer pb-0">
-                            <p><a href="">View All Announcements</a></p>   
+                            <p><a href="{{ url('/announcements') }}">View All Announcements</a></p>   
                         </div>                     
                     </div>
                 </div>

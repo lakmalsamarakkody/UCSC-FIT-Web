@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Website\AnouncementsController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Website\Home;
@@ -51,7 +52,7 @@ Route::get('/examination',[Examination::class,'index']);
 
 Route::get('/faq',[Faq::class, 'index']);
 
-Route::get('/welcome',[Faq::class, 'index']);
+Route::get('/announcements', [AnouncementsController::class, 'index']);
 
 
 /*
