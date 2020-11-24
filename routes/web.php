@@ -76,4 +76,4 @@ Route::get('/announcements', [AnouncementsController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/portal', [App\Http\Controllers\portal\HomeController::class, 'index']);
+Route::get('/portal/staff/home', [App\Http\Controllers\portal\HomeController::class, 'index']);
