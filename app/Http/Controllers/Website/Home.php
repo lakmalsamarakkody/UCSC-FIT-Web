@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Anouncements;
 use Illuminate\Http\Request;
 
 class Home extends Controller
 {
     public function index(){
-        return view('website/home');
+
+        $anouncements = Anouncements::orderBy('created_at', 'desc')->take(6)->get();
+
+        return view('website/home', [
+            'anouncements'=>$anouncements
+        ]);
     }
 }

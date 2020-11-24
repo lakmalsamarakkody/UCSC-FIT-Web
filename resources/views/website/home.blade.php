@@ -27,8 +27,17 @@
                 <div class="col-lg-4 order-lg-2 order-2 announce mt-5 pb-5">
                     <h1 class="title" style="padding-left:10px; color:#000">Announcements</h1>
                     <div class="announcement wow fadeIn" data-wow-delay="0.2s">
-                        <ul>
+                        <ul class="pb-2">
+                            @foreach($anouncements as $anouncement)
+
                             <li>
+                                <p><a href="{{ $anouncement->link }}">{{ $anouncement->announcement }}</a> <br>
+                                    <span class=" float-right pr-4"><small>{{ \Carbon\Carbon::parse($anouncement->created_at)->format('M d Y') }}</small></span> 
+                                 </p>
+                            </li>
+
+                            @endforeach
+                            {{-- <li>
                                 <p><a href="">December Exam Application now open</a> <br>
                                     <span class=" float-right pr-4"><small>November 20, 2020</small></span> 
                                  </p>
@@ -47,10 +56,11 @@
                                 <p><a href="">November Results Released</a> <br>
                                     <span class=" float-right pr-4"><small>November 11, 2020</small></span> 
                                  </p>
-                            </li>
+                            </li> --}}
                         </ul>
                         <div class="announce-footer pb-0">
-                            <p><a href="">View All Announcements</a></p>   </div>                     
+                            <p><a href="">View All Announcements</a></p>   
+                        </div>                     
                     </div>
                 </div>
             </div>
