@@ -53,7 +53,7 @@
         <script src="{{ asset('js/web.js') }}"></script>
     </head>
 
-    <body>
+    <body  style="cursor: url({{ asset('img/logo/cursor.png') }}), auto;">
     
     <!--==========================
     Header
