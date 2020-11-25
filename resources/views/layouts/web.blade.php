@@ -89,7 +89,7 @@
     <footer id="footer">
         <div class="footer-top">
 
-        <div class="container">
+        <!-- <div class="container">
             <div class="row">
 
                 <div class="col-lg-4 col-md-12">
@@ -125,14 +125,23 @@
 
             </div>
         </div>
-        </div>
+        </div> -->
 
         <div class="container">
+            <div class="copyright justify-content-center ">
+                    <h1> 
+                        <a target="_blank" href="" class="white"><i class="fab fa-twitter-square"></i></a>
+                        <a target="_blank" href="" class="white"><i class="fab fa-facebook-square"></i></a>
+                            <a target="_blank" href="" class="white"><i class="fab fa-youtube-square"></i></a>
+                       </h1> 
+                       <h4><a href="" class="white">Site Map </a>|<a href="" class="white"> Pivacy Policy </a>|<a href="" class="white"> Terms</a></h5>
+                
+            </div>
         <div class="copyright">
-            Copyright &copy;  {{ now()->year }}<strong> UCSC</strong>. All Rights Reserved 
+            Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" class="white"> UCSC</a> </strong>. All Rights Reserved 
         </div>
         <div class="credits">
-            Designed by <strong>e-Learning Center- UCSC </strong>
+            Designed by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Center- UCSC </a> </strong>
         </div>
         </div>
     </footer><!-- #footer -->
