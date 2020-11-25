@@ -60,7 +60,7 @@
     ============================-->
     <header id="header">
 
-        <div id="logo" class="float-left">
+        <div id="logo" class="pull-left">
             <a href="/"><img src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 65px; padding: 0px 0px 0px 0px;"/></a>
         </div>
 
@@ -78,7 +78,7 @@
         </nav><!-- #nav-menu-container -->
 
         <div class="float-right">
-            <a href="/"><img src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 65px; padding: 0px 0px 0px 0px;"/></a>
+            <a href="/"><img src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px; padding: 0px 0px 0px 0px;"/></a>
         </div>
     </header><!-- #header -->
 
