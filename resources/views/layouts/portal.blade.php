@@ -34,12 +34,24 @@
         <script src="{{ asset('lib/superfish/hoverIntent.js') }}"></script>
         <script src="{{ asset('lib/superfish/superfish.min.js') }}"></script>
 
-
+        <script type="text/javascript"> 
+          function display_c(){
+            var refresh=999; // Refresh rate in milli seconds
+            mytime=setTimeout('display_ct()',refresh)
+          }
+          
+          function display_ct() {
+            var dt = new Date()
+            var timeString = dt.getFullYear() +  "/" + dt.getMonth() + "/" + dt.getDate() + "   " + dt.getHours() + ":" + dt.getMinutes() +":" + dt.getSeconds()
+            document.getElementById('ct').innerHTML = timeString;
+            display_c();
+           }
+        </script>
 
     
 </head>
 
-<body>
+<body onload=display_ct();>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -50,8 +62,8 @@
             <a class="navbar-brand" href="{{ url('/') }}"><h3>Foundation of Information Technology<br>
            <small>University of Colombo School of Computing</small> </h3>
           </a>
-          <span class="navbar-text text-white" style="padding-left:50%;">
-            {{ Auth::user()->name }}
+          <span id="ct" class="navbar-text text-white">
+            
           </span>
               <span class="navbar-text text-white">
                 {{ Auth::user()->name }}

@@ -3,6 +3,8 @@
     background-color: #211870 !important;
     overflow: hidden;
     text-align: center !important;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 14px;
   }
   
   /* Style the links inside the navigation bar */

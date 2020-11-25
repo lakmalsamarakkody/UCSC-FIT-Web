@@ -77,7 +77,7 @@
             </ul>
         </nav><!-- #nav-menu-container -->
 
-        <div class="float-right">
+        <div class="float-right float-sm-left">
             <a href="/"><img src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px; padding: 0px 0px 0px 0px;"/></a>
         </div>
     </header><!-- #header -->
