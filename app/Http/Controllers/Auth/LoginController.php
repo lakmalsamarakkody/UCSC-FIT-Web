@@ -32,14 +32,14 @@ class LoginController extends Controller
 
     public function redirectTo(){
         $role = Auth::user()->role->name;
-        switch ($role){
+        switch ($role):
             case 'Student':
                 return 'portal/student';
                 break;
             default:
                 return '/portal/staff';
                 break;
-        }
+        endswitch;
     }
 
     /**
