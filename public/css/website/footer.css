@@ -15,8 +15,17 @@
   
   #footer .copyright {
     text-align: center;
+    color: #fff;
   }
   
+  .white{    
+    color: #fff;
+  }
+
+  .white:hover{    
+    color: rgb(123, 142, 207);
+  }
+
   #footer .credits {
     padding-top: 10px;
     text-align: center;
