@@ -21,20 +21,21 @@
             
                     <!-- <h1 style="text-align: left;"><span style="color:#7e6fff">F</span>oundation in <br> <span style="color:#23159c">I</span>nformation <br><span style="color:#23159c">T</span>echnology</h1> -->
                     <h1 style="text-align: left;">Foundation in <br> Information Technology</h1>
-                    <h3 style="color:#fff">University of Colombo School of Computing</h3>
+                    <h3 class="text-white">University of Colombo School of Computing</h3>
                     <a href="{{ url('/#about') }}" class="btn-get-started" style="width=25%">About FIT</a>
                 </div>                
                 <div class="col-lg-4 order-lg-2 order-2 announce mt-5 pb-5">
-                    <h1 class="title" style="padding-left:10px; color:#000">Announcements</h1>
+                    <h1 class="title px-4 text-white">Announcements</h1>
                     <div class="announcement wow fadeIn" data-wow-delay="0.2s">
                         <ul class="pb-2">
                             @foreach($anouncements as $anouncement)
 
                             <li>
-                                <p class="pr-4"><a href="{{ $anouncement->link }}">{{ $anouncement->title }}</a> <br>
-                                    <span class=" float-right pr-4"><small>{{ \Carbon\Carbon::parse($anouncement->created_at)->format('M d Y') }}</small></span> 
-                                 </p>
-                                 <hr>
+                                <p class="pr-4">
+                                    <a href="{{ url($anouncement->link)}}">{{ $anouncement->title }}</a>
+                                    <span class="float-right pr-4"><small>{{ \Carbon\Carbon::parse($anouncement->created_at)->format('M d Y') }}</small></span> 
+                                </p>
+                                <hr color="grey">
                             </li>
 
                             @endforeach
@@ -57,11 +58,18 @@
             <div class="row about-container">
                 <div class="col-lg-8 content order-lg-1 order-2">
                     <h2 class="title">About FIT</h2>
-                    <p>The Foundation in Information Technology (FIT) programme aims at enhancing the literacy and competency in using basic computer applications together with analytical thinking and communicational skills required for school leavers. Hence, Mathematics and English Language for Information Communication Technology (ICT) are considered as two other important supporting subject domains.</p>
-                    <p>FIT is a pre-degree programme that prepares students who are willing to read for their first degree. It is designed for anyone irrespective of the study streams they have followed in Advanced Level (secondary education. Recent statistics show many students who register for degree programmes fail due to lack of ICT competency, language skills and mathematical background. This tendency is very high in external degree programmes. Hence, FIT was designed to address these issues of undergraduate studies.</p>
+                    <p>The Foundation in Information Technology (FIT) programme <b>aims at enhancing the literacy and competency in using basic computer applications together with analytical thinking and communicational skills</b> required for school leavers. Hence, Mathematics and English Language for Information Communication Technology (ICT) are considered as two other important supporting subject domains.</p>
+                    <p>FIT is a <b>pre-degree programme</b> that prepares students who are willing to read for their first degree. It is designed for anyone irrespective of the study streams they have followed in Advanced Level (secondary education. Recent statistics show many students who register for degree programmes fail due to lack of ICT competency, language skills and mathematical background. This tendency is very high in external degree programmes. Hence, FIT was designed to address these issues of undergraduate studies.</p>
                     <p>At the same time, FIT is an alternative qualification for students who do not posse A/L qualifications to enroll into the Bachelor of Information Technology (BIT) programme. However, those who register for BIT should have completed studies up to Ordinary Level in school curriculum.</p>
                     <p>FIT is also a certification programme for employment seekers or school leavers to justify their knowledge and skills in ICT for their future endeavors. University of Colombo School of Computing (UCSC), which is the most reputed higher education institute in the field of computer science and Information Communication Technology in Sri Lanka, will issue these certificates once you successfully complete relevant assessment of the FIT programme.</p>
-                    <p>The FIT, Foundation in Information Technology, programme consists of three courses, namely, ICT Applications (FIT 103), English for ICT (FIT 203) and Mathematics for ICT (FIT 303). e-Learning based online system will be available for all registered students to follow courses at any time during the day. e-Testing based system will be used for the evaluation once the student is ready to take the test at University of Colombo School of Computing (UCSC) etesting lab. Hence, students could start the programme at any time during the year and they can take exams at any month during the year at testing centres. At the same time, several private institutes conduct face to face classes based on the FIT syllabuses.</p>
+                    <p>The FIT, Foundation in Information Technology, programme consists of three courses, namely,
+                        <ul>
+                            <li>ICT Applications (FIT 103)</li>
+                            <li>English for ICT (FIT 203)</li>
+                            <li>Mathematics for ICT (FIT 303)</li>
+                        </ul>
+                        and e-Learning based online system will be available for all registered students to follow courses at any time during the day. e-Testing based system will be used for the evaluation once the student is ready to take the test at University of Colombo School of Computing (UCSC) etesting lab. Hence, students could start the programme at any time during the year and they can take exams at any month during the year at testing centres. At the same time, several private institutes conduct face to face classes based on the FIT syllabuses.
+                    </p>
                     
                     <div class="icon-box wow fadeInUp" data-wow-delay="0.2s"  style="padding-top: 80px;">
                       <a href="{{ url('/programme') }}"><div class="icon"><i class="fa fa-book"></i></div></a>

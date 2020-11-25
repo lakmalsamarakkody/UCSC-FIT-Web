@@ -18,21 +18,22 @@ class RedirectIfAuthenticated
      * @return mixed
      */
 
-     public function handle($request, Closure $next, $guard = null){
-         if (Auth::guard($guard)->check()){
-             $role = Auth::user()->role;
+    public function handle($request, Closure $next, $guard = null){
+        if (Auth::guard($guard)->check()):
+             $role = Auth::user()->role->name;
 
-             switch ($role) {
-                case 'student':
+            switch ($role):
+                case 'Student':
                    return redirect('/portal/student/');
                    break;           
                 default:
                    return redirect('/portal/staff/'); 
                    break;
-              }
-         }
-         return $next($request);
-     }
+            endswitch;
+        endif;
+        
+        return $next($request);
+    }
 
 
 

@@ -61,23 +61,24 @@
     <header id="header">
 
         <div id="logo" class="pull-left">
-            <a href="/"><img src="img/logo/fit-nav.png" alt="" title="" style="width: 65px; padding: 0px 0px 0px 0px;"/></a>
-
+            <a href="/"><img src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 65px; padding: 0px 0px 0px 0px;"/></a>
         </div>
 
         <nav id="nav-menu-container">
             <ul class="nav-menu">
-            <li id="home_nav"><a href="{{ url('/') }}">Home</a></li>
-            <li id="home_nav"><a href="{{ url('/#about') }}">About</a></li>
-            <li id="programme_nav"><a href="{{ url('/programme') }}">Programme</a></li>
-            <li id="learning_nav"><a href="{{ url('/learning') }}">Learning</a></li>
-            <li id="examination_nav"><a href="{{ url('/examination') }}">Examination</a></li>
-            <li id="registration_nav"><a href="{{ url('/registration') }}">Registration</a></li>
-            <li id="contact_nav"><a href="{{ url('/contact') }}">Contact Us</a></li>
-            <li id="login_nav"><a href="{{ url('/login') }}">Login</a></li>
-
+                <li id="home_nav"><a href="{{ url('/') }}">Home</a></li>
+                <li id="home_nav"><a href="{{ url('/#about') }}">About</a></li>
+                <li id="programme_nav"><a href="{{ url('/programme') }}">Programme</a></li>
+                <li id="learning_nav"><a href="{{ url('/learning') }}">Learning</a></li>
+                <li id="examination_nav"><a href="{{ url('/examination') }}">Examination</a></li>
+                <li id="registration_nav"><a href="{{ url('/registration') }}">Registration</a></li>
+                <li id="contact_nav"><a href="{{ url('/contact') }}">Contact Us</a></li>
+                <li id="login_nav"><a href="{{ url('/login') }}">Login</a></li>
             </ul>
         </nav><!-- #nav-menu-container -->
+
+        <div class="float-right">
+            <a href="/"><img src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px; padding: 0px 0px 0px 0px;"/></a>
         </div>
     </header><!-- #header -->
 
@@ -89,60 +90,61 @@
     <footer id="footer">
         <div class="footer-top">
 
-        <!-- <div class="container">
-            <div class="row">
+            <!-- <div class="container">
+                <div class="row">
 
-                <div class="col-lg-4 col-md-12">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2>EXTERNAL DEGREES CENTRE</h2>
-                            <p>
-                            Co-ordinator,<br/>
-                            External Degree Centre of UCSC,<br/>
-                            University of Colombo School of Computing<br/>
-                            UCSC Building Complex,<br/>
-                            35, Reid Avenue,<br/>
-                            Colombo 00700
-                            </p>
-                            <p>
-                            Tel:  +94 -11- 2581245 / +94 -11- 2581247
-                            Fax:  +94 -11-2587239
-                            </p>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>EXTERNAL DEGREES CENTRE</h2>
+                                <p>
+                                Co-ordinator,<br/>
+                                External Degree Centre of UCSC,<br/>
+                                University of Colombo School of Computing<br/>
+                                UCSC Building Complex,<br/>
+                                35, Reid Avenue,<br/>
+                                Colombo 00700
+                                </p>
+                                <p>
+                                Tel:  +94 -11- 2581245 / +94 -11- 2581247
+                                Fax:  +94 -11-2587239
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-4 col-md-12">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2>STAY CONNECTED</h2>
-                            <i class="fab fa-twitter"></i>
-                            <i class="fab fa-facebook-f"></i>
-                            <i class="fab fa-youtube"></i>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>STAY CONNECTED</h2>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-facebook-f"></i>
+                                <i class="fab fa-youtube"></i>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
-        </div> -->
+            </div> -->
 
-        <div class="container">
-            <div class="copyright justify-content-center ">
+            <div class="container">
+                <div class="copyright justify-content-center ">
                     <h1> 
                         <a target="_blank" href="" class="white"><i class="fab fa-twitter-square"></i></a>
                         <a target="_blank" href="" class="white"><i class="fab fa-facebook-square"></i></a>
-                            <a target="_blank" href="" class="white"><i class="fab fa-youtube-square"></i></a>
-                       </h1> 
-                       <h4><a href="" class="white">Site Map </a>|<a href="" class="white"> Pivacy Policy </a>|<a href="" class="white"> Terms</a></h5>
-                
+                        <a target="_blank" href="" class="white"><i class="fab fa-youtube-square"></i></a>
+                    </h1> 
+                    <h4><a href="" class="white">Site Map </a>|<a href="" class="white"> Pivacy Policy </a>|<a href="" class="white"> Terms</a></h5>
+                    
+                </div>
+                <div class="copyright">
+                    Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" class="white"> UCSC</a> </strong>. All Rights Reserved 
+                </div>
+                <div class="credits">
+                    Designed by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Center- UCSC </a> </strong>
+                </div>
             </div>
-        <div class="copyright">
-            Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" class="white"> UCSC</a> </strong>. All Rights Reserved 
-        </div>
-        <div class="credits">
-            Designed by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Center- UCSC </a> </strong>
-        </div>
         </div>
     </footer><!-- #footer -->
 
