@@ -23,15 +23,11 @@ class RedirectIfAuthenticated
              $role = Auth::user()->role;
 
              switch ($role) {
-                case 'admin':
-                   return redirect('/portal/staff/');
-                   break;
                 case 'student':
                    return redirect('/portal/student/');
-                   break; 
-          
+                   break;           
                 default:
-                   return redirect('/'); 
+                   return redirect('/portal/staff/'); 
                    break;
               }
          }
