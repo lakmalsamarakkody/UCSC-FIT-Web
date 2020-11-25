@@ -58,28 +58,36 @@
     <!--==========================
     Header
     ============================-->
-    <header id="header">
+    <header id="header">  
+        <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-1">
+                <div id="logo" class="pull-left">
+                    <a href="/"><img src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 65px; padding: 0px 0px 0px 0px;"/></a>
+                </div>
+            </div>
 
-        <div id="logo" class="pull-left">
-            <a href="/"><img src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 65px; padding: 0px 0px 0px 0px;"/></a>
+            <div class="col-md-10">
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li id="home_nav"><a href="{{ url('/') }}">Home</a></li>
+                        <li id="home_nav"><a href="{{ url('/#about') }}">About</a></li>
+                        <li id="programme_nav"><a href="{{ url('/programme') }}">Programme</a></li>
+                        <li id="learning_nav"><a href="{{ url('/learning') }}">Learning</a></li>
+                        <li id="examination_nav"><a href="{{ url('/examination') }}">Examination</a></li>
+                        <li id="registration_nav"><a href="{{ url('/registration') }}">Registration</a></li>
+                        <li id="contact_nav"><a href="{{ url('/contact') }}">Contact Us</a></li>
+                        <li id="login_nav"><a href="{{ url('/login') }}">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col-md-1 text-right" id="ucsc_logo">
+                <a href="/"><img src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px; padding: 0px 0px 0px 0px;"/></a>
+            </div>
+        </div>
         </div>
 
-        <nav id="nav-menu-container">
-            <ul class="nav-menu">
-                <li id="home_nav"><a href="{{ url('/') }}">Home</a></li>
-                <li id="home_nav"><a href="{{ url('/#about') }}">About</a></li>
-                <li id="programme_nav"><a href="{{ url('/programme') }}">Programme</a></li>
-                <li id="learning_nav"><a href="{{ url('/learning') }}">Learning</a></li>
-                <li id="examination_nav"><a href="{{ url('/examination') }}">Examination</a></li>
-                <li id="registration_nav"><a href="{{ url('/registration') }}">Registration</a></li>
-                <li id="contact_nav"><a href="{{ url('/contact') }}">Contact Us</a></li>
-                <li id="login_nav"><a href="{{ url('/login') }}">Login</a></li>
-            </ul>
-        </nav><!-- #nav-menu-container -->
-
-        <div class="float-right float-sm-left">
-            <a href="/"><img src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px; padding: 0px 0px 0px 0px;"/></a>
-        </div>
     </header><!-- #header -->
 
         @yield('content')

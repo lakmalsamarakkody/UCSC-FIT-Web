@@ -43,7 +43,7 @@
                 <p>Several private teaching institutes in Sri Lanka conduct classes based on the FIT curriculum. Students are kindly advised to directly contact these institutes if they are interested to attend face to face classes based on the FIT programme.</p>
                 <p>It is important to mention that all FIT exams will be conducted in English medium and all learning materials developed based on the curriculum are available in English.</p>   
                 
-                <a target="_blank" href="http://fit.bit.lk/vle"><button id="vle_link" class="btn btn-primary"> Go to VLE</button></a>
+                <a target="_blank" href="http://fit.bit.lk/vle"><button id="vle_link" class="btn btn-primary">Go to VLE</button></a>
             </div>
 
             <div class="myBox col-lg-5 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/vle-logo.png') }}); cursor: pointer; margin-top:200px;">
