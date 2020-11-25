@@ -6,7 +6,7 @@
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/hero-back.png') }}); height:200px">
         <div class="page-hero-container">
-            <h1 style="padding-top:30px">Announcements</h1>
+            <h1 style="padding-top:30px">All Announcements</h1>
         </div>
     </section><!-- #hero -->
 
@@ -18,7 +18,7 @@
             {{-- ABOUT FIT --}}
             <div class="row about-container" style="padding-top: 80px;">
                 <div class="col-lg-8 content order-lg-1 order-2">
-                    <h2 class="title">All Announcements</h2>
+                    <h3 class="title"><a href="{{ url('/') }}">Back to Home</a></h3>
                 </div>
             </div>
 
