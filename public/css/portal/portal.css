@@ -1,0 +1,64 @@
+/* Add a black background color to the top navigation */
+.navbar {
+    background-color: #211870 !important;
+    overflow: hidden;
+    text-align: center !important;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .navbar a {
+    float: left;
+    color: #f2f2f2;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: left;
+  }
+ 
+
+
+
+
+
+
+
+/* The side navigation menu */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #211870;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    text-align: center;
+    font-size: 14px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  
+  /* Sidebar links */
+  .sidebar a {
+    display: block;
+    color: rgb(255, 255, 255);
+    padding: 16px;
+    text-decoration: solid;
+  }
+  
+  /* Active/current link */
+  .sidebar a.active {
+    background-color:  #8793c5;
+    color: rgb(255, 255, 255);
+  }
+  
+  /* Links on mouse-over */
+  .sidebar a:hover:not(.active) {
+    background-color:  #8793c5;
+    color: rgb(39, 38, 38);
+  }
+  
+  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+  
