@@ -64,8 +64,8 @@
 /* Nav Meu Container */
 
 #nav-menu-container {
-  float: right;
-  margin: 0;
+    float: none;
+    margin: 0;
 }
 
 /* Nav Meu Styling */
