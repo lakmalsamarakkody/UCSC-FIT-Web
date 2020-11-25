@@ -20,10 +20,10 @@ class RedirectIfAuthenticated
 
      public function handle($request, Closure $next, $guard = null){
          if (Auth::guard($guard)->check()){
-             $role = Auth::user()->role;
+             $role = Auth::user()->role->name;
 
              switch ($role) {
-                case 'student':
+                case 'Student':
                    return redirect('/portal/student/');
                    break;           
                 default:
