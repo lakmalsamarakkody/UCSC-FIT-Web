@@ -27,7 +27,7 @@
                     <ul>
                         @foreach($announcements as $anouncement)
                             <li>
-                                <h3><a href="{{ $anouncement->link }}">{{ $anouncement->announcement }}</a></h3>          
+                                <h3><a href="{{ $anouncement->link }}">{{ $anouncement->title }}</a></h3>          
                                 <p class="description text-right">{{ \Carbon\Carbon::parse($anouncement->created_at)->format('M d Y') }}</p>
                             </li>  
                             <hr>                          
