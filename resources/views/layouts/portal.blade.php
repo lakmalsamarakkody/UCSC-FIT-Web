@@ -95,10 +95,12 @@
               </ul>
 
               <div class="w-100 text-center" style="display:flex; align-items:flex-end;">
-                <div class="logout-menu py-3" style="position: absolute; bottom: 0; left: 0; width: 100%;">
-                  <a class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i> Logout</a>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-                </div>
+                <a class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  <div class="logout-menu py-3" style="position: absolute; bottom: 0; left: 0; width: 100%;">
+                    <i class="fa fa-power-off"></i> Logout
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                  </div>
+                </a>
               </div>
 
             </div>
