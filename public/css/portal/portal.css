@@ -108,6 +108,12 @@ footer{
     padding: 16px;
     text-decoration: solid;
   }
+
+  .sidebar p {
+    display: block;
+    color: rgb(255, 255, 255);
+    text-decoration: solid;
+  }
   
   /* Active/current link */
   .sidebar a.active {
