@@ -120,6 +120,13 @@
               </div>
             </div>
             <!-- /NAV BAR -->
+
+            <main class="col-lg-12 mt-5">
+              <div class="row">
+                    @yield('content')
+              </div>
+            </main>
+            
           </div>
         </div>
         <!-- PAGE AREA -->
@@ -152,11 +159,7 @@
           </div>
           <!-- /NAV BAR -->
 
-          <main class="col-lg-12 mt-5">
-            <div class="row">
-                  @yield('content')
-            </div>
-          </main>
+          
 
           </div>
         </div>
