@@ -9,7 +9,7 @@
                 <h1 class="m-0 text-dark">Dashboard</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <ol class="breadcrumb ">
                 <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
                 </ol>
             </div><!-- /.col -->
