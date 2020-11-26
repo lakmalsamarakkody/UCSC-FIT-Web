@@ -32,63 +32,51 @@
     color:var(--side-bar-text-color);
     text-decoration: solid;
     font-size: 14px;
-    overflow: auto;
   }
   .sidebar hr{
     background-color: rgb(255, 255, 255);
   }
-  .sidebar ul li a {
-    margin: 0;
-    color:var(--side-bar-text-color);
-  }
   .sidebar ul{
     list-style-type:none;
   }
-  .side-item>a{
+  .sidebar ul li a {
+    color:var(--side-bar-text-color);
+  }
+
+  .sidebar .avatar {
+    vertical-align: middle;
+    border-radius: 50%;
+  }
+
+  .sidebar .nav-menu ul {
+    display: contents;
+  }
+  .sidebar .nav-menu ul li{
+    text-decoration: solid;
+  }
+  .sidebar .nav-menu ul li.active{
+    background-color:  var(--side-bar-active-bg-color);
+    color: var(--side-bar-text-color);
+  }
+  .sidebar .nav-menu ul li:hover, .nav-menu ul li:hover:not(.active){
+    background-color:  var(--side-bar-hover-bg-color);
+  }
+  .sidebar .nav-menu ul li>a{
     list-style-type:none;
-    padding: 0 !important;
-    padding-left: 20px !important;
     display: block;
-    padding: 15px;
+    padding: 1rem 0rem 1rem 2rem;
     margin: 0;
     color:var(--side-bar-text-color);
     text-decoration: solid;
   }
-  .logout{
-    margin: 7em;
-    padding:10px;
-  }
-  .logout:hover{    
+
+  .sidebar .logout:hover{    
     background-color: var(--log-out-button) !important;
     border-radius: 100px;
     font-style: bold;
     cursor: pointer;
     padding:10px;
     box-shadow: 0 0px 8px 5px rgba(0, 0, 0, 0.2);
-  }
-  .side-item.active {
-    background-color:  var(--side-bar-active-bg-color);
-    color: var(--side-bar-text-color);
-  }
-  .side-item:hover:not(.active) {
-    background-color:  var(--side-bar-hover-bg-color);
-    padding-left: 10px;
-  }  
-  .side-item>a:hover{
-    background-color:  var(--side-bar-hover-bg-color);
-    padding-left: 20px;
-  }
-  .avatar {
-    vertical-align: middle;
-    border-radius: 50%;
-  }
-  .nav-menu ul {
-    display: contents;
-  }
-
-  .nav-menu ul li{
-    text-decoration: solid;
-    padding: 1rem 0rem 1rem 1rem;
   }
 /* /SIDE BAR */
 
@@ -99,7 +87,6 @@
   font-size: 14px;
   color: var( --nav-text-color);
 }
-
 .nav-bar a {
   text-decoration: none;
   font-size: 14px;
