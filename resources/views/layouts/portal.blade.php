@@ -74,15 +74,15 @@
             <hr width="90%"/> 
 
             <!-- MENU SECTION -->
-            <div class="nav-menu w-100 pl-5">
-              <ul>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Students</a></li>
-                <li><a href="#">Exams</a></li>
-                <li><a href="#">Results</a></li>
-                <li><a href="#">Users</a></li>
-                <li><a href="#">System</a></li>
-                <li style="position:fixed; bottom: 0px;">
+            <div class="nav-menu w-100">
+              <ul class="pl-5">
+                <li class="side-item active"><a href="#">Dashboard</a></li>
+                <li class="side-item"><a href="#">Students</a></li>
+                <li class="side-item"><a href="#">Exams</a></li>
+                <li class="side-item"><a href="#">Results</a></li>
+                <li class="side-item"><a href="#">Users</a></li>
+                <li class="side-item"><a href="#">System</a></li>
+                <li class="logout" style="position:fixed; bottom: 0px;">
                   <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                 </li>
@@ -104,7 +104,7 @@
               <div class="row mr-2">
 
                 <div class="col-lg-3 pt-3"> 
-                  <button class="btn btn-link btn-lg  pt-4 pr-4 pl-4"><i class="fa fa-cog"></i></button>     
+                  <button class="btn btn-link btn-lg  pt-4 pr-4 pl-4 nav-item"><i class="fa fa-cog"></i></button>     
                 </div>
 
 

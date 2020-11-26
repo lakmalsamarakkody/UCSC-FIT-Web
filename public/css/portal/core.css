@@ -7,6 +7,8 @@
 
   --side-bar-bg-color:  #211870;
   --side-bar-text-color:  #ebebeb;
+  --side-bar-active-bg-color: #6476c2;
+  --side-bar-hover-bg-color: #8793c5;
 
 
   --main-text-color: #646363d3;
@@ -14,6 +16,8 @@
 
   --nav-text-color: #CEDCE4;
   --nav-bg-color: #0f074e; 
+
+  --log-out-button:  rgb(126, 0, 0);
 }
 
 /* SIDE BAR */
@@ -23,21 +27,33 @@
     text-decoration: solid;
     font-size: 14px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    overflow: auto;
   }
-  .sidebar a {
-    color: rgb(255, 255, 255);
-    padding: 16px;
+  .sidebar ul li a {
+    margin: 0;
+    padding: 15px;
+    display: block;
+    color:var(--side-bar-text-color);
     text-decoration: solid;
   }
   .sidebar ul{
     list-style-type:none;
   }
-  .sidebar a.active {
-    background-color:  #8793c5;
-    color: rgb(255, 255, 255);
+  .side-item{
+    list-style-type:none;
+    padding: 0 !important;
+    padding-left: 20px !important;
   }
-  .sidebar a:hover:not(.active) {
-    background-color:  #8793c5;
+  .logout:hover{    
+    color: var(--log-out-button) !important;
+    display: block;
+  }
+  .side-item.active {
+    background-color:  var(--side-bar-active-bg-color);
+    color: var(--side-bar-text-color);
+  }
+  .side-item:hover:not(.active) {
+    background-color:  var(--side-bar-hover-bg-color);
     color: rgb(39, 38, 38);
   }
   .avatar {
