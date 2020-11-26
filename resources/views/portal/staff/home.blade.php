@@ -30,7 +30,7 @@
         <!-- SUMMARY CARDS -->
         <div class="col-lg-2">
           <div class="card border-0 bg-transparent shadow">
-            <div class="card-header border-0 bg-transparent">Registered</div>
+            <div class="card-header border-0 bg-transparent">Applicants</div>
             <div class="card-body">
               <div class="card-title">125</div>
               <div class="card-text">125</div>
@@ -40,11 +40,55 @@
         </div>
         
         <div class="col-lg-2">
-          <div class="card">
-            <div class="card-header">test</div>
+          <div class="card border-0 bg-transparent shadow">
+            <div class="card-header border-0 bg-transparent">Payments to review</div>
             <div class="card-body">
-              <div class="card-title">test</div>
-              <div class="card-text">test</div>
+              <div class="card-title">125</div>
+              <div class="card-text">125</div>
+            </div>
+            <div class="card-footer d-none">test</div>
+          </div>
+        </div>
+
+        <div class="col-lg-2">
+          <div class="card border-0 bg-transparent shadow">
+            <div class="card-header border-0 bg-transparent">Pending documents</div>
+            <div class="card-body">
+              <div class="card-title">125</div>
+              <div class="card-text">125</div>
+            </div>
+            <div class="card-footer d-none">test</div>
+          </div>
+        </div>
+
+        <div class="col-lg-2">
+          <div class="card border-0 bg-transparent shadow">
+            <div class="card-header border-0 bg-transparent">Documents to review</div>
+            <div class="card-body">
+              <div class="card-title">125</div>
+              <div class="card-text">125</div>
+            </div>
+            <div class="card-footer d-none">test</div>
+          </div>
+        </div>
+
+        <div class="col-lg-2">
+          <div class="card border-0 bg-transparent shadow">
+            <div class="card-header border-0 bg-transparent">Total Registered</div>
+            <div class="card-body">
+              <div class="card-title">125</div>
+              <div class="card-text">125</div>
+            </div>
+            <div class="card-footer d-none">test</div>
+          </div>
+        </div>
+
+        <div class="col-lg-2">
+          <div class="card border-0 bg-transparent shadow">
+            <div class="card-header border-0 bg-transparent">Medicals to review</div>
+            <div class="card-body">
+              <div class="card-title">125</div>
+              <div class="card-text">125</div>
             </div>
             <div class="card-footer d-none">test</div>
           </div>
