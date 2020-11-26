@@ -58,7 +58,7 @@
       <div class="row">
 
         <!-- SIDE BAR -->
-        <div class="col-lg-2 sidebar">
+        <div class="col-lg-2 sidebar vh-100">
           <div class="row">
 
             <!-- USER DETAILS SECTION -->
@@ -82,7 +82,7 @@
                 <li><a href="#news">Results</a></li>
                 <li><a href="#news">Users</a></li>
                 <li><a href="#news">System</a></li>
-                <li>
+                <li style="bottom: 0px;">
                   <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                 </li>
@@ -94,6 +94,35 @@
           </div>
         </div>
         <!-- /SIDE BAR -->
+
+        <!-- PAGE AREA -->
+        <div class="col-lg-10">
+          <div class="row">
+
+            <!-- NAV BAR -->
+            <div class="col-lg-12 nav-bar">
+              <div class="row">
+
+                <div class="col-lg-4">                  
+                  <a class="navbar-brand" href="{{ url('/') }}"><h3>Foundation of Information Technology<br>
+                    <small>University of Colombo School of Computing</small> </h3>
+                  </a>
+                </div>
+
+                <div class="col-lg-4 text-center">
+                    <span id="ct" class="navbar-text text-white"></span>
+                </div>
+
+                <div class="col-lg-4 text-right"> 
+                  <span class="navbar-text text-white">{{ Auth::user()->name }}</span>
+                </div>
+
+              </div>
+            </div>
+            <!-- /NAV BAR -->
+          </div>
+        </div>
+        <!-- PAGE AREA -->
 
       </div>
     </div>
