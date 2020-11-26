@@ -1,4 +1,7 @@
 :root{
+  --main-text-color: #646363d3;
+  --sub-text-color: #979797;
+
   --main-theme-color: #727cf5;
   --main-bg-color: #e6e6e65b;
 
@@ -11,17 +14,17 @@
   --side-bar-hover-bg-color: #8793c5;
 
 
-  --main-text-color: #646363d3;
-  --sub-text-color: #979797;
+
 
   --nav-text-color: #CEDCE4;
   --nav-bg-color: #211870;
   --nav-hover-bg-color: #8793c5; 
 
-  --log-out-button:  rgba(126, 0, 0, 0.466);
+  --log-out-button:  #211870;
+  --log-out-button-hover:  #7e0000e1;
 
-  --shadow-color: rgba(0, 0, 0, 0.2);
-  
+  --shadow-color: #00000033;
+  --hr-color : #ffffff;
 }
 
 
@@ -34,7 +37,7 @@
     font-size: 14px;
   }
   .sidebar hr{
-    background-color: rgb(255, 255, 255);
+    background-color: var(--hr-color);
   }
   .sidebar ul{
     list-style-type:none;
@@ -70,13 +73,19 @@
     text-decoration: solid;
   }
 
-  .sidebar .logout:hover{    
+  .sidebar .logout-menu{    
     background-color: var(--log-out-button) !important;
-    border-radius: 100px;
     font-style: bold;
     cursor: pointer;
-    padding:10px;
-    box-shadow: 0 0px 8px 5px rgba(0, 0, 0, 0.2);
+  }
+  .sidebar .logout-menu:hover{    
+    background-color: var(--log-out-button-hover) !important;
+    font-style: bold;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .sidebar .logout-menu a:hover{    
+    text-decoration: none;
   }
 /* /SIDE BAR */
 
