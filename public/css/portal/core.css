@@ -18,7 +18,10 @@
   --nav-bg-color: #211870;
   --nav-hover-bg-color: #8793c5; 
 
-  --log-out-button:  rgb(126, 0, 0);
+  --log-out-button:  rgba(126, 0, 0, 0.466);
+
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  
 }
 
 
@@ -51,13 +54,17 @@
     color:var(--side-bar-text-color);
     text-decoration: solid;
   }
+  .logout{
+    margin: 7em;
+    padding:10px;
+  }
   .logout:hover{    
     background-color: var(--log-out-button) !important;
-    border-radius: 50px;
+    border-radius: 100px;
     font-style: bold;
     cursor: pointer;
-    padding:1;
-    margin: 0;
+    padding:10px;
+    box-shadow: 0 0px 8px 5px rgba(0, 0, 0, 0.2);
   }
   .side-item.active {
     background-color:  var(--side-bar-active-bg-color);

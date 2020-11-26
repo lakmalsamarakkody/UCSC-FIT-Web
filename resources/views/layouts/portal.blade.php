@@ -34,6 +34,8 @@
         <script src="{{ asset('lib/superfish/hoverIntent.js') }}"></script>
         <script src="{{ asset('lib/superfish/superfish.min.js') }}"></script>
 
+        <script src="{{ asset('js/portal.js') }}" defer></script>
+
         <script type="text/javascript"> 
           function display_c(){
             var refresh=999; // Refresh rate in milli seconds
@@ -91,12 +93,11 @@
                 <li class="side-item"><a href="#">Users</a></li>
                 <li class="side-item"><a href="#">System</a></li>
               </ul>
-              <ul class="text-center mt-5" style="position:fixed; bottom: 0px;">
-                <li class="logout mt-5 pl-0" >
-                  <a class="pl-0" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off" style="font-size: 22px;"></i></a>
+              <div style="position:fixed; bottom: 0px;">
+                  <a class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><div class="text-center logout pb-2"><i class="fa fa-power-off" style="font-size: 22px;"></i></div></a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-                </li>
-              </ul>
+             
+              </div>
 
             </div>
             <!-- /MENU SECTION -->
