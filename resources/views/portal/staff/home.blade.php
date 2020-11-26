@@ -1,52 +1,46 @@
 @extends('layouts.portal')
 
 @section('content')
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Dashboard</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb ">
-                <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
-                </ol>
-            </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <div class="container-fluid">
+    <!-- BREACRUMB -->
+    <section class="col-sm-6">
         <div class="row">
-
-        <div class="col-lg-12">
-
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in as Staff!') }}
-                </div>
-            </div>
+           
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb ">
+              <li class="breadcrumb-item active" aria-current="page">{{--<a href="{{ url('/portal/staff') }}">--}}Dashboard</a></li>
+            </ol>
+          </nav>
 
         </div>
+    </section>
+    <!-- /BREACRUMB -->
 
-
-        </div>
+    <!-- HEADING -->
+    <div class="col-lg-12">
+      <div class="row">
+        <h3 class="title">Dashboard</h3>
+      </div>
     </div>
 
+    <!-- HEADING -->
+    <div class="col-lg-12">
+        <div class="row">
+          
+          <div class="card w-100">
+              <div class="card-header">{{ __('Dashboard') }}</div>
 
-    <div class="content-header">
-        <div class="col-sm-8">
- 
-        </div>
+              <div class="card-body">
+                  @if (session('status'))
+                      <div class="alert alert-success" role="alert">
+                          {{ session('status') }}
+                      </div>
+                  @endif
+
+                  {{ __('You are logged in as Staff!') }}
+              </div>
+          </div>
+
+      </div>
     </div>
+
 @endsection
