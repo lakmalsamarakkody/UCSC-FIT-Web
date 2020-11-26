@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- BREACRUMB -->
-    <section class="col-sm-12">
+    <section class="col-sm-12 mb-3">
         <div class="row">
            
           <nav aria-label="breadcrumb">
@@ -16,7 +16,7 @@
     <!-- /BREACRUMB -->
 
     <!-- HEADING -->
-    <div class="col-lg-12">
+    <div class="col-lg-12 mb-4">
       <div class="row">
         <h3 class="title">Dashboard</h3>
       </div>
@@ -29,13 +29,13 @@
 
         <!-- SUMMARY CARDS -->
         <div class="col-lg-2">
-          <div class="card">
-            <div class="card-header">test</div>
+          <div class="card border-0 bg-transparent shadow">
+            <div class="card-header bg-transparent">Registered</div>
             <div class="card-body">
-              <div class="card-title">test</div>
-              <div class="card-text">test</div>
+              <div class="card-title">125</div>
+              <div class="card-text">125</div>
             </div>
-            <div class="card-footer">test</div>
+            <div class="card-footer d-none">test</div>
           </div>
         </div>
         
@@ -46,7 +46,7 @@
               <div class="card-title">test</div>
               <div class="card-text">test</div>
             </div>
-            <div class="card-footer">test</div>
+            <div class="card-footer d-none">test</div>
           </div>
         </div>
         <!-- SUMMARY CARDS -->
