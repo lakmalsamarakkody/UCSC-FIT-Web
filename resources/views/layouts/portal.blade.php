@@ -45,7 +45,7 @@
             var timeString = dt.getFullYear() +  "/" + dt.getMonth() + "/" + dt.getDate() + "   " + dt.getHours() + ":" + dt.getMinutes() +":" + dt.getSeconds()
             document.getElementById('ct').innerHTML = timeString;
             display_c();
-           }
+          }
         </script>
 
     
@@ -53,78 +53,95 @@
 
 <body onload=display_ct();>
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+    <!-- Page container-fluid -->
+    <div id="container-fluid">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="sidebar">
+                <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar mt-5 mb-2">
+                <p class="mb-0">Hello! {{ Auth::user()->name }}</p>
+                <p><small>{{ Auth::user()->role->name }}</small> </p>
+                <hr style="background-color:aliceblue;"> 
+                <ul class="sidebar m-0 p-0 h-100" style="height: 100%;">
+                  <li>
+                    <a href="#home">Dashboard</a>
+                  </li>
+                  <li>            
+                    <a href="#news">Students</a>
+                  </li>
+                  <li>            
+                    <a href="#news">Exams</a>
+                  </li>
+                  <li>            
+                    <a href="#news">Results</a>
+                  </li>
+                  <li>            
+                    <a href="#news">Users</a>
+                  </li>
+                  <li>            
+                    <a href="#news">System</a>
+                  </li>
+                  <li style="position:fixed; bottom: 0; width:200px">
+                    <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      <i class="fa fa-power-off"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                  </li>
+                  
+                </ul>
+              </div>
 
-      
-      <nav class="navbar navbar-expand-md shadow-sm fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/') }}"><h3>Foundation of Information Technology<br>
-           <small>University of Colombo School of Computing</small> </h3>
-          </a>
-          <span id="ct" class="navbar-text text-white">
-            
-          </span>
-              <span class="navbar-text text-white">
-                {{ Auth::user()->name }}
-              </span>
-        </div>
-      </nav>
-
-      <!-- <nav class="navbar navbar-light bg-light shadow-sm">
-        <a class="navbar-brand" href="{{ url('/') }}"><h3>Foundation of Information Technology<br>
-          <small>University of Colombo School of Computing</small> </h3>
-        </a>
-        <span class="navbar-text">
-          {{ Auth::user()->name }}
-        </span>
-      </nav> -->
-      <!-- The sidebar -->
-          <aside>
-            <div class="sidebar">
-              <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar">
-              <p class="mb-0">Hello! {{ Auth::user()->name }}</p>
-              <p><small>{{ Auth::user()->role->name }}</small> </p>
-              <hr style="background-color:aliceblue;"> 
-              <ul class="sidebar" style="height: 100%;">
-                <li>
-                  <a href="#home">Dashboard</a>
-                </li>
-                <li>            
-                  <a href="#news">Students</a>
-                </li>
-                <li>            
-                  <a href="#news">Exams</a>
-                </li>
-                <li>            
-                  <a href="#news">Results</a>
-                </li>
-                <li>            
-                  <a href="#news">Users</a>
-                </li>
-                <li>            
-                  <a href="#news">System</a>
-                </li>
-                <li style="position:fixed; bottom: 0; width:200px">
-                  <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fa fa-power-off"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout
-                  </a>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-                </li>
-                
-              </ul>
             </div>
-          </aside>
+          </div>
+        </div>
+
+        <div class="col-lg-9">
+          <div class="row">
+            <nav class="navbar navbar-expand-md shadow-sm fixed-top">
+              
+              <div class="col-lg-4">                  
+                <a class="navbar-brand" href="{{ url('/') }}"><h3>Foundation of Information Technology<br>
+                  <small>University of Colombo School of Computing</small> </h3>
+                </a></div>
+              <div class="col-lg-4 text-center">
+                  <span id="ct" class="navbar-text text-white"></span>
+                
+              </div>
+              <div class="col-lg-4 text-right"> 
+                <span class="navbar-text text-white">
+                  {{ Auth::user()->name }}
+                </span>
+              </div>
+
+                  
+                   
+            </nav>
+  
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <main class="pt-5">
+  
+                <div class="container pt-4 mt-5">
+                  
+                  @yield('content')
+                </div>
+    
+              </main>
+            </div>
+
+
+          </div>
 
           
-          <main class="pt-5">
+        </div>
 
-            <div class="contentr pt-4 mt-5" style="margin-left: 200px;">
-              
-            @yield('content')
-            </div>
 
-          </main>
+      </div>
+          
+
     </div>
 </body>
 </html>
