@@ -91,9 +91,9 @@
                 <li class="side-item"><a href="#">Users</a></li>
                 <li class="side-item"><a href="#">System</a></li>
               </ul>
-              <ul class="w-100 text-center mt-5" style="position:fixed; bottom: 0px;">
+              <ul class="text-center mt-5" style="position:fixed; bottom: 0px;">
                 <li class="logout mt-5 pl-0" >
-                  <a class="pl-0" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
+                  <a class="pl-0" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off" style="font-size: 22px;"></i></a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                 </li>
               </ul>
