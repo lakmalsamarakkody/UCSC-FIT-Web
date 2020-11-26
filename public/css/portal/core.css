@@ -5,16 +5,40 @@
   --sub-theme-color: #8f75da;
   --sub-bg-color: #8f75da;
 
+  --side-bar-bg-color:  #211870;
+  --side-bar-text-color:  #ebebeb;
+
+
   --main-text-color: #646363d3;
   --sub-text-color: #979797;
 
   --nav-text-color: #CEDCE4;
-  --nav-bg-color: #333333; 
+  --nav-bg-color: #0f074e; 
 }
 
 /* SIDE BAR */
   .sidebar{
-    background-color: #211870;
+    background-color: var( --side-bar-bg-color);
+    color:var(--side-bar-text-color);
+    text-decoration: solid;
+    font-size: 14px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  .sidebar a {
+    color: rgb(255, 255, 255);
+    padding: 16px;
+    text-decoration: solid;
+  }
+  .sidebar ul{
+    list-style-type:none;
+  }
+  .sidebar a.active {
+    background-color:  #8793c5;
+    color: rgb(255, 255, 255);
+  }
+  .sidebar a:hover:not(.active) {
+    background-color:  #8793c5;
+    color: rgb(39, 38, 38);
   }
   .avatar {
     vertical-align: middle;

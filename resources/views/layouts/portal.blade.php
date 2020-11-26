@@ -58,7 +58,7 @@
       <div class="row">
 
         <!-- SIDE BAR -->
-        <div class="col-lg-2 sidebar vh-100">
+        <div class="col-lg-2 sidebar vh-100 shadow-lg">
           <div class="row">
 
             <!-- USER DETAILS SECTION -->
@@ -74,14 +74,14 @@
             <hr width="90%"/> 
 
             <!-- MENU SECTION -->
-            <div class="nav-menu w-100">
+            <div class="nav-menu w-100 pl-5">
               <ul>
-                <li><a href="#home">Dashboard</a></li>
-                <li><a href="#news">Students</a></li>
-                <li><a href="#news">Exams</a></li>
-                <li><a href="#news">Results</a></li>
-                <li><a href="#news">Users</a></li>
-                <li><a href="#news">System</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Students</a></li>
+                <li><a href="#">Exams</a></li>
+                <li><a href="#">Results</a></li>
+                <li><a href="#">Users</a></li>
+                <li><a href="#">System</a></li>
                 <li style="position:fixed; bottom: 0px;">
                   <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
@@ -100,19 +100,28 @@
           <div class="row">
 
             <!-- NAV BAR -->
-            <div class="col-lg-12 nav-bar">
-              <div class="row pt-3 pb-3 mr-2">
+            <div class="col-lg-12 nav-bar shadow-sm">
+              <div class="row mr-2">
 
-                <div class="col-lg-4  ">                  
-                  <a class="navbar-brand" href="{{ url('/') }}"><h3>Foundation of Information Technology<br>
-                    <small>University of Colombo School of Computing</small> </h3>
+                <div class="col-lg-3 pt-3"> 
+                  <button class="btn btn-link btn-lg  pt-4 pr-4 pl-4"><i class="fa fa-cog"></i></button>     
+                </div>
+
+
+                <div class="col-lg-6 text-center justify-content-around p-2 mt-2"> 
+                    <a class=" mr-3" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
+                  
+           
+                  <a class="navbar-brand p-0 m-0" href="{{ url('/') }}">
+                    <p class="m-0">Foundation of Information Technology<br>
+                    <small>University of Colombo School of Computing</small> </p>
+                    
                   </a>
+                  
+                    <a class=" mt-0 ml-3" href="/"><img class="mb-3" src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px;"/></a>
+                 
                 </div>
-
-
-                <div class="col-lg-4 text-center">
-                </div>
-                <div class="col-lg-4 text-right p-2 mr-0">
+                <div class="col-lg-3 text-right p-2 mt-3 mr-0">
                     <span id="ct" class="navbar-text text-white"></span>
                 </div>
 
