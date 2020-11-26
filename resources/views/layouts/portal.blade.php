@@ -82,7 +82,7 @@
                 <li><a href="#news">Results</a></li>
                 <li><a href="#news">Users</a></li>
                 <li><a href="#news">System</a></li>
-                <li style="bottom: 0px;">
+                <li style="position:fixed; bottom: 0px;">
                   <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                 </li>
@@ -101,21 +101,22 @@
 
             <!-- NAV BAR -->
             <div class="col-lg-12 nav-bar">
-              <div class="row">
+              <div class="row pt-3 pb-3 mr-2">
 
-                <div class="col-lg-4">                  
+                <div class="col-lg-4  ">                  
                   <a class="navbar-brand" href="{{ url('/') }}"><h3>Foundation of Information Technology<br>
                     <small>University of Colombo School of Computing</small> </h3>
                   </a>
                 </div>
 
+
                 <div class="col-lg-4 text-center">
+                </div>
+                <div class="col-lg-4 text-right p-2 mr-0">
                     <span id="ct" class="navbar-text text-white"></span>
                 </div>
 
-                <div class="col-lg-4 text-right"> 
-                  <span class="navbar-text text-white">{{ Auth::user()->name }}</span>
-                </div>
+
 
               </div>
             </div>
