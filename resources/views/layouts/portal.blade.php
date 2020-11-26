@@ -57,7 +57,7 @@
     <div id="wrapper">
 
       
-      <nav class="navbar navbar-expand-md shadow-sm">
+      <nav class="navbar navbar-expand-md shadow-sm fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}"><h3>Foundation of Information Technology<br>
            <small>University of Colombo School of Computing</small> </h3>
@@ -80,39 +80,51 @@
         </span>
       </nav> -->
       <!-- The sidebar -->
-      <div class="sidebar">
-        <ul class="sidebar" style="height: 100%;">
-          <li>
-            <a href="#home">Dashboard</a>
-          </li>
-          <li>            
-            <a href="#news">Students</a>
-          </li>
-          <li>            
-            <a href="#news">Exams</a>
-          </li>
-          <li>            
-            <a href="#news">Results</a>
-          </li>
-          <li>            
-            <a href="#news">Users</a>
-          </li>
-          <li>            
-            <a href="#news">System</a>
-          </li>
-          <li style="position:fixed; bottom: 0; width:200px">
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-              <i class="fa fa-power-off"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-          </li>
-          
-        </ul>
-      </div>
+          <aside>
+            <div class="sidebar">
+              <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar">
+              <p class="mb-0">Hello! {{ Auth::user()->name }}</p>
+              <p><small>{{ Auth::user()->role->name }}</small> </p>
+              <hr style="background-color:aliceblue;"> 
+              <ul class="sidebar" style="height: 100%;">
+                <li>
+                  <a href="#home">Dashboard</a>
+                </li>
+                <li>            
+                  <a href="#news">Students</a>
+                </li>
+                <li>            
+                  <a href="#news">Exams</a>
+                </li>
+                <li>            
+                  <a href="#news">Results</a>
+                </li>
+                <li>            
+                  <a href="#news">Users</a>
+                </li>
+                <li>            
+                  <a href="#news">System</a>
+                </li>
+                <li style="position:fixed; bottom: 0; width:200px">
+                  <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fa fa-power-off"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                </li>
+                
+              </ul>
+            </div>
+          </aside>
 
-      <main class="container pt-5">
-        @yield('content')
-      </main>
+          
+          <main class="pt-5">
+
+            <div class="contentr pt-4 mt-5" style="margin-left: 200px;">
+              
+            @yield('content')
+            </div>
+
+          </main>
     </div>
 </body>
 </html>
