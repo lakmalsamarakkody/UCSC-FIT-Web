@@ -50,8 +50,10 @@
     padding-left: 20px !important;
   }
   .logout:hover{    
-    color: var(--log-out-button) !important;
+    background-color: var(--log-out-button) !important;
     display: block;
+    font-style: bold;
+    cursor: pointer;
   }
   .side-item.active {
     background-color:  var(--side-bar-active-bg-color);
