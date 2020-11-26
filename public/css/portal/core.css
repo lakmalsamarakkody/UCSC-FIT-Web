@@ -15,7 +15,8 @@
   --sub-text-color: #979797;
 
   --nav-text-color: #CEDCE4;
-  --nav-bg-color: #0f074e; 
+  --nav-bg-color:#191b87;
+  --nav-hover-bg-color: #8793c5; 
 
   --log-out-button:  rgb(126, 0, 0);
 }
@@ -82,6 +83,12 @@
   text-decoration: none;
   font-size: 14px;
   color: #f2f2f2;
+}
+.nav-item{
+  color: var(--nav-text-color);
+}
+.nav-item:hover{
+  color: var(--nav-hover-bg-color);
 }
 /* /NAV BAR */
 
