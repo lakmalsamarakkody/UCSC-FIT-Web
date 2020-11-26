@@ -114,11 +114,12 @@
 
 
                 <div class="col-lg-3 p-2 my-2 ml-0">
-                  <span id="ct" class="navbar-text text-white"></span>
+                  <h4 class=" text-left p-0 m-0"><a href="">FIT | UCSC <br> <small>Staff Portal</small></a> </h5>
                 </div>
 
 
-                <div class="col-lg-6 text-center p-2 mt-2"> 
+                <div class="col-lg-6 text-center p-2 my-2"> 
+                  <span id="ct" class="navbar-text text-white"></span>
                     <!-- <a class=" mr-3" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
                   
            
