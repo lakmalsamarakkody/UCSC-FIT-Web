@@ -30,7 +30,7 @@
         <!-- SUMMARY CARDS -->
         <div class="col-lg-2">
           <div class="card border-0 bg-transparent shadow">
-            <div class="card-header bg-transparent">Registered</div>
+            <div class="card-header border-0 bg-transparent">Registered</div>
             <div class="card-body">
               <div class="card-title">125</div>
               <div class="card-text">125</div>
