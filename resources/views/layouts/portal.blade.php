@@ -61,9 +61,18 @@
         <div class="col-lg-2 sidebar vh-100 shadow-lg">
           <div class="row">
 
+            <div class="w-100">
+              <div class="img mx-5 mt-4 px-4">
+                <a class=" mr-3" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
+                <a class=" mt-0 ml-3" href="/"><img class="mb-3" src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px;"/></a>
+              </div>
+
+              
+            </div>
+            <hr width="90%"/> 
             <!-- USER DETAILS SECTION -->
             <div class="user w-100 text-center">
-              <div class="img mt-5 mb-2">
+              <div class="img mt-3 mb-2">
                 <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar" width="50%">
               </div>
               <p class="mb-0 text-white">Hello! {{ Auth::user()->name }}</p>
@@ -101,15 +110,16 @@
 
             <!-- NAV BAR -->
             <div class="col-lg-12 nav-bar shadow-sm">
-              <div class="row mr-2">
+              <div class="row ml-2">
 
-                <div class="col-lg-3 pt-3"> 
-                  <button class="btn btn-link btn-lg  pt-4 pr-4 pl-4 nav-item"><i class="fa fa-cog"></i></button>     
+
+                <div class="col-lg-3 p-2 my-2 ml-0">
+                  <span id="ct" class="navbar-text text-white"></span>
                 </div>
 
 
-                <div class="col-lg-6 text-center justify-content-around p-2 mt-2"> 
-                    <a class=" mr-3" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
+                <div class="col-lg-6 text-center p-2 mt-2"> 
+                    <!-- <a class=" mr-3" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
                   
            
                   <a class="navbar-brand p-0 m-0" href="{{ url('/') }}">
@@ -119,19 +129,18 @@
                   </a>
                   
                     <a class=" mt-0 ml-3" href="/"><img class="mb-3" src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px;"/></a>
-                 
+                  -->
                 </div>
-                <div class="col-lg-3 text-right p-2 mt-3 mr-0">
-                    <span id="ct" class="navbar-text text-white"></span>
+                <div class="col-lg-3 p-2 my-2  text-right"> 
+                  <button class="btn btn-link btn-lg  px-5 nav-item"><i class="fa fa-cog"></i></button>     
                 </div>
-
 
 
               </div>
             </div>
             <!-- /NAV BAR -->
 
-            <main class="col-lg-12 mt-5">
+            <main class="col-lg-12 py-4 px-5">
               <div class="row">
                     @yield('content')
               </div>
@@ -147,35 +156,4 @@
 </body>
 </html>
 
-{{-- <!-- PAGE AREA -->
-        <div class="col-lg-10">
-          <div class="row">
-
-            <!-- NAV BAR -->
-            <div class="navbar">
-              <div class="col-lg-4">                  
-                <a class="navbar-brand" href="{{ url('/') }}"><h3>Foundation of Information Technology<br>
-                  <small>University of Colombo School of Computing</small> </h3>
-                </a></div>
-              <div class="col-lg-4 text-center">
-                  <span id="ct" class="navbar-text text-white"></span>
-              </div>
-              <div class="col-lg-4 text-right"> 
-                <span class="navbar-text text-white">
-                  {{ Auth::user()->name }}
-                </span>
-              </div>
-            </div>
-          </div>
-          <!-- /NAV BAR -->
-
-          
-
-          </div>
-        </div>
-        <!-- /PAGE AREA -->
-
-
-      </div> --}}
-          
 
