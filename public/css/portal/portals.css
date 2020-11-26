@@ -4,41 +4,32 @@
 /* Add a black background color to the top navigation */
 .navbar {
     background-color: #211870 !important;
-    text-align: center !important;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 14px;
   }
   
   /* Style the links inside the navigation bar */
   .navbar a {
-    float: left;
     color: #f2f2f2;
     text-decoration: none;
     font-size: 14px;
-    text-align: left;
   }
  
 /* The side navigation menu */
 .sidebar {
-    width: 200px;
     background-color: #211870;
-    position: fixed;
-    overflow: auto;
-    text-align: center;
     font-size: 14px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
   
   /* Sidebar links */
   .sidebar a {
-    display: block;
     color: rgb(255, 255, 255);
     padding: 16px;
     text-decoration: solid;
   }
 
   .sidebar p {
-    display: block;
     color: rgb(255, 255, 255);
     text-decoration: solid;
   }

@@ -19,7 +19,7 @@
             <!-- FONT AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/all.css') }}">
             <!-- LINE AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/line-awesome/css/line-awesome.css') }}">
             <!-- ANIMATE -->        <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}">
-            <!-- CUSTOM -->        <link rel="stylesheet" href="{{ asset('css/portal/portal.css') }}">
+            <!-- CUSTOM -->        <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
 
 
        <!-- JavaScript Libraries -->
@@ -54,95 +54,86 @@
 <body onload=display_ct();>
 
     <!-- Page container-fluid -->
-    <div id="container-fluid">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-3">
+
+        <!-- SIDE BAR -->
+        <div class="col-lg-2 sidebar">
           <div class="row">
-            <div class="col-lg-12">
-              <div class="sidebar">
-                <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar mt-5 mb-2">
-                <p class="mb-0">Hello! {{ Auth::user()->name }}</p>
-                <p><small>{{ Auth::user()->role->name }}</small> </p>
-                <hr style="background-color:aliceblue;"> 
-                <ul class="sidebar m-0 p-0 h-100" style="height: 100%;">
-                  <li>
-                    <a href="#home">Dashboard</a>
-                  </li>
-                  <li>            
-                    <a href="#news">Students</a>
-                  </li>
-                  <li>            
-                    <a href="#news">Exams</a>
-                  </li>
-                  <li>            
-                    <a href="#news">Results</a>
-                  </li>
-                  <li>            
-                    <a href="#news">Users</a>
-                  </li>
-                  <li>            
-                    <a href="#news">System</a>
-                  </li>
-                  <li style="position:fixed; bottom: 0; width:200px">
-                    <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                      <i class="fa fa-power-off"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-                  </li>
-                  
-                </ul>
+
+            <!-- USER DETAILS SECTION -->
+            <div class="user w-100 text-center">
+              <div class="img mt-5 mb-2">
+                <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar" width="50%">
               </div>
+              <p class="mb-0 text-white">Hello! {{ Auth::user()->name }}</p>
+              <p class="text-white"><small>{{ Auth::user()->role->name }}</small> </p>
+            </div>
+            <!-- /USER DETAILS SECTION -->
+
+            <hr width="90%"/> 
+
+            <!-- MENU SECTION -->
+            <div class="nav-menu w-100">
+              <ul>
+                <li><a href="#home">Dashboard</a></li>
+                <li><a href="#news">Students</a></li>
+                <li><a href="#news">Exams</a></li>
+                <li><a href="#news">Results</a></li>
+                <li><a href="#news">Users</a></li>
+                <li><a href="#news">System</a></li>
+                <li>
+                  <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                </li>
+              </ul>
 
             </div>
+            <!-- /MENU SECTION -->
+
           </div>
         </div>
+        <!-- /SIDE BAR -->
 
-        <div class="col-lg-9">
+      </div>
+    </div>
+    <!-- /Page container-fluid -->
+</body>
+</html>
+
+{{-- <!-- PAGE AREA -->
+        <div class="col-lg-10">
           <div class="row">
-            <nav class="navbar navbar-expand-md shadow-sm fixed-top">
-              
+
+            <!-- NAV BAR -->
+            <div class="navbar">
               <div class="col-lg-4">                  
                 <a class="navbar-brand" href="{{ url('/') }}"><h3>Foundation of Information Technology<br>
                   <small>University of Colombo School of Computing</small> </h3>
                 </a></div>
               <div class="col-lg-4 text-center">
                   <span id="ct" class="navbar-text text-white"></span>
-                
               </div>
               <div class="col-lg-4 text-right"> 
                 <span class="navbar-text text-white">
                   {{ Auth::user()->name }}
                 </span>
               </div>
-
-                  
-                   
-            </nav>
-  
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <main class="pt-5">
-  
-                <div class="container pt-4 mt-5">
-                  
-                  @yield('content')
-                </div>
-    
-              </main>
             </div>
+          </div>
+          <!-- /NAV BAR -->
 
+          <main class="col-lg-12 mt-5">
+            <div class="row">
+                  @yield('content')
+            </div>
+          </main>
 
           </div>
-
-          
         </div>
+        <!-- /PAGE AREA -->
 
 
-      </div>
+      </div> --}}
           
-
-    </div>
-</body>
-</html>
 

@@ -1,0 +1,22 @@
+
+
+
+/* SIDE BAR */
+  .sidebar{
+    background-color: #211870;
+  }
+  .avatar {
+    vertical-align: middle;
+    border-radius: 50%;
+  }
+  .nav-menu ul {
+    display: contents;
+  }
+
+  .nav-menu ul li{
+    text-decoration: solid;
+    padding: 1rem 0rem 1rem 1rem;
+  }
+/* /SIDE BAR */
+
+  
