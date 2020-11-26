@@ -62,14 +62,13 @@
           <div class="row">
 
             <div class="w-100">
-              <div class="img mx-5 mt-4 px-4">
+              <div class="img mx-5 mt-3 px-4">
                 <a class=" mr-3" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
                 <a class=" mt-0 ml-3" href="/"><img class="mb-3" src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px;"/></a>
               </div>
 
               
             </div>
-            <hr width="90%"/> 
             <!-- USER DETAILS SECTION -->
             <div class="user w-100 text-center">
               <div class="img mt-3 mb-2">
