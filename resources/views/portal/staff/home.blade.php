@@ -113,7 +113,7 @@
         <div class="col-lg-6 mt-5 pr-5">
           <div class="row">
             
-            <h2 class="mb-4">Laravel 7|8 Yajra Datatables Example</h2>
+            <h2 class="mb-4">Upcoming Exams</h2>
             <table class="table table-bordered yajra-datatable px-5">
                 <thead>
                     <tr>
@@ -134,7 +134,7 @@
         <div class="col-lg-6 mt-5 pl-5">
           <div class="row">
             
-            <h2 class="mb-4">Laravel 7|8 Yajra Datatables Example</h2>
+            <h2 class="mb-4">Exams Held</h2>
             <table class="table table-bordered yajra-datatable px-5">
                 <thead>
                     <tr>

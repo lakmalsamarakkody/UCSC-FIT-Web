@@ -23,12 +23,16 @@ class ExamsController extends Controller
     public function getExamList(Request $request)
     {
         if ($request->ajax()) {
-            $data = Exam::get();
-            return Datatables::of($data)->addIndexColumn()->addColumn('action', function($row){
+            $data = Exam::latest()->get();
+            return Datatables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
                 $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> 
                 <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                 return $actionBtn;
-            })->rawColumns(['sction'])->make(true);
+            })
+            ->rawColumns(['sction'])
+            ->make(true);
         }
     }
 }
