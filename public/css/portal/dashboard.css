@@ -1,5 +1,5 @@
 :root{
-  --card-header-text:#ffffff; 
+  --card-dash-header-text:#ffffff; 
   --card-header-text-hover: #000000; 
 
   --card-background-green:#188839;
@@ -7,12 +7,14 @@
   --card-background-red:#8d1414;
   --card-background-black:#414040;
   --card-background-yellow:#b99803;
+
+  --card-header-text:#211870; 
 }
 /* number CARDS */
 .dashboard .card-dash{
   border: none;
   border-radius: 0;
-  color: var(--card-header-text);
+  color: var(--card-dash-header-text);
 }
 .dashboard a.card:hover{
   text-decoration: solid;
@@ -23,13 +25,13 @@
 }
 .dashboard .card-dash .card-title{
   font-size: 4rem;
-  color: var(--card-header-text);
+  color: var(--card-dash-header-text);
   font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
   text-transform: uppercase;
 }
 .dashboard .card-dash .card-header h1{
   font-size: 1rem;
-  color: var(--card-header-text);
+  color: var(--card-dash-header-text);
   /* font-family: 'Open Sans', sans-serif; */
   text-transform: uppercase;
   letter-spacing: .05rem;
@@ -69,6 +71,7 @@
   font-weight: bold;
   font-size: 1.2rem;
   vertical-align: middle;
+  padding: 1.5rem 0 0 1.5rem;
 }
 .dashboard .card .card-body th {
   color: var(--system-card-table-th-text);
