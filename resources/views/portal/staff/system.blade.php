@@ -26,7 +26,7 @@
     <!-- /BREACRUMB -->
 
     <!-- CONTENT -->
-    <div class="col-xl-12 system">
+    <div class="col-md-12 system">
       <div class="row">
 
         <!-- USER ROLE -->
@@ -35,7 +35,7 @@
             <div class="card-header">USER ROLE</div>
             <div class="card-body">
               <div class="card-text">
-                <table class="table table-responsive-lg">
+                <table class="table table-responsive-md">
                   <thead>
                     <tr>
                       <th>Role Name</th>
@@ -66,7 +66,7 @@
             <div class="card-header">SUBJECTS</div>
             <div class="card-body">
               <div class="card-text">
-                <table class="table table-responsive-lg">
+                <table class="table table-responsive-md">
                   <thead>
                     <tr>
                       <th>Code</th>
@@ -98,7 +98,7 @@
             <div class="card-header">EXAM TYPES</div>
             <div class="card-body">
               <div class="card-text">
-                <table class="table table-responsive-lg">
+                <table class="table table-responsive-md">
                   <thead>
                     <tr>
                       <th>Type Name</th>

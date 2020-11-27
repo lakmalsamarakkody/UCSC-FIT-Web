@@ -45,7 +45,7 @@
 /* /buttons */
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1200px) {
   .system .card{
     margin-top: 2rem;
   }
