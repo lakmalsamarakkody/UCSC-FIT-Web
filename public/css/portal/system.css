@@ -52,6 +52,25 @@
 }
 /* /buttons */
 
+/* modals */
+.system .modal .modal-content .modal-header .modal-title{
+  color: var(--main-text-color);
+}
+.system .modal .modal-content .modal-body{
+  padding: 2rem 0rem 4rem 4rem;
+}
+.system .modal .modal-content .modal-body i{
+  padding-right: 0.5rem;
+  vertical-align: middle;
+}
+.system .modal .modal-content .modal-body i.fa-check{
+  color: green;
+}
+.system .modal .modal-content .modal-body i.fa-times{
+  color: red;
+}
+/* /modals */
+
 
 @media only screen and (max-width: 1200px) {
   .system .card{

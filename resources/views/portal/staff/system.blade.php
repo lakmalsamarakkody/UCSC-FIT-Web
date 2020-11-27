@@ -48,7 +48,7 @@
                     <td>System Administrator</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-success"><i class="fas fa-eye"></i></button>
+                        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#view-role"><i class="fas fa-eye"></i></button>
                         <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                       </div>
@@ -129,6 +129,8 @@
       </div>
       <!-- /EXAM TYPE -->
 
+      @include('portal.staff.system.modal')
+    
     </div>
   </div>
   <!-- /CONTENT -->
@@ -156,6 +158,6 @@
     </div>
   </div>
 
-  @include('portal.staff.system.modal')
+  
 
 @endsection
