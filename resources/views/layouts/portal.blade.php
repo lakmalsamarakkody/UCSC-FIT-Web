@@ -64,9 +64,9 @@
           <div class="row">
 
             <div class="w-100">
-              <div class="img mx-5 mt-3 px-4">
-                <a class=" mr-3" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
-                <a class=" mt-0 ml-3" href="/"><img class="mb-3" src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px;"/></a>
+              <div class="img mt-3 px-4">
+                <a class="float-left" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
+                <a class="float-right" href="/"><img class="mb-3" src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px;"/></a>
               </div>
 
               
@@ -85,25 +85,22 @@
 
             <!-- MENU SECTION -->
             <div class="nav-menu w-100">
-              <ul class="pl-5">
-                <li class="side-item active"><a href="#">Dashboard</a></li>
-                <li class="side-item"><a href="#">Students</a></li>
-                <li class="side-item"><a href="#">Exams</a></li>
-                <li class="side-item"><a href="#">Results</a></li>
-                <li class="side-item"><a href="#">Users</a></li>
-                <li class="side-item"><a href="#">System</a></li>
+              <ul>
+                <li><a href="#123">Dashboard</a></li>
+                <li><a href="#234">Students</a></li>
+                <li><a href="#345">Exams</a></li>
+                <li><a href="#456">Results</a></li>
+                <li><a href="#678">Users</a></li>
+                <li><a href="#789">System</a></li>
               </ul>
-              <div style="position:fixed; bottom: 0px;" >
-                <div class="text-center">
-                  <a class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <div class="logout pb-2" title="Logout" data-toggle="tooltip" data-placement="bottom" >
-                      <i class="fa fa-power-off" style="font-size: 22px;"></i>
-                    </div>
-                  </a>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-                </div>
 
-             
+              <div class="w-100 text-center" style="display:flex; align-items:flex-end;">
+                <a class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  <div class="logout-menu py-3" style="position: absolute; bottom: 0; left: 0; width: 100%;">
+                    <i class="fa fa-power-off"></i> Logout
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                  </div>
+                </a>
               </div>
 
             </div>
@@ -129,7 +126,7 @@
 
                 <div class="col-lg-6 text-center p-2 my-2"> 
                   <span id="ct" class="navbar-text text-white"></span>
-                    <!-- <a class=" mr-3" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
+                    {{-- <a class=" mr-3" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
                   
            
                   <a class="navbar-brand p-0 m-0" href="{{ url('/') }}">
@@ -139,7 +136,7 @@
                   </a>
                   
                     <a class=" mt-0 ml-3" href="/"><img class="mb-3" src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px;"/></a>
-                  -->
+                  --}}
                 </div>
                 <div class="col-lg-3 p-2 my-2  text-right"> 
                   <button class="btn btn-link btn-lg  px-5 nav-item"><i class="fa fa-cog"></i></button>     
