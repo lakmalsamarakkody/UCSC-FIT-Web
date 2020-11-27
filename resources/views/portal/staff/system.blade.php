@@ -46,9 +46,11 @@
                     <tr>
                       <td>System Administrator</td>
                       <td class="text-right">
-                        <button type="button" class="btn btn-outline-success"><i class="fas fa-eye"></i></button>
-                        <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-outline-success"><i class="fas fa-eye"></i></button>
+                          <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
+                          <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                       </td>
                     </tr>
                   </thead>
@@ -79,8 +81,10 @@
                       <td><b>FIT 103</b></td>
                       <td>ICT Applications</td>
                       <td class="text-right">
-                        <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
+                          <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                       </td>
                     </tr>
                   </thead>
@@ -109,8 +113,10 @@
                     <tr>
                       <td>e-Test</td>
                       <td class="text-right">
-                        <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
+                          <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                       </td>
                     </tr>
                   </thead>

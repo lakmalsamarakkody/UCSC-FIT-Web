@@ -43,6 +43,11 @@
     text-decoration: solid;
     font-size: 14px;
     -webkit-transition: all 0.3s;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: fixed;
+    z-index: 1000;
+    height: 100vh;
   }
   .sidebar hr{
     background-color: var(--hr-color);
@@ -127,6 +132,13 @@
   color: var(--nav-hover-bg-color);
 }
 /* /NAV BAR */
+
+/* PAGE AREA */
+.page-area{
+  overflow-y: auto;
+  margin-left: auto;
+}
+/* /PAGE AREA */
 
 
   
