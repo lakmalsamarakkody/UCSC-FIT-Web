@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald:300,400,500,700');
 
 :root{
+
+  --white:#fff;
+  --black:#000;
   --main-text-color: #646363d3;
   --sub-text-color: #979797;
 

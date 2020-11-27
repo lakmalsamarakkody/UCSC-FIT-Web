@@ -26,20 +26,70 @@
     <!-- /BREACRUMB -->
 
     <!-- CONTENT -->
-    <div class="col-lg-12 dashboard">
+    <div class="col-lg-12 system">
       <div class="row">
 
-        <div class="col">
+        <!-- SUBJECT -->
+        <div class="col-lg-6 col-md-12">
           <div class="card border-0 shadow">
             <div class="card-header">SUBJECTS</div>
             <div class="card-body">
-              <div class="card-title">FIT 103</div>
-              <div class="card-text">ICT Applications</div>
+              <div class="card-text">
+                <table class="table table-responsive-lg">
+                  <thead>
+                    <tr>
+                      <th>Code</th>
+                      <th>Name</th>
+                      <th>&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <thead>
+                    <tr>
+                      <td><b>FIT 103</b></td>
+                      <td>ICT Applications</td>
+                      <td class="text-right">
+                        <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                      </td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
             </div>
-            <div class="card-footer text-right"><button type="button" class="btn btn-primary">Add Subjects</button></div>
+            <div class="card-footer text-right border-top-0"><button type="button" class="btn btn-outline-primary">Add Subject</button></div>
           </div>
         </div>
+        <!-- /SUBJECT -->
 
+        <!-- EXAM TYPE -->
+        <div class="col-lg-6 col-md-12">
+          <div class="card border-0 shadow">
+            <div class="card-header">EXAM TYPES</div>
+            <div class="card-body">
+              <div class="card-text">
+                <table class="table table-responsive-lg">
+                  <thead>
+                    <tr>
+                      <th>Type Name</th>
+                      <th>&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <thead>
+                    <tr>
+                      <td>e-Test</td>
+                      <td class="text-right">
+                        <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                      </td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer text-right border-top-0"><button type="button" class="btn btn-outline-primary">Add Subject</button></div>
+          </div>
+        </div>
+        <!-- /EXAM TYPE -->
 
       </div>
     </div>
