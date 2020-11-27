@@ -63,7 +63,7 @@
       <div class="row">
 
         <!-- SIDE BAR -->
-        <div class="col-lg-2 sidebar vh-100 shadow-lg">
+        <div class="col-lg-2 sidebar">
           <div class="row">
 
             <div class="w-100">
@@ -127,7 +127,7 @@
         <!-- /SIDE BAR -->
 
         <!-- PAGE AREA -->
-        <div class="col-lg-10">
+        <div class="col-lg-10 page-area">
           <div class="row">
 
             <!-- NAV BAR -->
