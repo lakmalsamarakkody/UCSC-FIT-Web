@@ -1,21 +1,22 @@
 
-/* CARDS */
+/* number CARDS */
 .dashboard a.card:hover{
   text-decoration: solid;
   color: var(--card-header-text);
+  opacity: 80%;
 }
-.dashboard .card{
+.dashboard .card-dash{
+  border: none;
+  border-radius: 0;
   background-color: var(--card-background-colour);
-  font-family: 'Oswald', sans-serif;
 }
-.dashboard .card-title{
+.dashboard .card-dash .card-title{
   font-size: 4rem;
   color: var(--card-header-text);
   font-family: 'Oswald', sans-serif;
-  font-style: bolder;
   text-transform: uppercase;
 }
-.dashboard .card-header h1{
+.dashboard .card-dash .card-header h1{
   font-size: 1rem;
   color: var(--card-header-text);
   font-family: 'Open Sans', sans-serif;
@@ -23,4 +24,30 @@
   letter-spacing: .05rem;
 }
 
+/* /number CARDS */
+
+/* CARDS */
+.dashboard .card{
+  border: none;
+  border-radius: 0;
+  box-shadow:  0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+.dashboard .card-header{
+  color: var(--card-header-text);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+.dashboard .card .card-body th {
+  color: var(--system-card-table-th-text);
+}
+.dashboard .card .card-body td {
+  vertical-align: middle;
+}
+.dashboard .card .card-footer{
+  border-top: none;
+  background-color: var(--white);
+  text-align: right;
+}
 /* /CARDS */

@@ -14,38 +14,34 @@
     <title>FIT -Portal</title>
     
 
-        <!-- STYLES -->
-          <!-- BOOTSTRAP -->      <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-          <!-- FONT AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/all.css') }}">
-          <!-- LINE AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/line-awesome/css/line-awesome.css') }}">
-          <!-- ANIMATE -->        <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}">
+      <!-- STYLES -->
+        <!-- BOOTSTRAP -->      <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <!-- FONT AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/all.css') }}">
+        <!-- LINE AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/line-awesome/css/line-awesome.css') }}">
+        <!-- ANIMATE -->        <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}">
                                   
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- DATATABLE CSS  -->
-    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <!-- DATATABLE CSS -->
+        <!-- DATATABLE CSS  -->
+        <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <!-- DATATABLE CSS -->
 
-          <!-- CUSTOM --> 
-          <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
-          <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}">
-          <link rel="stylesheet" href="{{ asset('css/portal/system.css') }}">
+        <!-- CUSTOM --> 
+        <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/portal/system.css') }}">
 
-       <!-- JavaScript Libraries -->
-        <!-- <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script> -->
-        <!-- <script src="{{ asset('lib/jquery/jquery-migrate.min.js') }}"></script> -->
+        <!-- JavaScript Libraries -->
+        <script src="{{ asset('js/app.js') }}" differ></script>
 
-<!-- DATATABLE SCRIPTS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
+        <!-- DATATABLE SCRIPTS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
         <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-<!-- /DATATABLE SCRIPTS -->
+        <!-- /DATATABLE SCRIPTS -->
 
-        <!-- <script src="{{ asset('js/app.js') }}"></script> -->
-        <!-- <script src="{{ asset('js/portal.js') }}" defer></script> -->
+        <script src="{{ asset('js/portal.js') }}"></script>
 
         <script type="text/javascript"> 
           function display_c(){
@@ -78,10 +74,9 @@
               <div class="img mt-3 px-4">
                 <a class="float-left" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
                 <a class="float-right" href="/"><img class="mb-3" src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px;"/></a>
-              </div>
-
-              
+              </div>              
             </div>
+
             <!-- USER DETAILS SECTION -->
             <div class="user w-100 text-center">
               <div class="img mt-3 mb-2">
@@ -117,14 +112,6 @@
                 </div>
               </div> 
               
-              {{-- <div class="w-100 text-center" style="display:flex; align-items:flex-end;">
-                <a class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                  <div class="logout-menu py-3" style="position: absolute; bottom: 0; left: 0; width: 100%;">
-                    <i class="fa fa-power-off"></i> Logout
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-                  </div>
-                </a>
-              </div> --}}
 
             </div>
             <!-- /MENU SECTION -->

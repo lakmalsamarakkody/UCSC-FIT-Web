@@ -39,7 +39,7 @@
         <!-- SUMMARY CARDS -->
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card border-0 shadow" style="max-width: 18rem;">
+            <div class="card card-dash border-0 shadow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">5000</div>
               </div>
@@ -51,7 +51,7 @@
         
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card border-0 shadow" style="max-width: 18rem;">
+            <div class="card card-dash border-0 shadow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">125</div>
               </div>
@@ -63,7 +63,7 @@
 
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card border-0 shadow" style="max-width: 18rem;">
+            <div class="card card-dash border-0 shadow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">100</div>
               </div>
@@ -75,7 +75,7 @@
 
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card border-0 shadow" style="max-width: 18rem;">
+            <div class="card card-dash border-0 shadow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">95</div>
               </div>
@@ -87,7 +87,7 @@
         
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card border-0 shadow" style="max-width: 18rem;">
+            <div class="card card-dash border-0 shadow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">1500</div>
               </div>
@@ -99,7 +99,7 @@
 
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card border-0 shadow" style="max-width: 18rem;">
+            <div class="card card-dash border-0 shadow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">2</div>
               </div>
@@ -110,46 +110,73 @@
         </div>
         <!-- SUMMARY CARDS -->
 
-        <div class="col-lg-6 mt-5 pr-5">
+        <div class="col-lg-6 mt-5 px-4">
           <div class="row">
+            <a class="card w-100" href="">
+              <div class="card w-100">
+                <div class="card-header border-0 bg-transparent">Upcoming Exams</div>
+                <div class="card-body px-0">
+                  <table class="table yajra-datatable ">
+                    <thead class="text-center">
+                        <tr>
+                          <th>Date</th>
+                          <th>Subject Code</th>
+                          <th>Subject</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($upcomings as $upcoming)
+                        <tr class="text-center">
+                          <td>{{ $upcoming->date }}</td>
+                          <td>{{ $upcoming->subject_code }}</td>
+                          <td>{{ $upcoming->subject_name }}</td>
+                        </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div class="card-footer border-0 bg-transparent text-right">
+                  View <i class="fa fa-arrow-alt-circle-right"></i>
+                </div>
             
-            <h2 class="mb-4">Upcoming Exams</h2>
-            <table class="table table-bordered yajra-datatable px-5">
-                <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Date</th>
-                      <th>Subject Code</th>
-                      <th>Subject</th>
-                      <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-  
+              </div>
+            </a>
           </div>
         </div>
 
-        
-        <div class="col-lg-6 mt-5 pl-5">
+        <div class="col-lg-6 mt-5 px-4">
           <div class="row">
+            <a class="card w-100" href="">
+              <div class="card w-100">
+                <div class="card-header border-0 bg-transparent">Exams Held</div>
+                <div class="card-body px-0">
+                  <table class="table yajra-datatable ">
+                    <thead class="text-center">
+                        <tr>
+                          <th>Date</th>
+                          <th>Subject Code</th>
+                          <th>Subject</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($dones as $done)
+                        <tr class="text-center">
+                          <td>{{ $done->date }}</td>
+                          <td>{{ $done->subject_code }}</td>
+                          <td>{{ $done->subject_name }}</td>
+                        </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div class="card-footer border-0 bg-transparent text-right">
+                  View <i class="fa fa-arrow-alt-circle-right"></i>
+                </div>
             
-            <h2 class="mb-4">Exams Held</h2>
-            <table class="table table-bordered yajra-datatable px-5">
-                <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Date</th>
-                      <th>Subject Code</th>
-                      <th>Subject</th>
-                      <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-  
+              </div>
+            </a>
           </div>
         </div>
 
@@ -158,7 +185,7 @@
     <!-- /CONTENT -->
 
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       $(function () {
         
         var table = $('.yajra-datatable').DataTable({
@@ -180,6 +207,6 @@
         });
         
       });
-    </script>
+    </script> -->
 
 @endsection
