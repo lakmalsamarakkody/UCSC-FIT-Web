@@ -25,18 +25,20 @@
     </section>
     <!-- /BREACRUMB -->
 
-    <!-- HEADING -->
-    <div class="col-lg-12 mb-4">
-      <div class="row">
-        <h3 class="title">System</h3>
-      </div>
-    </div>
-    <!-- /HEADING -->
-
     <!-- CONTENT -->
     <div class="col-lg-12 dashboard">
       <div class="row">
 
+        <div class="col">
+          <div class="card border-0 shadow">
+            <div class="card-header">SUBJECTS</div>
+            <div class="card-body">
+              <div class="card-title">FIT 103</div>
+              <div class="card-text">ICT Applications</div>
+            </div>
+            <div class="card-footer text-right"><button type="button" class="btn btn-primary">Add Subjects</button></div>
+          </div>
+        </div>
 
 
       </div>
