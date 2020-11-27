@@ -32,6 +32,10 @@
 
   --card-header-text:rgb(35, 9, 107); 
   --card-background-colour: #ecf4ff;
+
+  --scroll-bar-track-color:rgb(212, 212, 212);
+  --scroll-bar-color:rgb(18, 18, 53);
+  --scroll-bar-hover-color: rgb(65, 65, 190);
 }
 
 
