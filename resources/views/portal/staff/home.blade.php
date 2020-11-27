@@ -28,69 +28,63 @@
       <div class="row">
 
         <!-- SUMMARY CARDS -->
-        <div class="col-lg-2">
-          <div class="card border-0 bg-transparent shadow">
-            <div class="card-header border-0 bg-transparent">Applicants</div>
-            <div class="card-body">
-              <div class="card-title">125</div>
-              <div class="card-text">125</div>
+        <div class="col-lg-2 px-1">
+          <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+            <div class="card-body p-0 my-0 ">
+              <div class="card-title text-center m-0">5000</div>
             </div>
-            <div class="card-footer d-none">test</div>
+            <div class="card-header border-0 bg-transparent text-center p-0"><h1>new Applicants</h1></div>
+            <div class="card-footer border-0 bg-transparent text-right"><a href="">View <i class="fa fa-arrow-alt-circle-right"></i></a></div>
           </div>
         </div>
         
-        <div class="col-lg-2">
-          <div class="card border-0 bg-transparent shadow">
-            <div class="card-header border-0 bg-transparent">Payments to review</div>
-            <div class="card-body">
-              <div class="card-title">125</div>
-              <div class="card-text">125</div>
+        <div class="col-lg-2 px-1">
+          <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+            <div class="card-body p-0 my-0 ">
+              <div class="card-title text-center m-0">125</div>
             </div>
-            <div class="card-footer d-none">test</div>
+            <div class="card-header border-0 bg-transparent text-center p-0"><h1>Payments to Review</h1></div>
+            <div class="card-footer border-0 bg-transparent text-right"><a href="">View <i class="fa fa-arrow-alt-circle-right"></i></a></div>
           </div>
         </div>
 
-        <div class="col-lg-2">
-          <div class="card border-0 bg-transparent shadow">
-            <div class="card-header border-0 bg-transparent">Pending documents</div>
-            <div class="card-body">
-              <div class="card-title">125</div>
-              <div class="card-text">125</div>
+        <div class="col-lg-2 px-1">
+          <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+            <div class="card-body p-0 my-0 ">
+              <div class="card-title text-center m-0">100</div>
             </div>
-            <div class="card-footer d-none">test</div>
+            <div class="card-header border-0 bg-transparent text-center p-0"><h1>Documents Pending</h1></div>
+            <div class="card-footer border-0 bg-transparent text-right"><a href="">View <i class="fa fa-arrow-alt-circle-right"></i></a></div>
           </div>
         </div>
 
-        <div class="col-lg-2">
-          <div class="card border-0 bg-transparent shadow">
-            <div class="card-header border-0 bg-transparent">Documents to review</div>
-            <div class="card-body">
-              <div class="card-title">125</div>
-              <div class="card-text">125</div>
+        <div class="col-lg-2 px-1">
+          <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+            <div class="card-body p-0 my-0 ">
+              <div class="card-title text-center m-0">95</div>
             </div>
-            <div class="card-footer d-none">test</div>
+            <div class="card-header border-0 bg-transparent text-center p-0"><h1>Documents to Review</h1></div>
+            <div class="card-footer border-0 bg-transparent text-right"><a href="">View <i class="fa fa-arrow-alt-circle-right"></i></a></div>
+          </div>
+        </div>
+        
+        <div class="col-lg-2 px-1">
+          <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+            <div class="card-body p-0 my-0 ">
+              <div class="card-title text-center m-0">1500</div>
+            </div>
+            <div class="card-header border-0 bg-transparent text-center p-0"><h1>Total Registered</h1></div>
+            <div class="card-footer border-0 bg-transparent text-right"><a href="">View <i class="fa fa-arrow-alt-circle-right"></i></a></div>
           </div>
         </div>
 
-        <div class="col-lg-2">
-          <div class="card border-0 bg-transparent shadow">
-            <div class="card-header border-0 bg-transparent">Total Registered</div>
-            <div class="card-body">
-              <div class="card-title">125</div>
-              <div class="card-text">125</div>
+        <div class="col-lg-2 px-1">
+          <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+            <div class="card-body p-0 my-0 ">
+              <div class="card-title text-center m-0">2</div>
             </div>
-            <div class="card-footer d-none">test</div>
-          </div>
-        </div>
-
-        <div class="col-lg-2">
-          <div class="card border-0 bg-transparent shadow">
-            <div class="card-header border-0 bg-transparent">Medicals to review</div>
-            <div class="card-body">
-              <div class="card-title">125</div>
-              <div class="card-text">125</div>
-            </div>
-            <div class="card-footer d-none">test</div>
+            <div class="card-header border-0 bg-transparent text-center p-0"><h1>Medicals to Review</h1></div>
+            <div class="card-footer border-0 bg-transparent text-right"><a href="">View <i class="fa fa-arrow-alt-circle-right"></i></a></div>
           </div>
         </div>
         <!-- SUMMARY CARDS -->

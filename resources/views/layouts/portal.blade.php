@@ -44,7 +44,7 @@
           
           function display_ct() {
             var dt = new Date()
-            var timeString = dt.getFullYear() +  "/" + dt.getMonth() + "/" + dt.getDate() + "   " + dt.getHours() + ":" + dt.getMinutes() +":" + dt.getSeconds()
+            var timeString = dt.getFullYear() +  "/" + dt.getMonth() + "/" + dt.getDate() + "&nbsp;&nbsp;&nbsp;" + dt.getHours() + ":" + dt.getMinutes() +":" + dt.getSeconds()
             document.getElementById('ct').innerHTML = timeString;
             display_c();
           }
@@ -93,9 +93,16 @@
                 <li class="side-item"><a href="#">Users</a></li>
                 <li class="side-item"><a href="#">System</a></li>
               </ul>
-              <div style="position:fixed; bottom: 0px;">
-                  <a class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><div class="text-center logout pb-2"><i class="fa fa-power-off" style="font-size: 22px;"></i></div></a>
+              <div style="position:fixed; bottom: 0px;" >
+                <div class="text-center">
+                  <a class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <div class="logout pb-2" title="Logout" data-toggle="tooltip" data-placement="bottom" >
+                      <i class="fa fa-power-off" style="font-size: 22px;"></i>
+                    </div>
+                  </a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                </div>
+
              
               </div>
 

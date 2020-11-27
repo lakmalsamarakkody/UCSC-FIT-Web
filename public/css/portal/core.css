@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald:300,400,500,700');
+
 :root{
   --main-theme-color: #727cf5;
   --main-bg-color: #e6e6e65b;
@@ -21,7 +23,9 @@
   --log-out-button:  rgba(126, 0, 0, 0.466);
 
   --shadow-color: rgba(0, 0, 0, 0.2);
-  
+
+  --card-header-text:rgb(35, 9, 107); 
+  --card-background-colour: #ecf4ff;
 }
 
 
@@ -57,6 +61,7 @@
   .logout{
     margin: 7em;
     padding:10px;
+    -webkit-transition: all 0.3s;
   }
   .logout:hover{    
     background-color: var(--log-out-button) !important;
@@ -113,4 +118,28 @@
 }
 /* /NAV BAR */
 
+
+/* CARDS */
+.card-dash{
+  border: 2px solid var(--card-header-text) !important;
+  background-color: var(--card-background-colour);
+  font-family: 'Oswald', sans-serif;
+}
+.card-title{
+  font-size: 4rem;
+  color: var(--card-header-text);
+  font-family: 'Oswald', sans-serif;
+  font-style: bolder;
+  text-transform: uppercase;
+}
+.card-header h1{
+  font-size: 1rem;
+  color: var(--card-header-text);
+  font-family: 'Open Sans', sans-serif;
+  text-transform: capitalize;
+  text-transform: uppercase;
+  letter-spacing: .05rem;
+}
+
+/* /CARDS */
   
