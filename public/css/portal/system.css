@@ -17,6 +17,10 @@
 .system .card-body th {
   color: var(--system-card-table-th-text);
 }
+
+.system .card-body td {
+  vertical-align: middle;
+}
 /* /cards */
 
 
