@@ -86,12 +86,12 @@
             <!-- MENU SECTION -->
             <div class="nav-menu w-100">
               <ul>
-                <li><a href="#123">Dashboard</a></li>
-                <li><a href="#234">Students</a></li>
-                <li><a href="#345">Exams</a></li>
-                <li><a href="#456">Results</a></li>
-                <li><a href="#678">Users</a></li>
-                <li><a href="#789">System</a></li>
+                <li id="dashboard"><a href="{{ route('home') }}">Dashboard</a></li>
+                <li id="students"><a href="{{ route('students') }}">Students</a></li>
+                <li id="exams"><a href="{{ route('exams') }}">Exams</a></li>
+                <li id="results"><a href="{{ route('results') }}">Results</a></li>
+                <li id="users"><a href="{{ route('users') }}">Users</a></li>
+                <li id="system"><a href="{{ route('system') }}">System</a></li>
               </ul>
 
               <div style="position:fixed; bottom: 0px;" >

@@ -66,7 +66,7 @@
     background-color:  var(--side-bar-active-bg-color);
     color: var(--side-bar-text-color);
   }
-  .sidebar .nav-menu ul li:hover, .nav-menu ul li:hover:not(.active){
+  .sidebar .nav-menu ul li:hover:not(.active), .nav-menu ul li:hover:not(.active){
     background-color:  var(--side-bar-hover-bg-color);
     padding-left: 1rem;
     -webkit-transition: all 0.3s;
@@ -82,7 +82,7 @@
   .logout{
     margin: 0 0 7rem 7.3rem;
     padding:0.8rem;
-    border-radius: 5rem;
+    border-radius: 5rem ;
     -webkit-transition: all 0.3s;
   }
   .logout:hover{    

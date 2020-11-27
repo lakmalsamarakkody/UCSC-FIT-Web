@@ -1,13 +1,22 @@
 @extends('layouts.portal')
 
 @section('content')
+
+<script type="text/javascript">
+
+    // ACTIVE NAVIGATION ENTRY
+    $(document).ready(function ($) {
+        $('#dashboard').addClass("active");
+    });
+
+</script>
     <!-- BREACRUMB -->
     <section class="col-sm-12 mb-3">
         <div class="row">
            
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb ">
-              <li class="breadcrumb-item active" aria-current="page">{{--<a href="{{ url('/portal/staff') }}">--}}Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
             </ol>
           </nav>
 

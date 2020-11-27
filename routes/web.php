@@ -76,5 +76,16 @@ Route::get('/announcements', [AnouncementsController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/portal/staff/', [App\Http\Controllers\portal\staff\HomeController::class, 'index']);
+Route::get('/portal/staff/', [App\Http\Controllers\portal\staff\HomeController::class, 'index'])->name('home');
+
+Route::get('/portal/staff/students', [App\Http\Controllers\portal\staff\StudentController::class, 'index'])->name('students');
+
+Route::get('/portal/staff/exams', [App\Http\Controllers\portal\staff\ExamsController::class, 'index'])->name('exams');
+
+Route::get('/portal/staff/results', [App\Http\Controllers\portal\staff\ResultsController::class, 'index'])->name('results');
+
+Route::get('/portal/staff/users', [App\Http\Controllers\portal\staff\UsersController::class, 'index'])->name('users');
+
+Route::get('/portal/staff/system', [App\Http\Controllers\portal\staff\SystemController::class, 'index'])->name('system');
+
 Route::get('/portal/student/', [App\Http\Controllers\portal\Student\HomeController::class, 'index']);
