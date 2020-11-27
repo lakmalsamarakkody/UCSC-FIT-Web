@@ -126,29 +126,4 @@
 /* /NAV BAR */
 
 
-/* CARDS */
-a.card:hover{
-  text-decoration: solid;
-  color: var(--card-header-text);
-}
-.dashboard .card{
-  background-color: var(--card-background-colour);
-  font-family: 'Oswald', sans-serif;
-}
-.dashboard .card-title{
-  font-size: 4rem;
-  color: var(--card-header-text);
-  font-family: 'Oswald', sans-serif;
-  font-style: bolder;
-  text-transform: uppercase;
-}
-.dashboard .card-header h1{
-  font-size: 1rem;
-  color: var(--card-header-text);
-  font-family: 'Open Sans', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: .05rem;
-}
-
-/* /CARDS */
   
