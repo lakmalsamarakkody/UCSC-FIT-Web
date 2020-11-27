@@ -31,7 +31,7 @@
 
         <!-- USER ROLE -->
         <div class="col-xl-4 col-lg-12">
-          <div class="card border-0 shadow">
+          <div class="card">
             <div class="card-header">USER ROLE</div>
             <div class="card-body">
               <div class="card-text">
@@ -55,14 +55,14 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer text-right border-top-0"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
+            <div class="card-footer"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
           </div>
         </div>
         <!-- /USER ROLE -->
 
         <!-- SUBJECT -->
         <div class="col-xl-4 col-lg-12">
-          <div class="card border-0 shadow">
+          <div class="card">
             <div class="card-header">SUBJECTS</div>
             <div class="card-body">
               <div class="card-text">
@@ -87,14 +87,14 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer text-right border-top-0"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
+            <div class="card-footer"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
           </div>
         </div>
         <!-- /SUBJECT -->
 
         <!-- EXAM TYPE -->
         <div class="col-xl-4 col-lg-12">
-          <div class="card border-0 shadow">
+          <div class="card">
             <div class="card-header">EXAM TYPES</div>
             <div class="card-body">
               <div class="card-text">
@@ -117,7 +117,7 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer text-right border-top-0"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
+            <div class="card-footer"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
           </div>
         </div>
         <!-- /EXAM TYPE -->
