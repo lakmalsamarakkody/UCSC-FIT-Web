@@ -39,7 +39,7 @@
         <!-- SUMMARY CARDS -->
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+            <div class="card border-0 shadow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">5000</div>
               </div>
@@ -51,7 +51,7 @@
         
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+            <div class="card border-0 shadow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">125</div>
               </div>
@@ -63,7 +63,7 @@
 
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+            <div class="card border-0 shadow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">100</div>
               </div>
@@ -75,7 +75,7 @@
 
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+            <div class="card border-0 shadow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">95</div>
               </div>
@@ -87,7 +87,7 @@
         
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+            <div class="card border-0 shadow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">1500</div>
               </div>
@@ -99,7 +99,7 @@
 
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+            <div class="card border-0 shadow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">2</div>
               </div>
@@ -117,10 +117,11 @@
             <table class="table table-bordered yajra-datatable px-5">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Subject Code</th>
-                        <th>Subject</th>
-                        <th>Action</th>
+                      <th>No</th>
+                      <th>Date</th>
+                      <th>Subject Code</th>
+                      <th>Subject</th>
+                      <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -138,10 +139,11 @@
             <table class="table table-bordered yajra-datatable px-5">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Subject Code</th>
-                        <th>Subject</th>
-                        <th>Action</th>
+                      <th>No</th>
+                      <th>Date</th>
+                      <th>Subject Code</th>
+                      <th>Subject</th>
+                      <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -164,14 +166,15 @@
             serverSide: true,
             ajax: "{{ url('exam-list') }}",
             columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'date', name: 'Date'},
                 {data: 'subject_code', name: 'Subject Code'},
                 {data: 'subject_name', name: 'Subject'},
                 {
                     data: 'action', 
                     name: 'action', 
-                    orderable: true, 
-                    searchable: true
+                    orderable: false, 
+                    searchable: false
                 },
             ]
         });
