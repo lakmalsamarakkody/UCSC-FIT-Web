@@ -1,0 +1,52 @@
+
+:root{
+  --system-card-header-text: #ecf4ff; 
+  --system-card-background-color: #23096b;
+
+  --system-card-table-th-text: #23096b; 
+
+  --system-card-footer-button-text: #23096b; 
+  --system-card-footer-button-border: #23096b; 
+}
+
+/* cards */
+.system .card{
+  border: none;
+  box-shadow:  0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+.system .card-header{
+  color: var(--system-card-header-text);
+  background-color: var(--system-card-background-color);
+}
+.system .card .card-body th {
+  color: var(--system-card-table-th-text);
+}
+.system .card .card-body td {
+  vertical-align: middle;
+}
+.system .card .card-footer{
+  border-top: none;
+  background-color: var(--white);
+  text-align: right;
+}
+/* /cards */
+
+
+/* buttons */
+.system .card .card-footer .btn.btn.btn-outline-primary{
+  color: var(--system-card-footer-button-text);
+  border-color: var(--system-card-footer-button-border);
+}
+.system .card .card-footer .btn.btn.btn-outline-primary:hover{
+  color: var(--white);
+  background-color: var(--system-card-footer-button-border);
+  border-color: var(--system-card-footer-button-border);
+}
+/* /buttons */
+
+
+@media only screen and (max-width: 1200px) {
+  .system .card{
+    margin-top: 2rem;
+  }
+}
