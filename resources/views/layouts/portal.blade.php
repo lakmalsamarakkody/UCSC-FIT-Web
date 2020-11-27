@@ -92,6 +92,7 @@
                 <li id="results"><a href="{{ route('results') }}">Results</a></li>
                 <li id="users"><a href="{{ route('users') }}">Users</a></li>
                 <li id="system"><a href="{{ route('system') }}">System</a></li>
+               
               </ul>
 
               <div style="position:fixed; bottom: 0px;" >
@@ -103,9 +104,10 @@
                   </a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                 </div>
-              </div>
+              </div> 
 
-              <!-- <div class="w-100 text-center" style="display:flex; align-items:flex-end;">
+<!-- 
+              <div class="w-100 text-center" style="display:flex; align-items:flex-end;">
                 <a class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                   <div class="logout-menu py-3" style="position: absolute; bottom: 0; left: 0; width: 100%;">
                     <i class="fa fa-power-off"></i> Logout
