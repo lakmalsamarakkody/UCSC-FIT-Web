@@ -127,6 +127,10 @@
 
 
 /* CARDS */
+a.card:hover{
+  text-decoration: solid;
+  color: var(--card-header-text);
+}
 .card-dash{
   border: 2px solid var(--card-header-text) !important;
   background-color: var(--card-background-colour);
@@ -143,7 +147,6 @@
   font-size: 1rem;
   color: var(--card-header-text);
   font-family: 'Open Sans', sans-serif;
-  text-transform: capitalize;
   text-transform: uppercase;
   letter-spacing: .05rem;
 }

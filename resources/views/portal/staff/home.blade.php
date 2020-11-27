@@ -38,63 +38,75 @@
 
         <!-- SUMMARY CARDS -->
         <div class="col-lg-2 px-1">
-          <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
-            <div class="card-body p-0 my-0 ">
-              <div class="card-title text-center m-0">5000</div>
+          <a class="card" href="">
+            <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+              <div class="card-body p-0 my-0 ">
+                <div class="card-title text-center m-0">5000</div>
+              </div>
+              <div class="card-header border-0 bg-transparent text-center p-0"><h1>new Applicants</h1></div>
+              <div class="card-footer border-0 bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
-            <div class="card-header border-0 bg-transparent text-center p-0"><h1>new Applicants</h1></div>
-            <div class="card-footer border-0 bg-transparent text-right"><a href="">View <i class="fa fa-arrow-alt-circle-right"></i></a></div>
-          </div>
+          </a>
         </div>
         
         <div class="col-lg-2 px-1">
-          <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
-            <div class="card-body p-0 my-0 ">
-              <div class="card-title text-center m-0">125</div>
+          <a class="card" href="">
+            <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+              <div class="card-body p-0 my-0 ">
+                <div class="card-title text-center m-0">125</div>
+              </div>
+              <div class="card-header border-0 bg-transparent text-center p-0"><h1>Payments to Review</h1></div>
+              <div class="card-footer border-0 bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
-            <div class="card-header border-0 bg-transparent text-center p-0"><h1>Payments to Review</h1></div>
-            <div class="card-footer border-0 bg-transparent text-right"><a href="">View <i class="fa fa-arrow-alt-circle-right"></i></a></div>
-          </div>
+          </a>
         </div>
 
         <div class="col-lg-2 px-1">
-          <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
-            <div class="card-body p-0 my-0 ">
-              <div class="card-title text-center m-0">100</div>
+          <a class="card" href="">
+            <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+              <div class="card-body p-0 my-0 ">
+                <div class="card-title text-center m-0">100</div>
+              </div>
+              <div class="card-header border-0 bg-transparent text-center p-0"><h1>Documents Pending</h1></div>
+              <div class="card-footer border-0 bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
-            <div class="card-header border-0 bg-transparent text-center p-0"><h1>Documents Pending</h1></div>
-            <div class="card-footer border-0 bg-transparent text-right"><a href="">View <i class="fa fa-arrow-alt-circle-right"></i></a></div>
-          </div>
+          </a>
         </div>
 
         <div class="col-lg-2 px-1">
-          <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
-            <div class="card-body p-0 my-0 ">
-              <div class="card-title text-center m-0">95</div>
+          <a class="card" href="">
+            <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+              <div class="card-body p-0 my-0 ">
+                <div class="card-title text-center m-0">95</div>
+              </div>
+              <div class="card-header border-0 bg-transparent text-center p-0"><h1>Documents to Review</h1></div>
+              <div class="card-footer border-0 bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
-            <div class="card-header border-0 bg-transparent text-center p-0"><h1>Documents to Review</h1></div>
-            <div class="card-footer border-0 bg-transparent text-right"><a href="">View <i class="fa fa-arrow-alt-circle-right"></i></a></div>
-          </div>
+          </a>
         </div>
         
         <div class="col-lg-2 px-1">
-          <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
-            <div class="card-body p-0 my-0 ">
-              <div class="card-title text-center m-0">1500</div>
+          <a class="card" href="">
+            <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+              <div class="card-body p-0 my-0 ">
+                <div class="card-title text-center m-0">1500</div>
+              </div>
+              <div class="card-header border-0 bg-transparent text-center p-0"><h1>Total Registered</h1></div>
+              <div class="card-footer border-0 bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
-            <div class="card-header border-0 bg-transparent text-center p-0"><h1>Total Registered</h1></div>
-            <div class="card-footer border-0 bg-transparent text-right"><a href="">View <i class="fa fa-arrow-alt-circle-right"></i></a></div>
-          </div>
+          </a>
         </div>
 
         <div class="col-lg-2 px-1">
-          <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
-            <div class="card-body p-0 my-0 ">
-              <div class="card-title text-center m-0">2</div>
+          <a class="card" href="">
+            <div class="card border-0 shadow card-dash " style="max-width: 18rem;">
+              <div class="card-body p-0 my-0 ">
+                <div class="card-title text-center m-0">2</div>
+              </div>
+              <div class="card-header border-0 bg-transparent text-center p-0"><h1>Medicals to Review</h1></div>
+              <div class="card-footer border-0 bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
-            <div class="card-header border-0 bg-transparent text-center p-0"><h1>Medicals to Review</h1></div>
-            <div class="card-footer border-0 bg-transparent text-right"><a href="">View <i class="fa fa-arrow-alt-circle-right"></i></a></div>
-          </div>
+          </a>
         </div>
         <!-- SUMMARY CARDS -->
 
