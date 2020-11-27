@@ -110,31 +110,73 @@
         </div>
         <!-- SUMMARY CARDS -->
 
+        <div class="col-lg-6 mt-5 pr-5">
+          <div class="row">
+            
+            <h2 class="mb-4">Laravel 7|8 Yajra Datatables Example</h2>
+            <table class="table table-bordered yajra-datatable px-5">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Subject Code</th>
+                        <th>Subject</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+  
+          </div>
+        </div>
+
+        
+        <div class="col-lg-6 mt-5 pl-5">
+          <div class="row">
+            
+            <h2 class="mb-4">Laravel 7|8 Yajra Datatables Example</h2>
+            <table class="table table-bordered yajra-datatable px-5">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Subject Code</th>
+                        <th>Subject</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+  
+          </div>
+        </div>
+
       </div>
     </div>
     <!-- /CONTENT -->
 
 
-
-    <!-- HEADING -->
-    <div class="col-lg-12 mt-5">
-        <div class="row">
-          
-          <div class="card w-100">
-              <div class="card-header">{{ __('Dashboard') }}</div>
-
-              <div class="card-body">
-                  @if (session('status'))
-                      <div class="alert alert-success" role="alert">
-                          {{ session('status') }}
-                      </div>
-                  @endif
-
-                  {{ __('You are logged in as Staff!') }}
-              </div>
-          </div>
-
-      </div>
-    </div>
+    <script type="text/javascript">
+      $(function () {
+        
+        var table = $('.yajra-datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ url('exam-list') }}",
+            columns: [
+                {data: 'date', name: 'Date'},
+                {data: 'subject_code', name: 'Subject Code'},
+                {data: 'subject_name', name: 'Subject'},
+                {
+                    data: 'action', 
+                    name: 'action', 
+                    orderable: true, 
+                    searchable: true
+                },
+            ]
+        });
+        
+      });
+    </script>
 
 @endsection

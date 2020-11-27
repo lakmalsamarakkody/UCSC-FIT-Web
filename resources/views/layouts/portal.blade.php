@@ -19,6 +19,8 @@
           <!-- FONT AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/all.css') }}">
           <!-- LINE AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/line-awesome/css/line-awesome.css') }}">
           <!-- ANIMATE -->        <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}">
+          <!-- DATATABLE -->      <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+                                  <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
           <!-- CUSTOM --> 
           <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
@@ -36,6 +38,9 @@
         <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
         <script src="{{ asset('lib/superfish/hoverIntent.js') }}"></script>
         <script src="{{ asset('lib/superfish/superfish.min.js') }}"></script>
+
+        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
         <script src="{{ asset('js/portal.js') }}" defer></script>
 
