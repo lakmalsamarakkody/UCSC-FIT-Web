@@ -31,7 +31,7 @@
     <div class="row">
 
       <!-- USER ROLE -->
-      <div class="col-xl-4 col-lg-12">
+      <div class="col-xl-4 col-lg-12 px-1">
         <div class="card">
           <div class="card-header">USER ROLE</div>
           <div class="card-body">
@@ -64,7 +64,7 @@
       <!-- /USER ROLE -->
 
       <!-- SUBJECT -->
-      <div class="col-xl-4 col-lg-12">
+      <div class="col-xl-4 col-lg-12  px-1">
         <div class="card">
           <div class="card-header">SUBJECTS</div>
           <div class="card-body">
@@ -98,7 +98,7 @@
       <!-- /SUBJECT -->
 
       <!-- EXAM TYPE -->
-      <div class="col-xl-4 col-lg-12">
+      <div class="col-xl-4 col-lg-12  px-1">
         <div class="card">
           <div class="card-header">EXAM TYPES</div>
           <div class="card-body">

@@ -25,13 +25,6 @@
     </section>
     <!-- /BREACRUMB -->
 
-    <!-- HEADING -->
-    <div class="col-lg-12 mb-4">
-      <div class="row">
-        <h3 class="title">Users</h3>
-      </div>
-    </div>
-    <!-- /HEADING -->
 
     <!-- CONTENT -->
     <div class="col-lg-12 dashboard">

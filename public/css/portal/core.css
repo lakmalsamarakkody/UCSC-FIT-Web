@@ -18,9 +18,6 @@
   --side-bar-active-bg-color: #6476c2;
   --side-bar-hover-bg-color: #97a0c5;
 
-
-
-
   --nav-text-color: #CEDCE4;
   --nav-bg-color: #211870;
   --nav-hover-bg-color: #8793c5; 
@@ -30,15 +27,16 @@
 
   --shadow-color: rgba(0, 0, 0, 0.2);
 
-  --card-header-text:rgb(35, 9, 107); 
-  --card-background-colour: #ecf4ff;
-
   --scroll-bar-track-color:rgb(212, 212, 212);
   --scroll-bar-color:rgb(18, 18, 53);
   --scroll-bar-hover-color: rgb(65, 65, 190);
 }
 
-
+html{
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif !important;
+  -webkit-transition: all 0.3s;
+  scroll-behavior: smooth;
+}
 
 /* SIDE BAR */
   .sidebar{

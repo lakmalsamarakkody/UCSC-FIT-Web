@@ -24,13 +24,6 @@
     </section>
     <!-- /BREACRUMB -->
 
-    <!-- HEADING -->
-    <div class="col-lg-12 mb-4">
-      <div class="row">
-        <h3 class="title">Dashboard</h3>
-      </div>
-    </div>
-    <!-- /HEADING -->
 
     <!-- CONTENT -->
     <div class="col-lg-12 dashboard">
@@ -39,7 +32,7 @@
         <!-- SUMMARY CARDS -->
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card card-dash border-0 shadow" style="max-width: 18rem;">
+            <div class="card card-dash border-0 shadow green" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">5000</div>
               </div>
@@ -51,7 +44,7 @@
         
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card card-dash border-0 shadow" style="max-width: 18rem;">
+            <div class="card card-dash border-0 shadow red" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">125</div>
               </div>
@@ -63,7 +56,7 @@
 
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card card-dash border-0 shadow" style="max-width: 18rem;">
+            <div class="card card-dash border-0 shadow black" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">100</div>
               </div>
@@ -75,7 +68,7 @@
 
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card card-dash border-0 shadow" style="max-width: 18rem;">
+            <div class="card card-dash border-0 shadow yellow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">95</div>
               </div>
@@ -87,7 +80,7 @@
         
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card card-dash border-0 shadow" style="max-width: 18rem;">
+            <div class="card card-dash border-0 shadow black" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">1500</div>
               </div>
@@ -99,7 +92,7 @@
 
         <div class="col-lg-2 px-1">
           <a class="card" href="">
-            <div class="card card-dash border-0 shadow" style="max-width: 18rem;">
+            <div class="card card-dash border-0 shadow red" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">2</div>
               </div>

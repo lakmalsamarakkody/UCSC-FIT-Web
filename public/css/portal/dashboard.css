@@ -1,29 +1,59 @@
+:root{
+  --card-header-text:#ffffff; 
+  --card-header-text-hover: #000000; 
 
-/* number CARDS */
-.dashboard a.card:hover{
-  text-decoration: solid;
-  color: var(--card-header-text);
-  opacity: 80%;
+  --card-background-green:#188839;
+  --card-background-blue:#193474;
+  --card-background-red:#8d1414;
+  --card-background-black:#414040;
+  --card-background-yellow:#b99803;
 }
+/* number CARDS */
 .dashboard .card-dash{
   border: none;
   border-radius: 0;
-  background-color: var(--card-background-colour);
+  color: var(--card-header-text);
+}
+.dashboard a.card:hover{
+  text-decoration: solid;
+  opacity: 80%;
+}
+.dashboard .card:hover .card-footer{
+  color: var( --card-header-text-hover) ;
 }
 .dashboard .card-dash .card-title{
   font-size: 4rem;
   color: var(--card-header-text);
-  font-family: 'Oswald', sans-serif;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
   text-transform: uppercase;
 }
 .dashboard .card-dash .card-header h1{
   font-size: 1rem;
   color: var(--card-header-text);
-  font-family: 'Open Sans', sans-serif;
+  /* font-family: 'Open Sans', sans-serif; */
   text-transform: uppercase;
   letter-spacing: .05rem;
 }
 
+.dashboard .card .green{  
+  background-color: var(--card-background-green);
+}
+
+.dashboard .card .blue{  
+  background-color: var(--card-background-blue);
+}
+
+.dashboard .card .red{  
+  background-color: var(--card-background-red);
+}
+
+.dashboard .card .black{  
+  background-color: var(--card-background-black);
+}
+
+.dashboard .card .yellow{  
+  background-color: var(--card-background-yellow);
+}
 /* /number CARDS */
 
 /* CARDS */
