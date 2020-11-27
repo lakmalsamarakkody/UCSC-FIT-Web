@@ -78,7 +78,7 @@ Auth::routes();
 
 Route::get('/portal/staff/', [App\Http\Controllers\portal\staff\HomeController::class, 'index'])->name('home');
 
-Route::get('exam-list',[App\Http\Controllers\portal\staff\ExamsController::class, 'getExamList']);
+Route::get('exam-list',[App\Http\Controllers\portal\staff\ExamsController::class, 'getExamList'])->name('exams.list');
 
 Route::get('/portal/staff/students', [App\Http\Controllers\portal\staff\StudentController::class, 'index'])->name('students');
 

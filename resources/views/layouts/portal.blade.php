@@ -19,8 +19,13 @@
           <!-- FONT AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/all.css') }}">
           <!-- LINE AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/line-awesome/css/line-awesome.css') }}">
           <!-- ANIMATE -->        <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}">
-          <!-- DATATABLE -->      <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-                                  <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+                                  
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- DATATABLE CSS  -->
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- DATATABLE CSS -->
 
           <!-- CUSTOM --> 
           <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
@@ -28,21 +33,19 @@
           <link rel="stylesheet" href="{{ asset('css/portal/system.css') }}">
 
        <!-- JavaScript Libraries -->
-        
-        <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('lib/jquery/jquery-migrate.min.js') }}"></script>
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
-        <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
-        <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
-        <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
-        <script src="{{ asset('lib/superfish/hoverIntent.js') }}"></script>
-        <script src="{{ asset('lib/superfish/superfish.min.js') }}"></script>
+        <!-- <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script> -->
+        <!-- <script src="{{ asset('lib/jquery/jquery-migrate.min.js') }}"></script> -->
 
+<!-- DATATABLE SCRIPTS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
         <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<!-- /DATATABLE SCRIPTS -->
 
-        <script src="{{ asset('js/portal.js') }}" defer></script>
+        <!-- <script src="{{ asset('js/app.js') }}"></script> -->
+        <!-- <script src="{{ asset('js/portal.js') }}" defer></script> -->
 
         <script type="text/javascript"> 
           function display_c(){
