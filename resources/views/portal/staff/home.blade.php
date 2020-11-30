@@ -30,8 +30,8 @@
       <div class="row">
 
         <!-- SUMMARY CARDS -->
-        <div class="col-lg-2 px-1">
-          <a class="card" href="">
+        <div class="col-xl-2 col-lg-4 p-1">
+          <a class="" href="">
             <div class="card card-dash border-0 shadow green" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">5000</div>
@@ -42,8 +42,8 @@
           </a>
         </div>
         
-        <div class="col-lg-2 px-1">
-          <a class="card" href="">
+        <div class="col-xl-2 col-lg-4 p-1">
+          <a class="" href="">
             <div class="card card-dash border-0 shadow red" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">125</div>
@@ -54,8 +54,8 @@
           </a>
         </div>
 
-        <div class="col-lg-2 px-1">
-          <a class="card" href="">
+        <div class="col-xl-2 col-lg-4 p-1">
+          <a class="" href="">
             <div class="card card-dash border-0 shadow black" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">100</div>
@@ -66,8 +66,8 @@
           </a>
         </div>
 
-        <div class="col-lg-2 px-1">
-          <a class="card" href="">
+        <div class="col-xl-2 col-lg-4 p-1">
+          <a class="" href="">
             <div class="card card-dash border-0 shadow yellow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">95</div>
@@ -78,8 +78,8 @@
           </a>
         </div>
         
-        <div class="col-lg-2 px-1">
-          <a class="card" href="">
+        <div class="col-xl-2 col-lg-4 p-1">
+          <a class="" href="">
             <div class="card card-dash border-0 shadow black" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">1500</div>
@@ -90,8 +90,8 @@
           </a>
         </div>
 
-        <div class="col-lg-2 px-1">
-          <a class="card" href="">
+        <div class="col-xl-2 col-lg-4 p-1">
+          <a class="" href="">
             <div class="card card-dash border-0 shadow red" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">2</div>
@@ -103,7 +103,7 @@
         </div>
         <!-- SUMMARY CARDS -->
 
-        <div class="col-lg-6 mt-5 px-4">
+        <div class="col-lg-6 col-md-12 mt-5 px-4">
           <div class="row">
             <a class="card w-100" href="{{ route('exams') }}">
               <div class="card w-100">
@@ -138,7 +138,7 @@
           </div>
         </div>
 
-        <div class="col-lg-6 mt-5 px-4">
+        <div class="col-lg-6 col-md-12 mt-5 px-4">
           <div class="row">
             <a class="card w-100" href="{{ route('exams') }}">
               <div class="card w-100 overflow-auto">
