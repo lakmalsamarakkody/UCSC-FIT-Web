@@ -113,16 +113,16 @@
                     <thead class="text-center">
                         <tr>
                           <th>Date</th>
-                          <th>Subject Code</th>
                           <th>Subject</th>
+                          <th>Exam Type</th>
                         </tr>
                     </thead>
                     <tbody>
                       @foreach($upcomings as $upcoming)
                         <tr class="text-center">
                           <td>{{ $upcoming->date }}</td>
-                          <td>{{ $upcoming->subject_code }}</td>
-                          <td>{{ $upcoming->subject_name }}</td>
+                          <td>{{ $upcoming->subject }}</td>
+                          <td>{{ $upcoming->exam_type }}</td>
                         </tr>
                       @endforeach
                     </tbody>
@@ -148,7 +148,7 @@
                     <thead class="text-center">
                         <tr>
                           <th>Date</th>
-                          <th>Subject Code</th>
+                          <th>Subject</th>
                           <th>Subject</th>
                         </tr>
                     </thead>
@@ -156,8 +156,8 @@
                       @foreach($dones as $done)
                         <tr class="text-center">
                           <td>{{ $done->date }}</td>
-                          <td>{{ $done->subject_code }}</td>
-                          <td>{{ $done->subject_name }}</td>
+                          <td>{{ $done->subject }}</td>
+                          <td>{{ $done->exam_type }}</td>
                         </tr>
                       @endforeach
                     </tbody>

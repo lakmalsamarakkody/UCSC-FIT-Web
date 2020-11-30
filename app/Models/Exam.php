@@ -13,7 +13,9 @@ class Exam extends Model
 
     protected $fillable = [
         'date',
-        'subject_code',
-        'subject_name',
+        'sate_time',
+        'end_time',
+        'subject',
+        'exam_type'
     ];
 }

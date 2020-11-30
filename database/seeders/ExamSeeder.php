@@ -16,90 +16,139 @@ class ExamSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {        
+        $faker=\Faker\Factory::create();
         DB::table('exams')->insert(
             array(
                 [
                     'date' => '2020-10-30',
-                    'subject_code' =>'IT103',
-                    'subject_name' =>'ICT Applications',
+                    'subject' =>'ICT Applications',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '103-E-Test',
+                    'created_at' => '2020-11-27 17:36:23',
+                    'updated_at' => '2020-11-27 17:36:23'
+                ],
+                [
+                    'date' => '2020-10-31',
+                    'subject' =>'ICT Applications',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '103-Practical',
                     'created_at' => '2020-11-27 17:36:23',
                     'updated_at' => '2020-11-27 17:36:23'
                 ],
                 [
                     'date' => '2020-10-30',
-                    'subject_code' =>'IT203',
-                    'subject_name' =>'English for ICT',
+                    'subject' =>'English for ICT',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '203-E-Test',
+                    'created_at' => '2020-11-27 17:36:23',
+                    'updated_at' => '2020-11-27 17:36:23'
+                ],
+                [
+                    'date' => '2020-10-31',
+                    'subject' =>'English for ICT',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '203-Practical',
                     'created_at' => '2020-11-27 17:36:23',
                     'updated_at' => '2020-11-27 17:36:23'
                 ],
                 [
                     'date' => '2020-10-30',
-                    'subject_code' =>'IT303',
-                    'subject_name' =>'Mathematics for ICT',
+                    'subject' =>'Mathematics for ICT',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '303-E-Test',
                     'created_at' => '2020-11-27 17:36:23',
                     'updated_at' => '2020-11-27 17:36:23'
                 ],
                 [
                     'date' => '2020-11-30',
-                    'subject_code' =>'IT103',
-                    'subject_name' =>'ICT Applications',
+                    'subject' =>'ICT Applications',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '103-E-Test',
                     'created_at' => '2020-11-27 17:36:23',
                     'updated_at' => '2020-11-27 17:36:23'
                 ],
                 [
                     'date' => '2020-11-30',
-                    'subject_code' =>'IT203',
-                    'subject_name' =>'English for ICT',
+                    'subject' =>'English for ICT',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '203-E-Test',
                     'created_at' => '2020-11-27 17:36:23',
                     'updated_at' => '2020-11-27 17:36:23'
                 ],
                 [
                     'date' => '2020-11-30',
-                    'subject_code' =>'IT303',
-                    'subject_name' =>'Mathematics for ICT',
+                    'subject' =>'Mathematics for ICT',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '303-E-Test',
                     'created_at' => '2020-11-27 17:36:23',
                     'updated_at' => '2020-11-27 17:36:23'
                 ],
                 [
                     'date' => '2020-12-30',
-                    'subject_code' =>'IT103',
-                    'subject_name' =>'ICT Applications',
+                    'subject' =>'ICT Applications',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '103-E-Test',
                     'created_at' => '2020-11-27 17:36:23',
                     'updated_at' => '2020-11-27 17:36:23'
                 ],
                 [
                     'date' => '2020-12-30',
-                    'subject_code' =>'IT203',
-                    'subject_name' =>'English for ICT',
+                    'subject' =>'English for ICT',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '203-E-Test',
                     'created_at' => '2020-11-27 17:36:23',
                     'updated_at' => '2020-11-27 17:36:23'
                 ],
                 [
                     'date' => '2020-12-30',
-                    'subject_code' =>'IT303',
-                    'subject_name' =>'Mathematics for ICT',
+                    'subject' =>'Mathematics for ICT',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '303-E-Test',
                     'created_at' => '2020-11-27 17:36:23',
                     'updated_at' => '2020-11-27 17:36:23'
                 ],
                 [
                     'date' => '2021-01-30',
-                    'subject_code' =>'IT103',
-                    'subject_name' =>'ICT Applications',
+                    'subject' =>'ICT Applications',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '103-E-Test',
                     'created_at' => '2020-11-27 17:36:23',
                     'updated_at' => '2020-11-27 17:36:23'
                 ],
                 [
                     'date' => '2021-01-30',
-                    'subject_code' =>'IT203',
-                    'subject_name' =>'English for ICT',
+                    'subject' =>'English for ICT',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '203-E-Test',
                     'created_at' => '2020-11-27 17:36:23',
                     'updated_at' => '2020-11-27 17:36:23'
                 ],
                 [
                     'date' => '2021-01-30',
-                    'subject_code' =>'IT303',
-                    'subject_name' =>'Mathematics for ICT',
+                    'subject' =>'Mathematics for ICT',
+                    'start_time' => $faker->time(),
+                    'end_time' => $faker->time(),
+                    'exam_type' => '303-E-Test',
                     'created_at' => '2020-11-27 17:36:23',
                     'updated_at' => '2020-11-27 17:36:23'
                 ]
