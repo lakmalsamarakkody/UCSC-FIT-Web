@@ -7,6 +7,9 @@
 
   --system-card-footer-button-text: #23096b; 
   --system-card-footer-button-border: #23096b; 
+
+  --system-modal-footer-button-text: #23096b; 
+  --system-modal-footer-button-border: #23096b; 
 }
 
 /* cards */
@@ -57,7 +60,7 @@
   color: var(--main-text-color);
 }
 .system .modal .modal-content .modal-body{
-  padding: 2rem 0rem 4rem 4rem;
+  padding: 2rem 4rem 4rem 4rem;
 }
 .system .modal .modal-content .modal-body i{
   padding-right: 0.5rem;
@@ -68,6 +71,19 @@
 }
 .system .modal .modal-content .modal-body i.fa-times{
   color: red;
+}
+
+.system .modal .modal-content .modal-body input{
+  vertical-align: middle;
+}
+.system .modal .modal-footer .btn.btn.btn-outline-primary{
+  color: var(--system-modal-footer-button-text);
+  border-color: var(--system-modal-footer-button-border);
+}
+.system .modal .modal-footer .btn.btn.btn-outline-primary:hover{
+  color: var(--white);
+  background-color: var(--system-modal-footer-button-border);
+  border-color: var(--system-modal-footer-button-border);
 }
 /* /modals */
 
