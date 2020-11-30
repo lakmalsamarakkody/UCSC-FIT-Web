@@ -13,7 +13,7 @@ class CreateStudentExamsTable extends Migration
      */
     public function up()
     {
-        Schema::table('student_exams', function (Blueprint $table) {
+        Schema::create('student_exams', function (Blueprint $table) {
             $table->id();
             $table->string('exam_id');
             $table->string('student_id');
