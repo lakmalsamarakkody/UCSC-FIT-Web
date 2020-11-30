@@ -101,24 +101,18 @@
                
               </ul>
 
-              {{-- <div style="position:fixed; bottom: 0px;" >
-                <div class="text-center">
-                  <a class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <div class="logout pb-2" title="Logout" data-toggle="tooltip" data-placement="bottom" >
-                      <i class="fa fa-power-off" style="font-size: 22px;"></i>
-                    </div>
-                  </a>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-                </div>
-              </div>  --}}
 
-              <div class="logout-menu w-100 text-center bg-dark" style="display:flex; align-items:flex-end;">
-                <div class="bg-secondary py-3" style="position: absolute; bottom: 0; left: 0; width: 100%;">
-                  <a class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>Logout</a>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+             
+                <div class="logout-menu w-100 text-center " style="display:flex; align-items:flex-end;">
+                  <div class="py-3 justify-content-center align-content-center" style="position: absolute; bottom: 0; left: 0; width: 100%;">
+                    
+                    <a  title="Logout" data-toggle="tooltip" data-placement="bottom"  class="text-white " onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      <i class="logout fa fa-power-off"></i>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                  </div>
+                  
                 </div>
-              </div>
-              
 
             </div>
             <!-- /MENU SECTION -->

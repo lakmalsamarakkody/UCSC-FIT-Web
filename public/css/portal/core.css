@@ -90,8 +90,7 @@ html{
     text-decoration: solid;
   }
   .logout{
-    margin: 0 0 7rem 7.3rem;
-    padding:0.8rem;
+    padding: 1.2rem;
     border-radius: 5rem ;
     -webkit-transition: all 0.3s;
   }
@@ -100,11 +99,10 @@ html{
     font-style: bold;
     cursor: pointer;
   }
-  .sidebar .logout-menu:hover{    
+  .sidebar .logout-menu:hover>.logout:hover{    
     background-color: var(--log-out-button-hover) !important;
-    font-style: bold;
     cursor: pointer;
-    text-decoration: none;
+    
   }
   .sidebar .logout-menu a:hover{    
     text-decoration: none;

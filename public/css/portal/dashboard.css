@@ -16,9 +16,11 @@
   border-radius: 0;
   color: var(--card-dash-header-text);
 }
-.dashboard a.card:hover{
-  text-decoration: solid;
+.dashboard .card:hover{
   opacity: 80%;
+}
+.dashboard a:hover{
+  text-decoration: solid;
 }
 .dashboard .card:hover .card-footer{
   color: var( --card-header-text-hover) ;
@@ -37,23 +39,23 @@
   letter-spacing: .05rem;
 }
 
-.dashboard .card .green{  
+.dashboard .green{  
   background-color: var(--card-background-green);
 }
 
-.dashboard .card .blue{  
+.dashboard .blue{  
   background-color: var(--card-background-blue);
 }
 
-.dashboard .card .red{  
+.dashboard .red{  
   background-color: var(--card-background-red);
 }
 
-.dashboard .card .black{  
+.dashboard .black{  
   background-color: var(--card-background-black);
 }
 
-.dashboard .card .yellow{  
+.dashboard .yellow{  
   background-color: var(--card-background-yellow);
 }
 /* /number CARDS */
