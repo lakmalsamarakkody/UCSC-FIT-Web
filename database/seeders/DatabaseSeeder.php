@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
             AnnouncementSeeder::class,
             ExamSeeder::class,
             RoleSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            StudentSeeder::class,
+            SubjectSeeder::class
         ]);
     }
 }
