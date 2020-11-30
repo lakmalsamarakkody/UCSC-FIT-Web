@@ -15,9 +15,10 @@ class CreateStudentExamsTable extends Migration
     {
         Schema::create('student_exams', function (Blueprint $table) {
             $table->id();
-            $table->string('exam_id');
-            $table->string('student_id');
+            $table->integer('exam_id');
+            $table->integer('student_id');
             $table->string('result');
+            $table->decimal('mark',3,2);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,8 +31,6 @@ class CreateStudentExamsTable extends Migration
      */
     public function down()
     {
-        Schema::table('student_exams', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('student_exams');
     }
 }

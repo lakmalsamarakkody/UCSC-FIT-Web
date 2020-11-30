@@ -18,8 +18,8 @@ class CreateExamsTable extends Migration
             $table->date('date');
             $table->time('start_time');
             $table->time('end_time');
-            $table->String('subject');
-            $table->String('exam_type');
+            $table->String('subject_id');
+            $table->String('exam_type_id');
             $table->timestamps();
             $table->softDeletes();
         });

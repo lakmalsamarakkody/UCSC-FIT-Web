@@ -13,7 +13,7 @@ class Exam extends Model
 
     protected $fillable = [
         'date',
-        'sate_time',
+        'start_time',
         'end_time',
         'subject',
         'exam_type'

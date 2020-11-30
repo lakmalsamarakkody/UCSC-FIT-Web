@@ -17,19 +17,19 @@ class SubjectSeeder extends Seeder
         $faker=\Faker\Factory::create();
         DB::table('subjects')->insert(
             array(
-                ['subject_name'=> 'ICT Applications',
-                'subject_code'=> 'FIT103',
+                ['name'=> 'ICT Applications',
+                'code'=> '103',
                 'created_at'=>$faker->dateTimeBetween('2020-11-01', '2020-11-30'),
                 'updated_at'=> '2020-11-30 10:13:53'],
                 
-                ['subject_name'=> 'English for ICT',
-                'subject_code'=> 'FIT203',
+                ['name'=> 'English for ICT',
+                'code'=> '203',
                 'created_at'=>$faker->dateTimeBetween('2020-11-01', '2020-11-30'),
                 'updated_at'=> '2020-11-30 10:13:53'],
 
                 
-                ['subject_name'=> 'Mathematics for ICT',
-                'subject_code'=> 'FIT303',
+                ['name'=> 'Mathematics for ICT',
+                'code'=> '303',
                 'created_at'=>$faker->dateTimeBetween('2020-11-01', '2020-11-30'),
                 'updated_at'=> '2020-11-30 10:13:53']
 

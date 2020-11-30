@@ -16,26 +16,12 @@ class ExamTypeSeeder extends Seeder
     {
         DB::table('exam_types')->insert(
             array(
-                ['subject'=> 'FIT103',
-                'exam_type'=> '103-E-Test',
+                ['exam_type'=> 'E-Test',
                 'created_at'=> '2020-11-25 10:13:53',
                 'updated_at'=> '2020-11-25 10:13:53'],
-                ['subject'=> 'FIT203',
-                'exam_type'=> '203-E-Test',
+                ['exam_type'=> 'Practical',
                 'created_at'=> '2020-11-25 10:13:53',
-                'updated_at'=> '2020-11-25 10:13:53'],
-                ['subject'=> 'FIT303',
-                'exam_type'=> '303-E-Test',
-                'created_at'=> '2020-11-25 10:13:53',
-                'updated_at'=> '2020-11-25 10:13:53'],
-                ['subject'=> 'FIT103',
-                'exam_type'=> '103-Practical',
-                'created_at'=> '2020-11-25 10:13:53',
-                'updated_at'=> '2020-11-25 10:13:53'],
-                ['subject'=> 'FIT203',
-                'exam_type'=> '203-Practical',
-                'created_at'=> '2020-11-25 10:13:53',
-                'updated_at'=> '2020-11-25 10:13:53'],
+                'updated_at'=> '2020-11-25 10:13:53']
             )
         );
     }

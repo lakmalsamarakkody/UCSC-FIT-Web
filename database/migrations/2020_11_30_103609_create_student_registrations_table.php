@@ -13,8 +13,13 @@ class CreateStudentRegistrationsTable extends Migration
      */
     public function up()
     {
-        Schema::table('student_registrations', function (Blueprint $table) {
-            //
+        Schema::create('student_registrations', function (Blueprint $table) {            
+            $table->id();
+            $table->string('year');
+            $table->string('student_id');
+            $table->string('result');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -25,8 +30,6 @@ class CreateStudentRegistrationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('student_registrations', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('student_registrations');
     }
 }
