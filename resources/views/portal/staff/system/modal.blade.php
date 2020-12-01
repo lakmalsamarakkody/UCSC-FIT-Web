@@ -1,7 +1,7 @@
 {{-- USER ROLE --}}
 
   <!-- VIEW -->
-  <div class="modal fade" id="view-role" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade" id="modal-view-role" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -29,7 +29,7 @@
   <!--/ VIEW -->
 
   <!-- EDIT -->
-  <div class="modal fade" id="edit-role" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade" id="modal-edit-role" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -64,7 +64,7 @@
 
 {{-- SUBJECTS --}}
   <!-- EDIT -->
-  <div class="modal fade" id="edit-subject" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade" id="modal-edit-subject" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -98,7 +98,7 @@
 
 {{-- EXAM TYPE --}}
   <!-- EDIT -->
-  <div class="modal fade" id="edit-exam-type" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade" id="modal-edit-exam-type" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
