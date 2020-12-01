@@ -88,7 +88,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary">Save changes</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_subject()">Save changes</button>
         </div>
       </div>
     </div>
@@ -118,7 +118,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary">Save changes</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_exam_type()">Save changes</button>
         </div>
       </div>
     </div>
