@@ -15,9 +15,10 @@ class CreateStudentRegistrationsTable extends Migration
     {
         Schema::create('student_registrations', function (Blueprint $table) {            
             $table->id();
-            $table->string('year');
-            $table->string('student_id');
-            $table->string('result');
+            $table->integer('year_id');
+            $table->integer('year')->length(4);
+            $table->integer('student_id');
+            $table->date('deadline');
             $table->timestamps();
             $table->softDeletes();
         });
