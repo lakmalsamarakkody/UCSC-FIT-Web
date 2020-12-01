@@ -49,7 +49,6 @@
 
     {{-- CUSTOM --}}
     <script type="text/javascript"> 
-
       function display_c(){
         var refresh=999; // Refresh rate in milli seconds
         mytime=setTimeout('display_ct()',refresh)

@@ -50,7 +50,7 @@
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#view-role"><i class="fas fa-eye"></i></button>
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#edit-role"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" onclick="delete_role();"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
@@ -84,7 +84,7 @@
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#edit-subject"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" onclick="delete_subject();"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
@@ -116,7 +116,7 @@
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#edit-exam-type"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" onclick="delete_exam_type();"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
@@ -130,6 +130,7 @@
       <!-- /EXAM TYPE -->
 
       @include('portal.staff.system.modal')
+      @include('portal.staff.system.scripts')
     
     </div>
   </div>

@@ -53,7 +53,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary">Save changes</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_role()">Save changes</button>
         </div>
       </div>
     </div>
@@ -125,14 +125,4 @@
   </div>
   <!--/ EDIT -->
 {{-- /EXAM TYPE --}}
-
-
-<script>
-  Swal.fire({
-  title: 'Error!',
-  text: 'Do you want to continue',
-  icon: 'error',
-  confirmButtonText: 'Cool'
-})
-</script>
     
