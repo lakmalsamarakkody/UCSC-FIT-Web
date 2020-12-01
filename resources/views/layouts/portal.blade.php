@@ -2,62 +2,62 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('img/logo/fav.png') }}">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ asset('img/logo/fav.png') }}">
 
-    <title>FIT -Portal</title>
-    
+  <title>FIT -Portal</title>
+  
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-      <!-- STYLES -->
-        <!-- BOOTSTRAP -->      <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <!-- FONT AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/all.css') }}">
-        <!-- LINE AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/line-awesome/css/line-awesome.css') }}">
-        <!-- ANIMATE -->        <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}">
-                                  
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+  <!-- STYLES -->
+    <!-- BOOTSTRAP -->      <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <!-- FONT AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/all.css') }}">
+    <!-- LINE AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/line-awesome/css/line-awesome.css') }}">
+    <!-- ANIMATE -->        <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}">
 
-        <!-- DATATABLE CSS  -->
-        <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-        <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <!-- DATATABLE CSS -->
+    <!-- DATATABLE  -->
+    <link rel="stylesheet" href="{{ asset('lib/datatables/css/dataTables.min.css') }}" >
+    <link rel="stylesheet" href="{{ asset('lib/datatables/css/dataTables.bootstrap4.min.css') }}" >
+    <!-- DATATABLE -->
 
-        <!-- CUSTOM --> 
-        <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/portal/system.css') }}">
+    <!-- PAGES -->
+    <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/system.css') }}">
+    <!-- /PAGES --> 
+  <!-- /STYLES -->
 
-        <!-- JavaScript Libraries -->
-        <script src="{{ asset('js/app.js') }}" differ></script>
+  <!-- SCRIPTS -->
+    <script src="{{ asset('js/app.js') }}" differ></script>
+    <script src="{{ asset('js/portal.js') }}"></script>
 
-        <!-- DATATABLE SCRIPTS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-        <!-- /DATATABLE SCRIPTS -->
+    <!-- DATATABLE SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <!-- /DATATABLE SCRIPTS -->
 
-        <script src="{{ asset('js/portal.js') }}"></script>
+    <script type="text/javascript"> 
 
-        <script type="text/javascript"> 
-          function display_c(){
-            var refresh=999; // Refresh rate in milli seconds
-            mytime=setTimeout('display_ct()',refresh)
-          }
-          
-          function display_ct() {
-            var dt = new Date()
-            var timeString = dt.getFullYear() +  "/" + dt.getMonth() + "/" + dt.getDate() + "&nbsp;&nbsp;&nbsp;" + dt.getHours() + ":" + dt.getMinutes() +":" + dt.getSeconds()
-            document.getElementById('ct').innerHTML = timeString;
-            display_c();
-          }
-        </script>
+      function display_c(){
+        var refresh=999; // Refresh rate in milli seconds
+        mytime=setTimeout('display_ct()',refresh)
+      }
+      function display_ct() {
+        var dt = new Date()
+        var timeString = dt.getFullYear() +  "/" + dt.getMonth() + "/" + dt.getDate() + "&nbsp;&nbsp;&nbsp;" + dt.getHours() + ":" + dt.getMinutes() +":" + dt.getSeconds()
+        document.getElementById('ct').innerHTML = timeString;
+        display_c();
+      }
+    </script>
 
-    
+  <!-- /SCRIPTS -->
 </head>
 
 <body onload=display_ct();>
