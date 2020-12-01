@@ -41,8 +41,6 @@ class StudentSeeder extends Seeder
                     'email'=>$faker->email,
                     'citizenship'=>'Sri Lankan',
                     'dob'=>$faker->dateTimeBetween('1980-01-01', '2000-12-31'),
-                    'birth_cert'=>'0',
-                    'nic_img'=>'0',
                     'created_at'=>$faker->dateTimeBetween('2020-11-01', '2020-11-30'),
                     'updated_at'=> '2020-11-30 13:14:56']
     

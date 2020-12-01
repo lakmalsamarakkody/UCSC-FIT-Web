@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             SubjectSeeder::class,
             ExamTypeSeeder::class,
             AcademicYearSeeder::class,
-            StudentRegistrationSeeder::class
+            StudentRegistrationSeeder::class,
+            StudentFlagSeeder::class
         ]);
     }
 }

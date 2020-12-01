@@ -6,9 +6,9 @@
     title: "Are you sure?",
     text: "You wont be able to revert this!",
     icon: 'question',
-    iconColor: sweetalert_warning,
+    iconColor: sweetalert_success,
     confirmButtonText: 'Yes, Update!',
-    confirmButtonColor: sweetalert_warning,
+    confirmButtonColor: sweetalert_success,
     showCancelButton: true,
     cancelButtonColor: sweetalert_primary,
     timer: 5000,
@@ -21,8 +21,21 @@
           title: 'Updated!',
           text: 'Permissions has been updated.',
           icon: 'success',
+          confirmButtonColor: sweetalert_success,
           allowOutsideClick: false,
         })
+        $('#modal-edit-role').modal('toggle')
+      }
+      else{
+        Swal.fire({
+          title: 'Cancelled!',
+          text: 'Permissions has not been updated.',
+          icon: 'warning',
+          iconColor: sweetalert_warning,
+          confirmButtonColor: sweetalert_warning,
+          allowOutsideClick: false,
+        })
+        $('#modal-edit-role').modal('toggle')
       }
     })
   }
@@ -33,7 +46,7 @@
     Swal.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'warning',
+    icon: 'question',
     iconColor: sweetalert_danger,
     confirmButtonText: 'Yes, delete it!',
     confirmButtonColor: sweetalert_danger,
@@ -49,6 +62,17 @@
           title: 'Deleted!',
           text: 'User Role has been deleted.',
           icon: 'success',
+          confirmButtonColor: sweetalert_success,
+          allowOutsideClick: false,
+        })
+      }
+      else{
+        Swal.fire({
+          title: 'Cancelled!',
+          text: 'User Role has not been deleted.',
+          icon: 'warning',
+          iconColor: sweetalert_warning,
+          confirmButtonColor: sweetalert_warning,
           allowOutsideClick: false,
         })
       }
@@ -64,9 +88,9 @@
     title: "Are you sure?",
     text: "You wont be able to revert this!",
     icon: 'question',
-    iconColor: sweetalert_warning,
+    iconColor: sweetalert_success,
     confirmButtonText: 'Yes, Update!',
-    confirmButtonColor: sweetalert_warning,
+    confirmButtonColor: sweetalert_success,
     showCancelButton: true,
     cancelButtonColor: sweetalert_primary,
     timer: 5000,
@@ -79,8 +103,21 @@
           title: 'Updated!',
           text: 'Subject has been updated.',
           icon: 'success',
+          confirmButtonColor: sweetalert_success,
           allowOutsideClick: false,
         })
+        $('#modal-edit-subject').modal('toggle')
+      }
+      else{
+        Swal.fire({
+          title: 'Cancelled!',
+          text: 'Subject has not been updated.',
+          icon: 'warning',
+          iconColor: sweetalert_warning,
+          confirmButtonColor: sweetalert_warning,
+          allowOutsideClick: false,
+        })
+        $('#modal-edit-subject').modal('toggle')
       }
     })
   }
@@ -107,6 +144,17 @@
           title: 'Deleted!',
           text: 'Subject has been deleted.',
           icon: 'success',
+          confirmButtonColor: sweetalert_success,
+          allowOutsideClick: false,
+        })
+      }
+      else{
+        Swal.fire({
+          title: 'Cancelled!',
+          text: 'Subject has not been deleted.',
+          icon: 'warning',
+          iconColor: sweetalert_warning,
+          confirmButtonColor: sweetalert_warning,
           allowOutsideClick: false,
         })
       }
@@ -122,9 +170,9 @@
     title: "Are you sure?",
     text: "You wont be able to revert this!",
     icon: 'question',
-    iconColor: sweetalert_warning,
+    iconColor: sweetalert_success,
     confirmButtonText: 'Yes, Update!',
-    confirmButtonColor: sweetalert_warning,
+    confirmButtonColor: sweetalert_success,
     showCancelButton: true,
     cancelButtonColor: sweetalert_primary,
     timer: 5000,
@@ -137,8 +185,21 @@
           title: 'Updated!',
           text: 'Exam type has been updated.',
           icon: 'success',
+          confirmButtonColor: sweetalert_success,
           allowOutsideClick: false,
         })
+        $('#modal-edit-exam-type').modal('toggle')
+      }
+      else{
+        Swal.fire({
+          title: 'Cancelled!',
+          text: 'Subject has not been updated.',
+          icon: 'warning',
+          iconColor: sweetalert_warning,
+          confirmButtonColor: sweetalert_warning,
+          allowOutsideClick: false,
+        })
+        $('#modal-edit-exam-type').modal('toggle')
       }
     })
   }
@@ -163,8 +224,19 @@
       if (result.isConfirmed) {
         Swal.fire({
           title: 'Deleted!',
-          text: 'Examp type has been deleted.',
+          text: 'Exam type has been deleted.',
           icon: 'success',
+          confirmButtonColor: sweetalert_success,
+          allowOutsideClick: false,
+        })
+      }
+      else{
+        Swal.fire({
+          title: 'Cancelled!',
+          text: 'Exam type has not been deleted.',
+          icon: 'warning',
+          iconColor: sweetalert_warning,
+          confirmButtonColor: sweetalert_warning,
           allowOutsideClick: false,
         })
       }

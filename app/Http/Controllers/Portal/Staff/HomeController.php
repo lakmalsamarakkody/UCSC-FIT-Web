@@ -15,8 +15,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('revalidate');
+      $this->middleware('auth');
+      $this->middleware('revalidate');
     }
 
     /**
@@ -26,11 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $upcomings=Exam::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();
-        $dones=Exam::where('date', '<', date('Y-m-d'))->orderby('date', 'desc')->take(6)->get();
-        return view('portal/staff/home',[
-            'upcomings' => $upcomings,
-            'dones' => $dones
-        ]);
+      $upcomings=Exam::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();
+      $dones=Exam::where('date', '<', date('Y-m-d'))->orderby('date', 'desc')->take(6)->get();
+      return view('portal/staff/home',[
+          'upcomings' => $upcomings,
+          'dones' => $dones
+      ]);
     }
 }
