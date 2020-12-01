@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Portal\Staff\ExamsController;
 use App\Http\Controllers\Website\AnouncementsController;
 use Illuminate\Support\Facades\Route;
 
