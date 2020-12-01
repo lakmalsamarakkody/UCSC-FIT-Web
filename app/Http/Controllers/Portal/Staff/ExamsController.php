@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
-use DataTables;
+use Yajra\Datatables\Facades\DataTables;
 use Illuminate\Http\Request;
 
 class ExamsController extends Controller
