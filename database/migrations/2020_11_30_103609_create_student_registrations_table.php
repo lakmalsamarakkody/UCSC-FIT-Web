@@ -16,7 +16,6 @@ class CreateStudentRegistrationsTable extends Migration
         Schema::create('student_registrations', function (Blueprint $table) {            
             $table->id();
             $table->integer('year_id');
-            $table->integer('year')->length(4);
             $table->integer('student_id');
             $table->date('deadline');
             $table->timestamps();
