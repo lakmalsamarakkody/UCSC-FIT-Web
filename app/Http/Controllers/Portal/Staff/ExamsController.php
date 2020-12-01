@@ -17,7 +17,10 @@ class ExamsController extends Controller
     
     public function index()
     {
-        return view('portal/staff/exams');
+        $upcomings=Exam::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();
+        return view('portal/staff/exams',[
+            'upcomings' => $upcomings,
+        ]);
     }
 
     public function getExamList(Request $request)
@@ -35,4 +38,6 @@ class ExamsController extends Controller
             ->make(true);
         }
     }
+
+    
 }
