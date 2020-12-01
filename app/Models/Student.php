@@ -18,6 +18,6 @@ class Student extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->hasOne('App\Models\Student\Student_Flag','id','student_id');
+        return $this->hasOne('App\Models\Student\Student_Flag','id','id');
     }
 }

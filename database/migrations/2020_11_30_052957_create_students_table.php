@@ -28,8 +28,6 @@ class CreateStudentsTable extends Migration
             $table->string('email')->unique();
             $table->string('citizenship');
             $table->date('dob');
-            $table->boolean('birth_cert')->default(false);
-            $table->boolean('nic_img')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
