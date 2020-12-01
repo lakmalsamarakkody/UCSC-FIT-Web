@@ -1,19 +1,22 @@
 <?php
 
-namespace App\Models\Exam;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Types extends Model
+class Subject extends Model
 {
-    protected $table='exam_types';
-    
     use SoftDeletes;
     use HasFactory;
-    public function exam()
-    {
+
+    protected $fillable = [
+        'code',
+        'name'
+    ];
+    
+    public function exam(){        
         return $this->belongsTo('App\Models\Exam');
     }
 }

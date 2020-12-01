@@ -15,7 +15,24 @@ class Exam extends Model
         'date',
         'start_time',
         'end_time',
-        'subject',
-        'exam_type'
+        'subject_id',
+        'exam_type_id'
     ];
+    public function type(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasOne('App\Models\Exam\Types','id','exam_type_id');
+    }
+    
+    public function subject(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasOne('App\Models\Subject','id','subject_id');
+    }
 }
