@@ -105,7 +105,7 @@
 
         <div class="col-lg-6 col-md-12 mt-5 px-4">
           <div class="row">
-            <a class="card w-100" href="{{ route('exams') }}">
+            <a class="card w-100" href="{{ route('exams') }}" style="height: 30rem;">
               <div class="card w-100">
                 <div class="card-header border-0 bg-transparent">Upcoming Exams</div>
                 <div class="card-body px-0">
@@ -140,7 +140,7 @@
 
         <div class="col-lg-6 col-md-12 mt-5 px-4">
           <div class="row">
-            <a class="card w-100" href="{{ route('exams') }}">
+            <a class="card w-100" href="{{ route('exams') }}" style="height: 30rem;">
               <div class="card w-100 overflow-auto">
                 <div class="card-header border-0 bg-transparent">Exams Held</div>
                 <div class="card-body px-0">

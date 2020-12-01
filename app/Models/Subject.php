@@ -19,4 +19,5 @@ class Subject extends Model
     public function exam(){        
         return $this->belongsTo('App\Models\Exam');
     }
+
 }
