@@ -32,17 +32,18 @@
 
       <!-- CREATE EXAM SHEDULE -->
       <div class="exam-shedule">
-        <div class="card-header border-0 bg-transparent">Create Exam Shedule</div><br />
+        <div class="card-header border-0 bg-transparent">Create Exam Shedule</div>
         <form action="{{ route('exams') }}" method="POST">
           @csrf
-          <select name="subject" id="subject">
+          <select name="subject" class="subject">
             <option value="fit103">ICT Applications</option>
             <option value="fit203">English for ICT</option>
             <option value="fit303">Mathematics for ICT</option>
           </select>
-          <input type="time" name="startTime" id="startTime">
-          <input type="time" name="endTime" id="endTime">
-          <input type="date" name="examDate" id="examDate"><br /><br />
+          
+          <input type="date" name="exam-date" class="exam-select" id="exam-date">
+          <input type="time" name="start-time" class="exam-select" id="start-time">
+          <input type="time" name="end-time" class="exam-select" id="end-time"> <br /><br />
 
           <input type="submit" value="Release Shedule" class="submit">
 
@@ -53,15 +54,16 @@
 
       <!-- CREATE EXAM SHEDULE -->
 
+      <!--EXAM SHEDULE TABLE -->
       <div class="row">
 
-        <div class="col-lg-6 mt-5 px-4">
+        <div class="col-lg-8 mt-5 px-4">
           <div class="row">
             <a class="card w-100" href="{{ route('exams') }}">
 
 
 
-              <!--EXAM SHEDULE TABLE -->
+              
               <div class="card w-100">
                 <div class="card-header border-0 bg-transparent">Exam Shedules</div>
                   <table class="table yajra-datatable ">
@@ -78,12 +80,12 @@
                     <tbody>
                       @foreach($upcomings as $upcoming)
                         <tr class="text-center">
-                          <td>{{ $upcoming->subject_code }}</td>
-                          <td>{{ $upcoming->subject_name }}</td>
+                          <td>FIT 103</td>
+                          <td>ICT Applications</td>
                           <td>{{ $upcoming->date }}</td>
                           <td> 10.00 PM</td>
                           <td> 12.00 PM </td>
-                          <th><button id="remove">Remove</button></th>
+                          <th><button id="remove"><b>Remove</b></button></th>
                         </tr>
                       @endforeach
                     </tbody>

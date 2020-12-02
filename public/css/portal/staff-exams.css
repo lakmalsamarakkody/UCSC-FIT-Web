@@ -4,7 +4,7 @@
   
     --card-background-green:#188839;
     --card-background-blue:#193474;
-    --card-background-red:#8d1414;
+    --card-background-red: red;
     --card-background-black:#414040;
     --card-background-yellow:#b99803;
   
@@ -16,9 +16,9 @@
     border-radius: 0;
     color: var(--card-dash-header-text);
   }
-  .staff-exams .card:hover{
-    opacity: 80%;
-  }
+ /* .staff-exams .card:hover{
+    opacity: 95%;
+  } */
   .staff-exams a:hover{
     text-decoration: solid;
   }
@@ -81,6 +81,7 @@
   .staff-exams .card .card-body td {
     vertical-align: middle;
   }
+
   .staff-exams .card .card-footer{
     border-top: none;
     background-color: var(--white);
@@ -98,28 +99,66 @@
     padding: 1.5rem 0 0 1.5rem;
   }
 
-  .staff-exams #startTime:before {
+  .staff-exams #exam-date {
+    content: 'Date';
+  }
+
+  .staff-exams #start-time:before {
     content: 'Start Time';
+  }
+
+  .staff-exams #end-time:before {
+    content: 'End Time';
+  }
+
+  .staff-exams .exam-select {
     color: cadetblue;
   }
-.staff-exams #remove {
-  border: crimson;
-  color: crimson;
+
+
+.staff-exams .submit {
+  border:var(--card-background-blue) solid 1px;
+  color:var(--card-background-blue);
   background-color: whitesmoke;
   border-radius: 5px;
 }
 
-.staff-exams #remove:hover {
-  color: white;
-  background-attachment: crimson;
+.staff-exams .submit:hover {
+  border:var(--card-background-blue) solid 1px;
+  color:whitesmoke;
+  background-color: var(--card-background-blue);
+  border-radius: 5px;
 }
 
-
+.staff-exams .subject {
+  color: cadetblue;
+}
 
  /* /CREATE EXAM SHEDULE */
 
 
   /* EXAM SHEDULE TABLE */
 
+  .staff-exams #remove {
+    border: crimson;
+    color: crimson;
+    background-color: whitesmoke;
+    border-radius: 5px;
+  }
+  
+  .staff-exams #remove:hover {
+    border: crimson;
+    color:whitesmoke;
+    background-color: crimson;
+    border-radius: 5px;
+  }
+
+  .staff-exams tbody tr:hover {
+    opacity: 85%;
+  }
+
+  .staff-exams th {
+    color: var(--card-header-text);
+  }
 
   /* /EXAM SHEDULE TABLE */
