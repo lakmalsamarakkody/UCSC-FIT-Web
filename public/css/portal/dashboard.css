@@ -2,11 +2,11 @@
   --card-dash-header-text:#ffffff; 
   --card-header-text-hover: #000000; 
 
-  --card-background-green:#188839;
-  --card-background-blue:#193474;
-  --card-background-red:#8d1414;
-  --card-background-black:#414040;
-  --card-background-yellow:#b99803;
+  --card-background-green:#188839 !important;
+  --card-background-blue:#193474 !important;
+  --card-background-red:#8d1414 !important;
+  --card-background-black:#414040 !important;
+  --card-background-yellow:#b99803 !important;
 
   --card-header-text:#211870; 
 }
