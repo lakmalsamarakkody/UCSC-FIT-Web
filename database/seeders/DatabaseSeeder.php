@@ -23,7 +23,9 @@ class DatabaseSeeder extends Seeder
             ExamTypeSeeder::class,
             AcademicYearSeeder::class,
             StudentRegistrationSeeder::class,
-            StudentFlagSeeder::class
+            StudentFlagSeeder::class,
+            PermissionSeeder::class,
+            RolePermissionSeeder::class
         ]);
     }
 }

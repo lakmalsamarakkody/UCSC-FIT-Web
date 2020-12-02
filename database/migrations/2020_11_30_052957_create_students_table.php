@@ -17,6 +17,7 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->string('reg_no')->unique();
             $table->string('index_no')->unique();
+            $table->integer('user_id')->unique();
             $table->string('title');
             $table->string('first_name');
             $table->string('middle_names');
@@ -24,8 +25,7 @@ class CreateStudentsTable extends Migration
             $table->string('full_name');
             $table->string('initials');
             $table->string('gender');
-            $table->string('nic')->unique();            
-            $table->string('email')->unique();
+            $table->string('nic')->unique();   
             $table->string('citizenship');
             $table->date('dob');
             $table->timestamps();

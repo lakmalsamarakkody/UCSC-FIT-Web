@@ -30,6 +30,7 @@ class StudentSeeder extends Seeder
     
                     ['reg_no'=> 'F'. $faker->unique()->numerify('#########'),
                     'index_no'=> $faker->unique()->numerify('##########'),
+                    'user_id'=>$faker->unique()->numerify('##'),
                     'title'=> $faker->title($gender),
                     'first_name'=> $f_name,
                     'middle_names'=> $m_names,
@@ -38,7 +39,6 @@ class StudentSeeder extends Seeder
                     'initials'=> $initials,
                     'gender'=> $gender,
                     'nic'=>$faker->unique()->numerify('#########').'V',
-                    'email'=>$faker->email,
                     'citizenship'=>'Sri Lankan',
                     'dob'=>$faker->dateTimeBetween('1980-01-01', '2000-12-31'),
                     'created_at'=>$faker->dateTimeBetween('2020-11-01', '2020-11-30'),
