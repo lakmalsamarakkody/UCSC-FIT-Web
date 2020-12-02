@@ -1,5 +1,19 @@
 <script type="text/javascript">
 // USER ROLE
+  // ROLE NAME EDITABILITY
+  InputRoleName_editable = () => {
+    if($('#InputRoleName').attr('disabled')){
+      $('#InputRoleName').removeAttr('disabled');
+    }
+    else{
+      document.getElementById('InputRoleName').setAttribute("disabled","disabled");
+    }
+  }
+  function InputRoleName_readonly() {
+    document.getElementById('InputRoleName').setAttribute("disabled","disabled");
+  }
+  // /ROLE NAME EDITABILITY
+
   // EDIT
   edit_role = () => {
     Swal.fire({
@@ -80,6 +94,88 @@
   }
   // /DELETE
 // /USER ROLE
+
+// PERMISSION
+  // EDIT
+  edit_permission = () => {
+    Swal.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    icon: 'question',
+    iconColor: sweetalert_success,
+    confirmButtonText: 'Yes, Update!',
+    confirmButtonColor: sweetalert_success,
+    showCancelButton: true,
+    cancelButtonColor: sweetalert_primary,
+    timer: 5000,
+    timerProgressBar: true,
+    allowOutsideClick: false,
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Updated!',
+          text: 'Permission has been updated.',
+          icon: 'success',
+          confirmButtonColor: sweetalert_success,
+          allowOutsideClick: false,
+        })
+        $('#modal-edit-permission').modal('toggle')
+      }
+      else{
+        Swal.fire({
+          title: 'Cancelled!',
+          text: 'Permission has not been updated.',
+          icon: 'warning',
+          iconColor: sweetalert_warning,
+          confirmButtonColor: sweetalert_warning,
+          allowOutsideClick: false,
+        })
+        $('#modal-edit-permission').modal('toggle')
+      }
+    })
+  }
+  // /EDIT
+
+  // DELETE
+  delete_permission = () => {
+    Swal.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    icon: 'question',
+    iconColor: sweetalert_danger,
+    confirmButtonText: 'Yes, delete it!',
+    confirmButtonColor: sweetalert_danger,
+    showCancelButton: true,
+    cancelButtonColor: sweetalert_primary,
+    timer: 5000,
+    timerProgressBar: true,
+    allowOutsideClick: false,
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Permission has been deleted.',
+          icon: 'success',
+          confirmButtonColor: sweetalert_success,
+          allowOutsideClick: false,
+        })
+      }
+      else{
+        Swal.fire({
+          title: 'Cancelled!',
+          text: 'Permission has not been deleted.',
+          icon: 'warning',
+          iconColor: sweetalert_warning,
+          confirmButtonColor: sweetalert_warning,
+          allowOutsideClick: false,
+        })
+      }
+    })
+  }
+  // /DELETE
+// /PERMISSION
 
 // SUBJECT
   // EDIT

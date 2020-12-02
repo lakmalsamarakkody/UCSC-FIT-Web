@@ -17,6 +17,7 @@
   --color-secondary : #aaa;
   --color-success : #63c22c;
   --color-warning : #fdcf00;
+  --color-warning-dark : #caa502;
   --color-danger : #d33;
   --color-info : #3fc3ee;
   --color-error : #87adbd;
@@ -57,6 +58,15 @@ html{
   font-weight: bold;
   background-color: var(--main-theme-color);
   border-color: var(--main-theme-color);
+}
+
+.btn.btn-warning{
+  background-color: var(--color-warning);
+  border-color: var(--color-warning);
+}
+.btn.btn-warning:hover{
+  background-color: var(--color-warning-dark);
+  border-color: var(--color-warning-dark);
 }
 .btn.btn-outline-warning{
   color:var(--color-warning);

@@ -40,18 +40,11 @@
 }
 .system .modal .modal-content .modal-body i.fa-times{
   color: var(--color-danger);
+  padding-right: 0.7rem;
+
 }
 .system .modal .modal-content .modal-body input{
   vertical-align: middle;
-}
-.system .modal .modal-footer .btn.btn.btn-outline-primary{
-  color: var(--main-theme-color);
-  border-color: var(--main-theme-color);
-}
-.system .modal .modal-footer .btn.btn.btn-outline-primary:hover{
-  color: var(--white);
-  background-color: var(--main-theme-color);
-  border-color: var(--main-theme-color);
 }
 /* /modals */
 
