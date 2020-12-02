@@ -16,12 +16,13 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->integer('student_id');
-            $table->tinyInteger('method');
-            $table->tinyInteger('type');            
-            $table->tinyInteger('amount');
-            $table->tinyInteger('currency');
-            $table->tinyInteger('lkr_value');
+            $table->tinyInteger('method_id');
+            $table->tinyInteger('type_id');            
+            $table->decimal('amount',10,2);
+            $table->char('currency',4);
+            $table->decimal('lkr_value',10,2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
