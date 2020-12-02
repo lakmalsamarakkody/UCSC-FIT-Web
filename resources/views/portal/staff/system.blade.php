@@ -31,7 +31,7 @@
     <div class="row">
 
       <!-- USER ROLE -->
-      <div class="col-xl-5 col-lg-12 px-1">
+      <div class="col-xl-5 col-lg-12">
         <div class="card">
           <div class="card-header">USER ROLE</div>
           <div class="card-body">
@@ -64,7 +64,7 @@
       <!-- /USER ROLE -->
 
       <!-- PERMISSION -->
-      <div class="col-xl-7 col-lg-12 px-1">
+      <div class="col-xl-7 col-lg-12">
         <div class="card">
           <div class="card-header">PERMISSIONS</div>
           <div class="card-body">
@@ -80,7 +80,7 @@
                 <thead>
                   <tr>
                     <td>view-dashboard</td>
-                    <td>can grant to the dashboard page</td>
+                    <td>can view the dashboard page</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-permission"><i class="fas fa-edit"></i></button>
@@ -98,7 +98,7 @@
       <!-- /PERMISSION -->
 
       <!-- SUBJECT -->
-      <div class="col-xl-6 col-lg-12 px-1 mt-xl-4">
+      <div class="col-xl-6 col-lg-12 mt-xl-4">
         <div class="card">
           <div class="card-header">SUBJECTS</div>
           <div class="card-body">
@@ -132,7 +132,7 @@
       <!-- /SUBJECT -->
 
       <!-- EXAM TYPE -->
-      <div class="col-xl-6 col-lg-12 px-1 mt-xl-4">
+      <div class="col-xl-6 col-lg-12 mt-xl-4">
         <div class="card">
           <div class="card-header">EXAM TYPES</div>
           <div class="card-body">
@@ -164,7 +164,7 @@
       <!-- /EXAM TYPE -->
 
       <!-- ACADEMIC YEAR -->
-      <div class="col-xl-7 col-lg-12 px-1 mt-xl-4">
+      <div class="col-xl-7 col-lg-12 mt-xl-4">
         <div class="card">
           <div class="card-header">ACADEMIC YEARS</div>
           <div class="card-body">
@@ -200,7 +200,7 @@
       <!-- /ACADEMIC YEAR -->
 
       <!-- STUDENT STAGES -->
-      <div class="col-xl-5 col-lg-12 px-1 mt-xl-4">
+      <div class="col-xl-5 col-lg-12 mt-xl-4">
         <div class="card">
           <div class="card-header">STUDENT STAGES</div>
           <div class="card-body">
