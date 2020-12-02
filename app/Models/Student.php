@@ -20,4 +20,13 @@ class Student extends Model
          */
         return $this->hasOne('App\Models\Student\Student_Flag','id','id');
     }
+
+    public function payment(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasMany('App\Models\Student\Payment','student_id','id');
+    }
 }

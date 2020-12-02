@@ -106,7 +106,7 @@
         <div class="col-lg-6 col-md-12 mt-5 px-4">
           <div class="row">
             <a class="card w-100" href="{{ route('exams') }}" style="height: 30rem;">
-              <div class="card w-100">
+              <div class="card border-0 bg-transparent w-100" style="height: 30rem;">
                 <div class="card-header border-0 bg-transparent">Upcoming Exams</div>
                 <div class="card-body px-0">
                   <table class="table yajra-datatable ">
@@ -140,8 +140,8 @@
 
         <div class="col-lg-6 col-md-12 mt-5 px-4">
           <div class="row">
-            <a class="card w-100" href="{{ route('exams') }}" style="height: 30rem;">
-              <div class="card w-100 overflow-auto">
+            <a class="card border-0 bg-transparent w-100" href="{{ route('exams') }}" style="height: 30rem;">
+              <div class="card w-100 overflow-auto" style="height: 30rem;">
                 <div class="card-header border-0 bg-transparent">Exams Held</div>
                 <div class="card-body px-0">
                   <table class="table yajra-datatable ">

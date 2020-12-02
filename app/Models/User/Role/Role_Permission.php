@@ -13,7 +13,7 @@ class Role_Permission extends Model
 
     public function permission()
     {
-        return $this->hasOne('App\Models\User\Role\Role_Permission\Permission');
+        return $this->hasOne('App\Models\User\Role\Role_Permission\Permission','id','permission_id');
     }
 
     public function role()
