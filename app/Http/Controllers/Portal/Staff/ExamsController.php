@@ -16,9 +16,9 @@ class ExamsController extends Controller
     
     public function index()
     {
-        $upcomings=Exam::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();
+        $exams=Exam::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();
         return view('portal/staff/exams',[
-            'upcomings' => $upcomings,
+            'exams' => $exams,
         ]);
     }
 

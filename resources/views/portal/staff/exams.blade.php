@@ -29,7 +29,7 @@
 
     
     <div class="col-lg-12 staff-exams">
-
+      <div class="row">
       <!-- CREATE EXAM SHEDULE -->
       <div class="exam-shedule">
         <div class="card-header border-0 bg-transparent">Create Exam Shedule</div>
@@ -45,12 +45,13 @@
           <input type="time" name="start-time" class="exam-select" id="start-time">
           <input type="time" name="end-time" class="exam-select" id="end-time"> <br /><br />
 
-          <input type="submit" value="Release Shedule" class="submit">
+          <input type="submit" value="Release Shedule" class="btn btn-outline-primary" />
 
           
         </form>
 
       </div>
+    </div>
 
       <!-- CREATE EXAM SHEDULE -->
 
@@ -69,8 +70,8 @@
                   <table class="table yajra-datatable ">
                     <thead class="text-center">
                         <tr>
-                          <th>Subject Name</th>
                           <th>Subject Code</th>
+                          <th>Subject Name</th>
                           <th>Date</th>
                           <th>Start Time</th>
                           <th>End Time</th>
@@ -78,19 +79,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach($upcomings as $upcoming)
+                      @foreach($exams as $exam)
                         <tr class="text-center">
-                          <td>FIT 103</td>
-                          <td>ICT Applications</td>
-                          <td>{{ $upcoming->date }}</td>
+                        <td>FIT {{ $exam->subject->code }}</td>
+                          <td>{{ $exam->subject->name }}</td>
+                          <td>{{ $exam->date }}</td>
                           <td> 10.00 PM</td>
                           <td> 12.00 PM </td>
-                          <th><button id="remove"><b>Remove</b></button></th>
+                          <th><button id="remove" class="btn btn-outline-warning">Remove</button></th>
                         </tr>
                       @endforeach
                     </tbody>
                   </table>
                 </div>
+
+
+
                 <!--EXAMSHEDULE TABLE -->
                 
                 <!--
