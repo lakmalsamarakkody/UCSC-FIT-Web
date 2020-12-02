@@ -7,11 +7,19 @@
   --main-text-color: #211870;
   --sub-text-color: #979797;
 
-  --main-theme-color: #727cf5;
-  --main-bg-color: #e6e6e65b;
+  --main-theme-color: #23096b;
+  --main-bg-color: #fff;
 
-  --sub-theme-color: #8f75da;
-  --sub-bg-color: #8f75da;
+  --sub-theme-color: #211870;
+  --sub-bg-color: #fff;
+
+  --color-primary : #3085d6;
+  --color-secondary : #aaa;
+  --color-success : #63c22c;
+  --color-warning : #fdcf00;
+  --color-danger : #d33;
+  --color-info : #3fc3ee;
+  --color-error : #87adbd;
 
   --side-bar-bg-color: #191b87;
   --side-bar-text-color:  #ebebeb;
@@ -37,6 +45,37 @@ html{
   -webkit-transition: all 0.3s;
   scroll-behavior: smooth;
 }
+
+/* buttons */
+.btn.btn-primary{
+  color: var(--white);
+  background-color: var(--main-theme-color);
+  border-color: var(--main-theme-color);
+}
+.btn.btn-primary:hover{
+  color: var(--white);
+  font-weight: bold;
+  background-color: var(--main-theme-color);
+  border-color: var(--main-theme-color);
+}
+.btn.btn-outline-warning{
+  color:var(--color-warning);
+  border-color:var(--color-warning);
+}
+.btn.btn-outline-warning:hover{
+  color: initial;
+  border-color: transparent;
+}
+.btn.btn-outline-primary{
+  color: var(--main-theme-color);
+  border-color: var(--main-theme-color);
+}
+.btn.btn-outline-primary:hover{
+  color: var(--white);
+  background-color: var(--main-theme-color);
+  border-color: var(--main-theme-color);
+}
+/* /buttons */
 
 /* SIDE BAR */
   .sidebar{

@@ -98,7 +98,7 @@
       <!-- /PERMISSION -->
 
       <!-- SUBJECT -->
-      <div class="col-xl-6 col-lg-12 mt-xl-4">
+      <div class="col-xl-6 col-lg-12 mt-xl-5">
         <div class="card">
           <div class="card-header">SUBJECTS</div>
           <div class="card-body">
@@ -132,7 +132,7 @@
       <!-- /SUBJECT -->
 
       <!-- EXAM TYPE -->
-      <div class="col-xl-6 col-lg-12 mt-xl-4">
+      <div class="col-xl-6 col-lg-12 mt-xl-5">
         <div class="card">
           <div class="card-header">EXAM TYPES</div>
           <div class="card-body">
@@ -164,7 +164,7 @@
       <!-- /EXAM TYPE -->
 
       <!-- ACADEMIC YEAR -->
-      <div class="col-xl-7 col-lg-12 mt-xl-4">
+      <div class="col-xl-7 col-lg-12 mt-xl-5">
         <div class="card">
           <div class="card-header">ACADEMIC YEARS</div>
           <div class="card-body">
@@ -200,7 +200,7 @@
       <!-- /ACADEMIC YEAR -->
 
       <!-- STUDENT STAGES -->
-      <div class="col-xl-5 col-lg-12 mt-xl-4">
+      <div class="col-xl-5 col-lg-12 mt-xl-5">
         <div class="card">
           <div class="card-header">STUDENT STAGES</div>
           <div class="card-body">

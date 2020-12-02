@@ -172,7 +172,7 @@
             <!-- FOOTER -->
             <div class="col-12 nav-bar bg-dark text-center text-white py-2">
               Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" class="white"> UCSC</a> </strong>. All Rights Reserved. <br/>
-              Designed by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Center- UCSC </a> </strong>
+              Designed by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Center - UCSC </a> </strong>
             </div>
             <!-- /FOOTER -->
             
