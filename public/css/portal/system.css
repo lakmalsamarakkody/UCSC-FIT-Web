@@ -1,28 +1,18 @@
 
-:root{
-  --system-card-header-text: #ecf4ff; 
-  --system-card-background-color: #23096b;
-
-  --system-card-table-th-text: #23096b; 
-
-  --system-card-footer-button-text: #23096b; 
-  --system-card-footer-button-border: #23096b; 
-
-  --system-modal-footer-button-text: #23096b; 
-  --system-modal-footer-button-border: #23096b; 
-}
-
 /* cards */
 .system .card{
   border: none;
   box-shadow:  0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 .system .card-header{
-  color: var(--system-card-header-text);
-  background-color: var(--system-card-background-color);
+  font-weight: bold;
+  color: var(--main-theme-color);
+  background-color: var(--white);
+  border: none;
 }
 .system .card .card-body th {
-  color: var(--system-card-table-th-text);
+  color: var(--main-theme-color);
+  font-weight: normal;
 }
 .system .card .card-body td {
   vertical-align: middle;
@@ -33,27 +23,6 @@
   text-align: right;
 }
 /* /cards */
-
-
-/* buttons */
-.system .card .card-body .btn.btn.btn-outline-warning{
-  color: #fdcf00;
-  border-color: #fdcf00;
-}
-.system .card .card-body .btn.btn.btn-outline-warning:hover{
-  color: initial;
-  border-color: transparent;
-}
-.system .card .card-footer .btn.btn.btn-outline-primary{
-  color: var(--system-card-footer-button-text);
-  border-color: var(--system-card-footer-button-border);
-}
-.system .card .card-footer .btn.btn.btn-outline-primary:hover{
-  color: var(--white);
-  background-color: var(--system-card-footer-button-border);
-  border-color: var(--system-card-footer-button-border);
-}
-/* /buttons */
 
 /* modals */
 .system .modal .modal-content .modal-header .modal-title{
@@ -67,23 +36,22 @@
   vertical-align: middle;
 }
 .system .modal .modal-content .modal-body i.fa-check{
-  color: green;
+  color: var(--color-success);
 }
 .system .modal .modal-content .modal-body i.fa-times{
-  color: red;
+  color: var(--color-danger);
 }
-
 .system .modal .modal-content .modal-body input{
   vertical-align: middle;
 }
 .system .modal .modal-footer .btn.btn.btn-outline-primary{
-  color: var(--system-modal-footer-button-text);
-  border-color: var(--system-modal-footer-button-border);
+  color: var(--main-theme-color);
+  border-color: var(--main-theme-color);
 }
 .system .modal .modal-footer .btn.btn.btn-outline-primary:hover{
   color: var(--white);
-  background-color: var(--system-modal-footer-button-border);
-  border-color: var(--system-modal-footer-button-border);
+  background-color: var(--main-theme-color);
+  border-color: var(--main-theme-color);
 }
 /* /modals */
 

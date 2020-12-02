@@ -15,7 +15,9 @@ class CreatePaymentTypesTable extends Migration
     {
         Schema::create('payment__types', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

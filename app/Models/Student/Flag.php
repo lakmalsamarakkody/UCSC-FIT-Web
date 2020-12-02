@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Flag extends Model
 {
     use HasFactory;
+    protected $table='student_flags';
 
     public function student()
     {

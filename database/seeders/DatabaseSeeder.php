@@ -25,7 +25,10 @@ class DatabaseSeeder extends Seeder
             StudentRegistrationSeeder::class,
             StudentFlagSeeder::class,
             PermissionSeeder::class,
-            RolePermissionSeeder::class
+            RolePermissionSeeder::class,
+            PaymentTypeSeeder::class,
+            PaymentMethodSeeder::class,
+            PaymentSeeder::class
         ]);
     }
 }
