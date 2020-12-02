@@ -340,4 +340,86 @@
   }
   // /DELETE
 // /EXAM_TYPE
+
+// ACADEMIC YEAR
+  // DELETE
+  delete_academic_year = () => {
+    Swal.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    icon: 'warning',
+    iconColor: sweetalert_danger,
+    confirmButtonText: 'Yes, delete it!',
+    confirmButtonColor: sweetalert_danger,
+    showCancelButton: true,
+    cancelButtonColor: sweetalert_primary,
+    timer: 5000,
+    timerProgressBar: true,
+    allowOutsideClick: false,
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Academic year has been deleted.',
+          icon: 'success',
+          confirmButtonColor: sweetalert_success,
+          allowOutsideClick: false,
+        })
+      }
+      else{
+        Swal.fire({
+          title: 'Cancelled!',
+          text: 'Academic year has not been deleted.',
+          icon: 'warning',
+          iconColor: sweetalert_warning,
+          confirmButtonColor: sweetalert_warning,
+          allowOutsideClick: false,
+        })
+      }
+    })
+  }
+  // /DELETE
+// /ACADEMIC YEAR
+
+// STUDENT STAGE
+  // DELETE
+  delete_student_stage = () => {
+    Swal.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    icon: 'warning',
+    iconColor: sweetalert_danger,
+    confirmButtonText: 'Yes, delete it!',
+    confirmButtonColor: sweetalert_danger,
+    showCancelButton: true,
+    cancelButtonColor: sweetalert_primary,
+    timer: 5000,
+    timerProgressBar: true,
+    allowOutsideClick: false,
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Student stage has been deleted.',
+          icon: 'success',
+          confirmButtonColor: sweetalert_success,
+          allowOutsideClick: false,
+        })
+      }
+      else{
+        Swal.fire({
+          title: 'Cancelled!',
+          text: 'Student stage has not been deleted.',
+          icon: 'warning',
+          iconColor: sweetalert_warning,
+          confirmButtonColor: sweetalert_warning,
+          allowOutsideClick: false,
+        })
+      }
+    })
+  }
+  // /DELETE
+// /STUDENT STAGE
 </script>
