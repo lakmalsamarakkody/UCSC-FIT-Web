@@ -1,23 +1,18 @@
 <?php
 
-namespace App\Models\User;
+namespace App\Models\User\Role\Role_Permission;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class Permission extends Model
 {
     use SoftDeletes;
     use HasFactory;
 
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
-
     public function role_permission()
     {
-        return $this->hasMany('App\Models\User\Role\Role_Permission','role_id', 'id');
+        return $this->belongsTo('App\Models\User\Role\Role_Permission');
     }
 }
