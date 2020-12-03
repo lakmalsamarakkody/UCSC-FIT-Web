@@ -172,7 +172,6 @@
         <div class="col-lg-12">
           <span>
             &nbsp; <br>
-            
             &nbsp; <br>
             &nbsp; <br>
           </span>
