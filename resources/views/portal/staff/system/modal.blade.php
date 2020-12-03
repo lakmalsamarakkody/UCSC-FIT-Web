@@ -51,7 +51,7 @@
             </div>
           
             <p class="mt-5">Permission List</p>
-            
+
             <div class="container-fluid">
               <div class="row">
                 <div class="col-lg-3 col-md-6"><input type="checkbox" name="permission" value="view-dashboard" checked> view-dashboard</div>
@@ -154,9 +154,9 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="InputExamName">Name</label>
-              <input type="Ename" class="form-control" id="InputExamName" aria-describedby="EnameHelp"/>
-              <small id="EnameHelp" class="form-text text-muted">any help text</small>
+              <label for="InputExamTypeName">Name</label>
+              <input type="Ename" class="form-control" id="InputExamTypeName" aria-describedby="ETnameHelp"/>
+              <small id="ETnameHelp" class="form-text text-muted">any help text</small>
             </div>
           </form>
         </div>
@@ -169,4 +169,83 @@
   </div>
   <!--/ EDIT -->
 {{-- /EXAM TYPE --}}
+
+{{-- ACADEMIC YEAR --}}
+  <!-- EDIT -->
+  <div class="modal fade" id="modal-edit-academic-year" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Academic Year - 2020</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="InputYear">Year</label>
+              <select class="form-control" id="InputYear">
+                <option>2019</option>
+                <option>2020</option>
+                <option>2021</option>
+              </select>
+              <small id="YearHelp" class="form-text text-muted">any help text</small>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="InputYearStart">Start</label>
+                <input type="date" class="form-control" id="InputYearStart"/>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="InputYearEnd">End</label>
+                <input type="date" class="form-control" id="InputYearEnd"/>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_academic_year()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ EDIT -->
+{{-- /ACADEMIC YEAR --}}
+
+{{-- STUDENT STAGE --}}
+  <!-- EDIT -->
+  <div class="modal fade" id="modal-edit-student-stage" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Stage 1 - Fresh User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="InputStageCode">Code</label>
+              <input type="text" class="form-control" id="InputStageCode" aria-describedby="StageCodeHelp"/>
+              <small id="StageCodeHelp" class="form-text text-muted">any help text</small>
+            </div>
+            <div class="form-group">
+              <label for="InputStageDescription">Description</label>
+              <input type="text" class="form-control" id="InputStageDescription" aria-describedby="StageDescHelp"/>
+              <small id="StageDescHelp" class="form-text text-muted">any help text</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_student_stage()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ EDIT -->
+{{-- /STUDENT STAGE --}}
     
