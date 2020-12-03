@@ -31,13 +31,10 @@
       <div class="row">
 
       <!-- CREATE EXAM SHEDULE -->
-
-      <div class="col-10 mt-5 mx-4">
-        <div class="row">
-            <div class="card" style="height: 15rem;">
+            <div class="card">
               <div class="card-header">Create Exam Shedule</div>
               <div class="card-body">
-                <form action="" method="">
+                <form>
                   <div class="form-row">
                     <div class="form-group col-xl-3 col-lg-6">
                       <label for="subject">Subejct</label>
@@ -67,8 +64,7 @@
                 </form>
               </div>
             </div>
-          </div>
-        </div>
+
 
       <!-- /CREATE EXAM SHEDULE -->
 
