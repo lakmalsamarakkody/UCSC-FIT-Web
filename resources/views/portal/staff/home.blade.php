@@ -103,9 +103,8 @@
         </div>
         <!-- SUMMARY CARDS -->
 
-        <div class="col-lg-6 col-md-12 mt-5 px-4">
-          <div class="row">
-            <a class="card w-100" href="{{ route('exams') }}" style="height: 30rem;">
+        <div class="col-lg-6 col-md-12 mt-5 px-1">
+            <a class="" href="{{ route('exams') }}" style="height: 30rem;">
               <div class="card" style="height: 30rem;">
                 <div class="card-header">Upcoming Exams</div>
                 <div class="card-body px-0">
@@ -135,12 +134,10 @@
             
               </div>
             </a>
-          </div>
         </div>
 
-        <div class="col-lg-6 col-md-12 mt-5 px-4">
-          <div class="row">
-            <a class="card w-100" href="{{ route('exams') }}" style="height: 30rem;">
+        <div class="col-lg-6 col-md-12 mt-5 px-1">
+            <a class="" href="{{ route('exams') }}" style="height: 30rem;">
               <div class="card overflow-auto" style="height: 30rem;">
                 <div class="card-header">Exams Held</div>
                 <div class="card-body px-0">
@@ -170,8 +167,16 @@
             
               </div>
             </a>
-          </div>
         </div>
+
+        <div class="col-lg-12">
+          <span>
+            &nbsp; <br>
+            &nbsp; <br>
+            &nbsp; <br>
+          </span>
+        </div>
+
 
       </div>
     </div>
