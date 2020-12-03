@@ -229,3 +229,29 @@ html{
     text-decoration:none;
     color: var(--footer-link-hover-color) !important;
   }
+
+/* cards */
+  .card{
+    border: none;
+    box-shadow:  0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  }
+  .card-header{
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--main-theme-color);
+    background-color: var(--white);
+    border: none;
+  }
+  .card .card-body th {
+    color: var(--main-theme-color);
+    font-weight: normal;
+  }
+  .card .card-body td {
+    vertical-align: middle;
+  }
+  .card .card-footer{
+    border-top: none;
+    background-color: var(--white);
+    text-align: right;
+  }
+/* /cards */
