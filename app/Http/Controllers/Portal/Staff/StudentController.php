@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Portal\Staff;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class StudentController extends Controller
 {
@@ -14,5 +15,21 @@ class StudentController extends Controller
         return view('portal/staff/students',[
             'students'=>$students
         ]);
+    }
+
+    public function getStudentList(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Student::join('student_flags', 'students.id', '=', 'student_flags.id')->get();
+            
+            return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $actionBtn = '<button title="View Profile" data-toggle="tooltip" data-placement="left" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-view-role"><i class="fas fa-user"></i></button>';
+                return $actionBtn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
     }
 }

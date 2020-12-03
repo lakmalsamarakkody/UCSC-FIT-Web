@@ -29,35 +29,49 @@
     <!-- CONTENT -->
     <div class="col-lg-12 students">
       <div class="row">
+        <!-- <div class="col-lg-2"></div> -->
 
-        <div class="col-lg-10 w-100">
-          <div class="row">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <button type="button" class="btn btn-outline-secondary">Action</button>
-                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                  <div role="separator" class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Separated link</a>
+        <div class="col-lg-12">
+          <div class="row align-content-center">
+
+            <div class="card   w-100">
+              <div class="card-header">
+                Filters
+              </div>
+              <div class="card-body">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="">Filters <i class="fa fa-filter"></i></span>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                      <div role="separator" class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                  </div>
+                  <input type="text" class="form-control">
+                  <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-primary" id="btnSearch">
+                      <i class="fa fa-search"></i> Search
+                    </button>
+                  </div>
                 </div>
               </div>
-              <input type="text" class="form-control" aria-label="Text input with segmented dropdown button">
             </div>
 
           </div>
         </div>
+        <!-- <div class="col-lg-1"></div> -->
 
         <div class="card shadow w-100 mt-3">
           <div class="card-header">
             Students
           </div>
           <div class="card-body">
-            <table class="table table-responsive-md">
+            <table class="table table-responsive-md yajra-datatable">
               <thead class="text-center">
                 <tr>
                   <th>Registration No</th>
@@ -69,7 +83,7 @@
                 </tr>
               </thead>
               <tbody class="text-center">
-                @foreach($students as $student)
+                {{-- @foreach($students as $student)
                 <tr>
                   <td>{{ $student->reg_no }}</td>
                   <td>{{ $student->full_name }}</td>
@@ -89,7 +103,7 @@
                       <button title="View Profile" data-toggle="tooltip" data-placement="left" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-view-role"><i class="fas fa-user"></i></button>
                   </td>
                 </tr>
-                @endforeach
+                @endforeach --}}
               </tbody>
             </table>
           </div>
@@ -99,5 +113,6 @@
     </div>
     <!-- /CONTENT -->
 
+ @include('portal.staff.student.scripts')
 
 @endsection
