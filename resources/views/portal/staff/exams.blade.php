@@ -34,49 +34,41 @@
 
       <div class="col-10 mt-5 mx-4">
         <div class="row">
-          <div class="card w-100 create-exam">
-            <div class="card border-0 bg-transparent w-100" style="height: 15rem;">
-              <div class="header border-0 bg-transparent">Create Exam Shedule</div>
-              <div class="card-body px-0">
-              <form action="{{ route('exams') }}" method="POST">
-                @csrf
-                <div class="col-12 px-4">
-                  <div class="row">
-                    <label for="subject">Subject</label>
-                    <select class="col-xl-3 col-lg-4 mx-3 mt-2 row form-control" name="subject" id="subject">
-                      <option value="" selected disabled>Subject</option>
-                      <option value="">ICT Applications</option>
-                      <option value="">Mathematics for ICT</option>
-                      <option value="">English for ICT</option>
-                    </select>
-                    <label class="col-lg-3 col-md-4 mt-2 mx-3 row" for="exam-date">Exam Date</label>
-                    <input type="date" name="exam-date" id="exam-date" />
-                    <label class="col-lg-2 col-md-4 mt-2 mx-3 row" for="start-time">Start Time</label>
-                    <input  type="time" name="start-time" id="start-time"/>
-                    <label for="end-time">End Time</label>
-                    <input class="col-lg-2 col-md-4 mt-2 mx-3 row" type="time" name="end-time" id="end-time"/>
-
-                  </div> <br /><br />
+            <div class="card" style="height: 15rem;">
+              <div class="card-header">Create Exam Shedule</div>
+              <div class="card-body">
+                <form action="" method="">
+                  <div class="form-row">
+                    <div class="form-group col-xl-3 col-lg-6">
+                      <label for="subject">Subejct</label>
+                      <select name="subject" id="subject" class="form-control">
+                        <option value="">ICT Applications</option>
+                        <option value="">English for ICT</option>
+                        <option value="">Mathematics for ICT</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-xl-3 col-lg-6">
+                      <label for="exam_date">Date</label>
+                      <input type="date" name="exam_date" />
+                    </div>
+                    <div class="form-group col-xl-2 col-lg-6">
+                      <label for="start_time">Start Time</label>
+                      <input type="time" name="start_time" />
+                    </div>
+                    <div class="form-group col-xl-2 col-lg-6">
+                      <label for="end_time">End Time</label>
+                      <input type="time" name="exam_date" />
+                    </div>
+                  </div>
                   <div class="text-center">
-                    <input type="submit" value="RELEASE SHEDULE" class="btn btn-outline-primary">
-
+                    <button type="submit" class="btn btn-outline-primary">RELEASE SHEDULE</button>
                   </div>
                   
-                  
-
-                </div>
-                    
-              
-              </form>
+                </form>
               </div>
-
             </div>
-
-
           </div>
         </div>
-      </div>
-
 
       <!-- /CREATE EXAM SHEDULE -->
 
@@ -85,10 +77,9 @@
         <!-- EXAM SHEDULE TABLE -->
         <div class="col-lg-10 col-md-12 mt-5 mx-4">
           <div class="row">
-            <a class="card w-100" href="{{ route('exams') }}" style="height: 31.5rem;">
-              <div class="card border-0 bg-transparent w-100" style="height: 31.5rem">
-                <div class="card header border-0 bg-transparent" style="height: 4rem;">Exam Shedules</div>
-                <div class="card-body px-0">
+              <div class="card" style="height: 31.5rem">
+                <div class="card-header">Exam Shedules</div>
+                <div class="card-body">
                   <table class="table yajra-datatable">
                     <thead class="text-center">
                       <tr>
@@ -117,10 +108,6 @@
                 </div>
     
               </div>
-    
-              
-    
-            </a>
           </div>
     
         </div>
