@@ -50,7 +50,9 @@ Auth::routes();
 |--------------------------------------------------------------------------
 */
 Route::get('/portal/staff/', [App\Http\Controllers\portal\staff\HomeController::class, 'index'])->name('home');
+
 Route::get('/portal/staff/students', [App\Http\Controllers\portal\staff\StudentController::class, 'index'])->name('students');
+Route::get('student-list',[App\Http\Controllers\portal\staff\StudentController::class, 'getStudentList'])->name('student.list');
 
 Route::get('/portal/staff/exams', [App\Http\Controllers\portal\staff\ExamsController::class, 'index'])->name('exams');
 Route::get('exam-list',[App\Http\Controllers\portal\staff\ExamsController::class, 'getExamList'])->name('exams.list');
