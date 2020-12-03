@@ -199,10 +199,10 @@
       </div>
       <!-- /ACADEMIC YEAR -->
 
-      <!-- STUDENT STAGES -->
+      <!-- STUDENT PHASES -->
       <div class="col-xl-5 col-lg-12 mt-xl-5">
         <div class="card">
-          <div class="card-header">STUDENT STAGES</div>
+          <div class="card-header">STUDENT PHASES</div>
           <div class="card-body">
             <div class="card-text">
               <table class="table table-responsive-md">
@@ -231,7 +231,7 @@
           <div class="card-footer"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
         </div>
       </div>
-      <!-- /STUDENT STAGES -->
+      <!-- /STUDENT PHASES -->
 
       @include('portal.staff.system.modal')
       @include('portal.staff.system.scripts')
