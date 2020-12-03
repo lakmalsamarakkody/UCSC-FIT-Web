@@ -29,6 +29,7 @@
     
     <div class="col-12 staff-exams">
       <div class="row">
+        <div class="col-12 mb-5">
 
       <!-- CREATE EXAM SHEDULE -->
             <div class="card">
@@ -46,34 +47,33 @@
                     </div>
                     <div class="form-group col-xl-3 col-lg-6">
                       <label for="exam_date">Date</label>
-                      <input type="date" name="exam_date" />
+                      <input type="date" name="exam_date" class="form-control"/>
                     </div>
                     <div class="form-group col-xl-2 col-lg-6">
                       <label for="start_time">Start Time</label>
-                      <input type="time" name="start_time" />
+                      <input type="time" name="start_time" class="form-control"/>
                     </div>
                     <div class="form-group col-xl-2 col-lg-6">
                       <label for="end_time">End Time</label>
-                      <input type="time" name="exam_date" />
+                      <input type="time" name="exam_date" class="form-control"/>
                     </div>
                   </div>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-outline-primary">RELEASE SHEDULE</button>
+                    <button type="submit" class="btn btn-outline-primary" onclick="release_shedule()">RELEASE SHEDULE</button>
                   </div>
                   
                 </form>
               </div>
             </div>
-
+          </div>
+        </div>
 
       <!-- /CREATE EXAM SHEDULE -->
 
 
 
         <!-- EXAM SHEDULE TABLE -->
-        <div class="col-lg-10 col-md-12 mt-5 mx-4">
-          <div class="row">
-              <div class="card" style="height: 31.5rem">
+              <div class="card">
                 <div class="card-header">Exam Shedules</div>
                 <div class="card-body">
                   <table class="table yajra-datatable">
@@ -102,9 +102,6 @@
                   </table>
     
                 </div>
-    
-              </div>
-          </div>
     
         </div>
       </div>
@@ -139,5 +136,7 @@
 
       </div>
     </div> -->
+
+    @include('portal.staff.exams.scripts')
 
 @endsection
