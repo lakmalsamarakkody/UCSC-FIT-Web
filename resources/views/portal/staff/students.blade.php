@@ -32,15 +32,14 @@
         <!-- <div class="col-lg-2"></div> -->
 
         <div class="col-lg-12">
-          <div class="row align-content-center">
 
-            <div class="card   w-100">
+            <div class="card   ">
               <div class="card-header">
                 Filters
               </div>
               <div class="card-body">
                 <form action="">
-                  
+
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,51 +65,52 @@
               </div>
             </div>
 
-          </div>
         </div>
         <!-- <div class="col-lg-1"></div> -->
+        <div class="col-lg-12">
+          <div class="card shadow  mt-3">
+            <div class="card-header">
+              Students
+            </div>
+            <div class="card-body">
+              <table class="table table-responsive-md yajra-datatable">
+                <thead class="text-center">
+                  <tr>
+                    <th>Registration No</th>
+                    <th>Name</th>
+                    <th>NIC</th>
+                    <th>BIT Eligibility</th>
+                    <th>FIT Certificate</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  {{-- @foreach($students as $student)
+                  <tr>
+                    <td>{{ $student->reg_no }}</td>
+                    <td>{{ $student->full_name }}</td>
+                    <td>{{ $student->nic }}</td>
 
-        <div class="card shadow w-100 mt-3">
-          <div class="card-header">
-            Students
+                    @if($student->flag->bit_eligible)
+                      <td>Eligible</td>                    
+                    @else                    
+                      <td>Not Eligible</td>             
+                    @endif
+                    @if($student->flag->fit_cert)
+                      <td>Eligible</td>                    
+                    @else                    
+                      <td>Not Eligible</td>             
+                    @endif
+                    <td>                    
+                        <button title="View Profile" data-toggle="tooltip" data-placement="left" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-view-role"><i class="fas fa-user"></i></button>
+                    </td>
+                  </tr>
+                  @endforeach --}}
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div class="card-body">
-            <table class="table table-responsive-md yajra-datatable">
-              <thead class="text-center">
-                <tr>
-                  <th>Registration No</th>
-                  <th>Name</th>
-                  <th>NIC</th>
-                  <th>BIT Eligibility</th>
-                  <th>FIT Certificate</th>
-                  <th>&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody class="text-center">
-                {{-- @foreach($students as $student)
-                <tr>
-                  <td>{{ $student->reg_no }}</td>
-                  <td>{{ $student->full_name }}</td>
-                  <td>{{ $student->nic }}</td>
 
-                  @if($student->flag->bit_eligible)
-                    <td>Eligible</td>                    
-                  @else                    
-                    <td>Not Eligible</td>             
-                  @endif
-                  @if($student->flag->fit_cert)
-                    <td>Eligible</td>                    
-                  @else                    
-                    <td>Not Eligible</td>             
-                  @endif
-                  <td>                    
-                      <button title="View Profile" data-toggle="tooltip" data-placement="left" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-view-role"><i class="fas fa-user"></i></button>
-                  </td>
-                </tr>
-                @endforeach --}}
-              </tbody>
-            </table>
-          </div>
         </div>
 
       </div>
