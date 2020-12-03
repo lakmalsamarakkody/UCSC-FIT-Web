@@ -32,72 +32,72 @@
         <!-- SUMMARY CARDS -->
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="">
-            <div class="card card-dash border-0 shadow green" style="max-width: 18rem;">
+            <div class="card card-dash shadow green" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">5000</div>
               </div>
-              <div class="card-header border-0 bg-transparent text-center p-0"><h1>new Applicants</h1></div>
-              <div class="card-footer border-0 bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>new Applicants</h1></div>
+              <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
         </div>
         
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="">
-            <div class="card card-dash border-0 shadow red" style="max-width: 18rem;">
+            <div class="card card-dash shadow red" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">125</div>
               </div>
-              <div class="card-header border-0 bg-transparent text-center p-0"><h1>Payments to Review</h1></div>
-              <div class="card-footer border-0 bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Payments to Review</h1></div>
+              <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
         </div>
 
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="">
-            <div class="card card-dash border-0 shadow black" style="max-width: 18rem;">
+            <div class="card card-dash shadow black" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">100</div>
               </div>
-              <div class="card-header border-0 bg-transparent text-center p-0"><h1>Documents Pending</h1></div>
-              <div class="card-footer border-0 bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Documents Pending</h1></div>
+              <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
         </div>
 
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="">
-            <div class="card card-dash border-0 shadow yellow" style="max-width: 18rem;">
+            <div class="card card-dash shadow yellow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">95</div>
               </div>
-              <div class="card-header border-0 bg-transparent text-center p-0"><h1>Documents to Review</h1></div>
-              <div class="card-footer border-0 bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Documents to Review</h1></div>
+              <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
         </div>
         
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="">
-            <div class="card card-dash border-0 shadow black" style="max-width: 18rem;">
+            <div class="card card-dash shadow black" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">1500</div>
               </div>
-              <div class="card-header border-0 bg-transparent text-center p-0"><h1>Total Registered</h1></div>
-              <div class="card-footer border-0 bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Total Registered</h1></div>
+              <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
         </div>
 
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="">
-            <div class="card card-dash border-0 shadow red" style="max-width: 18rem;">
+            <div class="card card-dash shadow red" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">2</div>
               </div>
-              <div class="card-header border-0 bg-transparent text-center p-0"><h1>Medicals to Review</h1></div>
-              <div class="card-footer border-0 bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Medicals to Review</h1></div>
+              <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
         </div>
@@ -106,8 +106,8 @@
         <div class="col-lg-6 col-md-12 mt-5 px-4">
           <div class="row">
             <a class="card w-100" href="{{ route('exams') }}" style="height: 30rem;">
-              <div class="card border-0 bg-transparent w-100" style="height: 30rem;">
-                <div class="card-header border-0 bg-transparent">Upcoming Exams</div>
+              <div class="card" style="height: 30rem;">
+                <div class="card-header">Upcoming Exams</div>
                 <div class="card-body px-0">
                   <table class="table yajra-datatable ">
                     <thead class="text-center">
@@ -129,7 +129,7 @@
                   </table>
                 </div>
                 
-                <div class="card-footer border-0 bg-transparent text-right">
+                <div class="card-footer text-right">
                   View <i class="fa fa-arrow-alt-circle-right"></i>
                 </div>
             
@@ -140,9 +140,9 @@
 
         <div class="col-lg-6 col-md-12 mt-5 px-4">
           <div class="row">
-            <a class="card border-0 bg-transparent w-100" href="{{ route('exams') }}" style="height: 30rem;">
-              <div class="card w-100 overflow-auto" style="height: 30rem;">
-                <div class="card-header border-0 bg-transparent">Exams Held</div>
+            <a class="card w-100" href="{{ route('exams') }}" style="height: 30rem;">
+              <div class="card overflow-auto" style="height: 30rem;">
+                <div class="card-header">Exams Held</div>
                 <div class="card-body px-0">
                   <table class="table yajra-datatable ">
                     <thead class="text-center">
@@ -164,7 +164,7 @@
                   </table>
                 </div>
                 
-                <div class="card-footer border-0 bg-transparent text-right">
+                <div class="card-footer text-right">
                   View <i class="fa fa-arrow-alt-circle-right"></i>
                 </div>
             
