@@ -175,7 +175,7 @@
         </div>
         <!-- PAGE AREA -->
             <!-- FOOTER -->
-            <div class="col-12 position-fixed" style="bottom: 0;">
+            <div class="col-12" style="bottom: 0;">
               <div class="row">
                 
               <div class=" w-100 footer bg-dark text-right py-2 pr-3">
