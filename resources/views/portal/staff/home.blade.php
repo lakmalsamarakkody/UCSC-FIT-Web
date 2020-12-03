@@ -178,28 +178,6 @@
     <!-- /CONTENT -->
 
 
-    <!-- <script type="text/javascript">
-      $(function () {
-        
-        var table = $('.yajra-datatable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ url('exam-list') }}",
-            columns: [
-                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'date', name: 'Date'},
-                {data: 'subject_code', name: 'Subject Code'},
-                {data: 'subject_name', name: 'Subject'},
-                {
-                    data: 'action', 
-                    name: 'action', 
-                    orderable: false, 
-                    searchable: false
-                },
-            ]
-        });
-        
-      });
-    </script> -->
+
 
 @endsection
