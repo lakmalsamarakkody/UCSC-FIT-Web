@@ -1,164 +1,54 @@
-:root{
-    --card-dash-header-text:#ffffff; 
-    --card-header-text-hover: #000000; 
-  
-    --card-background-green:#188839;
-    --card-background-blue:#193474;
-    --card-background-red: red;
-    --card-background-black:#414040;
-    --card-background-yellow:#b99803;
-  
-    --card-header-text:#211870; 
-  }
-  /* number CARDS */
-  .staff-exams .card-dash{
-    border: none;
-    border-radius: 0;
-    color: var(--card-dash-header-text);
-  }
- /* .staff-exams .card:hover{
-    opacity: 95%;
-  } */
-  .staff-exams a:hover{
-    text-decoration: solid;
-  }
-  .staff-exams .card:hover .card-footer{
-    color: var( --card-header-text-hover);
-  }
-  .staff-exams .card-dash .card-title{
-    font-size: 4rem;
-    color: var(--card-dash-header-text);
-    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
-    text-transform: uppercase;
-  }
-  .staff-exams .card-dash .card-header h1{
-    font-size: 1rem;
-    color: var(--card-dash-header-text);
-    /* font-family: 'Open Sans', sans-serif; */
-    text-transform: uppercase;
-    letter-spacing: .05rem;
-  }
-  
-  .staff-exams .green{  
-    background-color: var(--card-background-green);
-  }
-  
-  .staff-exams .blue{  
-    background-color: var(--card-background-blue);
-  }
-  
-  .staff-exams .red{  
-    background-color: var(--card-background-red);
-  }
-  
-  .staff-exams .black{  
-    background-color: var(--card-background-black);
-  }
-  
-  .staff-exams .yellow{  
-    background-color: var(--card-background-yellow);
-  }
-  /* /number CARDS */
-  
-  /* CARDS */
-  .staff-exams .card{
-    border: none;
-    border-radius: 0;
-    box-shadow:  0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-    overflow-y: auto;
-  }
-  .staff-exams .card-header{
-    color: var(--card-header-text);
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1.2rem;
-    vertical-align: middle;
-    padding: 1.5rem 0 0 1.5rem;
-  }
-  .staff-exams .card .card-body th {
-    color: var(--system-card-table-th-text);
-  }
-  .staff-exams .card .card-body td {
-    vertical-align: middle;
-  }
-
-  .staff-exams .card .card-footer{
-    border-top: none;
-    background-color: var(--white);
-    text-align: right;
-  }
-  /* /CARDS */
-
-  /* CREATE EXAM SHEDULE */
-  .staff-exams .exam-shedule {
-    border: 0 solid #414040;
-    background-color: var(--white);
-    border-radius: 0;
-    box-shadow:  0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-    overflow-y: auto;
-    padding: 1.5rem 0 0 1.5rem;
-  }
-
-  .staff-exams #exam-date {
-    content: 'Date';
-  }
-
-  .staff-exams #start-time:before {
-    content: 'Start Time';
-  }
-
-  .staff-exams #end-time:before {
-    content: 'End Time';
-  }
-
-  .staff-exams .exam-select {
-    color: cadetblue;
-  }
-
-
-.staff-exams .submit {
-  border:var(--card-background-blue) solid 1px;
-  color:var(--card-background-blue);
-  background-color: whitesmoke;
-  border-radius: 5px;
+.root {
+  --tr-hover-color: #CEDCE4;
 }
 
-.staff-exams .submit:hover {
-  border:var(--card-background-blue) solid 1px;
-  color:whitesmoke;
-  background-color: var(--card-background-blue);
-  border-radius: 5px;
+/* CREATE EXAM SHEDULE */
+
+
+/* /CREATE EXAM SHEDULE */
+
+
+/* EXAM SHEDULE TABLE */
+.staff-exams .card .header {
+  color: var(--card-header-text);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.2rem;
+  vertical-align: middle;
+  padding: 1.5rem 0 0 1.5rem;
 }
 
-.staff-exams .subject {
-  color: cadetblue;
+.staff-exams .card{
+  border: none;
+  border-radius: 0;
+  box-shadow:  0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  overflow-y: auto;
 }
 
- /* /CREATE EXAM SHEDULE */
+.staff-exams .card:hover {
+  text-decoration: none;
+}
 
+.staff-exams .card .card-body th {
+  color: var(--system-card-table-th-text);
+}
+.staff-exams .card .card-body td {
+  vertical-align: middle;
+}
 
-  /* EXAM SHEDULE TABLE */
+.staff-exams .card .card-body tr:hover {
+  background-color: var(--tr-hover-color);
+}
 
-  .staff-exams #remove {
-    border: crimson;
-    color: crimson;
-    background-color: whitesmoke;
-    border-radius: 5px;
-  }
-  
-  .staff-exams #remove:hover {
-    border: crimson;
-    color:whitesmoke;
-    background-color: crimson;
-    border-radius: 5px;
-  }
+.staff-exams .card .card-body #exam-date, #start-time, #end-time, #subject {
+  border: solid 1px var(--log-out-button);
+  border-radius: 0.4rem;
+}
 
-  .staff-exams tbody tr:hover {
-    opacity: 85%;
-  }
+.staff-exams .card .card-body #exam-date:hover, #start-time:hover, #end-time:hover, #subject:hover {
+  opacity: 90%;
+  background-color: var(--color-secondary);
+}
 
-  .staff-exams th {
-    color: var(--card-header-text);
-  }
+/* /EXAM SHEDULE TABLE */
 
-  /* /EXAM SHEDULE TABLE */

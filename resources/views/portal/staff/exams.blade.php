@@ -26,91 +26,106 @@
     <!-- /BREACRUMB -->
 
     <!-- CONTENT -->
-
     
-    <div class="col-lg-12 staff-exams">
+    <div class="col-12 staff-exams">
       <div class="row">
-      <!-- CREATE EXAM SHEDULE -->
-      <div class="exam-shedule">
-        <div class="card-header border-0 bg-transparent">Create Exam Shedule</div>
-        <form action="{{ route('exams') }}" method="POST">
-          @csrf
-          <select name="subject" class="subject">
-            <option value="fit103">ICT Applications</option>
-            <option value="fit203">English for ICT</option>
-            <option value="fit303">Mathematics for ICT</option>
-          </select>
-          
-          <input type="date" name="exam-date" class="exam-select" id="exam-date">
-          <input type="time" name="start-time" class="exam-select" id="start-time">
-          <input type="time" name="end-time" class="exam-select" id="end-time"> <br /><br />
-
-          <input type="submit" value="Release Shedule" class="btn btn-outline-primary" />
-
-          
-        </form>
-
-      </div>
-    </div>
 
       <!-- CREATE EXAM SHEDULE -->
 
-      <!--EXAM SHEDULE TABLE -->
-      <div class="row">
+      <div class="col-10 mt-5 mx-4">
+        <div class="row">
+          <div class="card w-100 create-exam">
+            <div class="card border-0 bg-transparent w-100" style="height: 15rem;">
+              <div class="header border-0 bg-transparent">Create Exam Shedule</div>
+              <div class="card-body px-0">
+              <form action="{{ route('exams') }}" method="POST">
+                @csrf
+                <div class="col-12 px-4">
+                  <div class="row">
+                    <select class="col-lg-3 col-md-4 mx-3 mt-2 row form-control" name="subject" id="subject">
+                      <option value="" selected disabled>Subject</option>
+                      <option value="">ICT Applications</option>
+                      <option value="">Mathematics for ICT</option>
+                      <option value="">English for ICT</option>
+                    </select>
+                    <input class="col-lg-3 col-md-4 mt-2 mx-3 row" type="date" name="exam-date" id="exam-date" />
+                    <input class="col-lg-2 col-md-4 mt-2 mx-3 row" type="time" name="start-time" id="start-time"/>
+                    <input class="col-lg-2 col-md-4 mt-2 mx-3 row" type="time" name="end-time" id="end-time"/>
 
-        <div class="col-lg-8 mt-5 px-4">
-          <div class="row">
-            <a class="card w-100" href="{{ route('exams') }}">
+                  </div> <br /><br />
+                  <div class="text-center">
+                    <input type="submit" value="RELEASE SHEDULE" class="btn btn-outline-primary">
 
+                  </div>
+                  
+                  
 
-
+                </div>
+                    
               
-              <div class="card w-100">
-                <div class="card-header border-0 bg-transparent">Exam Shedules</div>
-                  <table class="table yajra-datatable ">
+              </form>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- /CREATE EXAM SHEDULE -->
+
+
+
+        <!-- EXAM SHEDULE TABLE -->
+        <div class="col-lg-10 col-md-12 mt-5 mx-4">
+          <div class="row">
+            <a class="card w-100" href="{{ route('exams') }}" style="height: 31.5rem;">
+              <div class="card border-0 bg-transparent w-100" style="height: 31.5rem">
+                <div class="card header border-0 bg-transparent" style="height: 4rem;">Exam Shedules</div>
+                <div class="card-body px-0">
+                  <table class="table yajra-datatable">
                     <thead class="text-center">
-                        <tr>
-                          <th>Subject Code</th>
-                          <th>Subject Name</th>
-                          <th>Date</th>
-                          <th>Start Time</th>
-                          <th>End Time</th>
-                          <th></th>
-                        </tr>
+                      <tr>
+                        <th>Subject Code</th>
+                        <th>Subject Name</th>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th></th>
+                      </tr>
                     </thead>
                     <tbody>
-                      @foreach($exams as $exam)
-                        <tr class="text-center">
+                      @foreach ($exams as $exam)
+                      <tr class="text-center">
                         <td>FIT {{ $exam->subject->code }}</td>
-                          <td>{{ $exam->subject->name }}</td>
-                          <td>{{ $exam->date }}</td>
-                          <td> 10.00 PM</td>
-                          <td> 12.00 PM </td>
-                          <th><button id="remove" class="btn btn-outline-warning">Remove</button></th>
-                        </tr>
+                        <td>{{ $exam->subject->name }}</td>
+                        <td>{{ $exam->date }}</td>
+                        <td>10.00AM</td>
+                        <td>12.00PM</td>
+                        <td><button class="btn btn-outline-danger">Remove</button></td>
+                      </tr>
                       @endforeach
                     </tbody>
                   </table>
+    
                 </div>
-
-
-
-                <!--EXAMSHEDULE TABLE -->
-                
-                <!--
-                <div class="card-footer border-0 bg-transparent text-right">
-                  View <i class="fa fa-arrow-alt-circle-right"></i>
-                </div> -->
-            
+    
               </div>
+    
+              
+    
             </a>
           </div>
+    
         </div>
+      </div>
 
+    </div>
+    <!-- /EXAM SHEDULE TABLE-->
  
 
-      </div>
-    </div>
     <!-- /CONTENT -->
 
 
