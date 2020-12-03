@@ -39,6 +39,10 @@
   --scroll-bar-track-color:rgb(212, 212, 212);
   --scroll-bar-color:rgb(18, 18, 53);
   --scroll-bar-hover-color: rgb(65, 65, 190);
+
+  --footer-background-color: rgba(0, 15, 83, 0.486);
+  --footer-link-color:rgb(46, 46, 46);
+  --footer-link-hover-color:rgba(255, 255, 255, 0.705);
 }
 
 html{
@@ -213,3 +217,15 @@ html{
     background: var(--scroll-bar-hover-color); 
   }
   
+  .footer{
+    background-color:var(--footer-background-color) !important;
+  }
+
+  .footer a{
+    color: var(--footer-link-color) !important;
+  }
+
+  .footer a:hover{
+    text-decoration:none;
+    color: var(--footer-link-hover-color) !important;
+  }
