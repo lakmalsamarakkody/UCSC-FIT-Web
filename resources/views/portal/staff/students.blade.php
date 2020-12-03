@@ -60,12 +60,12 @@
             <table class="table table-responsive-md">
               <thead class="text-center">
                 <tr>
-                  <td>Registration No</td>
-                  <td>Name</td>
-                  <td>NIC</td>
-                  <td>BIT Eligibility</td>
-                  <td>FIT Certificate</td>
-                  <td>&nbsp;</td>
+                  <th>Registration No</th>
+                  <th>Name</th>
+                  <th>NIC</th>
+                  <th>BIT Eligibility</th>
+                  <th>FIT Certificate</th>
+                  <th>&nbsp;</th>
                 </tr>
               </thead>
               <tbody class="text-center">
@@ -86,11 +86,7 @@
                     <td>Not Eligible</td>             
                   @endif
                   <td>                    
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-view-role"><i class="fas fa-eye"></i></button>
-                      <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-role"><i class="fas fa-edit"></i></button>
-                      <button type="button" class="btn btn-outline-danger" onclick="delete_role();"><i class="fas fa-trash-alt"></i></button>
-                    </div>
+                      <button title="View Profile" data-toggle="tooltip" data-placement="left" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-view-role"><i class="fas fa-user"></i></button>
                   </td>
                 </tr>
                 @endforeach
