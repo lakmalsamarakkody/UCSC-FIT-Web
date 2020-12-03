@@ -14,40 +14,51 @@
   }
   // /ROLE NAME EDITABILITY
 
-  // EDIT
-  edit_role = () => {
-    Swal.fire({
+  // CREATE
+  create_role = () => {
+    SwalQuestionSuccess.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'question',
-    iconColor: sweetalert_success,
-    confirmButtonText: 'Yes, Update!',
-    confirmButtonColor: sweetalert_success,
-    showCancelButton: true,
-    cancelButtonColor: sweetalert_primary,
-    timer: 5000,
-    timerProgressBar: true,
-    allowOutsideClick: false,
+    confirmButtonText: 'Yes, Create!',
     })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
+        SwalDoneSuccess.fire({
+          title: 'Created!',
+          text: 'User role created.',
+        })
+        $('#modal-create-role').modal('hide')
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'User role has not been created.',
+        })
+        $('#modal-create-role').modal('hide')
+      }
+    })
+  }
+  // /CREATE
+
+  // EDIT
+  edit_role = () => {
+    SwalQuestionSuccess.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Update!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
           title: 'Updated!',
-          text: 'Permissions has been updated.',
-          icon: 'success',
-          confirmButtonColor: sweetalert_success,
-          allowOutsideClick: false,
+          text: 'User role has been updated.',
         })
         $('#modal-edit-role').modal('hide')
       }
       else{
-        Swal.fire({
+        SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Permissions has not been updated.',
-          icon: 'warning',
-          iconColor: sweetalert_warning,
-          confirmButtonColor: sweetalert_warning,
-          allowOutsideClick: false,
+          text: 'User role has not been updated.',
         })
         $('#modal-edit-role').modal('hide')
       }
@@ -57,37 +68,22 @@
 
   // DELETE
   delete_role = () => {
-    Swal.fire({
+    SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'question',
-    iconColor: sweetalert_danger,
     confirmButtonText: 'Yes, delete it!',
-    confirmButtonColor: sweetalert_danger,
-    showCancelButton: true,
-    cancelButtonColor: sweetalert_primary,
-    timer: 5000,
-    timerProgressBar: true,
-    allowOutsideClick: false,
     })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
+        SwalDoneSuccess.fire({
           title: 'Deleted!',
-          text: 'User Role has been deleted.',
-          icon: 'success',
-          confirmButtonColor: sweetalert_success,
-          allowOutsideClick: false,
+          text: 'User role has been deleted.',
         })
       }
       else{
-        Swal.fire({
+        SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'User Role has not been deleted.',
-          icon: 'warning',
-          iconColor: sweetalert_warning,
-          confirmButtonColor: sweetalert_warning,
-          allowOutsideClick: false,
+          text: 'User role has not been deleted.',
         })
       }
     })
@@ -96,40 +92,51 @@
 // /USER ROLE
 
 // PERMISSION
-  // EDIT
-  edit_permission = () => {
-    Swal.fire({
+  // CREATE
+  create_permission = () => {
+    SwalQuestionSuccess.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'question',
-    iconColor: sweetalert_success,
-    confirmButtonText: 'Yes, Update!',
-    confirmButtonColor: sweetalert_success,
-    showCancelButton: true,
-    cancelButtonColor: sweetalert_primary,
-    timer: 5000,
-    timerProgressBar: true,
-    allowOutsideClick: false,
+    confirmButtonText: 'Yes, Create!',
     })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
+        SwalDoneSuccess.fire({
+          title: 'Created!',
+          text: 'Permission created.',
+        })
+        $('#modal-create-permission').modal('hide')
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Permission has not been created.',
+        })
+        $('#modal-create-permission').modal('hide')
+      }
+    })
+  }
+  // /CREATE
+
+  // EDIT
+  edit_permission = () => {
+    SwalQuestionSuccess.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Update!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
           title: 'Updated!',
           text: 'Permission has been updated.',
-          icon: 'success',
-          confirmButtonColor: sweetalert_success,
-          allowOutsideClick: false,
         })
         $('#modal-edit-permission').modal('hide')
       }
       else{
-        Swal.fire({
+        SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
           text: 'Permission has not been updated.',
-          icon: 'warning',
-          iconColor: sweetalert_warning,
-          confirmButtonColor: sweetalert_warning,
-          allowOutsideClick: false,
         })
         $('#modal-edit-permission').modal('hide')
       }
@@ -139,37 +146,22 @@
 
   // DELETE
   delete_permission = () => {
-    Swal.fire({
+    SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'question',
-    iconColor: sweetalert_danger,
     confirmButtonText: 'Yes, delete it!',
-    confirmButtonColor: sweetalert_danger,
-    showCancelButton: true,
-    cancelButtonColor: sweetalert_primary,
-    timer: 5000,
-    timerProgressBar: true,
-    allowOutsideClick: false,
     })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
+        SwalDoneSuccess.fire({
           title: 'Deleted!',
           text: 'Permission has been deleted.',
-          icon: 'success',
-          confirmButtonColor: sweetalert_success,
-          allowOutsideClick: false,
         })
       }
       else{
-        Swal.fire({
+        SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
           text: 'Permission has not been deleted.',
-          icon: 'warning',
-          iconColor: sweetalert_warning,
-          confirmButtonColor: sweetalert_warning,
-          allowOutsideClick: false,
         })
       }
     })
@@ -180,38 +172,23 @@
 // SUBJECT
   // EDIT
   edit_subject = () => {
-    Swal.fire({
+    SwalQuestionSuccess.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'question',
-    iconColor: sweetalert_success,
     confirmButtonText: 'Yes, Update!',
-    confirmButtonColor: sweetalert_success,
-    showCancelButton: true,
-    cancelButtonColor: sweetalert_primary,
-    timer: 5000,
-    timerProgressBar: true,
-    allowOutsideClick: false,
     })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
+        SwalDoneSuccess.fire({
           title: 'Updated!',
           text: 'Subject has been updated.',
-          icon: 'success',
-          confirmButtonColor: sweetalert_success,
-          allowOutsideClick: false,
         })
         $('#modal-edit-subject').modal('hide')
       }
       else{
-        Swal.fire({
+        SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
           text: 'Subject has not been updated.',
-          icon: 'warning',
-          iconColor: sweetalert_warning,
-          confirmButtonColor: sweetalert_warning,
-          allowOutsideClick: false,
         })
         $('#modal-edit-subject').modal('hide')
       }
@@ -221,37 +198,22 @@
 
   //DELETE
   delete_subject = () => {
-    Swal.fire({
+    SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'warning',
-    iconColor: sweetalert_danger,
     confirmButtonText: 'Yes, delete it!',
-    confirmButtonColor: sweetalert_danger,
-    showCancelButton: true,
-    cancelButtonColor: sweetalert_primary,
-    timer: 5000,
-    timerProgressBar: true,
-    allowOutsideClick: false,
     })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
+        SwalDoneSuccess.fire({
           title: 'Deleted!',
           text: 'Subject has been deleted.',
-          icon: 'success',
-          confirmButtonColor: sweetalert_success,
-          allowOutsideClick: false,
         })
       }
       else{
-        Swal.fire({
+        SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
           text: 'Subject has not been deleted.',
-          icon: 'warning',
-          iconColor: sweetalert_warning,
-          confirmButtonColor: sweetalert_warning,
-          allowOutsideClick: false,
         })
       }
     })
@@ -262,38 +224,23 @@
 // EXAM_TYPE
   // EDIT
   edit_exam_type = () => {
-    Swal.fire({
+    SwalQuestionSuccess.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'question',
-    iconColor: sweetalert_success,
     confirmButtonText: 'Yes, Update!',
-    confirmButtonColor: sweetalert_success,
-    showCancelButton: true,
-    cancelButtonColor: sweetalert_primary,
-    timer: 5000,
-    timerProgressBar: true,
-    allowOutsideClick: false,
     })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
+        SwalDoneSuccess.fire({
           title: 'Updated!',
           text: 'Exam type has been updated.',
-          icon: 'success',
-          confirmButtonColor: sweetalert_success,
-          allowOutsideClick: false,
         })
         $('#modal-edit-exam-type').modal('hide')
       }
       else{
-        Swal.fire({
+        SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
           text: 'Subject has not been updated.',
-          icon: 'warning',
-          iconColor: sweetalert_warning,
-          confirmButtonColor: sweetalert_warning,
-          allowOutsideClick: false,
         })
         $('#modal-edit-exam-type').modal('hide')
       }
@@ -303,37 +250,22 @@
 
   //DELETE
   delete_exam_type = () => {
-    Swal.fire({
+    SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'warning',
-    iconColor: sweetalert_danger,
     confirmButtonText: 'Yes, delete it!',
-    confirmButtonColor: sweetalert_danger,
-    showCancelButton: true,
-    cancelButtonColor: sweetalert_primary,
-    timer: 5000,
-    timerProgressBar: true,
-    allowOutsideClick: false,
     })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
+        SwalDoneSuccess.fire({
           title: 'Deleted!',
           text: 'Exam type has been deleted.',
-          icon: 'success',
-          confirmButtonColor: sweetalert_success,
-          allowOutsideClick: false,
         })
       }
       else{
-        Swal.fire({
+        SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
           text: 'Exam type has not been deleted.',
-          icon: 'warning',
-          iconColor: sweetalert_warning,
-          confirmButtonColor: sweetalert_warning,
-          allowOutsideClick: false,
         })
       }
     })
@@ -344,38 +276,23 @@
 // ACADEMIC YEAR
   // EDIT
   edit_academic_year = () => {
-    Swal.fire({
+    SwalQuestionSuccess.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'question',
-    iconColor: sweetalert_success,
     confirmButtonText: 'Yes, Update!',
-    confirmButtonColor: sweetalert_success,
-    showCancelButton: true,
-    cancelButtonColor: sweetalert_primary,
-    timer: 5000,
-    timerProgressBar: true,
-    allowOutsideClick: false,
     })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
+        SwalDoneSuccess.fire({
           title: 'Updated!',
           text: 'Academic year has been updated.',
-          icon: 'success',
-          confirmButtonColor: sweetalert_success,
-          allowOutsideClick: false,
         })
         $('#modal-edit-academic-year').modal('hide')
       }
       else{
-        Swal.fire({
+        SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
           text: 'Academic year has not been updated.',
-          icon: 'warning',
-          iconColor: sweetalert_warning,
-          confirmButtonColor: sweetalert_warning,
-          allowOutsideClick: false,
         })
         $('#modal-edit-academic-year').modal('hide')
       }
@@ -385,37 +302,22 @@
 
   // DELETE
   delete_academic_year = () => {
-    Swal.fire({
+    SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'warning',
-    iconColor: sweetalert_danger,
     confirmButtonText: 'Yes, delete it!',
-    confirmButtonColor: sweetalert_danger,
-    showCancelButton: true,
-    cancelButtonColor: sweetalert_primary,
-    timer: 5000,
-    timerProgressBar: true,
-    allowOutsideClick: false,
     })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
+        SwalDoneSuccess.fire({
           title: 'Deleted!',
           text: 'Academic year has been deleted.',
-          icon: 'success',
-          confirmButtonColor: sweetalert_success,
-          allowOutsideClick: false,
         })
       }
       else{
-        Swal.fire({
+        SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
           text: 'Academic year has not been deleted.',
-          icon: 'warning',
-          iconColor: sweetalert_warning,
-          confirmButtonColor: sweetalert_warning,
-          allowOutsideClick: false,
         })
       }
     })
@@ -423,85 +325,55 @@
   // /DELETE
 // /ACADEMIC YEAR
 
-// STUDENT STAGE
+// STUDENT PHASE
   // EDIT
-  edit_student_stage = () => {
-    Swal.fire({
+  edit_student_phase = () => {
+    SwalQuestionSuccess.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'question',
-    iconColor: sweetalert_success,
     confirmButtonText: 'Yes, Update!',
-    confirmButtonColor: sweetalert_success,
-    showCancelButton: true,
-    cancelButtonColor: sweetalert_primary,
-    timer: 5000,
-    timerProgressBar: true,
-    allowOutsideClick: false,
     })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
+        SwalDoneSuccess.fire({
           title: 'Updated!',
-          text: 'Student stage has been updated.',
-          icon: 'success',
-          confirmButtonColor: sweetalert_success,
-          allowOutsideClick: false,
+          text: 'Student phase has been updated.',
         })
-        $('#modal-edit-student-stage').modal('hide')
+        $('#modal-edit-student-phase').modal('hide')
       }
       else{
-        Swal.fire({
+        SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Student stage has not been updated.',
-          icon: 'warning',
-          iconColor: sweetalert_warning,
-          confirmButtonColor: sweetalert_warning,
-          allowOutsideClick: false,
+          text: 'Student phase has not been updated.',
         })
-        $('#modal-edit-student-stage').modal('hide')
+        $('#modal-edit-student-phase').modal('hide')
       }
     })
   }
   // /EDIT
 
   // DELETE
-  delete_student_stage = () => {
-    Swal.fire({
+  delete_student_phase = () => {
+    SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    icon: 'warning',
-    iconColor: sweetalert_danger,
     confirmButtonText: 'Yes, delete it!',
-    confirmButtonColor: sweetalert_danger,
-    showCancelButton: true,
-    cancelButtonColor: sweetalert_primary,
-    timer: 5000,
-    timerProgressBar: true,
-    allowOutsideClick: false,
     })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
+        SwalDoneSuccess.fire({
           title: 'Deleted!',
-          text: 'Student stage has been deleted.',
-          icon: 'success',
-          confirmButtonColor: sweetalert_success,
-          allowOutsideClick: false,
+          text: 'Student phase has been deleted.',
         })
       }
       else{
-        Swal.fire({
+        SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Student stage has not been deleted.',
-          icon: 'warning',
-          iconColor: sweetalert_warning,
-          confirmButtonColor: sweetalert_warning,
-          allowOutsideClick: false,
+          text: 'Student phase has not been deleted.',
         })
       }
     })
   }
   // /DELETE
-// /STUDENT STAGE
+// /STUDENT PHASE
 </script>

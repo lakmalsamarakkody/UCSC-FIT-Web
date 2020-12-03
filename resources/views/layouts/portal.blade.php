@@ -29,24 +29,26 @@
     <!-- PAGES -->
     <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/exams.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/system.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/staff-exams.css') }}">
     <!-- /PAGES --> 
   <!-- /STYLES -->
 
   <!-- SCRIPTS -->
     <script src="{{ asset('js/app.js') }}" differ></script>
-    <script src="{{ asset('js/portal.js') }}"></script>
 
+    <!-- SWEET ALERT 2 -->
+    <script src="{{ asset('lib/sweetalert2/sweetalert2.all.js') }}"></script>
+    <!-- /SWEET ALERT 2 -->
+    
     <!-- DATATABLE SCRIPTS -->
     <script src="{{ asset('lib/jquery/jquery.validate.js') }}"></script>
     <script src="{{ asset('lib/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('lib/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
     <!-- /DATATABLE SCRIPTS -->
 
-    <!-- SWEET ALERT 2 -->
-    <script src="{{ asset('lib/sweetalert2/sweetalert2.all.js') }}"></script>
-    <!-- /SWEET ALERT 2 -->
+    <script src="{{ asset('js/portal.js') }}"></script>
+    <script src="{{ asset('js/sweetalert.js') }}"></script>
 
     {{-- CUSTOM --}}
     <script type="text/javascript"> 

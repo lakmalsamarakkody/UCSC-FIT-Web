@@ -58,7 +58,7 @@
               </table>
             </div>
           </div>
-          <div class="card-footer"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-role"><i class="fas fa-plus"></i></button></div>
         </div>
       </div>
       <!-- /USER ROLE -->
@@ -92,7 +92,7 @@
               </table>
             </div>
           </div>
-          <div class="card-footer"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-permission"><i class="fas fa-plus"></i></button></div>
         </div>
       </div>
       <!-- /PERMISSION -->
@@ -126,7 +126,7 @@
               </table>
             </div>
           </div>
-          <div class="card-footer"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-subject"><i class="fas fa-plus"></i></button></div>
         </div>
       </div>
       <!-- /SUBJECT -->
@@ -158,7 +158,7 @@
               </table>
             </div>
           </div>
-          <div class="card-footer"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-exam-type"><i class="fas fa-plus"></i></button></div>
         </div>
       </div>
       <!-- /EXAM TYPE -->
@@ -194,7 +194,7 @@
               </table>
             </div>
           </div>
-          <div class="card-footer"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-academic-year"><i class="fas fa-plus"></i></button></div>
         </div>
       </div>
       <!-- /ACADEMIC YEAR -->
@@ -219,8 +219,8 @@
                     <td>Fresh User</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-student-stage"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" onclick="delete_student_stage();"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-student-phase"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-danger" onclick="delete_student_phase();"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
@@ -228,41 +228,17 @@
               </table>
             </div>
           </div>
-          <div class="card-footer"><button type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button></div>
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-student-phase"><i class="fas fa-plus"></i></button></div>
         </div>
       </div>
       <!-- /STUDENT PHASES -->
 
       @include('portal.staff.system.modal')
-      @include('portal.staff.system.scripts')
     
     </div>
   </div>
   <!-- /CONTENT -->
 
-
-
-  <!-- HEADING -->
-  <div class="col-lg-12 mt-5">
-      <div class="row">
-        
-        <div class="card w-100">
-            <div class="card-header">{{ __('Dashboard') }}</div>
-
-            <div class="card-body">
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
-
-                {{ __('You are logged in as Staff!') }}
-            </div>
-        </div>
-
-    </div>
-  </div>
-
-  
+  @include('portal.staff.system.scripts')
 
 @endsection

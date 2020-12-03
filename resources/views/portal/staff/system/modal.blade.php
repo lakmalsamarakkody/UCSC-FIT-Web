@@ -1,5 +1,32 @@
 {{-- USER ROLE --}}
 
+  <!-- CREATE -->
+  <div class="modal fade" id="modal-create-role" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create User Role</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="InputNewRoleName">Role Name</label>
+              <input type="text" class="form-control" id="InputNewRoleName"/>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" onclick="create_role()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ CREATE -->
+
   <!-- VIEW -->
   <div class="modal fade" id="modal-view-role" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
@@ -66,7 +93,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_role()">Save changes</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_role()">Update</button>
         </div>
       </div>
     </div>
@@ -76,6 +103,33 @@
 {{-- /USER ROLE --}}
 
 {{-- PERMISSION --}}
+
+  <!-- CREATE -->
+  <div class="modal fade" id="modal-create-permission" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Permission</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="InputNewPermissionName">Permission Name</label>
+              <input type="text" class="form-control" id="InputNewPermissionName"/>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" onclick="create_permission()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ CREATE -->
 
   <!-- EDIT -->
   <div class="modal fade" id="modal-edit-permission" tabindex="-1" role="dialog" aria-hidden="true">
@@ -97,7 +151,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_permission()">Save changes</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_permission()">Update</button>
         </div>
       </div>
     </div>
@@ -132,7 +186,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_subject()">Save changes</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_subject()">Update</button>
         </div>
       </div>
     </div>
@@ -162,7 +216,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_exam_type()">Save changes</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_exam_type()">Update</button>
         </div>
       </div>
     </div>
@@ -206,21 +260,21 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_academic_year()">Save changes</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_academic_year()">Update</button>
         </div>
       </div>
     </div>
   </div>
   <!--/ EDIT -->
-{{-- /ACADEMIC YEAR --}}
+{{--/ ACADEMIC YEAR --}}
 
-{{-- STUDENT STAGE --}}
+{{-- STUDENT PHASE --}}
   <!-- EDIT -->
-  <div class="modal fade" id="modal-edit-student-stage" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade" id="modal-edit-student-phase" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Stage 1 - Fresh User</h5>
+          <h5 class="modal-title">Phase 1 - Fresh User</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -228,24 +282,24 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="InputStageCode">Code</label>
-              <input type="text" class="form-control" id="InputStageCode" aria-describedby="StageCodeHelp"/>
-              <small id="StageCodeHelp" class="form-text text-muted">any help text</small>
+              <label for="InputPhaseCode">Code</label>
+              <input type="text" class="form-control" id="InputPhaseCode" aria-describedby="PhaseCodeHelp"/>
+              <small id="PhaseCodeHelp" class="form-text text-muted">any help text</small>
             </div>
             <div class="form-group">
-              <label for="InputStageDescription">Description</label>
-              <input type="text" class="form-control" id="InputStageDescription" aria-describedby="StageDescHelp"/>
-              <small id="StageDescHelp" class="form-text text-muted">any help text</small>
+              <label for="InputPhaseDescription">Description</label>
+              <input type="text" class="form-control" id="InputPhaseDescription" aria-describedby="PhaseDescHelp"/>
+              <small id="PhaseDescHelp" class="form-text text-muted">any help text</small>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_student_stage()">Save changes</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_student_phase()">Update</button>
         </div>
       </div>
     </div>
   </div>
   <!--/ EDIT -->
-{{-- /STUDENT STAGE --}}
+{{--/ STUDENT PHASE --}}
     
