@@ -131,8 +131,8 @@
           <div class="row">
 
             <!-- NAV BAR -->
-            <div class="col-lg-12 nav-bar shadow-sm">
-              <div class="row ml-2">
+            <div class="col-lg-12 nav-bar shadow-sm ">
+              <div class="row  ml-2">
 
 
                 <div class="col-lg-3 p-2 my-2 ml-0">
