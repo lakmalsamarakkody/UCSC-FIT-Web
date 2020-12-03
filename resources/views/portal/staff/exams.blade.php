@@ -42,14 +42,18 @@
                 @csrf
                 <div class="col-12 px-4">
                   <div class="row">
-                    <select class="col-lg-3 col-md-4 mx-3 mt-2 row form-control" name="subject" id="subject">
+                    <label for="subject">Subject</label>
+                    <select class="col-xl-3 col-lg-4 mx-3 mt-2 row form-control" name="subject" id="subject">
                       <option value="" selected disabled>Subject</option>
                       <option value="">ICT Applications</option>
                       <option value="">Mathematics for ICT</option>
                       <option value="">English for ICT</option>
                     </select>
-                    <input class="col-lg-3 col-md-4 mt-2 mx-3 row" type="date" name="exam-date" id="exam-date" />
-                    <input class="col-lg-2 col-md-4 mt-2 mx-3 row" type="time" name="start-time" id="start-time"/>
+                    <label class="col-lg-3 col-md-4 mt-2 mx-3 row" for="exam-date">Exam Date</label>
+                    <input type="date" name="exam-date" id="exam-date" />
+                    <label class="col-lg-2 col-md-4 mt-2 mx-3 row" for="start-time">Start Time</label>
+                    <input  type="time" name="start-time" id="start-time"/>
+                    <label for="end-time">End Time</label>
                     <input class="col-lg-2 col-md-4 mt-2 mx-3 row" type="time" name="end-time" id="end-time"/>
 
                   </div> <br /><br />
