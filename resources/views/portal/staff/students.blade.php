@@ -39,26 +39,30 @@
                 Filters
               </div>
               <div class="card-body">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <span class="">Filters <i class="fa fa-filter"></i></span>
-                    </button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                      <div role="separator" class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Separated link</a>
+                <form action="">
+                  
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="">Filters <i class="fa fa-filter"></i></span>
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                      </div>
+                    </div>
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                      <button type="button" class="btn btn-outline-primary" id="btnSearch">
+                        <i class="fa fa-search"></i> Search
+                      </button>
                     </div>
                   </div>
-                  <input type="text" class="form-control">
-                  <div class="input-group-append">
-                    <button type="button" class="btn btn-outline-primary" id="btnSearch">
-                      <i class="fa fa-search"></i> Search
-                    </button>
-                  </div>
-                </div>
+
+                </form>
               </div>
             </div>
 
