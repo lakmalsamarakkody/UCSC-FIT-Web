@@ -233,6 +233,70 @@
       </div>
       <!-- /STUDENT PHASES -->
 
+      <!-- PAYMENT METHODS -->
+      <div class="col-xl-6 col-lg-12 mt-xl-5">
+        <div class="card">
+          <div class="card-header">PAYMENT METHODS</div>
+          <div class="card-body">
+            <div class="card-text">
+              <table class="table table-responsive-md">
+                <thead>
+                  <tr>
+                    <th>Method Name</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <thead>
+                  <tr>
+                    <td>Online</td>
+                    <td class="text-right">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-payment-method"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-danger" onclick="delete_payment_method();"><i class="fas fa-trash-alt"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-payment-method"><i class="fas fa-plus"></i></button></div>
+        </div>
+      </div>
+      <!-- /PAYMENT METHODS -->
+
+      <!-- PAYMENT TYPES -->
+      <div class="col-xl-6 col-lg-12 mt-xl-5">
+        <div class="card">
+          <div class="card-header">PAYMENT TYPES</div>
+          <div class="card-body">
+            <div class="card-text">
+              <table class="table table-responsive-md">
+                <thead>
+                  <tr>
+                    <th>Type Name</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <thead>
+                  <tr>
+                    <td>Registration</td>
+                    <td class="text-right">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-payment-type"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-danger" onclick="delete_payment_type();"><i class="fas fa-trash-alt"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-payment-type"><i class="fas fa-plus"></i></button></div>
+        </div>
+      </div>
+      <!-- /PAYMENT METHODS -->
+
       @include('portal.staff.system.modal')
     
     </div>

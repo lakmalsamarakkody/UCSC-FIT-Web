@@ -34,7 +34,6 @@
           title: 'Cancelled!',
           text: 'User role has not been created.',
         })
-        $('#modal-create-role').modal('hide')
       }
     })
   }
@@ -60,7 +59,6 @@
           title: 'Cancelled!',
           text: 'User role has not been updated.',
         })
-        $('#modal-edit-role').modal('hide')
       }
     })
   }
@@ -112,7 +110,6 @@
           title: 'Cancelled!',
           text: 'Permission has not been created.',
         })
-        $('#modal-create-permission').modal('hide')
       }
     })
   }
@@ -138,7 +135,6 @@
           title: 'Cancelled!',
           text: 'Permission has not been updated.',
         })
-        $('#modal-edit-permission').modal('hide')
       }
     })
   }
@@ -190,7 +186,6 @@
           title: 'Cancelled!',
           text: 'Subject has not been created.',
         })
-        $('#modal-create-subject').modal('hide')
       }
     })
   }
@@ -216,7 +211,6 @@
           title: 'Cancelled!',
           text: 'Subject has not been updated.',
         })
-        $('#modal-edit-subject').modal('hide')
       }
     })
   }
@@ -268,7 +262,6 @@
           title: 'Cancelled!',
           text: 'Exam Type has not been created.',
         })
-        $('#modal-create-exam-type').modal('hide')
       }
     })
   }
@@ -293,7 +286,6 @@
           title: 'Cancelled!',
           text: 'Subject has not been updated.',
         })
-        $('#modal-edit-exam-type').modal('hide')
       }
     })
   }
@@ -344,7 +336,6 @@
           title: 'Cancelled!',
           text: 'Academic Year has not been created.',
         })
-        $('#modal-create-academic-year').modal('hide')
       }
     })
   }
@@ -369,7 +360,6 @@
           title: 'Cancelled!',
           text: 'Academic year has not been updated.',
         })
-        $('#modal-edit-academic-year').modal('hide')
       }
     })
   }
@@ -420,7 +410,6 @@
           title: 'Cancelled!',
           text: 'Student Phase has not been created.',
         })
-        $('#modal-create-student-phase').modal('hide')
       }
     })
   }
@@ -445,12 +434,10 @@
           title: 'Cancelled!',
           text: 'Student phase has not been updated.',
         })
-        $('#modal-edit-student-phase').modal('hide')
       }
     })
   }
   // /EDIT
-
   // DELETE
   delete_student_phase = () => {
     SwalQuestionDanger.fire({
@@ -475,4 +462,152 @@
   }
   // /DELETE
 // /STUDENT PHASE
+
+// PAYMENT METHOD
+  // CREATE
+  create_payment_method = () => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Create!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Created!',
+          text: 'Payment method created.',
+        })
+        $('#modal-create-payment-method').modal('hide')
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Payment method has not been created.',
+        })
+      }
+    })
+  }
+  // /CREATE
+  // EDIT
+  edit_payment_method = () => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Update!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Updated!',
+          text: 'Payment method has been updated.',
+        })
+        $('#modal-edit-payment-method').modal('hide')
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Payment method has not been updated.',
+        })
+      }
+    })
+  }
+  // /EDIT
+  // DELETE
+  delete_payment_method = () => {
+    SwalQuestionDanger.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, delete it!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Deleted!',
+          text: 'Payment method has been deleted.',
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Payment method has not been deleted.',
+        })
+      }
+    })
+  }
+  // /DELETE
+// /PAYMENT METHOD
+
+// PAYMENT TYPE
+  // CREATE
+  create_payment_type = () => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Create!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Created!',
+          text: 'Payment type created.',
+        })
+        $('#modal-create-payment-type').modal('hide')
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Payment type has not been created.',
+        })
+      }
+    })
+  }
+  // /CREATE
+  // EDIT
+  edit_payment_type = () => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Update!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Updated!',
+          text: 'Payment type has been updated.',
+        })
+        $('#modal-edit-payment-type').modal('hide')
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Payment type has not been updated.',
+        })
+      }
+    })
+  }
+  // /EDIT
+  // DELETE
+  delete_payment_type = () => {
+    SwalQuestionDanger.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, delete it!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Deleted!',
+          text: 'Payment type has been deleted.',
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Payment type has not been deleted.',
+        })
+      }
+    })
+  }
+  // /DELETE
+// /PAYMENT TYPE
 </script>

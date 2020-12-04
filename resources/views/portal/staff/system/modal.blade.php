@@ -73,7 +73,7 @@
                 <div class="input-group-prepend">
                   <button class="btn btn-warning" type="button" onclick="InputRoleName_editable();"><i class="fas fa-edit pr-0"></i></button>
                 </div>
-                <input type="text" class="form-control" id="InputRoleName" value="System Administrator" onfocusout="InputRoleName_readonly()" disabled/>
+                <input type="text" class="form-control" id="InputRoleName" onfocusout="InputRoleName_readonly()" disabled/>
               </div>
             </div>
           
@@ -145,7 +145,7 @@
           <form>
             <div class="form-group">
               <label for="InputPermissionName">Name</label>
-              <input type="text" class="form-control" id="InputPermissionName" value="view-dashboard"/>
+              <input type="text" class="form-control" id="InputPermissionName" />
             </div>
           </form>
         </div>
@@ -432,4 +432,118 @@
   </div>
   <!--/ EDIT -->
 {{--/ STUDENT PHASE --}}
+
+{{-- PAYMENT METHOD --}}
+  <!-- CREATE -->
+  <div class="modal fade" id="modal-create-payment-method" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Payment Method</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="InputNewPaymentMethod">Payment Method</label>
+              <input type="text" class="form-control" id="InputNewPaymentMethod" aria-describedby="NewPaymentMethodHelp"/>
+              <small id="NewPaymentMethodHelp" class="form-text text-muted">any help text</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" onclick="create_payment_method()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ CREATE -->
+  <!-- EDIT -->
+  <div class="modal fade" id="modal-edit-payment-method" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Online</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="InputPaymentMethod">Payment Method</label>
+              <input type="text" class="form-control" id="InputPaymentMethod" aria-describedby="PaymentMethodHelp"/>
+              <small id="PaymentMethodHelp" class="form-text text-muted">any help text</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_payment_method()">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ EDIT -->
+{{--/ PAYMENT METHOD --}}
+
+{{-- PAYMENT TYPE --}}
+  <!-- CREATE -->
+  <div class="modal fade" id="modal-create-payment-type" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Payment Type</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="InputNewPaymentType">Payment Type</label>
+              <input type="text" class="form-control" id="InputNewPaymentType" aria-describedby="NewPaymentTypeHelp"/>
+              <small id="NewPaymentTypeHelp" class="form-text text-muted">any help text</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" onclick="create_payment_type()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ CREATE -->
+  <!-- EDIT -->
+  <div class="modal fade" id="modal-edit-payment-type" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Year Registration</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="InputPaymentType">Payment Type</label>
+              <input type="text" class="form-control" id="InputPaymentType" aria-describedby="PaymentTypeHelp"/>
+              <small id="PaymentTypeHelp" class="form-text text-muted">any help text</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" onclick="edit_payment_type()">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ EDIT -->
+{{--/ PAYMENT TYPE --}}
     
