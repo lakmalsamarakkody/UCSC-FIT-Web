@@ -87,13 +87,18 @@
                   <tbody class="text-center">
                     @foreach ($exams as $exam)
                     <tr>
-                      <td>{{ $exam->subject->code }}</td>
+                      <td>FIT {{ $exam->subject->code }}</td>
                       <td>{{ $exam->subject->name }}</td>
                       <td>e-Test</td>
                       <td>{{ $exam->date }}</td>
                       <td>2:30PM</td>
                       <td>4.30PM</td>
-                      <td><button type="button" class="btn btn-outline-danger"><i class="fas fa-minus"></i></button></td>
+                      <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
+                          <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                      </td>
                     </tr>
                     @endforeach
                   </tbody>
