@@ -6,6 +6,14 @@ const SwalQuestionSuccess = Swal.mixin({
   confirmButtonColor: color_success,
   showCancelButton: true,
   cancelButtonColor: color_primary,
+  allowOutsideClick: false,
+})
+const SwalQuestionSuccessAutoClose = Swal.mixin({
+  icon: 'question',
+  iconColor: color_success,
+  confirmButtonColor: color_success,
+  showCancelButton: true,
+  cancelButtonColor: color_primary,
   timer: 5000,
   timerProgressBar: true,
   allowOutsideClick: false,
