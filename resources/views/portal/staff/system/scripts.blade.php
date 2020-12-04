@@ -170,6 +170,32 @@
 // /PERMISSION
 
 // SUBJECT
+  // CREATE
+  create_subject = () => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Create!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Created!',
+          text: 'Subject created.',
+        })
+        $('#modal-create-subject').modal('hide')
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Subject has not been created.',
+        })
+        $('#modal-create-subject').modal('hide')
+      }
+    })
+  }
+  // /CREATE
+
   // EDIT
   edit_subject = () => {
     SwalQuestionSuccessAutoClose.fire({
@@ -222,6 +248,31 @@
 // /SUBJECT
 
 // EXAM_TYPE
+  // CREATE
+  create_exam_type = () => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Create!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Created!',
+          text: 'Exam Type created.',
+        })
+        $('#modal-create-exam-type').modal('hide')
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Exam Type has not been created.',
+        })
+        $('#modal-create-exam-type').modal('hide')
+      }
+    })
+  }
+  // /CREATE
   // EDIT
   edit_exam_type = () => {
     SwalQuestionSuccessAutoClose.fire({
@@ -247,7 +298,6 @@
     })
   }
   // /EDIT
-
   //DELETE
   delete_exam_type = () => {
     SwalQuestionDanger.fire({
@@ -274,6 +324,31 @@
 // /EXAM_TYPE
 
 // ACADEMIC YEAR
+  // CREATE
+  create_academic_year = () => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Create!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Created!',
+          text: 'Academic Year created.',
+        })
+        $('#modal-create-academic-year').modal('hide')
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Academic Year has not been created.',
+        })
+        $('#modal-create-academic-year').modal('hide')
+      }
+    })
+  }
+  // /CREATE
   // EDIT
   edit_academic_year = () => {
     SwalQuestionSuccessAutoClose.fire({
@@ -299,7 +374,6 @@
     })
   }
   // /EDIT
-
   // DELETE
   delete_academic_year = () => {
     SwalQuestionDanger.fire({
@@ -326,6 +400,31 @@
 // /ACADEMIC YEAR
 
 // STUDENT PHASE
+  // CREATE
+  create_student_phase = () => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Create!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Created!',
+          text: 'Student Phase created.',
+        })
+        $('#modal-create-student-phase').modal('hide')
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Student Phase has not been created.',
+        })
+        $('#modal-create-student-phase').modal('hide')
+      }
+    })
+  }
+  // /CREATE
   // EDIT
   edit_student_phase = () => {
     SwalQuestionSuccessAutoClose.fire({
