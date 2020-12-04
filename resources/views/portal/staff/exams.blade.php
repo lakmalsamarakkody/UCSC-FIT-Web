@@ -177,7 +177,7 @@
                 <tbody>
                   @foreach ($exams as $exam)
                   <tr class="text-center">
-                    <td>{{ $exam->subject->code }}</td>
+                    <td>FIT {{ $exam->subject->code }}</td>
                     <td>{{ $exam->subject->name }}</td>
                     <td>e-Test</td>
                     <td>{{ $exam->date }}</td>
