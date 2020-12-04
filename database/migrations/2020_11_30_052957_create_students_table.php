@@ -28,6 +28,7 @@ class CreateStudentsTable extends Migration
             $table->string('nic')->unique();   
             $table->string('citizenship');
             $table->date('dob');
+            $table->integer('reg_year')->length(4);
             $table->timestamps();
             $table->softDeletes();
         });
