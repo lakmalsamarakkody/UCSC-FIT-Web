@@ -46,11 +46,15 @@
                         <span class="">Filters <i class="fa fa-filter"></i></span>
                       </button>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="pull-left">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                        <div class="pull-right">
+                          <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                         <div role="separator" class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
                       </div>
                     </div>
                     <input type="text" class="form-control">
