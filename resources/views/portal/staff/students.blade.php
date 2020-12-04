@@ -39,32 +39,61 @@
               </div>
               <div class="card-body">
                 <form action="">
-                  <div class="form-group mb-3">
-                    <div class="input-group ">
-                      <div class="input-group-prepend col-lg-4">
-                        <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <span class="">Filters <i class="fa fa-filter"></i></span>
-                        </button>
-                        <div class="dropdown-menu">
-                          <div class="pull-left">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="form-row">
+                    <div class="form-group col-lg-3">
+                      <select id="inputState" class="form-control ">
+                        <option selected>Year</option>
+                        @foreach($years as $year)                          
+                        <option value="{{ $year->reg_year }}">{{ $year->reg_year }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group col-lg-9 mb-3">
+                      <div class="input-group input-group-md">
+                        <div class="input-group-prepend">
+                          <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="">Filters <i class="fa fa-filter"></i></span>
+                          </button> 
+                          <ul class="dropdown-menu p-3">
+                            <li>                              
+                              <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label p-1" for="exampleCheck1">Registration No</label>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label p-1" for="exampleCheck1">Name</label>
+                              </div>
+                            </li>
+                            <li>
+                            </li>
+                          </ul>
+                          <div class="dropdown-menu p-3">
+                              <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label p-1" for="exampleCheck1">Registration No</label>
+                              </div>
+                              <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label p-1" for="exampleCheck1">Name</label>
+                              </div>
+
                           </div>
-                          <div class="pull-right">
-                            <a class="dropdown-item" href="#">Separated link</a>
-                          </div>
-                          <div role="separator" class="dropdown-divider"></div>
+                          
+
+                        </div>
+                        <input type="text" class="form-control">
+                        <div class="input-group-append">
+                          <button type="button" class="btn btn-outline-primary" id="btnSearch">
+                            <i class="fa fa-search"></i> Search
+                          </button>
                         </div>
                       </div>
-                      <input type="text" class="form-control col-lg-4">
-                      <div class="input-group-append col-lg-4">
-                        <button type="button" class="btn btn-outline-primary" id="btnSearch">
-                          <i class="fa fa-search"></i> Search
-                        </button>
-                      </div>
+                      
                     </div>
-                    
+
                   </div>
 
                 </form>
@@ -79,7 +108,7 @@
               Students
             </div>
             <div class="card-body">
-              <table class="table table-responsive-md yajra-datatable">
+              <table class="table yajra-datatable">
                 <thead class="text-center">
                   <tr>
                     <th>Registration No</th>

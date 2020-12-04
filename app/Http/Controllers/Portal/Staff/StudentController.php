@@ -11,9 +11,9 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students=Student::take(10)->get();
+        $years=Student::select('reg_year')->groupBy('reg_year')->get();
         return view('portal/staff/students',[
-            'students'=>$students
+            'years'=>$years
         ]);
     }
 
