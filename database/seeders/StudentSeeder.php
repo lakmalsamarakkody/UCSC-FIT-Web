@@ -24,6 +24,7 @@ class StudentSeeder extends Seeder
             $initials= $f_name[0]." ".$l_name[0];
             $full_name=$f_name." ".$m_names." ".$l_name;
             $gender=$faker->randomElement($array = array ('male', 'female'));
+            $year=$faker->randomElement($array = array('2017','2018','2019','2020'));
 
             DB::table('students')->insert(
                 array(
@@ -41,6 +42,7 @@ class StudentSeeder extends Seeder
                     'nic'=>$faker->unique()->numerify('#########').'V',
                     'citizenship'=>'Sri Lankan',
                     'dob'=>$faker->dateTimeBetween('1980-01-01', '2000-12-31'),
+                    'reg_year'=>$year,
                     'created_at'=>$faker->dateTimeBetween('2020-11-01', '2020-11-30'),
                     'updated_at'=> '2020-11-30 13:14:56']
     
