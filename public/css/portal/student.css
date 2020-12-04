@@ -1,3 +1,6 @@
+:root{
+    --accordion-card-color:rgb(242, 238, 255);
+}
 .student .avatar {
     vertical-align: middle;
     align-items: center;
@@ -18,7 +21,7 @@
     font-weight: bold;
     text-transform: uppercase;
     color: var(--main-theme-color);
-    background-color: var(--white);
+    background-color: var(--accordion-card-color);
     border: 1px !important;
 }
 .header-show{    
