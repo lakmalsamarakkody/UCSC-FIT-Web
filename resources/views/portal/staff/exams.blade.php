@@ -36,7 +36,7 @@
             <div class="card-header">Create Exam Shedule</div>
             <div class="card-body">
               <form>
-                <div class="form-row align-items-center">
+                <div class="form-row align-items-center px-4">
                   <div class="form-group col-xl-3 col-lg-6">
                     <label for="subject">Subejct</label>
                     <select name="subject" id="subject" class="form-control">
@@ -52,19 +52,20 @@
                       <option value="">Practical</option>
                     </select>
                   </div>
-                  <div class="form-group col-xl-2 col-lg-4">
+                  <div class="form-group col-xl-3 col-lg-6">
                     <label for="examDate">Date</label>
                     <input type="date" name="examDate" class="form-control"/>
                   </div>
-                  <div class="form-group col-xl-1 col-lg-4">
+                  <div class="form-group col-xl-2 col-lg-6">
                     <label for="startTime">Start Time</label>
                     <input type="time" name="startTime" class="form-control"/>
                   </div>
-                  <div class="form-group col-xl-1 col-lg-4">
+                  {{-- <div class="form-group col-xl-1 col-lg-4">
                     <label for="endTime">End Time</label>
                     <input type="time" name="endTime" class="form-control"/>
-                  </div>
-                  <div class="form-group col-xl-auto col-lg-1">
+                  </div> --}}
+                  <div class="form-group col-xl-1 col-lg-12">
+                    <label for="endTime">&nbsp;</label>
                     <button type="submit" class="btn btn-outline-primary form-control"><i class="fas fa-plus"></i></button>
                   </div>
                   
