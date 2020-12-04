@@ -84,7 +84,7 @@ html{
   color: var(--main-theme-color);
   border-color: var(--main-theme-color);
 }
-.btn.btn-outline-primary:hover{
+.btn.btn-outline-primary:hover, .show > .btn-outline-primary.dropdown-toggle{
   color: var(--white);
   background-color: var(--main-theme-color);
   border-color: var(--main-theme-color);
