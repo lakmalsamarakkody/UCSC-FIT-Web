@@ -144,7 +144,7 @@
                     <td>12.00PM</td>
                     <td>
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning"><i class="fas fa-calendar-plus"></i></button>
+                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#postponeExam"><i class="fas fa-calendar-plus"></i></button>
                         <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>

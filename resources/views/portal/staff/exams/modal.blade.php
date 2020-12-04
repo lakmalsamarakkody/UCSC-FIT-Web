@@ -51,3 +51,45 @@
     <!-- /EDIT -->
 
 <!-- /CREATE SHEDULE -->
+
+
+<!-- SHEDULE TABLE -->
+
+    <!-- POSTPONE-->
+    <div class="modal fade" id="postponeExam" data-backdrop="static" tabindex="-1" aria-labelledby="postponeExamLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="postponeExamLabel">Apply Changes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row align-items-center">
+                            <div class="form-group col-6">
+                                <label for="examDate">Date</label>
+                                <input type="date" class="form-control" name="examDate" id="examDate">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="startTime">Start Time</label>
+                                <input type="time" class="form-control" name="startTime" id="startTime">
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+                    <button type="button" class="btn btn-outline-primary">Apply Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- /POSTPONE -->
+
+<!-- /SHEDULE TABLE -->
