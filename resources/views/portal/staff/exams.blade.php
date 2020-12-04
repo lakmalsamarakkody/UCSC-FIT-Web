@@ -94,7 +94,14 @@
                       <td>{{ $exam->date }}</td>
                       <td>2:30PM</td>
                       <td>4.30PM</td>
-                      <td><button type="button" class="btn btn-outline-danger"><i class="fas fa-minus"></i></button></td>
+                      <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
+                          <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                          <button type="button" class="btn btn-outline-info"><i class="fas fa-share-square"></i></button>
+                          <button type="button" class="btn btn-outline-success"><i class="fas fa-file-signature"></i></button>
+                        </div>
+                      </td>
                     </tr>
                     @endforeach
                   </tbody>
@@ -137,7 +144,7 @@
                     <td>12.00PM</td>
                     <td>
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-warning"><i class="fas fa-calendar-plus"></i></button>
                         <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
