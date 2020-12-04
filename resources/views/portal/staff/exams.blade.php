@@ -82,7 +82,7 @@
                       <th>Date</th>
                       <th>Start Time</th>
                       <th>End Time</th>
-                      <th></th>
+                      <th>&nbsp;</th>
                     </tr>
                   </thead>
                   <tbody class="text-center">
@@ -96,7 +96,7 @@
                       <td>4.30PM</td>
                       <td>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
+                          <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#editShedule"><i class="fas fa-edit"></i></button>
                           <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                           <button type="button" class="btn btn-outline-info"><i class="fas fa-share-square"></i></button>
                           <button type="button" class="btn btn-outline-success"><i class="fas fa-file-signature"></i></button>
@@ -130,7 +130,7 @@
                     <th>Date</th>
                     <th>Start Time</th>
                     <th>End Time</th>
-                    <th></th>
+                    <th>&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -157,11 +157,49 @@
           </div>
         </div>
         <!-- /EXAM SHEDULE TABLE-->
+
+        <!-- EXAMS HELD -->
+        <div class="col-12 mt-5">
+          <div class="card">
+            <div class="card-header">Exams Held</div>
+            <div class="card-body">
+              <table class="table yajra-datatable">
+                <thead class="text-center">
+                  <tr>
+                    <th>Subject Code</th>
+                    <th>Subject Name</th>
+                    <th>Exam Type</th>
+                    <th>Date</th>
+                    <th>Started Time</th>
+                    <th>Ended Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($exams as $exam)
+                  <tr class="text-center">
+                    <td>{{ $exam->subject->code }}</td>
+                    <td>{{ $exam->subject->name }}</td>
+                    <td>e-Test</td>
+                    <td>{{ $exam->date }}</td>
+                    <td>10:30 AM</td>
+                    <td>12:30 PM</td>
+                  </tr>
+                      
+                  @endforeach
+                </tbody>
+              </table>
+
+          </div>
+
+          </div>
+          
+        </div>
+        <!-- /EXAMS HELD -->
+
+        @include('portal.staff.exams.modal')
+
       </div>
     </div>
-
-    
- 
 
     <!-- /CONTENT -->
 
