@@ -278,3 +278,17 @@ html{
     color: var(--footer-link-hover-color) !important;
   }
 /* /FOOTER */
+
+/* DATATABLE */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  color: rgb(0, 0, 0) !important;
+  border: 1px solid #ffffff!important;
+  background-color: #2980B9!important;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #ffffff))!important;
+  background: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 100%)!important;
+  background: -moz-linear-gradient(top, #ffffff 0%, #ffffff 100%)!important;
+  background: -ms-linear-gradient(top, #ffffff 0%, #ffffff 100%)!important;
+  background: -o-linear-gradient(top, #ffffff 0%, #ffffff 100%)!important;
+  background: linear-gradient(to bottom, #ffffff 0%, #ffffff 100%)!important;
+}
+/* /DATATABLE */
