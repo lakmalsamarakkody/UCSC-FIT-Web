@@ -29,9 +29,9 @@
     
     <div class="col-12 staff-exams">
       <div class="row">
-        <div class="col-12 mb-5">
 
-          <!-- CREATE EXAM SHEDULE -->
+        <!-- CREATE EXAM SHEDULE -->
+        <div class="col-12 mb-5">
           <div class="card">
             <div class="card-header">Create Exam Shedule</div>
             <div class="card-body">
@@ -52,7 +52,7 @@
                       <option value="">Practical</option>
                     </select>
                   </div>
-                  <div class="form-group col-xl-3 col-lg-4">
+                  <div class="form-group col-xl-2 col-lg-4">
                     <label for="examDate">Date</label>
                     <input type="date" name="examDate" class="form-control"/>
                   </div>
@@ -64,100 +64,92 @@
                     <label for="endTime">End Time</label>
                     <input type="time" name="endTime" class="form-control"/>
                   </div>
+                  <div class="form-group col-xl-auto col-lg-1">
+                    <button type="submit" class="btn btn-outline-primary form-control"><i class="fas fa-plus"></i></button>
+                  </div>
                   
                 </div>
-                <div class="text-center">
-                  <button type="submit" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button>
-                </div>
-                
               </form>
+
+              <div class="col-12 mt-5">
+                <table class="table yajra-datatable">
+                  <thead class="text-center">
+                    <tr>
+                      <th>Subject Code</th>
+                      <th>Subject Name</th>
+                      <th>Exam Type</th>
+                      <th>Date</th>
+                      <th>Start Time</th>
+                      <th>End Time</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-center">
+                    @foreach ($exams as $exam)
+                    <tr>
+                      <td>{{ $exam->subject->code }}</td>
+                      <td>{{ $exam->subject->name }}</td>
+                      <td>e-Test</td>
+                      <td>{{ $exam->date }}</td>
+                      <td>2:30PM</td>
+                      <td>4.30PM</td>
+                      <td><button type="button" class="btn btn-outline-danger"><i class="fas fa-minus"></i></button></td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-outline-primary" onclick="release_shedule()">RELEASE SHEDULE</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      <!-- /CREATE EXAM SHEDULE -->
+        <!-- /CREATE EXAM SHEDULE -->
 
-      <!-- SHEDULE TO RELEASE TABLE -->
-      <div class="col-12 mb-5">
-        <div class="card">
-          <div class="card-header">Exam shedules to be release</div>
-          <div class="card-body">
-            <table class="table yajra-datatable">
-              <thead class="text-center">
-                <tr>
-                  <th>Subject Code</th>
-                  <th>Subject Name</th>
-                  <th>Exam Type</th>
-                  <th>Date</th>
-                  <th>Start Time</th>
-                  <th>End Time</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody class="text-center">
-                @foreach ($exams as $exam)
-                <tr>
-                  <td>{{ $exam->subject->code }}</td>
-                  <td>{{ $exam->subject->name }}</td>
-                  <td>e-Test</td>
-                  <td>{{ $exam->date }}</td>
-                  <td>2:30PM</td>
-                  <td>4.30PM</td>
-                  <td><button type="button" class="btn btn-outline-danger"><i class="fas fa-minus"></i></button></td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-            <div class="text-center">
-              <button type="submit" class="btn btn-outline-primary" onclick="release_shedule()">RELEASE SHEDULE</button>
+
+        <!-- EXAM SHEDULE TABLE -->
+        <div class="col-12 md-5">
+          <div class="card">
+            <div class="card-header">Exam Shedules</div>
+            <div class="card-body">
+              <table class="table yajra-datatable">
+                <thead class="text-center">
+                  <tr>
+                    <th>Subject Code</th>
+                    <th>Subject Name</th>
+                    <th>Exam Type</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($exams as $exam)
+                  <tr class="text-center">
+                    <td>FIT {{ $exam->subject->code }}</td>
+                    <td>{{ $exam->subject->name }}</td>
+                    <td>e-Test</td>
+                    <td>{{ $exam->date }}</td>
+                    <td>10.00AM</td>
+                    <td>12.00PM</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+
             </div>
           </div>
-          
-
         </div>
-
+        <!-- /EXAM SHEDULE TABLE-->
       </div>
-
-
-      <!-- /SHEDULE TO RELEASE TABLE -->
-
-
-
-      <!-- EXAM SHEDULE TABLE -->
-      <div class="col-12 md-5">
-        <div class="card">
-          <div class="card-header">Exam Shedules</div>
-          <div class="card-body">
-            <table class="table yajra-datatable">
-              <thead class="text-center">
-                <tr>
-                  <th>Subject Code</th>
-                  <th>Subject Name</th>
-                  <th>Exam Type</th>
-                  <th>Date</th>
-                  <th>Start Time</th>
-                  <th>End Time</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($exams as $exam)
-                <tr class="text-center">
-                  <td>FIT {{ $exam->subject->code }}</td>
-                  <td>{{ $exam->subject->name }}</td>
-                  <td>e-Test</td>
-                  <td>{{ $exam->date }}</td>
-                  <td>10.00AM</td>
-                  <td>12.00PM</td>
-                  <td><button type="button" class="btn btn-outline-danger">Remove</button></td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-
-          </div>
-        </div>
-      </div>
-  <!-- /EXAM SHEDULE TABLE-->
     </div>
 
     
