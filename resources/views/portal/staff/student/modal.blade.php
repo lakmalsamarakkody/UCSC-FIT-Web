@@ -125,6 +125,7 @@
                                     <table class="table w-100">
                                         <thead>
                                             <th>Subject</th>
+                                            <th>Exam Type</th>
                                             <th>Result</th>
                                             <th>Medical</th>
                                         </thead>
@@ -166,6 +167,7 @@
                                     <table class="table w-100">
                                         <thead>
                                             <th>Subject</th>
+                                            <th>Exam Type</th>
                                             <th>Result</th>
                                             <th>Medical</th>
                                         </thead>
