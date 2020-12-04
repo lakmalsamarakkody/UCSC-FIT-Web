@@ -16,7 +16,7 @@
 
   // CREATE
   create_role = () => {
-    SwalQuestionSuccess.fire({
+    SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
     confirmButtonText: 'Yes, Create!',
@@ -42,7 +42,7 @@
 
   // EDIT
   edit_role = () => {
-    SwalQuestionSuccess.fire({
+    SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
     confirmButtonText: 'Yes, Update!',
@@ -94,7 +94,7 @@
 // PERMISSION
   // CREATE
   create_permission = () => {
-    SwalQuestionSuccess.fire({
+    SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
     confirmButtonText: 'Yes, Create!',
@@ -120,7 +120,7 @@
 
   // EDIT
   edit_permission = () => {
-    SwalQuestionSuccess.fire({
+    SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
     confirmButtonText: 'Yes, Update!',
@@ -172,7 +172,7 @@
 // SUBJECT
   // EDIT
   edit_subject = () => {
-    SwalQuestionSuccess.fire({
+    SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
     confirmButtonText: 'Yes, Update!',
@@ -224,7 +224,7 @@
 // EXAM_TYPE
   // EDIT
   edit_exam_type = () => {
-    SwalQuestionSuccess.fire({
+    SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
     confirmButtonText: 'Yes, Update!',
@@ -276,7 +276,7 @@
 // ACADEMIC YEAR
   // EDIT
   edit_academic_year = () => {
-    SwalQuestionSuccess.fire({
+    SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
     confirmButtonText: 'Yes, Update!',
@@ -328,7 +328,7 @@
 // STUDENT PHASE
   // EDIT
   edit_student_phase = () => {
-    SwalQuestionSuccess.fire({
+    SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
     confirmButtonText: 'Yes, Update!',
