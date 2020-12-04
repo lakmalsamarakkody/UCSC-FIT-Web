@@ -161,6 +161,37 @@
 {{-- /PERMISSION --}}
 
 {{-- SUBJECTS --}}
+  <!-- CREATE -->
+  <div class="modal fade" id="modal-create-subject" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Subject</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="InputNewSubjectCode">Subject Code</label>
+              <input type="text" class="form-control" id="InputNewSubjectCode"/>
+            </div>
+            <div class="form-group">
+              <label for="InputNewSubjectName">Subject Name</label>
+              <input type="text" class="form-control" id="InputNewSubjectName"/>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" onclick="create_subject()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ CREATE -->
+
   <!-- EDIT -->
   <div class="modal fade" id="modal-edit-subject" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
@@ -195,6 +226,32 @@
 {{-- /SUBJECTS --}}
 
 {{-- EXAM TYPE --}}
+  <!-- CREATE -->
+  <div class="modal fade" id="modal-create-exam-type" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Exam Type</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="InputNewExamTypeName">Exam Type Name</label>
+              <input type="text" class="form-control" id="InputNewExamTypeName"/>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" onclick="create_exam_type()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ CREATE -->
   <!-- EDIT -->
   <div class="modal fade" id="modal-edit-exam-type" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
@@ -225,6 +282,47 @@
 {{-- /EXAM TYPE --}}
 
 {{-- ACADEMIC YEAR --}}
+  <!-- CREATE -->
+  <div class="modal fade" id="modal-create-academic-year" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Academic Year</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="InputNewYear">Year</label>
+              <select class="form-control" id="InputNewYear">
+                <option>2020</option>
+                <option>2021</option>
+                <option>2022</option>
+              </select>
+              <small id="YearHelp" class="form-text text-muted">any help text</small>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="InputNewYearStart">Start</label>
+                <input type="date" class="form-control" id="InputNewYearStart"/>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="InputNewYearEnd">End</label>
+                <input type="date" class="form-control" id="InputNewYearEnd"/>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" onclick="create_academic_year()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ CREATE -->
   <!-- EDIT -->
   <div class="modal fade" id="modal-edit-academic-year" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
@@ -269,6 +367,38 @@
 {{--/ ACADEMIC YEAR --}}
 
 {{-- STUDENT PHASE --}}
+  <!-- CREATE -->
+  <div class="modal fade" id="modal-create-student-phase" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Student Phase</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="InputNewPhaseCode">Code</label>
+              <input type="text" class="form-control" id="InputNewPhaseCode" aria-describedby="NewPhaseCodeHelp"/>
+              <small id="NewPhaseCodeHelp" class="form-text text-muted">any help text</small>
+            </div>
+            <div class="form-group">
+              <label for="InputNewPhaseDescription">Description</label>
+              <input type="text" class="form-control" id="InputNewPhaseDescription" aria-describedby="NewPhaseDescHelp"/>
+              <small id="NewPhaseDescHelp" class="form-text text-muted">any help text</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" onclick="create_student_phase()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ CREATE -->
   <!-- EDIT -->
   <div class="modal fade" id="modal-edit-student-phase" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">

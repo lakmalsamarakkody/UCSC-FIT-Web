@@ -50,6 +50,9 @@ html{
   -webkit-transition: all 0.3s;
   scroll-behavior: smooth;
 }
+a{
+  color: var(--main-theme-color);
+}
 
 /* buttons */
 .btn.btn-primary{
