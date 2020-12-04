@@ -1,0 +1,41 @@
+.student .avatar {
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 50%;
+}
+.student .img {
+    align-items: center;
+}
+.student .nav-pills .nav-link.active,.student .nav-pills .show > .nav-link{
+    background-color: var(--main-theme-color);
+}
+/* accordion */
+#accordion .card{
+    border: 1px !important;
+    box-shadow: none !important;
+}
+#accordion  .card-header{
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--main-theme-color);
+    background-color: var(--white);
+    border: 1px !important;
+}
+.header-show{    
+    background-color: var(--main-theme-color) !important;
+}
+#accordion  .card-header .btn{
+    color: var(--main-theme-color);
+}
+.btn-show{    
+    background-color: var(---main-theme-color) ;
+    color: var(--white)!important;
+}
+#accordion  .card-header .btn:focus{
+    box-shadow: none !important;
+}
+#accordion  .card .card-body th {
+    color: var(--main-theme-color);
+    font-weight: normal;
+}
+/* /accordion */

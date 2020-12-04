@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\Student_Registration\Academic_Year;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -11,7 +12,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $years=Student::select('reg_year')->groupBy('reg_year')->get();
+        $years=Academic_Year::select('year')->get();
         return view('portal/staff/students',[
             'years'=>$years
         ]);
@@ -25,7 +26,7 @@ class StudentController extends Controller
             return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $actionBtn = '<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-view-role"><i class="fas fa-user"></i></button>';
+                $actionBtn = '<button data-toggle="modal" data-target="#exampleModal" title="View Profile" data-toggle="tooltip" data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></button>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])

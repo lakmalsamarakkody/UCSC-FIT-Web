@@ -27,7 +27,7 @@
 
 
     <!-- CONTENT -->
-    <div class="col-lg-12 students">
+    <div class="col-lg-12 student">
       <div class="row">
         <!-- <div class="col-lg-2"></div> -->
 
@@ -44,7 +44,7 @@
                       <select id="inputState" class="form-control ">
                         <option selected>Year</option>
                         @foreach($years as $year)                          
-                        <option value="{{ $year->reg_year }}">{{ $year->reg_year }}</option>
+                        <option value="{{ $year->year }}">{{ $year->year }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -148,6 +148,7 @@
 
         </div>
 
+        @include('portal.staff.student.modal')
       </div>
     </div>
     <!-- /CONTENT -->
