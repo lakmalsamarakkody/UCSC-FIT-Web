@@ -33,7 +33,7 @@
         <!-- CREATE EXAM SCHEDULE -->
         <div class="col-12 mb-5">
           <div class="card">
-            <div class="card-header">Create Exam Shedule</div>
+            <div class="card-header">Create Exam Schedule</div>
             <div class="card-body">
               <form>
                 <div class="form-row align-items-center px-4">
@@ -65,8 +65,8 @@
                     <input type="time" name="endTime" class="form-control"/>
                   </div> --}}
                   <div class="form-group col-xl-1 col-lg-12">
-                    <label for="endTime">&nbsp;</label>
-                    <button type="submit" class="btn btn-outline-primary form-control" onclick="create_schedule();"><i class="fas fa-plus"></i></button>
+                    <label for="submitExam">&nbsp;</label>
+                    <button type="button" class="btn btn-outline-primary form-control" onclick="create_schedule();" id="submitExam" name="submitExam"><i class="fas fa-plus"></i></button>
                   </div>
                   
                 </div>
@@ -96,10 +96,11 @@
                       <td>4.30PM</td>
                       <td>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#editShedule"><i class="fas fa-edit"></i></button>
-                          <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-                          <button type="button" class="btn btn-outline-info"><i class="fas fa-share-square"></i></button>
-                          <button type="button" class="btn btn-outline-success"><i class="fas fa-file-signature"></i></button>
+                          <button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" onclick=""><i class="fas fa-file-signature"></i></button>
+                          <button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Request Approvel" onclick=""><i class="fas fa-share-square"></i></button>
+                          <button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" onclick="" ><i class="fas fa-hand-point-right"></i></button>
+                          <button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Edit" data-target="#editSchedule"><i class="fas fa-edit"></i></button>
+                          <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" onclick="delete_before_release();"><i class="fas fa-trash-alt"></i></button>
                         </div>
                       </td>
                     </tr>
@@ -107,19 +108,19 @@
                   </tbody>
                 </table>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-outline-primary" onclick="">RELEASE SHEDULE</button>
+                  <button type="submit" class="btn btn-outline-primary" onclick="">RELEASE SCHEDULES</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- /CREATE EXAM SHEDULE -->
+        <!-- /CREATE EXAM SCHEDULE -->
 
 
-        <!-- EXAM SHEDULE TABLE -->
+        <!-- EXAM SCHEDULE TABLE -->
         <div class="col-12 md-5">
           <div class="card">
-            <div class="card-header">Exam Shedules</div>
+            <div class="card-header">Exam Schedules</div>
             <div class="card-body">
               <table class="table yajra-datatable">
                 <thead class="text-center">
@@ -156,7 +157,7 @@
             </div>
           </div>
         </div>
-        <!-- /EXAM SHEDULE TABLE-->
+        <!-- /EXAM SCHEDULE TABLE-->
 
         <!-- EXAMS HELD -->
         <div class="col-12 mt-5">
