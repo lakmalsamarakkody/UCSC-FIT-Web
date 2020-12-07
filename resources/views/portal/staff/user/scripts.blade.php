@@ -15,8 +15,8 @@
           name: 'email'
         },
         {
-          data: 'rolename', 
-          name: 'rolename'
+          data: 'role_name', 
+          name: 'role_name'
         },
         {
           data: 'status', 

@@ -56,12 +56,12 @@
                   <div class="form-row">
                     <div class="form-group col">
                       <label for="InputStudentName">Name</label>
-                      <input type="text" class="form-control" id="InputStudentName" aria-describedby="InputStudentNameHelp"/>
+                      <input type="text" class="form-control form-control-sm" id="InputStudentName" aria-describedby="InputStudentNameHelp"/>
                       <small id="InputStudentNameHelp" class="form-text text-muted">any help text</small>
                     </div>
                     <div class="form-group col">
                       <label for="InputStudentNIC">NIC</label>
-                      <input type="text" class="form-control" id="InputStudentNIC" aria-describedby="InputStudentNICHelp"/>
+                      <input type="text" class="form-control form-control-sm" id="InputStudentNIC" aria-describedby="InputStudentNICHelp"/>
                       <small id="InputStudentNICHelp" class="form-text text-muted">any help text</small>
                     </div>
                   </div>
@@ -74,7 +74,7 @@
       <!-- /SEARCH -->
 
       {{-- USER LIST --}}
-      <div class="col-md-12">
+      <div class="col-md-12 mt-4">
         <div class="card">
           <div class="card-header">Users</div>
           <div class="card-body">
@@ -83,6 +83,7 @@
                 <tr>
                   <th>Username</th>
                   <th>Email</th>
+                  <th>Role</th>
                   <th>Status</th>
                   <th>&nbsp;</th>
                 </tr>

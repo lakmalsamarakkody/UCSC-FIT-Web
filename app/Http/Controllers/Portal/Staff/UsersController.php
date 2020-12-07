@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\User;
+use App\Models\User\Role;
 
 class UsersController extends Controller
 {
@@ -17,7 +18,7 @@ class UsersController extends Controller
     public function getUserList(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::join('roles', 'users.role_id', '=', 'roles.id')->select('users.name','users.email','users.status','roles.name as rolename')->get();
+            $data = User::addSelect(['role_name' => Role::select('name')->whereColumn('role_id', 'roles.id')])->get();
             
             return DataTables::of($data)
             ->addIndexColumn()
