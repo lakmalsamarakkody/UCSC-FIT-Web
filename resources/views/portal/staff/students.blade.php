@@ -155,6 +155,7 @@
     </div>
     <!-- /CONTENT -->
 
- @include('portal.staff.student.scripts')
 
 @endsection
+
+@include('portal.staff.student.scripts')

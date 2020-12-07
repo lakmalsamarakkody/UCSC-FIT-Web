@@ -15,6 +15,10 @@
           name: 'email'
         },
         {
+          data: 'status', 
+          name: 'status'
+        },
+        {
           data: 'action', 
           name: 'action', 
           orderable: false, 

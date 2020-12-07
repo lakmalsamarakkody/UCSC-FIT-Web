@@ -192,6 +192,7 @@
     </div>
     <!-- /Page container-fluid -->
 </body>
+@yield('script')
 </html>
 
 

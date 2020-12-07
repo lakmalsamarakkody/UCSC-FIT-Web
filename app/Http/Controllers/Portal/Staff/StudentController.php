@@ -41,6 +41,6 @@ class StudentController extends Controller
 
     public function viewStudent()
     {
-        return view('portal/staff/profile');
+        return view('portal/staff/student/profile');
     }
 }

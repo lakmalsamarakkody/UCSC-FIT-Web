@@ -83,6 +83,7 @@
                   <tr>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Status</th>
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
