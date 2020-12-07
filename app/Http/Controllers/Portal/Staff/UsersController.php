@@ -17,7 +17,7 @@ class UsersController extends Controller
     public function getUserList(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::get();
+            $data = User::join('roles', 'users.role_id', '=', 'roles.id')->select('users.name','users.email','users.status','roles.name as rolename')->get();
             
             return DataTables::of($data)
             ->addIndexColumn()

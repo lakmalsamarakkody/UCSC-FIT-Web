@@ -15,6 +15,10 @@
           name: 'email'
         },
         {
+          data: 'rolename', 
+          name: 'rolename'
+        },
+        {
           data: 'status', 
           name: 'status'
         },
@@ -25,7 +29,7 @@
           searchable: false
         },
       ],
-      coloumnDefs:[
+      columnDefs: [
         {
           targets: 2,
           render: function ( data, type, row ) {
@@ -39,9 +43,9 @@
               color = 'danger';
               status = 'Inactive';
             }
-            return '<span class="text-'+color+'">'+status+'</span>';
+            return '<span class="text-'+color+' font-weight-bold">'+status+'</span>';
           }
-        }
+        },
       ]
     });
   });
