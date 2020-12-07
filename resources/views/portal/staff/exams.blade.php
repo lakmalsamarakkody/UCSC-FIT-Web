@@ -164,7 +164,47 @@
           <div class="card">
             <div class="card-header">Exams Held</div>
             <div class="card-body">
-              <table class="table yajra-datatable">
+              <!-- SEARCH -->
+              <form>
+                <div class="form-row mb-5">
+                  <div class="form-group col-xl-2 col-lg-3">
+                    <label for="srchExamYear">Year</label>
+                    <select name="srchExamYear" id="srchExamYear" class="form-control">
+                      <option slected>2020</option>
+                      <option>2019</option>
+                      <option>2028</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-xl-2 col-lg-3">
+                    <label for="srchExamDate">Date</label>
+                    <input type="date" class="form-control" id="srchExamDate" name="srchExamDate" />
+                  </div>
+                  <div class="form-group col-xl-2 col-lg-3">
+                    <label for="srchExamType">Exam Type</label>
+                    <select name="srchExamType" id="srchExamType" class="form-control">
+                      <option value="" selected>e-Test</option>
+                      <option value="">Practical</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-xl-3 col-lg-3">
+                    <label for="srchSubject">Subject</label>
+                    <select name="srchSubject" id="srchSubject" class="form-control">
+                      <option value="">ICT Applications</option>
+                      <option value="">English for ICT</option>
+                      <option value="">Mathematics for ICT</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-xl-3 col-lg-12">
+                    <label for="btnSearch">&nbsp;</label>
+                    <button type="button" class="btn btn-outline-primary form-control" onclick="" id="btnSearch" name="btnSearch"><i class="fa fa-search"></i> Search</button>
+                  </div>
+
+                </div>
+              </form>
+              <!-- /SEARCH -->
+              
+              <!-- HELD EXAM TABLE -->
+              <table class="table yajra-datatable mb-4">
                 <thead class="text-center">
                   <tr>
                     <th>Subject Code</th>
@@ -189,6 +229,7 @@
                   @endforeach
                 </tbody>
               </table>
+              <!-- /HELD EXAM TABLE -->
 
           </div>
 
