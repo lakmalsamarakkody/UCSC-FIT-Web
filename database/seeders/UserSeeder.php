@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
                 'email'=>"kdd@ucsc.cmb.ac.lk",
                 'password'=>'$2y$10$chLDig2zqSahPLNRnur.0O3xzyvjlzH54Jwsp.gblzj3Ltp.dfxkG',
                 'role_id'=> '2',
+                'status'=> true,
                 'created_at'=> '2020-11-23 10:13:53',
                 'updated_at'=> '2020-11-23 10:13:53'],
                 
@@ -27,6 +28,7 @@ class UserSeeder extends Seeder
                 'email'=>"sls@ucsc.cmb.ac.lk",
                 'password'=>'$2y$10$chLDig2zqSahPLNRnur.0O3xzyvjlzH54Jwsp.gblzj3Ltp.dfxkG',
                 'role_id'=> '2',
+                'status'=> true,
                 'created_at'=> '2020-11-23 10:13:53',
                 'updated_at'=> '2020-11-23 10:13:53'],
 
@@ -34,6 +36,7 @@ class UserSeeder extends Seeder
                 'email'=>"pdv@ucsc.cmb.ac.lk",
                 'password'=>'$2y$10$chLDig2zqSahPLNRnur.0O3xzyvjlzH54Jwsp.gblzj3Ltp.dfxkG',
                 'role_id'=> '2',
+                'status'=> true,
                 'created_at'=> '2020-11-23 10:13:53',
                 'updated_at'=> '2020-11-23 10:13:53'],
 
@@ -41,6 +44,7 @@ class UserSeeder extends Seeder
                 'email'=>"yde@ucsc.cmb.ac.lk",
                 'password'=>'$2y$10$chLDig2zqSahPLNRnur.0O3xzyvjlzH54Jwsp.gblzj3Ltp.dfxkG',
                 'role_id'=> '2',
+                'status'=> false,
                 'created_at'=> '2020-11-23 10:13:53',
                 'updated_at'=> '2020-11-23 10:13:53'],
                 
@@ -48,6 +52,7 @@ class UserSeeder extends Seeder
                 'email'=>"taw@ucsc.cmb.ac.lk",
                 'password'=>'$2y$10$chLDig2zqSahPLNRnur.0O3xzyvjlzH54Jwsp.gblzj3Ltp.dfxkG',
                 'role_id'=> '4',
+                'status'=> false,
                 'created_at'=> '2020-11-23 10:13:53',
                 'updated_at'=> '2020-11-23 10:13:53']
             )
