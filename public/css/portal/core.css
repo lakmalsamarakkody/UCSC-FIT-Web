@@ -280,6 +280,12 @@ html{
 /* /FOOTER */
 
 /* DATATABLE */
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
   color: rgb(0, 0, 0) !important;
   border: 1px solid #ffffff!important;
@@ -291,4 +297,5 @@ html{
   background: -o-linear-gradient(top, #ffffff 0%, #ffffff 100%)!important;
   background: linear-gradient(to bottom, #ffffff 0%, #ffffff 100%)!important;
 }
+
 /* /DATATABLE */
