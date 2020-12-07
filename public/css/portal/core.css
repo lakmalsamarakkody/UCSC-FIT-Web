@@ -299,3 +299,9 @@ html{
 }
 
 /* /DATATABLE */
+
+/* TABLE */
+.table th[rowspan] {
+  vertical-align: middle;
+}
+/* /TABLE */

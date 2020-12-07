@@ -23,7 +23,7 @@
 
     <!-- DATATABLE  -->
     <link rel="stylesheet" href="{{ asset('lib/datatables/css/dataTables.min.css') }}" >
-    {{-- <link rel="stylesheet" href="{{ asset('lib/datatables/css/dataTables.bootstrap4.min.css') }}" > --}}
+    <link rel="stylesheet" href="{{ asset('lib/datatables/css/dataTables.bootstrap4.min.css') }}" >
     <!-- DATATABLE -->
 
     <!-- PAGES -->
