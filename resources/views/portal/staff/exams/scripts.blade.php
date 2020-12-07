@@ -27,14 +27,14 @@
 
   // EDIT
   edit_shedule = () => {
-    SwalQuestionSuccessAutoCLose.fire({
+    SwalQuestionSuccessAutoClose.fire({
       title: "Are you sure ?",
-      text: "Shedule will be update",
-      confirmButtonText: "Yes, Update !",
+      text: "Shedule will be update.",
+      confirmButtonText: "Yes, Update!",
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSUccess.fire({
+        SwalDoneSuccess.fire({
           title: "Updated!",
           text: "Exam shedule updated.",
         })
@@ -50,6 +50,31 @@
   }
 
   // /EDIT
+
+  // POSTPONE
+
+  postpone_exam = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "Shedule will be postpone.",
+      confirmButtonText: "Yes, Postpone!",
+    })
+    .then((result) => {
+      if(result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: "Postponded",
+          text: "Exam postponed.",
+        })
+        $('#postponeExam').modal('hide')
+      }
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Exam has not been postponed.",
+        })
+      }
+    })
+  }
 
 
 </script>
