@@ -6,18 +6,13 @@
       serverSide: true,
       ajax: "{{ route('user.list') }}",
       columns: [
-        // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
         {
           data: 'name', 
-          name: 'Username',
-          orderable: true, 
-          searchable: true
+          name: 'name'
         },
         {
           data: 'email', 
-          name: 'Email',
-          orderable: true, 
-          searchable: true
+          name: 'email'
         },
         {
           data: 'action', 
