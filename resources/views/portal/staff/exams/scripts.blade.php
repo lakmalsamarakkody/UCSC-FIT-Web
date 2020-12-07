@@ -1,23 +1,23 @@
 <script type="text/javascript">
-
+// CREATE EXAM SCHEDULE
   // CREATE
   create_schedule = () => {
     SwalQuestionSuccessAutoClose.fire({
       title: "Are you sure ?",
-      text: "Shedule will be create.",
+      text: "Schedule will be create.",
       confirmButtonText: "Yes, Create!",
     })
     .then((result) => {
       if (result.isConfirmed) {
         SwalDoneSuccess.fire({
           title: "Created!",
-          text: "Exam shedule created.",
+          text: "Exam schedule created.",
         })
       }
       else{
         SwalNotificationWarningAutoClose.fire({
           title: "Cancelled!",
-          text: "Exam shedule has not been created.",
+          text: "Exam schedule has not been created.",
         })
       }
     })
@@ -25,24 +25,24 @@
   // /CREATE
 
   // EDIT
-  edit_shedule = () => {
+  edit_schedule = () => {
     SwalQuestionSuccessAutoClose.fire({
       title: "Are you sure ?",
-      text: "Shedule will be update.",
+      text: "Schedule will be update.",
       confirmButtonText: "Yes, Update!",
     })
     .then((result) => {
       if (result.isConfirmed) {
         SwalDoneSuccess.fire({
           title: "Updated!",
-          text: "Exam shedule updated.",
+          text: "Exam schedule updated.",
         })
-        $('#editShedule').modal('hide')
+        $('#editSchedule').modal('hide')
       }
       else{
         SwalNotificationWarningAutoClose.fire({
           title: "Cancelled!",
-          text: "Exam shedule has not been updated.",
+          text: "Exam schedule has not been updated.",
         })
       }
     })
@@ -54,7 +54,7 @@
   postpone_exam = () => {
     SwalQuestionSuccessAutoClose.fire({
       title: "Are you sure ?",
-      text: "Shedule will be postpone.",
+      text: "Exam will be postpone.",
       confirmButtonText: "Yes, Postpone!",
     })
     .then((result) => {
@@ -86,19 +86,23 @@
       if (result.isConfirmed) {
         SwalDoneSuccess.fire({
           title: 'Deleted!',
-          text: 'Payment type has been deleted.',
+          text: 'Exam has been deleted.',
         })
       }
       else{
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Payment type has not been deleted.',
+          text: 'Exam has not been deleted.',
         })
       }
     })
   }
-
   // /DELETE(BEFORE RELEASE)
+// /CREATE EXAM SCHEDULE
 
+// EXAM SCHEDULES
+  
+
+// /EXAM SCHEDULES
 
 </script>
