@@ -108,7 +108,7 @@
                   </tbody>
                 </table>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-outline-primary" onclick="">RELEASE SCHEDULES</button>
+                  <button type="submit" class="btn btn-outline-primary" onclick="release_schedules()">RELEASE EXAM SCHEDULE</button>
                 </div>
               </div>
             </div>
@@ -145,8 +145,8 @@
                     <td>12.00PM</td>
                     <td>
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#postponeExam"><i class="fas fa-calendar-plus"></i></button>
-                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" data-toggle="modal" data-target="#postponeExam"><i class="fas fa-calendar-plus"></i></button>
+                        <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" onclick="delete_after_release()"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
