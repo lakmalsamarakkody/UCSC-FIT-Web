@@ -38,10 +38,10 @@
                 Filters
               </div>
               <div class="card-body">
-                <form action="">
+                <form action="{{ route('students') }}" method="GET">
                   <div class="form-row">
                     <div class="form-group col-lg-3">
-                      <select id="inputState" class="form-control ">
+                      <select id="inputState" name="inputState" class="form-control ">
                         <option selected>Year</option>
                         @foreach($years as $year)                          
                         <option value="{{ $year->year }}">{{ $year->year }}</option>
@@ -86,7 +86,7 @@
                         </div>
                         <input type="text" class="form-control">
                         <div class="input-group-append">
-                          <button type="button" class="btn btn-outline-primary" id="btnSearch">
+                          <button type="submit" class="btn btn-outline-primary" id="btnSearch">
                             <i class="fa fa-search"></i> Search
                           </button>
                         </div>
@@ -120,7 +120,7 @@
                   </tr>
                 </thead>
                 <tbody class="text-center">
-                  {{-- @foreach($students as $student)
+                  <!-- @foreach($students as $student)
                   <tr>
                     <td>{{ $student->reg_no }}</td>
                     <td>{{ $student->full_name }}</td>
@@ -140,15 +140,17 @@
                         <button title="View Profile" data-toggle="tooltip" data-placement="left" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-view-role"><i class="fas fa-user"></i></button>
                     </td>
                   </tr>
-                  @endforeach --}}
+                  @endforeach -->
                 </tbody>
               </table>
+              <!-- <div class="float-right">
+                {{ $students->links( "pagination::bootstrap-4") }}
+              </div> -->
             </div>
           </div>
 
         </div>
 
-        @include('portal.staff.student.modal')
       </div>
     </div>
     <!-- /CONTENT -->

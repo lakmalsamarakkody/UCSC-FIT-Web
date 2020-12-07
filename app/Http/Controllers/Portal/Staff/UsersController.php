@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Portal\Staff;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-use app\Models\User;
+use App\Models\User;
 
 class UsersController extends Controller
 {
     public function index()
     {
-        return view('portal/staff/users');
+      return view('portal/staff/users');
     }
 
     public function getUserList(Request $request)

@@ -6,36 +6,25 @@
         serverSide: true,
         ajax: "{{ route('student.list') }}",
         columns: [
-            // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {
                 data: 'reg_no', 
-                name: 'Registration NO',
-                orderable: true, 
-                searchable: true
+                name: 'reg_no'
             },
             {
                 data: 'full_name', 
-                name: 'Full Name',
-                orderable: true, 
-                searchable: true
+                name: 'full_name'
             },
             {
                 data: 'nic', 
-                name: 'NIC',
-                orderable: true, 
-                searchable: true
+                name: 'nic'
             },
             {
                 data: 'bit_eligible', 
-                name: 'BIT Eligibility',
-                orderable: true, 
-                searchable: true
+                name: 'bit_eligible'
             },
             {
                 data: 'fit_cert', 
-                name: 'FIT Certificate',
-                orderable: true, 
-                searchable: true
+                name: 'fit_cert'
             },
             {
                 data: 'action', 
@@ -43,8 +32,47 @@
                 orderable: false, 
                 searchable: false
             },
-        ]
+        ],
+        columnDefs: [
+            {
+                targets: 3,
+                render: function ( data, type, row ) {
+                    var color = 'dark';
+                    var tag = 'times';
+                    if (data == 0) {
+                        color = 'dark';
+                        tag = 'times';
+                    } 
+                    if (data == 1) {
+                        color = 'success';
+                        tag = 'check';
+                    }
+                    return '<span class="badge badge-'+color+'"><i class="fa fa-'+tag+'"></i></span>';
+                }
+            },
+            {
+                targets: 4,
+                render: function ( data, type, row ) {
+                    var color = 'dark';
+                    var tag = 'times';
+                    if (data == 0) {
+                        color = 'dark';
+                        tag = 'times';
+                    } 
+                    if (data == 1) {
+                        color = 'success';
+                        tag = 'check';
+                    }
+                    return '<span class="badge badge-'+color+'"><i class="fa fa-'+tag+'"></i></span>';
+                }
+            }
+        ]   
     });
+
+    view_student = () => {
+        // alert('asda');
+        window.open("{{ route('student.profile') }}", '_blank')
+    }
     
     $(".collapse.show").each(function(){
         // Add chevron-down icon for collapse element which is open by default
