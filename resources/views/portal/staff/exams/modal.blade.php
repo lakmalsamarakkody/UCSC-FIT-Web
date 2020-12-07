@@ -1,11 +1,11 @@
 <!-- CREATE SHEDULE -->
 
     <!-- EDIT -->
-    <div class="modal fade" id="editShedule" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticEditExam" aria-hidden="true">
+    <div class="modal fade" id="editSchedule" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticEditSchedule" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticEditShedule">Edit Exam Shedule</h5>
+                    <h5 class="modal-title" id="staticEditSchedule">Edit Exam Schedule</h5>
                     <button type="butoon" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="edit_shedule();">Apply Changes</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="edit_schedule();">Apply Changes</button>
                 </div>
             </div>
         </div>
