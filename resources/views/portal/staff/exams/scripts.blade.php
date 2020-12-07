@@ -77,7 +77,7 @@
   approve_schedule = () => {
     SwalQuestionSuccessAutoClose.fire({
       title: "Are you sure ?",
-      text: "Scheduled exam will be approve.",
+      text: "You wont be able to revert this!",
       confirmButtonText: "Yes, Approve!",
     })
     .then((result) => {
@@ -101,20 +101,20 @@
   request_schedule_approval = () => {
     SwalQuestionSuccessAutoClose.fire({
       title: "Are you sure ?",
-      text: "Request will be send to Coordinator.",
+      text: "You wont be able to revert this!",
       confirmButtonText: "Yes, Send Request!",
     })
     .then((result) => {
       if(result.isConfirmed){
         SwalDoneSuccess.fire({
           title: 'Approval requested!',
-          text: 'Request has been sent to Coordinator.',
+          text: 'Approval request has been sent to Coordinator.',
         })
       }
       else{
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Request has not been sent.',
+          text: 'Approval request has not been sent.',
         })
       }
     })
@@ -125,14 +125,14 @@
   relase_individual_schedule = () => {
     SwalQuestionSuccessAutoClose.fire ({
       title: "Are you sure ?",
-      text: "Exam schedule will be release",
+      text: "You wont be able to revert this!",
       confirmButtonText: "Yes, Release!",
     })
     .then((result) => {
       if(result.isConfirmed){
         SwalDoneSuccess.fire({
           title: 'Released!',
-          text: 'Exam schedule has been released.',
+          text: 'Exam schedule released.',
         })
       }
       else{
@@ -144,6 +144,30 @@
     })
   }
   // /RELEASE INDIVIDUAL EXAM SCHEDULE
+
+  // RELEASE ALL SCHEDULES
+  release_schedules = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "You wont be able to revert this!",
+      confirmButtonText: "Yes, Release!",
+    })
+    .then((result) => {
+      if(result.isConfirmed){
+        SwalDoneSuccess.fire({
+          title: 'Released!',
+          text: 'Exam schedule released.',
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Exam schedule has not been released.',
+        })
+      }
+    })
+  }
+  // /RELEASE ALL SCHEDULES
 
 // /CREATE EXAM SCHEDULE
 
@@ -174,6 +198,31 @@
     })
   }
   // /POSTPONE
+
+  // DELETE(AFTER RELEASED)
+  delete_after_release = () => {
+    SwalQuestionDanger.fire({
+      title: "Are you sure ?",
+      text: "You wont be able to revert this!",
+      confirmButtonText: 'Yes, Send request!',
+    })
+    .then((result) => {
+      if(result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Request Delete!',
+          text: 'Delete request has been sent to Coordinator.',
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Delete request has not been sent.',
+        })
+      }
+    })
+  }
+
+  // /DELETE(AFTER RELEASED)
 
 // /EXAM SCHEDULES
 
