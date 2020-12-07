@@ -10,12 +10,17 @@ use Yajra\DataTables\Facades\DataTables;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $students = Student::orderBy('id', 'desc');
+
+        if ($request->inputState != null) {
+            $students = $students->where('reg_year', $request->inputState);
+        }
+
+        $students = $students->paginate(10);
         $years=Academic_Year::select('year')->get();
-        return view('portal/staff/students',[
-            'years'=>$years
-        ]);
+        return view('portal/staff/students', compact('years', 'students'));
     }
 
     public function getStudentList(Request $request)
@@ -26,11 +31,16 @@ class StudentController extends Controller
             return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $actionBtn = '<button data-toggle="modal" data-target="#exampleModal" title="View Profile" data-toggle="tooltip" data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></button>';
+                $actionBtn = '<a onclick="view_student();" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])
             ->make(true);
         }
+    }
+
+    public function viewStudent()
+    {
+        return view('portal/staff/profile');
     }
 }

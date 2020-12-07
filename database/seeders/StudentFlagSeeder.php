@@ -16,7 +16,15 @@ class StudentFlagSeeder extends Seeder
     public function run()
     {        
         $students=Student::all();
+        $faker=\Faker\Factory::create();
         foreach($students as $student):
+            $fit=$faker->randomElement($array = array (true, false));
+            $bit=false;
+            if ($fit==true){
+                $bit=$fit;
+            }else{
+                $bit=$faker->randomElement($array = array (true, false));
+            }
             DB::table('student_flags')->insert(
                 array(
                     [
@@ -24,8 +32,8 @@ class StudentFlagSeeder extends Seeder
                         'birth_cert'=>false,
                         'nic_img'=>false,
                         'postal_img'=>false,
-                        'bit_eligible'=>false,
-                        'fit_cert'=>false,
+                        'bit_eligible'=>$bit,
+                        'fit_cert'=>$fit,
                         'phase_id'=>false,
                     ]
                 )
