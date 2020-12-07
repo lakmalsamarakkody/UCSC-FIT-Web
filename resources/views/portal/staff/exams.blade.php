@@ -66,7 +66,7 @@
                   </div> --}}
                   <div class="form-group col-xl-1 col-lg-12">
                     <label for="endTime">&nbsp;</label>
-                    <button type="submit" class="btn btn-outline-primary form-control"><i class="fas fa-plus"></i></button>
+                    <button type="submit" class="btn btn-outline-primary form-control" onclick="create_shedule();"><i class="fas fa-plus"></i></button>
                   </div>
                   
                 </div>
@@ -107,7 +107,7 @@
                   </tbody>
                 </table>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-outline-primary" onclick="release_shedule()">RELEASE SHEDULE</button>
+                  <button type="submit" class="btn btn-outline-primary" onclick="">RELEASE SHEDULE</button>
                 </div>
               </div>
             </div>
