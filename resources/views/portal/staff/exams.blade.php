@@ -30,7 +30,7 @@
     <div class="col-12 staff-exams">
       <div class="row">
 
-        <!-- CREATE EXAM SHEDULE -->
+        <!-- CREATE EXAM SCHEDULE -->
         <div class="col-12 mb-5">
           <div class="card">
             <div class="card-header">Create Exam Shedule</div>
@@ -66,7 +66,7 @@
                   </div> --}}
                   <div class="form-group col-xl-1 col-lg-12">
                     <label for="endTime">&nbsp;</label>
-                    <button type="submit" class="btn btn-outline-primary form-control" onclick="create_shedule();"><i class="fas fa-plus"></i></button>
+                    <button type="submit" class="btn btn-outline-primary form-control" onclick="create_schedule();"><i class="fas fa-plus"></i></button>
                   </div>
                   
                 </div>

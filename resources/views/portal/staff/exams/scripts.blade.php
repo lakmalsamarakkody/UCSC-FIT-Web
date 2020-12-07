@@ -1,24 +1,23 @@
 <script type="text/javascript">
 
   // CREATE
-  create_shedule = () => {
+  create_schedule = () => {
     SwalQuestionSuccessAutoClose.fire({
-    title: "Are you sure?",
-    text: "Shedule will add to the shedule table",
-    confirmButtonText: 'Yes, Create!',
+      title: "Are you sure ?",
+      text: "Shedule will be create.",
+      confirmButtonText: "Yes, Create!",
     })
     .then((result) => {
       if (result.isConfirmed) {
         SwalDoneSuccess.fire({
-          title: 'Created!',
-          text: 'Exam shedule created.',
+          title: "Created!",
+          text: "Exam shedule created.",
         })
-        $('#modal-create-role').modal('hide')
       }
       else{
         SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Exam shedule has not been created.',
+          title: "Cancelled!",
+          text: "Exam shedule has not been created.",
         })
       }
     })
@@ -48,11 +47,10 @@
       }
     })
   }
-
   // /EDIT
 
-  // POSTPONE
 
+  // POSTPONE
   postpone_exam = () => {
     SwalQuestionSuccessAutoClose.fire({
       title: "Are you sure ?",
@@ -75,6 +73,32 @@
       }
     })
   }
+  // /POSTPONE
+
+  // DELETE(BEFORE RELEASE)
+  delete_before_release = () => {
+    SwalQuestionDanger.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, delete it!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Deleted!',
+          text: 'Payment type has been deleted.',
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Payment type has not been deleted.',
+        })
+      }
+    })
+  }
+
+  // /DELETE(BEFORE RELEASE)
 
 
 </script>
