@@ -178,10 +178,10 @@
         </div>
         <!-- PAGE AREA -->
             <!-- FOOTER -->
-            <div class="col-12">
+            <div class="col-12" style="bottom: 0;">
               <div class="row">
                 
-              <div class=" w-100 footer bg-dark text-right py-2 pr-3"  style="bottom: 0; position:absolute;">
+              <div class=" w-100 footer bg-dark text-right py-2 pr-3">
                 Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" class="white"> UCSC</a> </strong>. All Rights Reserved |
                 Powered by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Center - UCSC </a> </strong>
               </div>
