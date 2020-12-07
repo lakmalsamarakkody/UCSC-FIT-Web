@@ -24,6 +24,24 @@
           orderable: false, 
           searchable: false
         },
+      ],
+      coloumnDefs:[
+        {
+          targets: 2,
+          render: function ( data, type, row ) {
+            var color = 'success';
+            var status = 'Active';
+            if (data == 1) {
+              color = 'success';
+              status = 'Active';
+            } 
+            else {
+              color = 'danger';
+              status = 'Inactive';
+            }
+            return '<span class="text-'+color+'">'+status+'</span>';
+          }
+        }
       ]
     });
   });
