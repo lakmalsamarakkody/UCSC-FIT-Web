@@ -53,6 +53,7 @@ Route::get('/portal/staff/', [App\Http\Controllers\portal\staff\HomeController::
 
 Route::get('/portal/staff/students', [App\Http\Controllers\portal\staff\StudentController::class, 'index'])->name('students');
 Route::get('student-list',[App\Http\Controllers\portal\staff\StudentController::class, 'getStudentList'])->name('student.list');
+Route::get('student-Profile',[App\Http\Controllers\portal\staff\StudentController::class, 'viewStudent'])->name('student.profile');
 
 Route::get('/portal/staff/exams', [App\Http\Controllers\portal\staff\ExamsController::class, 'index'])->name('exams');
 Route::get('exam-list',[App\Http\Controllers\portal\staff\ExamsController::class, 'getExamList'])->name('exams.list');
