@@ -17,4 +17,9 @@ class ResultsController extends Controller
     {
         return view('portal/staff/results');
     }
+
+    public function viewResults()
+    {
+        return view('portal/staff/result/view');
+    }
 }
