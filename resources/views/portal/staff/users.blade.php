@@ -27,36 +27,75 @@
 
 
     <!-- CONTENT -->
-    <div class="col-lg-12 dashboard">
+    <div class="col-lg-12 users">
       <div class="row">
 
+        <!-- SEARCH -->
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">SEARCH</div>
+            <div class="card-body">
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-12">
+                    <div class="input-group input-group-md">
+                      <div class="input-group-prepend">
+                        <button type="button" class="form-control btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"><i class="fa fa-filter"></i>Filter</button>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Enter search details.."/>
+                      <div class="input-group-append">
+                        <button type="button" class="form-control btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <div class="collapse" id="collapseExample">
+                <div class="card shadow-none">
+                  <div class="card-body">
+                    <div class="form-row">
+                      <div class="form-group col">
+                        <label for="InputStudentName">Name</label>
+                        <input type="text" class="form-control" id="InputStudentName" aria-describedby="InputStudentNameHelp"/>
+                        <small id="InputStudentNameHelp" class="form-text text-muted">any help text</small>
+                      </div>
+                      <div class="form-group col">
+                        <label for="InputStudentNIC">NIC</label>
+                        <input type="text" class="form-control" id="InputStudentNIC" aria-describedby="InputStudentNICHelp"/>
+                        <small id="InputStudentNICHelp" class="form-text text-muted">any help text</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /SEARCH -->
 
+        {{-- USER LIST --}}
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">Users</div>
+            <div class="card-body">
+              <table class="table user-list-yajradt">
+                <thead class="text-center">
+                  <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                </tbody>
+              </table>
+            </div>
+          </div>
+          {{-- /USER LIST --}}
 
       </div>
     </div>
     <!-- /CONTENT -->
 
-
-
-    <!-- HEADING -->
-    <div class="col-lg-12 mt-5">
-        <div class="row">
-          
-          <div class="card w-100">
-              <div class="card-header">{{ __('Dashboard') }}</div>
-
-              <div class="card-body">
-                  @if (session('status'))
-                      <div class="alert alert-success" role="alert">
-                          {{ session('status') }}
-                      </div>
-                  @endif
-
-                  {{ __('You are logged in as Staff!') }}
-              </div>
-          </div>
-
-      </div>
-    </div>
-
+  @include('portal.staff.user.scripts')
 @endsection
