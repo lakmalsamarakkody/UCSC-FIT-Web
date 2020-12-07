@@ -1,42 +1,104 @@
 <script type="text/javascript">
-// EDIT
-release_shedule = () => {
-  Swal.fire({
-  title: "Are you sure?",
-  text: "You wont be able to revert this!",
-  icon: 'question',
-  iconColor: sweetalert_success,
-  confirmButtonText: 'Yes, Update!',
-  confirmButtonColor: sweetalert_success,
-  showCancelButton: true,
-  cancelButtonColor: sweetalert_primary,
-  timer: 5000,
-  timerProgressBar: true,
-  allowOutsideClick: false,
-  })
-  .then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: 'Updated!',
-        text: 'Permissions has been updated.',
-        icon: 'success',
-        confirmButtonColor: sweetalert_success,
-        allowOutsideClick: false,
-      })
-      $('#modal-edit-role').modal('hide')
-    }
-    else{
-      Swal.fire({
-        title: 'Cancelled!',
-        text: 'Permissions has not been updated.',
-        icon: 'warning',
-        iconColor: sweetalert_warning,
-        confirmButtonColor: sweetalert_warning,
-        allowOutsideClick: false,
-      })
-      $('#modal-edit-role').modal('hide')
-    }
-  })
-}
-// /EDIT
+
+  // CREATE
+  create_schedule = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "Shedule will be create.",
+      confirmButtonText: "Yes, Create!",
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: "Created!",
+          text: "Exam shedule created.",
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Exam shedule has not been created.",
+        })
+      }
+    })
+  }
+  // /CREATE
+
+  // EDIT
+  edit_shedule = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "Shedule will be update.",
+      confirmButtonText: "Yes, Update!",
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: "Updated!",
+          text: "Exam shedule updated.",
+        })
+        $('#editShedule').modal('hide')
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Exam shedule has not been updated.",
+        })
+      }
+    })
+  }
+  // /EDIT
+
+
+  // POSTPONE
+  postpone_exam = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "Shedule will be postpone.",
+      confirmButtonText: "Yes, Postpone!",
+    })
+    .then((result) => {
+      if(result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: "Postponded",
+          text: "Exam postponed.",
+        })
+        $('#postponeExam').modal('hide')
+      }
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Exam has not been postponed.",
+        })
+      }
+    })
+  }
+  // /POSTPONE
+
+  // DELETE(BEFORE RELEASE)
+  delete_before_release = () => {
+    SwalQuestionDanger.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, delete it!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Deleted!',
+          text: 'Payment type has been deleted.',
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Payment type has not been deleted.',
+        })
+      }
+    })
+  }
+
+  // /DELETE(BEFORE RELEASE)
+
+
 </script>
