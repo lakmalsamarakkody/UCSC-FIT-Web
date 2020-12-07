@@ -9,6 +9,5 @@ const color_error = "#87adbd";
 
 
 $(function () {
-
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-tooltip="tooltip"]').tooltip()
 })
