@@ -4,7 +4,7 @@
   create_schedule = () => {
     SwalQuestionSuccessAutoClose.fire({
       title: "Are you sure ?",
-      text: "Schedule will be create.",
+      text: "Exam schedule will be create.",
       confirmButtonText: "Yes, Create!",
     })
     .then((result) => {
@@ -28,7 +28,7 @@
   edit_schedule = () => {
     SwalQuestionSuccessAutoClose.fire({
       title: "Are you sure ?",
-      text: "Schedule will be update.",
+      text: "Exam schedule will be update.",
       confirmButtonText: "Yes, Update!",
     })
     .then((result) => {
@@ -49,6 +49,106 @@
   }
   // /EDIT
 
+  // DELETE(BEFORE RELEASE)
+  delete_before_release = () => {
+    SwalQuestionDanger.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Delete it!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Deleted!',
+          text: 'Scheduled exam has been deleted.',
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Scheduled exam has not been deleted.',
+        })
+      }
+    })
+  }
+  // /DELETE(BEFORE RELEASE)
+
+  // APPROVE SCHEDULE
+  approve_schedule = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "Scheduled exam will be approve.",
+      confirmButtonText: "Yes, Approve!",
+    })
+    .then((result) => {
+      if(result.isConfirmed){
+        SwalDoneSuccess.fire({
+          title: 'Approved!',
+          text: 'Scheduled exam has been approved.',
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Scheduled exam has not been approved.',
+        })
+      }
+    })
+  }
+  // /APPROVE SCHEDULE
+
+  // REQUEST SCHEDULE APPROVAL
+  request_schedule_approval = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "Request will be send to Coordinator.",
+      confirmButtonText: "Yes, Send Request!",
+    })
+    .then((result) => {
+      if(result.isConfirmed){
+        SwalDoneSuccess.fire({
+          title: 'Approval requested!',
+          text: 'Request has been sent to Coordinator.',
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Request has not been sent.',
+        })
+      }
+    })
+  }
+  // /REQUEST SCHEDULE APPROVAL
+
+  // RELEASE INDIVIDUAL EXAM SCHEDULE
+  relase_individual_schedule = () => {
+    SwalQuestionSuccessAutoClose.fire ({
+      title: "Are you sure ?",
+      text: "Exam schedule will be release",
+      confirmButtonText: "Yes, Release!",
+    })
+    .then((result) => {
+      if(result.isConfirmed){
+        SwalDoneSuccess.fire({
+          title: 'Released!',
+          text: 'Exam schedule has been released.',
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Exam schedule has not been released.',
+        })
+      }
+    })
+  }
+  // /RELEASE INDIVIDUAL EXAM SCHEDULE
+
+// /CREATE EXAM SCHEDULE
+
+
+// EXAM SCHEDULES
 
   // POSTPONE
   postpone_exam = () => {
@@ -60,7 +160,7 @@
     .then((result) => {
       if(result.isConfirmed) {
         SwalDoneSuccess.fire({
-          title: "Postponded",
+          title: "Postponed!",
           text: "Exam postponed.",
         })
         $('#postponeExam').modal('hide')
@@ -74,34 +174,6 @@
     })
   }
   // /POSTPONE
-
-  // DELETE(BEFORE RELEASE)
-  delete_before_release = () => {
-    SwalQuestionDanger.fire({
-    title: "Are you sure?",
-    text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, delete it!',
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Exam has been deleted.',
-        })
-      }
-      else{
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Exam has not been deleted.',
-        })
-      }
-    })
-  }
-  // /DELETE(BEFORE RELEASE)
-// /CREATE EXAM SCHEDULE
-
-// EXAM SCHEDULES
-  
 
 // /EXAM SCHEDULES
 
