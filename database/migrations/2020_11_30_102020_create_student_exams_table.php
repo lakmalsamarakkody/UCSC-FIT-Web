@@ -15,8 +15,7 @@ class CreateStudentExamsTable extends Migration
     {
         Schema::create('student_exams', function (Blueprint $table) {
             $table->id();
-            $table->integer('result_id');
-            $table->integer('exam_id');
+            $table->integer('exam_schedule_id');
             $table->integer('student_id');
             $table->string('result');
             $table->decimal('mark',10,2);

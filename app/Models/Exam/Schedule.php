@@ -11,6 +11,8 @@ class Schedule extends Model
     use SoftDeletes;
     use HasFactory;
 
+    protected $table='exam_schedules';
+
     protected $fillable = [
       'subject_id',
       'exam_type_id',
@@ -18,6 +20,16 @@ class Schedule extends Model
       'start_time',
       'end_time'
     ];
+
+    public function exam(){
+      /**
+       * The attributes that are assignable.
+       *
+       * connecting model , foreign_key , local_key
+       */
+      return $this->hasOne('App\Models\Exam','id','exam_id');
+  }
+
     public function type(){
         /**
          * The attributes that are assignable.
