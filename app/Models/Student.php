@@ -29,4 +29,8 @@ class Student extends Model
          */
         return $this->hasMany('App\Models\Student\Payment','student_id','id');
     }
+    public function exam()
+    {
+        return $this->belongsTo('App\Models\Student_Exam');
+    }
 }

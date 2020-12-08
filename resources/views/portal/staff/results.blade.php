@@ -90,7 +90,7 @@
                         <h3 class="mb-0">{{ $month->year }}&nbsp; {{ $month->month }}</h5> 
                       </div>
                       <div class="col-sm-4">
-                        <a class="btn btn-outline-success w-100 text-center" href="{{ url('/portal/staff/results/view') }}/{{ $month->id }}" target="_blank">
+                        <a class="btn btn-outline-success w-100 text-center" href="{{ url('/portal/staff/results/view/') }}/{{ $month->id }}" target="_blank">
                           <i class="fa fa-eye"></i>
                           &nbsp;View Results
                         </a>
@@ -102,7 +102,11 @@
 
                   
                 @endforeach
+                <div class="pt-4 float-right">
+                  {{ $months->links( "pagination::bootstrap-4") }}
+                </div>
               </div>
+              
             </div>
           </div>
 

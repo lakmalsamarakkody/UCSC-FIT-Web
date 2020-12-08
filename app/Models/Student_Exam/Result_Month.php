@@ -13,7 +13,7 @@ class Result_Month extends Model
 
     protected $table='result_months';
 
-    public function user()
+    public function result()
     {
         return $this->belongsTo('App\Models\Student_Exam');
     }

@@ -35,4 +35,8 @@ class Exam extends Model
          */
         return $this->hasOne('App\Models\Subject','id','subject_id');
     }
+    public function student()
+    {
+        return $this->belongsTo('App\Models\Student_Exam');
+    }
 }

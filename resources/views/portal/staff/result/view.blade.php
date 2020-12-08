@@ -123,9 +123,10 @@
                   </tr>
                 </thead>
                 <tbody class="text-center">
+                @foreach($results as $result)
                     <tr>
-                      <td>F850954274</td>
-                      <td>Nicholas Nicholas Wunsch Wunsch</td>
+                      <td>{{ $result->student->reg_no }}</td>
+                      <td>{{ $result->student->full_name }}</td>
                       <td>75</td>
                       <td><i class="fa fa-check"></i></td>
                       <td>45</td>
@@ -137,82 +138,8 @@
                       <td>75</td>
                       <td><i class="fa fa-check"></i></td>
                       <td><button data-toggle="modal" data-target="#exampleModal" title="View Profile" data-tooltip="tooltip" data-placement="bottom"  type="button" class="btn btn-outline-warning"><i class="fas fa-share"></i></button></td>
-                    </tr>
-                    <tr>
-                      <td>F850954274</td>
-                      <td>Nicholas Nicholas Wunsch Wunsch</td>
-                      <td>75</td>
-                      <td><i class="fa fa-check"></i></td>
-                      <td>45</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>35</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>35</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>75</td>
-                      <td><i class="fa fa-check"></i></td>
-                      <td><button data-toggle="modal" data-target="#exampleModal" title="View Profile" data-tooltip="tooltip" data-placement="bottom"  type="button" class="btn btn-outline-warning"><i class="fas fa-share"></i></button></td>
-                    </tr>
-                    <tr>
-                      <td>F850954274</td>
-                      <td>Nicholas Nicholas Wunsch Wunsch</td>
-                      <td>75</td>
-                      <td><i class="fa fa-check"></i></td>
-                      <td>45</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>35</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>35</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>75</td>
-                      <td><i class="fa fa-check"></i></td>
-                      <td><button data-toggle="modal" data-target="#exampleModal" title="View Profile" data-tooltip="tooltip" data-placement="bottom"  type="button" class="btn btn-outline-warning"><i class="fas fa-share"></i></button></td>
-                    </tr>
-                    <tr>
-                      <td>F850954274</td>
-                      <td>Nicholas Nicholas Wunsch Wunsch</td>
-                      <td>75</td>
-                      <td><i class="fa fa-check"></i></td>
-                      <td>45</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>35</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>35</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>75</td>
-                      <td><i class="fa fa-check"></i></td>
-                      <td><button data-toggle="modal" data-target="#exampleModal" title="View Profile" data-tooltip="tooltip" data-placement="bottom"  type="button" class="btn btn-outline-warning"><i class="fas fa-share"></i></button></td>
-                    </tr>
-                    <tr>
-                      <td>F850954274</td>
-                      <td>Nicholas Nicholas Wunsch Wunsch</td>
-                      <td>75</td>
-                      <td><i class="fa fa-check"></i></td>
-                      <td>45</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>35</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>35</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>75</td>
-                      <td><i class="fa fa-check"></i></td>
-                      <td><button data-toggle="modal" data-target="#exampleModal" title="View Profile" data-tooltip="tooltip" data-placement="bottom"  type="button" class="btn btn-outline-warning"><i class="fas fa-share"></i></button></td>
-                    </tr>
-                    <tr>
-                      <td>F850954274</td>
-                      <td>Nicholas Nicholas Wunsch Wunsch</td>
-                      <td>75</td>
-                      <td><i class="fa fa-check"></i></td>
-                      <td>45</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>35</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>35</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>75</td>
-                      <td><i class="fa fa-check"></i></td>
-                      <td><button data-toggle="modal" data-target="#exampleModal" title="View Profile" data-tooltip="tooltip" data-placement="bottom"  type="button" class="btn btn-outline-warning"><i class="fas fa-share"></i></button></td>
-                    </tr>
+                    </tr>                  
+                @endforeach
                 </tbody>
               </table>
             </div>
