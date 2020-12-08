@@ -17,14 +17,19 @@ class ExamScheduleSeeder extends Seeder
     {
       $faker=\Faker\Factory::create();
       $exam_ids=Exam::all();
-      foreach ($exam_ids as $exam_id):
-        for ($i=0; $i < 20; $i++):
-          $Sid = $faker->numberBetween($min = 1, $max = 3);
-          if( $Sid == 3):
-            $Etid = 1;
+      foreach ($exam_ids as $exam_id):                     
+        for ($i=0; $i < 5; $i++):   
+          if($i<2):
+            $Sid=1;
+            $Etid=$i+1;            
+          elseif($i<4):
+            $Sid=2;
+            $Etid=$i-1;
           else:
-            $Etid = $faker->numberBetween($min = 1, $max = 2);
+            $Sid=3;
+            $Etid = 1;
           endif;
+
           DB::table('exam_schedules')->insert(
             array( 
                 [
@@ -38,7 +43,7 @@ class ExamScheduleSeeder extends Seeder
                   'updated_at' => '2020-11-27 17:36:23'
                 ]
             )         
-        );
+          );
         endfor;
       endforeach;
     }
