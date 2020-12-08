@@ -16,8 +16,8 @@ class Subject extends Model
         'name'
     ];
     
-    public function exam(){        
-        return $this->belongsTo('App\Models\Exam');
+    public function exam_schedule(){        
+        return $this->belongsTo('App\Models\Exam\Schedule');
     }
 
 }
