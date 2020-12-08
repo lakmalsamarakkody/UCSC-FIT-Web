@@ -28,7 +28,9 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             PaymentTypeSeeder::class,
             PaymentMethodSeeder::class,
-            PaymentSeeder::class
+            PaymentSeeder::class,
+            ResultMonthSeeder::class,
+            StudentExamSeeder::class
         ]);
     }
 }
