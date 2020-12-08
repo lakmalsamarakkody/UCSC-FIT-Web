@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Exam extends Model
+class Schedule extends Model
 {
     use SoftDeletes;
     use HasFactory;
 
     protected $fillable = [
-        'date',
-        'start_time',
-        'end_time',
-        'subject_id',
-        'exam_type_id'
+      'subject_id',
+      'exam_type_id',
+      'date',
+      'start_time',
+      'end_time'
     ];
     public function type(){
         /**
