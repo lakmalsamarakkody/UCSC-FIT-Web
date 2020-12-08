@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
+use App\Models\Exam\Schedule;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,8 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-      $upcomings=Exam::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();
-      $dones=Exam::where('date', '<', date('Y-m-d'))->orderby('date', 'desc')->take(6)->get();
+      $upcomings=Schedule::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();
+      $dones=Schedule::where('date', '<', date('Y-m-d'))->orderby('date', 'desc')->take(6)->get();
       return view('portal/staff/home',[
           'upcomings' => $upcomings,
           'dones' => $dones
