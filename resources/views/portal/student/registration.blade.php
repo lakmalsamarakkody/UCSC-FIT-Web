@@ -43,6 +43,7 @@
                     <div class="card-header text-center">Register to FIT <br><small style="color:slategrey; text-transform: initial;">Please fill all the details correctly</small></div>
                     <div class="card-body">
                         <form>
+                            <!-- Personal Details -->
                             <div class="details px-3">
                                 <h6 class="text-left mt-4 mb-5">Personal Details</h6>
                                 <div class="form-row align-item-center">
@@ -104,12 +105,54 @@
                                             <option value="">GCE Ordinary Level</option>
                                         </select>
                                     </div>
-
-
-
-
+                                </div>
                             </div>
-                        </div>
+                            <!-- /Personal Details -->
+
+                            <!-- Contact Details -->
+                            <div class="details px-3 mt-4">
+                                <h6 class="text-left mt-4 mb-5">Contact Details</h6>
+                                <div class="form-row align-item-center">
+                                    <div class="form-group col-xl-6 col-md-12">
+                                        <label for="house">Permenent Address</label>
+                                        <input type="text" class="form-control" id="house" name="house" placeholder="No:20">
+                                        <input type="text" class="form-control" id="street1" name="street1" placeholder="First lane">
+                                        <input type="text" class="form-control" id="street2" name="street2" placeholder="Kandy Road">
+                                        <input type="text" class="form-control" id="city1" name="city1" placeholder="Senkadagala">
+                                        <input type="text" class="form-control" id="city2" name="city2" placeholder="Kandy">
+                                        <!--<button type="button" class="btn btn-outline-primary form-control" onclick="add_field();" id="addField" name="addField"><i class="fas fa-plus"></i></button> -->
+                                        
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-12">
+                                        <label for="curruntHouse">Current Address (Optional)</label>
+                                        <input type="text" class="form-control" id="curruntHouse" name="curruntHouse" placeholder="No:20" class="mb">
+                                        <input type="text" class="form-control" id="currentStreet1" name="currentStreet1" placeholder="First Lane">
+                                        <input type="text" class="form-control" id="currentStreet2" name="currentStreet2" placeholder="Kandy Road">
+                                        <input type="text" class="form-control" id="currentCity1" name="currentCity1" placeholder="Senkadagala">
+                                        <input type="text" class="form-control" id="currentCity2" name="currentCity2" placeholder="Kandy">
+                                        <!--<button type="button" class="btn btn-outline-primary form-control" onclick="add_field();" id="addField" name="addField"><i class="fas fa-plus"></i></button> -->
+                                        
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-12">
+                                        <label for="country">Country</label>
+                                        <input type="text" class="form-control" id="country" name="country" placeholder="Sri Lanka">
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-12">
+                                        <label for="telephone">Telephone Number</label>
+                                        <input type="tel" class="form-control" id="telephone" name="telephone" >
+                                    </div>
+
+                                    <div class="form-group col-xl-12 col-md-12">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" class="form-control" id="email" name="email">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Contact Details -->
+                            <p style="color: red;" class="mt-3">* Please double check the details you entered before submit.</p>
+                            <div class="text-left">
+                                <button type="submit" class="btn btn-outline-primary" onclick="">Submit Application</button>
+                              </div>
                         </form>
 
                     </div>
