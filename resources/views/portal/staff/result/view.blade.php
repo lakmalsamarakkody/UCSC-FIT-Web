@@ -102,7 +102,7 @@
         <div class="col-lg-12">
           <div class="card shadow  mt-3">
             <div class="card-header">
-              Students
+              Results
             </div>
             <div class="card-body">
               <table class="table table-bordered yajra-datatable">

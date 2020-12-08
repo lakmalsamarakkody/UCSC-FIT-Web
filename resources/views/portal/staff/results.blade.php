@@ -77,19 +77,20 @@
         <div class="col-lg-12">
           <div class="card shadow  mt-3">
             <div class="card-header">
-              Students
+              Results
             </div>
             <div class="card-body">
               <div class="col-lg-12">
-                <div class="card my-1">
+                @foreach($months as $month)
+                <div class="card my-2">
                   <div class="card-header align-middle">
                     <div class="row">
                       <div class="col-sm-8">
   
-                        <h3 class="mb-0">2020 May</h5> 
+                        <h3 class="mb-0">{{ $month->year }}&nbsp; {{ $month->month }}</h5> 
                       </div>
                       <div class="col-sm-4">
-                        <a class="btn btn-outline-success w-100 text-center" href="{{ route('results.view') }}" target="_blank">
+                        <a class="btn btn-outline-success w-100 text-center" href="{{ url('/portal/staff/results/view') }}/{{ $month->id }}" target="_blank">
                           <i class="fa fa-eye"></i>
                           &nbsp;View Results
                         </a>
@@ -98,57 +99,9 @@
 
                   </div>
                 </div>
-                <div class="card my-1">
-                  <div class="card-header align-middle">
-                    <div class="row">
-                      <div class="col-sm-8">
-  
-                        <h3 class="mb-0">2020 May</h5> 
-                      </div>
-                      <div class="col-sm-4">
-                        <a class="btn btn-outline-success w-100 text-center" href="{{ route('results.view') }}" target="_blank">
-                          <i class="fa fa-eye"></i>
-                          &nbsp;View Results
-                        </a>
-                      </div>
-                    </div>
 
-                  </div>
-                </div>
-                <div class="card my-1">
-                  <div class="card-header align-middle">
-                    <div class="row">
-                      <div class="col-sm-8">
-  
-                        <h3 class="mb-0">2020 May</h5> 
-                      </div>
-                      <div class="col-sm-4">
-                        <a class="btn btn-outline-success w-100 text-center" href="{{ route('results.view') }}" target="_blank">
-                          <i class="fa fa-eye"></i>
-                          &nbsp;View Results
-                        </a>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="card my-1">
-                  <div class="card-header align-middle">
-                    <div class="row">
-                      <div class="col-sm-8">
-  
-                        <h3 class="mb-0">2020 May</h5> 
-                      </div>
-                      <div class="col-sm-4">
-                        <a class="btn btn-outline-success w-100 text-center" href="{{ route('results.view') }}" target="_blank">
-                          <i class="fa fa-eye"></i>
-                          &nbsp;View Results
-                        </a>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
+                  
+                @endforeach
               </div>
             </div>
           </div>
