@@ -1,4 +1,4 @@
-@extends('layouts.registration')
+@extends('layouts.student_portal')
 
 @section('content')
 
@@ -6,7 +6,7 @@
 
     // ACTIVE NAVIGATION ENTRY
     $(document).ready(function ($) {
-        $('#exams').addClass("active");
+        $('#registration').addClass("active");
     });
 
 </script>
@@ -16,7 +16,7 @@
            
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb ">
-              <li class="breadcrumb-item"><a href="{{ url('/portal/staff/') }}">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('/portal/student/') }}">Dashboard</a></li>
               <li class="breadcrumb-item active" aria-current="page">Registration</li>
             </ol>
           </nav>
@@ -26,6 +26,19 @@
     <!-- /BREACRUMB -->
 
     <!-- CONTENT -->
+    <div class="col-12 student-registration">
+        <div class="row">
+            <div class="col-12 mt-5">
+                <div class="card">
+                    <div class="card-header text-center">Register to FIT</div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <!-- /CONTENT -->
 

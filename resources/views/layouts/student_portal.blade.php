@@ -95,7 +95,32 @@
             </div>
             <!-- /USER DETAILS SECTION -->
 
-            <hr width="90%"/>
+            <hr width="90%"/> 
+
+            <!-- MENU SECTION -->
+            <div class="nav-menu w-100">
+              <ul>
+                <li id="registration"><a href="{{ route('registration') }}">Registration</a></li>
+                <li id="information"><a href="{{ route('student.home') }}">Informations</a></li>
+                <li id="exams"><a href="{{ route('student.home') }}">Exams</a></li>
+                <li id="results"><a href="{{ route('student.home') }}">Results</a></li>
+              </ul>
+
+
+             
+                <div class="logout-menu w-100 text-center " style="display:flex; align-items:flex-end;">
+                  <div class="py-3 justify-content-center align-content-center" style="position: absolute; bottom: 0; left: 0; width: 100%;">
+                    
+                    <a  title="Logout" data-tooltip="tooltip"  data-placement="bottom"  class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      <i class="logout fa fa-power-off"></i>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                  </div>
+                  
+                </div>
+
+            </div>
+            <!-- /MENU SECTION -->
 
           </div>
         </div>

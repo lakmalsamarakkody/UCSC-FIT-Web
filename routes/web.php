@@ -71,8 +71,9 @@ Route::get('/portal/staff/system', [App\Http\Controllers\portal\staff\SystemCont
 | STUDENT PORTAL ROUTES
 |--------------------------------------------------------------------------
 */
-Route::get('/portal/student/', [App\Http\Controllers\portal\Student\HomeController::class, 'index']);
-Route::get('/portal/student/registration',[App\Http\Controllers\portal\Student\StudentController::class,'index'])->name('student.registration');
+Route::get('/portal/student/', [App\Http\Controllers\portal\Student\HomeController::class, 'index'])->name('student.home');
+Route::get('/portal/student/registration',[App\Http\Controllers\portal\Student\StudentController::class,'index'])->name('registration');
+
 
 
 
