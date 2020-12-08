@@ -18,18 +18,22 @@ class ExamSeeder extends Seeder
     public function run()
     {    
       $faker=\Faker\Factory::create();
-      for($i=0;$i<10;$i++):
-          DB::table('exams')->insert(
-              array (
-                  [
-                      'year'=>$faker->year(),
-                      'month'=>$faker->randomElement($array = array ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')),
-                      'created_at'=> '2020-11-25 10:13:53',
-                      'updated_at'=> '2020-11-25 10:13:53'
-                  ]
-                  
-              )
-          );
+      for($i=0;$i<20;$i++):
+        $year=0;
+        while($year<2017):
+            $year=$faker->year();
+        endwhile;
+        DB::table('exams')->insert(
+            array (
+                [
+                    'year'=>$year,
+                    'month'=>$faker->randomElement($array = array ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')),
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ]
+                
+            )
+        );
       endfor;
     }
 }
