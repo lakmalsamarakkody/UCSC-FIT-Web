@@ -139,10 +139,10 @@
                   <tr class="text-center">
                     <td>FIT {{ $exam->subject->code }}</td>
                     <td>{{ $exam->subject->name }}</td>
-                    <td>e-Test</td>
+                    <td>{{ $exam->type->exam_type }}</td>
                     <td>{{ $exam->date }}</td>
-                    <td>10.00AM</td>
-                    <td>12.00PM</td>
+                    <td>10:30 AM</td>
+                    <td>12:30 PM</td>
                     <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" data-toggle="modal" data-target="#postponeExam"><i class="fas fa-calendar-plus"></i></button>
