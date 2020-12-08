@@ -14,7 +14,7 @@ class PaymentMethodSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('payment__methods')->insert(
+        DB::table('payment_methods')->insert(
             array (
                 [
                     'method'=>'online',
