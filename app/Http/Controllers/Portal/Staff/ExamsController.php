@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
+use App\Models\Exam\Schedule;
 use Illuminate\Http\Request;
 
 class ExamsController extends Controller
@@ -16,7 +17,7 @@ class ExamsController extends Controller
     
     public function index()
     {
-        $exams=Exam::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();
+        $exams=Schedule::orderby('date')->take(6)->get();
         return view('portal/staff/exams',[
             'exams' => $exams,
         ]);
@@ -25,7 +26,7 @@ class ExamsController extends Controller
     public function getExamList(Request $request)
     {
         if ($request->ajax()) {
-            $data = Exam::latest()->get();
+            $data = Schedule::latest()->get();
             return Datatables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
