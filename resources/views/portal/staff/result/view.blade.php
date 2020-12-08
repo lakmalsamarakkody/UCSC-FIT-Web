@@ -125,8 +125,8 @@
                 <tbody class="text-center">
                 @foreach($results as $result)
                     <tr>
-                      <td>{{ $result->student->reg_no }}</td>
-                      <td>{{ $result->student->full_name }}</td>
+                      <td>{{ $result}}</td>
+                      <td> </td>
                       <td>75</td>
                       <td><i class="fa fa-check"></i></td>
                       <td>45</td>
