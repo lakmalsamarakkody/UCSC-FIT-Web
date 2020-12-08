@@ -49,24 +49,24 @@
               <div class="card-body">
                 <form action="{{ route('students') }}" method="GET">
                   <div class="form-row">
-                    <div class="form-group col-lg-2"></div>
+                    <div class="form-group col-lg-3"></div>
                     <div class="form-group col-lg-3">
-                      <select id="inputState" name="inputState" class="form-control ">
+                      <select id="year" name="year" class="form-control ">
                         <option selected>Year</option>
+                        @foreach($years as $year)                          
+                        <option value="{{ $year->year }}">{{ $year->year }}</option>
+                        @endforeach
                       </select>
                     </div>
                     <div class="form-group col-lg-3">
-                      <select id="inputState" name="inputState" class="form-control ">
+                      <select id="month" name="month" class="form-control ">
                         <option selected>Month</option>
+                        @foreach($months as $month)                          
+                        <option value="{{ $month->month }}">{{ $month->month }}</option>
+                        @endforeach
                       </select>
                     </div>
-                    <div class="form-group col-lg-2">
-                      <button type="submit" class="btn btn-outline-primary w-100"> 
-                        <i class="fa fa-search"></i>
-                        Search
-                      </button>
-                    </div>
-                    <div class="form-group col-lg-2"></div>
+                    <div class="form-group col-lg-3"></div>
                   </div>
                 </form>
               </div>
@@ -81,16 +81,16 @@
             </div>
             <div class="card-body">
               <div class="col-lg-12">
-                @foreach($months as $month)
+                @foreach($exams as $exam)
                 <div class="card my-2">
                   <div class="card-header align-middle">
                     <div class="row">
                       <div class="col-sm-8">
   
-                        <h3 class="mb-0">{{ $month->year }}&nbsp; {{ $month->month }}</h5> 
+                        <h3 class="mb-0">{{ $exam->year }}&nbsp; {{ $exam->month }}</h5> 
                       </div>
                       <div class="col-sm-4">
-                        <a class="btn btn-outline-success w-100 text-center" href="{{ url('/portal/staff/results/view/') }}/{{ $month->id }}" target="_blank">
+                        <a class="btn btn-outline-success w-100 text-center" href="{{ url('/portal/staff/results/view/') }}/{{ $exam->id }}" target="_blank">
                           <i class="fa fa-eye"></i>
                           &nbsp;View Results
                         </a>
@@ -103,7 +103,7 @@
                   
                 @endforeach
                 <div class="pt-4 float-right">
-                  {{ $months->links( "pagination::bootstrap-4") }}
+                  {{ $exams->links( "pagination::bootstrap-4") }}
                 </div>
               </div>
               
