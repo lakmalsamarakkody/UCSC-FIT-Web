@@ -13,14 +13,6 @@ class Student_Exam extends Model
 
     protected $table='student_exams';
 
-    public function month(){
-        /**
-         * The attributes that are assignable.
-         *
-         * connecting model , foreign_key , local_key
-         */
-        return $this->hasOne('App\Models\Student_Exam\Result_Month','id','result_id');
-    }
     public function student(){
         /**
          * The attributes that are assignable.
