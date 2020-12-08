@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             StudentSeeder::class,
             SubjectSeeder::class,
             ExamTypeSeeder::class,
+            ExamScheduleSeeder::class,
             AcademicYearSeeder::class,
             StudentRegistrationSeeder::class,
             StudentFlagSeeder::class,
@@ -29,7 +30,6 @@ class DatabaseSeeder extends Seeder
             PaymentTypeSeeder::class,
             PaymentMethodSeeder::class,
             PaymentSeeder::class,
-            ResultMonthSeeder::class,
             StudentExamSeeder::class
         ]);
     }

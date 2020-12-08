@@ -35,6 +35,6 @@ class Student_Exam extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->hasOne('App\Models\Exam','id','exam_id');
+        return $this->hasOne('App\Models\Exam\Schedule','id','exam_schedule_id');
     }
 }

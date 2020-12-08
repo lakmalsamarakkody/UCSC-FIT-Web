@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student_Exam;
-use App\Models\Student_Exam\Result_Month;
+use App\Models\Exam;
 use Illuminate\Http\Request;
 
 class ResultsController extends Controller
@@ -17,14 +17,14 @@ class ResultsController extends Controller
     
     public function index()
     {
-        $months = Result_Month::latest();
+        $months = Exam::latest();
         $months = $months->paginate(7);
         return view('portal/staff/results',compact('months'));
     }
 
     public function viewResults($id)
     {
-        $results=Student_Exam::where('result_id',$id)->get();
-        return view('portal/staff/result/view', compact('results'));
+        // $results=Student_Exam::where('result_id',$id)->get();
+        // return view('portal/staff/result/view', compact('results'));
     }
 }
