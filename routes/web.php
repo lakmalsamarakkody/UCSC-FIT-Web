@@ -72,6 +72,7 @@ Route::get('/portal/staff/system', [App\Http\Controllers\portal\staff\SystemCont
 |--------------------------------------------------------------------------
 */
 Route::get('/portal/student/', [App\Http\Controllers\portal\Student\HomeController::class, 'index']);
+Route::get('/portal/student/registration',[App\Http\Controllers\portal\Student\StudentController::class,'index'])->name('student.registration');
 
 
 
