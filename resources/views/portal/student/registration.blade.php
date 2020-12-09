@@ -40,7 +40,7 @@
         <div class="row">
             <div class="col-12 mt-5">
                 <div class="card">
-                    <div class="card-header text-center">Register to FIT <br><small style="color:slategrey; text-transform: initial;">Please fill all the details correctly</small></div>
+                    <div class="card-header text-center">Register to FIT Programme<br><small style="color:slategrey; text-transform: initial;">Please fill all the details correctly</small></div>
                     <div class="card-body">
                         <form>
                             <!-- PERSONAL DETAILS -->
@@ -49,26 +49,27 @@
                                 <div class="form-row align-item-center">
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="firstName">First Name</label>
-                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Kamal"/>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder=""/>
                                     </div>
                                     <div class="from-group col-xl-6 col-md-12">
                                         <label for="lastName">Last Name</label>
-                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Atthanayke">
+                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="">
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="fullName">Full Name</label>
-                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Kamal Herath Atthanyke">
+                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="">
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="nameInitials">Name with Initials</label>
-                                        <input type="text" class="form-control" id="nameInitials" name="nameInitials" placeholder="K H Atthanayke">
+                                        <input type="text" class="form-control" id="nameInitials" name="nameInitials" placeholder="">
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="title">Title</label>
                                         <select name="title" id="title" onchange="showfield(this.options[this.selectedIndex].value)" class="form-control">
+                                            <option value="" disabled selected>Select your Title</option>
                                             <option value="">Rev</option>
                                             <option value="">Dr</option>
-                                            <option value="" selected>Mr</option>
+                                            <option value="">Mr</option>
                                             <option value="">Miss</option>
                                             <option value="">Mrs</option>
                                             <option value="">Other(Specify)</option>
@@ -78,6 +79,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="gender">Gender</label>
                                         <select name="gender" id="gender" class="form-control">
+                                            <option value="" disabled selected>Select your Gender</option>
                                             <option value="">Male</option>
                                             <option value="">Female</option>
                                         </select>
@@ -85,6 +87,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="citizenship">Citizenship</label>
                                         <select name="citizenship" id="citizenship" class="form-control">
+                                            <option value="" selected disabled>Select your Citizenship</option>
                                             <option value="">Sri Lankan</option>
                                             <option value="">Foreign National</option>
                                         </select>
@@ -93,17 +96,17 @@
                                         <label for="">&nbsp;</label>
                                         <div class="form-check form-check-inline">
                                             <input type="radio" class="form-check-input" name="nicPassport" id="nic" value="" checked />
-                                            <label for="nicNo" class="form-check-label">National ID</label>
+                                            <label for="nicNo" class="form-check-label">National ID No</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input type="radio" class="form-check-input" name="nicPassport" id="postal" value="" />
-                                            <label for="degree" class="form-check-label">Postal ID</label>
+                                            <label for="degree" class="form-check-label">Postal ID No</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input type="radio" class="form-check-input" name="nicPassport" id="passport" value="" />
                                             <label for="degree" class="form-check-label">Passport No.</label>
                                         </div>
-                                        <input type="text" class="form-control" id="nic" name="nic" placeholder="Enter your National ID / Postal ID / Passport Number">
+                                        <input type="text" class="form-control" id="nic" name="nic" placeholder="Choose relevent No from above and enter it here.">
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="dob">Date of Birth</label>
@@ -115,8 +118,9 @@
 
                             <!-- EDUCATIONAL QUALIFICATIONS -->
                             <div class="details px-3 mt-4 pb-4">
-                                <h6 class="text-left mt-4 mb-5">Educational Qualifications</h6>
-                                <div class="form-check px-5">
+                                <h6 class="text-left mt-4 mb-4">Educational Qualifications</h6>
+                                <small style="color:slategrey;">* Choose your highest educational qualification.</small>
+                                <div class="form-check px-5 mt-2">
                                     <input type="radio" class="form-check-input" name="qualification" id="degree" value="" checked />
                                     <label for="degree" class="form-check-label">Bachelor's Degree</label>
                                 </div>
@@ -191,29 +195,33 @@
                                     </div>
                                     
                                     <div class="form-group col-xl-6 col-md-12">
-                                        <h6 style="color: black;" class="mb-4">Current Address (Optional)</h6>
-                                        <div class="form-group row ">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" name="addrs" id="addrs" onclick="">
+                                            <label for="addrs" class="form-check-label" ><h6 style="color: black;" class="mb-4">Current Address (Optional)</h6></label>
+                                        </div>
+                                        <!--<h6 style="color: black;" class="mb-4">Current Address (Optional)</h6> -->
+                                        <div class="form-group row">
                                             <label for="currentHouse" class="col-xl-4 col-md-12 col-form-label">House Name/No:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentHouse" name="currentHouse">
+                                                <input type="text" class="form-control" id="currentHouse" name="currentHouse" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="currentStreet1" class="col-xl-4 col-md-12 col-form-label">Street 1:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentStreet1" name="currentStreet1">
+                                                <input type="text" class="form-control" id="currentStreet1" name="currentStreet1" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="currentStreet2" class="col-xl-4 col-md-12 col-form-label">Street 2:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentStreet2" name="currentStreet2">
+                                                <input type="text" class="form-control" id="currentStreet2" name="currentStreet2" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="currentCity1" class="col-xl-4 col-md-12 col-form-label">City 1:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="currentCity1" id="currentCity1" class="form-control">
+                                                <select name="currentCity1" id="currentCity1" class="form-control" disabled>
                                                     <option value="">Colombo</option>
                                                     <option value="">&nbsp;</option>
                                                 </select>
@@ -222,14 +230,14 @@
                                         <div class="form-group row">
                                             <label for="currentCity2" class="col-xl-4 col-md-12 col-form-label">City 2:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="currentCity2" id="currentCity2" class="form-control">
+                                                <select name="currentCity2" id="currentCity2" class="form-control" disabled>
                                                     <option value="">Colombo</option>
                                                     <option value="">&nbsp;</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="text-right">
-                                            <button type="button" class="btn btn-outline-primary form-control col-2 text-center" onclick="add_field()" class="addField" id="addField"><i class="fas fa-plus"></i></button>
+                                        <div class="text-right curntAddrs">
+                                            <button type="button" class="btn btn-outline-primary form-control col-2 text-center" onclick="add_field()" class="addField" id="addField" disabled><i class="fas fa-plus"></i></button>
                                         </div>
                                     </div>
 
