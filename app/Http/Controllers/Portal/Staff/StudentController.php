@@ -14,8 +14,8 @@ class StudentController extends Controller
     {
         $students = Student::orderBy('id', 'desc');
 
-        if ($request->inputState != null) {
-            $students = $students->where('reg_year', $request->inputState);
+        if ($request->year != null) {
+            $students = $students->where('reg_year', $request->year);
         }
 
         $students = $students->paginate(10);

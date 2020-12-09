@@ -25,7 +25,7 @@
       <div class="row">
         
         <div class="w-100 text-right pr-4">
-          <button class="btn w-100 btn-lg btn-info float-right pull-right">
+          <button class="btn w-100 btn-lg btn-info float-right pull-right" data-toggle="modal" data-target="#importResults">
             <i class="fa fa-file-import"></i>
              &nbsp; Import Results
           </button>
@@ -36,21 +36,21 @@
 
 
     <!-- CONTENT -->
-    <div class="col-lg-12 student">
+    <div class="col-lg-12 results">
       <div class="row">
         <!-- <div class="col-lg-2"></div> -->
 
         <div class="col-lg-12">
 
-            <div class="card results">
+            <div class="card">
               <div class="card-header">
                 Filters
               </div>
               <div class="card-body">
                 <form action="{{ route('students') }}" method="GET">
                   <div class="form-row">
-                    <div class="form-group col-lg-3"></div>
-                    <div class="form-group col-lg-3">
+                    <div class="form-group col-lg-1"></div>
+                    <div class="form-group col">
                       <select id="year" name="year" class="form-control ">
                         <option selected>Year</option>
                         @foreach($years as $year)                          
@@ -58,15 +58,24 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="form-group col-lg-3">
+                    <div class="form-group col">
                       <select id="month" name="month" class="form-control ">
                         <option selected>Month</option>
-                        @foreach($months as $month)                          
-                        <option value="{{ $month->month }}">{{ $month->month }}</option>
-                        @endforeach
+                        <option value="january">January</option>
+                        <option value="february">February</option>
+                        <option value="march">January</option>
+                        <option value="april">January</option>
+                        <option value="may">January</option>
+                        <option value="june">January</option>
+                        <option value="july">January</option>
+                        <option value="august">January</option>
+                        <option value="september">January</option>
+                        <option value="october">January</option>
+                        <option value="november">January</option>
+                        <option value="december">January</option>
                       </select>
                     </div>
-                    <div class="form-group col-lg-3"></div>
+                    <div class="form-group col-lg-1"></div>
                   </div>
                 </form>
               </div>
@@ -90,7 +99,7 @@
                         <h3 class="mb-0">{{ $exam->year }}&nbsp; {{ $exam->month }}</h5> 
                       </div>
                       <div class="col-sm-4">
-                        <a class="btn btn-outline-success w-100 text-center" href="{{ url('/portal/staff/results/view/') }}/{{ $exam->id }}" target="_blank">
+                        <a class="btn btn-outline-success w-100 text-center" href="{{ url('/portal/staff/result/view/') }}/{{ $exam->id }}" target="_blank">
                           <i class="fa fa-eye"></i>
                           &nbsp;View Results
                         </a>
@@ -117,6 +126,8 @@
     <!-- /CONTENT -->
 
 
-
+@include('portal.staff.result.modal')
 
 @endsection
+
+@include('portal.staff.result.scripts')
