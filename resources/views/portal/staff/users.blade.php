@@ -40,11 +40,11 @@
                 <div class="form-group col-12">
                   <div class="input-group input-group-md">
                     <div class="input-group-prepend">
-                      <button type="button" class="form-control btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"><i class="fa fa-filter"></i>Filter</button>
+                      <button type="button" class="form-control btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"><i class="fa fa-filter"></i>&nbsp;Filter</button>
                     </div>
                     <input type="text" class="form-control" placeholder="Enter search details.."/>
                     <div class="input-group-append">
-                      <button type="button" class="form-control btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                      <button type="button" class="form-control btn btn-primary"><i class="fa fa-search"></i>&nbsp;Search</button>
                     </div>
                   </div>
                 </div>
