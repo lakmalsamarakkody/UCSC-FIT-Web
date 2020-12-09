@@ -1,12 +1,12 @@
 /* Registration */
 .student-registration .card .card-body h6 {
-  color: var(--registration-h6-color);
+  color: var(--color-secondary);
   font-weight: bold;
 }
 
 .student-registration .card .card-body .details {
-  border: solid 1px var(--registration-details-border);
-  box-shadow: var(--registration-details-border);
+  border: solid 1px var(--color-secondary);
+  box-shadow: var(--color-secondary);
   border-radius: 10px;
 }
 
