@@ -32,73 +32,70 @@
         <!-- <div class="col-lg-2"></div> -->
 
         <div class="col-lg-12">
-
-            <div class="card   ">
-              <div class="card-header">
-                Filters
-              </div>
-              <div class="card-body">
-                <form action="{{ route('students') }}" method="GET">
-                  <div class="form-row">
-                    <div class="form-group col-lg-3">
-                      <select id="inputState" name="inputState" class="form-control ">
-                        <option selected>Year</option>
-                        @foreach($years as $year)                          
-                        <option value="{{ $year->year }}">{{ $year->year }}</option>
-                        @endforeach
-                      </select>
+         <div class="card">
+          <div class="card-header">Filters</div>
+          <div class="card-body">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-12">
+                  <div class="input-group input-group-md">
+                    <div class="input-group-prepend">
+                      <button type="button" class="form-control btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"><i class="fa fa-filter"></i>&nbsp;Filter</button>
                     </div>
-                    <div class="form-group col-lg-9 mb-3">
-                      <div class="input-group input-group-md">
-                        <div class="input-group-prepend">
-                          <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="">Filters <i class="fa fa-filter"></i></span>
-                          </button> 
-                          <ul class="dropdown-menu p-3">
-                            <li>                              
-                              <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label p-1" for="exampleCheck1">Registration No</label>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label p-1" for="exampleCheck1">Name</label>
-                              </div>
-                            </li>
-                            <li>
-                            </li>
-                          </ul>
-                          <div class="dropdown-menu p-3">
-                              <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label p-1" for="exampleCheck1">Registration No</label>
-                              </div>
-                              <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label p-1" for="exampleCheck1">Name</label>
-                              </div>
-
-                          </div>
-                          
-
-                        </div>
-                        <input type="text" class="form-control">
-                        <div class="input-group-append">
-                          <button type="submit" class="btn btn-outline-primary" id="btnSearch">
-                            <i class="fa fa-search"></i> Search
-                          </button>
-                        </div>
-                      </div>
-                      
+                    <input type="text" class="form-control" placeholder="Enter search details.."/>
+                    <div class="input-group-append">
+                      <button type="button" class="form-control btn btn-primary"><i class="fa fa-search"></i>&nbsp;Search</button>
                     </div>
-
                   </div>
-
-                </form>
+                </div>
               </div>
-            </div>
+              <div class="collapse" id="collapseExample">
+                <div class="card shadow-none">
+                  <div class="card-body">
+                    <div class="form-row">                    
+                      <div class="form-group col">
+                        <label for="InputStudentNIC">Year</label>
+                        <select id="inputState" name="inputState" class="form-control form-control-sm">
+                          <option selected>select here---</option>
+                          @foreach($years as $year)                          
+                          <option value="{{ $year->year }}">{{ $year->year }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="form-group col">
+                        <label for="InputStudentName">Name</label>
+                        <input type="text" class="form-control form-control-sm" id="InputStudentName" aria-describedby="InputStudentNameHelp"/>
+                        <small id="InputStudentNameHelp" class="form-text text-muted">Enter Name Here</small>
+                      </div>
+                      <div class="form-group col">
+                        <label for="InputStudentNIC">Registration Number</label>
+                        <input type="text" class="form-control form-control-sm" id="InputStudentNIC" aria-describedby="InputStudentNICHelp"/>
+                        <small id="InputStudentNICHelp" class="form-text text-muted">Enter Registration Number Here</small>
+                      </div>                 
+                      <div class="form-group col">
+                        <label for="InputStudentNIC">BIT</label>
+                        <select id="inputState" name="inputState" class="form-control form-control-sm">
+                          <option selected>select here---</option>
+                          <option value="1">Eligible</option>
+                          <option value="0">Not-Eligible</option>
+                        </select>
+                      </div>            
+                      <div class="form-group col">
+                        <label for="InputStudentNIC">FIT Certificate</label>
+                        <select id="inputState" name="inputState" class="form-control form-control-sm">
+                          <option selected>select here---</option>
+                          <option value="1">Eligible</option>
+                          <option value="0">Not-Eligible</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+            </form>
+          </div>
+        </div>
+
 
         </div>
         <!-- <div class="col-lg-1"></div> -->
