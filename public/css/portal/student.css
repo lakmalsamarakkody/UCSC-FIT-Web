@@ -21,11 +21,11 @@ i.fa-times{
     color: var(--color-danger);
 }
 /* accordion */
-#accordion .card{
+.student #accordion .card{
     border: 1px !important;
     box-shadow: none !important;
 }
-#accordion  .card-header{
+.student #accordion  .card-header{
     font-weight: bold;
     text-transform: uppercase;
     color: var(--main-theme-color);
@@ -35,17 +35,17 @@ i.fa-times{
 .header-show{    
     background-color: var(--main-theme-color) !important;
 }
-#accordion  .card-header .btn{
+.student #accordion  .card-header .btn{
     color: var(--main-theme-color);
 }
 .btn-show{    
     background-color: var(---main-theme-color) ;
     color: var(--white)!important;
 }
-#accordion  .card-header .btn:focus{
+.student #accordion  .card-header .btn:focus{
     box-shadow: none !important;
 }
-#accordion  .card .card-body th {
+.student #accordion  .card .card-body th {
     color: var(--main-theme-color);
     font-weight: normal;
 }
