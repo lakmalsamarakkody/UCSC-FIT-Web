@@ -59,7 +59,7 @@ Route::get('/portal/staff/exams', [App\Http\Controllers\portal\staff\ExamsContro
 Route::get('exam-list',[App\Http\Controllers\portal\staff\ExamsController::class, 'getExamList'])->name('exams.list');
 
 Route::get('/portal/staff/results', [App\Http\Controllers\portal\staff\ResultsController::class, 'index'])->name('results');
-Route::get('/portal/staff/results/view/{id}', [App\Http\Controllers\portal\staff\ResultsController::class, 'viewResults'])->name('results.view');
+Route::get('/portal/staff/result/view/{id}', [App\Http\Controllers\portal\staff\ResultsController::class, 'viewResults'])->name('results.view');
 
 Route::get('/portal/staff/users', [App\Http\Controllers\portal\staff\UsersController::class, 'index'])->name('users');
 Route::get('/portal/staff/users/user-list',[App\Http\Controllers\portal\staff\UsersController::class, 'getUserList'])->name('user.list');
