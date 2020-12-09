@@ -23,11 +23,16 @@ class UsersController extends Controller
             return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $actionBtn = '<button data-toggle="modal" data-target="#exampleModal" title="View Profile" data-toggle="tooltip" data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></button>';
+                $actionBtn = '<a onclick="view_user();" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])
             ->make(true);
         }
+    }
+
+    public function viewUser()
+    {
+      return view('portal/staff/user/profile');
     }
 }

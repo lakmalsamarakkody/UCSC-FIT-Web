@@ -49,4 +49,9 @@
       ]
     });
   });
+
+  view_user = () => {
+    // alert('asda');
+    window.open("{{ route('user.profile') }}", '_blank')
+  }
 </script>
