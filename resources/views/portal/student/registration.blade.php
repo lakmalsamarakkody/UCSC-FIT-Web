@@ -43,7 +43,7 @@
                     <div class="card-header text-center">Register to FIT <br><small style="color:slategrey; text-transform: initial;">Please fill all the details correctly</small></div>
                     <div class="card-body">
                         <form>
-                            <!-- Personal Details -->
+                            <!-- PERSONAL DETAILS -->
                             <div class="details px-3">
                                 <h6 class="text-left mt-4 mb-5">Personal Details</h6>
                                 <div class="form-row align-item-center">
@@ -56,12 +56,12 @@
                                         <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Atthanayke">
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
-                                        <label for="otherName">Other Name</label>
-                                        <input type="text" class="form-control" id="otherName" name="otherName" placeholder="Kankanange">
+                                        <label for="fullName">Full Name</label>
+                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Kamal Herath Atthanyke">
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="nameInitials">Name with Initials</label>
-                                        <input type="text" class="form-control" id="nameInitials" name="nameInitials" placeholder="K K Atthanayke">
+                                        <input type="text" class="form-control" id="nameInitials" name="nameInitials" placeholder="K H Atthanayke">
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="title">Title</label>
@@ -90,65 +90,168 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
-                                        <label for="nic">Narional ID / Passport No.</label>
-                                        <input type="text" class="form-control" id="nic" name="nic" placeholder="960342704V">
+                                        <label for="">&nbsp;</label>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" name="nicPassport" id="nic" value="" checked />
+                                            <label for="nicNo" class="form-check-label">National ID</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" name="nicPassport" id="postal" value="" />
+                                            <label for="degree" class="form-check-label">Postal ID</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" name="nicPassport" id="passport" value="" />
+                                            <label for="degree" class="form-check-label">Passport No.</label>
+                                        </div>
+                                        <input type="text" class="form-control" id="nic" name="nic" placeholder="Enter your National ID / Postal ID / Passport Number">
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="dob">Date of Birth</label>
                                         <input type="date" class="form-control" id="dob" name="dob">
                                     </div>
-                                    <div class="form-group col-xl-6 col-md-12">
-                                        <label for="qulification">Highest Qualification</label>
-                                        <select name="qulification" id="qulification" class="form-control">
-                                            <option value="">Bachelor's Degree</option>
-                                            <option value="">GCE Advanced Level</option>
-                                            <option value="">GCE Ordinary Level</option>
-                                        </select>
-                                    </div>
                                 </div>
                             </div>
-                            <!-- /Personal Details -->
+                            <!-- /PERSONAL DETAILS -->
 
-                            <!-- Contact Details -->
+                            <!-- EDUCATIONAL QUALIFICATIONS -->
+                            <div class="details px-3 mt-4 pb-4">
+                                <h6 class="text-left mt-4 mb-5">Educational Qualifications</h6>
+                                <div class="form-check px-5">
+                                    <input type="radio" class="form-check-input" name="qualification" id="degree" value="" checked />
+                                    <label for="degree" class="form-check-label">Bachelor's Degree</label>
+                                </div>
+                                <div class="form-check px-5">
+                                    <input type="radio" class="form-check-input" name="qualification" id="highDip" value="" />
+                                    <label for="highDip" class="form-check-label">Advanced/Higher Diploma from a nationally or internationally recognized organisation</label>
+                                </div>
+                                <div class="form-check px-5">
+                                    <input type="radio" class="form-check-input" name="qualification" id="diploma" value="" />
+                                    <label for="diploma" class="form-check-label">Diploma from a nationally or internationally recognized organisation</label>
+                                </div>
+                                <div class="form-check px-5">
+                                    <input type="radio" class="form-check-input" name="qualification" id="aLevel" value="" />
+                                    <label for="aLevel" class="form-check-label">GCE Advanced Level</label>
+                                </div>
+                                <div class="form-check px-5">
+                                    <input type="radio" class="form-check-input" name="qualification" id="oLevel" value="" />
+                                    <label for="oLevel" class="form-check-label">GCE Ordinary Level</label>
+                                </div>
+                                <div class="form-check px-5">
+                                    <input type="radio" class="form-check-input" name="qualification" id="otherQual" value="" />
+                                    <label for="otherQual" class="form-check-label">Any other qualification</label>
+                                </div>
+                            </div>
+                            <!-- /EDUCATIONAL QUALIFICATIONS -->
+
+                            <!-- CONTACT DETAILS -->
                             <div class="details px-3 mt-4">
                                 <h6 class="text-left mt-4 mb-5">Contact Details</h6>
                                 <div class="form-row align-item-center">
                                     <div class="form-group col-xl-6 col-md-12">
-                                        <label for="house">Permenent Address</label>
-                                        <input type="text" class="form-control" id="house" name="house" placeholder="No:20">
-                                        <input type="text" class="form-control" id="street1" name="street1" placeholder="First lane">
-                                        <input type="text" class="form-control" id="street2" name="street2" placeholder="Kandy Road">
-                                        <input type="text" class="form-control" id="city1" name="city1" placeholder="Senkadagala">
-                                        <input type="text" class="form-control" id="city2" name="city2" placeholder="Kandy">
-                                        <!--<button type="button" class="btn btn-outline-primary form-control" onclick="add_field();" id="addField" name="addField"><i class="fas fa-plus"></i></button> -->
-                                        
+                                        <h6 style="color: black;" class="mb-4">Permanent Address</h6>
+                                        <div class="form-group row">
+                                            <label for="house" class="col-xl-4 col-md-12 col-form-label">House Name/No:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <input type="text" class="form-control" id="house" name="house">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="street1" class="col-xl-4 col-md-12 col-form-label">Street 1:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <input type="text" class="form-control" id="street1" name="street1">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="street2" class="col-xl-4 col-md-12 col-form-label">Street 2:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <input type="text" class="form-control" id="street2" name="street2">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="city1" class="col-xl-4 col-md-12 col-form-label">City 1:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="city1" id="city1" class="form-control">
+                                                    <option value="">Colombo</option>
+                                                    <option value="">&nbsp;</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="city2" class="col-xl-4 col-md-12 col-form-label">City 2:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="city2" id="city2" class="form-control">
+                                                    <option value="">Colombo</option>
+                                                    <option value="">&nbsp;</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="button" class="btn btn-outline-primary form-control col-2 text-center" onclick="add_field();" class="addField" id="addField"><i class="fas fa-plus"></i></button>
+                                        </div>
                                     </div>
+                                    
                                     <div class="form-group col-xl-6 col-md-12">
-                                        <label for="curruntHouse">Current Address (Optional)</label>
-                                        <input type="text" class="form-control" id="curruntHouse" name="curruntHouse" placeholder="No:20" class="mb">
-                                        <input type="text" class="form-control" id="currentStreet1" name="currentStreet1" placeholder="First Lane">
-                                        <input type="text" class="form-control" id="currentStreet2" name="currentStreet2" placeholder="Kandy Road">
-                                        <input type="text" class="form-control" id="currentCity1" name="currentCity1" placeholder="Senkadagala">
-                                        <input type="text" class="form-control" id="currentCity2" name="currentCity2" placeholder="Kandy">
-                                        <!--<button type="button" class="btn btn-outline-primary form-control" onclick="add_field();" id="addField" name="addField"><i class="fas fa-plus"></i></button> -->
-                                        
+                                        <h6 style="color: black;" class="mb-4">Current Address (Optional)</h6>
+                                        <div class="form-group row ">
+                                            <label for="currentHouse" class="col-xl-4 col-md-12 col-form-label">House Name/No:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <input type="text" class="form-control" id="currentHouse" name="currentHouse">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="currentStreet1" class="col-xl-4 col-md-12 col-form-label">Street 1:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <input type="text" class="form-control" id="currentStreet1" name="currentStreet1">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="currentStreet2" class="col-xl-4 col-md-12 col-form-label">Street 2:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <input type="text" class="form-control" id="currentStreet2" name="currentStreet2">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="currentCity1" class="col-xl-4 col-md-12 col-form-label">City 1:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="currentCity1" id="currentCity1" class="form-control">
+                                                    <option value="">Colombo</option>
+                                                    <option value="">&nbsp;</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="currentCity2" class="col-xl-4 col-md-12 col-form-label">City 2:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="currentCity2" id="currentCity2" class="form-control">
+                                                    <option value="">Colombo</option>
+                                                    <option value="">&nbsp;</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="button" class="btn btn-outline-primary form-control col-2 text-center" onclick="add_field()" class="addField" id="addField"><i class="fas fa-plus"></i></button>
+                                        </div>
                                     </div>
+
+                                    
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="country">Country</label>
-                                        <input type="text" class="form-control" id="country" name="country" placeholder="Sri Lanka">
+                                        <select name="country" id="country" class="form-control">
+                                            <option value="">Sri Lanka</option>
+                                        </select>
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="telephone">Telephone Number</label>
                                         <input type="tel" class="form-control" id="telephone" name="telephone" >
                                     </div>
 
-                                    <div class="form-group col-xl-12 col-md-12">
+                                    <div class="form-group col-xl-6 col-md-12">
                                         <label for="email">Email Address</label>
                                         <input type="email" class="form-control" id="email" name="email">
                                     </div>
                                 </div>
                             </div>
-                            <!-- /Contact Details -->
+                            <!-- /CONTACT DETAILS -->
                             <p style="color: red;" class="mt-3">* Please double check the details you entered before submit.</p>
                             <div class="text-left">
                                 <button type="submit" class="btn btn-outline-primary" onclick="">Submit Application</button>
