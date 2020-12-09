@@ -28,10 +28,10 @@
 
     <!-- PAGES -->
     <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/exams.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/system.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/student.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/staff/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/staff/exams.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/staff/system.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/staff/student.css') }}">
     <!-- /PAGES --> 
   <!-- /STYLES -->
 

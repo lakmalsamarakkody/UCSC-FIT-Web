@@ -28,9 +28,7 @@
 
     <!-- PAGES -->
     <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/exams.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/registration.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/student/registration.css') }}">
     <!-- /PAGES --> 
   <!-- /STYLES -->
 
@@ -99,14 +97,12 @@
             <!-- MENU SECTION -->
             <div class="nav-menu w-100">
               <ul>
-                <li id="registration"><a href="{{ route('registration') }}">Registration</a></li>
+                <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                 <li id="information"><a href="{{ route('student.home') }}">Informations</a></li>
                 <li id="exams"><a href="{{ route('student.home') }}">Exams</a></li>
-                <li id="results"><a href="{{ route('student.home') }}">Results</a></li>
+                <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
               </ul>
 
-
-             
                 <div class="logout-menu w-100 text-center " style="display:flex; align-items:flex-end;">
                   <div class="py-3 justify-content-center align-content-center" style="position: absolute; bottom: 0; left: 0; width: 100%;">
                     
@@ -155,19 +151,26 @@
                   <button class="btn btn-link btn-lg nav-item"><i class="fa fa-cog"></i></button>     
                 </div>
 
-                <div class="col-12 mobile-nav">
-                  <ul>
-                    <li id="mobile_registration"><a href="{{ route('registration') }}">Registration</a></li>
-                    <li id="mobile_information"><a href="{{ route('student.home') }}">Informations</a></li>
-                    <li id="mobile_exams"><a href="{{ route('student.home') }}">Exams</a></li>
-                    <li id="mobile_results"><a href="{{ route('student.home') }}">Results</a></li>
-                  </ul>
-                </div>
-
-
               </div>
             </div>
             <!-- /NAV BAR -->
+
+            <!-- MOBILE NAV BAR -->
+            <div class="col-12 mobile-nav py-2">
+              <div class="row">
+                <div class="col-6"><a href="">FIT | UCSC <br> <small>Student Portal</small></a></div>
+                <div class="col-6 text-right align-self-center"><i class="fa fa-bars fa-2x" data-toggle="collapse" data-target="#collapseMobileNav" aria-expanded="false"></i></div>
+                <div class="col-12 mt-2 px-0 collapse border-top border-darken-1" id="collapseMobileNav">
+                  <ul>
+                    <li id="mobile_registration"><a href="{{ route('student.registration') }}">Registration</a></li>
+                    <li id="mobile_information"><a href="{{ route('student.home') }}">Informations</a></li>
+                    <li id="mobile_exams"><a href="{{ route('student.home') }}">Exams</a></li>
+                    <li id="mobile_results"><a href="{{ route('student.results') }}">Results</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- /MOBILE NAV BAR -->
 
             <main class="col-lg-12 py-4 px-5">
               <div class="row">

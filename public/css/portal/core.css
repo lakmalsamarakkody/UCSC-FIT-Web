@@ -237,11 +237,23 @@ html{
 /* /NAV BAR */
 
 /* MOBILE NAV BAR */
+.mobile-nav{
+  background-color: var(--nav-bg-color) !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+  font-size: 14px;
+  color: var( --nav-text-color);
+}
+.mobile-nav a {
+  font-size: 14px;
+  color: var( --nav-text-color);
+}
 .mobile-nav ul {
   display: contents;
+  text-decoration: none;
+  list-style-type: none;
 }
 .mobile-nav ul li{
-  text-decoration: solid;
+  text-decoration: none;
 }
 .mobile-nav ul li.active{
   background-color:  var(--side-bar-active-bg-color);
@@ -249,12 +261,13 @@ html{
 }
 
 .mobile-nav ul li>a{
-  list-style-type:none;
+  list-style: none;
+  list-style-type: none;
   display: block;
   padding: 1rem 0rem 1rem 2rem;
   margin: 0;
   color:var(--side-bar-text-color);
-  text-decoration: solid;
+  text-decoration: none;
 }
 /* /MOBILE NAV BAR */
 
@@ -337,6 +350,9 @@ html{
 
 @media only screen and (max-width: 992px) {
   .sidebar{
+    display: none;
+  } 
+  .page-area .nav-bar{
     display: none;
   } 
 }
