@@ -99,10 +99,10 @@
             <!-- MENU SECTION -->
             <div class="nav-menu w-100">
               <ul>
-                <li id="registration"><a href="{{ route('registration') }}">Registration</a></li>
+                <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                 <li id="information"><a href="{{ route('student.home') }}">Informations</a></li>
                 <li id="exams"><a href="{{ route('student.home') }}">Exams</a></li>
-                <li id="results"><a href="{{ route('student.home') }}">Results</a></li>
+                <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
               </ul>
 
                 <div class="logout-menu w-100 text-center " style="display:flex; align-items:flex-end;">
