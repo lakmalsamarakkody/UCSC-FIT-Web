@@ -50,18 +50,3 @@ i.fa-times{
     font-weight: normal;
 }
 /* /accordion */
-
-
-/* Registration */
-.student-registration .card .card-body h6 {
-    color: var(--registration-h6-color);
-    font-weight: bold;
-}
-
-.student-registration .card .card-body .details {
-    border: solid 1px var(--registration-details-border);
-    box-shadow: var(--registration-details-border);
-    border-radius: 10px;
-}
-
-/* /Registration */
