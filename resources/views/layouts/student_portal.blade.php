@@ -105,8 +105,6 @@
                 <li id="results"><a href="{{ route('student.home') }}">Results</a></li>
               </ul>
 
-
-             
                 <div class="logout-menu w-100 text-center " style="display:flex; align-items:flex-end;">
                   <div class="py-3 justify-content-center align-content-center" style="position: absolute; bottom: 0; left: 0; width: 100%;">
                     
