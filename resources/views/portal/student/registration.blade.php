@@ -196,32 +196,32 @@
                                     
                                     <div class="form-group col-xl-6 col-md-12">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="addrs" id="addrs" onclick="">
-                                            <label for="addrs" class="form-check-label" ><h6 style="color: black;" class="mb-4">Current Address (Optional)</h6></label>
+                                            <input type="checkbox" class="form-check-input" name="addrs" id="current_address" onclick="address_editable()">
+                                            <label for="current_address" class="form-check-label" ><h6 style="color: black;" class="mb-4">Current Address (Optional)</h6></label>
                                         </div>
                                         <!--<h6 style="color: black;" class="mb-4">Current Address (Optional)</h6> -->
                                         <div class="form-group row">
                                             <label for="currentHouse" class="col-xl-4 col-md-12 col-form-label">House Name/No:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentHouse" name="currentHouse" disabled>
+                                                <input type="text" class="form-control" id="currentHouse" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="currentStreet1" class="col-xl-4 col-md-12 col-form-label">Street 1:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentStreet1" name="currentStreet1" disabled>
+                                                <input type="text" class="form-control" id="currentStreet1" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="currentStreet2" class="col-xl-4 col-md-12 col-form-label">Street 2:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentStreet2" name="currentStreet2" disabled>
+                                                <input type="text" class="form-control" id="currentStreet2" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="currentCity1" class="col-xl-4 col-md-12 col-form-label">City 1:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="currentCity1" id="currentCity1" class="form-control" disabled>
+                                                <select id="currentCity1" class="form-control" disabled>
                                                     <option value="">Colombo</option>
                                                     <option value="">&nbsp;</option>
                                                 </select>
@@ -230,7 +230,7 @@
                                         <div class="form-group row">
                                             <label for="currentCity2" class="col-xl-4 col-md-12 col-form-label">City 2:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="currentCity2" id="currentCity2" class="form-control" disabled>
+                                                <select id="currentCity2" class="form-control" disabled>
                                                     <option value="">Colombo</option>
                                                     <option value="">&nbsp;</option>
                                                 </select>
@@ -262,7 +262,7 @@
                             <!-- /CONTACT DETAILS -->
                             <p style="color: red;" class="mt-3">* Please double check the details you entered before submit.</p>
                             <div class="text-left">
-                                <button type="submit" class="btn btn-outline-primary" onclick="">Submit Application</button>
+                                <button type="button" class="btn btn-outline-primary" onclick="">Submit Application</button>
                               </div>
                         </form>
 
@@ -273,32 +273,9 @@
 
     </div>
 
-    <!-- /CONTENT -->
+    <!-- /CONTENT -->    
+@endsection
 
-
-     <!-- HEADING -->
-
-    <!--
-    <div class="col-lg-12 mt-5">
-        <div class="row">
-          
-          <div class="card w-100">
-              <div class="card-header">{{ __('Dashboard') }}</div>
-
-              <div class="card-body">
-                  @if (session('status'))
-                      <div class="alert alert-success" role="alert">
-                          {{ session('status') }}
-                      </div>
-                  @endif
-
-                  {{ __('You are logged in as Staff!') }}
-              </div>
-          </div>
-
-      </div>
-    </div> -->
-
-
-    
+@section('script')
+  @include('portal.student.registration.scripts')
 @endsection
