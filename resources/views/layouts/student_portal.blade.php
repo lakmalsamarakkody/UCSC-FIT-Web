@@ -130,16 +130,14 @@
           <div class="row">
 
             <!-- NAV BAR -->
-            <div class="col-lg-12 nav-bar shadow-sm ">
-              <div class="row  ml-2">
+            <div class="col-lg-12 nav-bar shadow-sm">
+              <div class="row  p-2">
 
-
-                <div class="col-lg-3 p-2 my-2 ml-0">
+                <div class="col-3">
                   <h4 class=" text-left p-0 m-0"><a href="">FIT | UCSC <br> <small>Student Portal</small></a> </h5>
                 </div>
 
-
-                <div class="col-lg-6 text-center p-2 my-2"> 
+                <div class="col-6 text-center"> 
                   <span id="ct" class="navbar-text text-white"></span>
                     {{-- <a class=" mr-3" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
                   
@@ -153,8 +151,17 @@
                     <a class=" mt-0 ml-3" href="/"><img class="mb-3" src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px;"/></a>
                   --}}
                 </div>
-                <div class="col-lg-3 p-2 my-2  text-right"> 
-                  <button class="btn btn-link btn-lg  px-5 nav-item"><i class="fa fa-cog"></i></button>     
+                <div class="col-3 text-right"> 
+                  <button class="btn btn-link btn-lg nav-item"><i class="fa fa-cog"></i></button>     
+                </div>
+
+                <div class="col-12 mobile-nav">
+                  <ul>
+                    <li id="mobile_registration"><a href="{{ route('registration') }}">Registration</a></li>
+                    <li id="mobile_information"><a href="{{ route('student.home') }}">Informations</a></li>
+                    <li id="mobile_exams"><a href="{{ route('student.home') }}">Exams</a></li>
+                    <li id="mobile_results"><a href="{{ route('student.home') }}">Results</a></li>
+                  </ul>
                 </div>
 
 

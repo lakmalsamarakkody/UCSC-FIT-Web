@@ -1,7 +1,5 @@
 :root{
     --accordion-card-color:rgb(242, 238, 255);
-    --registration-details-border: rgb(99, 102, 117);
-    --registration-h6-color: grey;
 }
 .student .avatar {
     vertical-align: middle;
