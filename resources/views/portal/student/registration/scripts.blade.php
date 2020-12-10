@@ -25,6 +25,7 @@
       $('#currentAddressLine3').removeAttr('disabled');
       $('#currentAddressLine4').removeAttr('disabled');
       $('#currentCity').removeAttr('disabled');
+      $('#currentCountry').removeAttr('disabled');
       $('#plusCurrentField').removeAttr('disabled');
     }
     else{
@@ -34,8 +35,8 @@
       document.getElementById('currentAddressLine3').setAttribute("disabled","disabled");
       document.getElementById('currentAddressLine4').setAttribute("disabled","disabled");
       document.getElementById('currentCity').setAttribute("disabled","disabled");
+      document.getElementById('currentCountry').setAttribute("disabled","disabled");
       document.getElementById('plusCurrentField').setAttribute("disabled","disabled");
-
     }
   }
   // /INSERT CURRENT ADDRESS
@@ -57,5 +58,15 @@
   }
   // /ENABLE-DISABLE DESIGNATION
 
+  // ACCEPT CONDITIONS
+  accept_conditions = () => {
+    if(document.getElementById("accept").checked == true) {
+      $('#submitApplication').removeAttr('disabled');
+    }
+    else {
+      document.getElementById('submitApplication').setAttribute("disabled","disabled");
+    }
+  }
+  // /ACCEPT CONDITIONS
 
   </script>
