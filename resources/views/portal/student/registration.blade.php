@@ -277,7 +277,7 @@
                                     <label for="empYes" class="form-check-label">Yes</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    <input type="radio" class="form-check-input" name="employement" id="empNo" />
+                                    <input type="radio" class="form-check-input" name="employement" id="empNo" onclick="disable_designation()"/>
                                     <label for="empNo" class="form-check-label">No</label>
                                 </div>
                                 <div class="form-group row mt-3">
