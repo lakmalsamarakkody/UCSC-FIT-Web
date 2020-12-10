@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Models\Exam\Schedule;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ExamsController extends Controller
 {    
@@ -27,7 +28,7 @@ class ExamsController extends Controller
     {
         if ($request->ajax()) {
             $data = Schedule::latest()->get();
-            return Datatables::of($data)
+            return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
                 $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> 

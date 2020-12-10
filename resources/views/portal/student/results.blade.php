@@ -29,10 +29,10 @@
               <table class="table table-bordered table-responsive-md">
                 <thead class="text-center">
                   <tr>
-                    <th rowspan="2"></th>
-                    <th colspan="2">FIT 103</th>
-                    <th colspan="2">FIT 203</th>
-                    <th colspan="2">FIT 303</th>
+                    <th scope="col" rowspan="2"></th>
+                    <th scope="col" colspan="2">FIT 103</th>
+                    <th scope="col" colspan="2">FIT 203</th>
+                    <th scope="col" colspan="2">FIT 303</th>
                   </tr>
                   <tr>
                     <th>E-Test</th>
