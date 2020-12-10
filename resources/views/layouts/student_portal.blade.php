@@ -29,6 +29,7 @@
     <!-- PAGES -->
     <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/student/registration.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/student/results.css') }}">
     <!-- /PAGES --> 
   <!-- /STYLES -->
 
