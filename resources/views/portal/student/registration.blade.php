@@ -42,7 +42,7 @@
                 <div class="card">
                     <div class="card-header text-center">Register to FIT Programme<br><small style="text-transform: initial;">Please fill all the details correctly</small></div>
                     <div class="card-body">
-                        <form>
+                        <form id="registerForm">
                             <!-- PERSONAL DETAILS -->
                             <div class="details px-3 pb-3">
                                 <h6 class="text-left mt-4 mb-4">Personal Details</h6>
@@ -305,7 +305,7 @@
                                     <button type="button" class="btn btn-outline-secondary form-control" id="saveInformation" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="declaration submitButton" onclick="">Save information</button>
                                 </div>
                                 <div class="text-center mt-3 col-xl-3 col-md-6">
-                                    <button type="reset" class="btn btn-outline-warning form-control" id="resetForm" onclick="">Reset Form</button>
+                                    <button type="reset" class="btn btn-outline-warning form-control" id="resetForm" onclick="reset_form()">Reset Form</button>
                                 </div>
                             </div>
 
@@ -322,7 +322,7 @@
                             <!-- /DECLARATION -->
 
                             <!-- SUBMIT APPLICATION-->
-                            <div class="form-group row collapse multi-collapse" id="submitButton">
+                            <div class="form-group row collapse multi-collapse  text-center" id="submitButton">
                                 <div class="text-center mt-3 col-xl-3 col-md-6">
                                     <button type="button" class="btn btn-outline-primary form-control" id="submitApplication" onclick="" disabled>Submit Application</button>
                                 </div>
