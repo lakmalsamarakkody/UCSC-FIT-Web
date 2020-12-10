@@ -17,7 +17,7 @@
             <div class="col-12">        
                 <div class="card">
                     <div class="card-header">
-                        Student Details
+                        Personal Details
                     </div>
                     <div class="card-body">
                         <div class="row">
