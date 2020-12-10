@@ -6,7 +6,7 @@
 
     // ACTIVE NAVIGATION ENTRY
     $(document).ready(function ($) {
-      $('#results').addClass("active");
+      $('#exams').addClass("active");
     });
 
 </script>
