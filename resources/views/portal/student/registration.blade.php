@@ -72,7 +72,6 @@
                                             <option value="">Mr</option>
                                             <option value="">Miss</option>
                                             <option value="">Mrs</option>
-                                            <option value="">Other(Specify)</option>
                                         </select>
                                        <!-- <div class="col-xl-6 col-md-12" id="divOther"></div> -->
                                     </div>
@@ -160,37 +159,40 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="street1" class="col-xl-4 col-md-12 col-form-label">Street 1:</label>
+                                            <label for="addressLine1" class="col-xl-4 col-md-12 col-form-label">Address Line 1:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="street1" name="street1">
+                                                <input type="text" class="form-control" id="addressLine1">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="street2" class="col-xl-4 col-md-12 col-form-label">Street 2:</label>
+                                            <label for="addressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="street2" name="street2">
+                                                <input type="text" class="form-control" id="addressLine2">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="city1" class="col-xl-4 col-md-12 col-form-label">City 1:</label>
+                                            <label for="addressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="city1" id="city1" class="form-control">
-                                                    <option value="">Colombo</option>
-                                                    <option value="">&nbsp;</option>
-                                                </select>
+                                                <input type="text" class="form-control" id="addressLine3">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row collapse" id="addField">
+                                            <label for="addressLine4" class="col-xl-4 col-md-12 col-form-label">Address Line 4:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <input type="text" class="form-control" id="addressLine4">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="city2" class="col-xl-4 col-md-12 col-form-label">City 2:</label>
+                                            <label for="city" class="col-xl-4 col-md-12 col-form-label">City:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="city2" id="city2" class="form-control">
+                                                <select name="city" id="city" class="form-control">
                                                     <option value="">Colombo</option>
                                                     <option value="">&nbsp;</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <button type="button" class="btn btn-outline-primary form-control col-2 text-center" onclick="add_field();" class="addField" id="addField"><i class="fas fa-plus"></i></button>
+                                            <button class="btn btn-outline-primary form-control col-2 text-center" type="button" id="plusField" data-toggle="collapse" data-target="#addField" aria-expanded="false" aria-controls="addField"><i class="fas fa-plus"></i></button>
                                         </div>
                                     </div>
                                     
@@ -207,37 +209,41 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="currentStreet1" class="col-xl-4 col-md-12 col-form-label">Street 1:</label>
+                                            <label for="currentAddressLine1" class="col-xl-4 col-md-12 col-form-label">Address Line 1:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentStreet1" disabled>
+                                                <input type="text" class="form-control" id="currentAddressLine1" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="currentStreet2" class="col-xl-4 col-md-12 col-form-label">Street 2:</label>
+                                            <label for="currentAddressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentStreet2" disabled>
+                                                <input type="text" class="form-control" id="currentAddressLine2" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="currentCity1" class="col-xl-4 col-md-12 col-form-label">City 1:</label>
+                                            <label for="currentAddressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select id="currentCity1" class="form-control" disabled>
+                                                <input type="text" class="form-control" id="currentAddressLine3" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row collapse" id="addCurrentField">
+                                            <label for="currentAddressLine4" class="col-xl-4 col-md-12 col-form-label">Address Line 4:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <input type="text" class="form-control" id="currentAddressLine4" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="currentCity" class="col-xl-4 col-md-12 col-form-label">City:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select id="currentCity" class="form-control" disabled>
                                                     <option value="">Colombo</option>
                                                     <option value="">&nbsp;</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="currentCity2" class="col-xl-4 col-md-12 col-form-label">City 2:</label>
-                                            <div class="col-xl-8 col-md-12">
-                                                <select id="currentCity2" class="form-control" disabled>
-                                                    <option value="">Colombo</option>
-                                                    <option value="">&nbsp;</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="text-right curntAddrs">
-                                            <button type="button" class="btn btn-outline-primary form-control col-2 text-center" onclick="add_field()" class="addField" id="addField" disabled><i class="fas fa-plus"></i></button>
+                                        <div class="text-right">
+                                            <button class="btn btn-outline-primary form-control col-2 text-center" type="button" id="plusCurrentField" data-toggle="collapse" data-target="#addCurrentField" aria-expanded="false" aria-controls="addCurrentField" disabled><i class="fas fa-plus"></i></button>
                                         </div>
                                     </div>
 
@@ -260,7 +266,7 @@
                                 </div>
                             </div>
                             <!-- /CONTACT DETAILS -->
-                            <p style="color: red;" class="mt-3">* Please double check the details you entered before submit.</p>
+                            <p style="color: var(--color-danger);" class="mt-3">* Please double check the details you entered before submit.</p>
                             <div class="text-left">
                                 <button type="button" class="btn btn-outline-primary" onclick="">Submit Application</button>
                               </div>
