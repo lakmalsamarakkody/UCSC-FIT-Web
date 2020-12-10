@@ -75,10 +75,18 @@
                               <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar" width="60%">
                           </div>
                           <div class="text-center w-100 ">
-                            <button class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="Reset Password"><i class="fa fa-key"></i></button>
-                            <button class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Reset Email"><i class="fa fa-envelope"></i></button>
-                            <button class="btn btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Activate Account"><i class="fa fa-user-alt"></i></button>
-                            <button class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Deactivate Account"><i class="fa fa-user-alt-slash"></i></button>
+                            <button onclick="reset_password()" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="Reset Password">
+                              <i class="fa fa-key"></i>
+                            </button>
+                            <button onclick="reset_email()" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Reset Email">
+                              <i class="fa fa-envelope"></i>
+                            </button>
+                            <button onclick="activate_acc()" class="btn btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Activate Account">
+                              <i class="fa fa-user-alt"></i>
+                            </button>
+                            <button onclick="deactivate_acc()" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Deactivate Account">
+                              <i class="fa fa-user-alt-slash"></i>
+                            </button>
                           </div>
                       </div>   
                   </div>
@@ -191,6 +199,6 @@
     <!-- /CONTENT -->
 <div class="mb-5">&nbsp;</div>
 
- @include('portal.staff.student.scripts')
+ @include('portal.staff.student.profile.scripts')
 
 @endsection
