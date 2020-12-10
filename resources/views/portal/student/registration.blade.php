@@ -40,7 +40,7 @@
         <div class="row">
             <div class="col-12 mt-5">
                 <div class="card">
-                    <div class="card-header text-center">Register to FIT Programme<br><small style="color:slategrey; text-transform: initial;">Please fill all the details correctly</small></div>
+                    <div class="card-header text-center">Register to FIT Programme<br><small style="text-transform: initial;">Please fill all the details correctly</small></div>
                     <div class="card-body">
                         <form>
                             <!-- PERSONAL DETAILS -->
@@ -92,18 +92,18 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
-                                        <label for="">&nbsp;</label>
+                                        <label for="nicPassport">&nbsp;</label>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="nicPassport" id="nic" value="" checked />
+                                            <input type="radio" class="form-check-input" name="nicPassport" id="nicNo" value="" checked />
                                             <label for="nicNo" class="form-check-label">National ID No</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="nicPassport" id="postal" value="" />
-                                            <label for="degree" class="form-check-label">Postal ID No</label>
+                                            <input type="radio" class="form-check-input" name="nicPassport" id="postalNo" value="" />
+                                            <label for="postalNo" class="form-check-label">Postal ID No</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="nicPassport" id="passport" value="" />
-                                            <label for="degree" class="form-check-label">Passport No.</label>
+                                            <input type="radio" class="form-check-input" name="nicPassport" id="passportNo" value="" />
+                                            <label for="passportNo" class="form-check-label">Passport No.</label>
                                         </div>
                                         <input type="text" class="form-control" id="nic" name="nic" placeholder="Choose relevent No from above and enter it here.">
                                     </div>
@@ -118,7 +118,7 @@
                             <!-- EDUCATIONAL QUALIFICATIONS -->
                             <div class="details px-3 mt-4 pb-4">
                                 <h6 class="text-left mt-4 mb-4">Educational Qualifications</h6>
-                                <small style="color:slategrey;">* Choose your highest educational qualification.</small>
+                                <small>* Choose your highest educational qualification.</small>
                                 <div class="form-check px-5 mt-2">
                                     <input type="radio" class="form-check-input" name="qualification" id="degree" value="" checked />
                                     <label for="degree" class="form-check-label">Bachelor's Degree</label>
@@ -266,6 +266,31 @@
                                 </div>
                             </div>
                             <!-- /CONTACT DETAILS -->
+
+                            <!-- EMPLOYMENT DETAILS -->
+                            <div class="details px-3 mt-4 pb-4">
+                                <h6 class="text-left mt-4 mb-4">Employment Details</h6>
+                                <small>* Please note that employment details would be kept confidential and will be utilized only for purposed of improving the FIT programme.</small>
+                                <h6 style="color: black;" class="mt-4 mb-3">Are you currently employed ?</h6>
+                                <div class="form-check px-5 mt-2">
+                                    <input type="radio" class="form-check-input" name="employement" id="empYes" onclick="enable_designation()"/>
+                                    <label for="empYes" class="form-check-label">Yes</label>
+                                </div>
+                                <div class="form-check px-5">
+                                    <input type="radio" class="form-check-input" name="employement" id="empNo" />
+                                    <label for="empNo" class="form-check-label">No</label>
+                                </div>
+                                <div class="form-group row mt-3">
+                                    <label for="designation" style="color: black; font-weight: bold;" class="col-xl-12 col-md-12 col-form-label">Designation:</label>
+                                    <div class="col-xl-6 col-md-12">
+                                        <input type="text" class="form-control" id="designation" placeholder="Please enter your designation" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- /EMPLOYMENT DETAILS -->
+
+
                             <p style="color: var(--color-danger);" class="mt-3">* Please double check the details you entered before submit.</p>
                             <div class="text-left">
                                 <button type="button" class="btn btn-outline-primary" onclick="">Submit Application</button>
