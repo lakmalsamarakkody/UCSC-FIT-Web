@@ -45,23 +45,24 @@
                         <form>
                             <!-- PERSONAL DETAILS -->
                             <div class="details px-3 pb-3">
-                                <h6 class="text-left mt-4 mb-5">Personal Details</h6>
-                                <div class="form-row align-item-center">
+                                <h6 class="text-left mt-4 mb-4">Personal Details</h6>
+                                <small>* Please fill your name and birthday as appearing in the Birth Certificate.</small>
+                                <div class="form-row align-item-center mt-2">
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="firstName">First Name</label>
-                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder=""/>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="e.g. Charith"/>
                                     </div>
                                     <div class="from-group col-xl-6 col-md-12">
                                         <label for="lastName">Last Name</label>
-                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="">
+                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" />
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="fullName">Full Name</label>
-                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="">
+                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="e.g. Charith Sampath Wickramarachchi" />
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="nameInitials">Name with Initials</label>
-                                        <input type="text" class="form-control" id="nameInitials" name="nameInitials" placeholder="">
+                                        <input type="text" class="form-control" id="nameInitials" name="nameInitials" placeholder="C S Wickramarachchi" />
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="title">Title</label>
@@ -299,10 +300,18 @@
                                 </div>
                             </div>
                             <!-- /EMPLOYMENT DETAILS -->
+                            <div class="form-group row">
+                                <div class="text-center mt-3 col-xl-3 col-md-6">
+                                    <button type="button" class="btn btn-outline-secondary form-control" id="saveInformation" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="declaration submitButton" onclick="">Save information</button>
+                                </div>
+                                <div class="text-center mt-3 col-xl-3 col-md-6">
+                                    <button type="reset" class="btn btn-outline-warning form-control" id="resetForm" onclick="">Reset Form</button>
+                                </div>
+                            </div>
 
 
                             <!-- DECLARATION -->
-                            <div class="details px-3 mt-4 pb-3">
+                            <div class="details px-3 mt-4 pb-3 collapse multi-collapse" id="declaration">
                                 <h6 class="text-left mt-4 mb-4">Declaration</h6>
                                 <p style="font-weight: bold;">I do hereby certify that the above particulars furnished by me are true and correct. In the event of my application for registration being accepted, I shall abide by all the regulations governing candidates of the University of Colombo School of Computing. (UCSC) I agree that the University has the right to cancel my registration at any time, either if I am found to have furnished false information or if I do not abide by the regulations governing candidates of the University of Colombo School of Computing.</p>
                                 <div class="form-check text-center">
@@ -312,9 +321,15 @@
                             </div>
                             <!-- /DECLARATION -->
 
-                            <div class="text-left mt-3">
-                                <button type="button" class="btn btn-outline-primary" id="submitApplication" onclick="" disabled>Submit Application</button>
-                              </div>
+                            <!-- SUBMIT APPLICATION-->
+                            <div class="form-group row collapse multi-collapse" id="submitButton">
+                                <div class="text-center mt-3 col-xl-3 col-md-6">
+                                    <button type="button" class="btn btn-outline-primary form-control" id="submitApplication" onclick="" disabled>Submit Application</button>
+                                </div>
+                            </div>
+                            
+                            <!-- SUBMIT APPLICATION-->
+
                         </form>
 
                     </div>
