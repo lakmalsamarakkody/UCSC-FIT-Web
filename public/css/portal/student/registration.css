@@ -12,6 +12,7 @@
 
 .student-registration .card small {
   color: var(--color-secondary);
+  font-size: 0.9rem;
 }
 
 /* /Registration */
