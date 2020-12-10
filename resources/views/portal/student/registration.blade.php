@@ -49,22 +49,6 @@
                                 <small>* Please fill your name and birthday as appearing in the Birth Certificate.</small>
                                 <div class="form-row align-item-center mt-2">
                                     <div class="form-group col-xl-6 col-md-12">
-                                        <label for="firstName">First Name</label>
-                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="e.g. Charith"/>
-                                    </div>
-                                    <div class="from-group col-xl-6 col-md-12">
-                                        <label for="lastName">Last Name</label>
-                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" />
-                                    </div>
-                                    <div class="form-group col-xl-6 col-md-12">
-                                        <label for="fullName">Full Name</label>
-                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="e.g. Charith Sampath Wickramarachchi" />
-                                    </div>
-                                    <div class="form-group col-xl-6 col-md-12">
-                                        <label for="nameInitials">Name with Initials</label>
-                                        <input type="text" class="form-control" id="nameInitials" name="nameInitials" placeholder="C S Wickramarachchi" />
-                                    </div>
-                                    <div class="form-group col-xl-6 col-md-12">
                                         <label for="title">Title</label>
                                         <select name="title" id="title" onchange="showfield(this.options[this.selectedIndex].value)" class="form-control">
                                             <option value="" disabled selected>Select your Title</option>
@@ -75,6 +59,30 @@
                                             <option value="">Mrs</option>
                                         </select>
                                        <!-- <div class="col-xl-6 col-md-12" id="divOther"></div> -->
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-12">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="e.g. Charith"/>
+                                    </div>
+                                    <div class="from-group col-xl-6 col-md-12">
+                                        <label for="middleName">Middle Name</label>
+                                        <input type="text" class="form-control" id="middleName" name="middleName" placeholder="e.g. Kumara" />
+                                    </div>
+                                    <div class="from-group col-xl-6 col-md-12">
+                                        <label for="lastName">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" />
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-12">
+                                        <label for="fullName">Full Name</label>
+                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="e.g. Charith Kumara Sampath Wickramarachchi" />
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-12">
+                                        <label for="nameInitials">Name with Initials</label>
+                                        <input type="text" class="form-control" id="nameInitials" name="nameInitials" placeholder="C K S Wickramarachchi" />
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-12">
+                                        <label for="dob">Date of Birth</label>
+                                        <input type="date" class="form-control" id="dob" name="dob">
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="gender">Gender</label>
@@ -107,10 +115,6 @@
                                             <label for="passportNo" class="form-check-label">Passport No.</label>
                                         </div>
                                         <input type="text" class="form-control" id="nic" name="nic" placeholder="Choose relevent No from above and enter it here.">
-                                    </div>
-                                    <div class="form-group col-xl-6 col-md-12">
-                                        <label for="dob">Date of Birth</label>
-                                        <input type="date" class="form-control" id="dob" name="dob">
                                     </div>
                                 </div>
                             </div>

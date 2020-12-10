@@ -1,6 +1,6 @@
 /* Registration */
 .student-registration .card .card-body h6 {
-  color: var(--sub-text-color);
+  color: var(--sub-theme-color);
   font-weight: bold;
 }
 
@@ -11,7 +11,7 @@
 }
 
 .student-registration .card small {
-  color: var(--color-secondary);
+  color: var(--sub-text-color);
   font-size: 0.9rem;
 }
 
