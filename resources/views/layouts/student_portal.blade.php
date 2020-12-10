@@ -101,7 +101,7 @@
               <ul>
                 <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                 <li id="information"><a href="{{ route('student.home') }}">Information</a></li>
-                <li id="exams"><a href="{{ route('student.home') }}">Exams</a></li>
+                <li id="exams"><a href="{{ route('student.exams') }}">Exams</a></li>
                 <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
               </ul>
 
@@ -166,7 +166,7 @@
                   <ul>
                     <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                     <li id="information"><a href="{{ route('student.home') }}">Information</a></li>
-                    <li id="exams"><a href="{{ route('student.home') }}">Exams</a></li>
+                    <li id="exams"><a href="{{ route('student.exams') }}">Exams</a></li>
                     <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
                   </ul>
                 </div>
