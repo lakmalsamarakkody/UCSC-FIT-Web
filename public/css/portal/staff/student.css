@@ -48,3 +48,22 @@ i.fa-times{
     font-weight: normal;
 }
 /* /accordion */
+
+/* tabs */
+.student .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+    color: var(--main-theme-color);
+    font-size: 1.15rem;
+    background-color: var(--transparent);
+    border-color: var(--main-theme-color) var(--transparent) var(--transparent);
+}
+.student .nav-tabs a{
+    color: var(--main-theme-color);
+    font-size: 1.15rem;
+} 
+.student .nav-tabs {
+    border-bottom: 3px solid var(--main-theme-color);
+}
+.student .nav-tabs .nav-link{
+    border: 3px solid var(--transparent);
+}
+/* /tabs */

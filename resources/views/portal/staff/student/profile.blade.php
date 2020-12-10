@@ -74,7 +74,20 @@
                           <div class="img my-2 text-center">
                               <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar" width="60%">
                           </div>
-
+                          <div class="text-center w-100 ">
+                            <button onclick="reset_password()" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="Reset Password">
+                              <i class="fa fa-key"></i>
+                            </button>
+                            <button onclick="reset_email()" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Reset Email">
+                              <i class="fa fa-envelope"></i>
+                            </button>
+                            <button onclick="activate_acc()" class="btn btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Activate Account">
+                              <i class="fa fa-user-alt"></i>
+                            </button>
+                            <button onclick="deactivate_acc()" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Deactivate Account">
+                              <i class="fa fa-user-alt-slash"></i>
+                            </button>
+                          </div>
                       </div>   
                   </div>
                   <div class="col-lg-12">
@@ -104,7 +117,7 @@
                                 <a class="nav-link" id="medicals-tab" data-toggle="tab" href="#medicals" role="tab" aria-controls="medicals" aria-selected="false">Medicals</a>
                               </li>
                             </ul>
-                            <div class="tab-content" id="myTabContent">
+                            <div class="tab-content pt-3" id="myTabContent">
                               <div class="tab-pane fade show active" id="result" role="tabpanel" aria-labelledby="results-tab">
                                 <table class="table table-bordered table-responsive-md">
                                   <thead class="text-center">
@@ -186,6 +199,6 @@
     <!-- /CONTENT -->
 <div class="mb-5">&nbsp;</div>
 
- @include('portal.staff.student.scripts')
+ @include('portal.staff.student.profile.scripts')
 
 @endsection

@@ -1,6 +1,29 @@
 @section('script')
 <script type="text/javascript">
-
+  // PASSWORD
+  import_result = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "Results will be imported to the Database",
+      confirmButtonText: "Yes, Send!",
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalNotificationSuccess.fire({
+          title: "Imported!",
+          text: "Results imported",
+        })
+        $('#importResults').modal('hide')
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Results not imported",
+        })
+      }
+    })
+  }
+  // /PASSWORD
 $(function () {
     
     // var table = $('.yajra-datatable').DataTable({

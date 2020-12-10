@@ -53,7 +53,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="">Import</button>
+                    <button onclick="import_result()" type="button" class="btn btn-outline-primary" onclick="">Import</button>
                 </div>
             </div>
         </div>
