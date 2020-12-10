@@ -78,6 +78,7 @@ Route::get('/portal/student/registration',[App\Http\Controllers\Portal\Student\S
 
 Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\ResultsController::class,'index'])->name('student.results');
 
+Route::get('/portal/student/information',[App\Http\Controllers\Portal\Student\InformationController::class,'index'])->name('student.information');
 
 
 
