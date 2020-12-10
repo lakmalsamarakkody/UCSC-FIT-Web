@@ -168,7 +168,7 @@
                             <div class="col-12">
                                 <table class="table">
                                     <tr>
-                                        <th>Deignation</th>
+                                        <th>Designation</th>
                                         <td>CEO, Company Name, Address</td>                                        
                                     </tr>
                                 </table>
