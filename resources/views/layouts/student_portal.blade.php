@@ -159,12 +159,12 @@
             <!-- MOBILE NAV BAR -->
             <div class="col-12 mobile-nav py-2">
               <div class="row">
-                <div class="col-6"><a href="">FIT | UCSC <br> <small>Student Portal</small></a></div>
+                <div class="col-6"><a href="">FIT | UCSC<small> &nbsp;Student Portal</small></a></div>
                 <div class="col-6 text-right align-self-center"><i class="fa fa-bars fa-2x" data-toggle="collapse" data-target="#collapseMobileNav" aria-expanded="false"></i></div>
                 <div class="col-12 mt-2 px-0 collapse border-top border-darken-1" id="collapseMobileNav">
                   <ul>
                     <li id="mobile_registration"><a href="{{ route('student.registration') }}">Registration</a></li>
-                    <li id="mobile_information"><a href="{{ route('student.home') }}">Informations</a></li>
+                    <li id="mobile_information"><a href="{{ route('student.home') }}">Information</a></li>
                     <li id="mobile_exams"><a href="{{ route('student.home') }}">Exams</a></li>
                     <li id="mobile_results"><a href="{{ route('student.results') }}">Results</a></li>
                   </ul>
