@@ -16,7 +16,7 @@
   } */
 
   address_editable = () => {
-    console.log('hello');
+    //console.log('hello');
     if(document.getElementById("current_address").checked == true) {
       //console.log('disabled');
       $('#currentHouse').removeAttr('disabled');
@@ -38,6 +38,24 @@
 
     }
   }
-  
   // /INSERT CURRENT ADDRESS
+
+  //ENABLE-DISABLE DESIGNATION
+  enable_designation = () => {
+    if(document.getElementById("empYes").checked == true) {
+      $('#designation').removeAttr('disabled');
+    }
+    else{
+      document.getElementById('designation').setAttribute("disabled","disabled");
+    }
+  }
+
+  disable_designation = () => {
+    if(document.getElementById("empNo").checked == true) {
+      document.getElementById('designation').setAttribute("disabled","disabled");
+    }
+  }
+  // /ENABLE-DISABLE DESIGNATION
+
+
   </script>
