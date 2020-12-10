@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <form>
                             <!-- PERSONAL DETAILS -->
-                            <div class="details px-3">
+                            <div class="details px-3 pb-3">
                                 <h6 class="text-left mt-4 mb-5">Personal Details</h6>
                                 <div class="form-row align-item-center">
                                     <div class="form-group col-xl-6 col-md-12">
@@ -147,9 +147,10 @@
                             <!-- /EDUCATIONAL QUALIFICATIONS -->
 
                             <!-- CONTACT DETAILS -->
-                            <div class="details px-3 mt-4">
-                                <h6 class="text-left mt-4 mb-5">Contact Details</h6>
-                                <div class="form-row align-item-center">
+                            <div class="details px-3 mt-4 pb-3">
+                                <h6 class="text-left mt-4 mb-4">Contact Details</h6>
+                                <small>* If your current address is not the Permanent Address please click on 'Current Address (Optional)' to enter your current address.</small>
+                                <div class="form-row align-item-center mt-3">
                                     <div class="form-group col-xl-6 col-md-12">
                                         <h6 style="color: black;" class="mb-4">Permanent Address</h6>
                                         <div class="form-group row">
@@ -191,8 +192,17 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <label for="country" class="col-xl-4 col-md-12 col-form-label">Country:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select id="country" class="form-control">
+                                                    <option value="">Sri Lanka</option>
+                                                    <option value="">&nbsp;</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="text-right">
-                                            <button class="btn btn-outline-primary form-control col-2 text-center" type="button" id="plusField" data-toggle="collapse" data-target="#addField" aria-expanded="false" aria-controls="addField"><i class="fas fa-plus"></i></button>
+                                            <button class="btn btn-outline-primary form-control col-2 text-center" type="button" id="plusField" data-toggle="collapse" data-target="#addField" aria-expanded="false" aria-controls="addField" data-tooltip="tooltip" data-placement="bottom" title="Add extra Address Line"><i class="fas fa-plus"></i></button>
                                         </div>
                                     </div>
                                     
@@ -201,7 +211,6 @@
                                             <input type="checkbox" class="form-check-input" name="addrs" id="current_address" onclick="address_editable()">
                                             <label for="current_address" class="form-check-label" ><h6 style="color: black;" class="mb-4">Current Address (Optional)</h6></label>
                                         </div>
-                                        <!--<h6 style="color: black;" class="mb-4">Current Address (Optional)</h6> -->
                                         <div class="form-group row">
                                             <label for="currentHouse" class="col-xl-4 col-md-12 col-form-label">House Name/No:</label>
                                             <div class="col-xl-8 col-md-12">
@@ -242,17 +251,18 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="text-right">
-                                            <button class="btn btn-outline-primary form-control col-2 text-center" type="button" id="plusCurrentField" data-toggle="collapse" data-target="#addCurrentField" aria-expanded="false" aria-controls="addCurrentField" disabled><i class="fas fa-plus"></i></button>
+                                        <div class="form-group row">
+                                            <label for="currentCountry" class="col-xl-4 col-md-12 col-form-label">Country:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select id="currentCountry" class="form-control" disabled>
+                                                    <option value="">Sri Lanka</option>
+                                                    <option value="">&nbsp;</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    
-                                    <div class="form-group col-xl-6 col-md-12">
-                                        <label for="country">Country</label>
-                                        <select name="country" id="country" class="form-control">
-                                            <option value="">Sri Lanka</option>
-                                        </select>
+                                        <div class="text-right">
+                                            <button class="btn btn-outline-primary form-control col-2 text-center" type="button" id="plusCurrentField" data-toggle="collapse" data-target="#addCurrentField" aria-expanded="false" aria-controls="addCurrentField" data-tooltip="tooltip" data-placement="bottom" title="Add extra Address Line" disabled><i class="fas fa-plus"></i></button>
+                                        </div>
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="telephone">Telephone Number</label>
@@ -261,17 +271,18 @@
 
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="email">Email Address</label>
-                                        <input type="email" class="form-control" id="email" name="email">
+                                        <input type="email" class="form-control" id="email" name="email" disabled>
+                                        <small>* Filled with your given email. You can change it after you registered.</small>
                                     </div>
                                 </div>
                             </div>
                             <!-- /CONTACT DETAILS -->
 
                             <!-- EMPLOYMENT DETAILS -->
-                            <div class="details px-3 mt-4 pb-4">
+                            <div class="details px-3 mt-4 pb-3">
                                 <h6 class="text-left mt-4 mb-4">Employment Details</h6>
                                 <small>* Please note that employment details would be kept confidential and will be utilized only for purposed of improving the FIT programme.</small>
-                                <h6 style="color: black;" class="mt-4 mb-3">Are you currently employed ?</h6>
+                                <h6 style="color: black;" class="mt-3 mb-3">Are you currently employed ?</h6>
                                 <div class="form-check px-5 mt-2">
                                     <input type="radio" class="form-check-input" name="employement" id="empYes" onclick="enable_designation()"/>
                                     <label for="empYes" class="form-check-label">Yes</label>
@@ -287,13 +298,22 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!-- /EMPLOYMENT DETAILS -->
 
 
-                            <p style="color: var(--color-danger);" class="mt-3">* Please double check the details you entered before submit.</p>
-                            <div class="text-left">
-                                <button type="button" class="btn btn-outline-primary" onclick="">Submit Application</button>
+                            <!-- DECLARATION -->
+                            <div class="details px-3 mt-4 pb-3">
+                                <h6 class="text-left mt-4 mb-4">Declaration</h6>
+                                <p style="font-weight: bold;">I do hereby certify that the above particulars furnished by me are true and correct. In the event of my application for registration being accepted, I shall abide by all the regulations governing candidates of the University of Colombo School of Computing. (UCSC) I agree that the University has the right to cancel my registration at any time, either if I am found to have furnished false information or if I do not abide by the regulations governing candidates of the University of Colombo School of Computing.</p>
+                                <div class="form-check text-center">
+                                    <input type="checkbox" class="form-check-input" id="accept" onclick="accept_conditions()">
+                                    <label for="accept" class="form-check-label" ><h6 style="color: var(--color-success);" class="mb-4">Accept and Continue</h6></label>
+                                </div>
+                            </div>
+                            <!-- /DECLARATION -->
+
+                            <div class="text-left mt-3">
+                                <button type="button" class="btn btn-outline-primary" id="submitApplication" onclick="" disabled>Submit Application</button>
                               </div>
                         </form>
 
