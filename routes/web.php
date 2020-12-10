@@ -80,6 +80,8 @@ Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsCon
 
 Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\ResultsController::class,'index'])->name('student.results');
 
+Route::get('/portal/student/payment',[App\Http\Controllers\Portal\Student\PaymentController::class,'index'])->name('payment');
+
 
 
 
