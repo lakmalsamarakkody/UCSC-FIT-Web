@@ -29,7 +29,7 @@
               <table class="table table-bordered table-responsive-md">
                 <thead class="text-center">
                   <tr>
-                    <th rowspan="2">Exam</th>
+                    <th rowspan="2"></th>
                     <th colspan="2">FIT 103</th>
                     <th colspan="2">FIT 203</th>
                     <th colspan="2">FIT 303</th>
@@ -39,8 +39,7 @@
                     <th>Practical</th>
                     <th>E-Test</th>
                     <th>Practical</th>
-                    <th>E-Test</th>
-                    <th>Practical</th>
+                    <th colspan="2">E-Test</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -51,7 +50,6 @@
                     <td><span class="badge badge-success">P</span></td>
                     <td><span class="badge badge-danger">F</span></td>
                     <td><span class="badge badge-success">P</span></td>
-                    <td><span class="badge badge-success">P</span></td>
                   </tr>
                   <tr>
                     <td class="text-left">2020 September</td>
@@ -60,14 +58,12 @@
                     <td><span class="badge badge-success">P</span></td>
                     <td><span class="badge badge-success">P</span></td>
                     <td><span class="badge badge-warning">N/A</span></td>
-                    <td><span class="badge badge-success">P</span></td>
                   </tr>
                   <tr>
                     <td class="text-left">2020 October</td>
                     <td><span class="badge badge-warning">N/A</span></td>
                     <td><span class="badge badge-success">P</span></td>
                     <td><span class="badge badge-danger">F</span></td>
-                    <td><span class="badge badge-success">P</span></td>
                     <td><span class="badge badge-success">P</span></td>
                     <td><span class="badge badge-success">P</span></td>
                   </tr>
