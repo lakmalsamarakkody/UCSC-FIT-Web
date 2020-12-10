@@ -2,18 +2,6 @@
 
 
 // INSERT CURRENT ADDRESS
-/*
-  InputRoleName_editable = () => {
-    if($('#InputRoleName').attr('disabled')){
-      $('#InputRoleName').removeAttr('disabled');
-    }
-    else{
-      document.getElementById('InputRoleName').setAttribute("disabled","disabled");
-    }
-  }
-  function InputRoleName_readonly() {
-    document.getElementById('InputRoleName').setAttribute("disabled","disabled");
-  } */
 
   address_editable = () => {
     //console.log('hello');
@@ -68,5 +56,14 @@
     }
   }
   // /ACCEPT CONDITIONS
+
+  // RESET FORM
+  reset_form = () => {
+    document.getElementById('registerForm').reset();
+    address_editable();
+    enable_designation();
+    disable_designation();
+  }
+  // /RESET FORM
 
   </script>
