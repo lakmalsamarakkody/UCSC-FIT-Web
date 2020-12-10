@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/student/registration.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/student/results.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/student/information.css') }}">
     <!-- /PAGES --> 
   <!-- /STYLES -->
 
@@ -164,7 +165,7 @@
                 <div class="col-12 mt-2 px-0 collapse border-top border-darken-1" id="collapseMobileNav">
                   <ul>
                     <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
-                    <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
+                    <li id="information"><a href="{{ route('student.home') }}">Information</a></li>
                     <li id="exams"><a href="{{ route('student.home') }}">Exams</a></li>
                     <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
                   </ul>

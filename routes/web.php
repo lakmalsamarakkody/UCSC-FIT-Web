@@ -76,9 +76,10 @@ Route::get('/portal/student/', [App\Http\Controllers\Portal\Student\HomeControll
 
 Route::get('/portal/student/registration',[App\Http\Controllers\Portal\Student\StudentController::class,'index'])->name('student.registration');
 
+Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsController::class,'index'])->name('student.exams');
+
 Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\ResultsController::class,'index'])->name('student.results');
 
-Route::get('/portal/student/information',[App\Http\Controllers\Portal\Student\InformationController::class,'index'])->name('student.information');
 
 
 
