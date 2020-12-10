@@ -95,135 +95,82 @@
                       </div>
                       <hr>
                       <div class="row">                        
-                          <div class="col-lg-12" id="accordion">
-                              <h4>Results</h4>
-                              <div class="card">
-                                <div class="card-header" id="headingOne">
-                                  <h5 class="mb-0">
-                                    <button class="btn w-100 text-left" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                      2017
-                                      <i class="fa fa-chevron-right float-right"></i>
-                                    </button>
-                                  </h5>
-                                </div>
-                            
-                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                  <div class="card-body">
-                                      <table class="table w-100">
-                                          <thead>
-                                              <th>Subject</th>
-                                              <th>Exam Type</th>
-                                              <th>Result</th>
-                                              <th>Medical</th>
-                                          </thead>
-                                          <tbody>
-                                              <tr>
-                                                  <td>FIT103</td>
-                                                  <td>E Test</td>
-                                                  <td><h4><span class="badge badge-success">P</span></h4></td>
-                                                  <td></td>
-                                              </tr>
-                                              <tr>
-                                                  <td>FIT203</td>
-                                                  <td>E Test</td>
-                                                  <td><h4><span class="badge badge-danger">F</span></h4></td>
-                                                  <td></td>
-                                              </tr>
-                                              <tr>
-                                                  <td>FIT303</td>
-                                                  <td>E Test</td>
-                                                  <td><h4><span class="badge badge-light">N/A</span></h4></td>
-                                                  <td><button class="btn btn-sm btn-warning px-32 text-center"><i class="fa fa-eye p-0"></i></button></td>
-                                              </tr>
-                                          </tbody>
-                                      </table>                                
-                                  </div>
-                                </div>
+                          <div class="col-lg-12">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                              <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="result-tab" data-toggle="tab" href="#result" role="tab" aria-controls="result" aria-selected="true">Results</a>
+                              </li>
+                              <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="medicals-tab" data-toggle="tab" href="#medicals" role="tab" aria-controls="medicals" aria-selected="false">Medicals</a>
+                              </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                              <div class="tab-pane fade show active" id="result" role="tabpanel" aria-labelledby="results-tab">
+                                <table class="table table-bordered table-responsive-md">
+                                  <thead class="text-center">
+                                    <tr>
+                                      <th rowspan="2">Exam</th>
+                                      <th colspan="2">FIT 103</th>
+                                      <th colspan="2">FIT 203</th>
+                                      <th >FIT 303</th>
+                                    </tr>
+                                    <tr>
+                                      <th>E-Test</th>
+                                      <th>Practical</th>
+                                      <th>E-Test</th>
+                                      <th>Practical</th>
+                                      <th>E-Test</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody class="text-center">
+                                    <tr>
+                                      <td>2017 June</td>
+                                      <td>56</td>
+                                      <td>80</td>
+                                      <td>65</td>
+                                      <td>60</td>
+                                      <td>45</td>
+                                    </tr>
+                                    <tr>
+                                      <td>2017 June</td>
+                                      <td>56</td>
+                                      <td>80</td>
+                                      <td>65</td>
+                                      <td>60</td>
+                                      <td>45</td>
+                                    </tr>
+                                    <tr>
+                                      <td>2017 June</td>
+                                      <td>56</td>
+                                      <td>80</td>
+                                      <td>65</td>
+                                      <td>60</td>
+                                      <td>45</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
                               </div>
-                              <div class="card">
-                                <div class="card-header" id="headingTwo">
-                                  <h5 class="mb-0">
-                                    <button class="btn  w-100 text-left collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                      2018
-                                      <i class="fa fa-chevron-right float-right"></i>
-                                    </button>
-                                  </h5>
-                                </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                  <div class="card-body">
-                                      <table class="table w-100">
-                                          <thead>
-                                              <th>Subject</th>
-                                              <th>Exam Type</th>
-                                              <th>Result</th>
-                                              <th>Medical</th>
-                                          </thead>
-                                          <tbody>
-                                              <tr>
-                                                  <td>FIT103</td>
-                                                  <td>Practical</td>
-                                                  <td><h4><span class="badge badge-success">P</span></h4></td>
-                                                  <td></td>
-                                              </tr>
-                                              <tr>
-                                                  <td>FIT203</td>
-                                                  <td>E Test</td>
-                                                  <td><h4><span class="badge badge-danger">F</span></h4></td>
-                                                  <td></td>
-                                              </tr>
-                                              <tr>
-                                                  <td>FIT303</td>
-                                                  <td>E Test</td>
-                                                  <td><h4><span class="badge badge-light">N/A</span></h4></td>
-                                                  <td><button class="btn btn-sm btn-warning px-32 text-center"><i class="fa fa-eye p-0"></i></button></td>
-                                              </tr>
-                                          </tbody>
-                                      </table>                                
-                                  </div>
-                                </div>
+                              <div class="tab-pane fade" id="medicals" role="tabpanel" aria-labelledby="medicals-tab">
+                                <table class="table table-bordered table-responsive-md">
+                                  <thead class="text-center">
+                                    <tr>
+                                      <th>Exam</th>
+                                      <th>Subject</th>
+                                      <th>Exam Type</th>
+                                      <th>Medical</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody class="text-center">
+                                    <tr>
+                                      <td>2017 June</td>
+                                      <td>FIT 203</td>
+                                      <td>Practical</td>
+                                      <td><button class="btn btn-sm btn-warning px-32 text-center"><i class="fa fa-eye p-0"></i></button></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
                               </div>
-                              <div class="card">
-                                <div class="card-header" id="headingThree">
-                                  <h5 class="mb-0">
-                                    <button class="btn  w-100 text-left collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                      2019
-                                      <i class="fa fa-chevron-right float-right"></i>
-                                    </button>
-                                  </h5>
-                                </div>
-                                <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
-                                  <div class="card-body">
-                                      <table class="table w-100">
-                                          <thead>
-                                              <th>Subject</th>
-                                              <th>Exam Type</th>
-                                              <th>Result</th>
-                                              <th>Medical</th>
-                                          </thead>
-                                          <tbody>
-                                              <tr>
-                                                  <td>FIT103</td>
-                                                  <td>E Test</td>
-                                                  <td><h4><span class="badge badge-success">P</span></h4></td>
-                                                  <td></td>
-                                              </tr>
-                                              <tr>
-                                                  <td>FIT203</td>
-                                                  <td>E Test</td>
-                                                  <td><h4><span class="badge badge-danger">F</span></h4></td>
-                                                  <td></td>
-                                              </tr>
-                                              <tr>
-                                                  <td>FIT303</td>
-                                                  <td>E Test</td>
-                                                  <td><h4><span class="badge badge-light">N/A</span></h4></td>
-                                                  <td><button class="btn btn-sm btn-warning px-32 text-center"><i class="fa fa-eye p-0"></i></button></td>
-                                              </tr>
-                                          </tbody>
-                                      </table>
-                                  </div>
-                                </div>
-                              </div>
+                            </div>
                           </div>
 
                       </div>
