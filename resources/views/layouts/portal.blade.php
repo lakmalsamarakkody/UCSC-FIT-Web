@@ -193,8 +193,9 @@
     </div>
     <!-- /Page container-fluid -->
 </body>
-@yield('script')
 <!-- DROPZONE JS--> <script src="{{ asset('lib/dropzone/drop-zone.js') }}"></script>
+
+@yield('script')
 
 </html>
 
