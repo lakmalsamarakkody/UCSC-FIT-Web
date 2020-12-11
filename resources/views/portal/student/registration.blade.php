@@ -293,7 +293,7 @@
                             <div class="row justify-content-end">
 
                                 <div class="mt-3 col-xl-3 col-md-6 order-sm-1 order-3">
-                                    <button type="reset" class="btn btn-outline-warning form-control" id="resetForm" onclick="reset_form()">Reset Form</button>
+                                    <button type="button" class="btn btn-outline-warning form-control" id="resetForm" onclick="reset_form()">Reset Form</button>
                                 </div>
                                 <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2">
                                     <button type="button" class="btn btn-outline-secondary form-control" id="saveInformation" data-toggle="collapse" data-target="#declaration" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_informatioin()">Save information</button>
