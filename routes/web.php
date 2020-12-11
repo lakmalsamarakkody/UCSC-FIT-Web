@@ -17,10 +17,6 @@ use Illuminate\Support\Facades\Auth;
 |               Method 2 -  Route::get('/home','App\Http\Controllers\HomeController@indexhome');
 */
 
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | WEBSITE ROUTES
