@@ -192,7 +192,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="text-right">
+                                        <div class="text-right" id="divCollapsePlus1">
                                             <button class="btn btn-outline-primary form-control col-2 text-center" type="button" id="plusField" data-toggle="collapse" data-target="#addField" aria-expanded="false" aria-controls="addField" data-tooltip="tooltip" data-placement="bottom" title="Add extra Address Line"><i class="fas fa-plus"></i></button>
                                         </div>
                                     </div>
@@ -251,7 +251,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="text-right collapse" id="collapsePlus">
+                                        <div class="text-right" id="divCollapsePlus2">
                                             <button class="btn btn-outline-primary form-control col-2 text-center" type="button" id="plusCurrentField" data-toggle="collapse" data-target="#addCurrentField" aria-expanded="false" aria-controls="addCurrentField" data-tooltip="tooltip" data-placement="bottom" title="Add extra Address Line" disabled><i class="fas fa-plus"></i></button>
                                         </div>
                                     </div>
@@ -299,7 +299,7 @@
                                     <button type="button" class="btn btn-outline-secondary form-control" id="btnSaveInformation" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_informatioin()">Save information</button>
                                 </div>
                                 <div class="mt-3 col-xl-3 col-md-6 order-sm-3 order-1 d-none" id="divEditInformation">
-                                    <button type="reset" class="btn btn-outline-warning form-control" id="btnEditInformation" onclick="edit_information()">Edit Information</button>
+                                    <button type="button" class="btn btn-outline-warning form-control" id="btnEditInformation" onclick="edit_information()">Edit Information</button>
                                 </div>
 
                             </div>
