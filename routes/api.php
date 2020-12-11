@@ -21,5 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get("reguserCount",[RegUsersController::class,'countRegUser']);
-
-Route::get("exam",[StudentExamController::class,'currentExam']);
+Route::get('examSchedule',[StudentExamController::class,'examSchedule']);
