@@ -29,8 +29,8 @@
   }
   // /INSERT CURRENT ADDRESS
 
-  //ENABLE-DISABLE DESIGNATION
-  enable_designation = () => {
+  //EDIT DESIGNATION
+  edit_designation = () => {
     if(document.getElementById("empYes").checked == true) {
       $('#designation').removeAttr('disabled');
     }
@@ -38,13 +38,7 @@
       document.getElementById('designation').setAttribute("disabled","disabled");
     }
   }
-
-  disable_designation = () => {
-    if(document.getElementById("empNo").checked == true) {
-      document.getElementById('designation').setAttribute("disabled","disabled");
-    }
-  }
-  // /ENABLE-DISABLE DESIGNATION
+  // /EDIT DESIGNATION
 
   // ACCEPT CONDITIONS
   accept_conditions = () => {
@@ -70,6 +64,7 @@
           title: 'Reset!',
           text: 'Form has been reset.',
         })
+        location.reload();
       }
       else{
         SwalNotificationWarningAutoClose.fire({
@@ -78,12 +73,6 @@
         })
       }
     })
-
-    /* 
-          document.getElementById('registerForm').reset();
-          address_editable();
-          enable_designation();
-          disable_designation(); */
   }
   // /RESET FORM
 
@@ -134,7 +123,31 @@
       }
     })
   }
-  
   // /SUBMIT APPLICATION
+
+  // EDIT INFORAMTION
+  edit_information = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: 'Are you sure?',
+      text: 'You will be able to edit your information.',
+      confirmButtonText: 'Yes, Edit!',
+    })
+
+    .then((result) => {
+      if(result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Edit!',
+          text: 'Form has been set to editable.',
+        })
+      }
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Form has not been set to editable.',
+        })
+      }
+    })
+  }
+  // /EDIT INFORAMTION
 
   </script>
