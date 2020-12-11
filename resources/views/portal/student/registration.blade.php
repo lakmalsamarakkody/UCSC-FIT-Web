@@ -51,8 +51,8 @@
                                         <input type="text" class="form-control" id="firstName" name="firstName" placeholder="e.g. Charith"/>
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
-                                        <label for="middleName">Middle Name</label>
-                                        <input type="text" class="form-control" id="middleName" name="middleName" placeholder="e.g. Kumara" />
+                                        <label for="middleNames">Middle Names</label>
+                                        <input type="text" class="form-control" id="middleNames" name="middleNames" placeholder="e.g. Kumara Sampath" />
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="lastName">Last Name</label>
