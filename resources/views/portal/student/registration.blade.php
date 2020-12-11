@@ -275,11 +275,11 @@
                                 <small>* Please note that employment details would be kept confidential and will be utilized only for purposed of improving the FIT programme.</small>
                                 <h6 style="color: black;" class="mt-3 mb-3">Are you currently employed ?</h6>
                                 <div class="form-check px-5 mt-2">
-                                    <input type="radio" class="form-check-input" name="employement" id="empYes" onclick="enable_designation()"/>
+                                    <input type="radio" class="form-check-input" name="employement" id="empYes" onclick="edit_designation()"/>
                                     <label for="empYes" class="form-check-label">Yes</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    <input type="radio" class="form-check-input" name="employement" id="empNo" onclick="disable_designation()"/>
+                                    <input type="radio" class="form-check-input" name="employement" id="empNo" onclick="edit_designation()" checked/>
                                     <label for="empNo" class="form-check-label">No</label>
                                 </div>
                                 <div class="form-group row mt-3">
@@ -292,12 +292,16 @@
                             <!-- /EMPLOYMENT DETAILS -->
                             <div class="row justify-content-end">
 
-                                <div class="mt-3 col-xl-3 col-md-6 order-sm-1 order-2">
+                                <div class="mt-3 col-xl-3 col-md-6 order-sm-1 order-3">
                                     <button type="reset" class="btn btn-outline-warning form-control" id="resetForm" onclick="reset_form()">Reset Form</button>
                                 </div>
-                                <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-1">
+                                <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2">
                                     <button type="button" class="btn btn-outline-secondary form-control" id="saveInformation" data-toggle="collapse" data-target="#declaration" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_informatioin()">Save information</button>
                                 </div>
+                                <div class="mt-3 col-xl-3 col-md-6 order-sm-3 order-1">
+                                    <button type="reset" class="btn btn-outline-warning form-control" id="editInformation" onclick="edit_information()">Edit Information</button>
+                                </div>
+
                             </div>
                             
 
