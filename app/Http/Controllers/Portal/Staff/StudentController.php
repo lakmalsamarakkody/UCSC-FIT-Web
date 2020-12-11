@@ -10,6 +10,12 @@ use Yajra\DataTables\Facades\DataTables;
 
 class StudentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('revalidate');
+    }
+
     public function index(Request $request)
     {
         $students = Student::orderBy('id', 'desc');

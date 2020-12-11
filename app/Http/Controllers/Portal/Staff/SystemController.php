@@ -7,8 +7,14 @@ use Illuminate\Http\Request;
 
 class SystemController extends Controller
 {
-    public function index()
-    {
-        return view('portal/staff/system');
-    }
+  public function __construct()
+  {
+    $this->middleware('auth');
+    $this->middleware('revalidate');
+  }
+  
+  public function index()
+  {
+    return view('portal/staff/system');
+  }
 }
