@@ -38,7 +38,6 @@
 
   <!-- SCRIPTS -->
     <script src="{{ asset('js/app.js') }}" differ></script>
-    <script src="{{ asset('lib/dropzone/drop-zone.js') }}"></script>
 
     <!-- SWEET ALERT 2 -->
     <script src="{{ asset('lib/sweetalert2/sweetalert2.all.js') }}"></script>
@@ -195,6 +194,8 @@
     <!-- /Page container-fluid -->
 </body>
 @yield('script')
+<!-- DROPZONE JS--> <script src="{{ asset('lib/dropzone/drop-zone.js') }}"></script>
+
 </html>
 
 
