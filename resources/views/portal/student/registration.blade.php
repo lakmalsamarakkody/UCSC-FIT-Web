@@ -296,7 +296,7 @@
                                     <button type="reset" class="btn btn-outline-warning form-control" id="resetForm" onclick="reset_form()">Reset Form</button>
                                 </div>
                                 <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-1">
-                                    <button type="button" class="btn btn-outline-secondary form-control" id="saveInformation" data-toggle="collapse" data-target="#declaration" role="button" aria-expanded="false" aria-controls="declaration" onclick="">Save information</button>
+                                    <button type="button" class="btn btn-outline-secondary form-control" id="saveInformation" data-toggle="collapse" data-target="#declaration" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_informatioin()">Save information</button>
                                 </div>
                             </div>
                             
@@ -316,7 +316,7 @@
                             <!-- SUBMIT APPLICATION-->
                             <div class="row justify-content-end">
                                 <div class="collapse mt-3 col-xl-3 col-md-6" id="submitButton">
-                                    <button type="button" class="btn btn-outline-primary form-control" id="submitApplication" onclick="" disabled>Submit Application</button>
+                                    <button type="button" class="btn btn-outline-primary form-control" id="submitApplication" onclick="submit_application()" disabled>Submit Application</button>
                                 </div>
                             </div>
                             
