@@ -59,13 +59,82 @@
 
   // RESET FORM
   reset_form = () => {
-    document.getElementById('registerForm').reset();
-    address_editable();
-    enable_designation();
-    disable_designation();
+    SwalQuestionWarningAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Reset!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Reset!',
+          text: 'Form has been reset.',
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Form has not been reset.',
+        })
+      }
+    })
+
+    /* 
+          document.getElementById('registerForm').reset();
+          address_editable();
+          enable_designation();
+          disable_designation(); */
   }
   // /RESET FORM
 
+  // SAVE INFORMATION
+  save_informatioin = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: 'Are you sure?',
+      text: 'Information you entered will be saved.',
+      confirmButtonText: 'Yes, Save!',
+    })
+
+    .then((result) => {
+      if(result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Saved!',
+          text: 'Information has been saved.',
+        })
+      }
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Information has not been saved.',
+        })
+      }
+    })
+  }
+  // /SAVE INFORMATION
+
+  // SUBMIT APPLICATION
+  submit_application = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: 'Are you sure?',
+      text: 'You wont be able to revert this!',
+      confirmButtonText: 'Yes, Submit!',
+    })
+    .then((result) => {
+      if(result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Submitted!',
+          text: 'Your information has been submitted for registration.',
+        })
+      }
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Form has not been submitted.',
+        })
+      }
+    })
+  }
   
+  // /SUBMIT APPLICATION
 
   </script>
