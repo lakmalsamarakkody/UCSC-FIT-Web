@@ -342,6 +342,25 @@ html{
 }
 /* /TABLE */
 
+/* tabs */
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+  color: var(--main-theme-color);
+  font-size: 12px;
+  background-color: var(--transparent);
+  border-color: var(--main-theme-color) var(--transparent) var(--transparent);
+}
+.nav-tabs a{
+  color: var(--main-theme-color);
+  font-size: 12px;
+} 
+.nav-tabs {
+  border-bottom: 3px solid var(--main-theme-color);
+}
+.nav-tabs .nav-link{
+  border: 3px solid var(--transparent);
+}
+/* /tabs */
+
 
 @media only screen and (max-width: 576px) {
 }
