@@ -130,35 +130,52 @@
                   {{-- BANK PAYMENT --}}
                   <div class="tab-pane fade show active mt-4" id="bank" role="tabpanel" aria-labelledby="bank-tab">
                     <form>
-                      <div class="form-group row">
-                        <label for="selectPaidBank" class="col-sm-2 col-form-label">Paid Bank Branch</label>
-                        <div class="col-sm-10 col-lg-4">
-                          <select class="form-control" id="selectPaidBank">
-                            <option>Colombo 04</option>
-                            <option>Gampaha</option>
-                            <option>Kandy</option>
-                            <option>Galle</option>
-                          </select>
+                      <div class="form-row">                    <div class="col-lg-6">
+                        <div class="form-group row">
+                          <label for="selectPaidBank" class="col-sm-3 col-form-label">Paid Bank Branch</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" id="selectPaidBank">
+                              <option>Colombo 04</option>
+                              <option>Gampaha</option>
+                              <option>Kandy</option>
+                              <option>Galle</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputPaidBankCode" class="col-sm-3 col-form-label">Paid Bank Code</label>
+                          <div class="col-sm-9">
+                            <input type="number" class="form-control" id="inputPaidBankCode">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputPaidDate" class="col-sm-3 col-form-label">Paid Date</label>
+                          <div class="col-sm-9">
+                            <input type="date" class="form-control" id="inputPaidDate">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputPaidAmount" class="col-sm-3 col-form-label">Paid Amount</label>
+                          <div class="col-sm-9">
+                            <input type="number" class="form-control" id="inputPaidAmount">
+                          </div>
+                        </div>
+  
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group row ">
+                          <label for="resultFile" class="col-sm-3 col-form-label">Scanned Bank Slip</label>
+                          <div class="col-sm-9">
+                            <div class="drop-zone">
+                              <span class="drop-zone__prompt">Drop image File here or click to upload</span>
+                              <input type="file" name="resultFile" id="resultFile" class="drop-zone__input"/>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="inputPaidBankCode" class="col-sm-2 col-form-label">Paid Bank Code</label>
-                        <div class="col-sm-10 col-lg-4">
-                          <input type="number" class="form-control" id="inputPaidBankCode">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputPaidDate" class="col-sm-2 col-form-label">Paid Date</label>
-                        <div class="col-sm-10 col-lg-4">
-                          <input type="date" class="form-control" id="inputPaidDate">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputPaidAmount" class="col-sm-2 col-form-label">Paid Amount</label>
-                        <div class="col-sm-10 col-lg-4">
-                          <input type="number" class="form-control" id="inputPaidAmount">
-                        </div>
-                      </div>
+                    </div>
+
+
                     </form>
                   </div>
                   {{-- /BANK PAYMENT --}}
