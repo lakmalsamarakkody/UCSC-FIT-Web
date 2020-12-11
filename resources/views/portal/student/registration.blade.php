@@ -292,14 +292,14 @@
                             <!-- /EMPLOYMENT DETAILS -->
                             <div class="row justify-content-end">
 
-                                <div class="mt-3 col-xl-3 col-md-6 order-sm-1 order-3">
-                                    <button type="button" class="btn btn-outline-warning form-control" id="resetForm" onclick="reset_form()">Reset Form</button>
+                                <div class="mt-3 col-xl-3 col-md-6 order-sm-1 order-3" id="divResetForm">
+                                    <button type="button" class="btn btn-outline-warning form-control" id="btnResetForm" onclick="reset_form()">Reset Form</button>
                                 </div>
-                                <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2">
-                                    <button type="button" class="btn btn-outline-secondary form-control" id="saveInformation" data-toggle="collapse" data-target="#declaration" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_informatioin()">Save information</button>
+                                <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2" id="divSaveInformation">
+                                    <button type="button" class="btn btn-outline-secondary form-control" id="btnSaveInformation" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_informatioin()">Save information</button>
                                 </div>
-                                <div class="mt-3 col-xl-3 col-md-6 order-sm-3 order-1">
-                                    <button type="reset" class="btn btn-outline-warning form-control" id="editInformation" onclick="edit_information()">Edit Information</button>
+                                <div class="mt-3 col-xl-3 col-md-6 order-sm-3 order-1 d-none" id="divEditInformation">
+                                    <button type="reset" class="btn btn-outline-warning form-control" id="btnEditInformation" onclick="edit_information()">Edit Information</button>
                                 </div>
 
                             </div>
@@ -311,7 +311,7 @@
                                 <h6 class="text-left mt-4 mb-4">Declaration</h6>
                                 <p style="font-weight: bold;">I do hereby certify that the above particulars furnished by me are true and correct. In the event of my application for registration being accepted, I shall abide by all the regulations governing candidates of the University of Colombo School of Computing. (UCSC) I agree that the University has the right to cancel my registration at any time, either if I am found to have furnished false information or if I do not abide by the regulations governing candidates of the University of Colombo School of Computing.</p>
                                 <div class="form-check text-center">
-                                    <input type="checkbox" class="form-check-input" id="accept" onclick="accept_conditions()" data-toggle="collapse" data-target="#submitButton" aria-expanded="false" aria-controls="submitButton">
+                                    <input type="checkbox" class="form-check-input" id="accept" onclick="accept_conditions()" data-toggle="collapse" data-target="#divSubmitButton" aria-expanded="false" aria-controls="divSubmitButton">
                                     <label for="accept" class="form-check-label" ><h6 style="color: var(--color-success);" class="mb-4">Accept and Continue</h6></label>
                                 </div>
                             </div>
@@ -319,8 +319,8 @@
 
                             <!-- SUBMIT APPLICATION-->
                             <div class="row justify-content-end">
-                                <div class="collapse mt-3 col-xl-3 col-md-6" id="submitButton">
-                                    <button type="button" class="btn btn-outline-primary form-control" id="submitApplication" onclick="submit_application()" disabled>Submit Application</button>
+                                <div class="collapse mt-3 col-xl-3 col-md-6" id="divSubmitButton">
+                                    <button type="button" class="btn btn-outline-primary form-control" id="btnSubmitApplication" onclick="submit_application()" disabled>Submit Application</button>
                                 </div>
                             </div>
                             

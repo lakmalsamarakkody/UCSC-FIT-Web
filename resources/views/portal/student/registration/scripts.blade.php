@@ -40,17 +40,6 @@
   }
   // /EDIT DESIGNATION
 
-  // ACCEPT CONDITIONS
-  accept_conditions = () => {
-    if(document.getElementById("accept").checked == true) {
-      $('#submitApplication').removeAttr('disabled');
-    }
-    else {
-      document.getElementById('submitApplication').setAttribute("disabled","disabled");
-    }
-  }
-  // /ACCEPT CONDITIONS
-
   // RESET FORM
   reset_form = () => {
     SwalQuestionWarningAutoClose.fire({
@@ -90,16 +79,52 @@
           title: 'Saved!',
           text: 'Information has been saved.',
         })
+        $('input').attr('disabled','disabled')
+        $('select').attr('disabled','disabled')
+        $('#accept').removeAttr('disabled','disabled')
+        $('#declaration').collapse('show')
+        $('#divSaveInformation').addClass('d-none')
+        $('#divResetForm').addClass('d-none')
+        $('#divEditInformation').removeClass('d-none')
       }
       else {
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
           text: 'Information has not been saved.',
         })
+        $('#declaration').collapse('hide')
       }
     })
   }
   // /SAVE INFORMATION
+
+  // EDIT INFORAMTION
+  edit_information = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: 'Are you sure?',
+      text: 'You will be able to edit your information.',
+      confirmButtonText: 'Yes, Edit!',
+    })
+
+    .then((result) => {
+      if(result.isConfirmed) {
+        $('input').removeAttr('disabled','disabled')
+        $('select').removeAttr('disabled','disabled')
+        $('#declaration').collapse('hide')
+        $('#accept').removeAttr('checked','checked')
+        $('#divSaveInformation').removeClass('d-none')
+        $('#divEditInformation').addClass('d-none')
+        $('#divSubmitButton').collapse('hide')
+      }
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Form has not been set to editable.',
+        })
+      }
+    })
+  }
+  // /EDIT INFORAMTION
 
   // SUBMIT APPLICATION
   submit_application = () => {
@@ -125,29 +150,17 @@
   }
   // /SUBMIT APPLICATION
 
-  // EDIT INFORAMTION
-  edit_information = () => {
-    SwalQuestionSuccessAutoClose.fire({
-      title: 'Are you sure?',
-      text: 'You will be able to edit your information.',
-      confirmButtonText: 'Yes, Edit!',
-    })
-
-    .then((result) => {
-      if(result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Edit!',
-          text: 'Form has been set to editable.',
-        })
-      }
-      else {
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Form has not been set to editable.',
-        })
-      }
-    })
+  // ACCEPT CONDITIONS
+  accept_conditions = () => {
+    if(document.getElementById("accept").checked == true) {
+      $('#divSubmitButton').collapse('show')
+      $('#btnSubmitApplication').removeAttr('disabled')
+    }
+    else {
+      $('#divSubmitButton').collapse('hide')
+      $('#btnSubmitApplication').attr('disabled')
+    }
   }
-  // /EDIT INFORAMTION
+  // /ACCEPT CONDITIONS
 
   </script>
