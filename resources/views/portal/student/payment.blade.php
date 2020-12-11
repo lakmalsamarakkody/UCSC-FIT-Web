@@ -163,14 +163,11 @@
   
                       </div>
                       <div class="col-lg-6">
-                        <div class="form-group row ">
-                          <label for="resultFile" class="col-sm-3 col-form-label">Scanned Bank Slip</label>
-                          <div class="col-sm-9">
+                        <div class="form-group mx-2">
                             <div class="drop-zone">
-                              <span class="drop-zone__prompt">Drop image File here or click to upload</span>
+                              <span class="drop-zone__prompt">Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
                               <input type="file" name="resultFile" id="resultFile" class="drop-zone__input"/>
                             </div>
-                          </div>
                         </div>
                       </div>
                     </div>
