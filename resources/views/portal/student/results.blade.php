@@ -26,7 +26,7 @@
                 <b>FIT Certificate : </b> <span class="badge badge-danger">Not Eligible</span></div>
             <div class="card-text">
               <div class="w-100 text-right">N/A - Not Applied | CN - Cancelled | EO - Examination Offence | WH - With Hold | AB - Absent</div>
-              <table class="table table-bordered table-responsive-md">
+              {{-- <table class="table table-bordered table-responsive-md">
                 <thead class="text-center">
                   <tr>
                     <th scope="col" rowspan="2"></th>
@@ -68,8 +68,54 @@
                     <td><span class="badge badge-success">P</span></td>
                   </tr>
                 </tbody>
-              </table>
+              </table> --}}
             </div>
+
+            <div class="col-lg-12" id="accordion">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn w-100 text-left" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      2017
+                      <i class="fa fa-chevron-right float-right"></i>
+                    </button>
+                  </h5>
+                </div>            
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                      <table class="table w-100">
+                          <thead>
+                              <th>Subject</th>
+                              <th>Exam Type</th>
+                              <th>Result</th>
+                              <th>Medical</th>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>FIT103</td>
+                                  <td>E Test</td>
+                                  <td><h4><span class="badge badge-success">P</span></h4></td>
+                                  <td></td>
+                              </tr>
+                              <tr>
+                                  <td>FIT203</td>
+                                  <td>E Test</td>
+                                  <td><h4><span class="badge badge-danger">F</span></h4></td>
+                                  <td></td>
+                              </tr>
+                              <tr>
+                                  <td>FIT303</td>
+                                  <td>E Test</td>
+                                  <td><h4><span class="badge badge-light">N/A</span></h4></td>
+                                  <td><button class="btn btn-sm btn-warning px-32 text-center"><i class="fa fa-eye p-0"></i></button></td>
+                              </tr>
+                          </tbody>
+                      </table>                                
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -77,7 +123,5 @@
     </div>
     <!-- /CONTENT -->
 
-
-
-
 @endsection
+@include('portal.student.result.script')

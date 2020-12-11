@@ -113,10 +113,10 @@
                     </div>
                     <div class="card-body">     
                         <div class="row">                                               
-                            <div class="col-6">
+                            <div class="col-12 col-md-6">
                                 <h5>Permanent Address</h5>
                                 <hr>
-                                <div class="ml-4">
+                                <div class="ml-lg-4">
                                    <p>House Name/ No.</p>  
                                    <p>Adress Line 1 </p>
                                    <p>Address Line 2</p>  
@@ -126,10 +126,10 @@
                                    <p>Country</p> 
                                 </div>
                             </div>                    
-                            <div class="col-6">
+                            <div class="col-12 col-md-6">
                                 <h5>Current Address</h5>
                                 <hr>
-                                <div class="ml-4">
+                                <div class="ml-lg-4">
                                    <p>House Name/ No.</p>  
                                    <p>Adress Line 1 </p>
                                    <p>Address Line 2</p>  
@@ -139,7 +139,7 @@
                                    <p>Country</p> 
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12 col-md-6">
                                 <table class="table">
                                     <tr>
                                         <th>Telephone No.</th>
@@ -147,7 +147,7 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12 col-md-6">
                                 <table class="table">
                                     <tr>
                                         <th>Email</th>
@@ -185,17 +185,17 @@
                         <div class="col-12">
                             <form action="">
                                 <div class="form-row">     
-                                  <div class="form-group col">
+                                  <div class="form-group col-12 col-md-3">
                                     <label for="currentPassword">Current Password</label>
                                     <input type="password" class="form-control form-control-sm" id="currentPassword" name="currentPassword"/>
                                     <small id="InputCurrentPasswordHelp" class="form-text text-muted">Enter Current Password</small>
                                   </div> 
-                                  <div class="form-group col">
+                                  <div class="form-group col-12 col-md-3">
                                     <label for="newPassword">New Password</label>
                                     <input type="password" class="form-control form-control-sm" id="newPassword" name="newPassword"/>
                                     <small id="InputNewPasswordHelp" class="form-text text-muted">Enter New Password</small>
                                   </div> 
-                                  <div class="form-group col">
+                                  <div class="form-group col-12 col-md-3">
                                     <label for="reNewPassword">Re-Type Password</label>
                                     <input type="password" class="form-control form-control-sm" id="reNewPassword" name="reNewPassword"/>
                                     <small id="InputReNewPasswordHelp" class="form-text text-muted">Re-Type New Password</small>
