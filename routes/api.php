@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Mobileapp\RegUsersController;
-
+use App\Http\Controllers\Mobileapp\StudentExamController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get("reguserCount",[RegUsersController::class,'countRegUser']);
+
+Route::get("exam",[StudentExamController::class,'currentExam']);
