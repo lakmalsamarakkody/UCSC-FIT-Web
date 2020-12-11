@@ -29,6 +29,17 @@ const SwalQuestionDanger = Swal.mixin({
   allowOutsideClick: false,
 })
 
+const SwalQuestionWarningAutoClose = Swal.mixin({
+  icon: 'question',
+  iconColor: color_warning,
+  confirmButtonColor: color_warning,
+  showCancelButton: true,
+  cancelButtonColor: color_primary,
+  timer: 5000,
+  timerProgressBar: true,
+  allowOutsideClick: false,
+})
+
 // SWEETALERT DONE 
 const SwalDoneSuccess = Swal.mixin({
   icon: 'success',
@@ -69,4 +80,6 @@ const SwalNotificationWarningAutoClose = Swal.mixin({
   timer: 5000,
   timerProgressBar: true,
 })
+
+
 // /SWEETALERT

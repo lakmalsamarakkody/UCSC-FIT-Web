@@ -29,8 +29,8 @@
   }
   // /INSERT CURRENT ADDRESS
 
-  //ENABLE-DISABLE DESIGNATION
-  enable_designation = () => {
+  //EDIT DESIGNATION
+  edit_designation = () => {
     if(document.getElementById("empYes").checked == true) {
       $('#designation').removeAttr('disabled');
     }
@@ -38,13 +38,7 @@
       document.getElementById('designation').setAttribute("disabled","disabled");
     }
   }
-
-  disable_designation = () => {
-    if(document.getElementById("empNo").checked == true) {
-      document.getElementById('designation').setAttribute("disabled","disabled");
-    }
-  }
-  // /ENABLE-DISABLE DESIGNATION
+  // /EDIT DESIGNATION
 
   // ACCEPT CONDITIONS
   accept_conditions = () => {
@@ -59,13 +53,101 @@
 
   // RESET FORM
   reset_form = () => {
-    document.getElementById('registerForm').reset();
-    address_editable();
-    enable_designation();
-    disable_designation();
+    SwalQuestionWarningAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Reset!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Reset!',
+          text: 'Form has been reset.',
+        })
+        location.reload();
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Form has not been reset.',
+        })
+      }
+    })
   }
   // /RESET FORM
 
-  
+  // SAVE INFORMATION
+  save_informatioin = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: 'Are you sure?',
+      text: 'Information you entered will be saved.',
+      confirmButtonText: 'Yes, Save!',
+    })
+
+    .then((result) => {
+      if(result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Saved!',
+          text: 'Information has been saved.',
+        })
+      }
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Information has not been saved.',
+        })
+      }
+    })
+  }
+  // /SAVE INFORMATION
+
+  // SUBMIT APPLICATION
+  submit_application = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: 'Are you sure?',
+      text: 'You wont be able to revert this!',
+      confirmButtonText: 'Yes, Submit!',
+    })
+    .then((result) => {
+      if(result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Submitted!',
+          text: 'Your information has been submitted for registration.',
+        })
+      }
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Form has not been submitted.',
+        })
+      }
+    })
+  }
+  // /SUBMIT APPLICATION
+
+  // EDIT INFORAMTION
+  edit_information = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: 'Are you sure?',
+      text: 'You will be able to edit your information.',
+      confirmButtonText: 'Yes, Edit!',
+    })
+
+    .then((result) => {
+      if(result.isConfirmed) {
+        SwalDoneSuccess.fire({
+          title: 'Edit!',
+          text: 'Form has been set to editable.',
+        })
+      }
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Form has not been set to editable.',
+        })
+      }
+    })
+  }
+  // /EDIT INFORAMTION
 
   </script>
