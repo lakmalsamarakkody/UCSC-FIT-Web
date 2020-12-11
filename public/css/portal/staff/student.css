@@ -18,36 +18,7 @@ i.fa-check{
 i.fa-times{
     color: var(--color-danger);
 }
-/* accordion */
-.student #accordion .card{
-    border: 1px !important;
-    box-shadow: none !important;
-}
-.student #accordion  .card-header{
-    font-weight: bold;
-    text-transform: uppercase;
-    color: var(--main-theme-color);
-    background-color: var(--accordion-card-color);
-    border: 1px !important;
-}
-.header-show{    
-    background-color: var(--main-theme-color) !important;
-}
-.student #accordion  .card-header .btn{
-    color: var(--main-theme-color);
-}
-.btn-show{    
-    background-color: var(---main-theme-color) ;
-    color: var(--white)!important;
-}
-.student #accordion  .card-header .btn:focus{
-    box-shadow: none !important;
-}
-.student #accordion  .card .card-body th {
-    color: var(--main-theme-color);
-    font-weight: normal;
-}
-/* /accordion */
+
 
 /* tabs */
 .student .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
