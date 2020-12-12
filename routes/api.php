@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Mobileapp\RegUsersController;
 use App\Http\Controllers\Mobileapp\StudentExamController;
+use App\Http\Controllers\Mobileapp\StduentDetailsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,3 +23,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get("reguserCount",[RegUsersController::class,'countRegUser']);
 Route::get('examSchedule',[StudentExamController::class,'examSchedule']);
+Route::get('studentDetails',[StduentDetailsController::class,'studentDetails']);
