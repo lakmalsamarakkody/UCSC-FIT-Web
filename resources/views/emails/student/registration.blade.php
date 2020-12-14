@@ -5,7 +5,6 @@
 
 <p style="text-align: center; color: #fff;">Your All set! <br> Now you can complete your registration for the Foundation of Information Technology by login in to your by clicking below.</p> 
 
-<h5 style="text-align: center; color: #fff;">User Email: {{ $email ?? '' }}</h5>
 
 @component('mail::button', ['url' => '', 'color' => 'success'])
 Login
