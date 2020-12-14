@@ -27,13 +27,4 @@ class RegistrationController extends Controller
   {
     return view('portal/student/registration');
   }
-
-  public function SaveInformation(Request $request)
-  {
-    // Validate and store Student Information
-    $validatedData = $request->validate([
-      'title' => ['required', 'max:255'],
-      'firstName' => ['required'],
-  ]);
-  }
 }
