@@ -67,6 +67,7 @@
 
   // SAVE INFORMATION
   save_informatioin = () => {
+
     SwalQuestionSuccessAutoClose.fire({
       title: 'Are you sure?',
       text: 'Information you entered will be saved.',

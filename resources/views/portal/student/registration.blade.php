@@ -35,8 +35,8 @@
                                 <small>* Please fill your name and birthday as appearing in the Birth Certificate.</small>
                                 <div class="form-row align-item-center mt-2">
                                     <div class="form-group col-xl-6 col-md-12">
-                                        <label for="title">Title</label>
-                                        <select name="title" id="title" onchange="showfield(this.options[this.selectedIndex].value)" class="form-control">
+                                        <label for="selectTitle">Title</label>
+                                        <select name="selectTitle" id="selectTitle" onchange="showfield(this.options[this.selectedIndex].value)" class="form-control">
                                             <option value="" disabled selected>Select your Title</option>
                                             <option value="">Rev</option>
                                             <option value="">Dr</option>
