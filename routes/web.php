@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\StudentRegistration;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -79,7 +80,9 @@ Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\Result
 
 Route::get('/portal/student/payment',[App\Http\Controllers\Portal\Student\PaymentController::class,'index'])->name('payment');
 
-
+Route::get('/email', function(){
+  return new StudentRegistration();
+});
 
 
 
