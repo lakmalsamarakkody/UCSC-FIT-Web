@@ -1,5 +1,5 @@
 /* accordion */
-.student-exams #accordion .card{
+/* .student-exams #accordion .card{
   border: 1px !important;
   box-shadow: none !important;
 }
@@ -26,5 +26,5 @@
 .student-exams #accordion  .card .card-body th {
   color: var(--main-theme-color);
   font-weight: normal;
-}
+} */
 /* /accordion */
