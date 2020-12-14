@@ -13,6 +13,7 @@ class ExamScheduleSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
       $faker=\Faker\Factory::create();
@@ -37,8 +38,8 @@ class ExamScheduleSeeder extends Seeder
                   'subject_id' =>$Sid,
                   'exam_type_id' => $Etid,
                   'date' => $faker->dateTimeBetween($exam_id->year .'-'. $exam_id->month.'-01', '2020-12-31'),
-                  'start_time' => $faker->time(),
-                  'end_time' => $faker->time(),
+                  'start_time' => $faker->time($format = 'H:i'),
+                  'end_time' => $faker->time($format = 'H:i'),
                   'created_at' => '2020-11-27 17:36:23',
                   'updated_at' => '2020-11-27 17:36:23'
                 ]
