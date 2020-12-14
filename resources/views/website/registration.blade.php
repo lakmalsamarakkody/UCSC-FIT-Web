@@ -40,7 +40,8 @@
                     <div id="error">
 
                     </div>
-                    <form action="" method="post" role="form" class="contactForm">
+                    <form action="{{ url('/student/registration') }}" method="POST" role="form" class="contactForm">
+                    @csrf
                         <div class="form-group">
                         <input type="email" class="form-control" name="email" id="email" placeholder="Type Your Email Here"  data-rule="email" data-msg="Please enter a valid email" />
                         <div class="validation"></div>
