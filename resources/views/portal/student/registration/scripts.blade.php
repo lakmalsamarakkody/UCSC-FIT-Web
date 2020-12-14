@@ -67,6 +67,39 @@
 
   // SAVE INFORMATION
   save_informatioin = () => {
+
+    // PAYLOAD
+    var formData = new FormData;
+
+    // ADD STAFF CATEGORY DATA
+    formData.append('title', $("#selectTitle").val())
+    formData.append('firstName', $("#firstName").val())
+
+    // REQUEST
+    $.ajax({
+        url: "student.registration.saveinformation",
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: (res) => {
+            
+            if ( res.status == 'success' ) {
+                alertify.alert("Success", "User role added successfully ... ").set('onok', function() {
+                    location.reload();
+                })
+            } else {
+                console.log(res);
+                alertify.alert("Failed", res.error);
+            }
+        },
+        error: (e) => {
+            alertify.alert("Error", "Something went wrong ... ");
+            console.log(e.responseText)
+        }
+    })
+
     SwalQuestionSuccessAutoClose.fire({
       title: 'Are you sure?',
       text: 'Information you entered will be saved.',

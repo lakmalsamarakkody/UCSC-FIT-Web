@@ -16,7 +16,7 @@
       <div class="row">
 
         <!-- UPCOMING EXAM SCHEDULE -->
-        <div class="col-12 mt-4">
+        <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">Upcoming Schedules</div>
             <div class="card-body">
@@ -61,7 +61,7 @@
         <!-- /UPCOMING EXAM SCHEDULE-->
 
         <!-- APPLIED EXAMS TABLE -->
-        <div class="col-12 mt-4">
+        <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">Applied Exams</div>
             <div class="card-body">
@@ -106,7 +106,7 @@
         <!-- /APPLIED EXAMS TABLE-->
 
         <!-- FACED EXAMS TABLE -->
-        <div class="col-12 mt-4">
+        <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">Faced Exams</div>
             <div class="card-body">
