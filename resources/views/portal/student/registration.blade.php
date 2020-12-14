@@ -39,11 +39,13 @@
                                         <label for="selectTitle">Title</label>
                                         <select name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
                                             <option value="" disabled selected>Select your Title</option>
-                                            <option value="">Rev</option>
-                                            <option value="">Dr</option>
-                                            <option value="">Mr</option>
-                                            <option value="">Miss</option>
-                                            <option value="">Mrs</option>
+                                            @foreach ($student_titles as $student_title)
+                                                @if (old('title') == $student_title->title)
+                                                    <option value="{{ $student_title->title }}" selected>{{ $student_title->title }}</option>
+                                                @else
+                                                    <option value="{{ $student_title->title }}">{{ $student_title->title }}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
                                         @error('title')
                                             <span class="invalid-feedback" role="alert">
@@ -107,11 +109,24 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="gender">Gender</label>
-                                        <select name="gender" id="gender" class="form-control">
+                                        <select name="gender" id="gender" class="form-control @error('gender') is-invalid @enderror">
                                             <option value="" disabled selected>Select your Gender</option>
-                                            <option value="">Male</option>
-                                            <option value="">Female</option>
+                                            @if (old('gender') == "Male")
+                                                <option value="Male" selected>Male</option>
+                                                <option value="Female">Female</option>
+                                            @elseif (old('gender') == "Female")
+                                                <option value="Male">Male</option>
+                                                <option value="Female" selected>Female</option>
+                                            @else
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            @endif
                                         </select>
+                                        @error('gender')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="citizenship">Citizenship</label>
