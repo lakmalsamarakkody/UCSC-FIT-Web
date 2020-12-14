@@ -37,7 +37,7 @@
                                 <div class="form-row align-item-center mt-2">
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="selectTitle">Title</label>
-                                        <select name="selectTitle" id="selectTitle" onchange="showfield(this.options[this.selectedIndex].value)" class="form-control">
+                                        <select name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
                                             <option value="" disabled selected>Select your Title</option>
                                             <option value="">Rev</option>
                                             <option value="">Dr</option>
@@ -45,12 +45,16 @@
                                             <option value="">Miss</option>
                                             <option value="">Mrs</option>
                                         </select>
-                                       <!-- <div class="col-xl-6 col-md-12" id="divOther"></div> -->
+                                        @error('title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="firstName">First Name</label>
                                         <input type="text" class="form-control @error('firstName') is-invalid @enderror" id="firstName" name="firstName" placeholder="e.g. Charith" value="{{ old('firstName') }}"/>
-                                        @error('firstName')                                            
+                                        @error('firstName')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -58,23 +62,48 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="middleNames">Middle Names</label>
-                                        <input type="text" class="form-control" id="middleNames" name="middleNames" placeholder="e.g. Kumara Sampath" />
+                                        <input type="text" class="form-control @error('middleNames') is-invalid @enderror" id="middleNames" name="middleNames" placeholder="e.g. Kumara Sampath" value="{{ old('middleNames') }}" />
+                                        @error('middleNames')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="lastName">Last Name</label>
-                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" />
+                                        <input type="text" class="form-control @error('lastName') is-invalid @enderror" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" value="{{ old('lastName') }}" />
+                                        @error('lastName')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="fullName">Full Name</label>
-                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="e.g. Charith Kumara Sampath Wickramarachchi" />
+                                        <input type="text" class="form-control @error('fullName') is-invalid @enderror" id="fullName" name="fullName" placeholder="e.g. Charith Kumara Sampath Wickramarachchi" value="{{ old('fullName') }}" />
+                                        @error('fullName')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="nameInitials">Name with Initials</label>
-                                        <input type="text" class="form-control" id="nameInitials" name="nameInitials" placeholder="C K S Wickramarachchi" />
+                                        <input type="text" class="form-control @error('nameInitials') is-invalid @enderror" id="nameInitials" name="nameInitials" placeholder="C K S Wickramarachchi" value="{{ old('nameInitials') }}" />
+                                        @error('nameInitials')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="dob">Date of Birth</label>
-                                        <input type="date" class="form-control" id="dob" name="dob" />
+                                        <input type="date" class="form-control @error('dob') is-invalid @enderror" id="dob" name="dob" value="{{ old('dob') }}" />
+                                        @error('dob')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="gender">Gender</label>
@@ -106,7 +135,12 @@
                                             <input type="radio" class="form-check-input" name="nicPassport" id="passportNo" value="" />
                                             <label for="passportNo" class="form-check-label">Passport No.</label>
                                         </div>
-                                        <input type="text" class="form-control" id="nic" name="nic" placeholder="Choose relevent No from above and enter it here.">
+                                        <input type="text" class="form-control @error('unique_id') is-invalid @enderror" id="unique_id" name="unique_id" value="{{ old('unique_id') }}" placeholder="Choose relevent No from above and enter it here.">
+                                        @error('unique_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -153,31 +187,56 @@
                                         <div class="form-group row">
                                             <label for="house" class="col-xl-4 col-md-12 col-form-label">House Name/No:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="house" name="house">
+                                                <input type="text" class="form-control @error('house') is-invalid @enderror" id="house" name="house" value="{{ old('house') }}">
+                                                @error('house')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="addressLine1" class="col-xl-4 col-md-12 col-form-label">Address Line 1:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="addressLine1">
+                                                <input type="text" class="form-control @error('addressLine1') is-invalid @enderror" id="addressLine1" name="addressLine1" value="{{ old('addressLine1') }}">
+                                                @error('addressLine1')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="addressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="addressLine2">
+                                                <input type="text" class="form-control @error('addressLine2') is-invalid @enderror" id="addressLine2" name="addressLine2" value="{{ old('addressLine2') }}">
+                                                @error('addressLine2')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="addressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="addressLine3">
+                                                <input type="text" class="form-control @error('addressLine3') is-invalid @enderror" id="addressLine3" name="addressLine3" value="{{ old('addressLine3') }}">
+                                                @error('addressLine3')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="addField">
                                             <label for="addressLine4" class="col-xl-4 col-md-12 col-form-label">Address Line 4:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="addressLine4">
+                                                <input type="text" class="form-control @error('addressLine4') is-invalid @enderror" id="addressLine4" name="addressLine4" value="{{ old('addressLine4') }}">
+                                                @error('addressLine4')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -211,31 +270,56 @@
                                         <div class="form-group row">
                                             <label for="currentHouse" class="col-xl-4 col-md-12 col-form-label">House Name/No:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentHouse" disabled>
+                                                <input type="text" class="form-control @error('currentHouse') is-invalid @enderror" id="currentHouse" name="currentHouse" value="{{ old('currentHouse') }}" disabled>
+                                                @error('currentHouse')
+                                                  <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                  </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="currentAddressLine1" class="col-xl-4 col-md-12 col-form-label">Address Line 1:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentAddressLine1" disabled>
+                                                <input type="text" class="form-control @error('currentAddressLine1') is-invalid @enderror" id="currentAddressLine1" name="currentAddressLine1" value="{{ old('currentAddressLine1') }}" disabled>
+                                                @error('currentAddressLine1')
+                                                  <span class="invalid-feedback" role="alert">
+                                                    <strong strong>{{ $message }}</strong>
+                                                  </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="currentAddressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentAddressLine2" disabled>
+                                                <input type="text" class="form-control @error('currentAddressLine2') is-invalid @enderror" id="currentAddressLine2" name="currentAddressLine2" value="{{ old('currentAddressLine2') }}" disabled>
+                                                @error('currentAddressLine2')
+                                                  <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                  </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="currentAddressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentAddressLine3" disabled>
+                                                <input type="text" class="form-control @error('currentAddressLine3') is-invalid @enderror" id="currentAddressLine3" name="currentAddressLine3" value="{{ old('currentAddressLine3') }}" disabled>
+                                                @error('currentAddressLine3')
+                                                  <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                  </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="addCurrentField">
                                             <label for="currentAddressLine4" class="col-xl-4 col-md-12 col-form-label">Address Line 4:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control" id="currentAddressLine4" disabled>
+                                                <input type="text" class="form-control @error('currentAddressLine4') is-invalid @enderror" id="currentAddressLine4" name="currentAddressLine4" value="{{ old('currentAddressLine4') }}" disabled>
+                                                @error('currentAddressLine4')
+                                                  <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                  </span>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -263,13 +347,23 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="telephone">Telephone Number</label>
-                                        <input type="tel" class="form-control" id="telephone" name="telephone" >
+                                        <input type="tel" class="form-control @error('telephone') is-invalid @enderror" id="telephone" name="telephone" value="{{ old('telephone') }}" >
+                                        @error('telephone')
+                                          <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                          </span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="email">Email Address</label>
-                                        <input type="email" class="form-control" id="email" name="email" disabled>
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" disabled>
                                         <small>* Filled with your given email. You can change it after you registered.</small>
+                                        @error('email')
+                                          <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                          </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -291,7 +385,12 @@
                                 <div class="form-group row mt-3">
                                     <label for="designation" style="color: black; font-weight: bold;" class="col-xl-12 col-md-12 col-form-label">Designation:</label>
                                     <div class="col-xl-6 col-md-12">
-                                        <input type="text" class="form-control" id="designation" placeholder="Please enter your designation" disabled>
+                                      <input type="text" class="form-control  @error('designation') is-invalid @enderror" id="designation" name="designation" value="{{ old('designation') }}" placeholder="Please enter your designation" disabled>
+                                      @error('designation')
+                                          <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                          </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>

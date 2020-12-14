@@ -27,4 +27,35 @@ class RegistrationController extends Controller
   {
     return view('portal/student/registration');
   }
+
+  public function saveInfo(Request $request)
+  {
+    $validate = $request->validate([
+      'title' => 'required',
+      'firstName' => 'required',
+      'middleNames' => 'required',
+      'lastName' => 'required',
+      'fullName' => 'required',
+      'nameInitials' => 'required',
+      'dob' => 'required',
+      'unique_id' => 'required',
+
+      'house' => 'required',
+      'addressLine1' => 'required',
+      'addressLine2' => 'required',
+      'addressLine3' => 'required',
+      'addressLine4' => 'required',
+
+      'currentHouse' => 'required',
+      'currentAddressLine1' => 'required',
+      'currentAddressLine2' => 'required',
+      'currentAddressLine3' => 'required',
+      'currentAddressLine4' => 'required',
+
+      'telephone' => 'required',
+      'email' => 'required',
+      'designation' => 'required',
+    ]
+  );
+  }
 }
