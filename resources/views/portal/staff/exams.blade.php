@@ -90,10 +90,10 @@
                     <tr>
                       <td>FIT {{ $exam->subject->code }}</td>
                       <td>{{ $exam->subject->name }}</td>
-                      <td>e-Test</td>
+                      <td>{{ $exam->type->exam_type }}</td>
                       <td>{{ $exam->date }}</td>
-                      <td>2:30PM</td>
-                      <td>4.30PM</td>
+                      <td>{{ $exam->start_time }}</td>
+                      <td>{{ $exam->end_time }}</td>
                       <td>
                         <div class="btn-group">
                           <button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" onclick="approve_schedule()"><i class="fas fa-file-signature"></i></button>
@@ -141,8 +141,8 @@
                     <td>{{ $exam->subject->name }}</td>
                     <td>{{ $exam->type->exam_type }}</td>
                     <td>{{ $exam->date }}</td>
-                    <td>10:30 AM</td>
-                    <td>12:30 PM</td>
+                    <td>{{ $exam->start_time }}</td>
+                    <td>{{ $exam->end_time }}</td>
                     <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" data-toggle="modal" data-target="#postponeExam"><i class="fas fa-calendar-plus"></i></button>
@@ -220,10 +220,10 @@
                   <tr class="text-center">
                     <td>FIT {{ $exam->subject->code }}</td>
                     <td>{{ $exam->subject->name }}</td>
-                    <td>e-Test</td>
+                    <td>{{ $exam->type->exam_type }}</td>
                     <td>{{ $exam->date }}</td>
-                    <td>10:30 AM</td>
-                    <td>12:30 PM</td>
+                    <td>{{ $exam->start_time }}</td>
+                    <td>{{ $exam->end_time }}</td>
                   </tr>
                       
                   @endforeach
