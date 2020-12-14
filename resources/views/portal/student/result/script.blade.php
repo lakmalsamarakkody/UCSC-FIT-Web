@@ -1,7 +1,7 @@
 @section('script')
 <script type="text/javascript">
   $(function () {
-    alert('asvas');
+    
     $(".collapse.show").each(function(){
     // Add chevron-down icon for collapse element which is open by default
       $(this).prev(".card-header").find(".btn").addClass("btn-show");
