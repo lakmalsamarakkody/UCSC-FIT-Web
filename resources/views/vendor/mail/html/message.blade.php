@@ -21,7 +21,12 @@
 {{-- Footer --}}
 @slot('footer')
 @component('mail::footer')
-© {{ date('Y') }} {{ config('app.name') }}. @lang('All rights reserved.')
+Please do not reply to this email as it is an automated email and cannot be responded to. <br>
+Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" class="white"> UCSC</a> </strong>. All Rights Reserved |
+Powered by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Center - UCSC </a> </strong>
+<br>
+<br>
+
 @endcomponent
 @endslot
 @endcomponent
