@@ -71,9 +71,9 @@
               </table> --}}
             </div>
 
-            <div class="col-lg-12" id="accordion">
+            <div class="col-lg-12 px-0" id="accordion">
               <div class="card">
-                <div class="card-header" id="headingOne">
+                <div class="card-header shadow-sm" id="headingOne">
                   <h5 class="mb-0">
                     <button class="btn w-100 text-left" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                       2017
@@ -83,7 +83,7 @@
                 </div>            
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                   <div class="card-body">
-                      <table class="table w-100">
+                      <table class="table w-100 text-center">
                           <thead>
                               <th>Subject</th>
                               <th>Exam Type</th>

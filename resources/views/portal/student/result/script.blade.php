@@ -1,7 +1,7 @@
 @section('script')
 <script type="text/javascript">
-alert('asvas');
   $(function () {
+    
     $(".collapse.show").each(function(){
     // Add chevron-down icon for collapse element which is open by default
       $(this).prev(".card-header").find(".btn").addClass("btn-show");
@@ -20,5 +20,5 @@ alert('asvas');
       $(this).prev(".card-header").find(".fa").removeClass("fa-chevron-down").addClass("fa-chevron-right");
     });
   });
-<script>
+</script>
 @endsection
