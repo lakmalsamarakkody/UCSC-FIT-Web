@@ -176,7 +176,7 @@
             </div>
             <!-- /MOBILE NAV BAR -->
 
-            <main class="col-lg-12 py-4 px-5">
+            <main class="col-lg-12 py-md-4 px-md-5">
               <div class="row">
                     @yield('content')
               </div>

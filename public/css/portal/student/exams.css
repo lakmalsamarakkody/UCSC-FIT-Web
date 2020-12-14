@@ -1,0 +1,30 @@
+/* accordion */
+.student-exams #accordion .card{
+  border: 1px !important;
+  box-shadow: none !important;
+}
+.student-exams #accordion .card-header{
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--main-theme-color);
+  background-color: var(--accordion-card-color);
+  border: 1px !important;
+}
+.student-exams .header-show{    
+  background-color: var(--main-theme-color) !important;
+}
+.student-exams #accordion  .card-header .btn{
+  color: var(--main-theme-color);
+}
+.student-exams .btn-show{    
+  background-color: var(---main-theme-color) ;
+  color: var(--white)!important;
+}
+.student-exams #accordion  .card-header .btn:focus{
+  box-shadow: none !important;
+}
+.student-exams #accordion  .card .card-body th {
+  color: var(--main-theme-color);
+  font-weight: normal;
+}
+/* /accordion */
