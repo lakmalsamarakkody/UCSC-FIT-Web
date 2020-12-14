@@ -30,8 +30,9 @@
     <!-- PAGES -->
     <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/student/registration.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/student/results.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/student/information.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/student/exams.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/student/results.css') }}">
     <!-- /PAGES --> 
   <!-- /STYLES -->
 
