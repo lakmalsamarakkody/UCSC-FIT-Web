@@ -28,7 +28,8 @@
                 <div class="card">
                     <div class="card-header text-center">Register to FIT Programme<br><small style="text-transform: initial;">Please fill all the details correctly</small></div>
                     <div class="card-body">
-                        <form id="registerForm">
+                        <form id="registerForm" action="{{ url('/portal/student/registration') }}" method="POST">
+                        @csrf
                             <!-- PERSONAL DETAILS -->
                             <div class="details px-3 pb-3">
                                 <h6 class="text-left mt-4 mb-4">Personal Details</h6>
@@ -48,7 +49,12 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="firstName">First Name</label>
-                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="e.g. Charith"/>
+                                        <input type="text" class="form-control @error('firstName') is-invalid @enderror" id="firstName" name="firstName" placeholder="e.g. Charith" value="{{ old('firstName') }}"/>
+                                        @error('firstName')                                            
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="middleNames">Middle Names</label>
@@ -296,7 +302,7 @@
                                     <button type="button" class="btn btn-outline-warning form-control" id="btnResetForm" onclick="reset_form()">Reset Form</button>
                                 </div>
                                 <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2" id="divSaveInformation">
-                                    <button type="button" class="btn btn-outline-secondary form-control" id="btnSaveInformation" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_informatioin()">Save information</button>
+                                    <button type="submit" class="btn btn-outline-secondary form-control" id="btnSaveInformation" role="button" aria-expanded="false" aria-controls="declaration">Save information</button>
                                 </div>
                                 <div class="mt-3 col-xl-3 col-md-6 order-sm-3 order-1 d-none" id="divEditInformation">
                                     <button type="button" class="btn btn-outline-warning form-control" id="btnEditInformation" onclick="edit_information()">Edit Information</button>
@@ -304,6 +310,7 @@
 
                             </div>
                             
+                        </form>
 
 
                             <!-- DECLARATION -->
@@ -326,7 +333,6 @@
                             
                             <!-- SUBMIT APPLICATION-->
 
-                        </form>
 
                     </div>
                 </div>

@@ -27,4 +27,12 @@ class StudentController extends Controller
     {
         return view('portal/student/registration');
     }
+
+    public function saveInfo(Request $request)
+    {
+
+        $request->validate([
+            'firstName' => 'required'
+        ]);
+    }
 }
