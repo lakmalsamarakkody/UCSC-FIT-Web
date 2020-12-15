@@ -34,7 +34,11 @@ class DatabaseSeeder extends Seeder
             TitleSeeder::class,
             SlProvinceSeeder::class,
             SlDistrictSeeder::class,
-            SlCitiesSeeder::class
+            SlCitiesSeeder::class,
+            WorldContinentsTableSeeder::class,
+            WorldCountriesTableSeeder::class,
+            WorldDivisionsTableSeeder::class,
+            WorldCitiesTableSeeder::class,
         ]);
     }
 }
