@@ -42,9 +42,14 @@ class ExamsController extends Controller
         }
     }
 
-    public function storeSchedule(Request $request)
+    public function createSchedule(Request $request)
     {
         $schedule = new Schedule();
+        $schedule->subject_id = request('subject');
+        $schedule->exam_type_id = request('examType');
+        $schedule->date = request('examDate');
+        $schedule->start_time = request('startTime');
+
 
     }
 
