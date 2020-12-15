@@ -1,8 +1,40 @@
 <script type="text/javascript">
 
+  // BODY ONLOAD
+  $(document).ready(function(){
 
-// INSERT CURRENT ADDRESS
+    select_district_state()
+    address_editable()
+    edit_designation()
 
+  });
+  // /BODY ONLOAD
+
+  // COLLAPSE DISTRICT,STATE FIELDS
+  select_district_state = () => {
+    if(document.getElementById('citizenship').value == 'Sri Lankan') {
+      $('#divSelectDistrict').collapse('show')
+      $('#divSelectState').collapse('hide')
+      $('#divSelectCurrentDistrict').collapse('show')
+      $('#divSelectCurrentState').collapse('hide')
+    }
+    else if(document.getElementById('citizenship').value == 'Foreign National') {
+      $('#divSelectDistrict').collapse('hide')
+      $('#divSelectState').collapse('show')
+      $('#divSelectCurrentDistrict').collapse('hide')
+      $('#divSelectCurrentState').collapse('show')
+    }
+    else {
+      $('#divSelectDistrict').collapse('hide')
+      $('#divSelectState').collapse('hide')
+      $('#divSelectCurrentDistrict').collapse('hide')
+      $('#divSelectCurrentState').collapse('hide')
+    }
+  }
+  // /COLLAPSE DISTRICT,STATE FIELDS
+
+
+  // INSERT CURRENT ADDRESS
   address_editable = () => {
     //console.log('hello');
     if(document.getElementById("current_address").checked == true) {
@@ -174,29 +206,5 @@
     }
   }
   // /ACCEPT CONDITIONS
-
-  // COLLAPSE DISTRICT,STATE FIELDS
-  select_district_state = () => {
-    if(document.getElementById('citizenship').value == 'Sri Lankan') {
-      $('#divSelectDistrict').collapse('show')
-      $('#divSelectState').collapse('hide')
-      $('#divSelectCurrentDistrict').collapse('show')
-      $('#divSelectCurrentState').collapse('hide')
-    }
-    else if(document.getElementById('citizenship').value == 'Foreign National') {
-      $('#divSelectDistrict').collapse('hide')
-      $('#divSelectState').collapse('show')
-      $('#divSelectCurrentDistrict').collapse('hide')
-      $('#divSelectCurrentState').collapse('show')
-    }
-    else {
-      $('#divSelectDistrict').collapse('hide')
-      $('#divSelectState').collapse('hide')
-      $('#divSelectCurrentDistrict').collapse('hide')
-      $('#divSelectCurrentState').collapse('hide')
-    }
-  }
-
-  // /COLLAPSE DISTRICT,STATE FIELDS
 
   </script>

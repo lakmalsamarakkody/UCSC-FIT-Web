@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Student\Title;
+use Illuminate\Support\Facades\DB;
 
 class RegistrationController extends Controller
 {
@@ -28,7 +29,11 @@ class RegistrationController extends Controller
   public function index()
   {
     $student_titles = Title::select('title')->get();
-    return view('portal/student/registration', ['student_titles' => $student_titles]);
+    $countries_list = DB::table('world_countries')->orderBy('name')->get();
+    return view('portal/student/registration', [
+      'student_titles' => $student_titles,
+      'countries_list' => $countries_list,
+    ]);
   }
 
   public function saveInfo(Request $request)
@@ -45,7 +50,10 @@ class RegistrationController extends Controller
       'nameInitials' => 'required',
       'dob' => 'required',
       'gender' => 'required',
+      'citizenship' => 'required',
       'unique_id' => 'required',
+
+      'qualification' => 'required',
 
       'house' => 'required',
       'addressLine1' => 'required',
