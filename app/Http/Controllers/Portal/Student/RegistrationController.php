@@ -34,6 +34,8 @@ class RegistrationController extends Controller
   public function saveInfo(Request $request)
   {
 
+    // dd($request->all());
+    
     $validate = $request->validate([
       'title' => 'required',
       'firstName' => 'required',
