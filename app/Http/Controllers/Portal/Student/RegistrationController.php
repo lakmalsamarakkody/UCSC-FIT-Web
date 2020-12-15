@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Portal\Student;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Student\Title;
+
 class RegistrationController extends Controller
 {
   /**
@@ -25,11 +27,15 @@ class RegistrationController extends Controller
    */
   public function index()
   {
-    return view('portal/student/registration');
+    $student_titles = Title::select('title')->get();
+    return view('portal/student/registration', ['student_titles' => $student_titles]);
   }
 
   public function saveInfo(Request $request)
   {
+
+    // dd($request->all());
+    
     $validate = $request->validate([
       'title' => 'required',
       'firstName' => 'required',
@@ -38,6 +44,7 @@ class RegistrationController extends Controller
       'fullName' => 'required',
       'nameInitials' => 'required',
       'dob' => 'required',
+      'gender' => 'required',
       'unique_id' => 'required',
 
       'house' => 'required',
@@ -55,7 +62,6 @@ class RegistrationController extends Controller
       'telephone' => 'required',
       'email' => 'required',
       'designation' => 'required',
-    ]
-  );
+    ]);
   }
 }
