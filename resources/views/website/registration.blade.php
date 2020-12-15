@@ -13,7 +13,7 @@
     <!--==========================
     Hero Section
     ============================-->
-    <section id="hero" style="background-image: url({{ asset('img/background/hero-back.png') }}); height:200px">
+    <section id="hero" style="background-image: url({{ asset('img/background/back.jpg') }}); height:200px">
         <div class="page-hero-container">
             <h1 style="padding-top:30px">Get Register for FIT</h1>
         </div>
@@ -40,14 +40,14 @@
                     <div id="error">
 
                     </div>
-                    <form action="{{ url('/student/registration') }}" method="POST" role="form" class="contactForm">
-                    @csrf
+                    <form role="form" class="contactForm">
                         <div class="form-group">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Type Your Email Here"  data-rule="email" data-msg="Please enter a valid email" />
-                        <div class="validation"></div>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Type Your Email Here"  data-rule="email" data-msg="Please enter a valid email" />
+                            <span id="erremail" class="invalid-feedback" role="alert"></span>
                         </div>
-                        <div class="mt-4 text-center"><button type="submit">Sign Up Here</button></div>
                     </form>
+                    <div class="mt-4 text-center"><button id="submit" type="button" onclick="send_email()">Sign Up Here</button></div>
+                    
                 </div>
             
             </div>
@@ -196,3 +196,4 @@
   </main>
 
 @endsection
+@include('website.registration.script')

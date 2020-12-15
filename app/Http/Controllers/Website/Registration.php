@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\StudentRegistration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class Registration extends Controller
 {
@@ -15,7 +16,24 @@ class Registration extends Controller
 
     public function emailLink(Request $request)
     {
+        $validator = Validator::make($request->all(), [            
+            'email'=> ['required', 'email', 'unique:users']
+        ]);
+        // $request->validate([
+        //     'email'=> ['required', 'email', 'unique:users']
+        // ]);
+        
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        endif;
         $email = $request->email;
-        Mail::to($email)->send(new StudentRegistration($email));
+        if(Mail::to($email)->send(new StudentRegistration($email))):
+            $msg = 'success';
+        else:
+            $msg = 'fail';
+        endif;
+        
+              
+        return view('website/registration', compact('msg'));
     }
 }
