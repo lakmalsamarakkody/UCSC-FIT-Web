@@ -171,9 +171,10 @@
                   <div class="form-group col-xl-2 col-lg-3">
                     <label for="selectSearchExamYear">Year</label>
                     <select name="selectSearchExamYear" id="selectSearchExamYear" class="form-control">
-                      <option value="" slected>2020</option>
-                      <option value="">2019</option>
+                      <option value="">2017</option>
                       <option value="">2018</option>
+                      <option value="">2019</option>
+                      <option value="">2020</option>
                     </select>
                   </div>
                   <div class="form-group col-xl-2 col-lg-3">
