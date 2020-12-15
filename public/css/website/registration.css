@@ -91,7 +91,7 @@ input[type="email"]{
     font-weight: bold;
 }
 
-button[type="submit"] {
+#submit {
     font-family: "Poppins", sans-serif;
     text-transform: uppercase;
     font-weight: 500;
@@ -111,7 +111,13 @@ button[type="submit"] {
     transition: 0.4s; */
 }
 
-button[type="submit"]:hover {
+#submit:hover {
+    background: #23159c;
+    color: #fff;
+    border: 2px solid  #fff;
+}
+#submit:focus {
+    outline: none;
     background: #23159c;
     color: #fff;
     border: 2px solid  #fff;

@@ -3,11 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>FIT - UCSC</title>
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="{{ asset('img/logo/fav.png') }}">
+
 
         <!-- FONTS -->
             <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
@@ -45,12 +46,13 @@
         <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
         <script src="{{ asset('lib/superfish/hoverIntent.js') }}"></script>
         <script src="{{ asset('lib/superfish/superfish.min.js') }}"></script>
+        <script src="{{ asset('lib/sweetalert2/sweetalert2.all.js') }}"></script>
 
-        <!-- SCRIPTS -->
-        <!-- /SCRIPTS -->
-    
         <!-- Template Main Javascript File -->
         <script src="{{ asset('js/web.js') }}"></script>
+        <!-- SCRIPTS -->
+        <script src="{{ asset('js/sweetalert.js') }}"></script>
+        <!-- /SCRIPTS -->
     </head>
 
     <body>
@@ -161,4 +163,5 @@
 
 
     </body>
+    @yield('script')
 </html>
