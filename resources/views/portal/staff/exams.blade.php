@@ -35,21 +35,22 @@
           <div class="card">
             <div class="card-header">Create Exam Schedule</div>
             <div class="card-body">
-              <form>
+              <form action="" method="POST">
                 <div class="form-row align-items-center px-4">
                   <div class="form-group col-xl-3 col-lg-6">
                     <label for="subject">Subejct</label>
                     <select name="subject" id="subject" class="form-control">
-                      <option value="">ICT Applications</option>
-                      <option value="">English for ICT</option>
-                      <option value="">Mathematics for ICT</option>
+                      @foreach ($subjects as $subject)
+                      <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                      @endforeach
                     </select>
                   </div>
                   <div class="form-group col-xl-3 col-lg-6">
                     <label for="examType">Exam Type</label>
                     <select name="examType" id="examType" class="form-control">
-                      <option value="">e-Test</option>
-                      <option value="">Practical</option>
+                      @foreach ($exam_types as $type)
+                          <option value="{{ $type->id }}">{{ $type->exam_type }}</option>
+                      @endforeach
                     </select>
                   </div>
                   <div class="form-group col-xl-3 col-lg-6">
@@ -168,35 +169,37 @@
               <form>
                 <div class="form-row mb-5">
                   <div class="form-group col-xl-2 col-lg-3">
-                    <label for="srchExamYear">Year</label>
-                    <select name="srchExamYear" id="srchExamYear" class="form-control">
+                    <label for="selectSearchExamYear">Year</label>
+                    <select name="selectSearchExamYear" id="selectSearchExamYear" class="form-control">
                       <option value="" slected>2020</option>
                       <option value="">2019</option>
                       <option value="">2018</option>
                     </select>
                   </div>
                   <div class="form-group col-xl-2 col-lg-3">
-                    <label for="srchExamDate">Date</label>
-                    <input type="date" class="form-control" id="srchExamDate" name="srchExamDate" />
+                    <label for="selectSearchExamDate">Date</label>
+                    <input type="date" class="form-control" id="selectSearchExamDate" name="selectSearchExamDate" />
                   </div>
                   <div class="form-group col-xl-2 col-lg-3">
-                    <label for="srchExamType">Exam Type</label>
-                    <select name="srchExamType" id="srchExamType" class="form-control">
-                      <option value="" selected>e-Test</option>
-                      <option value="">Practical</option>
+                    <label for="selectSearchExamType">Exam Type</label>
+                    <select name="selectSearchExamType" id="selectSearchExamType" class="form-control">
+                      @foreach ($exam_types as $type)
+                          <option value="{{ $type->id }}">{{ $type->exam_type }}</option>
+                      @endforeach
                     </select>
                   </div>
                   <div class="form-group col-xl-3 col-lg-3">
-                    <label for="srchSubject">Subject</label>
-                    <select name="srchSubject" id="srchSubject" class="form-control">
-                      <option value="">ICT Applications</option>
-                      <option value="">English for ICT</option>
-                      <option value="">Mathematics for ICT</option>
+                    <label for="selectSearchSubject">Subject</label>
+                    <select name="selectSearchSubject" id="selectSearchSubject" class="form-control">
+                      @foreach ($subjects as $subject)
+                      <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                      @endforeach
+                     
                     </select>
                   </div>
                   <div class="form-group col-xl-3 col-lg-12">
-                    <label for="btnSearch">&nbsp;</label>
-                    <button type="button" class="btn btn-outline-primary form-control" onclick="" id="btnSearch" name="btnSearch"><i class="fa fa-search"></i> Search</button>
+                    <label for="btnSearchExam">&nbsp;</label>
+                    <button type="button" class="btn btn-outline-primary form-control" onclick="" id="btnSearchExam" name="btnSearchExam"><i class="fa fa-search"></i> Search</button>
                   </div>
 
                 </div>

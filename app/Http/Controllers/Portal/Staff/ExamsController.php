@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Portal\Staff;
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Models\Exam\Schedule;
+use App\Models\Subject;
+use App\Models\Exam\Types;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -18,10 +20,10 @@ class ExamsController extends Controller
     
     public function index()
     {
-        $exams=Schedule::orderby('date')->take(6)->get();
-        return view('portal/staff/exams',[
-            'exams' => $exams,
-        ]);
+        $exams=Schedule::orderby('date','desc')->take(6)->get();
+        $subjects=Subject::orderby('id')->get();
+        $exam_types=Types::orderby('id')->get();
+        return view('portal/staff/exams',compact('exams','subjects','exam_types'));
     }
 
     public function getExamList(Request $request)
@@ -38,6 +40,12 @@ class ExamsController extends Controller
             ->rawColumns(['sction'])
             ->make(true);
         }
+    }
+
+    public function storeSchedule(Request $request)
+    {
+        $schedule = new Schedule();
+
     }
 
     
