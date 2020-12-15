@@ -123,6 +123,13 @@ input[type="email"]{
     border: 2px solid  #fff;
 }
 
+#submit:disabled{
+    outline: none;
+    background: #868484;
+    color: #fff;
+    border: 2px solid  #fff;
+}
+
 .form-label{
     font-size: 14px;
     font-weight: bold;

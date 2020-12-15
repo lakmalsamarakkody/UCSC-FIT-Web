@@ -28,12 +28,12 @@ class Registration extends Controller
         endif;
         $email = $request->email;
         if(Mail::to($email)->send(new StudentRegistration($email))):
-            $msg = 'success';
+            return response()->json(['success'=>'sucess']);
         else:
-            $msg = 'fail';
+            return response()->json(['success'=>'sucess']);
         endif;
         
               
-        return view('website/registration', compact('msg'));
+        // return view('website/registration', compact('msg'));
     }
 }

@@ -7,6 +7,11 @@ const color_danger = "#d33";
 const color_info = "#3fc3ee";
 const color_error = "#87adbd";
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
 $(function () {
     $('[data-tooltip="tooltip"]').tooltip()
