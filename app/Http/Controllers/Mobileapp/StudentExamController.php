@@ -15,8 +15,9 @@ class StudentExamController extends Controller
 {
 
     function examSchedule(){
-       return
-        DB::table('exam_schedules')
+       return [
+        "status"=>true,
+        "Data"=>DB::table('exam_schedules')
        ->join('subjects','exam_schedules.subject_id',"=",'subjects.id')
        ->join('exam_types','exam_schedules.exam_type_id',"=",'exam_types.id')
        ->join('exams','exam_schedules.exam_id',"=",'exams.id')
@@ -30,6 +31,6 @@ class StudentExamController extends Controller
            'exams.year',
            'exams.month'
            )
-       ->get();
+       ->get()];
     }
 }

@@ -130,10 +130,10 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="citizenship">Citizenship</label>
-                                        <select name="citizenship" id="citizenship" class="form-control">
+                                        <select name="citizenship" id="citizenship" class="form-control" onchange="select_district_state()" data-toggle="collapse">
                                             <option value="" selected disabled>Select your Citizenship</option>
-                                            <option value="">Sri Lankan</option>
-                                            <option value="">Foreign National</option>
+                                            <option value="Sri Lankan">Sri Lankan</option>
+                                            <option value="Foreign National">Foreign National</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
@@ -254,11 +254,29 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="form-group row collapse" id="divSelectDistrict">
+                                            <label for="selectDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="selectDistrict" id="selectDistrict" class="form-control">
+                                                    <option value="">Colombo</option>
+                                                    <option value="">&nbsp;</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row collapse" id="divSelectState">
+                                            <label for="selectState" class="col-xl-4 col-md-12 col-form-label">State:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="selectState" id="selectState" class="form-control">
+                                                    <option value="">State 1</option>
+                                                    <option value="">&nbsp;</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             <label for="city" class="col-xl-4 col-md-12 col-form-label">City:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <select name="city" id="city" class="form-control">
-                                                    <option value="">Colombo</option>
+                                                    <option value="">City 1</option>
                                                     <option value="">&nbsp;</option>
                                                 </select>
                                             </div>
@@ -337,12 +355,29 @@
                                                 @enderror
                                             </div>
                                         </div>
-
+                                        <div class="form-group row collapse" id="divSelectCurrentDistrict">
+                                            <label for="selectCurrentDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="selectCurrentDistrict" id="selectCurrentDistrict" class="form-control" disabled>
+                                                    <option value="">Colombo</option>
+                                                    <option value="">&nbsp;</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row collapse" id="divSelectCurrentState">
+                                            <label for="selectCurrentState" class="col-xl-4 col-md-12 col-form-label">State:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="selectCurrentState" id="selectCurrentState" class="form-control" disabled>
+                                                    <option value="">State 1</option>
+                                                    <option value="">&nbsp;</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             <label for="currentCity" class="col-xl-4 col-md-12 col-form-label">City:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <select id="currentCity" class="form-control" disabled>
-                                                    <option value="">Colombo</option>
+                                                    <option value="">City 1</option>
                                                     <option value="">&nbsp;</option>
                                                 </select>
                                             </div>
