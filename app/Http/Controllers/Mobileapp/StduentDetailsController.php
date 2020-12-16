@@ -15,6 +15,13 @@ class StduentDetailsController extends Controller
          ->join('student_exams','exam_schedules.id',"=",'student_exams.exam_schedule_id')
          ->join('students','student_exams.student_id',"=",'students.id')
          ->where('students.id',$id)
+         ->select(
+             'subjects.name',
+             'subjects.code',
+             'student_exams.result',
+             'student_exams.mark',
+             'exam_schedules.date'
+         )
          ->get();
     }
     function searchStudents(){
