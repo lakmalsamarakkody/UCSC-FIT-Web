@@ -16,9 +16,9 @@ class StudentRegistration extends Mailable
      *
      * @return void
      */
-    public function __construct($email)
+    public function __construct($details)
     {
-        $this->email = $email;
+        $this->details = $details;
     }
 
     /**

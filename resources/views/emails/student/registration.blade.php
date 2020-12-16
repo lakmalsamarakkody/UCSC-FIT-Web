@@ -6,11 +6,11 @@
 <p style="text-align: center; color: #fff;">Your All set! <br> Now you can complete your registration for the Foundation of Information Technology by login in to your by clicking below.</p> 
 
 
-@component('mail::button', ['url' => 'http://www.google.com', 'color' => 'success'])
+@component('mail::button', ['url' => 'http://127.0.0.1:8000/{{ $details->email }}/{{ $details->token }}', 'color' => 'success'])
 Login
 @endcomponent
 
-<p style="text-align: center; color: #fff;">OR <br> Use the Following Link <br><a href="">http://www.sample.com/sample/sample</a></p>
+<p style="text-align: center; color: #fff;">OR <br> Use the Following Link <br><a href="http://127.0.0.1:8000/{{ $details->email }}/{{ $details->token }}">http://www.sample.com/sample/sample</a></p>
 
 
 </div>

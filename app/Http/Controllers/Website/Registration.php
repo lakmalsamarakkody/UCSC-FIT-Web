@@ -34,19 +34,30 @@ class Registration extends Controller
             $user = new User();
             $user->email = $email;
             $user->token = $token;
+            $user->role_id = '1';
 
             $user->save();
+
+            $details = [
+                'email' => $email,
+                'token' => $token
+            ];
             
-            if(Mail::to($email)->send(new StudentRegistration($email,$token))):
+            if(Mail::to($email)->send(new StudentRegistration($details))):
                 return response()->json(['success'=>'success']);
             else:
                 return response()->json(['success'=>'success']);
             endif;
-        endif;
-
-
-        
+        endif;       
               
         // return view('website/registration', compact('msg'));
+    }
+    public function updateAccount($email)
+    {
+        // $validator = Validator::make($request->all(), [            
+        //     'email'=> ['required', 'email']      
+        //     // 'email'=> ['required', 'email', 'unique:users']
+        // ]);
+        return view('portal/student/guest');
     }
 }
