@@ -13,6 +13,10 @@
   // SAVE INFORMATION
   save_information = () => {
 
+    $('.form-control').removeClass('is-invalid');
+    $('.invalid-feedback').html('');
+    $('.invalid-feedback').hide();
+
     // FORM PAYLOAD
     var formData = new FormData($("#registerForm")[0]);
 
@@ -36,10 +40,11 @@
         $('#btnSaveInformation').removeAttr('disabled','disabled');
         if(data['errors']){
           $.each(data['errors'], function(key, value){
+            $('#error-'+key).show();
+            $('#'+key).addClass('is-invalid');
             $('#error-'+key).append('<strong>'+value+'</strong>')
           });
         }else if (data['success']){
-          $('#email').val('');
           SwalNotificationSuccess.fire({
             title: 'Registration Link Emailed!',
             text: 'Please Check your Email',
@@ -48,6 +53,7 @@
       },
       error: function(err){
         console.log('error');
+        SwalSystemErrorDanger.fire()
       }
     });
   }

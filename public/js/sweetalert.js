@@ -28,7 +28,6 @@ const SwalQuestionDanger = Swal.mixin({
   timerProgressBar: true,
   allowOutsideClick: false,
 })
-
 const SwalQuestionWarningAutoClose = Swal.mixin({
   icon: 'question',
   iconColor: color_warning,
@@ -39,6 +38,7 @@ const SwalQuestionWarningAutoClose = Swal.mixin({
   timerProgressBar: true,
   allowOutsideClick: false,
 })
+// SWEETALERT QUESTION
 
 // SWEETALERT DONE 
 const SwalDoneSuccess = Swal.mixin({
@@ -53,6 +53,17 @@ const SwalCancelWarning = Swal.mixin({
   iconColor: color_warning,
   confirmButtonColor: color_warning,
 })
+
+// SWEETALERT ERROR 
+const SwalSystemErrorDanger = Swal.mixin({
+  icon: 'error',
+  iconColor: color_danger,
+  title: 'System Error!',
+  text: 'Please contact your System Administrator',
+  confirmButtonColor: color_danger,
+  allowOutsideClick: false,
+})
+// /SWEETALERT ERROR 
 
 // SWEETALERT NOTIFICATION 
 const SwalNotificationSuccess = Swal.mixin({
@@ -80,6 +91,4 @@ const SwalNotificationWarningAutoClose = Swal.mixin({
   timer: 5000,
   timerProgressBar: true,
 })
-
-
-// /SWEETALERT
+// /SWEETALERT NOTIFICATION
