@@ -9,6 +9,7 @@ use App\Models\Student\Title;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Unique;
 
 class RegistrationController extends Controller
 {
@@ -44,19 +45,19 @@ class RegistrationController extends Controller
     $validator = Validator::make($request->all(), [            
       // 'email'=> ['required', 'email', 'unique:users'],
       'title' => ['required', 'exists:titles,title'],
-      'firstName' => ['required', 'alpha'],
-      //'middleNames' => ['required'],
-      'lastName' => ['required', 'alpha'],
-      // 'fullName' => ['required'],
-      // 'nameInitials' => ['required'],
+      'firstName' => ['required', 'alpha','min:3'],
+      'middleNames' => ['required', 'regex:/^[a-zA-Z]*$/'],
+      'lastName' => ['required', 'alpha', 'min:3'],
+      'fullName' => ['required', 'regex:/^[a-zA-Z\s]*$/'],
+      'nameInitials' => ['required', 'regex:/^([A-Z]{1}\s)+[a-zA-Z]{3}$/'],
       'dob' => ['required' , 'date','before:today'],
       'gender' => ['required', 'exists:students,gender'],
       // 'citizenship' => ['required'],
-      // 'unique_id' => ['required'],
+      //'unique_id' => ['required', 'regex:/^[0-9]{12}$/', 'regex:/^[0-9]{9}V$/'],
 
-      // 'qualification' => ['required'],
+      //'qualification' => ['required', 'exists:'],
 
-      // 'house' => ['required'],
+      'house' => ['required'],
       // 'addressLine1' => ['required'],
       // 'addressLine2' => ['required'],
       // 'addressLine3' => ['required'],
@@ -64,7 +65,7 @@ class RegistrationController extends Controller
       //'city' => ['required', 'exists: world_cities,name'],
       //'selectDistrict' => ['required', 'exists: sl_districts,name'],
       //'selectState' => ['required', 'exists: world_divisions,name'],
-      'country' => ['required', 'exists:world_countries,name'],
+      'country' => ['required', 'exists:world_countries,id'],
 
       // 'currentHouse' => ['required'],
       // 'currentAddressLine1' => ['required'],
@@ -76,9 +77,9 @@ class RegistrationController extends Controller
       //'selectCurrentState' => ['required', 'exists: world_divisions,name'],
       'currentCountry' => ['required', 'exists: world_countries,name'],
 
-      // 'telephone' => ['required'],
-      // 'email' => ['required'],
-      // 'designation' => ['required'],
+      'telephone' => ['required', 'regex:/^0[0-9]{9}$/'],
+      //'email' => ['required', 'email', 'unique:users'],
+      'designation' => ['required', 'regex:/^[a-zA-Z\s]*$/', 'min:3'],
     ]);
     
     if($validator->fails()):

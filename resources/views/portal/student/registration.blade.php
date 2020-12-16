@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="firstName">First Name</label>
-                                        <input type="text" class="form-control @error('firstName') is-invalid @enderror" id="firstName" name="firstName" placeholder="e.g. Charith" value="{{ old('firstName') }}"/>
+                                        <input type="text" class="form-control @error('firstName') is-invalid @enderror" id="firstName" name="firstName" placeholder="Start with Capital letter(e.g. Charith)" value="{{ old('firstName') }}"/>
                                         <span class="invalid-feedback" id="error-firstName" role="alert"></span>
                                         @error('firstName')
                                             <span class="invalid-feedback" role="alert">
@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="middleNames">Middle Names</label>
-                                        <input type="text" class="form-control @error('middleNames') is-invalid @enderror" id="middleNames" name="middleNames" placeholder="e.g. Kumara Sampath" value="{{ old('middleNames') }}" />
+                                        <input type="text" class="form-control @error('middleNames') is-invalid @enderror" id="middleNames" name="middleNames" placeholder="First Letters of name with Capital letter(e.g. Kumara Sampath)" value="{{ old('middleNames') }}" />
                                         <span class="invalid-feedback" id="error-middleNames" role="alert"></span>
                                         @error('middleNames')
                                             <span class="invalid-feedback" role="alert">
@@ -80,7 +80,7 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="lastName">Last Name</label>
-                                        <input type="text" class="form-control @error('lastName') is-invalid @enderror" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" value="{{ old('lastName') }}" />
+                                        <input type="text" class="form-control @error('lastName') is-invalid @enderror" id="lastName" name="lastName" placeholder="Start with Capital letter(e.g. Wickramarachchi)" value="{{ old('lastName') }}" />
                                         <span class="invalid-feedback" id="error-lastName" role="alert"></span>
                                         @error('lastName')
                                             <span class="invalid-feedback" role="alert">
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="nameInitials">Name with Initials</label>
-                                        <input type="text" class="form-control @error('nameInitials') is-invalid @enderror" id="nameInitials" name="nameInitials" placeholder="C K S Wickramarachchi" value="{{ old('nameInitials') }}" />
+                                        <input type="text" class="form-control @error('nameInitials') is-invalid @enderror" id="nameInitials" name="nameInitials" placeholder="Initials with Capital Letters(C K S Wickramarachchi)" value="{{ old('nameInitials') }}" />
                                         <span class="invalid-feedback" id="error-nameInitials" role="alert"></span>
                                         @error('nameInitials')
                                             <span class="invalid-feedback" role="alert">
@@ -347,10 +347,10 @@
                                         <div class="form-group row">
                                             <label for="country" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select id="country" name="country" class="form-control" onchange="">
+                                                <select id="country" name="country" class="form-control" onchange="get_state_district()">
                                                     <option disabled selected>Select your country</option>
                                                     @foreach ($countries_list as $countries)
-                                                        <option value="{{ $countries->name }}">{{ $countries->name }}</option><br/>
+                                                        <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>
                                                     @endforeach
                                                 </select>
                                                 <span class="invalid-feedback" id="error-country" role="alert"></span>
