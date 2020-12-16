@@ -32,7 +32,7 @@
                 <div class="card">
                     <div class="card-header text-center">Register to FIT Programme<br><small style="text-transform: initial;">Please fill all the details correctly</small></div>
                     <div class="card-body">
-                        <form id="registerForm" action="{{ url('/portal/student/registration') }}" method="POST">
+                        <form id="registerForm" action="{{ url('/portal/student/registration/saveinfo') }}" method="POST">
                         @csrf
                             <!-- PERSONAL DETAILS -->
                             <div class="details px-3 pb-3">
@@ -61,6 +61,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="firstName">First Name</label>
                                         <input type="text" class="form-control @error('firstName') is-invalid @enderror" id="firstName" name="firstName" placeholder="e.g. Charith" value="{{ old('firstName') }}"/>
+                                        <span class="invalid-feedback" id="error-firstName" role="alert"></span>
                                         @error('firstName')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -70,6 +71,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="middleNames">Middle Names</label>
                                         <input type="text" class="form-control @error('middleNames') is-invalid @enderror" id="middleNames" name="middleNames" placeholder="e.g. Kumara Sampath" value="{{ old('middleNames') }}" />
+                                        <span class="invalid-feedback" id="error-middleNames" role="alert"></span>
                                         @error('middleNames')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -79,6 +81,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="lastName">Last Name</label>
                                         <input type="text" class="form-control @error('lastName') is-invalid @enderror" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" value="{{ old('lastName') }}" />
+                                        <span class="invalid-feedback" id="error-lastName" role="alert"></span>
                                         @error('lastName')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -88,6 +91,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="fullName">Full Name</label>
                                         <input type="text" class="form-control @error('fullName') is-invalid @enderror" id="fullName" name="fullName" placeholder="e.g. Charith Kumara Sampath Wickramarachchi" value="{{ old('fullName') }}" />
+                                        <span class="invalid-feedback" id="error-fullName" role="alert"></span>
                                         @error('fullName')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -97,6 +101,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="nameInitials">Name with Initials</label>
                                         <input type="text" class="form-control @error('nameInitials') is-invalid @enderror" id="nameInitials" name="nameInitials" placeholder="C K S Wickramarachchi" value="{{ old('nameInitials') }}" />
+                                        <span class="invalid-feedback" id="error-nameInitials" role="alert"></span>
                                         @error('nameInitials')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -106,6 +111,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="dob">Date of Birth</label>
                                         <input type="date" class="form-control @error('dob') is-invalid @enderror" id="dob" name="dob" value="{{ old('dob') }}" />
+                                        <span class="invalid-feedback" id="error-dob" role="alert"></span>
                                         @error('dob')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -127,6 +133,7 @@
                                                 <option value="Female">Female</option>
                                             @endif
                                         </select>
+                                        <span class="invalid-feedback" id="error-gender" role="alert"></span>
                                         @error('gender')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -148,6 +155,7 @@
                                                 <option value="Foreign National">Foreign National</option>
                                             @endif
                                         </select>
+                                        <span class="invalid-feedback" id="error-citizenship" role="alert"></span>
                                         @error('citizenship')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -177,6 +185,7 @@
                                             <label for="passportNo" class="form-check-label">Passport No.</label>
                                         </div>
                                         <input type="text" class="form-control @error('unique_id') is-invalid @enderror" id="unique_id" name="unique_id" value="{{ old('unique_id') }}" placeholder="Choose relevent No from above and enter it here.">
+                                        <span class="invalid-feedback" id="error-unique_id" role="alert"></span>
                                         @error('unique_id')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -249,6 +258,7 @@
                                             <label for="house" class="col-xl-4 col-md-12 col-form-label">House Name/No:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('house') is-invalid @enderror" id="house" name="house" value="{{ old('house') }}">
+                                                <span class="invalid-feedback" id="error-house" role="alert"></span>
                                                 @error('house')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -260,6 +270,7 @@
                                             <label for="addressLine1" class="col-xl-4 col-md-12 col-form-label">Address Line 1:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('addressLine1') is-invalid @enderror" id="addressLine1" name="addressLine1" value="{{ old('addressLine1') }}">
+                                                <span class="invalid-feedback" id="error-addressLine1" role="alert"></span>
                                                 @error('addressLine1')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -271,6 +282,7 @@
                                             <label for="addressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('addressLine2') is-invalid @enderror" id="addressLine2" name="addressLine2" value="{{ old('addressLine2') }}">
+                                                <span class="invalid-feedback" id="error-addressLine2" role="alert"></span>
                                                 @error('addressLine2')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -282,6 +294,7 @@
                                             <label for="addressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('addressLine3') is-invalid @enderror" id="addressLine3" name="addressLine3" value="{{ old('addressLine3') }}">
+                                                <span class="invalid-feedback" id="error-addressLine3" role="alert"></span>
                                                 @error('addressLine3')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -293,6 +306,7 @@
                                             <label for="addressLine4" class="col-xl-4 col-md-12 col-form-label">Address Line 4:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('addressLine4') is-invalid @enderror" id="addressLine4" name="addressLine4" value="{{ old('addressLine4') }}">
+                                                <span class="invalid-feedback" id="error-addressLine4" role="alert"></span>
                                                 @error('addressLine4')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -306,6 +320,7 @@
                                                 <select name="city" id="city" class="form-control">
                                                     <option disabled selected>Select your city</option>
                                                 </select>
+                                                <span class="invalid-feedback" id="error-city" role="alert"></span>
                                                 <small class="form-text text-muted">* cities are shown after selecting a State/District.</small>
                                             </div>
                                         </div>
@@ -315,6 +330,7 @@
                                                 <select name="selectDistrict" id="selectDistrict" class="form-control" onchange="">
                                                     <option disabled selected>Select your district</option>
                                                 </select>
+                                                <span class="invalid-feedback" id="error-selectDistrict" role="alert"></span>
                                                 <small class="form-text text-muted">* Districts are shown after selecting a country.</small>
                                             </div>
                                         </div>
@@ -324,6 +340,7 @@
                                                 <select name="selectState" id="selectState" class="form-control" onchange="">
                                                     <option disabled selected>Select your state</option>
                                                 </select>
+                                                <span class="invalid-feedback" id="error-selectState" role="alert"></span>
                                                 <small class="form-text text-muted">* States are shown after selecting a country.</small>
                                             </div>
                                         </div>
@@ -336,6 +353,7 @@
                                                         <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>
                                                     @endforeach
                                                 </select>
+                                                <span class="invalid-feedback" id="error-country" role="alert"></span>
                                             </div>
                                         </div>
                                         <div class="text-right" id="divCollapsePlus1">
@@ -352,6 +370,7 @@
                                             <label for="currentHouse" class="col-xl-4 col-md-12 col-form-label">House Name/No:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('currentHouse') is-invalid @enderror" id="currentHouse" name="currentHouse" value="{{ old('currentHouse') }}" disabled>
+                                                <span class="invalid-feedback" id="error-currentHouse" role="alert"></span>
                                                 @error('currentHouse')
                                                   <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -363,6 +382,7 @@
                                             <label for="currentAddressLine1" class="col-xl-4 col-md-12 col-form-label">Address Line 1:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('currentAddressLine1') is-invalid @enderror" id="currentAddressLine1" name="currentAddressLine1" value="{{ old('currentAddressLine1') }}" disabled>
+                                                <span class="invalid-feedback" id="error-currentAddressLine1" role="alert"></span>
                                                 @error('currentAddressLine1')
                                                   <span class="invalid-feedback" role="alert">
                                                     <strong strong>{{ $message }}</strong>
@@ -374,6 +394,7 @@
                                             <label for="currentAddressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('currentAddressLine2') is-invalid @enderror" id="currentAddressLine2" name="currentAddressLine2" value="{{ old('currentAddressLine2') }}" disabled>
+                                                <span class="invalid-feedback" id="error-currentAddressLine2" role="alert"></span>
                                                 @error('currentAddressLine2')
                                                   <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -385,6 +406,7 @@
                                             <label for="currentAddressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('currentAddressLine3') is-invalid @enderror" id="currentAddressLine3" name="currentAddressLine3" value="{{ old('currentAddressLine3') }}" disabled>
+                                                <span class="invalid-feedback" id="error-currentAddressLine3" role="alert"></span>
                                                 @error('currentAddressLine3')
                                                   <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -396,6 +418,7 @@
                                             <label for="currentAddressLine4" class="col-xl-4 col-md-12 col-form-label">Address Line 4:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('currentAddressLine4') is-invalid @enderror" id="currentAddressLine4" name="currentAddressLine4" value="{{ old('currentAddressLine4') }}" disabled>
+                                                <span class="invalid-feedback" id="error-currentAddressLine4" role="alert"></span>
                                                 @error('currentAddressLine4')
                                                   <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -410,6 +433,7 @@
                                                     <option>City 1</option>
                                                     <option>&nbsp;</option>
                                                 </select>
+                                                <span class="invalid-feedback" id="error-currentCity" role="alert"></span>
                                                 <small class="form-text text-muted">* Cities are shown after selecting a State/District.</small>
                                             </div>
                                         </div>
@@ -420,6 +444,7 @@
                                                     <option>Colombo</option>
                                                     <option>&nbsp;</option>
                                                 </select>
+                                                <span class="invalid-feedback" id="error-selectCurrentDistrict" role="alert"></span>
                                                 <small class="form-text text-muted">* Districts are shown after selecting a country.</small>
                                             </div>
                                         </div>
@@ -430,6 +455,7 @@
                                                     <option>State 1</option>
                                                     <option>&nbsp;</option>
                                                 </select>
+                                                <span class="invalid-feedback" id="error-selectCurrentState" role="alert"></span>
                                                 <small class="form-text text-muted">* States are shown after selecting a country.</small>
                                             </div>
                                         </div>
@@ -442,6 +468,7 @@
                                                         <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>
                                                     @endforeach
                                                 </select>
+                                                <span class="invalid-feedback" id="error-currentCountry" role="alert"></span>
                                             </div>
                                         </div>
                                         <div class="text-right" id="divCollapsePlus2">
@@ -451,6 +478,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="telephone">Telephone Number</label>
                                         <input type="tel" class="form-control @error('telephone') is-invalid @enderror" id="telephone" name="telephone" value="{{ old('telephone') }}" >
+                                        <span class="invalid-feedback" id="error-telephone" role="alert"></span>
                                         @error('telephone')
                                           <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -461,6 +489,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="email">Email Address</label>
                                         <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" disabled>
+                                        <span class="invalid-feedback" id="error-email" role="alert"></span>
                                         <small>* Filled with your given email. You can change it after you registered.</small>
                                         @error('email')
                                           <span class="invalid-feedback" role="alert">
@@ -489,6 +518,7 @@
                                     <label for="designation" style="color: black; font-weight: bold;" class="col-xl-12 col-md-12 col-form-label">Designation:</label>
                                     <div class="col-xl-6 col-md-12">
                                       <input type="text" class="form-control  @error('designation') is-invalid @enderror" id="designation" name="designation" value="{{ old('designation') }}" placeholder="Please enter your designation" disabled>
+                                      <span class="invalid-feedback" id="error-designation" role="alert"></span>
                                       @error('designation')
                                           <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -521,6 +551,7 @@
                                 <p style="font-weight: bold;">I do hereby certify that the above particulars furnished by me are true and correct. In the event of my application for registration being accepted, I shall abide by all the regulations governing candidates of the University of Colombo School of Computing. (UCSC) I agree that the University has the right to cancel my registration at any time, either if I am found to have furnished false information or if I do not abide by the regulations governing candidates of the University of Colombo School of Computing.</p>
                                 <div class="form-check text-center">
                                     <input type="checkbox" class="form-check-input" id="accept" onclick="accept_conditions()" data-toggle="collapse" data-target="#divSubmitButton" aria-expanded="false" aria-controls="divSubmitButton">
+                                    <span class="invalid-feedback" id="error-accept" role="alert"></span>
                                     <label for="accept" class="form-check-label" ><h6 style="color: var(--color-success);" class="mb-4">Accept and Continue</h6></label>
                                 </div>
                             </div>
