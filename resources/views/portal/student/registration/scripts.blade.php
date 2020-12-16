@@ -21,14 +21,13 @@
     var formData = new FormData($("#registerForm")[0]);
 
     // ADD DATA
-    formData.append('user_role_name', $("#user_role_name").val())
-    formData.append('user_role_description', $("#user_role_description").val())
+    //formData.append('user_role_name', $("#user_role_name").val())
 
     $.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      url: "{{ url('/portal/student/registration') }}",
+      url: "{{ url('/portal/student/registration/saveinfo') }}",
       type: 'post',
       data: formData,
       processData: false,
