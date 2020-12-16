@@ -69,7 +69,7 @@
   <!-- /SCRIPTS -->
 </head>
 
-<body onload=display_ct();>
+<body onload=display_ct(); style="background-color: rgb(0, 28, 70);">
 
     <!-- Page container-fluid -->
     <div class="container-fluid">
@@ -191,7 +191,7 @@
             <div class="col-12" style="bottom: 0;">
               <div class="row">
                 
-              <div class=" w-100 footer bg-dark text-right py-2 pr-3">
+              <div class=" w-100 footer bg-dark text-right py-2 pr-3" style="background-color: #516899 !important;">
                 Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" class="white"> UCSC</a> </strong>. All Rights Reserved |
                 Powered by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Center - UCSC </a> </strong>
               </div>
