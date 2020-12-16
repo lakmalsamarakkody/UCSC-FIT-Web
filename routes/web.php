@@ -74,7 +74,7 @@ Route::get('/portal/staff/system', [App\Http\Controllers\Portal\Staff\SystemCont
 Route::get('/portal/student/', [App\Http\Controllers\Portal\Student\HomeController::class, 'index'])->name('student.home');
 
 Route::get('/portal/student/registration',[App\Http\Controllers\Portal\Student\RegistrationController::class,'index'])->name('student.registration');
-Route::post('/portal/student/registration',[App\Http\Controllers\Portal\Student\RegistrationController::class,'saveInfo']);
+Route::post('/portal/student/registration/saveinfo',[App\Http\Controllers\Portal\Student\RegistrationController::class,'saveInfo']);
 
 Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsController::class,'index'])->name('student.exams');
 
