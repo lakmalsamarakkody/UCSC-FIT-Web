@@ -43,10 +43,10 @@ class RegistrationController extends Controller
     // dd($request->all());
     $validator = Validator::make($request->all(), [            
       // 'email'=> ['required', 'email', 'unique:users'],
-      'title' => ['required'],
-      // 'firstName' => ['required'],
-      // 'middleNames' => ['required'],
-      // 'lastName' => ['required'],
+      'title' => ['required', 'exists:titles,title'],
+      'firstName' => ['required', 'alpha'],
+      //'middleNames' => ['required'],
+      'lastName' => ['required', 'alpha'],
       // 'fullName' => ['required'],
       // 'nameInitials' => ['required'],
       // 'dob' => ['required'],
