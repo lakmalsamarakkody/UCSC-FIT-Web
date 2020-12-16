@@ -60,9 +60,9 @@
 
 
             <nav class="navbar py-3 pl-5 w-100" style="background-color: #211870; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 14px; color: var( --nav-text-color);">
-                <h5 class=" text-left p-0 m-0">FIT | UCSC <br> <small>Staff Portal</small></h5>
+                <h5 class=" text-left p-0 m-0">FIT | UCSC <br> <small>Student Portal</small></h5>
 
-                    <a title="Back to FIT Website" data-tooltip="tooltip"  data-placement="bottom"  class="pr-5 text-right" style="cursor: pointer;"><i class="far fa-lg fa-hand-point-left"></i></a>
+                    <a href="{{ url('/') }}" title="Back to FIT Website" data-tooltip="tooltip"  data-placement="bottom"  class="pr-5 text-right" style="cursor: pointer;"><i class="far fa-lg fa-hand-point-left"></i></a>
               </nav>
 
             <!-- /NAVBAR -->
@@ -81,9 +81,6 @@
                                     Update Account <br>
                                     <small class="">Please update the following information in your student account  to continue registration</small>
                                 </div> 
-                                <div class="card-header">
-                                    Account Settings
-                                </div>
                                 <div class="card-body">                        
                                     <div class="col-12">
                                         <form action="">
