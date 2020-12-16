@@ -70,6 +70,10 @@ p {
     text-align: left;
 }
 
+.text-white{
+    color: #fff !important;
+}
+
 p.sub {
     font-size: 12px;
 }

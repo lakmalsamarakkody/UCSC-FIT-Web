@@ -19,11 +19,9 @@
         // Show loader
         $("#emailSpinner").removeClass('d-none');
         $('#submit').attr('disabled','disabled');
-        // $("#submit").addClass('disabled');
       },
       success: function(data){
         $("#emailSpinner").addClass('d-none');
-        // $("#submit").removeClass('disabled');
         $('#submit').removeAttr('disabled');
         if(data['errors']){
           $.each(data['errors'], function(key, value){
@@ -37,10 +35,20 @@
             title: 'Registration Link Emailed!',
             text: 'Please Check your Email',
           })
+        }else if (data['error']){
+          SwalNotificationWarning.fire({
+            title: 'Email Failed!',
+            text: 'Please Try Again or Contact Administrator: admin@ucsc.cmb.ac.lk',
+          })
         }
       },
       error: function(err){
-        console.log('error');
+        $("#emailSpinner").addClass('d-none');
+        $('#submit').removeAttr('disabled');
+        SwalNotificationWarning.fire({
+          title: 'Email Failed!',
+          text: 'Please Try Again or Contact Administrator: admin@ucsc.cmb.ac.lk',
+        })
       }
     });
   }

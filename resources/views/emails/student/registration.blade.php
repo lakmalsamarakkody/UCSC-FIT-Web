@@ -3,14 +3,30 @@
 
 <h1 style="text-align: center; color: #fff;">Register to FIT</h1>
 
-<p style="text-align: center; color: #fff;">Your All set! <br> Now you can complete your registration for the Foundation of Information Technology by login in to your by clicking below.</p> 
+<p style="text-align: center; color: #fff;">Your All set! <br> Now you can complete your registration for the Foundation of Information Technology by login in to your account by clicking below.</p> 
 
 
-@component('mail::button', ['url' => 'http://127.0.0.1:8000/{{ $details->email }}/{{ $details->token }}', 'color' => 'success'])
-Login
-@endcomponent
+<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td align="center">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td align="center">
+<table border="0" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td>
+<a style="width:200px; text-align:center" href="{{ route('email.link', ['email'=>$details['email'], 'token'=>$details['token']]) }}" class="button button-success" target="_blank" rel="noopener">Login</a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
 
-<p style="text-align: center; color: #fff;">OR <br> Use the Following Link <br><a href="http://127.0.0.1:8000/{{ $details->email }}/{{ $details->token }}">http://www.sample.com/sample/sample</a></p>
+<p class="text-white" style="text-align: center; color: #fff !important;">OR <br> Use the Following Link <br><a href="{{ route('email.link', ['email'=>$details['email'], 'token'=>$details['token']]) }}">{{ route('email.link', ['email'=>$details['email'], 'token'=>$details['token']]) }}</a></p>
 
 
 </div>

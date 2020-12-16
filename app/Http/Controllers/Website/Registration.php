@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-use function PHPUnit\Framework\isNull;
 
 class Registration extends Controller
 {
@@ -20,13 +19,9 @@ class Registration extends Controller
 
     public function emailLink(Request $request)
     {
-        $validator = Validator::make($request->all(), [            
-            'email'=> ['required', 'email']      
-            // 'email'=> ['required', 'email', 'unique:users']
+        $validator = Validator::make($request->all(), [     
+            'email'=> ['required', 'email', 'unique:users']
         ]);
-        // $request->validate([
-        //     'email'=> ['required', 'email', 'unique:users']
-        // ]);
         
         if($validator->fails()):
             return response()->json(['errors'=>$validator->errors()->all()]);
@@ -38,21 +33,21 @@ class Registration extends Controller
             $user->token = $token;
             $user->role_id = '1';
 
-            $user->save();
 
             $details = [
-                'email' => $email,
-                'token' => $token
+                'email' => $user->email,
+                'token' => $user->token
             ];
             
-            if(Mail::to($email)->send(new StudentRegistration($details))):
-                return response()->json(['success'=>'success']);
+            $user->save();
+
+            if(Mail::to($email)->send(new \App\Mail\StudentRegistration($details))):
+                return response()->json(['error'=>'error']);
             else:
                 return response()->json(['success'=>'success']);
             endif;
         endif;       
               
-        // return view('website/registration', compact('msg'));
     }
     public function updateAccount($email, $token)
     {
