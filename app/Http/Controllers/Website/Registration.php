@@ -28,9 +28,9 @@ class Registration extends Controller
         endif;
         $email = $request->email;
         if(Mail::to($email)->send(new StudentRegistration($email))):
-            return response()->json(['success'=>'sucess']);
+            return response()->json(['success'=>'success']);
         else:
-            return response()->json(['success'=>'sucess']);
+            return response()->json(['success'=>'success']);
         endif;
         
               
