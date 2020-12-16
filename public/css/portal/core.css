@@ -220,7 +220,7 @@ html{
 /* NAV BAR */
 
 
-.nav-bar, nav {
+.nav-bar{
   background-color: var(--nav-bg-color) !important;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
   font-size: 14px;
