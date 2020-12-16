@@ -347,10 +347,10 @@
                                         <div class="form-group row">
                                             <label for="country" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select id="country" class="form-control" onchange="">
+                                                <select id="country" name="country" class="form-control" onchange="">
                                                     <option disabled selected>Select your country</option>
                                                     @foreach ($countries_list as $countries)
-                                                        <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>
+                                                        <option value="{{ $countries->name }}">{{ $countries->name }}</option><br/>
                                                     @endforeach
                                                 </select>
                                                 <span class="invalid-feedback" id="error-country" role="alert"></span>
@@ -363,7 +363,7 @@
                                     
                                     <div class="form-group col-xl-6 col-md-12">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="addrs" id="current_address" onclick="address_editable()" data-toggle="collapse" data-target="#collapsePlus" aria-expanded="false" aria-controls="collapsePlus" >
+                                            <input type="checkbox" class="form-check-input" name="current_address" id="current_address" onclick="address_editable()" data-toggle="collapse" data-target="#collapsePlus" aria-expanded="false" aria-controls="collapsePlus" >
                                             <label for="current_address" class="form-check-label" ><h6 style="color: black;" class="mb-4">Current Address (Optional)</h6></label>
                                         </div>
                                         <div class="form-group row">
@@ -429,7 +429,7 @@
                                         <div class="form-group row">
                                             <label for="currentCity" class="col-xl-4 col-md-12 col-form-label">City:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select id="currentCity" class="form-control" disabled>
+                                                <select id="currentCity" name="currentCity" class="form-control" disabled>
                                                     <option>City 1</option>
                                                     <option>&nbsp;</option>
                                                 </select>
@@ -465,7 +465,7 @@
                                                 <select id="currentCountry" class="form-control" disabled onchange="">
                                                     <option disabled selected>Select your country</option>
                                                     @foreach ($countries_list as $countries)
-                                                        <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>
+                                                        <option value="{{ $countries->name }}">{{ $countries->name }}</option><br/>
                                                     @endforeach
                                                 </select>
                                                 <span class="invalid-feedback" id="error-currentCountry" role="alert"></span>
