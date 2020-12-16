@@ -311,7 +311,7 @@
                                         <div class="form-group row collapse" id="divSelectDistrict">
                                             <label for="selectDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="selectDistrict" id="selectDistrict" class="form-control">
+                                                <select name="selectDistrict" id="selectDistrict" class="form-control" onchange="">
                                                     <option disabled selected>Select your district</option>
                                                 </select>
                                                 <small class="form-text text-muted">* Districts are shown after selecting a country.</small>
@@ -320,7 +320,7 @@
                                         <div class="form-group row collapse" id="divSelectState">
                                             <label for="selectState" class="col-xl-4 col-md-12 col-form-label">State:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="selectState" id="selectState" class="form-control">
+                                                <select name="selectState" id="selectState" class="form-control" onchange="">
                                                     <option disabled selected>Select your state</option>
                                                 </select>
                                                 <small class="form-text text-muted">* States are shown after selecting a country.</small>
@@ -329,10 +329,10 @@
                                         <div class="form-group row">
                                             <label for="country" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select id="country" class="form-control">
+                                                <select id="country" class="form-control" onchange="">
                                                     <option disabled selected>Select your country</option>
                                                     @foreach ($countries_list as $countries)
-                                                        <option value="{{ $countries->name }}">{{ $countries->name }}</option><br/>
+                                                        <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -409,32 +409,37 @@
                                                     <option>City 1</option>
                                                     <option>&nbsp;</option>
                                                 </select>
+                                                <small class="form-text text-muted">* Cities are shown after selecting a State/District.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectCurrentDistrict">
                                             <label for="selectCurrentDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="selectCurrentDistrict" id="selectCurrentDistrict" class="form-control" disabled>
+                                                <select name="selectCurrentDistrict" id="selectCurrentDistrict" class="form-control" disabled onchange="">
                                                     <option>Colombo</option>
                                                     <option>&nbsp;</option>
                                                 </select>
+                                                <small class="form-text text-muted">* Districts are shown after selecting a country.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectCurrentState">
                                             <label for="selectCurrentState" class="col-xl-4 col-md-12 col-form-label">State:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="selectCurrentState" id="selectCurrentState" class="form-control" disabled>
+                                                <select name="selectCurrentState" id="selectCurrentState" class="form-control" disabled onchange="">
                                                     <option>State 1</option>
                                                     <option>&nbsp;</option>
                                                 </select>
+                                                <small class="form-text text-muted">* States are shown after selecting a country.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="currentCountry" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select id="currentCountry" class="form-control" disabled>
-                                                    <option>Sri Lanka</option>
-                                                    <option>&nbsp;</option>
+                                                <select id="currentCountry" class="form-control" disabled onchange="">
+                                                    <option disabled selected>Select your country</option>
+                                                    @foreach ($countries_list as $countries)
+                                                        <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
