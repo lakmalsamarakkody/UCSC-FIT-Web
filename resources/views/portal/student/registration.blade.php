@@ -20,6 +20,10 @@
     }
 </script> -->
 
+                                        
+                                            {{-- {{ $countries_list }} <br/> --}}
+                                        
+                                        
 
     <!-- CONTENT -->
     <div class="col-lg-12 student-registration">
@@ -38,7 +42,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="selectTitle">Title</label>
                                         <select name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
-                                            <option value="" disabled selected>Select your Title</option>
+                                            <option disabled selected>Select your Title</option>
                                             @foreach ($student_titles as $student_title)
                                                 @if (old('title') == $student_title->title)
                                                     <option value="{{ $student_title->title }}" selected>{{ $student_title->title }}</option>
@@ -110,7 +114,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="gender">Gender</label>
                                         <select name="gender" id="gender" class="form-control @error('gender') is-invalid @enderror">
-                                            <option value="" disabled selected>Select your Gender</option>
+                                            <option disabled selected>Select your Gender</option>
                                             @if (old('gender') == "Male")
                                                 <option value="Male" selected>Male</option>
                                                 <option value="Female">Female</option>
@@ -130,24 +134,45 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="citizenship">Citizenship</label>
-                                        <select name="citizenship" id="citizenship" class="form-control" onchange="select_district_state()" data-toggle="collapse">
-                                            <option value="" selected disabled>Select your Citizenship</option>
-                                            <option value="Sri Lankan">Sri Lankan</option>
-                                            <option value="Foreign National">Foreign National</option>
+                                        <select name="citizenship" id="citizenship" class="form-control @error('citizenship') is-invalid @enderror" onchange="select_district_state()" data-toggle="collapse">
+                                            <option selected disabled>Select your Citizenship</option>
+                                            @if (old('citizenship') == 'Sri Lankan')
+                                                <option value="Sri Lankan" selected>Sri Lankan</option>
+                                                <option value="Foreign National">Foreign National</option>
+                                            @elseif (old('citizenship') == 'Foreign National')
+                                                <option value="Sri Lankan">Sri Lankan</option>
+                                                <option value="Foreign National" selected>Foreign National</option>
+                                            @else
+                                                <option value="Sri Lankan">Sri Lankan</option>
+                                                <option value="Foreign National">Foreign National</option>
+                                            @endif
                                         </select>
+                                        @error('citizenship')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="nicPassport">&nbsp;</label>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="nicPassport" id="nicNo" value="" checked />
+                                            <input type="radio" class="form-check-input" name="nicPassport" id="nic" value="nic" checked />
                                             <label for="nicNo" class="form-check-label">National ID No</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="nicPassport" id="postalNo" value="" />
+                                            @if(old('nicPassport') == 'postal')
+                                                <input type="radio" class="form-check-input" name="nicPassport" id="postal" value="postal" checked/>
+                                            @else 
+                                                <input type="radio" class="form-check-input" name="nicPassport" id="postal" value="postal" />
+                                            @endif
                                             <label for="postalNo" class="form-check-label">Postal ID No</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="nicPassport" id="passportNo" value="" />
+                                            @if(old('nicPassport') == 'passport')
+                                                <input type="radio" class="form-check-input" name="nicPassport" id="passport" value="passport" checked/>
+                                            @else 
+                                                <input type="radio" class="form-check-input" name="nicPassport" id="passport" value="passport" />
+                                            @endif
                                             <label for="passportNo" class="form-check-label">Passport No.</label>
                                         </div>
                                         <input type="text" class="form-control @error('unique_id') is-invalid @enderror" id="unique_id" name="unique_id" value="{{ old('unique_id') }}" placeholder="Choose relevent No from above and enter it here.">
@@ -166,28 +191,48 @@
                                 <h6 class="text-left mt-4 mb-4">Educational Qualifications</h6>
                                 <small>* Choose your highest educational qualification.</small>
                                 <div class="form-check px-5 mt-2">
-                                    <input type="radio" class="form-check-input" name="qualification" id="degree" value="" checked />
+                                    <input type="radio" class="form-check-input" name="qualification" id="degree" value="degree" checked/>
                                     <label for="degree" class="form-check-label">Bachelor's Degree</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    <input type="radio" class="form-check-input" name="qualification" id="highDip" value="" />
-                                    <label for="highDip" class="form-check-label">Advanced/Higher Diploma from a nationally or internationally recognized organisation</label>
+                                    @if(old('qualification') == 'higherdiploma')
+                                        <input type="radio" class="form-check-input" name="qualification" id="higherdiploma" value="higherdiploma" checked/>
+                                    @else
+                                        <input type="radio" class="form-check-input" name="qualification" id="higherdiploma" value="higherdiploma" />
+                                    @endif
+                                    <label for="higherdiploma" class="form-check-label">Advanced/Higher Diploma from a nationally or internationally recognized organisation</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    <input type="radio" class="form-check-input" name="qualification" id="diploma" value="" />
+                                    @if(old('qualification') == 'diploma')
+                                        <input type="radio" class="form-check-input" name="qualification" id="diploma" value="diploma" checked/>
+                                    @else
+                                        <input type="radio" class="form-check-input" name="qualification" id="diploma" value="diploma" />
+                                    @endif
                                     <label for="diploma" class="form-check-label">Diploma from a nationally or internationally recognized organisation</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    <input type="radio" class="form-check-input" name="qualification" id="aLevel" value="" />
-                                    <label for="aLevel" class="form-check-label">GCE Advanced Level</label>
+                                    @if(old('qualification') == 'advancedlevel')
+                                        <input type="radio" class="form-check-input" name="qualification" id="advancedlevel" value="advancedlevel" checked/>
+                                    @else
+                                        <input type="radio" class="form-check-input" name="qualification" id="advancedlevel" value="advancedlevel" />
+                                    @endif
+                                    <label for="advancedlevel" class="form-check-label">GCE Advanced Level</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    <input type="radio" class="form-check-input" name="qualification" id="oLevel" value="" />
-                                    <label for="oLevel" class="form-check-label">GCE Ordinary Level</label>
+                                    @if(old('qualification') == 'ordinarylevel')
+                                        <input type="radio" class="form-check-input" name="qualification" id="ordinarylevel" value="ordinarylevel" checked/>
+                                    @else
+                                        <input type="radio" class="form-check-input" name="qualification" id="ordinarylevel" value="ordinarylevel" />
+                                    @endif
+                                    <label for="ordinarylevel" class="form-check-label">GCE Ordinary Level</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    <input type="radio" class="form-check-input" name="qualification" id="otherQual" value="" />
-                                    <label for="otherQual" class="form-check-label">Any other qualification</label>
+                                    @if(old('qualification') == 'otherqualification')
+                                        <input type="radio" class="form-check-input" name="qualification" id="otherqualification" value="otherqualification" checked/>
+                                    @else
+                                        <input type="radio" class="form-check-input" name="qualification" id="otherqualification" value="otherqualification"/>
+                                    @endif
+                                    <label for="otherqualification" class="form-check-label">Any other qualification</label>
                                 </div>
                             </div>
                             <!-- /EDUCATIONAL QUALIFICATIONS -->
@@ -254,39 +299,41 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <label for="city" class="col-xl-4 col-md-12 col-form-label">City:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="city" id="city" class="form-control">
+                                                    <option disabled selected>Select your city</option>
+                                                </select>
+                                                <small class="form-text text-muted">* cities are shown after selecting a State/District.</small>
+                                            </div>
+                                        </div>
                                         <div class="form-group row collapse" id="divSelectDistrict">
                                             <label for="selectDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <select name="selectDistrict" id="selectDistrict" class="form-control">
-                                                    <option value="">Colombo</option>
-                                                    <option value="">&nbsp;</option>
+                                                    <option disabled selected>Select your district</option>
                                                 </select>
+                                                <small class="form-text text-muted">* Districts are shown after selecting a country.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectState">
                                             <label for="selectState" class="col-xl-4 col-md-12 col-form-label">State:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <select name="selectState" id="selectState" class="form-control">
-                                                    <option value="">State 1</option>
-                                                    <option value="">&nbsp;</option>
+                                                    <option disabled selected>Select your state</option>
                                                 </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="city" class="col-xl-4 col-md-12 col-form-label">City:</label>
-                                            <div class="col-xl-8 col-md-12">
-                                                <select name="city" id="city" class="form-control">
-                                                    <option value="">City 1</option>
-                                                    <option value="">&nbsp;</option>
-                                                </select>
+                                                <small class="form-text text-muted">* States are shown after selecting a country.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="country" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <select id="country" class="form-control">
-                                                    <option value="">Sri Lanka</option>
-                                                    <option value="">&nbsp;</option>
+                                                    <option disabled selected>Select your country</option>
+                                                    @foreach ($countries_list as $countries)
+                                                        <option value="{{ $countries->name }}">{{ $countries->name }}</option><br/>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -355,12 +402,21 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <label for="currentCity" class="col-xl-4 col-md-12 col-form-label">City:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select id="currentCity" class="form-control" disabled>
+                                                    <option>City 1</option>
+                                                    <option>&nbsp;</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="form-group row collapse" id="divSelectCurrentDistrict">
                                             <label for="selectCurrentDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <select name="selectCurrentDistrict" id="selectCurrentDistrict" class="form-control" disabled>
-                                                    <option value="">Colombo</option>
-                                                    <option value="">&nbsp;</option>
+                                                    <option>Colombo</option>
+                                                    <option>&nbsp;</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -368,17 +424,8 @@
                                             <label for="selectCurrentState" class="col-xl-4 col-md-12 col-form-label">State:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <select name="selectCurrentState" id="selectCurrentState" class="form-control" disabled>
-                                                    <option value="">State 1</option>
-                                                    <option value="">&nbsp;</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="currentCity" class="col-xl-4 col-md-12 col-form-label">City:</label>
-                                            <div class="col-xl-8 col-md-12">
-                                                <select id="currentCity" class="form-control" disabled>
-                                                    <option value="">City 1</option>
-                                                    <option value="">&nbsp;</option>
+                                                    <option>State 1</option>
+                                                    <option>&nbsp;</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -386,8 +433,8 @@
                                             <label for="currentCountry" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <select id="currentCountry" class="form-control" disabled>
-                                                    <option value="">Sri Lanka</option>
-                                                    <option value="">&nbsp;</option>
+                                                    <option>Sri Lanka</option>
+                                                    <option>&nbsp;</option>
                                                 </select>
                                             </div>
                                         </div>

@@ -16,7 +16,7 @@ class StudentSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        for($i=0;$i<30;$i++){
+        for($i=0;$i<10;$i++){
 
             $f_name= $faker->firstName;
             $l_name=$faker->lastName;

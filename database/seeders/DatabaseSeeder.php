@@ -31,7 +31,14 @@ class DatabaseSeeder extends Seeder
             PaymentMethodSeeder::class,
             PaymentSeeder::class,
             StudentExamSeeder::class,
-            TitleSeeder::class
+            TitleSeeder::class,
+            SlProvinceSeeder::class,
+            SlDistrictSeeder::class,
+            SlCitiesSeeder::class,
+            WorldContinentsTableSeeder::class,
+            WorldCountriesTableSeeder::class,
+            WorldDivisionsTableSeeder::class,
+            WorldCitiesTableSeeder::class,
         ]);
     }
 }
