@@ -59,10 +59,10 @@
 
 
 
-            <nav class="navbar py-3  w-100">
+            <nav class="navbar py-3 pl-5 w-100" style="background-color: #211870; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 14px; color: var( --nav-text-color);">
                 <h5 class=" text-left p-0 m-0">FIT | UCSC <br> <small>Staff Portal</small></h5>
 
-                    <button title="Back to FIT Website" class="btn btn-link btn-lg  px-5 nav-item text-right"><i class="fa fa-cog"></i></button>
+                    <a title="Back to FIT Website" data-tooltip="tooltip"  data-placement="bottom"  class="pr-5 text-right"><i class="far fa-lg fa-hand-point-left"></i></a>
               </nav>
 
             <!-- /NAVBAR -->
@@ -131,7 +131,7 @@
                 
               <div class=" w-100 footer text-right py-2 pr-3" style="background-color: #516899 !important;">
                 Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" > UCSC</a> </strong>. All Rights Reserved |
-                Powered by <strong><a style="color: rgb(255, 0, 0);" target="_blank" href="http://www.e-learning.lk/" >e-Learning Center - UCSC </a> </strong>
+                Powered by <strong><a target="_blank" href="http://www.e-learning.lk/" >e-Learning Center - UCSC </a> </strong>
               </div>
               </div>
             </div>
