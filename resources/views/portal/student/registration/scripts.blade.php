@@ -45,9 +45,35 @@
             $('#error-'+key).append('<strong>'+value+'</strong>')
           });
         }else if (data['success']){
-          SwalNotificationSuccess.fire({
-            title: 'Registration Link Emailed!',
-            text: 'Please Check your Email',
+          SwalQuestionSuccessAutoClose.fire({
+            title: 'Are you sure?',
+            text: 'Information you entered will be saved.',
+            confirmButtonText: 'Yes, Save!',
+          })
+
+          .then((result) => {
+            if(result.isConfirmed) {
+              SwalDoneSuccess.fire({
+                title: 'Saved!',
+                text: 'Information has been saved.',
+              })
+              $('input').attr('disabled','disabled')
+              $('select').attr('disabled','disabled')
+              $('#divCollapsePlus1').addClass('d-none')
+              $('#divCollapsePlus2').addClass('d-none')
+              $('#accept').removeAttr('disabled','disabled')
+              $('#declaration').collapse('show')
+              $('#divSaveInformation').addClass('d-none')
+              $('#divResetForm').addClass('d-none')
+              $('#divEditInformation').removeClass('d-none')
+            }
+            else {
+              SwalNotificationWarningAutoClose.fire({
+                title: 'Cancelled!',
+                text: 'Information has not been saved.',
+              })
+              $('#declaration').collapse('hide')
+            }
           })
         }
       },
@@ -149,42 +175,6 @@
     })
   }
   // /RESET FORM
-
-  // SAVE INFORMATION
-  save_informatioin = () => {
-
-    SwalQuestionSuccessAutoClose.fire({
-      title: 'Are you sure?',
-      text: 'Information you entered will be saved.',
-      confirmButtonText: 'Yes, Save!',
-    })
-
-    .then((result) => {
-      if(result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Saved!',
-          text: 'Information has been saved.',
-        })
-        $('input').attr('disabled','disabled')
-        $('select').attr('disabled','disabled')
-        $('#divCollapsePlus1').addClass('d-none')
-        $('#divCollapsePlus2').addClass('d-none')
-        $('#accept').removeAttr('disabled','disabled')
-        $('#declaration').collapse('show')
-        $('#divSaveInformation').addClass('d-none')
-        $('#divResetForm').addClass('d-none')
-        $('#divEditInformation').removeClass('d-none')
-      }
-      else {
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Information has not been saved.',
-        })
-        $('#declaration').collapse('hide')
-      }
-    })
-  }
-  // /SAVE INFORMATION
 
   // EDIT INFORAMTION
   edit_information = () => {
