@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\DB;
 class StduentDetailsController extends Controller
 {
     function studentDetails(){
-         return DB::table('students')
-         ->join('student_exams','students.id',"=",'student_exams.student_id')
+         return DB::table('exam_schedules')
+         ->join('subjects','exam_schedules.subject_id',"=",'.subjects.id')
+         ->join('student_exams','exam_schedules.id',"=",'student_exams.exam_schedule_id')
+         ->join('students','student_exams.student_id',"=",'students.id')
          ->get();
+    }
+    function searchStudents(){
+         return Student::all();
     }
 
 }
