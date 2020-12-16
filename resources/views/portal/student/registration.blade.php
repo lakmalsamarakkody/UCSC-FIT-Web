@@ -51,6 +51,7 @@
                                                 @endif
                                             @endforeach
                                         </select>
+                                        <span class="invalid-feedback" id="error-0" role="alert"></span>
                                         @error('title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -503,7 +504,7 @@
                                     <button type="button" class="btn btn-outline-warning form-control" id="btnResetForm" onclick="reset_form()">Reset Form</button>
                                 </div>
                                 <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2" id="divSaveInformation">
-                                    <button type="submit" class="btn btn-outline-secondary form-control" id="btnSaveInformation" role="button" aria-expanded="false" aria-controls="declaration">Save information</button>
+                                    <button type="button" class="btn btn-outline-secondary form-control" id="btnSaveInformation" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_information()">Save information</button>
                                 </div>
                                 <div class="mt-3 col-xl-3 col-md-6 order-sm-3 order-1 d-none" id="divEditInformation">
                                     <button type="button" class="btn btn-outline-warning form-control" id="btnEditInformation" onclick="edit_information()">Edit Information</button>

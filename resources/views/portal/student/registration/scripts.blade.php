@@ -10,6 +10,49 @@
   });
   // /BODY ONLOAD
 
+  // SAVE INFORMATION
+  save_information = () => {
+
+    // FORM PAYLOAD
+    var formData = new FormData($("#registerForm")[0]);
+
+    // ADD DATA
+    formData.append('user_role_name', $("#user_role_name").val())
+    formData.append('user_role_description', $("#user_role_description").val())
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{ url('/portal/student/registration') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){
+        $('#btnSaveInformation').attr('disabled','disabled');
+      },
+      success: function(data){
+        $('#btnSaveInformation').removeAttr('disabled','disabled');
+        if(data['errors']){
+          $.each(data['errors'], function(key, value){
+            $('#error-'+key).append('<strong>'+value+'</strong>')
+          });
+        }else if (data['success']){
+          $('#email').val('');
+          SwalNotificationSuccess.fire({
+            title: 'Registration Link Emailed!',
+            text: 'Please Check your Email',
+          })
+        }
+      },
+      error: function(err){
+        console.log('error');
+      }
+    });
+  }
+  // /SEND EMAIL
+
   // COLLAPSE DISTRICT,STATE FIELDS
   select_district_state = () => {
     if(document.getElementById('citizenship').value == 'Sri Lankan') {

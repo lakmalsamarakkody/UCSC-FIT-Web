@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Student\Title;
+
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
 class RegistrationController extends Controller
@@ -38,38 +40,43 @@ class RegistrationController extends Controller
 
   public function saveInfo(Request $request)
   {
-
     // dd($request->all());
-    
-    $validate = $request->validate([
-      'title' => 'required',
-      'firstName' => 'required',
-      'middleNames' => 'required',
-      'lastName' => 'required',
-      'fullName' => 'required',
-      'nameInitials' => 'required',
-      'dob' => 'required',
-      'gender' => 'required',
-      'citizenship' => 'required',
-      'unique_id' => 'required',
+    $validator = Validator::make($request->all(), [            
+      'email'=> ['required', 'email', 'unique:users'],
+      'title' => ['required'],
+      'firstName' => ['required'],
+      'middleNames' => ['required'],
+      'lastName' => ['required'],
+      'fullName' => ['required'],
+      'nameInitials' => ['required'],
+      'dob' => ['required'],
+      'gender' => ['required'],
+      'citizenship' => ['required'],
+      'unique_id' => ['required'],
 
-      'qualification' => 'required',
+      'qualification' => ['required'],
 
-      'house' => 'required',
-      'addressLine1' => 'required',
-      'addressLine2' => 'required',
-      'addressLine3' => 'required',
-      'addressLine4' => 'required',
+      'house' => ['required'],
+      'addressLine1' => ['required'],
+      'addressLine2' => ['required'],
+      'addressLine3' => ['required'],
+      'addressLine4' => ['required'],
 
-      'currentHouse' => 'required',
-      'currentAddressLine1' => 'required',
-      'currentAddressLine2' => 'required',
-      'currentAddressLine3' => 'required',
-      'currentAddressLine4' => 'required',
+      'currentHouse' => ['required'],
+      'currentAddressLine1' => ['required'],
+      'currentAddressLine2' => ['required'],
+      'currentAddressLine3' => ['required'],
+      'currentAddressLine4' => ['required'],
 
-      'telephone' => 'required',
-      'email' => 'required',
-      'designation' => 'required',
+      'telephone' => ['required'],
+      'email' => ['required'],
+      'designation' => ['required'],
     ]);
+    
+    if($validator->fails()):
+        return response()->json(['errors'=>$validator->errors()->all()]);
+    else:
+        return response()->json(['success'=>'success']);
+    endif;
   }
 }
