@@ -34,7 +34,7 @@ Route::get('/faq',[App\Http\Controllers\Website\Faq::class, 'index']);
 Route::get('/announcements', [App\Http\Controllers\Website\AnouncementsController::class, 'index']);
 
 Route::post('/student/registration',[App\Http\Controllers\Website\Registration::class,'emailLink']);
-
+Route::get('/{email}', [App\Http\Controllers\Website\Registration::class,'updateAccount']);
 /*
 |--------------------------------------------------------------------------
 | PORTAL ROUTES
@@ -82,9 +82,7 @@ Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\Result
 
 Route::get('/portal/student/payment',[App\Http\Controllers\Portal\Student\PaymentController::class,'index'])->name('payment');
 
-Route::get('/email', function(){
-  return new StudentRegistration();
-});
+
 
 
 
