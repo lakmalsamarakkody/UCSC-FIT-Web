@@ -51,7 +51,7 @@
                                                 @endif
                                             @endforeach
                                         </select>
-                                        <span class="invalid-feedback" id="error-0" role="alert"></span>
+                                        <span class="invalid-feedback" id="error-title" role="alert"></span>
                                         @error('title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

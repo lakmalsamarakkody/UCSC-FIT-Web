@@ -13,6 +13,10 @@
   // SAVE INFORMATION
   save_information = () => {
 
+    $('.form-control').removeClass('is-invalid');
+    $('.invalid-feedback').html('');
+    $('.invalid-feedback').hide();
+
     // FORM PAYLOAD
     var formData = new FormData($("#registerForm")[0]);
 
@@ -36,18 +40,46 @@
         $('#btnSaveInformation').removeAttr('disabled','disabled');
         if(data['errors']){
           $.each(data['errors'], function(key, value){
+            $('#error-'+key).show();
+            $('#'+key).addClass('is-invalid');
             $('#error-'+key).append('<strong>'+value+'</strong>')
           });
         }else if (data['success']){
-          $('#email').val('');
-          SwalNotificationSuccess.fire({
-            title: 'Registration Link Emailed!',
-            text: 'Please Check your Email',
+          SwalQuestionSuccessAutoClose.fire({
+            title: 'Are you sure?',
+            text: 'Information you entered will be saved.',
+            confirmButtonText: 'Yes, Save!',
+          })
+
+          .then((result) => {
+            if(result.isConfirmed) {
+              SwalDoneSuccess.fire({
+                title: 'Saved!',
+                text: 'Information has been saved.',
+              })
+              $('input').attr('disabled','disabled')
+              $('select').attr('disabled','disabled')
+              $('#divCollapsePlus1').addClass('d-none')
+              $('#divCollapsePlus2').addClass('d-none')
+              $('#accept').removeAttr('disabled','disabled')
+              $('#declaration').collapse('show')
+              $('#divSaveInformation').addClass('d-none')
+              $('#divResetForm').addClass('d-none')
+              $('#divEditInformation').removeClass('d-none')
+            }
+            else {
+              SwalNotificationWarningAutoClose.fire({
+                title: 'Cancelled!',
+                text: 'Information has not been saved.',
+              })
+              $('#declaration').collapse('hide')
+            }
           })
         }
       },
       error: function(err){
         console.log('error');
+        SwalSystemErrorDanger.fire()
       }
     });
   }
@@ -143,42 +175,6 @@
     })
   }
   // /RESET FORM
-
-  // SAVE INFORMATION
-  save_informatioin = () => {
-
-    SwalQuestionSuccessAutoClose.fire({
-      title: 'Are you sure?',
-      text: 'Information you entered will be saved.',
-      confirmButtonText: 'Yes, Save!',
-    })
-
-    .then((result) => {
-      if(result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Saved!',
-          text: 'Information has been saved.',
-        })
-        $('input').attr('disabled','disabled')
-        $('select').attr('disabled','disabled')
-        $('#divCollapsePlus1').addClass('d-none')
-        $('#divCollapsePlus2').addClass('d-none')
-        $('#accept').removeAttr('disabled','disabled')
-        $('#declaration').collapse('show')
-        $('#divSaveInformation').addClass('d-none')
-        $('#divResetForm').addClass('d-none')
-        $('#divEditInformation').removeClass('d-none')
-      }
-      else {
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Information has not been saved.',
-        })
-        $('#declaration').collapse('hide')
-      }
-    })
-  }
-  // /SAVE INFORMATION
 
   // EDIT INFORAMTION
   edit_information = () => {

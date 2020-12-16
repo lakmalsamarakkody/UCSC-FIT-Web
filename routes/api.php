@@ -24,3 +24,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get("reguserCount",[RegUsersController::class,'countRegUser']);
 Route::get('examSchedule',[StudentExamController::class,'examSchedule']);
 Route::get('studentDetails',[StduentDetailsController::class,'studentDetails']);
+Route::get('searchStudents',[StduentDetailsController::class,'searchStudents']);
