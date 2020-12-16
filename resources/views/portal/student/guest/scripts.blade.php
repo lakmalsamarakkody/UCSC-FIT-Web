@@ -1,4 +1,3 @@
-@section('script')
 <script type="text/javascript">
 
   // EMAIL
@@ -33,4 +32,3 @@
     
   });
 </script>
-@endsection
