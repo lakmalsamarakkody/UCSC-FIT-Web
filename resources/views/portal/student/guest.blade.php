@@ -62,7 +62,7 @@
             <nav class="navbar py-3 pl-5 w-100" style="background-color: #211870; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 14px; color: var( --nav-text-color);">
                 <h5 class=" text-left p-0 m-0">FIT | UCSC <br> <small>Staff Portal</small></h5>
 
-                    <a title="Back to FIT Website" data-tooltip="tooltip"  data-placement="bottom"  class="pr-5 text-right"><i class="far fa-lg fa-hand-point-left"></i></a>
+                    <a title="Back to FIT Website" data-tooltip="tooltip"  data-placement="bottom"  class="pr-5 text-right" style="cursor: pointer;"><i class="far fa-lg fa-hand-point-left"></i></a>
               </nav>
 
             <!-- /NAVBAR -->
