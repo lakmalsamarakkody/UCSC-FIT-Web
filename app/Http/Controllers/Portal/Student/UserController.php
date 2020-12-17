@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Portal\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Email_Token;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use PharIo\Manifest\Email;
 
 class UserController extends Controller
 {
@@ -23,14 +26,14 @@ class UserController extends Controller
         if($validator->fails()):
             return view('website/error');
         else:
-            $user = Email_Token::where('email', $email)->get()->first();
-            if(is_Null($user['token'])):
-                return view('website/error');
+            $email_token = Email_Token::where('email', $email)->get()->first();
+            if(is_Null($email_token['token'])):
+                return abort(403);
             else:
-                if($token==$user['token']):
-                    return view('portal/student/guest');
+                if($token==$email_token['token']):
+                    return view('portal/student/guest', compact('email'));
                 else:
-                    return view('website/error');
+                    return abort(403);
                 endif;
             endif;
         endif;
@@ -38,6 +41,36 @@ class UserController extends Controller
 
     public function updateAccount(Request $request)
     {
-        # code...
+        $validator = Validator::make($request->all(), 
+            [     
+                'password'=> ['required', 'string', 'min:8'],
+                'rePassword'=>['required', 'string', 'same:password']
+            ],
+            [
+                'same'=>'The password must match with re-type password<br>'
+            ]
+        );
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()]);
+        else:
+            $email = $request->email;
+            $user = new User();
+            $user->email = $email;
+            $user->password = Hash::make($request->password);
+            $user->role_id = '1';
+
+            $email_token = Email_Token::where('email', $email)->get()->first();
+            if(is_Null($email_token['token'])):
+                return abort(403);
+            else:
+                if($user->save()):
+                    Email_Token::where('email', $email)->delete();
+                    return response()->json(['success'=>'success']);
+                else:
+                    return response()->json(['error'=>'error']);
+                endif;
+            endif;
+            
+        endif;
     }
 }

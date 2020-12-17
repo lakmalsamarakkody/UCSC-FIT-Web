@@ -83,29 +83,30 @@
                                 </div> 
                                 <div class="card-body">                        
                                     <div class="col-12">
-                                        <form action="">
+                                        <form action="" id="updateAccount">
                                             <div class="form-row">     
-                                            <div class="form-group col-12 col-md-4">
-                                                <label for="currentPassword">User Email</label>
-                                                <input type="text" class="form-control form-control-sm" id="currentPassword" name="currentPassword" readonly/>
-                                                <small id="InputCurrentPasswordHelp" class="form-text text-muted">You can change your email after registration</small>
+                                            <div class="form-group col-12 col-md-6">
+                                                <input type="text" class="" id="email" name="email" value="{{ $email }}" readonly hidden/>
+                                                <label for="password">Password</label>
+                                                <input type="password" class="form-control " id="password" name="password"/>
+                                                <small id="InputPasswordHelp" class="form-text text-muted">Enter Password</small>
+                                                <span class="invalid-feedback" id="error-password" role="alert"></span>
                                             </div> 
-                                            <div class="form-group col-12 col-md-4">
-                                                <label for="newPassword">Password</label>
-                                                <input type="password" class="form-control form-control-sm" id="newPassword" name="newPassword"/>
-                                                <small id="InputNewPasswordHelp" class="form-text text-muted">Enter Password</small>
-                                            </div> 
-                                            <div class="form-group col-12 col-md-4">
-                                                <label for="reNewPassword">Re-Type Password</label>
-                                                <input type="password" class="form-control form-control-sm" id="reNewPassword" name="reNewPassword"/>
-                                                <small id="InputReNewPasswordHelp" class="form-text text-muted">Re-Type Password</small>
+                                            <div class="form-group col-12 col-md-6">
+                                                <label for="rePassword">Re-Type Password</label>
+                                                <input type="password" class="form-control " id="rePassword" name="rePassword"/>
+                                                <small id="InputRePasswordHelp" class="form-text text-muted">Enter Re-Type Password</small>
+                                                <span class="invalid-feedback" id="error-rePassword" role="alert"></span>
                                             </div>
-                                            </div>
-                                            <div class=" text-right w-100">
-                                                <button class="btn btn-secondary">Discard</button>
-                                                <button class="btn btn-outline-primary">Update Password</button>
                                             </div>
                                         </form>
+                                        <div class=" text-right w-100">
+                                            <button class="btn btn-secondary">Discard</button>
+                                            <button type="button" id="submit" onclick="update_account()" class="btn btn-outline-primary">
+                                              Update Password
+                                              <span id="spinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
