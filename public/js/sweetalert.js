@@ -55,6 +55,13 @@ const SwalCancelWarning = Swal.mixin({
 })
 
 // SWEETALERT ERROR 
+const SwalErrorDanger = Swal.mixin({
+  icon: 'error',
+  iconColor: color_danger,
+  confirmButtonColor: color_danger,
+  allowOutsideClick: false,
+})
+
 const SwalSystemErrorDanger = Swal.mixin({
   icon: 'error',
   iconColor: color_danger,
