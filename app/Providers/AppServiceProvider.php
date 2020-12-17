@@ -25,26 +25,27 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // CUSTOM VALIDATION RULES
-        Validator::extend('alpha_spaces', function ($attribute, $value) {
+        Validator::extend('alpha_space', function ($attribute, $value) {
             // This will only accept alpha and spaces. 
             return preg_match('/^[\pL\s]+$/u', $value); 
         });
-        Validator::extend('alpha_dash_spaces', function ($attribute, $value) {
+        Validator::extend('alpha_dash_space', function ($attribute, $value) {
             // This will only accept alpha and spaces and hyphen. 
             return preg_match('/^[\pL\s-]+$/u', $value); 
         });
-        Validator::extend('initials', function ($attribute, $value) {
+        Validator::extend('alpha_capital', function ($attribute, $value) {
             // This will only accept capital letters seperate with space
-            return preg_match('/^([A-Z\s]{1})+$/', $value); 
+            return preg_match('/^[A-Z]+$/', $value); 
         });
-        Validator::extend('house_name', function ($attribute, $value) {
+        Validator::extend('address', function ($attribute, $value) {
             // This will only accept alphanumerics, spaces,[: . / - _ ].
-            return preg_match('/^[a-zA-Z0-9\s\:|\.|\/|\-|_]*$/', $value); 
+            return preg_match('/^[a-zA-Z0-9\s\:|\,|\.|\/|\-|_]*$/', $value); 
         });
-        Validator::extend('address_line', function($attribute, $value) {
-            // This will only accept alphanumerics, spaces, comma, dash and slash
-            return preg_match('/^[a-zA-Z0-9\s\:|\.|\/|\-|\,]*$/', $value);
+        Validator::extend('nic_old', function($attribute, $value) {
+            //Old NIC number format
+            return preg_match('/^[0-9]{9}[V|v]$/',$value);
         });
+        
         // /CUSTOM VALIDATION RULES
     }
 }
