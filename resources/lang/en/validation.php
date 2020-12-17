@@ -58,7 +58,7 @@ return [
         'string' => 'The :attribute must be greater than or equal :value characters.',
         'array' => 'The :attribute must have :value items or more.',
     ],
-    'house' => 'The :attribute may only contain letters, spaces, slashes and dashes.',
+    'house_name' => 'The :attribute may only contain letters, spaces, slashes and dashes.',
     'image' => 'The :attribute must be an image.',
     'in' => 'The selected :attribute is invalid.',
     'initials' => 'The :attribute may only contain letter and a space.',
