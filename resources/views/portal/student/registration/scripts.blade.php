@@ -3,7 +3,7 @@
   // BODY ONLOAD
   $(document).ready(function(){
 
-    select_district_state()
+    onChangeCitizenship()
     address_editable()
     edit_designation()
 
@@ -87,51 +87,48 @@
   }
   // /SEND EMAIL
 
-  // COLLAPSE DISTRICT,STATE FIELDS
+  // ONCHANGE Citizenship GET Countrylist
   onChangeCitizenship = () => {
     if($('#citizenship').val() == 'Sri Lankan') {
       // set country as sri lanka 
-
       // FORM PAYLOAD
       var formData = new FormData();
-
       // ADD DATA
       formData.append('citizenship', $('#citizenship').val())
 
       $.ajax({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      url: "{{ url('/portal/student/registration/get_countries') }}",
-      type: 'post',
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function(data){
-        console.log('success');
-        if(data['status'] == 'error'){
-          SwalErrorNotificationDanger.fire({
-            title: 'Error!',
-            text: 'country list loader failed',
-          });
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ url('/portal/student/registration/getcountries') }}",
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(data){
+          console.log('success');
+          if(data['status'] == 'error'){
+            SwalErrorNotificationDanger.fire({
+              title: 'Error!',
+              text: 'country list loader failed',
+            });
+          }
+          else if (data['status'] == 'success'){
+          }
+        },
+        error: function(err){
+          console.log('error');
+          SwalSystemErrorDanger.fire();
         }
-        else if (data['status'] == 'success'){
-        }
-      },
-      error: function(err){
-        console.log('error');
-        SwalSystemErrorDanger.fire()
-      }
+      });
 
       // set visible selects
-      $('#divSelectDistrict').collapse('show')
-      $('#divSelectState').collapse('hide')
-      $('#divSelectCurrentDistrict').collapse('show')
-      $('#divSelectCurrentState').collapse('hide')
+      $('#divSelectDistrict').collapse('show');
+      $('#divSelectState').collapse('hide');
+      $('#divSelectCurrentDistrict').collapse('show');
+      $('#divSelectCurrentState').collapse('hide');
     }
     else if($('#citizenship').val() == 'Foreign National') {
-      $("#citizenship option[value='67']").remove();
-
       $('#divSelectDistrict').collapse('hide')
       $('#divSelectState').collapse('show')
       $('#divSelectCurrentDistrict').collapse('hide')
@@ -144,7 +141,7 @@
       $('#divSelectCurrentState').collapse('hide')
     }
   }
-  // /COLLAPSE DISTRICT,STATE FIELDS
+  // ONCHANGE Citizenship GET Countrylist
 
 
   // INSERT CURRENT ADDRESS
