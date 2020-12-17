@@ -39,11 +39,11 @@ class Registration extends Controller
                 'token' => $user->token
             ];
             
-            $user->save();
 
             if(Mail::to($email)->send(new \App\Mail\StudentRegistration($details))):
                 return response()->json(['error'=>'error']);
             else:
+                $user->save();
                 return response()->json(['success'=>'success']);
             endif;
         endif;       
