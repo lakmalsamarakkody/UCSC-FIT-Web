@@ -462,9 +462,6 @@
                                             <div class="col-xl-8 col-md-12">
                                                 <select id="currentCountry" class="form-control" disabled onchange="">
                                                     <option disabled selected>Select your country</option>
-                                                    @foreach ($countries_list as $countries)
-                                                        <option value="{{ $countries->name }}">{{ $countries->name }}</option><br/>
-                                                    @endforeach
                                                 </select>
                                                 <span class="invalid-feedback" id="error-currentCountry" role="alert"></span>
                                             </div>
