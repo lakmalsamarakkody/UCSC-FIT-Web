@@ -24,8 +24,7 @@ class Registration extends Controller
                 'email'=> ['required', 'email', 'unique:email_tokens']
             ],
             $messages=[
-                'unique:users'=>'Already rRegistered! Please login',
-                'unique'=>'Registration link Already emailed, please check Your email'
+                'unique'=>'Registration link already emailed, please check Your email'
             ]
         );
         
@@ -37,7 +36,7 @@ class Registration extends Controller
                     'email'=>'unique:users'
                 ],
                 $messages=[
-                    'unique'=>'Already registered! Login to continue'
+                    'unique'=>'User account exist! Please login to continue registration'
                 ]
             );
             if($revalidator->fails()):
