@@ -328,7 +328,7 @@
                                         <div class="form-group row collapse" id="divSelectDistrict">
                                             <label for="selectDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="selectDistrict" id="selectDistrict" class="form-control">
+                                                <select name="selectDistrict" id="selectDistrict" class="form-control" onchange="onChangeState('sriLanka')">
                                                     <option disabled selected>Select your district</option>
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectDistrict" role="alert"></span>
@@ -338,7 +338,7 @@
                                         <div class="form-group row collapse" id="divSelectState">
                                             <label for="selectState" class="col-xl-4 col-md-12 col-form-label">State:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="selectState" id="selectState" class="form-control">
+                                                <select name="selectState" id="selectState" class="form-control" onchange="onChangeState('foreignState')">
                                                     <option disabled selected>Select your state</option>
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectState" role="alert"></span>
