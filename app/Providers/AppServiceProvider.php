@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
             return preg_match('/^[\pL\s-]+$/u', $value); 
         });
         Validator::extend('initials', function ($attribute, $value) {
-            // This will only accept alpha and spaces and hyphen. 
+            // This will only accept alpha and spaces and hyphen.
             return preg_match('/^([A-Z]{1}\s)+[a-zA-Z]{3,}$/', $value); 
         });
         Validator::extend('house_name', function ($attribute, $value) {
