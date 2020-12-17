@@ -143,7 +143,7 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="citizenship">Citizenship</label>
-                                        <select name="citizenship" id="citizenship" class="form-control @error('citizenship') is-invalid @enderror" onchange="select_district_state()" data-toggle="collapse">
+                                        <select name="citizenship" id="citizenship" class="form-control @error('citizenship') is-invalid @enderror" onchange="onChangeCitizenship()" data-toggle="collapse">
                                             <option selected disabled>Select your Citizenship</option>
                                             @if (old('citizenship') == 'Sri Lankan')
                                                 <option value="Sri Lankan" selected>Sri Lankan</option>
@@ -350,9 +350,6 @@
                                             <div class="col-xl-8 col-md-12">
                                                 <select id="country" name="country" class="form-control" onchange="get_state_district()">
                                                     <option disabled selected>Select your country</option>
-                                                    @foreach ($countries_list as $countries)
-                                                        <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>
-                                                    @endforeach
                                                 </select>
                                                 <span class="invalid-feedback" id="error-country" role="alert"></span>
                                             </div>
