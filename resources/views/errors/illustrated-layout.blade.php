@@ -228,7 +228,7 @@
             }
 
             .bg-white {
-                background-color: #fff;
+                background-color: rgb(97, 97, 97);
             }
 
             .bg-teal-light {
@@ -236,7 +236,7 @@
             }
 
             .bg-blue-dark {
-                background-color: #2779bd;
+                background-color:#211870;
             }
 
             .bg-indigo-light {
@@ -259,8 +259,9 @@
                 border-color: #dae1e7;
             }
 
-            .hover\:border-grey:hover {
+            .button:hover {
                 border-color: #b8c2cc;
+                background-color:  #49538d;
             }
 
             .rounded-lg {
@@ -375,6 +376,10 @@
                 color: #3d4852;
             }
 
+            .text-white{
+                color: #fff;
+            }
+
             .text-grey-darker {
                 color: #606f7b;
             }
@@ -456,25 +461,30 @@
             }
         </style>
     </head>
-    <body class="antialiased font-sans">
+    <body class=" font-sans">
         <div class="md:flex min-h-screen">
-            <div class="w-full md:w-1/2 bg-white flex items-center justify-center">
-                <div class="max-w-sm m-8">
-                    <div class="text-black text-5xl md:text-15xl font-black">
-                        @yield('code', __('Oh no'))
+            <div class="w-full md:w-1/2 bg-blue-dark flex items-center justify-center">
+                <div class="max-w-md m-8">
+                    <div class="text-white text-5xl md:text-15xl font-black">
+                         {{ __('Oh no!') }}
                     </div>
 
-                    <div class="w-16 h-1 bg-purple-light my-3 md:my-6"></div>
+                    <div class="w-full h-1 bg-indigo-light my-3 md:my-6"></div>
 
-                    <p class="text-grey-darker text-2xl md:text-3xl font-light mb-8 leading-normal">
+                    <p class="text-white text-2xl md:text-3xl font-light mb-8 leading-normal">
+                        @yield ('code')
                         @yield('message')
                     </p>
 
                     <a href="{{ app('router')->has('home') ? route('home') : url('/') }}">
-                        <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
+                        <button class="button bg-indigo-light text-white font-bold uppercase tracking-wide py-3 px-6 border-0 rounded-lg">
                             {{ __('Go Home') }}
                         </button>
-                    </a>
+                    </a>                    
+                    <div class="text-white text-3xl  my-3">
+                        {{ __('Or Contact Administrator:') }}
+                        <a class="text-white" href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a>
+                   </div>
                 </div>
             </div>
 
