@@ -88,4 +88,23 @@ class RegistrationController extends Controller
         return response()->json(['success'=>'success']);
     endif;
   }
+
+  public function getCountries(Request $request)
+  {
+    // validate citizenship
+    $validator = Validator::make($request->all(), [
+      'citizenship' => ['required', 'alpha_spaces'],
+    ]);
+
+    if($validator->fails()):
+        return response()->json(['status' => 'error','errors'=>$validator->errors()->all()]);
+    else:
+      if ( $request->citizenship == 'Sri Lankan' ):
+        $countries_list = DB::table('world_countries')->select('id','name')->where('name', 'Sri Lanka')->orderBy('name')->get();
+      elseif ( $request->citizenship == 'Foreign National' ):
+        $countries_list = DB::table('world_countries')->select('id','name')->where('name', '!=', 'Sri Lanka')->orderBy('name')->get();
+      endif;
+      return response()->json(['status'=>'success', 'country_list'=>$countries_list ]);
+    endif;
+  }
 }
