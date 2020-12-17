@@ -38,7 +38,7 @@ class LoginController extends Controller
                 if($status==0):
                     return '/portal/student/registration';
                 else:
-                    return 'portal/student';
+                    return '/portal/student';
                 endif;
                 break;
             default:
