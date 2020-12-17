@@ -111,6 +111,7 @@
         else if (data['status'] == 'success'){
           // CLEAR CURRENT LIST
           $('#country').find('option').remove().end().append('<option selected disabled>Select your country</option>')
+          $('#city').find('option').remove().end().append('<option selected disabled>Select your city</option>')
           // APPEND COUNTRY LIST
           if(data['country_list']){
             $.each(data['country_list'], function(key,value){
