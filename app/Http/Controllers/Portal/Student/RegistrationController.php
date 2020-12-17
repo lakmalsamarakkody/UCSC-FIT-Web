@@ -39,7 +39,7 @@ class RegistrationController extends Controller
     ]);
   }
 
-  public function saveInfo(Request $request)
+  public function saveInfoValidator(Request $request)
   {
     // dd($request->all());
     $validator = Validator::make($request->all(), [            
@@ -96,7 +96,7 @@ class RegistrationController extends Controller
   {
     // validate citizenship
     $validator = Validator::make($request->all(), [
-      'citizenship' => ['required', 'alpha_spaces'],
+      'citizenship' => ['required', 'alpha_space'],
     ]);
 
     if($validator->fails()):
@@ -108,6 +108,27 @@ class RegistrationController extends Controller
         $countries_list = DB::table('world_countries')->select('id','name')->where('name', '!=', 'Sri Lanka')->orderBy('name')->get();
       endif;
       return response()->json(['status'=>'success', 'country_list'=>$countries_list ]);
+    endif;
+  }
+
+  public function getStates(Request $request)
+  {
+    // validate country
+    $validator = Validator::make($request->all(), [
+      'country' => ['required', 'integer', 'exists:world_countries,id'],
+    ]);
+
+    if($validator->fails()):
+        return response()->json(['status' => 'error','errors'=>$validator->errors()->all()]);
+    else:
+      if ( $request->country == '67' ):
+        $state_type = 'districts';
+        $state_list = DB::table('sl_districts')->select('id','name')->orderBy('name')->get();
+      else:
+        $state_type = 'divisions';
+        $state_list = DB::table('world_divisions')->select('id','name')->where('country_id', $request->country)->orderBy('name')->get();
+      endif;
+      return response()->json(['status'=>'success', 'state_type'=>$state_type, 'state_list'=>$state_list]);
     endif;
   }
 }

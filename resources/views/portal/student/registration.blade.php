@@ -348,7 +348,7 @@
                                         <div class="form-group row">
                                             <label for="country" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select id="country" name="country" class="form-control">
+                                                <select id="country" name="country" class="form-control" onchange="onChangeCountry()">
                                                     <option disabled selected>Select your country</option>
                                                     @foreach ($countries_list as $countries)
                                                         <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>
