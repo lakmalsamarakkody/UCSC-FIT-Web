@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="firstName">First Name</label>
-                                        <input type="text" class="form-control @error('firstName') is-invalid @enderror" id="firstName" name="firstName" placeholder="Start with Capital letter(e.g. Charith)" value="{{ old('firstName') }}"/>
+                                        <input type="text" class="form-control @error('firstName') is-invalid @enderror" id="firstName" name="firstName" placeholder="Start with Capital letter (e.g. Charith)" value="{{ old('firstName') }}"/>
                                         <span class="invalid-feedback" id="error-firstName" role="alert"></span>
                                         @error('firstName')
                                             <span class="invalid-feedback" role="alert">
@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="middleNames">Middle Names</label>
-                                        <input type="text" class="form-control @error('middleNames') is-invalid @enderror" id="middleNames" name="middleNames" placeholder="First Letters of name with Capital letter(e.g. Kumara Sampath)" value="{{ old('middleNames') }}" />
+                                        <input type="text" class="form-control @error('middleNames') is-invalid @enderror" id="middleNames" name="middleNames" placeholder="First Letters of name with Capital letter (e.g. Kumara Sampath)" value="{{ old('middleNames') }}" />
                                         <span class="invalid-feedback" id="error-middleNames" role="alert"></span>
                                         @error('middleNames')
                                             <span class="invalid-feedback" role="alert">
