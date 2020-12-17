@@ -6,6 +6,8 @@
 
         <title>@yield('title')</title>
 
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="{{ asset('img/logo/fav.png') }}">
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
