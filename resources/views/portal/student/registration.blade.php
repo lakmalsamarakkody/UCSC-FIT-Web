@@ -79,30 +79,31 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
-                                        <label for="lastName">Last Name</label>
-                                        <input type="text" class="form-control @error('lastName') is-invalid @enderror" id="lastName" name="lastName" placeholder="Start with Capital letter(e.g. Wickramarachchi)" value="{{ old('lastName') }}" />
+                                        <label for="lastName">Name with Initials</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend col-4 px-0">
+                                                <input type="text" class="form-control @error('initials') is-invalid @enderror" id="initials" name="initials" placeholder="e.g. C K S" value="{{ old('initials') }}" />
+                                            </div>
+                                            <input type="text" class="form-control @error('lastName') is-invalid @enderror" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" value="{{ old('lastName') }}" />
+                                        </div>
+                                        <span class="invalid-feedback" id="error-initials" role="alert"></span>
                                         <span class="invalid-feedback" id="error-lastName" role="alert"></span>
+                                        @error('initials')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                         @error('lastName')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
-                                    <div class="form-group col-xl-6 col-md-12">
+                                    <div class="form-group col-xl-12 col-md-12">
                                         <label for="fullName">Full Name</label>
                                         <input type="text" class="form-control @error('fullName') is-invalid @enderror" id="fullName" name="fullName" placeholder="e.g. Charith Kumara Sampath Wickramarachchi" value="{{ old('fullName') }}" />
                                         <span class="invalid-feedback" id="error-fullName" role="alert"></span>
                                         @error('fullName')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-xl-6 col-md-12">
-                                        <label for="nameInitials">Name with Initials</label>
-                                        <input type="text" class="form-control @error('nameInitials') is-invalid @enderror" id="nameInitials" name="nameInitials" placeholder="Initials with Capital Letters(C K S Wickramarachchi)" value="{{ old('nameInitials') }}" />
-                                        <span class="invalid-feedback" id="error-nameInitials" role="alert"></span>
-                                        @error('nameInitials')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
