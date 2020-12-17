@@ -82,7 +82,7 @@
                                         <label for="lastName">Name with Initials</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend col-4 px-0">
-                                                <input type="text" class="form-control @error('initials') is-invalid @enderror" id="initials" name="initials" placeholder="e.g. C K S" value="{{ old('initials') }}" />
+                                                <input type="text" class="form-control @error('initials') is-invalid @enderror" id="initials" name="initials" placeholder="e.g. CKS" value="{{ old('initials') }}" />
                                             </div>
                                             <input type="text" class="form-control @error('lastName') is-invalid @enderror" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" value="{{ old('lastName') }}" />
                                         </div>
