@@ -34,12 +34,16 @@ class AppServiceProvider extends ServiceProvider
             return preg_match('/^[\pL\s-]+$/u', $value); 
         });
         Validator::extend('initials', function ($attribute, $value) {
-            // This will only accept alpha and spaces and hyphen.
-            return preg_match('/^([A-Z]{1}\s)+[a-zA-Z]{3,}$/', $value); 
+            // This will only accept capital letters seperate with space
+            return preg_match('/^([A-Z\s]{1})+$/', $value); 
         });
         Validator::extend('house_name', function ($attribute, $value) {
-            // This will only accept alpha and spaces and hyphen. 
-            return preg_match('/^[a-zA-Z]{2,}\s*[:|.]?[a-zA-Z0-9\s]*$/', $value); 
+            // This will only accept alphanumerics, spaces,[: . / - _ ].
+            return preg_match('/^[a-zA-Z0-9\s\:|\.|\/|\-|_]*$/', $value); 
+        });
+        Validator::extend('address_line', function($attribute, $value) {
+            // This will only accept alphanumerics, spaces, comma, dash and slash
+            return preg_match('/^[a-zA-Z0-9\s\:|\.|\/|\-|\,]*$/', $value);
         });
         // /CUSTOM VALIDATION RULES
     }
