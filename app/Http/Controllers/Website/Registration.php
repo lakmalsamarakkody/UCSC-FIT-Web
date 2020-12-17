@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Mail\StudentRegistration;
-use App\Models\User;
+use App\Models\Email_Token;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -19,32 +19,50 @@ class Registration extends Controller
 
     public function emailLink(Request $request)
     {
-        $validator = Validator::make($request->all(), [     
-            'email'=> ['required', 'email', 'unique:users']
-        ]);
+        $validator = Validator::make($request->all(), 
+            [     
+                'email'=> ['required', 'email', 'unique:email_tokens']
+            ],
+            $messages=[
+                'unique:users'=>'Already rRegistered! Please login',
+                'unique'=>'Registration link Already emailed, please check Your email'
+            ]
+        );
         
         if($validator->fails()):
             return response()->json(['errors'=>$validator->errors()->all()]);
         else:
-            $email = $request->email;
-            $token = Str::random(32);
-            $user = new User();
-            $user->email = $email;
-            $user->token = $token;
-            $user->role_id = '1';
-
-
-            $details = [
-                'email' => $user->email,
-                'token' => $user->token
-            ];
-            
-
-            if(Mail::to($email)->send(new \App\Mail\StudentRegistration($details))):
-                return response()->json(['error'=>'error']);
+            $revalidator = Validator::make($request->all(),
+                [
+                    'email'=>'unique:users'
+                ],
+                $messages=[
+                    'unique'=>'Already registered! Login to continue'
+                ]
+            );
+            if($revalidator->fails()):
+                return response()->json(['errors'=>$revalidator->errors()->all()]);
             else:
-                $user->save();
-                return response()->json(['success'=>'success']);
+                $email = $request->email;
+                $token = Str::random(32);
+                $email_token = new Email_Token();
+                $email_token->email = $email;
+                $email_token->token = $token;
+    
+    
+                $details = [
+                    'email' => $email_token->email,
+                    'token' => $email_token->token
+                ];
+                
+    
+                if(Mail::to($email)->send(new StudentRegistration($details))):
+                    return response()->json(['error'=>'error']);
+                else:
+                    $email_token->save();
+                    return response()->json(['success'=>'success']);
+                endif;
+
             endif;
         endif;       
               
@@ -63,7 +81,7 @@ class Registration extends Controller
         if($validator->fails()):
             return view('website/error');
         else:
-            $user = User::where('email', $email)->get()->first();
+            $user = Email_Token::where('email', $email)->get()->first();
             if(is_Null($user['token'])):
                 return view('website/error');
             else:

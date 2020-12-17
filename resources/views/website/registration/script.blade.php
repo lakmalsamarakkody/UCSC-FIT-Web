@@ -38,7 +38,7 @@
         }else if (data['error']){
           SwalNotificationWarning.fire({
             title: 'Email Failed!',
-            text: 'Please Try Again or Contact Administrator: admin@ucsc.cmb.ac.lk',
+            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
           })
         }
       },
@@ -47,7 +47,7 @@
         $('#submit').removeAttr('disabled');
         SwalNotificationWarning.fire({
           title: 'Email Failed!',
-          text: 'Please Try Again or Contact Administrator: admin@ucsc.cmb.ac.lk',
+          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
         })
       }
     });
