@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="firstName">First Name</label>
-                                        <input type="text" class="form-control @error('firstName') is-invalid @enderror" id="firstName" name="firstName" placeholder="Start with Capital letter(e.g. Charith)" value="{{ old('firstName') }}"/>
+                                        <input type="text" class="form-control @error('firstName') is-invalid @enderror" id="firstName" name="firstName" placeholder="Start with Capital letter (e.g. Charith)" value="{{ old('firstName') }}"/>
                                         <span class="invalid-feedback" id="error-firstName" role="alert"></span>
                                         @error('firstName')
                                             <span class="invalid-feedback" role="alert">
@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="middleNames">Middle Names</label>
-                                        <input type="text" class="form-control @error('middleNames') is-invalid @enderror" id="middleNames" name="middleNames" placeholder="First Letters of name with Capital letter(e.g. Kumara Sampath)" value="{{ old('middleNames') }}" />
+                                        <input type="text" class="form-control @error('middleNames') is-invalid @enderror" id="middleNames" name="middleNames" placeholder="First Letters of name with Capital letter (e.g. Kumara Sampath)" value="{{ old('middleNames') }}" />
                                         <span class="invalid-feedback" id="error-middleNames" role="alert"></span>
                                         @error('middleNames')
                                             <span class="invalid-feedback" role="alert">
@@ -82,7 +82,7 @@
                                         <label for="lastName">Name with Initials</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend col-4 px-0">
-                                                <input type="text" class="form-control @error('initials') is-invalid @enderror" id="initials" name="initials" placeholder="e.g. C K S" value="{{ old('initials') }}" />
+                                                <input type="text" class="form-control @error('initials') is-invalid @enderror" id="initials" name="initials" placeholder="e.g. CKS" value="{{ old('initials') }}" />
                                             </div>
                                             <input type="text" class="form-control @error('lastName') is-invalid @enderror" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" value="{{ old('lastName') }}" />
                                         </div>
@@ -328,7 +328,7 @@
                                         <div class="form-group row collapse" id="divSelectDistrict">
                                             <label for="selectDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="selectDistrict" id="selectDistrict" class="form-control" onchange="">
+                                                <select name="selectDistrict" id="selectDistrict" class="form-control">
                                                     <option disabled selected>Select your district</option>
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectDistrict" role="alert"></span>
@@ -338,7 +338,7 @@
                                         <div class="form-group row collapse" id="divSelectState">
                                             <label for="selectState" class="col-xl-4 col-md-12 col-form-label">State:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="selectState" id="selectState" class="form-control" onchange="">
+                                                <select name="selectState" id="selectState" class="form-control">
                                                     <option disabled selected>Select your state</option>
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectState" role="alert"></span>
@@ -348,8 +348,11 @@
                                         <div class="form-group row">
                                             <label for="country" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select id="country" name="country" class="form-control" onchange="get_state_district()">
+                                                <select id="country" name="country" class="form-control">
                                                     <option disabled selected>Select your country</option>
+                                                    @foreach ($countries_list as $countries)
+                                                        <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>
+                                                    @endforeach
                                                 </select>
                                                 <span class="invalid-feedback" id="error-country" role="alert"></span>
                                             </div>
@@ -462,6 +465,9 @@
                                             <div class="col-xl-8 col-md-12">
                                                 <select id="currentCountry" class="form-control" disabled onchange="">
                                                     <option disabled selected>Select your country</option>
+                                                    @foreach ($countries_list as $countries)
+                                                        <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>
+                                                    @endforeach
                                                 </select>
                                                 <span class="invalid-feedback" id="error-currentCountry" role="alert"></span>
                                             </div>

@@ -44,48 +44,70 @@ class RegistrationController extends Controller
     // dd($request->all());
     $validator = Validator::make($request->all(), [            
       // 'email'=> ['required', 'email', 'unique:users'],
-      'title' => ['required', 'exists:titles,title'],
-      'firstName' => ['required', 'alpha','min:3'],
-      'middleNames' => ['required', 'alpha_dash_spaces'],
-      'lastName' => ['required', 'alpha', 'min:3'],
-      'fullName' => ['required', 'alpha_dash_spaces'],
-      'initials' => ['required', 'regex:/^([A-Z]{1}\s)+[a-zA-Z]{3,}$/'],
-      'dob' => ['required' , 'date','before:today'],
-      'gender' => ['required', 'exists:students,gender'],
-      // 'citizenship' => ['required'],
-      //'unique_id' => ['required', 'regex:/^[0-9]{12}$/', 'regex:/^[0-9]{9}V$/'],
+      'title' => ['nullable', 'exists:titles,title'],
+      'firstName' => ['nullable', 'alpha','min:3'],
+      'middleNames' => ['nullable', 'alpha_dash_space'],
+      'lastName' => ['nullable', 'alpha', 'min:3'],
+      'fullName' => ['nullable', 'alpha_dash_space'],
+      'initials' => ['nullable', 'alpha_capital'],
+      'dob' => ['nullable' , 'date','before:today'],
+      'gender' => ['nullable', 'exists:students,gender'],
+      // 'citizenship' => ['nullable'],
+      //'nic_old' => ['nullable', 'regex:/^[0-9]{9}[V|v]$/'],
+      //'nic_nw' => ['nullable', 'digits:12'],
+      //'postal' => ['nullable', 'regex:/^[A-Z]{1}\-[A-Z]{1}[0-6]{6}$/'],
+      //'unique_id' => ['nullable', 'regex:/^[A-Z]{1}\-[A-Z]{1}[0-6]{6}$/'],
 
       //'qualification' => ['required', 'exists:'],
 
-      'house' => ['required', 'regex:/^[a-zA-Z]{2,}\s*[:|.]?[a-zA-Z0-9\s]*$/'],
-      'addressLine1' => ['required', 'regex:/^[a-zA-Z0-9\s]*$/'],
-      'addressLine2' => ['required', 'regex:/^[a-zA-Z0-9\s]*$/'],
-      'addressLine3' => ['required', 'regex:/^[a-zA-Z0-9\s]*$/'],
-      'addressLine4' => ['required', 'regex:/^[a-zA-Z0-9\s]*$/'],
-      //'city' => ['required', 'exists: world_cities,name'],
-      //'selectDistrict' => ['required', 'exists: sl_districts,name'],
-      //'selectState' => ['required', 'exists: world_divisions,name'],
-      'country' => ['required', 'exists:world_countries,id'],
+      'house' => ['nullable', 'address'],
+      'addressLine1' => ['nullable', 'address'],
+      'addressLine2' => ['nullable', 'address'],
+      'addressLine3' => ['nullable', 'address'],
+      'addressLine4' => ['nullable', 'address'],
+      //'city' => ['nullable', 'exists: world_cities,name'],
+      //'selectDistrict' => ['nullable', 'exists: sl_districts,name'],
+      //'selectState' => ['nullable', 'exists: world_divisions,name'],
+      'country' => ['nullable', 'exists:world_countries,id'],
 
-      'currentHouse' => ['required', 'regex:/^[a-zA-Z]{2,}\s*[:|.]?[a-zA-Z0-9\s]*$/'],
-      'currentAddressLine1' => ['required', 'regex:/^[a-zA-Z0-9\s]*$/'],
-      'currentAddressLine2' => ['required', 'regex:/^[a-zA-Z0-9\s]*$/'],
-      'currentAddressLine3' => ['required', 'regex:/^[a-zA-Z0-9\s]*$/'],
-      'currentAddressLine4' => ['required', 'regex:/^[a-zA-Z0-9\s]*$/'],
-      //'currentCity' => ['required', 'exists: world_cities,name'],
-      //'selectCurrentDistrict' => ['required', 'exists: sl_districts,name'],
-      //'selectCurrentState' => ['required', 'exists: world_divisions,name'],
-      'currentCountry' => ['required', 'exists: world_countries,name'],
+      'currentHouse' => ['nullable', 'address'],
+      'currentAddressLine1' => ['nullable', 'address'],
+      'currentAddressLine2' => ['nullable', 'address'],
+      'currentAddressLine3' => ['nullable', 'address'],
+      'currentAddressLine4' => ['nullable', 'address'],
+      //'currentCity' => ['nullable', 'exists: world_cities,name'],
+      //'selectCurrentDistrict' => ['nullable', 'exists: sl_districts,name'],
+      //'selectCurrentState' => ['nullable', 'exists: world_divisions,name'],
+      'currentCountry' => ['nullable', 'exists: world_countries,name'],
 
-      'telephone' => ['required', 'regex:/^0[0-9]{9}$/'],
-      //'email' => ['required', 'email', 'unique:users'],
-      'designation' => ['required', 'regex:/^[a-zA-Z\s]*$/', 'min:3'],
+      'telephone' => ['nullable', 'digits:10'],
+      //'email' => ['nullable', 'email', 'unique:users'],
+      'designation' => ['nullable', 'regex:/^[a-zA-Z\s]*$/', 'min:3'],
     ]);
     
     if($validator->fails()):
         return response()->json(['errors'=>$validator->errors()]);
     else:
         return response()->json(['success'=>'success']);
+    endif;
+  }
+
+  public function getCountries(Request $request)
+  {
+    // validate citizenship
+    $validator = Validator::make($request->all(), [
+      'citizenship' => ['required', 'alpha_spaces'],
+    ]);
+
+    if($validator->fails()):
+        return response()->json(['status' => 'error','errors'=>$validator->errors()->all()]);
+    else:
+      if ( $request->citizenship == 'Sri Lankan' ):
+        $countries_list = DB::table('world_countries')->select('id','name')->where('name', 'Sri Lanka')->orderBy('name')->get();
+      elseif ( $request->citizenship == 'Foreign National' ):
+        $countries_list = DB::table('world_countries')->select('id','name')->where('name', '!=', 'Sri Lanka')->orderBy('name')->get();
+      endif;
+      return response()->json(['status'=>'success', 'country_list'=>$countries_list ]);
     endif;
   }
 }

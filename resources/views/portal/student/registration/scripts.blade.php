@@ -3,9 +3,9 @@
   // BODY ONLOAD
   $(document).ready(function(){
 
-    onChangeCitizenship()
-    address_editable()
-    edit_designation()
+    // onChangeCitizenship()
+    // address_editable()
+    // edit_designation()
 
   });
   // /BODY ONLOAD
@@ -89,39 +89,51 @@
 
   // ONCHANGE Citizenship GET Countrylist
   onChangeCitizenship = () => {
-    if($('#citizenship').val() == 'Sri Lankan') {
-      // set country as sri lanka 
-      // FORM PAYLOAD
-      var formData = new FormData();
-      // ADD DATA
-      formData.append('citizenship', $('#citizenship').val())
+    // FORM PAYLOAD
+    var formData = new FormData();
+    // ADD DATA
+    formData.append('citizenship', $('#citizenship').val())
 
-      $.ajax({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: "{{ url('/portal/student/registration/getcountries') }}",
-        type: 'post',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(data){
-          console.log('success');
-          if(data['status'] == 'error'){
-            SwalErrorNotificationDanger.fire({
-              title: 'Error!',
-              text: 'country list loader failed',
-            });
-          }
-          else if (data['status'] == 'success'){
-          }
-        },
-        error: function(err){
-          console.log('error');
-          SwalSystemErrorDanger.fire();
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{ url('/portal/student/registration/getcountries') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(data){
+        console.log('success');
+        if(data['status'] == 'error'){
+          SwalNotificationErrorDanger.fire({
+            title: 'Error!',
+            text: $.each(data['errors'], function(key, value){value}),
+          });
         }
-      });
+        else if (data['status'] == 'success'){
+          // CLEAR CURRENT LIST
+          $('#country').find('option').remove().end().append('<option selected disabled>Select your country</option>')
+          // APPEND COUNTRY LIST
+          if(data['country_list']){
+            $.each(data['country_list'], function(key,value)
+            {
+              $('#country').append($('<option>', { 
+                  value: value.id,
+                  text : value.name
+              }));
+            })
+            //$.each(data['country_list'], function(key,value){console.log( value.id + value.name)  });
+          }
+        }
+      },
+      error: function(err){
+        console.log('error');
+        SwalSystemErrorDanger.fire();
+      }
+    });
 
+    if($('#citizenship').val() == 'Sri Lankan') {
       // set visible selects
       $('#divSelectDistrict').collapse('show');
       $('#divSelectState').collapse('hide');
