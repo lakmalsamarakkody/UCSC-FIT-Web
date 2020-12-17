@@ -98,4 +98,13 @@ const SwalNotificationWarningAutoClose = Swal.mixin({
   timer: 5000,
   timerProgressBar: true,
 })
+const SwalNotificationErrorDanger = Swal.mixin({
+  icon: 'error',
+  iconColor: color_danger,
+  showConfirmButton: false,
+  toast: true,
+  position: 'top-end',
+  timer: 5000,
+  timerProgressBar: true,
+})
 // /SWEETALERT NOTIFICATION
