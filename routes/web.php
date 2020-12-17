@@ -34,8 +34,6 @@ Route::get('/faq',[App\Http\Controllers\Website\Faq::class, 'index']);
 Route::get('/announcements', [App\Http\Controllers\Website\AnouncementsController::class, 'index']);
 
 Route::post('/student/registration',[App\Http\Controllers\Website\Registration::class,'emailLink']);
-Route::get('/guest/{email}/fit/{token}', [App\Http\Controllers\Website\Registration::class,'updateAccount'])->name('email.link');
-Route::get('/website/error', [App\Http\Controllers\Website\Registration::class,'index']);
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +83,9 @@ Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\Result
 
 Route::get('/portal/student/payment',[App\Http\Controllers\Portal\Student\PaymentController::class,'index'])->name('payment');
 
+Route::get('/guest/{email}/fit/{token}', [App\Http\Controllers\Portal\Student\UserController::class,'setPassword'])->name('email.link');
+
+Route::post('/guest/update/account', [App\Http\Controllers\Portal\Student\UserController::class,'updateAccount'])->name('update.account');
 
 
 
