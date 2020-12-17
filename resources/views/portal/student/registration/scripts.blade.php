@@ -36,6 +36,7 @@
         $('#btnSaveInformation').attr('disabled','disabled');
       },
       success: function(data){
+        console.log('success');
         $('#btnSaveInformation').removeAttr('disabled','disabled');
         if(data['errors']){
           $.each(data['errors'], function(key, value){
@@ -77,8 +78,10 @@
         }
       },
       error: function(err){
+        $('#btnSaveInformation').removeAttr('disabled','disabled');
         console.log('error');
         SwalSystemErrorDanger.fire()
+        
       }
     });
   }
