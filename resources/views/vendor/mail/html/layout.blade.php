@@ -37,7 +37,7 @@ width: 100% !important;
 <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
 <!-- Body content -->
 <tr>
-<td class="content-cell">
+<td class="content-cell" style="padding:25px">
 {{ Illuminate\Mail\Markdown::parse($slot) }}
 
 {{ $subcopy ?? '' }}
