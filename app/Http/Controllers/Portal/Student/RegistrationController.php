@@ -116,24 +116,48 @@ class RegistrationController extends Controller
 
   public function getStates(Request $request)
   {
-    // validate country
-    $validator = Validator::make($request->all(), [
-      'country' => ['required', 'integer', 'exists:world_countries,id'],
-    ]);
+    //Set using country
+    if(isset($request->country)):
+      // validate country
+      $validator = Validator::make($request->all(), [
+        'country' => ['required', 'integer', 'exists:world_countries,id'],
+      ]);
 
-    if($validator->fails()):
-        return response()->json(['status' => 'error','errors'=>$validator->errors()->all()]);
-    else:
-      if ( $request->country == '67' ):
-        $state_type = 'districts';
-        $state_list = DB::table('sl_districts')->select('id','name')->orderBy('name')->get();
-        $city_list = NULL;
+      if($validator->fails()):
+          return response()->json(['status' => 'error','errors'=>$validator->errors()->all()]);
       else:
-        $state_type = 'divisions';
-        $state_list = DB::table('world_divisions')->select('id','name')->where('country_id', $request->country)->orderBy('name')->get();
-        $city_list = DB::table('world_cities')->select('id','name')->where('country_id', $request->country)->orderBy('name')->get();
+        if ( $request->country == '67' ):
+          $state_type = 'districts';
+          $state_list = DB::table('sl_districts')->select('id','name')->orderBy('name')->get();
+          $city_list = NULL;
+        else:
+          $state_type = 'divisions';
+          $state_list = DB::table('world_divisions')->select('id','name')->where('country_id', $request->country)->orderBy('name')->get();
+          $city_list = DB::table('world_cities')->select('id','name')->where('country_id', $request->country)->orderBy('name')->get();
+        endif;
+        return response()->json(['status'=>'success', 'state_type'=>$state_type, 'state_list'=>$state_list, 'city_list'=>$city_list]);
       endif;
-      return response()->json(['status'=>'success', 'state_type'=>$state_type, 'state_list'=>$state_list, 'city_list'=>$city_list]);
+    //Set using current country
+    elseif(isset($request->currentCountry)):
+      // validate current country
+      $validator = Validator::make($request->all(), [
+        'currentCountry' => ['required', 'integer', 'exists:world_countries,id'],
+      ]);
+
+      if($validator->fails()):
+          return response()->json(['status' => 'error','errors'=>$validator->errors()->all()]);
+      else:
+        if ( $request->currentCountry == '67' ):
+          $state_type = 'districts';
+          $state_list = DB::table('sl_districts')->select('id','name')->orderBy('name')->get();
+          $city_list = NULL;
+        else:
+          $state_type = 'divisions';
+          $state_list = DB::table('world_divisions')->select('id','name')->where('country_id', $request->currentCountry)->orderBy('name')->get();
+          $city_list = DB::table('world_cities')->select('id','name')->where('country_id', $request->currentCountry)->orderBy('name')->get();
+        endif;
+        return response()->json(['status'=>'success', 'state_type'=>$state_type, 'state_list'=>$state_list, 'city_list'=>$city_list]);
+      endif;
     endif;
   }
 
