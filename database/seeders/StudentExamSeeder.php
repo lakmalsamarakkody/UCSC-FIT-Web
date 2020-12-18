@@ -31,12 +31,13 @@ class StudentExamSeeder extends Seeder
                 DB::table('student_exams')->insert(
                     array (
                         [
-                            'exam_schedule_id'=>$exam->id,
-                            'student_id'=>$student->id,
-                            'mark'=>$mark,
-                            'result'=>$result,
-                            'created_at'=> '2020-11-25 10:13:53',
-                            'updated_at'=> '2020-11-25 10:13:53'
+                        'exam_schedule_id'=>$exam->id,
+                        'student_id'=>$student->id,
+                        'mark'=>$mark,
+                        'result'=>$result,
+                        'status'=>'OK',
+                        'created_at'=> '2020-11-25 10:13:53',
+                        'updated_at'=> '2020-11-25 10:13:53'
                         ]
                         
                     )

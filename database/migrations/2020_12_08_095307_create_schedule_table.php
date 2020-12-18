@@ -20,7 +20,8 @@ class CreateScheduleTable extends Migration
             $table->String('exam_type_id');
             $table->date('date');
             $table->time('start_time');
-            $table->time('end_time');
+            $table->time('end_time')->nullable();
+            $table->boolean('result_released')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
