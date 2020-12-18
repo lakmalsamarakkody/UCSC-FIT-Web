@@ -69,7 +69,7 @@
   <!-- /SCRIPTS -->
 </head>
 
-<body onload=display_ct(); style="background-color: rgb(0, 28, 70);">
+<body onload=display_ct();>
 
     <!-- Page container-fluid -->
     <div class="container-fluid">
@@ -180,6 +180,7 @@
               <div class="row">
                     @yield('content')
               </div>
+              <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-chevron-up"></i></button>
             </main>
 
 
@@ -191,9 +192,9 @@
             <div class="col-12" style="bottom: 0;">
               <div class="row">
                 
-              <div class=" w-100 footer bg-dark text-right py-2 pr-3" style="background-color: #516899 !important;">
-                Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" class="white"> UCSC</a> </strong>. All Rights Reserved |
-                Powered by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Center - UCSC </a> </strong>
+              <div class=" w-100 footer bg-dark text-right py-2 pr-3" >
+                Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" > UCSC</a> </strong>. All Rights Reserved |
+                Powered by <strong><a target="_blank" href="http://www.e-learning.lk/">e-Learning Center - UCSC </a> </strong>
               </div>
               </div>
             </div>
@@ -204,6 +205,28 @@
 </body>
 <!-- DROPZONE JS--> <script src="{{ asset('lib/dropzone/drop-zone.js') }}"></script>
 @yield('script')
+
+<script type="text/javascript">
+//Get the button:
+mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
 </html>
 
 

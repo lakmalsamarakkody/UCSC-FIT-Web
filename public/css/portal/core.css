@@ -41,8 +41,8 @@
   --scroll-bar-color:rgb(18, 18, 53);
   --scroll-bar-hover-color: rgb(65, 65, 190);
 
-  --footer-background-color: rgba(0, 15, 83, 0.486);
-  --footer-link-color:rgb(46, 46, 46);
+  --footer-background-color: rgb(25, 27, 135);
+  --footer-link-color:rgb(146, 146, 146);
   --footer-link-hover-color:rgba(255, 255, 255, 0.705);
 }
 
@@ -305,6 +305,7 @@ html{
 /* FOOTER */
   .footer{
     background-color:var(--footer-background-color) !important;
+    color: var(--footer-link-color);
   }
 
   .footer a{
@@ -387,3 +388,25 @@ html{
 
 @media only screen and (max-width: 1200px) {
 }
+
+/* Backtotop */
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 40px; /* Place the button at the bottom of the page */
+  right: 7px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: rgba(25, 27, 135, 0.555); /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 8px 13px 8px 13px; /* Some padding */
+  border-radius: 500px; /* Rounded corners */
+  font-size: 14px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+/* /backtotop */
