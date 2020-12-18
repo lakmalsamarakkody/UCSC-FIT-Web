@@ -17,18 +17,18 @@
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/back.jpg') }}); height:200px">
         <div class="page-hero-container">
-            <h1 style="padding-top:30px">Login to FIT</h1>
+            <h1 style="padding-top:30px">Forget Password</h1>
         </div>
     </section><!-- #hero -->
 
 <main id="main">
     <section id="registration" style="padding-top: 80px;">
         <div class="row about-container mb-5 pb-5">
-            <div class="col-lg-6 background order-lg-1 order-2 pb-5"  style="background-image: url({{ asset('img/logo/login.png') }});">
+            <div class="col-lg-7 background order-lg-1 order-2 pb-5"  style="background-image: url({{ asset('img/logo/login.png') }});">
 
 
             </div>
-            <div class="col-lg-6 content order-lg-2 order-1">
+            <div class="col-lg-5 content order-lg-2 order-1">
                 <div class="p-5 form">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
