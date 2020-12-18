@@ -152,7 +152,7 @@
                   --}}
                 </div>
                 <div class="col-3 text-right"> 
-                  <button class="btn btn-link btn-lg nav-item"><i class="fa fa-cog"></i></button>     
+                  <button title="Settings" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg nav-item"><i class="fa fa-cog"></i></button>     
                 </div>
 
               </div>
@@ -180,7 +180,7 @@
               <div class="row">
                     @yield('content')
               </div>
-              <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-chevron-up"></i></button>
+              <button title="Go to Top" data-tooltip="tooltip"  data-placement="bottom"  onclick="topFunction()" id="myBtn"><i class="fa fa-chevron-up"></i></button>
             </main>
 
 
