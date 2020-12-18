@@ -17,8 +17,8 @@ class CreateSlDistrictsTable extends Migration
             $table->id();
             $table->integer('province_id');
             $table->string('name');
-            $table->string('name_si');
-            $table->string('name_ta');
+            $table->string('name_si')->nullable();
+            $table->string('name_ta')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

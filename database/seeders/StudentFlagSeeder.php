@@ -29,12 +29,8 @@ class StudentFlagSeeder extends Seeder
                 array(
                     [
                         'id'=>$student->id,
-                        'birth_cert'=>false,
-                        'nic_img'=>false,
-                        'postal_img'=>false,
                         'bit_eligible'=>$bit,
                         'fit_cert'=>$fit,
-                        'phase_id'=>false,
                     ]
                 )
             );

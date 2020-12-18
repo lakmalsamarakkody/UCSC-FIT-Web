@@ -17,8 +17,9 @@ class CreateStudentExamsTable extends Migration
             $table->id();
             $table->integer('exam_schedule_id');
             $table->integer('student_id');
-            $table->string('result');
-            $table->decimal('mark',10,2);
+            $table->boolean('result')->nullable()->default(false);
+            $table->decimal('mark',10,2)->nullable();
+            $table->string('status')->nullable()->default('AB');
             $table->timestamps();
             $table->softDeletes();
         });
