@@ -131,14 +131,14 @@
       // set visible selects
       $('#divSelectDistrict').collapse('show');
       $('#divSelectState').collapse('hide');
-      $('#divSelectCurrentDistrict').collapse('show');
+      $('#divSelectCurrentDistrict').collapse('hide');
       $('#divSelectCurrentState').collapse('hide');
     }
     else if($('#citizenship').val() == 'Foreign National') {
       $('#divSelectDistrict').collapse('hide')
       $('#divSelectState').collapse('show')
       $('#divSelectCurrentDistrict').collapse('hide')
-      $('#divSelectCurrentState').collapse('show')
+      $('#divSelectCurrentState').collapse('hide')
     }
     else {
       $('#divSelectDistrict').collapse('hide')
@@ -278,11 +278,15 @@
           $('#currentCity').find('option').remove().end().append('<option selected disabled>Select your city</option>')
           //APPEND COUNTRY LIST
           if(data['state_type'] == 'districts'){
+            $('#divSelectCurrentState').collapse('hide');
+            $('#divSelectCurrentDistrict').collapse('show');
             $.each(data['state_list'], function(key,value){
               $('#selectCurrentDistrict').append($('<option>',{value: value.id,text: value.name}));
             })
           }
           else if(data['state_type'] == 'divisions'){
+            $('#divSelectCurrentDistrict').collapse('hide');
+            $('#divSelectCurrentState').collapse('show');
             $.each(data['state_list'], function(key,value){
               $('#selectCurrentState').append($('<option>', {value: value.id,text: value.name}));
             })

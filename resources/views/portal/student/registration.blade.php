@@ -322,7 +322,7 @@
                                                     <option disabled selected>Select your city</option>
                                                 </select>
                                                 <span class="invalid-feedback" id="error-city" role="alert"></span>
-                                                <small class="form-text text-muted">* Cities are shown after selecting a State/District.</small>
+                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectDistrict">
@@ -332,7 +332,7 @@
                                                     <option disabled selected>Select your district</option>
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectDistrict" role="alert"></span>
-                                                <small class="form-text text-muted">* Districts are shown after selecting a country.</small>
+                                                <small class="form-text text-muted">* Districts are shown after selecting a Country.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectState">
@@ -342,7 +342,7 @@
                                                     <option disabled selected>Select your state</option>
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectState" role="alert"></span>
-                                                <small class="form-text text-muted">* States are shown after selecting a country.</small>
+                                                <small class="form-text text-muted">* States are shown after selecting a Country.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -431,33 +431,28 @@
                                             <label for="currentCity" class="col-xl-4 col-md-12 col-form-label">City:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <select id="currentCity" name="currentCity" class="form-control" disabled>
-                                                    <option>City 1</option>
-                                                    <option>&nbsp;</option>
+                                                    <option selected disabled>Select your city</option>
                                                 </select>
                                                 <span class="invalid-feedback" id="error-currentCity" role="alert"></span>
-                                                <small class="form-text text-muted">* Cities are shown after selecting a State/District.</small>
+                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectCurrentDistrict">
                                             <label for="selectCurrentDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <select name="selectCurrentDistrict" id="selectCurrentDistrict" class="form-control" disabled onchange="onChangeCurrentState('sriLanka')">
-                                                    <option>Colombo</option>
-                                                    <option>&nbsp;</option>
+                                                    <option selected disabled>Select your district</option>
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectCurrentDistrict" role="alert"></span>
-                                                <small class="form-text text-muted">* Districts are shown after selecting a country.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectCurrentState">
                                             <label for="selectCurrentState" class="col-xl-4 col-md-12 col-form-label">State:</label>
                                             <div class="col-xl-8 col-md-12">
                                                 <select name="selectCurrentState" id="selectCurrentState" class="form-control" disabled onchange="onChangeCurrentState('foreignState')">
-                                                    <option>State 1</option>
-                                                    <option>&nbsp;</option>
+                                                    <option selected disabled>Select your state</option>
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectCurrentState" role="alert"></span>
-                                                <small class="form-text text-muted">* States are shown after selecting a country.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -470,6 +465,7 @@
                                                     @endforeach
                                                 </select>
                                                 <span class="invalid-feedback" id="error-currentCountry" role="alert"></span>
+                                                <small class="form-text text-muted">* Select country to show District/State.</small>
                                             </div>
                                         </div>
                                         <div class="text-right" id="divCollapsePlus2">
