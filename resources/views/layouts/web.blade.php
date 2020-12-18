@@ -103,7 +103,7 @@
                 <div class="row">
                     <div class="col-12 col-md-6 text-center order-md-1 mb-3">
                         <div class="input-group">
-                            <input type="email" id="subscribeEmail" class="form-control" placeholder="Enter your email.."/>
+                            <input type="email" name="subscriberEmail" id="subscriberEmail" class="form-control" placeholder="Enter your email.."/>
                             <div class="input-group-append">
                               <button class="btn btn-outline-primary btn-subscribe" onclick="onClickSubscribe()">SUBSCRIBE</button>
                             </div>
@@ -153,7 +153,7 @@
             // FORM PAYLOAD
             var formData = new FormData();
             // ADD DATA
-            formData.append('email', $('#subscribeEmail').val())
+            formData.append('subscriberEmail', $('#subscriberEmail').val())
 
             $.ajax({
                 headers: {
@@ -165,8 +165,15 @@
                 processData: false,
                 contentType: false,
                 success: function(data){
-                    console.log('success');
-                    SwalNotificationSuccess.fire({title: 'Subscribed!',text:'You will get future updates on FIT Programme'});
+                    if(data['status'] == 'success'){
+                        console.log('success');
+                        SwalNotificationSuccess.fire({title: 'Subscribed!',text:'You will get future updates on FIT Programme'});
+                    }
+                    else if(data['status'] == 'error'){
+                        if(data['errors']){
+                            SwalNotificationErrorDanger.fire({title: 'Error!',text: $.each(data['errors'], function(key, value){value}),});
+                        }
+                    }
                 },
                 error: function(err){
                     console.log('error');
