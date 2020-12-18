@@ -9,7 +9,7 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalNotificationSuccess.fire({
+        SwalNotificationSuccessAutoClose.fire({
           title: "Sent!",
           text: "Password reset link sent",
         })
@@ -36,7 +36,7 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalNotificationSuccess.fire({
+        SwalNotificationSuccessAutoClose.fire({
           title: "Sent!",
           text: "Verification email sent",
         })
@@ -60,7 +60,7 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalNotificationSuccess.fire({
+        SwalNotificationSuccessAutoClose.fire({
           title: "Activated!",
           text: "Account Activated",
         })
@@ -84,7 +84,7 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalNotificationSuccess.fire({
+        SwalNotificationSuccessAutoClose.fire({
           title: "Deactivated!",
           text: "Account dectivated",
         })

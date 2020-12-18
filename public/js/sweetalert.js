@@ -79,6 +79,13 @@ const SwalNotificationSuccess = Swal.mixin({
   showConfirmButton: false,
   toast: true,
   position: 'top-end',
+})
+const SwalNotificationSuccessAutoClose = Swal.mixin({
+  icon: 'success',
+  iconColor: color_success,
+  showConfirmButton: false,
+  toast: true,
+  position: 'top-end',
   timer: 5000,
   timerProgressBar: true,
 })

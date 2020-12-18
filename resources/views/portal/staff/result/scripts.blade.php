@@ -9,7 +9,7 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalNotificationSuccess.fire({
+        SwalNotificationSuccessAutoClose.fire({
           title: "Imported!",
           text: "Results imported",
         })

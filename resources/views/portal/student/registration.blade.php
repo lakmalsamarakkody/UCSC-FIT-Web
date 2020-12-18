@@ -322,7 +322,7 @@
                                                     <option disabled selected>Select your city</option>
                                                 </select>
                                                 <span class="invalid-feedback" id="error-city" role="alert"></span>
-                                                <small class="form-text text-muted">* cities are shown after selecting a State/District.</small>
+                                                <small class="form-text text-muted">* Cities are shown after selecting a State/District.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectDistrict">
@@ -441,7 +441,7 @@
                                         <div class="form-group row collapse" id="divSelectCurrentDistrict">
                                             <label for="selectCurrentDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="selectCurrentDistrict" id="selectCurrentDistrict" class="form-control" disabled onchange="">
+                                                <select name="selectCurrentDistrict" id="selectCurrentDistrict" class="form-control" disabled onchange="onChangeCurrentState('sriLanka')">
                                                     <option>Colombo</option>
                                                     <option>&nbsp;</option>
                                                 </select>
@@ -452,7 +452,7 @@
                                         <div class="form-group row collapse" id="divSelectCurrentState">
                                             <label for="selectCurrentState" class="col-xl-4 col-md-12 col-form-label">State:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select name="selectCurrentState" id="selectCurrentState" class="form-control" disabled onchange="">
+                                                <select name="selectCurrentState" id="selectCurrentState" class="form-control" disabled onchange="onChangeCurrentState('foreignState')">
                                                     <option>State 1</option>
                                                     <option>&nbsp;</option>
                                                 </select>
@@ -463,7 +463,7 @@
                                         <div class="form-group row">
                                             <label for="currentCountry" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select id="currentCountry" class="form-control" disabled onchange="">
+                                                <select id="currentCountry" class="form-control" disabled onchange="onChangeCurrentCountry()">
                                                     <option disabled selected>Select your country</option>
                                                     @foreach ($countries_list as $countries)
                                                         <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>

@@ -34,6 +34,7 @@ Route::get('/faq',[App\Http\Controllers\Website\Faq::class, 'index']);
 Route::get('/announcements', [App\Http\Controllers\Website\AnouncementsController::class, 'index']);
 
 Route::post('/student/registration',[App\Http\Controllers\Website\Registration::class,'emailLink']);
+Route::post('/student/registration/subscribe',[App\Http\Controllers\Website\Registration::class,'subscribe']);
 
 /*
 |--------------------------------------------------------------------------

@@ -31,7 +31,7 @@
           });
         }else if (data['success']){
           $('#email').val('');
-          SwalNotificationSuccess.fire({
+          SwalNotificationSuccessAutoClose.fire({
             title: 'Registration Link Emailed!',
             text: 'Please Check your Email',
           })
