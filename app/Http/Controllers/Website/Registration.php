@@ -67,4 +67,8 @@ class Registration extends Controller
               
     }
 
+    public function subscribe(Request $request){
+
+    }
+
 }

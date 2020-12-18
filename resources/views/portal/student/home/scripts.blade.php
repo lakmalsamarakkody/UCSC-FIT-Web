@@ -13,7 +13,7 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalNotificationSuccess.fire({
+        SwalNotificationSuccessAutoClose.fire({
           title: "Sent!",
           text: "Verification email sent",
         })

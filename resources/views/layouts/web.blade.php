@@ -101,11 +101,11 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-md-6 text-center order-md-1 mb-sm-3">
+                    <div class="col-12 col-md-6 text-center order-md-1 mb-3">
                         <div class="input-group">
-                            <input type="email" class="form-control" placeholder="Enter your email.."/>
+                            <input type="email" id="subscribeEmail" class="form-control" placeholder="Enter your email.."/>
                             <div class="input-group-append">
-                              <button class="btn btn-outline-primary btn-subscribe">SUBSCRIBE</button>
+                              <button class="btn btn-outline-primary btn-subscribe" onclick="onClickSubscribe()">SUBSCRIBE</button>
                             </div>
                         </div>
                     </div>
@@ -146,4 +146,33 @@
 
     </body>
     @yield('script')
+
+    <script type="text/javascript">
+        // ONCLCIK SUBSCRIBE BUTTON
+        onClickSubscribe = () => {
+            // FORM PAYLOAD
+            var formData = new FormData();
+            // ADD DATA
+            formData.append('email', $('#subscribeEmail').val())
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ url('/student/registration/subscribe') }}",
+                type: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data){
+                    console.log('success');
+                    SwalNotificationSuccess.fire({title: 'Subscribed!',text:'You will get future updates on FIT Programme'});
+                },
+                error: function(err){
+                    console.log('error');
+                    SwalSystemErrorDanger.fire();
+                }
+            });
+        }
+    </script>
 </html>
