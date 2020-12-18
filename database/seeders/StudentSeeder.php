@@ -30,7 +30,6 @@ class StudentSeeder extends Seeder
                 array(
     
                     ['reg_no'=> 'F'. $faker->unique()->numerify('#########'),
-                    'index_no'=> $faker->unique()->numerify('##########'),
                     'user_id'=>$faker->unique()->numerify('##'),
                     'title'=> $faker->title($gender),
                     'first_name'=> $f_name,
