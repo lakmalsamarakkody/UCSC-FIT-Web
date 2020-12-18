@@ -298,12 +298,55 @@
        }
      });
   }
-
-  
   // /ONCHANGE Country GET Current District/States
 
+
   // ONCHANGE State GET Current Cities
-  
+  onChangeCurrentState = (currentStateType) => {
+    //FORM PAYLOAD
+    var formData = new FormData();
+    // ADD DATA
+    formData.append('currentStateType', currentStateType);
+    if(currentStateType == 'foreignState'){
+      formData.append('selectCurrentState', $('#selectCurrentState').val());
+      formData.append('selectCurrentDistrict',null);
+    }
+    else if(currentStateType == 'sriLanka'){
+      formData.append('selectCurrentState', null);
+      formData.append('selectCurrentDistrict', $('#selectCurrentDistrict').val());
+    }
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{ url('/portal/student/registration/getcities') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(data){
+        console.log('success');
+        if(data['status'] == 'error'){
+          SwalNotificationErrorDanger.fire({title: 'Error!', text: $.each(data['errors'], function(key, value){value})});
+        }
+        else if (data['status'] == 'success'){
+          // CLEAR CURRENT LIST
+          $('#currentCity').find('option').remove().end().append('<option selected disabled>Select your city</option>')
+          // APPEND CITY LIST
+          if(data['city_list']){
+            $.each(data['city_list'], function(key,value){
+              $('#currentCity').append($('<option>', {value: value.id,text: value.name}));
+            })
+          }
+        }
+      },
+      error: function(err){
+        console.log('error');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  } 
   // /ONCHANGE State GET Current Cities
 
 

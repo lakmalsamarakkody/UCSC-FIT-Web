@@ -116,7 +116,7 @@ class RegistrationController extends Controller
 
   public function getStates(Request $request)
   {
-    //Set using country
+    //Get using country
     if(isset($request->country)):
       // validate country
       $validator = Validator::make($request->all(), [
@@ -137,7 +137,7 @@ class RegistrationController extends Controller
         endif;
         return response()->json(['status'=>'success', 'state_type'=>$state_type, 'state_list'=>$state_list, 'city_list'=>$city_list]);
       endif;
-    //Set using current country
+    //Get using current country
     elseif(isset($request->currentCountry)):
       // validate current country
       $validator = Validator::make($request->all(), [
@@ -163,23 +163,45 @@ class RegistrationController extends Controller
 
   public function getCities(Request $request)
   {
-    // VALIDATE STATE TYPE
-    $validator = Validator::make($request->all(), [
-      'stateType' => ['required', Rule::in(['foreignState', 'sriLanka'])],
-      'selectState' => ['nullable', 'alpha_num'],
-      'selectDistrict' => ['nullable', 'alpha_num'],
-    ]);
+    // Get cities using district/state
+    if(isset($request->stateType)):
+      // VALIDATE STATE TYPE
+      $validator = Validator::make($request->all(), [
+        'stateType' => ['required', Rule::in(['foreignState', 'sriLanka'])],
+        'selectState' => ['nullable', 'alpha_num'],
+        'selectDistrict' => ['nullable', 'alpha_num'],
+      ]);
 
-    if($validator->fails()):
-      return response()->json(['status' => 'error','errors'=>$validator->errors()->all(), $request->selectState, $request->selectDistrict]);
-    else:
-      //GET CITIES
-      if ($request->stateType == 'foreignState'):
-        $city_list = DB::table('world_cities')->select('id','name')->where('division_id', $request->selectState)->orderBy('name')->get();
-      elseif ($request->stateType == 'sriLanka'):
-        $city_list = DB::table('sl_cities')->select('id','name')->where('district_id', $request->selectDistrict)->orderBy('name')->get();
+      if($validator->fails()):
+        return response()->json(['status' => 'error','errors'=>$validator->errors()->all(), $request->selectState, $request->selectDistrict]);
+      else:
+        //GET CITIES
+        if ($request->stateType == 'foreignState'):
+          $city_list = DB::table('world_cities')->select('id','name')->where('division_id', $request->selectState)->orderBy('name')->get();
+        elseif ($request->stateType == 'sriLanka'):
+          $city_list = DB::table('sl_cities')->select('id','name')->where('district_id', $request->selectDistrict)->orderBy('name')->get();
+        endif;
+        return response()->json(['status'=>'success', 'city_list'=>$city_list]);
       endif;
-      return response()->json(['status'=>'success', 'city_list'=>$city_list]);
+      
+    elseif(isset($request->currentStateType)):
+      $validator = Validator::make($request->all(), [
+        'currentStateType' => ['required', Rule::in(['foreignState', 'sriLanka'])],
+        'selectCurrentState' => ['nullable', 'alpha_num'],
+        'selectCurrentDistrict' => ['nullable', 'alpha_num'],
+      ]);
+
+      if($validator->fails()):
+        return response()->json(['status' => 'error','errors'=>$validator->errors()->all(), $request->selectCurrentState, $request->selectCurrentDistrict]);
+      else:
+        //GET CITIES
+        if ($request->currentStateType == 'foreignState'):
+          $city_list = DB::table('world_cities')->select('id','name')->where('division_id', $request->selectCurrentState)->orderBy('name')->get();
+        elseif ($request->currentStateType == 'sriLanka'):
+          $city_list = DB::table('sl_cities')->select('id','name')->where('district_id', $request->selectCurrentDistrict)->orderBy('name')->get();
+        endif;
+        return response()->json(['status'=>'success', 'city_list'=>$city_list]);
+      endif;
     endif;
   }
 }
