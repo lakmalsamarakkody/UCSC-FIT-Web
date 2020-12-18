@@ -99,60 +99,42 @@
     ============================-->
     <footer id="footer">
         <div class="footer-top">
-
-            <!-- <div class="container">
+            <div class="container">
                 <div class="row">
-
-                    <div class="col-lg-4 col-md-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <h2>EXTERNAL DEGREES CENTRE</h2>
-                                <p>
-                                Co-ordinator,<br/>
-                                External Degree Centre of UCSC,<br/>
-                                University of Colombo School of Computing<br/>
-                                UCSC Building Complex,<br/>
-                                35, Reid Avenue,<br/>
-                                Colombo 00700
-                                </p>
-                                <p>
-                                Tel:  +94 -11- 2581245 / +94 -11- 2581247
-                                Fax:  +94 -11-2587239
-                                </p>
+                    <div class="col-12 col-md-6 text-center order-md-1 mb-sm-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Enter your email.."/>
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-primary btn-subscribe">SUBSCRIBE</button>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-4 col-md-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <h2>STAY CONNECTED</h2>
-                                <i class="fab fa-twitter"></i>
-                                <i class="fab fa-facebook-f"></i>
-                                <i class="fab fa-youtube"></i>
-                            </div>
-                        </div>
+                    <div class="col-12 col-md-6 text-center order-md-3">
+                        <h4>Subscribe to our Newsletter</h4>
                     </div>
-
+                    <div class="col-12 col-md-6 text-center order-md-2">
+                        <h1> 
+                            <a target="_blank" href="" class="white"><i class="fab fa-twitter-square"></i></a>
+                            <a target="_blank" href="" class="white"><i class="fab fa-facebook-square"></i></a>
+                            <a target="_blank" href="" class="white"><i class="fab fa-youtube-square"></i></a>
+                        </h1> 
+                        
+                    </div>
+                    <div class="col-12 col-md-6 text-center order-md-4">
+                        <h4><a href="" class="white">Site Map </a>|<a href="" class="white"> Pivacy Policy </a>|<a href="" class="white"> Terms</a></h4>
+                    </div>
                 </div>
             </div>
-            </div> -->
-
+        </div>
+        <div class="footer-bottom">
             <div class="container">
-                <div class="copyright justify-content-center ">
-                    <h1> 
-                        <a target="_blank" href="" class="white"><i class="fab fa-twitter-square"></i></a>
-                        <a target="_blank" href="" class="white"><i class="fab fa-facebook-square"></i></a>
-                        <a target="_blank" href="" class="white"><i class="fab fa-youtube-square"></i></a>
-                    </h1> 
-                    <h4><a href="" class="white">Site Map </a>|<a href="" class="white"> Pivacy Policy </a>|<a href="" class="white"> Terms</a></h5>
-                    
-                </div>
-                <div class="copyright">
-                    Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" class="white"> UCSC</a> </strong>. All Rights Reserved 
-                </div>
-                <div class="credits">
-                    Powered by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Center- UCSC </a> </strong>
+                <div class="row">
+                    <div class="col-12 copyright mt-4">
+                        Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" class="white"> UCSC</a> </strong>. All Rights Reserved 
+                    </div>
+                    <div class="col-12 credits">
+                        Powered by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Center- UCSC </a> </strong>
+                    </div>
                 </div>
             </div>
         </div>
