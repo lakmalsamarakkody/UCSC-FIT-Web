@@ -3,32 +3,46 @@
 --------------------------------------------------------------*/
 
 #footer {
-    background: #212b4b;
-    padding: 30px 0;
-    color: #fff;
-    font-size: 14px;
-    position: relative;
-    width: 100%;
-    height: auto;
-    bottom: 0;
-  }
-  
-  #footer .copyright {
-    text-align: center;
-    color: #fff;
-  }
-  
-  .white{    
-    color: #fff;
-  }
+  background: #212b4b;
+  padding: 30px 0;
+  color: #fff;
+  font-size: 14px;
+  position: relative;
+  width: 100%;
+  height: auto;
+  bottom: 0;
+}
 
-  .white:hover{    
-    color: rgb(123, 142, 207);
-  }
+#footer .footer-top .btn-subscribe{
+  font-weight: bolder;
+  background-color: var(--white);
+  color: #212b4b;
+  border: none;
+  border-left: 1px solid #212b4b;
+}
 
-  #footer .credits {
-    padding-top: 10px;
-    text-align: center;
-    font-size: 13px;
-    color: #ccc;
-  }
+#footer .footer-top .btn-subscribe:hover{
+  background-color: #212b4b;
+  color: var(--white);
+  border: 1px solid white;
+}
+
+#footer .copyright {
+  text-align: center;
+  color: #fff;
+}
+
+#footer .white{    
+  color: #fff;
+}
+
+#footer .white:hover{    
+  color: rgb(123, 142, 207);
+}
+
+#footer .credits {
+  padding-top: 10px;
+  text-align: center;
+  font-size: 13px;
+  color: #ccc;
+}
