@@ -27,4 +27,4 @@ Route::get('examSchedule',[StudentExamController::class,'examSchedule']);
 Route::get('studentDetails/{id}',[StduentDetailsController::class,'studentDetails']);
 Route::get('searchStudents',[StduentDetailsController::class,'searchStudents']);
 Route::get('subjectDetails',[SubjectController::class,'subjectDetails']);
-Route::get('subjectresult/{id}/{year?}',[SubjectController::class,'subjectresult']);
+Route::get('subjectresult/{id}/{year?}/{month?}',[SubjectController::class,'subjectresult']);
