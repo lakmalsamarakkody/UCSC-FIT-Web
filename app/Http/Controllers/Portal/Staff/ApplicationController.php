@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
-    public function getApplicantList()
+    public function index()
     {
         return view('portal/staff/registration/applications');
     }

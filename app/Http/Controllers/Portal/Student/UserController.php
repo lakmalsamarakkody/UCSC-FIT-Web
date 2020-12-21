@@ -64,8 +64,11 @@ class UserController extends Controller
                 return abort(403);
             else:
                 if($user->save()):
-                    Email_Token::where('email', $email)->delete();
-                    return response()->json(['success'=>'success']);
+                    if(Email_Token::where('email', $email)->delete()):
+                        return response()->json(['success'=>'success']);
+                    else:                        
+                        return response()->json(['error'=>'error']);
+                    endif;
                 else:
                     return response()->json(['error'=>'error']);
                 endif;

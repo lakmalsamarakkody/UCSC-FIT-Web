@@ -49,7 +49,7 @@
                     <td>johndoe@gmail.com</td>
                     <td>
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Apllicant Details" data-toggle="modal" data-target="#"><i class="fas fa-user">View</i></button>
+                        <button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Applicant Details" data-toggle="modal" data-target="#modal-view-applicant"><i class="fas fa-user">View</i></button>
                       </div>
                     </td>
                   </tr>
@@ -60,8 +60,6 @@
           </div>
         </div>
         <!-- /APPLICATIONS LIST -->
-        
-        @include('')
 
       </div>
     </div>
@@ -92,7 +90,6 @@
 
       </div>
     </div> -->
-
-    @include('')
+    @include('portal.staff.registration.modal')
 
 @endsection

@@ -55,7 +55,7 @@
         <!-- /SCRIPTS -->
     </head>
 
-    <body>
+    <body class="">
     
     <!--==========================
     Header
@@ -104,10 +104,17 @@
                     <div class="col-12 col-md-6 text-center order-md-1 mb-3">
                         <div class="input-group">
                             <input type="email" name="subscriberEmail" id="subscriberEmail" class="form-control" placeholder="Enter your email.."/>
+                            
                             <div class="input-group-append">
-                              <button class="btn btn-outline-primary btn-subscribe" onclick="onClickSubscribe()">SUBSCRIBE</button>
+                                <button id="subscribe" class="btn btn-outline-primary btn-subscribe" onclick="onClickSubscribe()">
+                                    SUBSCRIBE
+                                    <span id="emailSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                </button>
+                            
                             </div>
                         </div>
+                        
+                        <span id="errSubEmail" class="invalid-feedback text-left" role="alert"></span>
                     </div>
                     <div class="col-12 col-md-6 text-center order-md-3">
                         <h4>Subscribe to our Newsletter</h4>
@@ -154,7 +161,9 @@
             var formData = new FormData();
             // ADD DATA
             formData.append('subscriberEmail', $('#subscriberEmail').val())
-
+            $('#subscriberEmail').removeClass('is-invalid');
+            $('#errSubEmail').html('');
+            $('#errSubEmail').hide();
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -164,15 +173,30 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function(data){
-                    if(data['status'] == 'success'){
+                beforeSend: function(){
+                    // Show loader
+                    $("#emailSpinner").removeClass('d-none');
+                    $('#subscribe').attr('disabled','disabled');
+                },
+                success: function(data){                    
+                    $("#emailSpinner").addClass('d-none');
+                    $('#subscribe').removeAttr('disabled');
+                    if(data['errors']){
+                        $.each(data['errors'], function(key, value){
+                            $('#errSubEmail').show();
+                            $('#subscriberEmail').addClass('is-invalid');
+                            $('#errSubEmail').append('<strong>'+value+'</strong>')
+                        });
+                    }else if(data['status'] == 'success'){
                         console.log('success');
-                        SwalNotificationSuccess.fire({title: 'Subscribed!',text:'You will get future updates on FIT Programme'});
-                    }
-                    else if(data['status'] == 'error'){
-                        if(data['errors']){
-                            SwalNotificationErrorDanger.fire({title: 'Error!',text: $.each(data['errors'], function(key, value){value}),});
-                        }
+                        $('#subscriberEmail').val('');
+                        SwalNotificationSuccess.fire({
+                            title: 'Subscribed!',
+                            text:'You will get future updates on FIT Programme'
+                        });
+                    }else if (data['error']){
+                        console.log('error');
+                        SwalSystemErrorDanger.fire();
                     }
                 },
                 error: function(err){
