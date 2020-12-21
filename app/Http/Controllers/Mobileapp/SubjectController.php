@@ -38,9 +38,11 @@ class SubjectController extends Controller
          'exam_schedules.id'
     );
     $fullData=$data->get();
+    $absent=$data->where('student_exams.status','OK')->count();
      $co=$data  ->get()->count();
      $pass=$data->where('student_exams.result','>',0)->orderBy('exams.month')->count();
      $fail=$data->where('student_exams.result','<',1)->count();
+
 //    $pa=0;
 //    $average = array(
 //             array(
@@ -102,6 +104,7 @@ class SubjectController extends Controller
             "Fail"=>$fail,
             "Pass"=>$pass,
             "Regstu"=>$co,
+            "Ab"=>$absent
 
         ];
 
