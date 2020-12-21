@@ -37,8 +37,10 @@ Route::get('/announcements', [App\Http\Controllers\Website\AnouncementsControlle
 Route::post('/student/registration',[App\Http\Controllers\Website\Registration::class,'emailLink']);
 Route::post('/student/registration/subscribe',[App\Http\Controllers\Website\Registration::class,'subscribe']);
 
+Route::get('/{email}/unsubscribe/{token}', [App\Http\Controllers\Website\Registration::class,'unsubscribe'])->name('unsubscribe');
+
 Route::get('/email',function(){
-  return new Subscribe();
+  return new Subscribe('dinukolla@gmail.com');
 });
 
 /*
