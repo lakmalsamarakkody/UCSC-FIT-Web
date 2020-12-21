@@ -54,6 +54,7 @@ Auth::routes();
 |--------------------------------------------------------------------------
 */
 Route::get('/portal/staff/', [App\Http\Controllers\Portal\Staff\HomeController::class, 'index'])->name('home');
+Route::get('/portal/staff/applications', [App\Http\Controllers\Portal\Staff\HomeController::class, 'getApplicantList'])->name('applicant.list');
 
 Route::get('/portal/staff/students', [App\Http\Controllers\Portal\Staff\StudentController::class, 'index'])->name('students');
 Route::get('student-list',[App\Http\Controllers\Portal\Staff\StudentController::class, 'getStudentList'])->name('student.list');
