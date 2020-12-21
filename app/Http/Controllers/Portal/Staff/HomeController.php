@@ -34,4 +34,9 @@ class HomeController extends Controller
           'dones' => $dones
       ]);
     }
+
+    public function getApplicantList()
+    {
+      return view('portal/staff/registration/applications');
+    }
 }
