@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Mobileapp\RegUsersController;
+use App\Http\Controllers\Mobileapp\ResultOverviewController;
 use App\Http\Controllers\Mobileapp\StudentExamController;
 use App\Http\Controllers\Mobileapp\StduentDetailsController;
 use App\Http\Controllers\Mobileapp\SubjectController;
@@ -28,3 +29,4 @@ Route::get('studentDetails/{id}',[StduentDetailsController::class,'studentDetail
 Route::get('searchStudents',[StduentDetailsController::class,'searchStudents']);
 Route::get('subjectDetails',[SubjectController::class,'subjectDetails']);
 Route::get('subjectresult/{id}/{year?}/{month?}',[SubjectController::class,'subjectresult']);
+Route::get('resultoverview/{year?}',[ResultOverviewController::class,'resultoverview']);
