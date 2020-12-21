@@ -1,6 +1,7 @@
 <?php
 
 use App\Mail\StudentRegistration;
+use App\Mail\Subscribe;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,6 +36,10 @@ Route::get('/announcements', [App\Http\Controllers\Website\AnouncementsControlle
 
 Route::post('/student/registration',[App\Http\Controllers\Website\Registration::class,'emailLink']);
 Route::post('/student/registration/subscribe',[App\Http\Controllers\Website\Registration::class,'subscribe']);
+
+Route::get('/email',function(){
+  return new Subscribe();
+});
 
 /*
 |--------------------------------------------------------------------------
