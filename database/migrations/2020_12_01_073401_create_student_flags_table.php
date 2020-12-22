@@ -14,7 +14,8 @@ class CreateStudentFlagsTable extends Migration
     public function up()
     {
         Schema::create('student_flags', function (Blueprint $table) {
-            $table->integer('id');
+            $table->id();
+            $table->integer('student_id');
             $table->boolean('info_complete')->default(false);
             $table->boolean('info_editable')->default(true);
             $table->boolean('birth_cert')->default(false);
