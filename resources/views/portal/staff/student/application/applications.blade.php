@@ -92,7 +92,7 @@
 
       </div>
     </div> -->
-    @include('portal.staff.registration.modal')
-    @include('portal.staff.registration.scripts')
+    @include('portal.staff.student.application.modal')
+    @include('portal.staff.student.application.scripts')
 
 @endsection

@@ -216,7 +216,17 @@
                                                         <th>Paid Bank Branch Code: </th>
                                                         <td>693</td>
                                                     </tr>
+                                                    <tr>
+                                                        <th>Paid Amount: </th>
+                                                        <td>Rs.2750.00</td>
+                                                    </tr>
                                                 </table>
+                                                <div class="col-lg-12 divImage">
+                                                    <div class="form-group mx-2">
+                                                        <span class="">Scanned Bank Slip</span>
+                                                        <img type="image" name="registerBankSlip" id="registerBankSlip" src="" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -302,7 +312,7 @@
     </div>
 
 </div>
-<!-- VIEW APPLICANT DETAILS -->
+<!-- /VIEW APPLICANT DETAILS -->
 
 <!-- DECLINE MESSAGE -->
 <div class="modal fade" id="modal-decline-message" tabindex="-1" aria-labelledby="declineMessageLabel" aria-hidden="true" data-backdrop="static">
@@ -329,6 +339,6 @@
 </div>
 <!-- /DECLINE MESSAGE -->
 
-@include('portal.staff.registration.scripts')
+@include('portal.staff.student.application.scripts')
 
 
