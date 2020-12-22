@@ -42,7 +42,8 @@
           SwalDoneSuccess.fire({
             title: 'User Account Created!',
             text: 'Please Login to Continue',
-          })
+          });
+          window.location.replace("{{ route('login') }}");
         }else if (data['error']){
           SwalErrorDanger.fire({
             title: 'Email Failed!',
