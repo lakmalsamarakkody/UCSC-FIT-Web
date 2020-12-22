@@ -90,7 +90,7 @@
             <!-- USER DETAILS SECTION -->
             <div class="user w-100 text-center">
               <div class="img mt-3 mb-2">
-                <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar" width="50%">
+                <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar" width="50%" onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
               </div>
               <p class="mb-0 text-white">Hello! {{ Auth::user()->name }}</p>
               <p class="text-white"><small>{{ Auth::user()->role->name }}</small> </p>
