@@ -15,4 +15,7 @@
   font-size: 0.9rem;
 }
 
+.student-registration .countryCodeSelect, .student-registration .countryCodeOption{
+  text-transform: uppercase;
+}
 /* /Registration */

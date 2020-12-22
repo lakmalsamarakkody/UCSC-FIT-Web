@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Student\Title;
-
+use App\Models\Support\SlCity;
+use App\Models\Support\SlDistrict;
+use App\Models\Support\WorldCity;
+use App\Models\Support\WorldCountry;
+use App\Models\Support\WorldDivision;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -35,7 +39,7 @@ class RegistrationController extends Controller
   public function index()
   {
     $student_titles = Title::select('title')->get();
-    $countries_list = DB::table('world_countries')->orderBy('name')->get();
+    $countries_list = WorldCountry::orderBy('name')->get();
     return view('portal/student/registration', [
       'student_titles' => $student_titles,
       'countries_list' => $countries_list,
@@ -54,7 +58,7 @@ class RegistrationController extends Controller
       'fullName' => ['nullable', 'alpha_dash_space'],
       'initials' => ['nullable', 'alpha_capital'],
       'dob' => ['nullable' , 'date','before:today'],
-      'gender' => ['nullable', 'exists:students,gender'],
+      'gender' => ['nullable', Rule::in(['Male', 'Female'])],
       // 'citizenship' => ['nullable'],
       //'nic_old' => ['nullable', 'regex:/^[0-9]{9}[V|v]$/'],
       //'nic_nw' => ['nullable', 'digits:12'],
@@ -82,8 +86,8 @@ class RegistrationController extends Controller
       //'selectCurrentDistrict' => ['nullable', 'exists: sl_districts,name'],
       //'selectCurrentState' => ['nullable', 'exists: world_divisions,name'],
       'currentCountry' => ['nullable', 'exists: world_countries,name'],
-
-      'telephone' => ['nullable', 'digits:10'],
+      'telephoneCountryCode' => ['nullable', 'numeric', 'digits:5' ],
+      'telephone' => ['nullable', 'numeric', 'digits:15'],
       //'email' => ['nullable', 'email', 'unique:users'],
       'designation' => ['nullable', 'regex:/^[a-zA-Z\s]*$/', 'min:3'],
     ]);
@@ -106,9 +110,9 @@ class RegistrationController extends Controller
         return response()->json(['status' => 'error','errors'=>$validator->errors()->all()]);
     else:
       if ( $request->citizenship == 'Sri Lankan' ):
-        $countries_list = DB::table('world_countries')->select('id','name')->where('name', 'Sri Lanka')->orderBy('name')->get();
+        $countries_list = WorldCountry::select('id','name')->where('name', 'Sri Lanka')->orderBy('name')->get();
       elseif ( $request->citizenship == 'Foreign National' ):
-        $countries_list = DB::table('world_countries')->select('id','name')->where('name', '!=', 'Sri Lanka')->orderBy('name')->get();
+        $countries_list = WorldCountry::select('id','name')->where('name', '!=', 'Sri Lanka')->orderBy('name')->get();
       endif;
       return response()->json(['status'=>'success', 'country_list'=>$countries_list ]);
     endif;
@@ -128,12 +132,12 @@ class RegistrationController extends Controller
       else:
         if ( $request->country == '67' ):
           $state_type = 'districts';
-          $state_list = DB::table('sl_districts')->select('id','name')->orderBy('name')->get();
+          $state_list = SlDistrict::select('id','name')->orderBy('name')->get();
           $city_list = NULL;
         else:
           $state_type = 'divisions';
-          $state_list = DB::table('world_divisions')->select('id','name')->where('country_id', $request->country)->orderBy('name')->get();
-          $city_list = DB::table('world_cities')->select('id','name')->where('country_id', $request->country)->orderBy('name')->get();
+          $state_list = WorldDivision::select('id','name')->where('country_id', $request->country)->orderBy('name')->get();
+          $city_list = WorldCity::select('id','name')->where('country_id', $request->country)->orderBy('name')->get();
         endif;
         return response()->json(['status'=>'success', 'state_type'=>$state_type, 'state_list'=>$state_list, 'city_list'=>$city_list]);
       endif;
@@ -149,12 +153,12 @@ class RegistrationController extends Controller
       else:
         if ( $request->currentCountry == '67' ):
           $state_type = 'districts';
-          $state_list = DB::table('sl_districts')->select('id','name')->orderBy('name')->get();
+          $state_list = SlDistrict::select('id','name')->orderBy('name')->get();
           $city_list = NULL;
         else:
           $state_type = 'divisions';
-          $state_list = DB::table('world_divisions')->select('id','name')->where('country_id', $request->currentCountry)->orderBy('name')->get();
-          $city_list = DB::table('world_cities')->select('id','name')->where('country_id', $request->currentCountry)->orderBy('name')->get();
+          $state_list = WorldDivision::select('id','name')->where('country_id', $request->currentCountry)->orderBy('name')->get();
+          $city_list = WorldCity::select('id','name')->where('country_id', $request->currentCountry)->orderBy('name')->get();
         endif;
         return response()->json(['status'=>'success', 'state_type'=>$state_type, 'state_list'=>$state_list, 'city_list'=>$city_list]);
       endif;
@@ -177,9 +181,9 @@ class RegistrationController extends Controller
       else:
         //GET CITIES
         if ($request->stateType == 'foreignState'):
-          $city_list = DB::table('world_cities')->select('id','name')->where('division_id', $request->selectState)->orderBy('name')->get();
+          $city_list = WorldCity::select('id','name')->where('division_id', $request->selectState)->orderBy('name')->get();
         elseif ($request->stateType == 'sriLanka'):
-          $city_list = DB::table('sl_cities')->select('id','name')->where('district_id', $request->selectDistrict)->orderBy('name')->get();
+          $city_list = SlCity::select('id','name')->where('district_id', $request->selectDistrict)->orderBy('name')->get();
         endif;
         return response()->json(['status'=>'success', 'city_list'=>$city_list]);
       endif;
@@ -196,9 +200,9 @@ class RegistrationController extends Controller
       else:
         //GET CITIES
         if ($request->currentStateType == 'foreignState'):
-          $city_list = DB::table('world_cities')->select('id','name')->where('division_id', $request->selectCurrentState)->orderBy('name')->get();
+          $city_list = WorldCity::select('id','name')->where('division_id', $request->selectCurrentState)->orderBy('name')->get();
         elseif ($request->currentStateType == 'sriLanka'):
-          $city_list = DB::table('sl_cities')->select('id','name')->where('district_id', $request->selectCurrentDistrict)->orderBy('name')->get();
+          $city_list = SlCity::select('id','name')->where('district_id', $request->selectCurrentDistrict)->orderBy('name')->get();
         endif;
         return response()->json(['status'=>'success', 'city_list'=>$city_list]);
       endif;

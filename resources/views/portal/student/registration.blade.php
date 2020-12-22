@@ -11,20 +11,6 @@
 
 </script>
 
-<!--
-<script type="text/javascript">
-    // SHOW INPUT FILED IN TITLE
-    function showfield(name){
-      if(name=='Other')document.getElementById('oth').innerHTML='<input type="text" class="form-control" name="other" />';
-      else document.getElementById('oth').innerHTML='';
-    }
-</script> -->
-
-                                        
-                                            {{-- {{ $countries_list }} <br/> --}}
-                                        
-                                        
-
     <!-- CONTENT -->
     <div class="col-lg-12 student-registration">
         <div class="row">
@@ -458,7 +444,7 @@
                                         <div class="form-group row">
                                             <label for="currentCountry" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <select id="currentCountry" class="form-control" disabled onchange="onChangeCurrentCountry()">
+                                                <select name="currentCountry" id="currentCountry" class="form-control" disabled onchange="onChangeCurrentCountry()">
                                                     <option disabled selected>Select your country</option>
                                                     @foreach ($countries_list as $countries)
                                                         <option value="{{ $countries->id }}">{{ $countries->name }}</option><br/>
@@ -474,7 +460,17 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="telephone">Telephone Number</label>
-                                        <input type="tel" class="form-control @error('telephone') is-invalid @enderror" id="telephone" name="telephone" value="{{ old('telephone') }}" >
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <select name="telephoneCountryCode" id="telephoneCountryCode" class="form-control countryCodeSelect">
+                                                    <option disabled selected>Code</option>
+                                                    @foreach ($countries_list as $countries)
+                                                        <option class="countryCodeOption" value="{{ $countries->callingcode }}">{{ $countries->code }} (+{{ $countries->callingcode }})</option><br/>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <input type="tel" class="form-control @error('telephone') is-invalid @enderror" id="telephone" name="telephone" value="{{ old('telephone') }}" >
+                                          </div>
                                         <span class="invalid-feedback" id="error-telephone" role="alert"></span>
                                         @error('telephone')
                                           <span class="invalid-feedback" role="alert">
