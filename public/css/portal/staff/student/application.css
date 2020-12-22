@@ -1,0 +1,5 @@
+.applications .card .card-body .divImage {
+    border: 2px var(--main-theme-color);
+    border-style: dashed;
+    height: 50px;
+}

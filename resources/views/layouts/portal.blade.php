@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="{{ asset('css/portal/staff/exams.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/staff/system.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/staff/student.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/staff/registration.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/staff/student/application.css') }}">
     <!-- /PAGES --> 
   <!-- /STYLES -->
 
