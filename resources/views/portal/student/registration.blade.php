@@ -150,24 +150,24 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
-                                        <label for="nicPassport">&nbsp;</label>
+                                        <label for="uniqueType">&nbsp;</label>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="nicPassport" id="nic" value="nic" checked />
+                                            <input type="radio" class="form-check-input" name="uniqueType" id="uniqueTypeNic" value="nic" checked />
                                             <label for="nicNo" class="form-check-label">National ID No</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            @if(old('nicPassport') == 'postal')
-                                                <input type="radio" class="form-check-input" name="nicPassport" id="postal" value="postal" checked/>
+                                            @if(old('uniqueType') == 'postal')
+                                                <input type="radio" class="form-check-input" name="uniqueType" id="uniqueTypePostal" value="postal" checked/>
                                             @else 
-                                                <input type="radio" class="form-check-input" name="nicPassport" id="postal" value="postal" />
+                                                <input type="radio" class="form-check-input" name="uniqueType" id="uniqueTypePostal" value="postal" />
                                             @endif
                                             <label for="postalNo" class="form-check-label">Postal ID No</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            @if(old('nicPassport') == 'passport')
-                                                <input type="radio" class="form-check-input" name="nicPassport" id="passport" value="passport" checked/>
+                                            @if(old('uniqueType') == 'passport')
+                                                <input type="radio" class="form-check-input" name="uniqueType" id="uniqueTypePassport" value="passport" checked/>
                                             @else 
-                                                <input type="radio" class="form-check-input" name="nicPassport" id="passport" value="passport" />
+                                                <input type="radio" class="form-check-input" name="uniqueType" id="uniqueTypePassport" value="passport" />
                                             @endif
                                             <label for="passportNo" class="form-check-label">Passport No.</label>
                                         </div>
@@ -500,11 +500,11 @@
                                 <small>* Please note that employment details would be kept confidential and will be utilized only for purposed of improving the FIT programme.</small>
                                 <h6 style="color: black;" class="mt-3 mb-3">Are you currently employed ?</h6>
                                 <div class="form-check px-5 mt-2">
-                                    <input type="radio" class="form-check-input" name="employement" id="empYes" value="yes" onclick="edit_designation()"/>
+                                    <input type="radio" class="form-check-input" name="employement" id="employement" value="yes" onclick="edit_designation()"/>
                                     <label for="empYes" class="form-check-label">Yes</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    <input type="radio" class="form-check-input" name="employement" id="empNo" value="no" onclick="edit_designation()" checked/>
+                                    <input type="radio" class="form-check-input" name="employement" id="noemployement" value="no" onclick="edit_designation()" checked/>
                                     <label for="empNo" class="form-check-label">No</label>
                                 </div>
                                 <div class="form-group row mt-3">

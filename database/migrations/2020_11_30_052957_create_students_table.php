@@ -26,19 +26,30 @@ class CreateStudentsTable extends Migration
             $table->date('dob')->nullable();
             $table->string('gender')->nullable();
             $table->string('citizenship')->nullable();
+            
             $table->string('nic_old')->unique()->length(10)->nullable();
             $table->bigInteger('nic_new')->unique()->length(12)->nullable();
             $table->string('postal')->unique()->length(9)->nullable();
             $table->string('passport')->unique()->nullable();
+
             $table->string('education')->nullable();
+
             $table->string('permanent_house')->nullable();
-            $table->string('permanent_address')->nullable();
+            $table->string('permanent_address_line1')->nullable();
+            $table->string('permanent_address_line2')->nullable();
+            $table->string('permanent_address_line3')->nullable();
+            $table->string('permanent_address_line4')->nullable();
             $table->integer('permanent_city_id')->nullable();
             $table->integer('permanent_country_id')->nullable();
+
             $table->string('current_house')->nullable();
-            $table->string('current_address')->nullable();
+            $table->string('current_address_line1')->nullable();
+            $table->string('current_address_line2')->nullable();
+            $table->string('current_address_line3')->nullable();
+            $table->string('current_address_line4')->nullable();
             $table->integer('current_city_id')->nullable();
             $table->integer('current_country_id')->nullable();
+
             $table->integer('telephone_country_code')->length(5)->nullable();
             $table->integer('telephone')->length(16)->nullable();
             $table->string('designation')->nullable();

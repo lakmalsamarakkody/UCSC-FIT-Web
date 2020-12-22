@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Portal\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\Student\Flag;
 use Illuminate\Http\Request;
 
 use App\Models\Student\Title;
@@ -30,7 +31,7 @@ class RegistrationController extends Controller
   {
     $this->middleware('auth');
     $this->middleware('revalidate');
-    $this->middleware('registration.check');
+    //$this->middleware('registration.check');
   }
 
   /**
@@ -62,22 +63,18 @@ class RegistrationController extends Controller
       'initials' => ['nullable', 'alpha_capital'],
       'dob' => ['nullable' , 'date','before:today'],
       'gender' => ['nullable', Rule::in(['Male', 'Female'])],
-      // 'citizenship' => ['nullable'],
-      //'nic_old' => ['nullable', 'regex:/^[0-9]{9}[V|v]$/'],
-      //'nic_nw' => ['nullable', 'digits:12'],
-      //'postal' => ['nullable', 'regex:/^[A-Z]{1}\-[A-Z]{1}[0-6]{6}$/'],
-      //'unique_id' => ['nullable', 'regex:/^[A-Z]{1}\-[A-Z]{1}[0-6]{6}$/'],
-
-      //'qualification' => ['required', 'exists:'],
+      'citizenship' => ['nullable', Rule::in(['Sri Lankan', 'Foreign National'])],
+      'uniqueType' => ['nullable', Rule::in(['nic', 'postal', 'passport'])],
+      'qualification' => ['required', Rule::in(['degree', 'higherdiploma', 'diploma', 'advancedlevel', 'ordinarylevel', 'otherqualification'])],
 
       'house' => ['nullable', 'address'],
       'addressLine1' => ['nullable', 'address'],
       'addressLine2' => ['nullable', 'address'],
       'addressLine3' => ['nullable', 'address'],
       'addressLine4' => ['nullable', 'address'],
-      //'city' => ['nullable', 'exists: world_cities,name'],
-      //'selectDistrict' => ['nullable', 'exists: sl_districts,name'],
-      //'selectState' => ['nullable', 'exists: world_divisions,name'],
+      'city' => ['nullable', 'numeric'],
+      'selectDistrict' => ['nullable', 'numeric'],
+      'selectState' => ['nullable', 'exists: world_divisions,id'],
       'country' => ['nullable', 'exists:world_countries,id'],
 
       'currentHouse' => ['nullable', 'address'],
@@ -85,38 +82,181 @@ class RegistrationController extends Controller
       'currentAddressLine2' => ['nullable', 'address'],
       'currentAddressLine3' => ['nullable', 'address'],
       'currentAddressLine4' => ['nullable', 'address'],
-      //'currentCity' => ['nullable', 'exists: world_cities,name'],
-      //'selectCurrentDistrict' => ['nullable', 'exists: sl_districts,name'],
-      //'selectCurrentState' => ['nullable', 'exists: world_divisions,name'],
-      'currentCountry' => ['nullable', 'exists: world_countries,name'],
-      'telephoneCountryCode' => ['nullable', 'numeric', 'digits:5' ],
-      'telephone' => ['nullable', 'numeric', 'digits:15'],
+      'currentCity' => ['nullable', 'numeric'],
+      'selectCurrentDistrict' => ['nullable', 'numeric'],
+      'selectCurrentState' => ['nullable', 'exists: world_divisions,id'],
+      'currentCountry' => ['nullable', 'exists: world_countries,id'],
+      
+      'telephoneCountryCode' => ['nullable', 'numeric', 'digits_between:1,5' ],
+      'telephone' => ['nullable', 'numeric', 'digits_between:8,15'],
       'email' => ['nullable', 'email', 'unique:users'],
       'designation' => ['nullable', 'regex:/^[a-zA-Z\s]*$/', 'min:3'],
     ]);
+
+    if($request->uniqueType == 'nic'):
+      if(strlen($request->unique_id)>10):
+        $uniqueID_validator =  Validator::make($request->all(), [
+          'unique_id' => ['nullable', 'numeric', 'digits:12'],
+        ]);
+      else:
+        $uniqueID_validator =  Validator::make($request->all(), [
+          'unique_id' => ['nullable', 'alpha_num', 'min:10', 'regex:/^([0-9]{9}[x|X|v|V])$/'],
+        ]);
+      endif;
+    elseif($request->uniqueType == 'postal'):
+      $uniqueID_validator =  Validator::make($request->all(), [
+        'unique_id' => ['nullable', 'alpha_num', 'size:10'],
+      ]);
+    else:
+      $uniqueID_validator =  Validator::make($request->all(), [
+        'unique_id' => ['nullable', 'alpha_num', 'size:10'],
+      ]);
+    endif;
     
     if($validator->fails()):
         return response()->json(['errors'=>$validator->errors()]);
+    elseif(isset($uniqueID_validator) && $uniqueID_validator->fails()):
+      return response()->json(['errors'=>$uniqueID_validator->errors()]);
     else:
         return response()->json(['success'=>'success']);
     endif;
   }
 
-  //SaveInformations
+  //SAVE INFORMATION
   public function saveInfo(Request $request){
     $user = Auth::user();
-    //update if details exists
+    //UPDATE DETAILS IF STUDENT EXISTS
     if( Student::where('user_id', $user->id)->first() ):
+      $student = Student::where('user_id',$user->id)->first();
+      $student->user_id = $user->id;
+      $student->title = $request->title;
+      $student->first_name = $request->firstName;
+      $student->middle_names = $request->middleNames;
+      $student->last_name = $request->lastName;
+      $student->initials = $request->initials;
+      $student->full_name = $request->fullName;
+      $student->dob = $request->dob;
+      $student->gender = $request->gender;
+      $student->citizenship = $request->citizenship;
+      $student->education = $request->qualification;
 
-    // create new student record
+      $student->permanent_house = $request->house;
+      $student->permanent_address_line1 = $request->addressLine1;
+      $student->permanent_address_line2 = $request->addressLine2;
+      $student->permanent_address_line3 = $request->addressLine3;
+      $student->permanent_address_line4 = $request->addressLine4;
+      $student->permanent_city_id = $request->city;
+      $student->permanent_country_id = $request->country;
+
+      $student->current_house = $request->currentHouse;
+      $student->current_address_line1 = $request->currentAddressLine1;
+      $student->current_address_line2 = $request->currentAddressLine2;
+      $student->current_address_line3 = $request->currentAddressLine3;
+      $student->current_address_line4 = $request->currentAddressLine4;
+      $student->current_city_id = $request->currentCity;
+      $student->current_country_id = $request->currentCountry;
+
+      $student->telephone_country_code = $request->telephoneCountryCode;
+      $student->telephone = $request->telephone;
+
+      // CHECK UNIQUE ID AND SAVE TO RELEVANT FIELD
+      if($request->uniqueType == 'nic'):
+        if(strlen($request->unique_id)==10):
+          $student->nic_old = $request->unique_id;
+          $student->nic_new = NULL;
+          $student->postal = NULL;
+          $student->passport = NULL;
+        elseif(strlen($request->unique_id)==12):
+          $student->nic_new = $request->unique_id;
+          $student->nic_old = NULL;
+          $student->postal = NULL;
+          $student->passport = NULL;
+        endif;
+      elseif($request->uniqueType == 'postal'):
+        $student->postal = $request->unique_id;
+        $student->nic_old = NULL;
+        $student->nic_new = NULL;
+        $student->passport = NULL;
+      elseif($request->uniqueType == 'passport'):
+        $student->passport = $request->unique_id;
+        $student->nic_old = NULL;
+        $student->nic_new = NULL;
+        $student->postal = NULL;
+      endif;
+
+      // CHECK EMPLOYMENT
+      if ($request->employement == 'yes'):
+        $student->designation = $request->designation;
+      else:
+        $student->designation = NULL;
+      endif;
+
+      //CREATE STUDENT RECORD
+      $student->save();
+
+      return response()->json(['status'=>'success', 'student'=>$student]);
+
+    // CREATE NEW STUDENT RECORD
     else:
-      $student = Student::create([
-        'user_id' => $user->id,
-        'title' => $request->title,
-      ]);
-      return response()->json(['status'=>'success']);
+      $student = new Student;
+      $student->user_id = $user->id;
+      $student->title = $request->title;
+      $student->first_name = $request->firstName;
+      $student->middle_names = $request->middleNames;
+      $student->last_name = $request->lastName;
+      $student->initials = $request->initials;
+      $student->full_name = $request->fullName;
+      $student->dob = $request->dob;
+      $student->gender = $request->gender;
+      $student->citizenship = $request->citizenship;
+      $student->education = $request->qualification;
+
+      $student->permanent_house = $request->house;
+      $student->permanent_address_line1 = $request->addressLine1;
+      $student->permanent_address_line2 = $request->addressLine2;
+      $student->permanent_address_line3 = $request->addressLine3;
+      $student->permanent_address_line4 = $request->addressLine4;
+      $student->permanent_city_id = $request->city;
+      $student->permanent_country_id = $request->country;
+
+      $student->current_house = $request->currentHouse;
+      $student->current_address_line1 = $request->currentAddressLine1;
+      $student->current_address_line2 = $request->currentAddressLine2;
+      $student->current_address_line3 = $request->currentAddressLine3;
+      $student->current_address_line4 = $request->currentAddressLine4;
+      $student->current_city_id = $request->currentCity;
+      $student->current_country_id = $request->currentCountry;
+
+      $student->telephone_country_code = $request->telephoneCountryCode;
+      $student->telephone = $request->telephone;
+
+      // CHECK UNIQUE ID AND SAVE TO RELEVANT FIELD
+      if($request->uniqueType == 'nic'):
+        if(strlen($request->unique_id)==10):
+          $student->nic_old = $request->unique_id;
+        elseif(strlen($request->unique_id)==12):
+          $student->nic_new = $request->unique_id;
+        endif;
+      elseif($request->uniqueType == 'postal'):
+        $student->postal = $request->unique_id;
+      elseif($request->uniqueType == 'passport'):
+        $student->passport = $request->unique_id;
+      endif;
+
+      // CHECK EMPLOYMENT
+      if ($request->employement == 'yes'):
+        $student->designation = $request->designation;
+      endif;
+
+      //CREATE STUDENT RECORD
+      $student->save();
+
+      // CREATE STUDENT FLAG RECORD
+      $student_flag = new Flag;
+      $student_flag->student_id = $student->id;
+      $student_flag->save();
+      return response()->json(['status'=>'success', 'student'=>$student, 'flag'=>$student_flag]);
     endif;
-    //return response()->json(['status'=>'error', 'errors'=>$result]);
   }
 
   public function getCountries(Request $request)

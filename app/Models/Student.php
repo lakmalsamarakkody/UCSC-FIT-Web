@@ -11,6 +11,10 @@ class Student extends Model
     use SoftDeletes;
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+    ];
+
     
     public function flag(){
         /**
