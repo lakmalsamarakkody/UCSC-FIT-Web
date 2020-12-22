@@ -64,6 +64,8 @@
         <!-- /APPLICATIONS LIST -->
 
       </div>
+      @include('portal.staff.student.application.modal')
+      @include('portal.staff.student.application.scripts')
     </div>
 
     <!-- /CONTENT -->
@@ -92,7 +94,5 @@
 
       </div>
     </div> -->
-    @include('portal.staff.student.application.modal')
-    @include('portal.staff.student.application.scripts')
 
 @endsection
