@@ -222,10 +222,7 @@
                                                     </tr>
                                                 </table>
                                                 <div class="col-lg-12 divImage text-center">
-                                                    <div class="form-group mx-2">
-                                                        <span>Scanned Bank Slip</span>
-                                                        <img type="image" name="registerBankSlip" id="registerBankSlip" src="" />
-                                                    </div>
+                                                    <img name="registerBankSlip" id="registerBankSlip" src="" />
                                                 </div>
                                             </div>
                                         </div>
@@ -248,12 +245,9 @@
                                     <div class="card-body">                        
                                         <div class="row">
                                             <div class="col-md-8 order-md-1 order-2">
-                                                <table class="table text-left">
-                                                    <tr>
-                                                        <th></th>
-                                                        <td></td>                                        
-                                                    </tr>
-                                                </table>
+                                                <div class="col-lg-12 divImage text-center">
+                                                    <img name="imgBirthCertificate" id="imgBirthCertificate" src="" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -267,27 +261,17 @@
                                             <div class="col-md-8 order-md-1 order-2">
                                                 <table class="table text-left">
                                                     <tr>
-                                                        <th>Nic/Postal/Passport Number: </th>
-                                                        <td>960566408V</td>                                        
+                                                        <th>Type: </th>
+                                                        <td>NIC</td>
                                                     </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 mt-3">
-                                <div class="card">
-                                    <div class="card-header">Other Documents</div>
-                                    <div class="card-body">                        
-                                        <div class="row">
-                                            <div class="col-md-8 order-md-1 order-2">
-                                                <table class="table text-left">
                                                     <tr>
-                                                        <th></th>
-                                                        <td></td>                                        
+                                                        <th>NIC/Postal/Passport No: </th>
+                                                        <td>960567896V</td>
                                                     </tr>
                                                 </table>
+                                                <div class="col-lg-12 divImage text-center">
+                                                    <img name="imgNicPassport" id="imgNicPassport" src="" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

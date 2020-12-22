@@ -31,7 +31,7 @@
 
         <!-- SUMMARY CARDS -->
         <div class="col-xl-2 col-lg-4 p-1">
-          <a class="" href="{{ url('/portal/staff/applications') }}">
+          <a class="" href="{{ url('/portal/staff/student/application') }}">
             <div class="card card-dash shadow green" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">5000</div>
