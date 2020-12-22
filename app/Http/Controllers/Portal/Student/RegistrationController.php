@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Portal\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 use App\Models\Student\Title;
@@ -47,6 +48,7 @@ class RegistrationController extends Controller
     ]);
   }
 
+  //Validate SaveInfoButton Request
   public function saveInfoValidator(Request $request)
   {
     // dd($request->all());
@@ -89,7 +91,7 @@ class RegistrationController extends Controller
       'currentCountry' => ['nullable', 'exists: world_countries,name'],
       'telephoneCountryCode' => ['nullable', 'numeric', 'digits:5' ],
       'telephone' => ['nullable', 'numeric', 'digits:15'],
-      //'email' => ['nullable', 'email', 'unique:users'],
+      'email' => ['nullable', 'email', 'unique:users'],
       'designation' => ['nullable', 'regex:/^[a-zA-Z\s]*$/', 'min:3'],
     ]);
     
@@ -98,6 +100,13 @@ class RegistrationController extends Controller
     else:
         return response()->json(['success'=>'success']);
     endif;
+  }
+
+  //SaveInformations
+  public function saveInfo(){
+    $student = Student::create([
+
+    ]);
   }
 
   public function getCountries(Request $request)
