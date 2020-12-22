@@ -38,7 +38,7 @@
               <table class="table yajra-datatable">
                 <thead class="text-center">
                   <tr>
-                    <th>Date</th>
+                    <th>Submitted Date</th>
                     <th>Student Name</th>
                     <th>Email</th>
                     <th></th>
@@ -93,5 +93,6 @@
       </div>
     </div> -->
     @include('portal.staff.registration.modal')
+    @include('portal.staff.registration.scripts')
 
 @endsection
