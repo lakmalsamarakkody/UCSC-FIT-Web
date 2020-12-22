@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="col-12 mt-3 btn btn-info">
+                <div class="col-12 mt-3 btn btn-primary">
                     <div class="card">
                         <div class="card-header"></div>
                         <div class="card-body">                        
