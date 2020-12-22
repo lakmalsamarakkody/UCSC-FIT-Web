@@ -221,9 +221,9 @@
                                                         <td>Rs.2750.00</td>
                                                     </tr>
                                                 </table>
-                                                <div class="col-lg-12 divImage">
+                                                <div class="col-lg-12 divImage text-center">
                                                     <div class="form-group mx-2">
-                                                        <span class="">Scanned Bank Slip</span>
+                                                        <span>Scanned Bank Slip</span>
                                                         <img type="image" name="registerBankSlip" id="registerBankSlip" src="" />
                                                     </div>
                                                 </div>

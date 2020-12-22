@@ -1,5 +1,10 @@
-.applications .card .card-body .divImage {
+.applications .modal .modal-body .divImage {
     border: 2px var(--main-theme-color);
     border-style: dashed;
-    height: 50px;
+    height: 10rem;
+    border-radius: 2rem;
+}
+
+.applications .modal .modal-body .divImage span {
+    color: var(--main-theme-color);
 }
