@@ -25,9 +25,9 @@ class RedirectIfAuthenticated
              switch ($role):
                  case 'Student':
                      if($status==0):
-                         return '/portal/student/registration';
+                         return redirect('/portal/student/registration');
                      else:
-                         return '/portal/student';
+                         return redirect('/portal/student');
                      endif;
                    break;           
                 default:
