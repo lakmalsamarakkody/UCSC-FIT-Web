@@ -12,12 +12,12 @@ use App\Models\Support\SlDistrict;
 use App\Models\Support\WorldCity;
 use App\Models\Support\WorldCountry;
 use App\Models\Support\WorldDivision;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Unique;
-
-
+use PhpOffice\PhpSpreadsheet\Calculation\Statistical;
 
 class RegistrationController extends Controller
 {
@@ -103,10 +103,20 @@ class RegistrationController extends Controller
   }
 
   //SaveInformations
-  public function saveInfo(){
-    $student = Student::create([
+  public function saveInfo(Request $request){
+    $user = Auth::user();
+    //update if details exists
+    if( Student::where('user_id', $user->id)->first() ):
 
-    ]);
+    // create new student record
+    else:
+      $student = Student::create([
+        'user_id' => $user->id,
+        'title' => $request->title,
+      ]);
+      return response()->json(['status'=>'success']);
+    endif;
+    //return response()->json(['status'=>'error', 'errors'=>$result]);
   }
 
   public function getCountries(Request $request)

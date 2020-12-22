@@ -23,6 +23,7 @@
     // ADD DATA
     //formData.append('user_role_name', $("#user_role_name").val())
 
+    //validate information
     $.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -50,22 +51,36 @@
             text: 'Information you entered will be saved.',
             confirmButtonText: 'Yes, Save!',
           })
-
           .then((result) => {
             if(result.isConfirmed) {
-              SwalDoneSuccess.fire({
-                title: 'Saved!',
-                text: 'Information has been saved.',
-              })
-              $('input').attr('disabled','disabled')
-              $('select').attr('disabled','disabled')
-              $('#divCollapsePlus1').addClass('d-none')
-              $('#divCollapsePlus2').addClass('d-none')
-              $('#accept').removeAttr('disabled','disabled')
-              $('#declaration').collapse('show')
-              $('#divSaveInformation').addClass('d-none')
-              $('#divResetForm').addClass('d-none')
-              $('#divEditInformation').removeClass('d-none')
+              //Save Data to database
+              $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url: "{{ url('/portal/student/registration/saveInfo') }}",
+                type: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data){
+                  SwalDoneSuccess.fire({
+                    title: 'Saved!',
+                    text: 'Information has been saved.',
+                  });
+                  $('input').attr('disabled','disabled')
+                  $('select').attr('disabled','disabled')
+                  $('#divCollapsePlus1').addClass('d-none')
+                  $('#divCollapsePlus2').addClass('d-none')
+                  $('#accept').removeAttr('disabled','disabled')
+                  $('#declaration').collapse('show')
+                  $('#divSaveInformation').addClass('d-none')
+                  $('#divResetForm').addClass('d-none')
+                  $('#divEditInformation').removeClass('d-none')
+                },
+                error: function(err){
+                  console.log('error');
+                  SwalSystemErrorDanger.fire()
+                }
+              });
             }
             else {
               SwalNotificationWarningAutoClose.fire({
