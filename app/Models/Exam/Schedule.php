@@ -2,6 +2,10 @@
 
 namespace App\Models\Exam;
 
+use App\Models\Exam;
+use App\Models\Student\Payment\Type;
+use App\Models\Student_Exam;
+use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,7 +31,7 @@ class Schedule extends Model
        *
        * connecting model , foreign_key , local_key
        */
-      return $this->hasOne('App\Models\Exam','id','exam_id');
+      return $this->hasOne(Exam::class,'id','exam_id');
   }
 
     public function type(){
@@ -36,7 +40,7 @@ class Schedule extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->hasOne('App\Models\Exam\Types','id','exam_type_id');
+        return $this->hasOne(Type::class,'id','exam_type_id');
     }
     
     public function subject(){
@@ -45,10 +49,10 @@ class Schedule extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->hasOne('App\Models\Subject','id','subject_id');
+        return $this->hasOne(Subject::class,'id','subject_id');
     }
     public function student()
     {
-        return $this->belongsTo('App\Models\Student_Exam');
+        return $this->belongsTo(Student_Exam::class);
     }
 }

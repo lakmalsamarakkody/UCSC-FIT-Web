@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,11 +45,6 @@ class User extends Authenticatable
     ];
 
     public function role(){
-        /**
-         * The attributes that are assignable.
-         *
-         * connecting model , foreign_key , local_key
-         */
-        return $this->hasOne('App\Models\User\Role','id','role_id');
+        return $this->belongsTo(Role::class);
     }
 }

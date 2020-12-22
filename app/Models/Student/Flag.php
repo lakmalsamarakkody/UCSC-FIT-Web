@@ -2,6 +2,7 @@
 
 namespace App\Models\Student;
 
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,6 +15,6 @@ class Flag extends Model
 
     public function student()
     {
-        return $this->belongsTo('App\Models\Student');
+        return $this->belongsTo(Student::class);
     }
 }

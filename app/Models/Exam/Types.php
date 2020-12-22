@@ -2,6 +2,7 @@
 
 namespace App\Models\Exam;
 
+use App\Models\Exam;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,6 +15,6 @@ class Types extends Model
     use HasFactory;
     public function exam()
     {
-        return $this->belongsTo('App\Models\Exam');
+        return $this->belongsTo(Exam::class);
     }
 }

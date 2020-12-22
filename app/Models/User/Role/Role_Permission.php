@@ -2,6 +2,8 @@
 
 namespace App\Models\User\Role;
 
+use App\Models\User\Role;
+use App\Models\User\Role\Role_Permission\Permission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,12 +15,12 @@ class Role_Permission extends Model
 
     public function permission()
     {
-        return $this->hasOne('App\Models\User\Role\Role_Permission\Permission','id','permission_id');
+        return $this->hasOne(Permission::class,'id','permission_id');
     }
 
     public function role()
     {
-        return $this->belongsTo('App\Models\User\Role');
+        return $this->belongsTo(Role::class);
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models\Student\Payment;
 
+use App\Models\Student\Payment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,6 @@ class Method extends Model
 
     public function payment()
     {
-        return $this->belongsTo('App\Models\Student\Payment');
+        return $this->belongsTo(Payment::class);
     }
 }

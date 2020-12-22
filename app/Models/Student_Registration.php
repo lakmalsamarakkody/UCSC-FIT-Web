@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Student_Registration\Academic_Year;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,12 +20,8 @@ class Student_Registration extends Model
         'deadline'
     ];
 
-    public function year(){
-        /**
-         * The attributes that are assignable.
-         *
-         * connecting model , foreign_key , local_key
-         */
-        return $this->hasOne('App\Models\Student_Registration\Academic_Year','id','year_id');
+    public function year()
+    {
+        return $this->belongsTo(Academic_Year::class);
     }
 }

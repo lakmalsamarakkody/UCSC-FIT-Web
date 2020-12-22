@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Exam\Schedule;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,7 +21,7 @@ class Student_Exam extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->hasOne('App\Models\Student','id','student_id');
+        return $this->hasOne(Student::class,'id','student_id');
     }
     public function exam(){
         /**
@@ -27,6 +29,6 @@ class Student_Exam extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->hasOne('App\Models\Exam\Schedule','id','exam_schedule_id');
+        return $this->hasOne(Schedule::class,'id','exam_schedule_id');
     }
 }

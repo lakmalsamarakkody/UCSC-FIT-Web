@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Exam\Schedule;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,10 +15,10 @@ class Exam extends Model
   protected $table='exams';
 
   public function student_exam(){        
-    return $this->belongsTo('App\Models\Student_Exam');
+    return $this->belongsTo(Student_Exam::class);
   }
 
   public function exam_schedule(){        
-    return $this->belongsTo('App\Models\Exam\Schedule');
+    return $this->belongsTo(Schedule::class);
   }
 }

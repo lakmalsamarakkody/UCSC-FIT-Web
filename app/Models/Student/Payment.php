@@ -2,6 +2,9 @@
 
 namespace App\Models\Student;
 
+use App\Models\Student;
+use App\Models\Student\Payment\Method;
+use App\Models\Student\Payment\Type;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,16 +16,16 @@ class Payment extends Model
 
     public function type()
     {
-        return $this->hasOne('App\Models\Student\Payment\Type', 'id', 'type_id');
+        return $this->hasOne(Type::class, 'id', 'type_id');
     }
 
     public function Method()
     {
-        return $this->hasOne('App\Models\Student\Payment\Method','id','method_id');
+        return $this->hasOne(Method::class,'id','method_id');
     }
 
     public function student()
     {
-        return $this->belongsTo('App\Models\Student');
+        return $this->belongsTo(Student::class);
     }
 }
