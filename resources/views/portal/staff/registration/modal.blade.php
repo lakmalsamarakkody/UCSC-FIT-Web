@@ -189,14 +189,14 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Check Later</button>
-                                <button type="button" class="btn btn-success">Approve</button>
+                                <button type="button" class="btn btn-success" onclick="approve_application()">Approve</button>
                                 <button type="button" class="btn btn-warning" data-target="#modal-decline-message" data-toggle="modal">Decline</button>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Check Later</button>
-                                <button type="button" class="btn btn-success">Approve</button>
+                                <button type="button" class="btn btn-success" onclick="approve_payement()">Approve</button>
                                 <button type="button" class="btn btn-warning" data-target="#modal-decline-message" data-toggle="modal">Decline</button>
                             </div>
                         </div>
@@ -226,10 +226,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Approve and Send</button>
+                <button type="button" class="btn btn-success" onclick="decline_application_payment()">Send</button>
             </div>
         </div>
     </div>
 </div>
+
+@include('portal.staff.registration.scripts')
 
 
