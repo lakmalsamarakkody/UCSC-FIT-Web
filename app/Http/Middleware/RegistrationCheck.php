@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Student;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,13 +18,12 @@ class RegistrationCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        $status = Auth::user()->status;
-        if( $status == 0):
+        $uid = Auth::user()->id;
+        $student = Student::select('reg_no')->where('user_id', $uid)->get()->first();
+        if(is_null($student) || $student==null):
             return $next($request);
-        elseif( $status == 1 ):
-            return redirect('portal/student/');
         else:
-            return redirect('/login');
+            return redirect('portal/student/');
         endif;
     }
 }
