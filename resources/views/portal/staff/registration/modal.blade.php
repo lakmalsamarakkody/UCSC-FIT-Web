@@ -9,8 +9,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="col-12 mt-3 btn btn-primary">
-                    <div class="card">
+                <div class="col-12 mt-3">
+                    <div class="card border border-primary rounded">
                         <div class="card-header"></div>
                         <div class="card-body">                        
                             <div class="row">
@@ -37,6 +37,9 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="payment-tab" data-toggle="tab" href="#payment" role="tab" aria-controls="payment" aria-selected="false">Payments</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents</a>
                         </li>
                     </ul>
                     <div class="tab-content pt-3" id="myTabContent">
@@ -187,21 +190,113 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Check Later</button>
-                                <button type="button" class="btn btn-success" onclick="approve_application()">Approve</button>
-                                <button type="button" class="btn btn-warning" data-target="#modal-decline-message" data-toggle="modal">Decline</button>
+                            <div class="mt-4 col-12 text-center">
+                                <div class="btn-group col-xl-3 col-md-6">
+                                    <button type="button" class="btn btn-success form-control" id="btnApproveInfo" onclick="approve_documents()">Approve</button>
+                                </div>
+                                <div class="btn-group col-xl-3 col-md-6">
+                                    <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message" id="btnDeclineInfo" data-toggle="modal">Decline</button>
+                                </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Check Later</button>
-                                <button type="button" class="btn btn-success" onclick="approve_payement()">Approve</button>
-                                <button type="button" class="btn btn-warning" data-target="#modal-decline-message" data-toggle="modal">Decline</button>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-header"></div>
+                                    <div class="card-body">                        
+                                        <div class="row">
+                                            <div class="col-md-8 order-md-1 order-2">
+                                                <table class="table text-left">
+                                                    <tr>
+                                                        <th>Date: </th>
+                                                        <td>2020/12/21</td>                                        
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Paid Bank Branch Code: </th>
+                                                        <td>693</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 col-12 text-center">
+                                <div class="btn-group col-xl-3 col-md-6">
+                                    <button type="button" class="btn btn-success form-control" id="btnApprovePayment" onclick="approve_documents()">Approve</button>
+                                </div>
+                                <div class="btn-group col-xl-3 col-md-6">
+                                    <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message" id="btnDeclinePayment" data-toggle="modal">Decline</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-header">Birth Certificate</div>
+                                    <div class="card-body">                        
+                                        <div class="row">
+                                            <div class="col-md-8 order-md-1 order-2">
+                                                <table class="table text-left">
+                                                    <tr>
+                                                        <th></th>
+                                                        <td></td>                                        
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-header">Nic/Postal/Passport</div>
+                                    <div class="card-body">                        
+                                        <div class="row">
+                                            <div class="col-md-8 order-md-1 order-2">
+                                                <table class="table text-left">
+                                                    <tr>
+                                                        <th>Nic/Postal/Passport Number: </th>
+                                                        <td>960566408V</td>                                        
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-header">Other Documents</div>
+                                    <div class="card-body">                        
+                                        <div class="row">
+                                            <div class="col-md-8 order-md-1 order-2">
+                                                <table class="table text-left">
+                                                    <tr>
+                                                        <th></th>
+                                                        <td></td>                                        
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 col-12 text-center">
+                                <div class="btn-group col-xl-3 col-md-6">
+                                    <button type="button" class="btn btn-success form-control" id="btnApproveDocument" onclick="approve_documents()">Approve</button>
+                                </div>
+                                <div class="btn-group col-xl-3 col-md-6">
+                                    <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message" id="btnDeclineDocument" data-toggle="modal">Decline</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnCheckLater" data-dismiss="modal">Check Later</button>
             </div>
         </div>
     </div>
@@ -209,6 +304,7 @@
 </div>
 <!-- VIEW APPLICANT DETAILS -->
 
+<!-- DECLINE MESSAGE -->
 <div class="modal fade" id="modal-decline-message" tabindex="-1" aria-labelledby="declineMessageLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -226,11 +322,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" onclick="decline_application_payment()">Send</button>
+                <button type="button" class="btn btn-warning" onclick="decline_application_payment()">Decline</button>
             </div>
         </div>
     </div>
 </div>
+<!-- /DECLINE MESSAGE -->
 
 @include('portal.staff.registration.scripts')
 

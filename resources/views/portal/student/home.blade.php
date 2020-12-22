@@ -73,7 +73,7 @@
                                 <div class="row">                               
                                     <div class="img mt-5 mb-2 text-center position-relative">
                                         <button class="btn btn-outline-warning position-absolute m-3" data-tooltip="tooltip" data-placement="bottom" title="Change Profile Picture"><i class="fa fa-edit"></i></button>
-                                        <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar" width="60%">
+                                        <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar" width="60%" onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
                                     </div>
                                     <div class="text-center w-100 ">
                                         <a href="#account" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="Change Password">
