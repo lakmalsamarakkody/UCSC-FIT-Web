@@ -38,6 +38,7 @@
               <table class="table yajra-datatable">
                 <thead class="text-center">
                   <tr>
+                    <th>Date</th>
                     <th>Student Name</th>
                     <th>Email</th>
                     <th></th>
@@ -45,6 +46,7 @@
                 </thead>
                 <tbody>
                   <tr class="text-center">
+                    <td>2020/12/21</td>
                     <td>John Doe</td>
                     <td>johndoe@gmail.com</td>
                     <td>
