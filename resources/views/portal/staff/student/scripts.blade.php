@@ -16,8 +16,8 @@
                     name: 'full_name'
                 },
                 {
-                    data: 'nic', 
-                    name: 'nic'
+                    data: 'nic_old', 
+                    name: 'nic_old'
                 },
                 {
                     data: 'bit_eligible', 

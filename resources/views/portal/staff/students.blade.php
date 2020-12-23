@@ -121,7 +121,7 @@
                   <tr>
                     <td>{{ $student->reg_no }}</td>
                     <td>{{ $student->full_name }}</td>
-                    <td>{{ $student->nic }}</td>
+                    <td>{{ $student->nic_old }}{{ $student->nic_new }}{{ $student->postal }}{{ $student->passport }}</td>
 
                     @if($student->flag->bit_eligible)
                       <td>Eligible</td>                    

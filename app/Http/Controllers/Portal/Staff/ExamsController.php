@@ -16,6 +16,7 @@ class ExamsController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('revalidate');
+        $this->middleware('staff.auth');
     }
     
     public function index()
