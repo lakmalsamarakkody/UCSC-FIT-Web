@@ -13,11 +13,16 @@ class SubjectController extends Controller
    }
 
    function subjectresult($id,$year=0,$month=''){
-       if($year==0 || $month==''){
+
+       if($year==0){
 
            $year=idate('Y');
-           $month=date("F", mktime(0, 0, 0, 0, 10));
 
+
+       }
+       if($month==''){
+        $month=date("F", mktime(0, 0, 0, 0, 10));
+        echo $month;
        }
    $data=DB::table('exam_schedules')
     ->join('subjects','exam_schedules.subject_id',"=",'subjects.id')
@@ -26,7 +31,7 @@ class SubjectController extends Controller
     ->join('exams','exam_schedules.exam_id',"=",'exams.id')
     ->where('subjects.id',$id)
     ->where('exams.year',$year)
-    ->where('exams.month',$month)
+     ->where('exams.month',$month)
     ->select(
         'subjects.name',
         'subjects.code',
@@ -37,9 +42,9 @@ class SubjectController extends Controller
          'exams.month',
          'exam_schedules.id'
     );
-    $fullData=$data->get();
+
     $absent=$data->where('student_exams.status','OK')->count();
-     $co=$data  ->get()->count();
+     $co=$data  ->count();
      $pass=$data->where('student_exams.result','>',0)->orderBy('exams.month')->count();
      $fail=$data->where('student_exams.result','<',1)->count();
 
