@@ -3,7 +3,6 @@
 namespace App\Models\Exam;
 
 use App\Models\Exam;
-use App\Models\Student\Payment\Type;
 use App\Models\Student_Exam;
 use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,7 +39,7 @@ class Schedule extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->hasOne(Type::class,'id','exam_type_id');
+        return $this->hasOne(Types::class,'id','exam_type_id');
     }
     
     public function subject(){
