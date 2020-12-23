@@ -12,6 +12,8 @@ class Method extends Model
     use SoftDeletes;
     use HasFactory;
 
+    protected $table = 'payment_methods';
+
     public function payment()
     {
         return $this->belongsTo(Payment::class);
