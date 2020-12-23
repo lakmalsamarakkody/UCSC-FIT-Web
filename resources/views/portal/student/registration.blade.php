@@ -14,8 +14,9 @@
     <!-- CONTENT -->
     <div class="col-lg-12 student-registration">
         <div class="row">
+
             <div class="col-12 ">
-                <div class="card">
+                <div class="card">{{ $student }}
                     <div class="card-header text-center">Register to FIT Programme<br><small style="text-transform: initial;">Please fill all the details correctly</small></div>
                     <div class="card-body">
                         <form id="registerForm" action="{{ url('/portal/student/registration/saveinfo') }}" method="POST">
@@ -27,10 +28,10 @@
                                 <div class="form-row align-item-center mt-2">
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="selectTitle">Title</label>
-                                        <select name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
+                                        <select name="title" id="title" class="form-control">
                                             <option disabled selected>Select your Title</option>
                                             @foreach ($student_titles as $student_title)
-                                                @if (old('title') == $student_title->title)
+                                                @if ($student->title == $student_title->title)
                                                     <option value="{{ $student_title->title }}" selected>{{ $student_title->title }}</option>
                                                 @else
                                                     <option value="{{ $student_title->title }}">{{ $student_title->title }}</option>
@@ -38,76 +39,41 @@
                                             @endforeach
                                         </select>
                                         <span class="invalid-feedback" id="error-title" role="alert"></span>
-                                        @error('title')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="firstName">First Name</label>
-                                        <input type="text" class="form-control @error('firstName') is-invalid @enderror" id="firstName" name="firstName" placeholder="Start with Capital letter (e.g. Charith)" value="{{ old('firstName') }}"/>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Start with Capital letter (e.g. Charith)" value="{{ $student->first_name }}"/>
                                         <span class="invalid-feedback" id="error-firstName" role="alert"></span>
-                                        @error('firstName')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="middleNames">Middle Names</label>
-                                        <input type="text" class="form-control @error('middleNames') is-invalid @enderror" id="middleNames" name="middleNames" placeholder="First Letters of name with Capital letter (e.g. Kumara Sampath)" value="{{ old('middleNames') }}" />
+                                        <input type="text" class="form-control" id="middleNames" name="middleNames" placeholder="First Letters of name with Capital letter (e.g. Kumara Sampath)" value="{{ $student->middle_names }}" />
                                         <span class="invalid-feedback" id="error-middleNames" role="alert"></span>
-                                        @error('middleNames')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="lastName">Name with Initials</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend col-4 px-0">
-                                                <input type="text" class="form-control @error('initials') is-invalid @enderror" id="initials" name="initials" placeholder="e.g. CKS" value="{{ old('initials') }}" />
+                                                <input type="text" class="form-control" id="initials" name="initials" placeholder="e.g. CKS" value="{{ $student->initials }}" />
                                             </div>
-                                            <input type="text" class="form-control @error('lastName') is-invalid @enderror" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" value="{{ old('lastName') }}" />
+                                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" value="{{ $student->last_name }}" />
                                         </div>
                                         <span class="invalid-feedback" id="error-initials" role="alert"></span>
                                         <span class="invalid-feedback" id="error-lastName" role="alert"></span>
-                                        @error('initials')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        @error('lastName')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-12 col-md-12">
                                         <label for="fullName">Full Name</label>
-                                        <input type="text" class="form-control @error('fullName') is-invalid @enderror" id="fullName" name="fullName" placeholder="e.g. Charith Kumara Sampath Wickramarachchi" value="{{ old('fullName') }}" />
+                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="e.g. Charith Kumara Sampath Wickramarachchi" value="{{ $student->full_name }}" />
                                         <span class="invalid-feedback" id="error-fullName" role="alert"></span>
-                                        @error('fullName')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="dob">Date of Birth</label>
-                                        <input type="date" class="form-control @error('dob') is-invalid @enderror" id="dob" name="dob" value="{{ old('dob') }}" />
+                                        <input type="date" class="form-control" id="dob" name="dob" value="{{ $student->dob }}" />
                                         <span class="invalid-feedback" id="error-dob" role="alert"></span>
-                                        @error('dob')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="gender">Gender</label>
-                                        <select name="gender" id="gender" class="form-control @error('gender') is-invalid @enderror">
+                                        <select name="gender" id="gender" class="form-control">
                                             <option disabled selected>Select your Gender</option>
                                             @if (old('gender') == "Male")
                                                 <option value="Male" selected>Male</option>
@@ -121,11 +87,6 @@
                                             @endif
                                         </select>
                                         <span class="invalid-feedback" id="error-gender" role="alert"></span>
-                                        @error('gender')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="citizenship">Citizenship</label>
