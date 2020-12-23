@@ -83,7 +83,7 @@
                   @foreach ($permissions as $permission)
                   <tr>
                     <td>{{ $permission->permission }}</td>
-                    <td>can view the dashboard page</td>
+                    <td>{{ $permission->description }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-permission"><i class="fas fa-edit"></i></button>
@@ -219,14 +219,17 @@
                 <thead>
                   <tr>
                     <th>Code</th>
+                    <th>Name</th>
                     <th>Description</th>
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
                 <thead>
+                  @foreach ($phases as $phase)
                   <tr>
-                    <td>1</td>
-                    <td>Fresh User</td>
+                    <td>{{ $phase->code }}</td>
+                    <td>{{ $phase->name }}</td>
+                    <td>{{ $phase->description }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-student-phase"><i class="fas fa-edit"></i></button>
@@ -234,6 +237,7 @@
                       </div>
                     </td>
                   </tr>
+                  @endforeach
                 </thead>
               </table>
             </div>
