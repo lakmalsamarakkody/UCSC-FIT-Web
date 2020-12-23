@@ -112,7 +112,7 @@ class RegistrationController extends Controller
       endif;
     elseif($request->uniqueType == 'postal'):
       $uniqueID_validator =  Validator::make($request->all(), [
-        'unique_id' => ['nullable', 'alpha_num', 'size:10'],
+        'unique_id' => ['nullable', 'alpha_num', 'size:9'],
       ]);
     else:
       $uniqueID_validator =  Validator::make($request->all(), [
