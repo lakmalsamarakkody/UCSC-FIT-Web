@@ -21,7 +21,7 @@ class Student_Exam extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->hasOne(Student::class,'id','student_id');
+        return $this->belongsTo(Student::class,'id','student_id');
     }
     public function exam(){
         /**
@@ -29,6 +29,6 @@ class Student_Exam extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->hasOne(Schedule::class,'id','exam_schedule_id');
+        return $this->belongsTo(Schedule::class,'id','exam_schedule_id');
     }
 }
