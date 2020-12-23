@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Student\Flag;
+use App\Models\Student\Payment;
+use App\Models\Student_Exam;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
