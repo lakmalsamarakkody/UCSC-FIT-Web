@@ -100,6 +100,39 @@
   }
   // /SAVE INFORMATION
 
+  // EDIT INFORAMTION
+  edit_information = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: 'Are you sure?',
+      text: 'You will be able to edit your information.',
+      confirmButtonText: 'Yes, Edit!',
+    })
+
+    .then((result) => {
+      if(result.isConfirmed) {
+        $('input').removeAttr('disabled','disabled');
+        $('select').removeAttr('disabled','disabled');
+        edit_designation();
+        address_editable();
+        $('#divCollapsePlus1').removeClass('d-none');
+        $('#divCollapsePlus2').removeClass('d-none');
+        $('#stu_email').attr('disabled','disabled');
+        $('#declaration').collapse('hide');
+        $('#accept').removeAttr('checked','checked');
+        $('#divSaveInformation').removeClass('d-none');
+        $('#divEditInformation').addClass('d-none');
+        $('#divSubmitButton').collapse('hide');
+      }
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Form has not been set to editable.',
+        })
+      }
+    })
+  }
+  // /EDIT INFORAMTION
+
   // ONCHANGE Citizenship GET Countrylist
   onChangeCitizenship = () => {
     // FORM PAYLOAD
@@ -257,7 +290,7 @@
   // /ONCHANGE State GET Cities
 
 
-  // ONCHANGE Country GET Current District/States
+  // ONCHANGE Current Country GET Current District/States
   onChangeCurrentCountry = () => {
      // FORM PAYLOAD
      var formData =  new FormData();
@@ -313,7 +346,7 @@
   // /ONCHANGE Country GET Current District/States
 
 
-  // ONCHANGE State GET Current Cities
+  // ONCHANGE Current State GET Current Cities
   onChangeCurrentState = (currentStateType) => {
     //FORM PAYLOAD
     var formData = new FormData();
@@ -447,38 +480,18 @@
   }
   // /RESET FORM
 
-  // EDIT INFORAMTION
-  edit_information = () => {
-    SwalQuestionSuccessAutoClose.fire({
-      title: 'Are you sure?',
-      text: 'You will be able to edit your information.',
-      confirmButtonText: 'Yes, Edit!',
-    })
-
-    .then((result) => {
-      if(result.isConfirmed) {
-        $('input').removeAttr('disabled','disabled');
-        $('select').removeAttr('disabled','disabled');
-        edit_designation();
-        address_editable();
-        $('#divCollapsePlus1').removeClass('d-none');
-        $('#divCollapsePlus2').removeClass('d-none');
-        $('#stu_email').attr('disabled','disabled');
-        $('#declaration').collapse('hide');
-        $('#accept').removeAttr('checked','checked');
-        $('#divSaveInformation').removeClass('d-none');
-        $('#divEditInformation').addClass('d-none');
-        $('#divSubmitButton').collapse('hide');
-      }
-      else {
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Form has not been set to editable.',
-        })
-      }
-    })
+  // ACCEPT CONDITIONS
+  accept_conditions = () => {
+    if(document.getElementById("accept").checked == true) {
+      $('#divSubmitButton').collapse('show')
+      $('#btnSubmitApplication').removeAttr('disabled')
+    }
+    else {
+      $('#divSubmitButton').collapse('hide')
+      $('#btnSubmitApplication').attr('disabled')
+    }
   }
-  // /EDIT INFORAMTION
+  // /ACCEPT CONDITIONS
 
   // SUBMIT APPLICATION
   submit_application = () => {
@@ -503,18 +516,5 @@
     })
   }
   // /SUBMIT APPLICATION
-
-  // ACCEPT CONDITIONS
-  accept_conditions = () => {
-    if(document.getElementById("accept").checked == true) {
-      $('#divSubmitButton').collapse('show')
-      $('#btnSubmitApplication').removeAttr('disabled')
-    }
-    else {
-      $('#divSubmitButton').collapse('hide')
-      $('#btnSubmitApplication').attr('disabled')
-    }
-  }
-  // /ACCEPT CONDITIONS
 
   </script>
