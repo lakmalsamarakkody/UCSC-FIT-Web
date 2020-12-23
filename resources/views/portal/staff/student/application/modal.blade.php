@@ -214,7 +214,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th>Paid Bank Branch Code: </th>
-                                                        <td>693</td>
+                                                        <td>600</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Paid Amount: </th>
