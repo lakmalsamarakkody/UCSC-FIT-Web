@@ -41,11 +41,17 @@ class RegistrationController extends Controller
    */
   public function index()
   {
+    $user = Auth::user();
+    $student = NULL;
+    if(Student::where('user_id', $user->id)->first()):
+      $student = Student::where('user_id', $user->id)->first();
+    endif;
     $student_titles = Title::select('title')->get();
     $countries_list = WorldCountry::orderBy('name')->get();
     return view('portal/student/registration', [
       'student_titles' => $student_titles,
       'countries_list' => $countries_list,
+      'student' => $student,
     ]);
   }
 
@@ -126,7 +132,7 @@ class RegistrationController extends Controller
   public function saveInfo(Request $request){
     $user = Auth::user();
     //UPDATE DETAILS IF STUDENT EXISTS
-    if( Student::where('user_id', $user->id)->first() ):
+    if(Student::where('user_id', $user->id)->first()):
       $student = Student::where('user_id',$user->id)->first();
       $student->user_id = $user->id;
       $student->title = $request->title;
