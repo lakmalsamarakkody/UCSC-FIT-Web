@@ -493,28 +493,35 @@
                             
                         </form>
 
+                        <!-- INFO NOT COMPLETED ALERT -->
+                        <div class="px-3 my-4 alert alert-danger border-danger d-none collapse" id="infoCompleteAlert">
+                            <h6 class="text-left text-danger">Application is not completed</h6>
+                            <p>Following fields must be completed to continue and submit the application.</p>
+                            <div id="toBeCompletedErrors">
 
-                            <!-- DECLARATION -->
-                            <div class="details px-3 mt-4 pb-3 collapse" id="declaration">
-                                <h6 class="text-left mt-4 mb-4">Declaration</h6>
-                                <p style="font-weight: bold;">I do hereby certify that the above particulars furnished by me are true and correct. In the event of my application for registration being accepted, I shall abide by all the regulations governing candidates of the University of Colombo School of Computing. (UCSC) I agree that the University has the right to cancel my registration at any time, either if I am found to have furnished false information or if I do not abide by the regulations governing candidates of the University of Colombo School of Computing.</p>
-                                <div class="form-check text-center">
-                                    <input type="checkbox" class="form-check-input" id="accept" onclick="accept_conditions()" data-toggle="collapse" data-target="#divSubmitButton" aria-expanded="false" aria-controls="divSubmitButton">
-                                    <span class="invalid-feedback" id="error-accept" role="alert"></span>
-                                    <label for="accept" class="form-check-label" ><h6 style="color: var(--color-success);" class="mb-4">Accept and Continue</h6></label>
-                                </div>
                             </div>
-                            <!-- /DECLARATION -->
+                        </div>
+                        <!-- /INFO NOT COMPLETED ALERT -->
 
-                            <!-- SUBMIT APPLICATION-->
-                            <div class="row justify-content-end">
-                                <div class="collapse mt-3 col-xl-3 col-md-6" id="divSubmitButton">
-                                    <button type="button" class="btn btn-outline-primary form-control" id="btnSubmitApplication" onclick="submit_application()" disabled>Submit Application</button>
-                                </div>
+                        <!-- DECLARATION -->
+                        <div class="details px-3 mt-4 pb-3 collapse" id="declaration">
+                            <h6 class="text-left mt-4 mb-4">Declaration</h6>
+                            <p style="font-weight: bold;">I do hereby certify that the above particulars furnished by me are true and correct. In the event of my application for registration being accepted, I shall abide by all the regulations governing candidates of the University of Colombo School of Computing. (UCSC) I agree that the University has the right to cancel my registration at any time, either if I am found to have furnished false information or if I do not abide by the regulations governing candidates of the University of Colombo School of Computing.</p>
+                            <div class="form-check text-center">
+                                <input type="checkbox" class="form-check-input" id="accept" onclick="accept_conditions()" data-toggle="collapse" data-target="#divSubmitButton" aria-expanded="false" aria-controls="divSubmitButton">
+                                <span class="invalid-feedback" id="error-accept" role="alert"></span>
+                                <label for="accept" class="form-check-label" ><h6 style="color: var(--color-success);" class="mb-4">Accept and Continue</h6></label>
                             </div>
-                            
-                            <!-- SUBMIT APPLICATION-->
+                        </div>
+                        <!-- /DECLARATION -->
 
+                        <!-- SUBMIT APPLICATION-->
+                        <div class="row justify-content-end">
+                            <div class="collapse mt-3 col-xl-3 col-md-6" id="divSubmitButton">
+                                <button type="button" class="btn btn-outline-primary form-control" id="btnSubmitApplication" onclick="submit_application()" disabled>Submit Application</button>
+                            </div>
+                        </div>
+                        <!-- SUBMIT APPLICATION-->
 
                     </div>
                 </div>

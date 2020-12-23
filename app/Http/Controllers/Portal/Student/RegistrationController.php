@@ -78,9 +78,7 @@ class RegistrationController extends Controller
   //Validate SaveInfoButton Request
   public function saveInfoValidator(Request $request)
   {
-    // dd($request->all());
     $validator = Validator::make($request->all(), [            
-      // 'email'=> ['required', 'email', 'unique:users'],
       'title' => ['nullable', 'exists:titles,title'],
       'firstName' => ['nullable', 'alpha','min:3'],
       'middleNames' => ['nullable', 'alpha_dash_space'],
@@ -153,7 +151,7 @@ class RegistrationController extends Controller
     elseif(isset($country_validator) && $country_validator->fails()):
       return response()->json(['errors'=>$country_validator->errors()]);
     else:
-      return response()->json(['success'=>'success']);
+      return response()->json(['status'=>'success']);
     endif;
   }
 
@@ -304,6 +302,32 @@ class RegistrationController extends Controller
       $student_flag->save();
       return response()->json(['status'=>'success', 'student'=>$student, 'flag'=>$student_flag]);
     endif;
+  }
+
+  public function checkInfoComplete(Request $request){
+
+    $user = Auth::user();
+    $student = Student::where('user_id', $user->id)->first();
+
+    $validator = Validator::make($request->all(), [
+      'title' => ['required', 'exists:titles,title'],
+      'firstName' => ['required', 'alpha','min:3'],
+      'lastName' => ['required', 'alpha', 'min:3'],
+      'fullName' => ['required', 'alpha_dash_space'],
+      'initials' => ['required', 'alpha_capital'],
+      'dob' => ['required' , 'date','before:today'],
+      'gender' => ['required', Rule::in(['Male', 'Female'])],
+      'citizenship' => ['required', Rule::in(['Sri Lankan', 'Foreign National'])],
+      'uniqueType' => ['required', Rule::in(['nic', 'postal', 'passport'])],
+      'qualification' => ['required', Rule::in(['degree', 'higherdiploma', 'diploma', 'advancedlevel', 'ordinarylevel', 'otherqualification'])],
+    ]);
+
+    if($validator->fails()):
+      return response()->json(['errors'=>$validator->errors()]);
+    else:
+      return response()->json(['status'=>'success']);
+    endif;
+
   }
 
   public function getCountries(Request $request)

@@ -36,14 +36,14 @@
       },
       success: function(data){
         console.log('success');
-        $('#btnSaveInformation').removeAttr('disabled','disabled');
         if(data['errors']){
+          $('#btnSaveInformation').removeAttr('disabled','disabled');
           $.each(data['errors'], function(key, value){
             $('#error-'+key).show();
             $('#'+key).addClass('is-invalid');
             $('#error-'+key).append('<strong>'+value+'</strong>')
           });
-        }else if (data['success']){
+        }else if (data['status'] = 'success'){
           SwalQuestionSuccessAutoClose.fire({
             title: 'Are you sure?',
             text: 'Information you entered will be saved.',
@@ -60,19 +60,48 @@
                 processData: false,
                 contentType: false,
                 success: function(data){
-                  SwalDoneSuccess.fire({
-                    title: 'Saved!',
-                    text: 'Information has been saved.',
-                  });
-                  $('input').attr('disabled','disabled')
-                  $('select').attr('disabled','disabled')
-                  $('#divCollapsePlus1').addClass('d-none')
-                  $('#divCollapsePlus2').addClass('d-none')
-                  $('#accept').removeAttr('disabled','disabled')
-                  $('#declaration').collapse('show')
-                  $('#divSaveInformation').addClass('d-none')
-                  $('#divResetForm').addClass('d-none')
-                  $('#divEditInformation').removeClass('d-none')
+                  console.log('success on saving data');
+                  if(data['status'] == 'success'){
+                    SwalDoneSuccess.fire({title: 'Saved!',text: 'Information has been saved.',});
+                    $('input').attr('disabled','disabled');
+                    $('select').attr('disabled','disabled');
+                    $('#divCollapsePlus1').addClass('d-none');
+                    $('#divCollapsePlus2').addClass('d-none');
+                    $('#divSaveInformation').addClass('d-none');
+                    $('#divResetForm').addClass('d-none');
+                    $('#divEditInformation').removeClass('d-none');
+
+                    //CHECK IS INFO COMPLETE TO SHOW DECLARATION
+                    $.ajax({
+                      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                      url: "{{ url('/portal/student/registration/checkInfoComplete') }}",
+                      type: 'post',
+                      data: formData,
+                      processData: false,
+                      contentType: false,
+                      success: function(data){
+                        if(data['errors']){
+                          $.each(data['errors'], function(key, value){$('#toBeCompletedErrors').append('<li>'+value+'</li>');});
+                          $('#infoCompleteAlert').removeClass('d-none');
+                          $('#infoCompleteAlert').collapse('show');
+                        }
+                        else if(data['status'] == 'success'){
+                          $('#infoCompleteAlert').addClass('d-none');
+                          $('#infoCompleteAlert').collapse('hide');
+                          $('#accept').removeAttr('disabled','disabled');
+                          $('#declaration').collapse('show');
+                        }
+                      },
+                      error: function(err){
+                        console.log('error in checkinfo complete');
+                        SwalSystemErrorDanger.fire()
+                      }
+                    });
+                  }
+                  else{
+                    console.log('error on saving data');
+                    SwalSystemErrorDanger.fire()
+                  }
                 },
                 error: function(err){
                   console.log('error');
@@ -119,7 +148,9 @@
         $('#stu_email').attr('disabled','disabled');
         $('#declaration').collapse('hide');
         $('#accept').removeAttr('checked','checked');
+        $('#divResetForm').removeClass('d-none')
         $('#divSaveInformation').removeClass('d-none');
+        $('#btnSaveInformation').removeAttr('disabled','disabled');
         $('#divEditInformation').addClass('d-none');
         $('#divSubmitButton').collapse('hide');
       }
