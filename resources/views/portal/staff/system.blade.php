@@ -257,8 +257,9 @@
                   </tr>
                 </thead>
                 <thead>
+                  @foreach ($payment_methods as $method)
                   <tr>
-                    <td>Online</td>
+                    <td>{{ $method->method }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-payment-method"><i class="fas fa-edit"></i></button>
@@ -266,6 +267,7 @@
                       </div>
                     </td>
                   </tr>
+                  @endforeach
                 </thead>
               </table>
             </div>
@@ -289,8 +291,9 @@
                   </tr>
                 </thead>
                 <thead>
+                  @foreach ($payment_types as $type)
                   <tr>
-                    <td>Registration</td>
+                    <td>{{ $type->type }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-payment-type"><i class="fas fa-edit"></i></button>
@@ -298,6 +301,7 @@
                       </div>
                     </td>
                   </tr>
+                  @endforeach
                 </thead>
               </table>
             </div>

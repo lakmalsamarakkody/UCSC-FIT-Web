@@ -28,8 +28,9 @@ class SystemController extends Controller
     $subjects = Subject::orderby('code')->get();
     $exam_types = Types::orderby('id')->get();
     $years = Academic_Year::orderby('year')->get();
-    //$payment_methods = Method::orderby('method')->get();
-    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types','years'));
+    $payment_methods = Method::orderby('id')->get();
+    $payment_types = Type::orderby('id')->get();
+    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types','years','payment_methods', 'payment_types'));
   }
 
   // public function getUserRoles()
