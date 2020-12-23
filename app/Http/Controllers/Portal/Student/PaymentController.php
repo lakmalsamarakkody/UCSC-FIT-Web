@@ -23,8 +23,12 @@ class PaymentController extends Controller
    *
    * @return \Illuminate\Contracts\Support\Renderable
    */
-  public function index()
+  public function exam()
   {
-    return view('portal/student/payment');
+    return view('portal/student/payment/exam');
+  }  
+  public function registration()
+  {
+    return view('portal/student/payment/registration');
   }
 }
