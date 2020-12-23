@@ -4,7 +4,3 @@
     height: 10rem;
     border-radius: 2rem;
 }
-
-.applications .modal .modal-body .divImage span {
-    color: var(--main-theme-color);
-}
