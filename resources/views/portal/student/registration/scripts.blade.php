@@ -3,10 +3,8 @@
   // BODY ONLOAD
   $(document).ready(function(){
 
-    // onChangeCitizenship()
-    // address_editable()
-    // edit_designation()
-
+    // CHECK COUNTRY AND SET STATE OR DISTRICT
+    setViewDistrictState();
   });
   // /BODY ONLOAD
 
@@ -142,30 +140,25 @@
       }
     });
 
-    if($('#citizenship').val() == 'Sri Lankan') {
-      // set visible selects
-      $('#divSelectDistrict').collapse('show');
-      $('#divSelectState').collapse('hide');
-      $('#divSelectCurrentDistrict').collapse('hide');
-      $('#divSelectCurrentState').collapse('hide');
-    }
-    else if($('#citizenship').val() == 'Foreign National') {
-      $('#divSelectDistrict').collapse('hide')
-      $('#divSelectState').collapse('show')
-      $('#divSelectCurrentDistrict').collapse('hide')
-      $('#divSelectCurrentState').collapse('hide')
-    }
-    else {
-      $('#divSelectDistrict').collapse('hide')
-      $('#divSelectState').collapse('hide')
-      $('#divSelectCurrentDistrict').collapse('hide')
-      $('#divSelectCurrentState').collapse('hide')
-    }
+    setViewDistrictState();
   }
   // /ONCHANGE Citizenship GET Countrylist
 
   // ONCHANGE Country GET District/States
   onChangeCountry = () => {
+
+    //SET DISTRICT OR STATE VIEW 
+    if($('#country').val() == '67') {
+      // set visible selects
+      $('#divSelectDistrict').collapse('show');
+      $('#divSelectState').collapse('hide');
+      $('#citizenship').val('Sri Lankan');
+    }
+    else if($('#country').val() != '67') {
+      $('#divSelectDistrict').collapse('hide')
+      $('#divSelectState').collapse('show')
+      $('#citizenship').val('Foreign National');
+    }
     // FORM PAYLOAD
     var formData = new FormData();
     // ADD DATA
@@ -368,6 +361,24 @@
   } 
   // /ONCHANGE State GET Current Cities
 
+  //VIEW DISTRICT OR STATE ACCORDING TO CITIZENSHIP
+  setViewDistrictState = () => {
+    if($('#citizenship').val() == 'Sri Lankan') {
+      // set visible selects
+      $('#divSelectDistrict').collapse('show');
+      $('#divSelectState').collapse('hide');
+    }
+    else if($('#citizenship').val() == 'Foreign National') {
+      $('#divSelectDistrict').collapse('hide');
+      $('#divSelectState').collapse('show');
+      //onChangeCitizenship();
+    }
+    else {
+      $('#divSelectDistrict').collapse('hide');
+      $('#divSelectState').collapse('hide');
+    }
+  }
+
 
   // INSERT CURRENT ADDRESS
   address_editable = () => {
@@ -402,11 +413,11 @@
 
   //EDIT DESIGNATION
   edit_designation = () => {
-    if(document.getElementById("empYes").checked == true) {
+    if($('#employement').prop("checked")) {
       $('#designation').removeAttr('disabled');
     }
     else{
-      document.getElementById('designation').setAttribute("disabled","disabled");
+      $('#designation').attr('disabled','disabled');
     }
   }
   // /EDIT DESIGNATION
@@ -450,8 +461,8 @@
         $('select').removeAttr('disabled','disabled')
         $('#divCollapsePlus1').removeClass('d-none')
         $('#divCollapsePlus2').removeClass('d-none')
-        edit_designation()
-        address_editable()
+        // edit_designation()
+        // address_editable()
         $('#email').attr('disabled','disabled')
         $('#declaration').collapse('hide')
         $('#accept').removeAttr('checked','checked')

@@ -40,6 +40,7 @@ class CreateStudentsTable extends Migration
             $table->string('permanent_address_line3')->nullable();
             $table->string('permanent_address_line4')->nullable();
             $table->integer('permanent_city_id')->nullable();
+            $table->integer('permanent_state_id')->nullable();
             $table->integer('permanent_country_id')->nullable();
 
             $table->string('current_house')->nullable();
@@ -48,6 +49,7 @@ class CreateStudentsTable extends Migration
             $table->string('current_address_line3')->nullable();
             $table->string('current_address_line4')->nullable();
             $table->integer('current_city_id')->nullable();
+            $table->integer('current_state_id')->nullable();
             $table->integer('current_country_id')->nullable();
 
             $table->integer('telephone_country_code')->length(5)->nullable();
