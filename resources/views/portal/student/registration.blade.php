@@ -75,10 +75,10 @@
                                         <label for="gender">Gender</label>
                                         <select name="gender" id="gender" class="form-control">
                                             <option disabled selected>Select your Gender</option>
-                                            @if (old('gender') == "Male")
+                                            @if ($student->gender == "Male")
                                                 <option value="Male" selected>Male</option>
                                                 <option value="Female">Female</option>
-                                            @elseif (old('gender') == "Female")
+                                            @elseif ($student->gender == "Female")
                                                 <option value="Male">Male</option>
                                                 <option value="Female" selected>Female</option>
                                             @else
@@ -92,10 +92,10 @@
                                         <label for="citizenship">Citizenship</label>
                                         <select name="citizenship" id="citizenship" class="form-control @error('citizenship') is-invalid @enderror" onchange="onChangeCitizenship()" data-toggle="collapse">
                                             <option selected disabled>Select your Citizenship</option>
-                                            @if (old('citizenship') == 'Sri Lankan')
+                                            @if ($student->citizenship == 'Sri Lankan')
                                                 <option value="Sri Lankan" selected>Sri Lankan</option>
                                                 <option value="Foreign National">Foreign National</option>
-                                            @elseif (old('citizenship') == 'Foreign National')
+                                            @elseif ($student->citizenship == 'Foreign National')
                                                 <option value="Sri Lankan">Sri Lankan</option>
                                                 <option value="Foreign National" selected>Foreign National</option>
                                             @else
@@ -117,7 +117,7 @@
                                             <label for="nicNo" class="form-check-label">National ID No</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            @if(old('uniqueType') == 'postal')
+                                            @if($student->postal)
                                                 <input type="radio" class="form-check-input" name="uniqueType" id="uniqueTypePostal" value="postal" checked/>
                                             @else 
                                                 <input type="radio" class="form-check-input" name="uniqueType" id="uniqueTypePostal" value="postal" />
@@ -125,20 +125,15 @@
                                             <label for="postalNo" class="form-check-label">Postal ID No</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            @if(old('uniqueType') == 'passport')
+                                            @if($student->passport)
                                                 <input type="radio" class="form-check-input" name="uniqueType" id="uniqueTypePassport" value="passport" checked/>
                                             @else 
                                                 <input type="radio" class="form-check-input" name="uniqueType" id="uniqueTypePassport" value="passport" />
                                             @endif
                                             <label for="passportNo" class="form-check-label">Passport No.</label>
                                         </div>
-                                        <input type="text" class="form-control @error('unique_id') is-invalid @enderror" id="unique_id" name="unique_id" value="{{ old('unique_id') }}" placeholder="Choose relevent No from above and enter it here.">
+                                        <input type="text" class="form-control" id="unique_id" name="unique_id" value="@if($student->nic_old){{ $student->nic_old }} @elseif($student->nic_new){{ $student->nic_new }} @elseif($student->postal){{$student->postal}} @elseif($student->passport){{ $student->passport }} @endif" placeholder="Enter your ID number here.">
                                         <span class="invalid-feedback" id="error-unique_id" role="alert"></span>
-                                        @error('unique_id')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +148,7 @@
                                     <label for="degree" class="form-check-label">Bachelor's Degree</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    @if(old('qualification') == 'higherdiploma')
+                                    @if($student->education == 'higherdiploma')
                                         <input type="radio" class="form-check-input" name="qualification" id="higherdiploma" value="higherdiploma" checked/>
                                     @else
                                         <input type="radio" class="form-check-input" name="qualification" id="higherdiploma" value="higherdiploma" />
@@ -161,7 +156,7 @@
                                     <label for="higherdiploma" class="form-check-label">Advanced/Higher Diploma from a nationally or internationally recognized organisation</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    @if(old('qualification') == 'diploma')
+                                    @if($student->education == 'diploma')
                                         <input type="radio" class="form-check-input" name="qualification" id="diploma" value="diploma" checked/>
                                     @else
                                         <input type="radio" class="form-check-input" name="qualification" id="diploma" value="diploma" />
@@ -169,7 +164,7 @@
                                     <label for="diploma" class="form-check-label">Diploma from a nationally or internationally recognized organisation</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    @if(old('qualification') == 'advancedlevel')
+                                    @if($student->education == 'advancedlevel')
                                         <input type="radio" class="form-check-input" name="qualification" id="advancedlevel" value="advancedlevel" checked/>
                                     @else
                                         <input type="radio" class="form-check-input" name="qualification" id="advancedlevel" value="advancedlevel" />
@@ -177,7 +172,7 @@
                                     <label for="advancedlevel" class="form-check-label">GCE Advanced Level</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    @if(old('qualification') == 'ordinarylevel')
+                                    @if($student->education == 'ordinarylevel')
                                         <input type="radio" class="form-check-input" name="qualification" id="ordinarylevel" value="ordinarylevel" checked/>
                                     @else
                                         <input type="radio" class="form-check-input" name="qualification" id="ordinarylevel" value="ordinarylevel" />
@@ -185,7 +180,7 @@
                                     <label for="ordinarylevel" class="form-check-label">GCE Ordinary Level</label>
                                 </div>
                                 <div class="form-check px-5">
-                                    @if(old('qualification') == 'otherqualification')
+                                    @if($student->education == 'otherqualification')
                                         <input type="radio" class="form-check-input" name="qualification" id="otherqualification" value="otherqualification" checked/>
                                     @else
                                         <input type="radio" class="form-check-input" name="qualification" id="otherqualification" value="otherqualification"/>
@@ -205,61 +200,36 @@
                                         <div class="form-group row">
                                             <label for="house" class="col-xl-4 col-md-12 col-form-label">House Name/No:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control @error('house') is-invalid @enderror" id="house" name="house" value="{{ old('house') }}">
+                                                <input type="text" class="form-control" id="house" name="house" value="{{ $student->permanent_house }}">
                                                 <span class="invalid-feedback" id="error-house" role="alert"></span>
-                                                @error('house')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="addressLine1" class="col-xl-4 col-md-12 col-form-label">Address Line 1:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control @error('addressLine1') is-invalid @enderror" id="addressLine1" name="addressLine1" value="{{ old('addressLine1') }}">
+                                                <input type="text" class="form-control" id="addressLine1" name="addressLine1" value="{{ $student->permanent_address_line1 }}">
                                                 <span class="invalid-feedback" id="error-addressLine1" role="alert"></span>
-                                                @error('addressLine1')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="addressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control @error('addressLine2') is-invalid @enderror" id="addressLine2" name="addressLine2" value="{{ old('addressLine2') }}">
+                                                <input type="text" class="form-control" id="addressLine2" name="addressLine2" value="{{ $student->permanent_address_line2 }}">
                                                 <span class="invalid-feedback" id="error-addressLine2" role="alert"></span>
-                                                @error('addressLine2')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="addressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control @error('addressLine3') is-invalid @enderror" id="addressLine3" name="addressLine3" value="{{ old('addressLine3') }}">
+                                                <input type="text" class="form-control" id="addressLine3" name="addressLine3" value="{{ $student->permanent_address_line3 }}">
                                                 <span class="invalid-feedback" id="error-addressLine3" role="alert"></span>
-                                                @error('addressLine3')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="addField">
                                             <label for="addressLine4" class="col-xl-4 col-md-12 col-form-label">Address Line 4:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control @error('addressLine4') is-invalid @enderror" id="addressLine4" name="addressLine4" value="{{ old('addressLine4') }}">
+                                                <input type="text" class="form-control" id="addressLine4" name="addressLine4" value="{{ $student->permanent_address_line4 }}">
                                                 <span class="invalid-feedback" id="error-addressLine4" role="alert"></span>
-                                                @error('addressLine4')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
