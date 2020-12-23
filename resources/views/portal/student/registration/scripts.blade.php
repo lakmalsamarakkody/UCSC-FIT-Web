@@ -37,11 +37,13 @@
       success: function(data){
         console.log('success');
         if(data['errors']){
+          console.log('error on validating data');
           $('#btnSaveInformation').removeAttr('disabled','disabled');
           $.each(data['errors'], function(key, value){
             $('#error-'+key).show();
             $('#'+key).addClass('is-invalid');
             $('#error-'+key).append('<strong>'+value+'</strong>')
+            window.location.hash = '#'+key;
           });
         }else if (data['status'] = 'success'){
           SwalQuestionSuccessAutoClose.fire({
@@ -81,6 +83,7 @@
                       contentType: false,
                       success: function(data){
                         if(data['errors']){
+                          $('#toBeCompletedErrors').html(null);
                           $.each(data['errors'], function(key, value){$('#toBeCompletedErrors').append('<li>'+value+'</li>');});
                           $('#infoCompleteAlert').removeClass('d-none');
                           $('#infoCompleteAlert').collapse('show');
@@ -115,6 +118,7 @@
                 text: 'Information has not been saved.',
               })
               $('#declaration').collapse('hide')
+              $('#btnSaveInformation').removeAttr('disabled','disabled');
             }
           })
         }
@@ -123,7 +127,6 @@
         $('#btnSaveInformation').removeAttr('disabled','disabled');
         console.log('error');
         SwalSystemErrorDanger.fire()
-        
       }
     });
   }
@@ -446,9 +449,9 @@
 
   // INSERT CURRENT ADDRESS
   address_editable = () => {
-    //console.log('hello');
+    console.log('address editable invoked');
     if($('#current_address').prop("checked")) {
-      //console.log('disabled');
+      console.log('current address enabled');
       $('#currentHouse').removeAttr('disabled');
       $('#currentAddressLine1').removeAttr('disabled');
       $('#currentAddressLine2').removeAttr('disabled');
@@ -461,6 +464,7 @@
       $('#selectCurrentState').removeAttr('disabled');
     }
     else{
+      console.log('current address disabled');
       $('#currentHouse').attr('disabled','disabled');
       $('#currentAddressLine1').attr('disabled','disabled');
       $('#currentAddressLine2').attr('disabled','disabled');
@@ -533,15 +537,38 @@
     })
     .then((result) => {
       if(result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Submitted!',
-          text: 'Your information has been submitted for registration.',
-        })
+
+        //validate information
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/student/registration/submitApplication') }}",
+          type: 'post',
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnSubmitApplication').attr('disabled','disabled');},
+          success: function(data){
+            console.log('registration submit ajax success');
+            $('#btnSubmitApplication').removeAttr('disabled','disabled');
+            if(data['status'] == 'success'){
+              SwalDoneSuccess.fire({title: 'Submitted!',text: 'Your information has been submitted for registration.',})
+            }
+            else if(data['status'] == 'error'){
+              SwalCancelWarning.fire({title: 'Submittion Aborted!',text: 'You have not met the requirements to submit the application.',})
+            }
+          },
+          error: function(err){
+            $('#btnSubmitApplication').removeAttr('disabled','disabled');
+            console.log('error in registration submit ajax');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else {
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Form has not been submitted.',
+          text: 'Form submittion cancelled.',
         })
       }
     })

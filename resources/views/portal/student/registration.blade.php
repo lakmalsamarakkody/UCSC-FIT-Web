@@ -12,11 +12,12 @@
 </script>
 
     <!-- CONTENT -->
-    <div class="col-lg-12 student-registration">
+    <div class="col-lg-12 student-registration min-vh-100">
         <div class="row">
 
-            <div class="col-12 ">
-                <div class="card">{{ $student }}
+            <div class="col-12 px-0">
+                @if($student != NULL && $student->flag->application_submit==0)
+                <div class="card">
                     <div class="card-header text-center">Register to FIT Programme<br><small style="text-transform: initial;">Please fill all the details correctly</small></div>
                     <div class="card-body">
                         <form id="registerForm" action="{{ url('/portal/student/registration/saveinfo') }}" method="POST">
@@ -236,17 +237,15 @@
                                             <div class="col-xl-8 col-md-12">
                                                 <select name="city" id="city" class="form-control">
                                                     <option disabled selected>Select your city</option>
-                                                    @foreach ($city_list as $city)
-                                                        @if ($student != NULL)
+                                                    @if ($student != NULL)
+                                                        @foreach ($city_list as $city)
                                                             @if($student->permanent_city_id == $city->id)
                                                                 <option value="{{ $city->id }}" selected>{{ $city->name }}</option>
                                                             @else
                                                                 <option value="{{ $city->id }}">{{ $city->name }}</option>
                                                             @endif
-                                                        @else
-                                                            <option value="{{ $city->id }}">{{ $city->name }}</option>
-                                                        @endif
-                                                    @endforeach
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                                 <span class="invalid-feedback" id="error-city" role="alert"></span>
                                                 <small class="form-text text-muted">* Cities are shown after selecting a District/State.</small>
@@ -257,17 +256,15 @@
                                             <div class="col-xl-8 col-md-12">
                                                 <select name="selectDistrict" id="selectDistrict" class="form-control" onchange="onChangeState('sriLanka')">
                                                     <option disabled selected>Select your district</option>
-                                                    @foreach ($states_list as $states)
-                                                        @if ($student != NULL)
+                                                    @if ($student != NULL)
+                                                        @foreach ($states_list as $states)
                                                             @if($student->permanent_state_id == $states->id)
                                                                 <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
                                                             @else
                                                                 <option value="{{ $states->id }}">{{ $states->name }}</option>
                                                             @endif
-                                                        @else
-                                                            <option value="{{ $states->id }}">{{ $states->name }}</option>
-                                                        @endif
-                                                    @endforeach
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectDistrict" role="alert"></span>
                                                 <small class="form-text text-muted">* Districts are shown after selecting a Country.</small>
@@ -278,17 +275,15 @@
                                             <div class="col-xl-8 col-md-12">
                                                 <select name="selectState" id="selectState" class="form-control" onchange="onChangeState('foreignState')">
                                                     <option disabled selected>Select your state</option>
-                                                    @foreach ($states_list as $states)
-                                                        @if ($student != NULL)
+                                                    @if ($student != NULL)
+                                                        @foreach ($states_list as $states)
                                                             @if($student->permanent_state_id == $states->id)
                                                                 <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
                                                             @else
                                                                 <option value="{{ $states->id }}">{{ $states->name }}</option>
                                                             @endif
-                                                        @else
-                                                            <option value="{{ $states->id }}">{{ $states->name }}</option>
-                                                        @endif
-                                                    @endforeach
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectState" role="alert"></span>
                                                 <small class="form-text text-muted">* States are shown after selecting a Country.</small>
@@ -427,22 +422,25 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="telephone">Telephone Number</label>
                                         <div class="input-group">
-                                            <div class="input-group-prepend">
+                                            <div class="input-group-prepend col-4 px-0">
                                                 <select name="telephoneCountryCode" id="telephoneCountryCode" class="form-control countryCodeSelect">
                                                     <option disabled selected>Code</option>
                                                     @foreach ($countries_list as $countries)
-                                                        <option class="countryCodeOption" value="{{ $countries->callingcode }}">{{ $countries->code }} (+{{ $countries->callingcode }})</option><br/>
+                                                        @if($student != NULL)
+                                                            @if($student->telephone_country_code == $countries->callingcode && $countries->callingcode != NULL )
+                                                            <option class="countryCodeOption" value="{{ $countries->callingcode }}" selected>{{ $countries->code }} (+{{ $countries->callingcode }})</option>
+                                                            @else
+                                                                <option class="countryCodeOption" value="{{ $countries->callingcode }}">{{ $countries->code }} (+{{ $countries->callingcode }})</option>
+                                                            @endif
+                                                        @else
+                                                        <option class="countryCodeOption" value="{{ $countries->callingcode }}">{{ $countries->code }} (+{{ $countries->callingcode }})</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <input type="tel" class="form-control @error('telephone') is-invalid @enderror" id="telephone" name="telephone" @if($student != NULL) value="{{ $student->telephone }}" @endif/>
+                                            <input type="tel" class="form-control" id="telephone" name="telephone" @if($student != NULL) value="{{ $student->telephone }}" @endif/>
                                           </div>
                                         <span class="invalid-feedback" id="error-telephone" role="alert"></span>
-                                        @error('telephone')
-                                          <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                          </span>
-                                        @enderror
                                     </div>
 
                                     <div class="form-group col-xl-6 col-md-12">
@@ -479,13 +477,13 @@
                             <!-- /EMPLOYMENT DETAILS -->
                             <div class="row justify-content-end">
 
-                                <div class="mt-3 col-xl-3 col-md-6 order-sm-1 order-3" id="divResetForm">
+                                <div class="mt-3 col-xl-3 col-md-6 order-sm-1 order-3 @if($student != NULL && $student->flag->info_complete==1) d-none @endif " id="divResetForm">
                                     <button type="button" class="btn btn-outline-warning form-control" id="btnResetForm" onclick="reset_form()">Reset Form</button>
                                 </div>
-                                <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2" id="divSaveInformation">
+                                <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2  @if($student != NULL && $student->flag->info_complete==1) d-none @endif " id="divSaveInformation">
                                     <button type="button" class="btn btn-outline-secondary form-control" id="btnSaveInformation" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_information()">Save information</button>
                                 </div>
-                                <div class="mt-3 col-xl-3 col-md-6 order-sm-3 order-1 d-none" id="divEditInformation">
+                                <div class="mt-3 col-xl-3 col-md-6 order-sm-3 order-1  @if($student != NULL && $student->flag->info_complete==0) d-none @endif " id="divEditInformation">
                                     <button type="button" class="btn btn-outline-warning form-control" id="btnEditInformation" onclick="edit_information()">Edit Information</button>
                                 </div>
 
@@ -504,8 +502,8 @@
                         <!-- /INFO NOT COMPLETED ALERT -->
 
                         <!-- DECLARATION -->
-                        <div class="details px-3 mt-4 pb-3 collapse" id="declaration">
-                            <h6 class="text-left mt-4 mb-4">Declaration</h6>
+                        <div class="details px-3 mt-4 pb-3 collapse @if($student != NULL && $student->flag->info_complete==1) show @endif " id="declaration">
+                            <h6 class="my-4">Declaration</h6>
                             <p style="font-weight: bold;">I do hereby certify that the above particulars furnished by me are true and correct. In the event of my application for registration being accepted, I shall abide by all the regulations governing candidates of the University of Colombo School of Computing. (UCSC) I agree that the University has the right to cancel my registration at any time, either if I am found to have furnished false information or if I do not abide by the regulations governing candidates of the University of Colombo School of Computing.</p>
                             <div class="form-check text-center">
                                 <input type="checkbox" class="form-check-input" id="accept" onclick="accept_conditions()" data-toggle="collapse" data-target="#divSubmitButton" aria-expanded="false" aria-controls="divSubmitButton">
@@ -517,7 +515,7 @@
 
                         <!-- SUBMIT APPLICATION-->
                         <div class="row justify-content-end">
-                            <div class="collapse mt-3 col-xl-3 col-md-6" id="divSubmitButton">
+                            <div class="collapse mt-3 col-xl-3 col-md-12" id="divSubmitButton">
                                 <button type="button" class="btn btn-outline-primary form-control" id="btnSubmitApplication" onclick="submit_application()" disabled>Submit Application</button>
                             </div>
                         </div>
@@ -525,6 +523,12 @@
 
                     </div>
                 </div>
+                @else
+                    <div class="alert alert-success border-success">
+                        <h4 class="my-4">Application Submitted</h4>
+                        <p style="font-weight: bold;">Please wait for Administrator Approval</p>
+                    </div>
+                @endif
             </div>
         </div>
 

@@ -45,6 +45,7 @@ class RegistrationController extends Controller
     $user = Auth::user();
     $student = NULL;
     $states_list = NULL;
+    $city_list = NULL;
 
     //GET STUDENT DETAILS IF EXISTS
     if(Student::where('user_id', $user->id)->first()):
@@ -133,7 +134,7 @@ class RegistrationController extends Controller
       ]);
     else:
       $uniqueID_validator =  Validator::make($request->all(), [
-        'unique_id' => ['nullable', 'alpha_num', 'size:10'],
+        'unique_id' => ['nullable', 'alpha_num'],
       ]);
     endif;
 
@@ -143,6 +144,15 @@ class RegistrationController extends Controller
         'country' => ['nullable', Rule::in(['67'])],
       ]);
     endif;
+
+    // VALIDATE CURRENT ADDRESS
+    if($request->current_address == true):
+      $current_address_validator = Validator::make($request->all(), [
+        'currentHouse' => ['required'],
+        'currentAddressLine1' => ['required'],
+        'currentCountry' => ['required'],
+      ]);
+    endif;
     
     if($validator->fails()):
       return response()->json(['errors'=>$validator->errors()]);
@@ -150,6 +160,8 @@ class RegistrationController extends Controller
       return response()->json(['errors'=>$uniqueID_validator->errors()]);
     elseif(isset($country_validator) && $country_validator->fails()):
       return response()->json(['errors'=>$country_validator->errors()]);
+    elseif(isset($current_address_validator) && $current_address_validator->fails()):
+      return response()->json(['errors'=>$current_address_validator->errors()]);
     else:
       return response()->json(['status'=>'success']);
     endif;
@@ -262,6 +274,12 @@ class RegistrationController extends Controller
       $student->permanent_address_line3 = $request->addressLine3;
       $student->permanent_address_line4 = $request->addressLine4;
       $student->permanent_city_id = $request->city;
+      //SET RELEVENT STATE OR DISTRICT
+      if ($request->country == '67'):
+        $student->permanent_state_id = $request->selectDistrict;
+      else:
+        $student->permanent_state_id = $request->selectState;
+      endif;
       $student->permanent_country_id = $request->country;
 
       $student->current_house = $request->currentHouse;
@@ -270,6 +288,12 @@ class RegistrationController extends Controller
       $student->current_address_line3 = $request->currentAddressLine3;
       $student->current_address_line4 = $request->currentAddressLine4;
       $student->current_city_id = $request->currentCity;
+      //SET RELEVENT STATE OR DISTRICT
+      if ($request->country == '67'):
+        $student->current_state_id = $request->selectCurrentDistrict;
+      else:
+        $student->current_state_id = $request->selectCurrentState;
+      endif;
       $student->current_country_id = $request->currentCountry;
 
       $student->telephone_country_code = $request->telephoneCountryCode;
@@ -297,17 +321,21 @@ class RegistrationController extends Controller
       $student->save();
 
       // CREATE STUDENT FLAG RECORD
-      $student_flag = new Flag;
-      $student_flag->student_id = $student->id;
-      $student_flag->save();
-      return response()->json(['status'=>'success', 'student'=>$student, 'flag'=>$student_flag]);
+      $student->flag()->create();
+
+      //RETURN SUCCESS
+      return response()->json(['status'=>'success', 'student'=>$student]);
     endif;
   }
 
+  //CHECK INFORMATION COMPLETE
   public function checkInfoComplete(Request $request){
 
-    $user = Auth::user();
-    $student = Student::where('user_id', $user->id)->first();
+    //SET INFO COMPLETE - 0
+    $student = Student::where('user_id',Auth::user()->id)->first();
+    $student_flag = $student->flag()->update([
+      'info_complete'=> 0,
+    ]);
 
     $validator = Validator::make($request->all(), [
       'title' => ['required', 'exists:titles,title'],
@@ -320,16 +348,77 @@ class RegistrationController extends Controller
       'citizenship' => ['required', Rule::in(['Sri Lankan', 'Foreign National'])],
       'uniqueType' => ['required', Rule::in(['nic', 'postal', 'passport'])],
       'qualification' => ['required', Rule::in(['degree', 'higherdiploma', 'diploma', 'advancedlevel', 'ordinarylevel', 'otherqualification'])],
+
+      'house' => ['required','address'],
+      'addressLine1' => ['required','address'],
+      'country' => ['required','exists:world_countries,id'],
+
+      'telephoneCountryCode' => ['required', 'numeric', 'digits_between:1,5' ],
+      'telephone' => ['required', 'numeric', 'digits_between:8,15'],
     ]);
+
+    //CHECK UNIQUE TYPE AND VALIDATE UNIQUE ID
+    if($request->uniqueType == 'nic'):
+      if(strlen($request->unique_id)>10):
+        $uniqueID_validator =  Validator::make($request->all(), [
+          'unique_id' => ['required', 'numeric', 'digits:12'],
+        ]);
+      else:
+        $uniqueID_validator =  Validator::make($request->all(), [
+          'unique_id' => ['required', 'alpha_num', 'min:10', 'regex:/^([0-9]{9}[x|X|v|V])$/'],
+        ]);
+      endif;
+    elseif($request->uniqueType == 'postal'):
+      $uniqueID_validator =  Validator::make($request->all(), [
+        'unique_id' => ['required', 'alpha_num', 'size:9'],
+      ]);
+    else:
+      $uniqueID_validator =  Validator::make($request->all(), [
+        'unique_id' => ['required', 'alpha_num'],
+      ]);
+    endif;
+
+    // VALIDATE CURRENT ADDRESS
+    if($request->current_address == true):
+      $current_address_validator = Validator::make($request->all(), [
+        'currentHouse' => ['required'],
+        'currentAddressLine1' => ['required'],
+        'currentCountry' => ['required'],
+      ]);
+    endif;
 
     if($validator->fails()):
       return response()->json(['errors'=>$validator->errors()]);
+    elseif(isset($uniqueID_validator) && $uniqueID_validator->fails()):
+      return response()->json(['errors'=>$uniqueID_validator->errors()]);
+    elseif(isset($current_address_validator) && $current_address_validator->fails()):
+      return response()->json(['errors'=>$current_address_validator->errors()]);
     else:
+      $student_flag = $student->flag()->update([
+        'info_complete'=> 1,
+      ]);
       return response()->json(['status'=>'success']);
     endif;
 
   }
 
+  //SUBMIT APPLICATION
+  public function submitApplication(){
+    $student = Student::where('user_id', Auth::user()->id)->first();
+
+    if($student->flag->info_complete == 1):
+      $student->flag()->update([
+        'info_editable' => 0,
+        'declaration' => 1,
+        'application_submit' =>1
+      ]);
+      return response()->json(['status'=>'success']);
+    else:
+      return response()->json(['status'=>'error']);
+    endif;
+  }
+
+  //GET COUNTRIES
   public function getCountries(Request $request)
   {
     // validate citizenship
@@ -349,6 +438,7 @@ class RegistrationController extends Controller
     endif;
   }
 
+  //GET STATES OR DISTRICTS
   public function getStates(Request $request)
   {
     //Get using country
@@ -396,6 +486,7 @@ class RegistrationController extends Controller
     endif;
   }
 
+  //GET CITIES
   public function getCities(Request $request)
   {
     // Get cities using district/state
