@@ -91,6 +91,7 @@ Route::get('/portal/student/registration',[App\Http\Controllers\Portal\Student\R
 Route::post('/portal/student/registration/saveInfoValidator',[App\Http\Controllers\Portal\Student\RegistrationController::class,'saveInfoValidator']);
 Route::post('/portal/student/registration/saveInfo',[App\Http\Controllers\Portal\Student\RegistrationController::class,'saveInfo']);
 Route::post('/portal/student/registration/checkInfoComplete',[App\Http\Controllers\Portal\Student\RegistrationController::class,'checkInfoComplete']);
+Route::post('/portal/student/registration/submitApplication',[App\Http\Controllers\Portal\Student\RegistrationController::class,'submitApplication']);
 Route::post('/portal/student/registration/getcountries',[App\Http\Controllers\Portal\Student\RegistrationController::class,'getCountries']);
 Route::post('/portal/student/registration/getstates',[App\Http\Controllers\Portal\Student\RegistrationController::class,'getStates']);
 Route::post('/portal/student/registration/getcities',[App\Http\Controllers\Portal\Student\RegistrationController::class,'getCities']);
