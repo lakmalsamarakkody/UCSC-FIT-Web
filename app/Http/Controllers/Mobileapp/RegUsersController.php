@@ -37,4 +37,35 @@ class RegUsersController extends Controller
 
 
     }
+    function activeStudents(){
+        $data=DB::table('students')
+
+        ->where('students.reg_year',idate('Y'))
+        ->orderBy('updated_at', 'desc')
+        ->select(
+            'students.reg_year',
+            'students.first_name',
+            'students.updated_at'
+
+        );
+        $users=DB::table('students')
+        ->join('users','students.user_id',"=",'users.id')
+        ->where('students.reg_year',idate('Y'))
+        ->orderBy('updated_at', 'desc')
+        ->select(
+            'students.reg_year',
+            'students.first_name',
+            'students.updated_at'
+
+        );
+
+
+ return [
+      "yearReg"=>$data->count(),
+      "active"=>$users->where('users.status',1)->count(),
+
+
+ ];
+
+    }
 }
