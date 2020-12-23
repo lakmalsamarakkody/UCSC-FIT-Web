@@ -44,8 +44,9 @@
                   </tr>
                 </thead>
                 <thead>
+                  @foreach ($roles as $role)
                   <tr>
-                    <td>System Administrator</td>
+                    <td>{{ $role->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-view-role"><i class="fas fa-eye"></i></button>
@@ -54,6 +55,7 @@
                       </div>
                     </td>
                   </tr>
+                  @endforeach
                 </thead>
               </table>
             </div>
@@ -78,8 +80,9 @@
                   </tr>
                 </thead>
                 <thead>
+                  @foreach ($permissions as $permission)
                   <tr>
-                    <td>view-dashboard</td>
+                    <td>{{ $permission->permission }}</td>
                     <td>can view the dashboard page</td>
                     <td class="text-right">
                       <div class="btn-group">
@@ -88,6 +91,7 @@
                       </div>
                     </td>
                   </tr>
+                  @endforeach
                 </thead>
               </table>
             </div>
@@ -112,9 +116,10 @@
                   </tr>
                 </thead>
                 <thead>
+                  @foreach ($subjects as $subject)
                   <tr>
-                    <td><b>FIT 103</b></td>
-                    <td>ICT Applications</td>
+                    <td><b>FIT{{ $subject->code }}</b></td>
+                    <td>{{ $subject->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-subject"><i class="fas fa-edit"></i></button>
@@ -122,6 +127,7 @@
                       </div>
                     </td>
                   </tr>
+                  @endforeach
                 </thead>
               </table>
             </div>
@@ -145,8 +151,9 @@
                   </tr>
                 </thead>
                 <thead>
+                  @foreach ($exam_types as $type)
                   <tr>
-                    <td>e-Test</td>
+                    <td>{{ $type->exam_type }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-exam-type"><i class="fas fa-edit"></i></button>
@@ -154,6 +161,7 @@
                       </div>
                     </td>
                   </tr>
+                  @endforeach
                 </thead>
               </table>
             </div>
@@ -179,10 +187,11 @@
                   </tr>
                 </thead>
                 <thead>
+                  @foreach ($years as $year)
                   <tr>
-                    <td>2020</td>
-                    <td>01 January 2020</td>
-                    <td>31 December 2020</td>
+                    <td>{{ $year->year }}</td>
+                    <td>{{ $year->start }}</td>
+                    <td>{{ $year->end }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-academic-year"><i class="fas fa-edit"></i></button>
@@ -190,6 +199,7 @@
                       </div>
                     </td>
                   </tr>
+                  @endforeach
                 </thead>
               </table>
             </div>
@@ -247,8 +257,9 @@
                   </tr>
                 </thead>
                 <thead>
+                  @foreach ($payment_methods as $method)
                   <tr>
-                    <td>Online</td>
+                    <td>{{ $method->method }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-payment-method"><i class="fas fa-edit"></i></button>
@@ -256,6 +267,7 @@
                       </div>
                     </td>
                   </tr>
+                  @endforeach
                 </thead>
               </table>
             </div>
@@ -279,8 +291,9 @@
                   </tr>
                 </thead>
                 <thead>
+                  @foreach ($payment_types as $type)
                   <tr>
-                    <td>Registration</td>
+                    <td>{{ $type->type }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-payment-type"><i class="fas fa-edit"></i></button>
@@ -288,6 +301,7 @@
                       </div>
                     </td>
                   </tr>
+                  @endforeach
                 </thead>
               </table>
             </div>
