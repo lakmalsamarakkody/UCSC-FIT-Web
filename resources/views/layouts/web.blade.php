@@ -33,6 +33,7 @@
             <link rel="stylesheet" href="{{ asset('css/website/registration.css') }}">
             <link rel="stylesheet" href="{{ asset('css/website/contact-us.css') }}">
             <link rel="stylesheet" href="{{ asset('css/website/faq.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/website/site-map.css') }}">
         <!-- /STYLES -->
 
         <!-- JavaScript Libraries -->
