@@ -24,17 +24,8 @@
                 <div class="row">
   
                   {{-- PAYMENT TYPE --}}
-                  <div class="col-md-4">Payment Type :</div>
-                  <div class="col-md-8">
-                    <div class="form-check mr-5">
-                      <input type="radio" name="payment_type" class="form-check-input" value="registration"/>
-                      <label class="form-check-label" for="FieldsetCheck">Year Registration</label>
-                    </div>
-                    <div class="form-check">
-                      <input type="radio" name="payment_type" class="form-check-input" value="exam"/>
-                      <label class="form-check-label" for="FieldsetCheck">Exam Application</label>
-                    </div>
-                  </div>
+                   <div class="col-md-4">Payment Type :</div>
+                  <div class="col-md-8">Exam</div>
                   {{-- /PAYMENT TYPE --}}
   
                   <hr width="100%"/>

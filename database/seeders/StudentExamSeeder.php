@@ -36,6 +36,7 @@ class StudentExamSeeder extends Seeder
                         'mark'=>$mark,
                         'result'=>$result,
                         'status'=>'OK',
+                        'payment_id'=>$faker->unique()->numberBetween($min = 1, $max = 50),
                         'created_at'=> '2020-11-25 10:13:53',
                         'updated_at'=> '2020-11-25 10:13:53'
                         ]

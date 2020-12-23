@@ -19,8 +19,6 @@ class CreatePaymentsTable extends Migration
             $table->tinyInteger('method_id');
             $table->tinyInteger('type_id');            
             $table->decimal('amount',10,2);
-            $table->char('currency',4);
-            $table->decimal('lkr_value',10,2);
             $table->timestamps();
             $table->softDeletes();
         });

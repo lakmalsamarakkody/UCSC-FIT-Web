@@ -33,6 +33,9 @@ Route::get('/contact',[App\Http\Controllers\Website\Contact::class,'index']);
 Route::get('/examination',[App\Http\Controllers\Website\Examination::class,'index']);
 Route::get('/faq',[App\Http\Controllers\Website\Faq::class, 'index']);
 Route::get('/announcements', [App\Http\Controllers\Website\AnouncementsController::class, 'index']);
+Route::get('/privacyPolicy',[App\Http\Controllers\Website\PrivacyPolicy::class, 'index']);
+Route::get('/terms',[App\Http\Controllers\Website\Terms::class, 'index']);
+Route::get('/siteMap',[App\Http\Controllers\Website\SiteMap::class, 'index']);
 
 Route::post('/student/registration',[App\Http\Controllers\Website\Registration::class,'emailLink']);
 Route::post('/student/registration/subscribe',[App\Http\Controllers\Website\Registration::class,'subscribe']);
@@ -61,6 +64,8 @@ Route::get('/portal/staff/students', [App\Http\Controllers\Portal\Staff\StudentC
 Route::get('student-list',[App\Http\Controllers\Portal\Staff\StudentController::class, 'getStudentList'])->name('student.list');
 Route::get('/portal/staff/student/profile',[App\Http\Controllers\Portal\Staff\StudentController::class, 'viewStudent'])->name('student.profile');
 Route::get('/portal/staff/student/application', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'index'])->name('student.application');
+Route::get('/portal/staff/student/exams/application', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'index'])->name('student.exams');
+
 
 Route::get('/portal/staff/exams', [App\Http\Controllers\Portal\Staff\ExamsController::class, 'index'])->name('exams');
 Route::get('exam-list',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'getExamList'])->name('exams.list');
@@ -93,7 +98,8 @@ Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsCon
 
 Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\ResultsController::class,'index'])->name('student.results');
 
-Route::get('/portal/student/payment',[App\Http\Controllers\Portal\Student\PaymentController::class,'index'])->name('payment');
+Route::get('/portal/student/payment/registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'registration'])->name('payment.registration');
+Route::get('/portal/student/payment/exam',[App\Http\Controllers\Portal\Student\PaymentController::class,'exam'])->name('payment.exam');
 
 Route::get('/guest/{email}/fit/{token}', [App\Http\Controllers\Portal\Student\UserController::class,'setPassword'])->name('email.link');
 
