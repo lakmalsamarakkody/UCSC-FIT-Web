@@ -11,6 +11,7 @@ use App\Models\Exam\Types;
 use App\Models\Student_Registration\Academic_Year;
 use App\Models\Student\Payment\Method;
 use App\Models\Student\Payment\Type;
+use App\Models\Student\Phase;
 
 class SystemController extends Controller
 {
@@ -30,7 +31,8 @@ class SystemController extends Controller
     $years = Academic_Year::orderby('year')->get();
     $payment_methods = Method::orderby('id')->get();
     $payment_types = Type::orderby('id')->get();
-    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types','years','payment_methods', 'payment_types'));
+    $phases = Phase::orderby('code')->get();
+    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types','years','payment_methods', 'payment_types', 'phases'));
   }
 
   // public function getUserRoles()
