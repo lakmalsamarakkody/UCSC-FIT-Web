@@ -20,6 +20,7 @@ class CreateStudentExamsTable extends Migration
             $table->boolean('result')->nullable()->default(false);
             $table->decimal('mark',10,2)->nullable();
             $table->string('status')->nullable()->default('AB');
+            $table->integer('payment_id');
             $table->timestamps();
             $table->softDeletes();
         });

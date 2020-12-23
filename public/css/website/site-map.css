@@ -1,0 +1,17 @@
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+
+.site-map-list{
+  font-size: 16px;
+  font-weight: bold;
+}
+.site-map-list>li a{
+  color: #000;
+}
+.site-map-list>li>ul>li a{
+  color: rgb(109, 107, 107);
+}
+.site-map-list a:hover{
+  color: rgb(15, 35, 104);
+}

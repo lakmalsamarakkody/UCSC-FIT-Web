@@ -33,6 +33,9 @@ Route::get('/contact',[App\Http\Controllers\Website\Contact::class,'index']);
 Route::get('/examination',[App\Http\Controllers\Website\Examination::class,'index']);
 Route::get('/faq',[App\Http\Controllers\Website\Faq::class, 'index']);
 Route::get('/announcements', [App\Http\Controllers\Website\AnouncementsController::class, 'index']);
+Route::get('/privacyPolicy',[App\Http\Controllers\Website\PrivacyPolicy::class, 'index']);
+Route::get('/terms',[App\Http\Controllers\Website\Terms::class, 'index']);
+Route::get('/siteMap',[App\Http\Controllers\Website\SiteMap::class, 'index']);
 
 Route::post('/student/registration',[App\Http\Controllers\Website\Registration::class,'emailLink']);
 Route::post('/student/registration/subscribe',[App\Http\Controllers\Website\Registration::class,'subscribe']);

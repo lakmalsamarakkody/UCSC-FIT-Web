@@ -27,6 +27,7 @@ class StudentRegistrationSeeder extends Seeder
                         'year_id'=>$year_id,
                         'student_id'=>$student,
                         'deadline'=>$Academic_Year->end,
+                        'payment_id'=>$faker->unique()->numberBetween($min = 1, $max = 50),
                         'created_at'=>$created_date,
                         'updated_at'=>$faker->dateTimeBetween($created_date, $Academic_Year->end)
                     ]

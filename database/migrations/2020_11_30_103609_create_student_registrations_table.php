@@ -18,6 +18,7 @@ class CreateStudentRegistrationsTable extends Migration
             $table->integer('year_id');
             $table->integer('student_id');
             $table->date('deadline');
+            $table->integer('payment_id');
             $table->timestamps();
             $table->softDeletes();
         });
