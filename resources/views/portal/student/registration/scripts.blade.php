@@ -383,7 +383,7 @@
   // INSERT CURRENT ADDRESS
   address_editable = () => {
     //console.log('hello');
-    if(document.getElementById("current_address").checked == true) {
+    if($('#current_address').prop("checked")) {
       //console.log('disabled');
       $('#currentHouse').removeAttr('disabled');
       $('#currentAddressLine1').removeAttr('disabled');
@@ -397,16 +397,16 @@
       $('#selectCurrentState').removeAttr('disabled');
     }
     else{
-      document.getElementById('currentHouse').setAttribute("disabled","disabled");
-      document.getElementById('currentAddressLine1').setAttribute("disabled","disabled");
-      document.getElementById('currentAddressLine2').setAttribute("disabled","disabled");
-      document.getElementById('currentAddressLine3').setAttribute("disabled","disabled");
-      document.getElementById('currentAddressLine4').setAttribute("disabled","disabled");
-      document.getElementById('currentCity').setAttribute("disabled","disabled");
-      document.getElementById('currentCountry').setAttribute("disabled","disabled");
-      document.getElementById('plusCurrentField').setAttribute("disabled","disabled");
-      document.getElementById('selectCurrentDistrict').setAttribute("disabled","disabled");
-      document.getElementById('selectCurrentState').setAttribute("disabled","disabled");
+      $('#currentHouse').attr('disabled','disabled');
+      $('#currentAddressLine1').attr('disabled','disabled');
+      $('#currentAddressLine2').attr('disabled','disabled');
+      $('#currentAddressLine3').attr('disabled','disabled');
+      $('#currentAddressLine4').attr('disabled','disabled');
+      $('#currentCity').attr('disabled','disabled');
+      $('#currentCountry').attr('disabled','disabled');
+      $('#plusCurrentField').attr('disabled','disabled');
+      $('#selectCurrentDistrict').attr('disabled','disabled');
+      $('#selectCurrentState').attr('disabled','disabled');
     }
   }
   // /INSERT CURRENT ADDRESS
@@ -457,18 +457,18 @@
 
     .then((result) => {
       if(result.isConfirmed) {
-        $('input').removeAttr('disabled','disabled')
-        $('select').removeAttr('disabled','disabled')
-        $('#divCollapsePlus1').removeClass('d-none')
-        $('#divCollapsePlus2').removeClass('d-none')
-        // edit_designation()
-        // address_editable()
-        $('#email').attr('disabled','disabled')
-        $('#declaration').collapse('hide')
-        $('#accept').removeAttr('checked','checked')
-        $('#divSaveInformation').removeClass('d-none')
-        $('#divEditInformation').addClass('d-none')
-        $('#divSubmitButton').collapse('hide')
+        $('input').removeAttr('disabled','disabled');
+        $('select').removeAttr('disabled','disabled');
+        edit_designation();
+        address_editable();
+        $('#divCollapsePlus1').removeClass('d-none');
+        $('#divCollapsePlus2').removeClass('d-none');
+        $('#stu_email').attr('disabled','disabled');
+        $('#declaration').collapse('hide');
+        $('#accept').removeAttr('checked','checked');
+        $('#divSaveInformation').removeClass('d-none');
+        $('#divEditInformation').addClass('d-none');
+        $('#divSubmitButton').collapse('hide');
       }
       else {
         SwalNotificationWarningAutoClose.fire({
