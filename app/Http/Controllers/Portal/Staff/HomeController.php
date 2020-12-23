@@ -18,6 +18,7 @@ class HomeController extends Controller
     {
       $this->middleware('auth');
       $this->middleware('revalidate');
+      $this->middleware('staff.auth');
     }
 
     /**

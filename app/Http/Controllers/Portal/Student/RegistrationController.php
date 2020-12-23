@@ -32,6 +32,7 @@ class RegistrationController extends Controller
     $this->middleware('auth');
     $this->middleware('revalidate');
     //$this->middleware('registration.check');
+    // $this->middleware('student.auth');
   }
 
   /**
