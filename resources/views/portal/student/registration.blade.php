@@ -533,8 +533,7 @@
         </div>
 
     </div>
-
-    <!-- /CONTENT -->    
+    <!-- /CONTENT -->
 @endsection
 
 @section('script')
