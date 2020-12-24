@@ -65,7 +65,15 @@
                 </div>
             </div>
         </div>
-        
+        <div class="row about-container pt-0">
+            <div class="col-lg-8 content order-lg-1 order-2"> 
+                <div class="icon-box wow fadeInLeft pb-5" data-wow-delay="0.2s">
+                    <a target="_blank" href="{{ asset('documents/Payment_Voucher.pdf') }}"><div class="icon"><i class="fa fa-file-invoice-dollar"></i></div></a>
+                    <h4 class="title"><a target="_blank" href="{{ asset('documents/Payment_Voucher.pdf') }}">Payment Voucher</a></h4>
+                    <p class="description">Click Here to Download the Payment Voucher</p>
+                </div>
+            </div>
+        </div>
     </section><!-- #registration -->
 
     {{-- FAQ --}}

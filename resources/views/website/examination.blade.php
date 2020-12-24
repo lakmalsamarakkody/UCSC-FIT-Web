@@ -72,12 +72,21 @@
                 <a target="_blank"  href="http://fit.bit.lk/vle"></a>
 
             </div>
+
         </div><!-- #main header -->
 
-
+        <div class="row about-container pt-5">
+            <div class="col-lg-8 content order-lg-1 order-2"> 
+                <div class="icon-box wow fadeInLeft pb-0" data-wow-delay="0.2s">
+                    <a target="_blank" href="{{ asset('documents/Payment_Voucher.pdf') }}"><div class="icon"><i class="fa fa-file-invoice-dollar"></i></div></a>
+                    <h4 class="title"><a target="_blank" href="{{ asset('documents/Payment_Voucher.pdf') }}">Payment Voucher</a></h4>
+                    <p class="description">Click Here to Download the Payment Voucher</p>
+                </div>
+            </div>
+        </div>
 
         <!-- DETAILS -->
-        <div class="row about-container mt-5" style="background-color:  rgba(255, 255, 255, 0) !important;">
+        <div class="row about-container mt-5" style="background-color:  rgba(255, 255, 255, 0) !important;" id="contact">
             <div class="col-lg-8 content order-lg-1 order-1">               
                 <div class="wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 0px;">
                     <h2 class="title">UCSC e-Testing Lab</h2>
