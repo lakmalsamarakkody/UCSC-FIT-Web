@@ -129,7 +129,10 @@
                         
                     </div>
                     <div class="col-12 col-md-6 text-center order-md-4">
-                        <h4><a href="{{ url('/siteMap') }}" class="white">Site Map </a>|<a href="{{ url('/privacyPolicy') }}" class="white"> Pivacy Policy </a>|<a href="{{ url('/terms') }}" class="white"> Terms</a></h4>
+                        <h4><a href="{{ url('/downloads') }}" class="white">Downloads </a>|
+                        <a href="{{ url('/siteMap') }}" class="white">Site Map </a>|
+                        <a href="{{ url('/privacyPolicy') }}" class="white"> Pivacy Policy </a>|
+                        <a href="{{ url('/terms') }}" class="white"> Terms</a></h4>
                     </div>
                 </div>
             </div>

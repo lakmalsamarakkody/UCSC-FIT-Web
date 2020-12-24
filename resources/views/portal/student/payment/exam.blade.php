@@ -161,11 +161,11 @@
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group mx-2">
-                                <div class="drop-zone">
-                                  <span class="drop-zone__prompt">Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
-                                  <input type="file" name="resultFile" id="resultFile" class="drop-zone__input"/>
-                                </div>
-                                <small id="InputStudentNameHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</small>
+                              <small id="InputStudentNameHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</small>
+                              <div class="drop-zone">
+                                <span class="drop-zone__prompt">Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
+                                <input type="file" name="resultFile" id="resultFile" class="drop-zone__input"/>
+                              </div>
                             </div>
                           </div>
                         </div>

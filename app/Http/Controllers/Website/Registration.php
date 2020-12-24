@@ -60,12 +60,14 @@ class Registration extends Controller
                 if(Mail::to($email)->send(new StudentRegistration($details))):
                     return response()->json(['error'=>'error']);
                 else:
-                    $email_token->save();
-                    return response()->json(['success'=>'success']);
+                    if($email_token->save()):
+                        return response()->json(['success'=>'success']);
+                    endif;
                 endif;
 
             endif;
-        endif;       
+        endif;   
+        return response()->json(['error'=>'error']);    
               
     }
 

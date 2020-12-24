@@ -36,6 +36,7 @@ Route::get('/announcements', [App\Http\Controllers\Website\AnouncementsControlle
 Route::get('/privacyPolicy',[App\Http\Controllers\Website\PrivacyPolicy::class, 'index']);
 Route::get('/terms',[App\Http\Controllers\Website\Terms::class, 'index']);
 Route::get('/siteMap',[App\Http\Controllers\Website\SiteMap::class, 'index']);
+Route::get('/downloads',[App\Http\Controllers\Website\Downloads::class, 'index']);
 
 Route::post('/student/registration',[App\Http\Controllers\Website\Registration::class,'emailLink']);
 Route::post('/student/registration/subscribe',[App\Http\Controllers\Website\Registration::class,'subscribe']);
@@ -108,6 +109,7 @@ Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\Result
 Route::get('/portal/student/payment/registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'registration'])->name('payment.registration');
 Route::post('/portal/student/payment/registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'saveRegPayment']);
 Route::get('/portal/student/payment/exam',[App\Http\Controllers\Portal\Student\PaymentController::class,'exam'])->name('payment.exam');
+Route::post('/portal/student/payment/exam',[App\Http\Controllers\Portal\Student\PaymentController::class,'saveExamPayment']);
 
 Route::get('/guest/{email}/fit/{token}', [App\Http\Controllers\Portal\Student\UserController::class,'setPassword'])->name('email.link');
 
