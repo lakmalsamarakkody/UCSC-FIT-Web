@@ -23,16 +23,47 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Created!',
-          text: 'User role created.',
-        })
-        $('#modal-create-role').modal('hide')
+        //Form Payload
+        var formData = new FormData();
+        //Add data
+        formData.append('inputNewRoleName', $('#inputNewRoleName').val())
+        formData.append('inputNewRoleDescription', $('#inputNewRoleDescription').val())
+
+        //Validate information
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/staff/system/create-user-role') }}",
+          type: 'post',
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreateUserRole').attr('disabled','disabled');},
+          success: function(data){
+            console.log('create role ajax success');
+            $('#btnCreateUserRole').removeAttr('disabled','disabled');
+            if(data['status'] == 'success'){
+              SwalDoneSuccess.fire({
+                title: 'Created!',
+                text: 'User role created.',
+                })
+                $('#modal-create-role').modal('hide')
+            }
+            else if(data['status'] == 'error'){
+              SwalCancelWarning.fire({title: 'Role creation Aborted!',text: 'You have no permission to create a role',})
+            }
+          },
+          error: function(err){
+            $('#btnCreateUserRole').removeAttr('disabled','disabled');
+            console.log('error in create role ajax');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'User role has not been created.',
+          text: 'User role creation cancelled.',
         })
       }
     })

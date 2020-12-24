@@ -13,14 +13,18 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="InputNewRoleName">Role Name</label>
-              <input type="text" class="form-control" id="InputNewRoleName"/>
+              <label for="inputNewRoleName">Role Name</label>
+              <input type="text" class="form-control" id="inputNewRoleName" name="inputNewRoleName"/>
+            </div>
+            <div class="form-group">
+              <label for="inputNewRoleDescription">Role Description</label>
+              <input type="text" class="form-control" id="inputNewRoleDescription" name="inputNewRoleDescription"/>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="create_role()">Create</button>
+          <button type="button" id="btnCreateUserRole" name="btnCreateUserRole" class="btn btn-outline-primary" onclick="create_role()">Create</button>
         </div>
       </div>
     </div>
