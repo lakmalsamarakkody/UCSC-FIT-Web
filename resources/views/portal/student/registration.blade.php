@@ -476,7 +476,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <input type="tel" class="form-control" id="telephone" name="telephone" @if($student != NULL) value="{{ $student->telephone }}" @endif/>
+                                            <input type="tel" class="form-control" id="telephone" name="telephone" @if($student != NULL) value="{{ $student->telephone }}" @endif placeholder="Number without leading zeros"/>
                                           </div>
                                         <span class="invalid-feedback" id="error-telephone" role="alert"></span>
                                     </div>
