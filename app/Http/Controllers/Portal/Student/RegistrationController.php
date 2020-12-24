@@ -43,14 +43,12 @@ class RegistrationController extends Controller
   public function index()
   {
     $user = Auth::user();
-    $student = NULL;
-    $states_list = NULL;
-    $city_list = NULL;
 
     //GET STUDENT DETAILS IF EXISTS
     if(Student::where('user_id', $user->id)->first()):
       $student = Student::where('user_id', $user->id)->first();
-      //GET STATES AND CITIES
+
+      //GET STATES AND CITIES FOR PERMANENT ADDRESS
       if($student->permanent_country_id == 67):
         $states_list = SlDistrict::select('id','name')->orderBy('name')->get();
         $city_list = SlCity::select('id','name')->where('district_id', $student->permanent_state_id)->orderBy('name')->get();
@@ -63,15 +61,42 @@ class RegistrationController extends Controller
           $city_list = WorldCity::select('id','name')->where('country_id', $student->permanent_country_id)->orderBy('name')->get();
         endif;
       endif;
+
+      //GET STATES AND CITIES FOR CURRENT ADDRESS
+      if($student->current_country_id == 67):
+        $current_states_list = SlDistrict::select('id','name')->orderBy('name')->get();
+        $current_city_list = SlCity::select('id','name')->where('district_id', $student->current_state_id)->orderBy('name')->get();
+      else:
+        $current_states_list = WorldDivision::select('id','name')->where('country_id', $student->current_country_id)->orderBy('name')->get();
+        //GET CITIES BY DIVISION OR COUNTRY
+        if($student->current_state_id):
+          $current_city_list = WorldCity::select('id','name')->where('division_id', $student->current_state_id)->orderBy('name')->get();
+        else:
+          $current_city_list = WorldCity::select('id','name')->where('country_id', $student->current_country_id)->orderBy('name')->get();
+        endif;
+      endif;
+
+    else:
+      $student = NULL;
+      $states_list = NULL;
+      $city_list = NULL;
+      $current_states_list = NULL;
+      $current_city_list = NULL;
     endif;
 
+    // GET TITLES LIST
     $student_titles = Title::select('title')->get();
+    // GET COUNTRY LIST
     $countries_list = WorldCountry::orderBy('name')->get();
+
+    //  RETURN
     return view('portal/student/registration', [
       'student_titles' => $student_titles,
       'countries_list' => $countries_list,
       'states_list' => $states_list,
+      'current_states_list' => $current_states_list,
       'city_list' => $city_list,
+      'current_city_list' => $current_city_list,
       'student' => $student,
     ]);
   }
@@ -98,8 +123,8 @@ class RegistrationController extends Controller
       'addressLine3' => ['nullable', 'address'],
       'addressLine4' => ['nullable', 'address'],
       'city' => ['nullable', 'numeric'],
-      'selectDistrict' => ['nullable', 'numeric', 'exists:sl_districts,id'],
-      'selectState' => ['nullable', 'numeric', 'exists:world_divisions,id'],
+      'selectDistrict' => ['nullable'],
+      'selectState' => ['nullable'],
       'country' => ['nullable', 'exists:world_countries,id'],
 
       'currentHouse' => ['nullable', 'address'],
@@ -108,8 +133,8 @@ class RegistrationController extends Controller
       'currentAddressLine3' => ['nullable', 'address'],
       'currentAddressLine4' => ['nullable', 'address'],
       'currentCity' => ['nullable', 'numeric'],
-      'selectCurrentDistrict' => ['nullable', 'numeric', 'exists:sl_districts,id'],
-      'selectCurrentState' => ['nullable', 'numeric', 'exists:world_divisions,id'],
+      'selectCurrentDistrict' => ['nullable'],
+      'selectCurrentState' => ['nullable'],
       'currentCountry' => ['nullable', 'exists:world_countries,id'],
       
       'telephoneCountryCode' => ['nullable', 'numeric', 'digits_between:1,5' ],
@@ -145,6 +170,19 @@ class RegistrationController extends Controller
       ]);
     endif;
 
+    // VALIDATE PERMANENT ADDRESS
+    if($request->country == '67'):
+      $permanent_address_validator = Validator::make($request->all(), [
+        'city' => ['nullable', 'numeric', 'exists:sl_cities,id'],
+        'selectDistrict' => ['nullable', 'numeric', 'exists:sl_districts,id'],
+      ]);
+    else:
+      $permanent_address_validator = Validator::make($request->all(), [
+        'city' => ['nullable', 'numeric', 'exists:world_cities,id'],
+        'selectState' => ['nullable', 'numeric', 'exists:world_divisions,id'],
+      ]);
+    endif;
+
     // VALIDATE CURRENT ADDRESS
     if($request->current_address == true):
       $current_address_validator = Validator::make($request->all(), [
@@ -152,6 +190,17 @@ class RegistrationController extends Controller
         'currentAddressLine1' => ['required'],
         'currentCountry' => ['required'],
       ]);
+      if($request->currentCountry == '67'):
+        $current_address_validator = Validator::make($request->all(), [
+          'currentCity' => ['nullable', 'numeric', 'exists:sl_cities,id'],
+          'selectCurrentDistrict' => ['nullable', 'numeric', 'exists:sl_districts,id'],
+        ]);
+      else:
+        $current_address_validator = Validator::make($request->all(), [
+          'currentCity' => ['nullable', 'numeric', 'exists:world_cities,id'],
+          'selectCurrentState' => ['nullable', 'numeric', 'exists:world_divisions,id'],
+        ]);
+      endif;
     endif;
     
     if($validator->fails()):
@@ -160,6 +209,8 @@ class RegistrationController extends Controller
       return response()->json(['errors'=>$uniqueID_validator->errors()]);
     elseif(isset($country_validator) && $country_validator->fails()):
       return response()->json(['errors'=>$country_validator->errors()]);
+    elseif(isset($permanent_address_validator) && $permanent_address_validator->fails()):
+      return response()->json(['errors'=>$permanent_address_validator->errors()]);
     elseif(isset($current_address_validator) && $current_address_validator->fails()):
       return response()->json(['errors'=>$current_address_validator->errors()]);
     else:

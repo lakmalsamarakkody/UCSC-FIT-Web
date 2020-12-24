@@ -5,6 +5,20 @@
 
     // CHECK COUNTRY AND SET STATE OR DISTRICT
     setViewDistrictState();
+    
+    //MAKE EDITABLE
+    $('input').removeAttr('disabled','disabled');
+    $('select').removeAttr('disabled','disabled');
+    edit_designation();
+    address_editable();
+    $('#stu_email').attr('disabled','disabled');
+    $('#declaration').collapse('hide');
+    $('#accept').removeAttr('checked','checked');
+    $('#divResetForm').removeClass('d-none')
+    $('#divSaveInformation').removeClass('d-none');
+    $('#btnSaveInformation').removeAttr('disabled','disabled');
+    $('#divEditInformation').addClass('d-none');
+    $('#divSubmitButton').collapse('hide');
   });
   // /BODY ONLOAD
 
@@ -326,6 +340,7 @@
 
   // ONCHANGE Current Country GET Current District/States
   onChangeCurrentCountry = () => {
+
      // FORM PAYLOAD
      var formData =  new FormData();
      // ADD DATA
@@ -353,15 +368,19 @@
           $('#currentCity').find('option').remove().end().append('<option selected disabled>Select your city</option>')
           //APPEND COUNTRY LIST
           if(data['state_type'] == 'districts'){
+            $('#selectCurrentState').attr('disabled', 'disabled');
             $('#divSelectCurrentState').collapse('hide');
             $('#divSelectCurrentDistrict').collapse('show');
+            $('#selectCurrentDistrict').removeAttr('disabled', 'disabled');
             $.each(data['state_list'], function(key,value){
               $('#selectCurrentDistrict').append($('<option>',{value: value.id,text: value.name}));
             })
           }
           else if(data['state_type'] == 'divisions'){
+            $('#selectCurrentDistrict').attr('disabled', 'disabled');
             $('#divSelectCurrentDistrict').collapse('hide');
             $('#divSelectCurrentState').collapse('show');
+            $('#selectCurrentState').removeAattr('disabled', 'disabled');
             $.each(data['state_list'], function(key,value){
               $('#selectCurrentState').append($('<option>', {value: value.id,text: value.name}));
             })
@@ -430,19 +449,32 @@
 
   //VIEW DISTRICT OR STATE ACCORDING TO CITIZENSHIP
   setViewDistrictState = () => {
+    //PERMANENT ADDRESS VIEW
     if($('#citizenship').val() == 'Sri Lankan') {
-      // set visible selects
       $('#divSelectDistrict').collapse('show');
       $('#divSelectState').collapse('hide');
     }
     else if($('#citizenship').val() == 'Foreign National') {
       $('#divSelectDistrict').collapse('hide');
       $('#divSelectState').collapse('show');
-      //onChangeCitizenship();
     }
     else {
       $('#divSelectDistrict').collapse('hide');
       $('#divSelectState').collapse('hide');
+    }
+
+    //CURRENT ADDRESS VIEW
+    if($('#currentCountry').val() == '67') {
+      $('#divSelectCurrentDistrict').collapse('show');
+      $('#selectCurrentDistrict').removeAttr('disabled', 'disabled');
+      $('#divSelectCurrentState').collapse('hide');
+      $('#selectCurrentState').attr('disabled', 'disabled');
+    }
+    else{
+      $('#divSelectCurrentDistrict').collapse('hide');
+      $('#selectCurrentDistrict').attr('disabled', 'disabled');
+      $('#divSelectCurrentState').collapse('show');
+      $('#selectCurrentState').removeAttr('disabled', 'disabled');
     }
   }
 
@@ -459,6 +491,7 @@
       $('#currentAddressLine4').removeAttr('disabled');
       $('#currentCity').removeAttr('disabled');
       $('#currentCountry').removeAttr('disabled');
+      $('#divCollapsePlus2').collapse('show');
       $('#plusCurrentField').removeAttr('disabled');
       $('#selectCurrentDistrict').removeAttr('disabled');
       $('#selectCurrentState').removeAttr('disabled');
@@ -473,6 +506,7 @@
       $('#currentCity').attr('disabled','disabled');
       $('#currentCountry').attr('disabled','disabled');
       $('#plusCurrentField').attr('disabled','disabled');
+      $('#divCollapsePlus2').collapse('hide');
       $('#selectCurrentDistrict').attr('disabled','disabled');
       $('#selectCurrentState').attr('disabled','disabled');
     }
