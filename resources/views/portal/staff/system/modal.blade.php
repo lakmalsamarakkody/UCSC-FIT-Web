@@ -11,7 +11,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formUserRole">
             <div class="form-group">
               <label for="inputNewRoleName">Role Name</label>
               <input type="text" class="form-control" id="inputNewRoleName" name="inputNewRoleName"/>

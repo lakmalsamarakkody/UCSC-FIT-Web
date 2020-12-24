@@ -24,10 +24,11 @@
     .then((result) => {
       if (result.isConfirmed) {
         //Form Payload
-        var formData = new FormData();
-        //Add data
-        formData.append('inputNewRoleName', $('#inputNewRoleName').val())
-        formData.append('inputNewRoleDescription', $('#inputNewRoleDescription').val())
+        var formData = new FormData($("#formUserRole")[0]);
+        // var formData = new FormData();
+        // //Add data
+        // formData.append('inputNewRoleName', $('#inputNewRoleName').val())
+        // formData.append('inputNewRoleDescription', $('#inputNewRoleDescription').val())
 
         //Validate information
         $.ajax({
@@ -36,6 +37,7 @@
           },
           url: "{{ url('/portal/staff/system/create-user-role') }}",
           type: 'post',
+          data:formData,
           processData: false,
           contentType: false,
           beforeSend: function(){$('#btnCreateUserRole').attr('disabled','disabled');},

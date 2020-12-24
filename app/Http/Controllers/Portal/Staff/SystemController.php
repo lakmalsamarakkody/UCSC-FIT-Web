@@ -52,5 +52,6 @@ class SystemController extends Controller
       return response()->json(['errors'=>$user_role_validator->errors()]);
     else:
       return response()->json(['status'=>'success', 'role'=>$role]);
-
+    endif;
+  }
 }
