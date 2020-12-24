@@ -39,8 +39,8 @@ class SystemController extends Controller
   {
     // Validate role
     $user_role_validator = Validator::make($request->all(), [
-      'inputNewRoleName' => ['required'],
-      'inputNewRoleDescription' => ['nullable'],
+      'inputNewRoleName' => ['required','alpha_space'],
+      'inputNewRoleDescription' => ['nullable','address'],
     ]);
     
     if($user_role_validator->fails()):
