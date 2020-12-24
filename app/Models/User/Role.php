@@ -20,10 +20,10 @@ class Role extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->hasOne(User::class);
+        return $this->hasMany(User::class,'role_id', 'id');
     }
 
-    public function role_permission()
+    public function Role_Permission()
     {
         return $this->hasMany(Role_Permission::class,'role_id', 'id');
     }
