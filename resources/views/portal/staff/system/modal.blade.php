@@ -128,7 +128,7 @@
               <span class="invalid-feedback" id="error-newPermissionName" role="alert"></span>
             </div>
             <div class="form-group">
-              <label for="newPermissionDescription">Permission Name</label>
+              <label for="newPermissionDescription">Permission Description</label>
               <input type="text" class="form-control" name="newPermissionDescription" id="newPermissionDescription"/>
               <span class="invalid-feedback" id="error-newPermissionDescription" role="alert"></span>
             </div>
