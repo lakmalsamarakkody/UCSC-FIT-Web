@@ -58,7 +58,7 @@
               //SwalCancelWarning.fire({title: 'Role creation Aborted!',text: 'You have no permission to create a role',})
             }
             else if(data['status'] == 'success'){
-              console.log('create role ajax success');
+              console.log('create role is success');
               SwalDoneSuccess.fire({
                 title: 'Created!',
                 text: 'User role created.',
@@ -93,6 +93,7 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
+
         SwalDoneSuccess.fire({
           title: 'Updated!',
           text: 'User role has been updated.',
@@ -444,16 +445,57 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Created!',
-          text: 'Student Phase created.',
-        })
-        $('#modal-create-student-phase').modal('hide')
+        //remove past validation messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+
+        //Form Data
+        var formData = new FormData($("#formCreatePhase")[0]);
+
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/staff/system/createStudentPhase') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreatePhase').attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in create phase ajax');
+            $('#btnCreatePhase').removeAttr('disabled','disabled');
+            if(data['errors']){
+              console.log('Errors on validating data.');
+              $.each(data['errors'], function(key, value){
+                $('.form-text').hide();
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Create phase is success.');
+              SwalDoneSuccess.fire({
+                title: 'Created!',
+                text: 'Student Phase created.',
+              })
+              $('#modal-create-student-phase').modal('hide')
+              location.reload();
+            }
+          },
+          error: function(err){
+            $('#btnCreatePhase').removeAttr('disabled','disabled');
+            console.log('Error in create phase ajax');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Student Phase has not been created.',
+          text: 'Student Phase creation cancelled.',
         })
       }
     })

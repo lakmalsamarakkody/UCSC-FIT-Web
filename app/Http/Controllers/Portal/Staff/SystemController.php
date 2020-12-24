@@ -37,20 +37,44 @@ class SystemController extends Controller
 
   public function createUserRole(Request $request)
   {
-    // Validate role
+    // Validate role fields
     $user_role_validator = Validator::make($request->all(), [
-      'inputNewRoleName' => ['required','alpha_space'],
-      'inputNewRoleDescription' => ['nullable'],
+      'newRoleName' => ['required','alpha_space'],
+      'newRoleDescription' => ['nullable'],
     ]);
-    
+    //Check validation errors
     if($user_role_validator->fails()):
       return response()->json(['errors'=>$user_role_validator->errors()]);
+    //Otherwise, Store data to table
     else:
       $role = new Role();
-      $role->name = $request->inputNewRoleName;
-      $role->description = $request->inputNewRoleDescription;
+      $role->name = $request->newRoleName;
+      $role->description = $request->newRoleDescription;
       if($role->save()):
         return response()->json(['status'=>'success', 'role'=>$role]);
+      endif;
+    endif;
+  }
+
+  public function createStudentPhase(Request $request)
+  {
+    //Validate phase fields
+    $student_phase_validator = Validator::make($request->all(), [
+      'newPhaseCode' => ['required','numeric'],
+      'newPhaseName' => ['required','alpha_space'],
+      'newPhaseDescription' => ['nullable'],
+    ]);
+    //Check validation errors
+    if($student_phase_validator->fails()):
+      return response()->json(['errors'=>$student_phase_validator->errors()]);
+    //Otherwise, Store data to table
+    else:
+      $phase = new Phase();
+      $phase->code = $request->newPhaseCode;
+      $phase->name = $request->newPhaseName;
+      $phase->description = $request->newPhaseDescription;
+      if($phase->save()):
+        return response()->json(['status'=>'success', 'phase'=>$phase]);
       endif;
     endif;
   }

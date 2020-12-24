@@ -13,14 +13,14 @@
         <div class="modal-body">
           <form id="formUserRole">
             <div class="form-group">
-              <label for="inputNewRoleName">Role Name</label>
-              <input type="text" class="form-control" id="inputNewRoleName" name="inputNewRoleName"/>
-              <span class="invalid-feedback" id="error-inputNewRoleName" role="alert"></span>
+              <label for="newRoleName">Role Name</label>
+              <input type="text" class="form-control" id="newRoleName" name="newRoleName"/>
+              <span class="invalid-feedback" id="error-newRoleName" role="alert"></span>
             </div>
             <div class="form-group">
-              <label for="inputNewRoleDescription">Role Description</label>
-              <input type="text" class="form-control" id="inputNewRoleDescription" name="inputNewRoleDescription"/>
-              <span class="invalid-feedback" id="error-inputNewRoleDescription" role="alert"></span>
+              <label for="newRoleDescription">Role Description</label>
+              <input type="text" class="form-control" id="newRoleDescription" name="newRoleDescription"/>
+              <span class="invalid-feedback" id="error-newRoleDescription" role="alert"></span>
             </div>
           </form>
         </div>
@@ -384,22 +384,30 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formCreatePhase">
             <div class="form-group">
-              <label for="InputNewPhaseCode">Code</label>
-              <input type="text" class="form-control" id="InputNewPhaseCode" aria-describedby="NewPhaseCodeHelp"/>
+              <label for="newPhaseCode">Code</label>
+              <input type="text" class="form-control" id="newPhaseCode" name="newPhaseCode" aria-describedby="NewPhaseCodeHelp"/>
               <small id="NewPhaseCodeHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-newPhaseCode" role="alert"></span>
             </div>
             <div class="form-group">
-              <label for="InputNewPhaseDescription">Description</label>
-              <input type="text" class="form-control" id="InputNewPhaseDescription" aria-describedby="NewPhaseDescHelp"/>
+              <label for="newPhaseName">Name</label>
+              <input type="text" class="form-control" id="newPhaseName" name="newPhaseName" aria-describedby="NewPhaseCodeHelp"/>
+              <small id="NewPhaseCodeHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-newPhaseName" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newPhaseDescription">Description</label>
+              <input type="text" class="form-control" name="newPhaseDescription" id="newPhaseDescription" aria-describedby="NewPhaseDescHelp"/>
               <small id="NewPhaseDescHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-newPhaseDescription" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="create_student_phase()">Create</button>
+          <button type="button" id="btnCreatePhase" class="btn btn-outline-primary" onclick="create_student_phase()">Create</button>
         </div>
       </div>
     </div>
