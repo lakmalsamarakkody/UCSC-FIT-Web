@@ -15,9 +15,9 @@ class CreatePhasesTable extends Migration
     {
         Schema::create('student_phases', function (Blueprint $table) {
             $table->id();
-            $table->integer('code');
+            $table->integer('code')->unique();
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
