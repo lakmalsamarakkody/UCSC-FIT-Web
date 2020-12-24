@@ -23,6 +23,10 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
+        //Remove past validation messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
         //Form Payload
         var formData = new FormData($("#formUserRole")[0]);
         // var formData = new FormData();
