@@ -34,7 +34,7 @@
         </div><!-- #main header -->
 
         <!-- FIT 103 -->
-        <div class="row about-container" style="padding-top: 30px;">
+        <div class="row about-container" style="padding-top: 30px;" id="103">
             <div class="col-lg-8 content order-lg-1 order-1">
                 <p><strong>FIT 103: ICT Applications</strong><br>
                 This course provides basic ICT (Information and Communication Technology) knowledge and skills required for the office environment. It ensures that the learner possesses required knowledge and skills to use office applications competently. It encompasses eight modules: (1) Computing for the Society, (2) Introduction to Computers, (3) Word Processing for Electronic Documents, (4) Spreadsheets for Calculation, (5) Multimedia and Electronic Presentation, (6) Data and Databases, (7) The Internet and Web Applications, and (8) Programming. Also, students could use Microsoft Office 365 as the office package when they sit for examination. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test and a two-hour practical test for Fundamentals of Computing course.</p>
@@ -45,7 +45,7 @@
         </div><!-- #FIT 103 -->
 
         <!-- FIT 203 -->
-        <div class="row about-container">
+        <div class="row about-container" id="203">
             <div class="myBox col-lg-4 background order-lg-1 order-2 wow fadeInLeft" style="background-image: url({{ asset('img/logo/fit203.png') }});  cursor: pointer;">
                 <a target="_blank" href="{{ asset('documents/FIT-203/FIT-203-English_for_Computing.pdf') }}"></a>
             </div>
@@ -56,7 +56,7 @@
         </div><!-- FIT #103 -->
 
         <!-- FIT 303 -->
-        <div class="row about-container">
+        <div class="row about-container" id="303">
             <div class="col-lg-8 content order-lg-1 order-1">
                 <p><strong>FIT 303: Mathematics for ICT</strong><br>
                 Mathematics plays an important role in Information Technology. The aim of this course is to provide basic mathematical and statistical concepts. After successful completion of this course, the learner will possess problem solving and analytical skills together with required mathematical & statistical knowledge to solve problems in computing. Hence, this will be very useful for anyone who is planning to pursue a carrier in ICT or related sector. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test.
