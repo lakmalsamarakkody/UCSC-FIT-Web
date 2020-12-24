@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Student_Registration\Academic_Year;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -17,19 +16,17 @@ class StudentRegistrationSeeder extends Seeder
     {        
         $faker=\Faker\Factory::create();
         for($i=0;$i<50;$i++):
-            $year_id=$faker->numberBetween($min = 1, $max = 5);
             $student=$faker->numberBetween($min = 1, $max = 30);
-            $Academic_Year=Academic_Year::where('id', $year_id)->first();
-            $created_date=$faker->dateTimeBetween($Academic_Year->start, $Academic_Year->end);
             DB::table('student_registrations')->insert(
                 array(
                     [
-                        'year_id'=>$year_id,
                         'student_id'=>$student,
-                        'deadline'=>$Academic_Year->end,
+                        'registered_at'=>$faker->dateTimeBetween('2020-11-25','2020-12-31'),
+                        'registration_expire_at'=>$faker->dateTimeBetween('2021-11-25','2021-12-31'),
+                        'registration_status'=>$faker->numberBetween($min = 0, $max = 1),
                         'payment_id'=>$faker->unique()->numberBetween($min = 1, $max = 50),
-                        'created_at'=>$created_date,
-                        'updated_at'=>$faker->dateTimeBetween($created_date, $Academic_Year->end)
+                        'created_at'=>'2020-11-25 10:13:53',
+                        'updated_at'=>'2020-11-25 10:13:53',
                     ]
                 )
             );
