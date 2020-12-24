@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Student;
 
 use App\Models\Exam\Schedule;
 use App\Models\Student;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Student_Exam extends Model
+class hasExam extends Model
 {
     use SoftDeletes;
     use HasFactory;
@@ -23,7 +23,7 @@ class Student_Exam extends Model
          */
         return $this->belongsTo(Student::class,'id','student_id');
     }
-    public function exam(){
+    public function hasExam(){
         /**
          * The attributes that are assignable.
          *
