@@ -392,19 +392,19 @@
         <div class="modal-body">
           <form id="formCreatePhase">
             <div class="form-group">
-              <label for="newPhaseCode">Code</label>
+              <label for="newPhaseCode">Phase Code</label>
               <input type="text" class="form-control" id="newPhaseCode" name="newPhaseCode" aria-describedby="NewPhaseCodeHelp"/>
               <small id="NewPhaseCodeHelp" class="form-text text-muted">any help text</small>
               <span class="invalid-feedback" id="error-newPhaseCode" role="alert"></span>
             </div>
             <div class="form-group">
-              <label for="newPhaseName">Name</label>
+              <label for="newPhaseName">Phase Name</label>
               <input type="text" class="form-control" id="newPhaseName" name="newPhaseName" aria-describedby="NewPhaseCodeHelp"/>
               <small id="NewPhaseCodeHelp" class="form-text text-muted">any help text</small>
               <span class="invalid-feedback" id="error-newPhaseName" role="alert"></span>
             </div>
             <div class="form-group">
-              <label for="newPhaseDescription">Description</label>
+              <label for="newPhaseDescription">Phase Description</label>
               <input type="text" class="form-control" name="newPhaseDescription" id="newPhaseDescription" aria-describedby="NewPhaseDescHelp"/>
               <small id="NewPhaseDescHelp" class="form-text text-muted">any help text</small>
               <span class="invalid-feedback" id="error-newPhaseDescription" role="alert"></span>
