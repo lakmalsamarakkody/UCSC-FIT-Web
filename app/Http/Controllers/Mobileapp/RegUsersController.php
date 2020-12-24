@@ -61,8 +61,11 @@ class RegUsersController extends Controller
 
 
  return [
+
       "yearReg"=>$data->count(),
+      "Pendiig"=>$users->count()-$users->where('users.status',1)->count(),
       "active"=>$users->where('users.status',1)->count(),
+      "updateDate"=>$users->select('users.updated_at')->first(),
 
 
  ];
