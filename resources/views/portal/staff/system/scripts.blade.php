@@ -42,17 +42,24 @@
           contentType: false,
           beforeSend: function(){$('#btnCreateUserRole').attr('disabled','disabled');},
           success: function(data){
-            console.log('create role ajax success');
             $('#btnCreateUserRole').removeAttr('disabled','disabled');
-            if(data['status'] == 'success'){
+            if(data['errors']){
+              console.log('errors on validating data');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+              //SwalCancelWarning.fire({title: 'Role creation Aborted!',text: 'You have no permission to create a role',})
+            }
+            else if(data['status'] == 'success'){
+              console.log('create role ajax success');
               SwalDoneSuccess.fire({
                 title: 'Created!',
                 text: 'User role created.',
                 })
                 $('#modal-create-role').modal('hide')
-            }
-            else if(data['status'] == 'error'){
-              SwalCancelWarning.fire({title: 'Role creation Aborted!',text: 'You have no permission to create a role',})
+                location.reload();
             }
           },
           error: function(err){
