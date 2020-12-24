@@ -23,7 +23,7 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        //Remove past validation messages
+        //Remove previous validation error messages
         $('.form-control').removeClass('is-invalid');
         $('.invalid-feedback').html('');
         $('.invalid-feedback').hide();
@@ -145,11 +145,49 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Created!',
-          text: 'Permission created.',
-        })
-        $('#modal-create-permission').modal('hide')
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+
+        //Form Data
+        var formData = new FormData($('#formCreatePermission')[0]);
+        //Validate information
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/createPermission') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreatePermission').attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in create permission ajax.');
+            $('#btnCreatePermission').removeAttr('disabled','disabled');
+            if(data['errors']){
+              console.log('Errors on validation data.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Create permission success.');
+              SwalDoneSuccess.fire({
+                title: 'Created!',
+                text: 'Permission created.',
+              })
+              $('#modal-create-permission').modal('hide');
+              location.reload();
+            }
+          },
+          error: function(err){
+            $('#btnCreatePermission').removeAttr('disabled','disabled');
+            console.log('Error in create permission ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({

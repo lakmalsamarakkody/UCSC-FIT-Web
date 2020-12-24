@@ -14,6 +14,8 @@ use App\Models\Student\Phase;
 use App\Models\User\Permission;
 use Illuminate\Support\Facades\Validator;
 
+use function GuzzleHttp\Promise\all;
+
 class SystemController extends Controller
 {
   public function __construct()
@@ -75,6 +77,28 @@ class SystemController extends Controller
       $phase->description = $request->newPhaseDescription;
       if($phase->save()):
         return response()->json(['status'=>'success', 'phase'=>$phase]);
+      endif;
+    endif;
+  }
+
+  public function createPermission(Request $request)
+  {
+    //Validate permission fields
+    $permission_validator = Validator::make($request->all(), [
+      'newPermissionName'=> ['required','alpha_space'],
+      'newPermissionDescription'=> ['nullable'],
+    ]);
+
+    //Check validation errors
+    if($permission_validator->fails()):
+      return response()->json(['errors'=>$permission_validator->errors()]);
+    //Otherwise, Store data to table
+    else:
+      $permission = new Permission();
+      $permission->permission = $request->newPermissionName;
+      $permission->description = $request->newPermissionDescription;
+      if($permission->save()):
+        return response()->json(['status'=>'success', 'permission'=>$permission]);
       endif;
     endif;
   }

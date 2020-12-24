@@ -121,16 +121,22 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formCreatePermission">
             <div class="form-group">
-              <label for="InputNewPermissionName">Permission Name</label>
-              <input type="text" class="form-control" id="InputNewPermissionName"/>
+              <label for="newPermissionName">Permission Name</label>
+              <input type="text" class="form-control" name="newPermissionName" id="newPermissionName"/>
+              <span class="invalid-feedback" id="error-newPermissionName" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newPermissionDescription">Permission Name</label>
+              <input type="text" class="form-control" name="newPermissionDescription" id="newPermissionDescription"/>
+              <span class="invalid-feedback" id="error-newPermissionDescription" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="create_permission()">Create</button>
+          <button type="button" id="btnCreatePermission" class="btn btn-outline-primary" onclick="create_permission()">Create</button>
         </div>
       </div>
     </div>
