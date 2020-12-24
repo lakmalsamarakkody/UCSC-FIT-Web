@@ -41,7 +41,7 @@ class SystemController extends Controller
   {
     // Validate role fields
     $user_role_validator = Validator::make($request->all(), [
-      'newRoleName' => ['required','alpha_space'],
+      'newRoleName' => ['required','alpha_space','unique:App\Models\User\Role,name'],
       'newRoleDescription' => ['nullable'],
     ]);
     //Check validation errors
@@ -62,8 +62,8 @@ class SystemController extends Controller
   {
     //Validate phase fields
     $student_phase_validator = Validator::make($request->all(), [
-      'newPhaseCode' => ['required','numeric'],
-      'newPhaseName' => ['required','alpha_space'],
+      'newPhaseCode' => ['required','numeric','unique:App\Models\Student\Phase,code'],
+      'newPhaseName' => ['required','alpha_space','unique:App\Models\Student\Phase,name'],
       'newPhaseDescription' => ['nullable'],
     ]);
     //Check validation errors
@@ -85,7 +85,7 @@ class SystemController extends Controller
   {
     //Validate permission fields
     $permission_validator = Validator::make($request->all(), [
-      'newPermissionName'=> ['required','alpha_space'],
+      'newPermissionName'=> ['required','alpha_space','unique:App\Models\User\Permission,permission'],
       'newPermissionDescription'=> ['nullable'],
     ]);
 
