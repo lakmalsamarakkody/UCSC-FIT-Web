@@ -84,6 +84,7 @@ Route::get('/portal/staff/system', [App\Http\Controllers\Portal\Staff\SystemCont
 // STAFF SYSTEM PAGE CRUD OPERATIONS
 Route::post('/portal/staff/system/createUserRole', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createUserRole']);
 Route::post('/portal/staff/system/createStudentPhase', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createStudentPhase']);
+Route::post('/portal/staff/system/createPermission', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createPermission']);
 // /STAFF SYSTEM PAGE CRUD OPERATIONS
 
 /*
