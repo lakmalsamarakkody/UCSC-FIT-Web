@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\User\Role\Role_Permission;
+namespace App\Models\User;
 
 use App\Models\User\Role\Role_Permission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +14,6 @@ class Permission extends Model
 
     public function role_permission()
     {
-        return $this->belongsTo(Role_Permission::class);
+        return $this->hasMany(Role_Permission::class,'permission_id', 'id');
     }
 }

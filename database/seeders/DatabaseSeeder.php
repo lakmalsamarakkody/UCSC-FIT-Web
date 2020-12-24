@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
             StudentPhaseSeeder::class,
             ExamTypeSeeder::class,
             //ExamScheduleSeeder::class,
-            AcademicYearSeeder::class,
             //StudentRegistrationSeeder::class,
             //StudentFlagSeeder::class,
             PermissionSeeder::class,
