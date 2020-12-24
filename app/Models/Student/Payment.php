@@ -16,16 +16,16 @@ class Payment extends Model
 
     public function type()
     {
-        return $this->belongsTo(Type::class, 'id', 'type_id');
+        return $this->belongsTo(Type::class, 'type_id', 'id');
     }
 
     public function Method()
     {
-        return $this->belongsTo(Method::class,'id','method_id');
+        return $this->belongsTo(Method::class,'method_id','id');
     }
 
     public function student()
     {
-        return $this->belongsTo(Student::class, 'id', 'student_id');
+        return $this->belongsTo(Student::class, 'student_id', 'id');
     }
 }

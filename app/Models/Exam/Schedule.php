@@ -29,7 +29,7 @@ class Schedule extends Model
        *
        * connecting model , foreign_key , local_key
        */
-      return $this->belongsTo(Exam::class,'id','exam_id');
+      return $this->belongsTo(Exam::class,'exam_id','id');
   }
 
     public function type(){
@@ -38,7 +38,7 @@ class Schedule extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->belongsTo(Types::class,'id','exam_type_id');
+        return $this->belongsTo(Types::class,'exam_type_id','id');
     }
     
     public function subject(){
@@ -47,6 +47,6 @@ class Schedule extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->belongsTo(Subject::class,'id','subject_id');
+        return $this->belongsTo(Subject::class,'subject_id','id');
     }
 }

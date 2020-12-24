@@ -12,6 +12,6 @@ class SlCity extends Model
     protected $table = 'sl_cities';
 
     public function district(){
-        return $this->belongsTo(SlDistrict::class, 'id', 'district_id');
+        return $this->belongsTo(SlDistrict::class, 'district_id', 'id');
     }
 }
