@@ -39,7 +39,7 @@ class SystemController extends Controller
   {
     // Validate role
     $user_role_validator = Validator::make($request->all(), [
-      'inputNewRoleName' => ['required'],
+      'inputNewRoleName' => ['required','alpha_space'],
       'inputNewRoleDescription' => ['nullable'],
     ]);
     
@@ -49,8 +49,9 @@ class SystemController extends Controller
       $role = new Role();
       $role->name = $request->inputNewRoleName;
       $role->description = $request->inputNewRoleDescription;
-      $role->save();
-      return response()->json(['status'=>'success', 'role'=>$role]);
+      if($role->save()):
+        return response()->json(['status'=>'success', 'role'=>$role]);
+      endif;
     endif;
   }
 }

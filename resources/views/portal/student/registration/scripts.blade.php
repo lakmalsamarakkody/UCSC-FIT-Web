@@ -470,7 +470,7 @@
       $('#divSelectCurrentState').collapse('hide');
       $('#selectCurrentState').attr('disabled', 'disabled');
     }
-    else{
+    else if($('#currentCountry').val() != '67' && $('#currentCountry').val() != null ){
       $('#divSelectCurrentDistrict').collapse('hide');
       $('#selectCurrentDistrict').attr('disabled', 'disabled');
       $('#divSelectCurrentState').collapse('show');
