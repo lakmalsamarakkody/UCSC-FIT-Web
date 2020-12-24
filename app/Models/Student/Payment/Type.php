@@ -16,6 +16,6 @@ class Type extends Model
 
     public function payment()
     {
-        return $this->belongsTo(Payment::class);
+        return $this->hasMany(Payment::class, 'type_id', 'id');
     }
 }

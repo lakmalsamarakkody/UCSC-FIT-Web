@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Student\Flag;
 use App\Models\Student\hasExam;
 use App\Models\Student\Payment;
+use App\Models\Student\Registration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -37,8 +38,21 @@ class Student extends Model
         return $this->hasMany(Payment::class,'student_id','id');
     }
     
-    public function hasExam()
-    {
+    public function hasExam(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
         return $this->hasMany(hasExam::class, 'student_id', 'id');
+    }
+
+    public function registration(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasMany(Registration::class, 'student_id', 'id');
     }
 }
