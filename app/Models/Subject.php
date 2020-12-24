@@ -17,8 +17,8 @@ class Subject extends Model
         'name'
     ];
     
-    public function exam_schedule(){        
-        return $this->belongsTo(Schedule::class);
+    public function schedule(){        
+        return $this->hasMany(Schedule::class, 'subject_id', 'id');
     }
 
 }

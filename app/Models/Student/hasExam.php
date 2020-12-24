@@ -23,7 +23,7 @@ class hasExam extends Model
          */
         return $this->belongsTo(Student::class,'id','student_id');
     }
-    public function hasExam(){
+    public function schedule(){
         /**
          * The attributes that are assignable.
          *

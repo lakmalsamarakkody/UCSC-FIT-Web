@@ -3,7 +3,6 @@
 namespace App\Models\Exam;
 
 use App\Models\Exam;
-use App\Models\Student_Exam;
 use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,7 +29,7 @@ class Schedule extends Model
        *
        * connecting model , foreign_key , local_key
        */
-      return $this->hasOne(Exam::class,'id','exam_id');
+      return $this->belongsTo(Exam::class,'id','exam_id');
   }
 
     public function type(){
@@ -39,7 +38,7 @@ class Schedule extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->hasOne(Types::class,'id','exam_type_id');
+        return $this->belongsTo(Types::class,'id','exam_type_id');
     }
     
     public function subject(){
@@ -48,10 +47,6 @@ class Schedule extends Model
          *
          * connecting model , foreign_key , local_key
          */
-        return $this->hasOne(Subject::class,'id','subject_id');
-    }
-    public function student()
-    {
-        return $this->belongsTo(Student_Exam::class);
+        return $this->belongsTo(Subject::class,'id','subject_id');
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Student\Flag;
+use App\Models\Student\hasExam;
 use App\Models\Student\Payment;
-use App\Models\Student_Exam;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -36,8 +36,9 @@ class Student extends Model
          */
         return $this->hasMany(Payment::class,'student_id','id');
     }
-    public function exam()
+    
+    public function hasExam()
     {
-        return $this->hasMany(Student_Exam::class);
+        return $this->hasMany(hasExam::class, 'student_id', 'id');
     }
 }

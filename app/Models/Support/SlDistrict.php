@@ -12,9 +12,9 @@ class SlDistrict extends Model
     protected $table = 'sl_districts';
 
     public function province(){
-        return $this->belongsTo(SlProvince::class);
+        return $this->belongsTo(SlProvince::class, 'id', 'province_id');
     }
     public function city(){
-        return $this->hasMany(SlCity::class);
+        return $this->hasMany(SlCity::class, 'district_id', 'id');
     }
 }

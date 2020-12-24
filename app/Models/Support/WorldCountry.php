@@ -14,11 +14,11 @@ class WorldCountry extends Model
 
     public function division()
     {
-        return $this->hasMany(WorldDivision::class);
+        return $this->hasMany(WorldDivision::class, 'country_id', 'id');
     }
 
     public function city()
     {
-        return $this->hasMany(WorldCity::class);
+        return $this->hasMany(WorldCity::class, 'country_id', 'id');
     }
 }

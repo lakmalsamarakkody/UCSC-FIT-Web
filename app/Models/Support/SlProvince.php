@@ -12,6 +12,6 @@ class SlProvince extends Model
     protected $table = 'sl_provinces';
 
     public function district(){
-        return $this->hasMany(SlDistrict::class);
+        return $this->hasMany(SlDistrict::class, 'province_id', 'id');
     }
 }

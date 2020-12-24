@@ -14,11 +14,7 @@ class Exam extends Model
 
   protected $table='exams';
 
-  public function student_exam(){        
-    return $this->belongsTo(Student_Exam::class);
-  }
-
-  public function exam_schedule(){        
-    return $this->belongsTo(Schedule::class);
+  public function schedule(){        
+    return $this->hasMany(Schedule::class, 'exam_id', 'id');
   }
 }

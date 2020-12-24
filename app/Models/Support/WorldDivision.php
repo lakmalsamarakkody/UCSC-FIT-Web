@@ -13,10 +13,10 @@ class WorldDivision extends Model
     protected $table='world_divisions';
 
     public function country(){  
-        return $this->belongsTo(WorldCountry::class);
+        return $this->belongsTo(WorldCountry::class, 'id', 'country_id');
     }
 
     public function city(){  
-        return $this->belongsTo(WorldCity::class);
+        return $this->hasMany(WorldCity::class, 'division_id', 'id');
     }
 }
