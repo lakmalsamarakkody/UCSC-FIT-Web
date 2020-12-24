@@ -35,13 +35,14 @@
           headers: {
             'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
           },
-          url: "{{ url('/portal/staff/system/create-user-role') }}",
+          url: "{{ url('/portal/staff/system/createUserRole') }}",
           type: 'post',
           data:formData,
           processData: false,
           contentType: false,
           beforeSend: function(){$('#btnCreateUserRole').attr('disabled','disabled');},
           success: function(data){
+            console.log('success in create role ajax');
             $('#btnCreateUserRole').removeAttr('disabled','disabled');
             if(data['errors']){
               console.log('errors on validating data');

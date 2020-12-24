@@ -81,7 +81,7 @@ Route::get('/portal/staff/user/profile',[App\Http\Controllers\Portal\Staff\Users
 Route::get('/portal/staff/system', [App\Http\Controllers\Portal\Staff\SystemController::class, 'index'])->name('system');
 
 // STAFF SYSTEM PAGE CRUD OPERATIONS
-Route::post('/portal/staff/system/create-user-role', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createUserRole'])->name('create.userrole');
+Route::post('/portal/staff/system/createUserRole', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createUserRole']);
 // /STAFF SYSTEM PAGE CRUD OPERATIONS
 
 /*

@@ -171,44 +171,6 @@
       </div>
       <!-- /EXAM TYPE -->
 
-      <!-- ACADEMIC YEAR -->
-      <div class="col-xl-7 col-lg-12 mt-xl-5">
-        <div class="card">
-          <div class="card-header">ACADEMIC YEARS</div>
-          <div class="card-body">
-            <div class="card-text">
-              <table class="table table-responsive-md">
-                <thead>
-                  <tr>
-                    <th>Year</th>
-                    <th>Start</th>
-                    <th>End</th>
-                    <th>&nbsp;</th>
-                  </tr>
-                </thead>
-                <thead>
-                  @foreach ($years as $year)
-                  <tr>
-                    <td>{{ $year->year }}</td>
-                    <td>{{ $year->start }}</td>
-                    <td>{{ $year->end }}</td>
-                    <td class="text-right">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-academic-year"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" onclick="delete_academic_year();"><i class="fas fa-trash-alt"></i></button>
-                      </div>
-                    </td>
-                  </tr>
-                  @endforeach
-                </thead>
-              </table>
-            </div>
-          </div>
-          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-academic-year"><i class="fas fa-plus"></i></button></div>
-        </div>
-      </div>
-      <!-- /ACADEMIC YEAR -->
-
       <!-- STUDENT PHASES -->
       <div class="col-xl-5 col-lg-12 mt-xl-5">
         <div class="card">
