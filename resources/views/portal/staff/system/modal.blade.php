@@ -15,10 +15,12 @@
             <div class="form-group">
               <label for="inputNewRoleName">Role Name</label>
               <input type="text" class="form-control" id="inputNewRoleName" name="inputNewRoleName"/>
+              <span class="invalid-feedback" id="error-inputNewRoleName" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="inputNewRoleDescription">Role Description</label>
               <input type="text" class="form-control" id="inputNewRoleDescription" name="inputNewRoleDescription"/>
+              <span class="invalid-feedback" id="error-inputNewRoleDescription" role="alert"></span>
             </div>
           </form>
         </div>
