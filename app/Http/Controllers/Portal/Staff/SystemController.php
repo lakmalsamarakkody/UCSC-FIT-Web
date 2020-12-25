@@ -37,6 +37,7 @@ class SystemController extends Controller
     return view('portal/staff/system',compact('roles','permissions','subjects','exam_types','payment_methods', 'payment_types', 'phases'));
   }
 
+  //CREATE FUNCTIONS
   public function createUserRole(Request $request)
   {
     // Validate role fields
@@ -47,7 +48,7 @@ class SystemController extends Controller
     //Check validation errors
     if($user_role_validator->fails()):
       return response()->json(['errors'=>$user_role_validator->errors()]);
-    //Otherwise, Store data to table
+    //Otherwise, Store data to the table
     else:
       $role = new Role();
       $role->name = $request->newRoleName;
@@ -69,7 +70,7 @@ class SystemController extends Controller
     //Check validation errors
     if($student_phase_validator->fails()):
       return response()->json(['errors'=>$student_phase_validator->errors()]);
-    //Otherwise, Store data to table
+    //Otherwise, Store data to the table
     else:
       $phase = new Phase();
       $phase->code = $request->newPhaseCode;
@@ -92,7 +93,7 @@ class SystemController extends Controller
     //Check validation errors
     if($permission_validator->fails()):
       return response()->json(['errors'=>$permission_validator->errors()]);
-    //Otherwise, Store data to table
+    //Otherwise, Store data to the table
     else:
       $permission = new Permission();
       $permission->permission = $request->newPermissionName;
@@ -102,4 +103,26 @@ class SystemController extends Controller
       endif;
     endif;
   }
+  public function createSubject(Request $request)
+  {
+    // Validate subject fields
+    $subject_validator = Validator::make($request->all(), [
+      'newSubjectCode' => ['required','numeric', 'unique:App\Models\Subject,code'],
+      'newSubjectName' => ['required', 'alpha_space','unique:App\Models\Subject,name'],
+    ]);
+    // Check validation errors
+    if($subject_validator->fails()):
+      return response()->json(['errors'=>$subject_validator->errors()]);
+      //Otherwise, Store data to the table
+    else:
+      $subject = new Subject();
+      $subject->code = $request->newSubjectCode;
+      $subject->name = $request->newSubjectName;
+      if($subject->save()):
+        return response()->json(['status'=>'success', 'subject'=>$subject]);
+      endif;
+    endif;
+  }
+  // /CREATE FUNCTIONS
+  
 }

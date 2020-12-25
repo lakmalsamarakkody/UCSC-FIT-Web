@@ -184,20 +184,22 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formCreateSubject">
             <div class="form-group">
-              <label for="InputNewSubjectCode">Subject Code</label>
-              <input type="text" class="form-control" id="InputNewSubjectCode"/>
+              <label for="newSubjectCode">Subject Code</label>
+              <input type="text" class="form-control" id="newSubjectCode" name="newSubjectCode"/>
+              <span class="invalid-feedback" id="error-newSubjectCode" role="alert"></span>
             </div>
             <div class="form-group">
-              <label for="InputNewSubjectName">Subject Name</label>
-              <input type="text" class="form-control" id="InputNewSubjectName"/>
+              <label for="newSubjectName">Subject Name</label>
+              <input type="text" class="form-control" id="newSubjectName" name="newSubjectName">
+              <span class="invalid-feedback" id="error-newSubjectName" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="create_subject()">Create</button>
+          <button type="button" id="btnCreateSubject" class="btn btn-outline-primary" onclick="create_subject()">Create</button>
         </div>
       </div>
     </div>
