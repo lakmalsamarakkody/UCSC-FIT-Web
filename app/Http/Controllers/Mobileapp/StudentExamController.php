@@ -33,4 +33,40 @@ class StudentExamController extends Controller
            )
        ->get()];
     }
+    function currentExam(){
+        $scheId=DB::table('exam_schedules')
+        ->join('student_exams','exam_schedules.id',"=",'student_exams.exam_schedule_id')
+        ->join('subjects','exam_schedules.subject_id',"=",'subjects.id')
+        ->orderBy('student_exams.updated_at', 'desc')
+        ->where('subjects.id',3)
+        ->select('exam_schedules.id')
+        ->take(3)->get();
+           foreach($scheId as $sh){
+               echo $sh->id;
+           }
+
+
+
+        $data=DB::table('exam_schedules')
+        ->join('subjects','exam_schedules.subject_id',"=",'subjects.id')
+        ->join('exam_types','exam_schedules.exam_type_id',"=",'exam_types.id')
+        ->join('exams','exam_schedules.exam_id',"=",'exams.id')
+        ->join('student_exams','exam_schedules.id',"=",'student_exams.exam_schedule_id')
+        ->where('student_exams.status','OK')
+        ->where('student_exams.exam_schedule_id',40)
+        ->select(
+            'exam_schedules.date',
+            'exam_schedules.start_time',
+            'exam_schedules.end_time',
+            'subjects.code',
+            'subjects.name',
+            'exam_types.exam_type',
+            'exams.year',
+            'exams.month',
+            'exam_schedules.updated_at',
+            'exam_schedules.id'
+            )
+        ->get();
+        return $data;
+    }
 }

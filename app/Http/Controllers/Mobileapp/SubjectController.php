@@ -48,60 +48,6 @@ class SubjectController extends Controller
      $pass=$data->where('student_exams.result','>',0)->orderBy('exams.month')->count();
      $fail=$data->where('student_exams.result','<',1)->count();
 
-//    $pa=0;
-//    $average = array(
-//             array(
-//          'month' => 'January',
-//          'all'=>$data->where( "exams.month", "August",)->get(),
-
-
-
-//             ),
-
-
-
-//         );
-    //  for($i=0; $i<$co; $i++){
-    //     $pass=$data->where('student_exams.result','1')->where( "exams.month", "October",)  ->get();
-    //    switch($fullData[$i]->month){
-    //            case "January":
-    //             $pa=$data->where('student_exams.result','1')->where( "exams.month", "January",)  ->count();
-    //            break;
-    //            case "February":
-    //             $pa=$data->where('student_exams.result','1')->where( "exams.month", "February",)  ->count();
-    //            break;
-    //            case 'March':
-    //             $pa=$data->where('student_exams.result','1')->where( "exams.month", "March",)  ->count();
-    //            break;
-    //            case 'April':
-    //             $pa=$data->where('student_exams.result','1')->where( "exams.month", "April",)  ->count();
-    //            break;
-    //            case 'May':
-    //             $pa=$data->where('student_exams.result','1')->where( "exams.month", "May",)  ->count();
-    //            break;
-    //            case 'June':
-    //             $pa=$data->where('student_exams.result','1')->where( "exams.month", "June",)  ->count();
-    //            break;
-    //            case 'July':
-    //             $pa=$data->where('student_exams.result','1')->where( "exams.month", "July",)  ->count();
-    //            break;
-    //            case 'August':
-    //             $pa=$data->where('student_exams.result','1')->where( "exams.month", "August",)  ->count();
-    //            break;
-    //            case 'September':
-    //             $pa=$data->where('student_exams.result','1')->where( "exams.month", "September",)  ->count();
-    //            break;
-    //            case 'October':
-    //             $pa=$data->where('student_exams.result','1')->where( "exams.month", "October",)  ->count();
-    //            break;
-    //            case 'November':
-    //             $pa=$data->where('student_exams.result','1')->where( "exams.month", "November",)  ->count();
-    //            break;
-    //         //    case 'December':
-    //         //     $pa=$data->where('student_exams.result','1')->where( "exams.month", "December",)  ->count();
-    //         //    break;
-    //    }
-    //  }
     return
 
         [
