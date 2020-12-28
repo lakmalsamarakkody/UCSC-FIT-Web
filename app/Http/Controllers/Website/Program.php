@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 class Program extends Controller
 {
     public function index(){
-        return view('website/program');
+        return view('website/program', [
+            'title' => 'Programme'
+        ]);
     }
 }
