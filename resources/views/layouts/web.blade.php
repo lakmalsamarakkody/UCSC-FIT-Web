@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>FIT - UCSC</title>
+        <title>FIT - UCSC | {{ $title ?? '' }}</title>
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="{{ asset('img/logo/fav.png') }}">

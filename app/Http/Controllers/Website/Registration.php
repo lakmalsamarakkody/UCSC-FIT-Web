@@ -16,7 +16,9 @@ use App\Models\Subscriber;
 class Registration extends Controller
 {
     public function index(){
-        return view('website/registration');
+        return view('website/registration', [
+            'title' => 'Registration'
+        ]);
     }
 
     public function emailLink(Request $request)

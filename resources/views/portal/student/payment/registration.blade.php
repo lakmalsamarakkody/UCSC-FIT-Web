@@ -81,7 +81,7 @@
                     <div class="tab-content col-12" id="PaymentMethodTabContent">
                       {{-- BANK PAYMENT --}}
                       <div class="tab-pane fade show active mt-4" id="bank" role="tabpanel" aria-labelledby="bank-tab">
-                        <form>
+                        <form enctype="multipart/form-data">
                           <div class="form-row">                    
                             <div class="col-lg-6">
                               <div class="form-group row">
@@ -124,7 +124,7 @@
                                 <small id="InputStudentNameHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</small>
                                 <div class="drop-zone">
                                   <span class="drop-zone__prompt">Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
-                                  <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input"/>
+                                  <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
                                 </div>
                                 <span class="invalid-feedback" id="error-bankSlip" role="alert"></span>
                               </div>

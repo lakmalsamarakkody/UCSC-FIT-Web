@@ -11,7 +11,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ asset('img/logo/fav.png') }}">
 
-  <title>FIT -Portal</title>
+  <title>FIT -Portal | {{ $title ?? '' }}</title>
   
   <meta name="csrf-token" content="{{ csrf_token() }}">
 

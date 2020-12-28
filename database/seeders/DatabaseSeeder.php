@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             PaymentTypeSeeder::class,
             PaymentMethodSeeder::class,
-            PaymentSeeder::class,
+            // PaymentSeeder::class,
             //StudentExamSeeder::class,
             TitleSeeder::class,
             SlProvinceSeeder::class,
