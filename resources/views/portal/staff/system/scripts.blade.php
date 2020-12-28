@@ -386,7 +386,7 @@
   // /EDIT
 
   //DELETE
-  delete_subject = () => {
+  delete_subject = (subject_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -394,10 +394,32 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Subject has been deleted.',
-        })
+        //Payload
+        var formData = new FormData();
+        formData.append('subject_id',subject_id);
+
+        //Delete subject controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/porta/staff/system/deleteSubject') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteSubject-'+subject_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in delete subject ajax.');
+            $('#tbl-subject-tr-'+subject_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Subject has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('Error in delete subjecr ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({

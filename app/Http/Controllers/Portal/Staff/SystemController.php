@@ -153,7 +153,7 @@ class SystemController extends Controller
   }
   // /CREATE FUNCTION
 
-  // DELETE FUNTION 
+  // DELETE FUNCTION 
   public function deletePermission(Request $request)
   {
     //Validate permission id
@@ -170,7 +170,7 @@ class SystemController extends Controller
     endif;
     return response()->json(['status'=> 'error', 'data'=>$request->all()]);
   }
-  // /DELETE FUNTION
+  // /DELETE FUNCTION
   // /PERMISSION
 
   // SUBJECT
@@ -196,5 +196,25 @@ class SystemController extends Controller
     endif;
   }
   // /CREATE FUNCTION
-  // /PERMISSION
+
+  //DELETE FUNCTION
+  public function deleteSubject(Request $request)
+  {
+    //Validate subject id
+    $subjectId_validator = Validator::make($request->all(), [
+      'subject_id'=> ['required', 'integer', 'exists:App\Models\Subject,id'],
+    ]);
+
+    //Check validator fails
+    if($subjectId_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$subjectId_validator->errors()]);
+    else:
+      if(Subject::destroy($request->subject_id)):
+        return response()->json(['status'=> 'success']);
+      endif;
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+  }
+  // /DELETE FUNCTION
+  // /SUBJECT
 }

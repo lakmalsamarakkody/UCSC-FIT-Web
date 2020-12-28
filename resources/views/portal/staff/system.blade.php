@@ -117,13 +117,13 @@
                 </thead>
                 <thead>
                   @foreach ($subjects as $subject)
-                  <tr>
+                  <tr id="tbl-subject-tr-{{$subject->id}}">
                     <td><b>FIT{{ $subject->code }}</b></td>
                     <td>{{ $subject->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-subject"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" onclick="delete_subject();"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" id="btnDeleteSubject-{{$subject->id}}" onclick="delete_subject({{$subject->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
