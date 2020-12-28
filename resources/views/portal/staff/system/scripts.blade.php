@@ -269,7 +269,7 @@
           data: formData,
           processData: false,
           contentType: false,
-          beforeSend: function(){$('#btnDeleteUserRole-'+permission_id).attr('disabled','disabled');},
+          beforeSend: function(){$('#btnDeletePermission-'+permission_id).attr('disabled','disabled');},
           success: function(data){
             console.log('Success in delete permission ajax.');
             //remove delete data included row
@@ -649,7 +649,7 @@
   }
   // /EDIT
   // DELETE
-  delete_student_phase = () => {
+  delete_student_phase = (phase_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -657,10 +657,32 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Student phase has been deleted.',
-        })
+        //Payload
+        var formData = new FormData();
+        formData.append('phase_id',phase_id);
+
+        //Delete student phase controller
+        $.ajax({
+          headers: {'X-CSRF-token' : $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/deleteStudentPhase') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteStudentPhase-'+phase_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in delete student phase ajax.');
+            $('#tbl-studentPhase-tr-'+phase_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Student phase has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('Error in delete student phase ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({

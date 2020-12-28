@@ -188,14 +188,14 @@
                 </thead>
                 <thead>
                   @foreach ($phases as $phase)
-                  <tr>
+                  <tr id="tbl-studentPhase-tr-{{$phase->id}}">
                     <td>{{ $phase->code }}</td>
                     <td>{{ $phase->name }}</td>
                     <td>{{ $phase->description }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-student-phase"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" onclick="delete_student_phase();"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" id="btnDeleteStudentPhase-{{$phase->id}}" onclick="delete_student_phase({{$phase->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
