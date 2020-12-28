@@ -30,9 +30,9 @@ class SystemController extends Controller
     $permissions = Permission::orderby('permission')->get();
     $subjects = Subject::orderby('code')->get();
     $exam_types = Types::orderby('id')->get();
+    $phases = Phase::orderby('code')->get();
     $payment_methods = Method::orderby('id')->get();
     $payment_types = Type::orderby('id')->get();
-    $phases = Phase::orderby('code')->get();
     return view('portal/staff/system',compact('roles','permissions','subjects','exam_types','payment_methods', 'payment_types', 'phases'));
   }
 
@@ -40,7 +40,7 @@ class SystemController extends Controller
   // CREATE FUNCTION
   public function createUserRole(Request $request)
   {
-    // Validate role fields
+    // Validate role form fields
     $user_role_validator = Validator::make($request->all(), [
       'newRoleName' => ['required','alpha_space','unique:App\Models\User\Role,name'],
       'newRoleDescription' => ['nullable'],
@@ -81,58 +81,11 @@ class SystemController extends Controller
   // /DELETE FUNCTION
   // /USER ROLE
 
-  // STUDENT PHASE
-  // CREATE FUNCTION
-  public function createStudentPhase(Request $request)
-  {
-    //Validate phase fields
-    $student_phase_validator = Validator::make($request->all(), [
-      'newPhaseCode' => ['required','numeric','unique:App\Models\Student\Phase,code'],
-      'newPhaseName' => ['required','alpha_space','unique:App\Models\Student\Phase,name'],
-      'newPhaseDescription' => ['nullable'],
-    ]);
-    //Check validation errors
-    if($student_phase_validator->fails()):
-      return response()->json(['errors'=>$student_phase_validator->errors()]);
-    //Otherwise, Store data to the table
-    else:
-      $phase = new Phase();
-      $phase->code = $request->newPhaseCode;
-      $phase->name = $request->newPhaseName;
-      $phase->description = $request->newPhaseDescription;
-      if($phase->save()):
-        return response()->json(['status'=>'success', 'phase'=>$phase]);
-      endif;
-    endif;
-  }
-  // /CREATE FUNCTION
-
-  // DELETE FUNCTION
-  public function deleteStudentPhase(Request $request)
-  {
-    //Validate phase id
-    $phaseId_validator = Validator::make($request->all(), [
-      'phase_id' => ['required', 'integer', 'exists:App\Models\Student\Phase,id'],
-    ]);
-
-    //Check validator fails
-    if($phaseId_validator->fails()):
-      return response()->json(['status'=>'error', 'errors'=>$phaseId_validator->errors()]);
-    else:
-      Phase::destroy($request->phase_id);
-      return response()->json(['status'=> 'success']);
-    endif;
-    return response()->json(['status'=>'error', 'data'=>$request->all()]);
-  }
-  // /DELETE FUNCTION
-  // /STUDENT PHASE
-
-
   // PERMISSION
   // CREATE FUNCTION
   public function createPermission(Request $request)
   {
-    //Validate permission fields
+    //Validate permission form fields
     $permission_validator = Validator::make($request->all(), [
       'newPermissionName'=> ['required','alpha_space','unique:App\Models\User\Permission,permission'],
       'newPermissionDescription'=> ['nullable'],
@@ -177,7 +130,7 @@ class SystemController extends Controller
   // CREATE FUNCTION
   public function createSubject(Request $request)
   {
-    // Validate subject fields
+    // Validate subject form fields
     $subject_validator = Validator::make($request->all(), [
       'newSubjectCode' => ['required','numeric', 'unique:App\Models\Subject,code'],
       'newSubjectName' => ['required', 'alpha_space','unique:App\Models\Subject,name'],
@@ -197,7 +150,7 @@ class SystemController extends Controller
   }
   // /CREATE FUNCTION
 
-  //DELETE FUNCTION
+  // DELETE FUNCTION
   public function deleteSubject(Request $request)
   {
     //Validate subject id
@@ -217,4 +170,123 @@ class SystemController extends Controller
   }
   // /DELETE FUNCTION
   // /SUBJECT
+
+  // EXAM TYPE
+  // CREATE FUNCTION
+  public function createExamType(Request $request)
+  {
+    //Validate exam type form fields
+    $exam_type_validator = Validator::make($request->all(), [
+      'newExamTypeName'=> [],
+    ]);
+     return response()->json(['status'=>'success']);
+  }
+  // /CREATE FUNCTION
+
+  // DELETE FUNCTION
+  public function deleteExamType(Request $request)
+  {
+    //Validate exam type id
+    $exam_type_id_validator = Validator::make($request->all(), [
+
+    ]);
+
+    return response()->json(['status'=>'success']);
+
+  }
+  // /DELETE FUNCTION
+  // /EXAM TYPE
+
+  // STUDENT PHASE
+  // CREATE FUNCTION
+  public function createStudentPhase(Request $request)
+  {
+    //Validate phase form fields
+    $student_phase_validator = Validator::make($request->all(), [
+      'newPhaseCode' => ['required','numeric','unique:App\Models\Student\Phase,code'],
+      'newPhaseName' => ['required','alpha_space','unique:App\Models\Student\Phase,name'],
+      'newPhaseDescription' => ['nullable'],
+    ]);
+    //Check validation errors
+    if($student_phase_validator->fails()):
+      return response()->json(['errors'=>$student_phase_validator->errors()]);
+    //Otherwise, Store data to the table
+    else:
+      $phase = new Phase();
+      $phase->code = $request->newPhaseCode;
+      $phase->name = $request->newPhaseName;
+      $phase->description = $request->newPhaseDescription;
+      if($phase->save()):
+        return response()->json(['status'=>'success', 'phase'=>$phase]);
+      endif;
+    endif;
+  }
+  // /CREATE FUNCTION
+
+  // DELETE FUNCTION
+  public function deleteStudentPhase(Request $request)
+  {
+    //Validate phase id
+    $phaseId_validator = Validator::make($request->all(), [
+      'phase_id' => ['required', 'integer', 'exists:App\Models\Student\Phase,id'],
+    ]);
+
+    //Check validator fails
+    if($phaseId_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$phaseId_validator->errors()]);
+    else:
+      Phase::destroy($request->phase_id);
+      return response()->json(['status'=> 'success']);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+  }
+  // /DELETE FUNCTION
+  // /STUDENT PHASE
+
+  // PAYMENT METHOD
+  // CREATE FUNCTION
+  public function createPaymentMethod(Request $request)
+  {
+    //Validate payment method form fields
+    $payment_method_validator = Validator::make($request->all(), [
+      'newPaymentMethod'=> [],
+    ]);
+
+  }
+  // /CREATE FUNCTION
+
+  // DELETE FUNCTION
+  public function deletePaymentMethod(Request $request)
+  {
+    //Validate payment method id
+    $payment_method_id_validator = Validator::make($request->all(), [
+
+    ]);
+
+  }
+  // /DELETE FUNCTION
+  // /PAYMENT METHOD
+
+  // PAYMENT TYPE
+  // CREATE FUNCTION
+  public function createPaymentType(Request $request)
+  {
+    //Validate payment type form fields
+    $payment_type_validator = Validator::make($request->all(), [
+      'newPaymentType'=> [],
+    ]);
+
+  }
+  // /CREATE FUNCTION
+
+  // DELETE FUNCTION
+  public function deletePaymentType(Request $request)
+  {
+    //Validate payment type id
+    $payment_type_id_validator = Validator::make($request->all(), [
+
+    ]);
+  }
+  // /DELETE FUNCTION
+  // /PAYMENT TYPE
 }
