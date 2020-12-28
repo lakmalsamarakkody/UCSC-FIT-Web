@@ -34,23 +34,27 @@
             window.location.hash = '#'+key;
           });
         }else if (data['success']){
-          $('#email').val('');
-          SwalNotificationSuccessAutoClose.fire({
-            title: 'Registration Link Emailed!',
-            text: 'Please Check your Email',
-          })
+          $('.form-control').val('');
+          SwalDoneSuccess.fire({
+            title: 'Payment Submitted to review!',
+            text: 'You\'ll be notified once reviewed',
+          }).then((result) => {
+            if(result.isConfirmed) {
+              location.reload()
+            }
+          });
         }else if (data['error']){
-          SwalNotificationWarning.fire({
-            title: 'Email Failed!',
+          SwalSystemErrorDanger.fire({
+            title: 'PaymentFailed!',
             text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
           })
         }
       },
       error: function(err){
-        $("#emailSpinner").addClass('d-none');
-        $('#submit').removeAttr('disabled');
-        SwalNotificationWarning.fire({
-          title: 'Email Failed!',
+        $("#spinner").addClass('d-none');
+        $('#btnSavePayment').removeAttr('disabled');
+        SwalSystemErrorDanger.fire({
+          title: 'PaymentFailed!',
           text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
         })
       }
