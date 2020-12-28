@@ -111,7 +111,7 @@
   // /EDIT
 
   // DELETE
-  delete_role = () => {
+  delete_role = (role_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -119,10 +119,34 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'User role has been deleted.',
-        })
+        // PAYLOAD
+        var formData = new FormData;
+        formData.append('role_id', role_id)
+
+        //DELETE ROLE CONTROLLER
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/staff/system/deleteUserRole') }}",
+          type: 'post',
+          data:formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteUserRole-'+role_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('success : delete user role ajax');
+            $('#tbl-userRole-tr-'+role_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'User role has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('error : delete user role ajax');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({

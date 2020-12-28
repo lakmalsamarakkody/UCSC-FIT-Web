@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\User\Role;
 use App\Models\Subject;
 use App\Models\Exam\Types;
-use App\Models\Student;
 use App\Models\Student\Payment\Method;
 use App\Models\Student\Payment\Type;
 use App\Models\Student\Phase;
@@ -37,7 +36,8 @@ class SystemController extends Controller
     return view('portal/staff/system',compact('roles','permissions','subjects','exam_types','payment_methods', 'payment_types', 'phases'));
   }
 
-  //CREATE FUNCTIONS
+  // USER ROLE
+  // CREATE FUNCTION
   public function createUserRole(Request $request)
   {
     // Validate role fields
@@ -57,8 +57,32 @@ class SystemController extends Controller
         return response()->json(['status'=>'success', 'role'=>$role]);
       endif;
     endif;
+    return response()->json(['status'=>'error']);
   }
+  // /CREATE FUNCTION
 
+  // DELETE FUNCTION
+  public function deleteUserRole(Request $request)
+  {
+    // VALIDATE ROLE ID
+    $roleID_validator = Validator::make($request->all(), [
+      'role_id' => ['required','integer','exists:App\Models\User\Role,id'],
+    ]);
+
+    // CHECK VALIDATOR FAILS
+    if($roleID_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$roleID_validator->errors()]);
+    else:
+      Role::destroy($request->role_id);
+      return response()->json(['status'=>'success']);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+  }
+  // /DELETE FUNCTION
+  // /USER ROLE
+
+  // STUDENT PHASE
+  // CREATE FUNCTION
   public function createStudentPhase(Request $request)
   {
     //Validate phase fields
@@ -81,7 +105,12 @@ class SystemController extends Controller
       endif;
     endif;
   }
+  // /CREATE FUNCTION
+  // /STUDENT PHASE
 
+
+  // PERMISSION
+  // CREATE FUNCTION
   public function createPermission(Request $request)
   {
     //Validate permission fields
@@ -103,6 +132,11 @@ class SystemController extends Controller
       endif;
     endif;
   }
+  // /CREATE FUNCTION
+  // /PERMISSION
+
+  // SUBJECT
+  // CREATE FUNCTION
   public function createSubject(Request $request)
   {
     // Validate subject fields
@@ -123,6 +157,6 @@ class SystemController extends Controller
       endif;
     endif;
   }
-  // /CREATE FUNCTIONS
-  
+  // /CREATE FUNCTION
+  // /PERMISSION
 }
