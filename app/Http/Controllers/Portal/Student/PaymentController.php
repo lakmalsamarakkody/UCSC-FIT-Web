@@ -64,7 +64,7 @@ class PaymentController extends Controller
 
       $payment->payment_image = $file_name;
 
-      if($path = $request->file('bankSlip')->storeAs('public/cover_images',$file_name)):
+      if($path = $request->file('bankSlip')->storeAs('public/bank_slips/registration',$file_name)):
         if($payment->save()):
           return response()->json(['success'=>'success']);
         endif;
