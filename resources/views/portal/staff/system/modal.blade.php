@@ -72,14 +72,14 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formEditRole">
             <div class="form-group">
-              <label for="InputRoleName">Name</label>
+              <label for="roleName">Role Name</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <button class="btn btn-warning" type="button" onclick="InputRoleName_editable();"><i class="fas fa-edit pr-0"></i></button>
                 </div>
-                <input type="text" class="form-control" id="InputRoleName" onfocusout="InputRoleName_readonly()" disabled/>
+                <input type="text" class="form-control" id="roleName" onfocusout="InputRoleName_readonly()" disabled/>
               </div>
             </div>
           
@@ -154,10 +154,14 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formEditPermission">
             <div class="form-group">
-              <label for="InputPermissionName">Name</label>
-              <input type="text" class="form-control" id="InputPermissionName" />
+              <label for="permissionName">Permission Name</label>
+              <input type="text" class="form-control" id="permissionName" name="permissionName" />
+            </div>
+            <div class="form-group">
+              <label for="permissionDescription">Permission Description</label>
+              <input type="text" class="form-control" id="permissionDescription" name="permissionDescription" />
             </div>
           </form>
         </div>
@@ -217,15 +221,15 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formEditSubject">
             <div class="form-group">
-              <label for="InputSubjectCode">Subject Code</label>
-              <input type="Scode" class="form-control" id="InputSubjectCode" aria-describedby="ScodeHelp"/>
+              <label for="subjectCode">Subject Code</label>
+              <input type="Scode" class="form-control" id="subjectCode" name="subjectCode" aria-describedby="ScodeHelp"/>
               <small id="ScodeHelp" class="form-text text-muted">any help text</small>
             </div>
             <div class="form-group">
-              <label for="InputSubjectName">Name</label>
-              <input type="text" class="form-control" id="InputSubjectName"/>
+              <label for="subjectName">Subject Name</label>
+              <input type="text" class="form-control" id="subjectName" name="subjectName"/>
             </div>
           </form>
         </div>
@@ -251,10 +255,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formCreateExamType">
             <div class="form-group">
-              <label for="InputNewExamTypeName">Exam Type Name</label>
-              <input type="text" class="form-control" id="InputNewExamTypeName"/>
+              <label for="newExamTypeName">Exam Type Name</label>
+              <input type="text" class="form-control" id="newExamTypeName" name="newExamTypeName"/>
             </div>
           </form>
         </div>
@@ -277,10 +281,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formEditExamType">
             <div class="form-group">
-              <label for="InputExamTypeName">Name</label>
-              <input type="Ename" class="form-control" id="InputExamTypeName" aria-describedby="ETnameHelp"/>
+              <label for="examTypeName">Name</label>
+              <input type="Ename" class="form-control" id="examTypeName" name="examTypeName" aria-describedby="ETnameHelp"/>
               <small id="ETnameHelp" class="form-text text-muted">any help text</small>
             </div>
           </form>
@@ -432,15 +436,20 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formEditPhase">
             <div class="form-group">
-              <label for="InputPhaseCode">Code</label>
-              <input type="text" class="form-control" id="InputPhaseCode" aria-describedby="PhaseCodeHelp"/>
+              <label for="phaseCode">Phase Code</label>
+              <input type="text" class="form-control" id="phaseCode" name="phaseCode" aria-describedby="PhaseCodeHelp"/>
               <small id="PhaseCodeHelp" class="form-text text-muted">any help text</small>
             </div>
             <div class="form-group">
-              <label for="InputPhaseDescription">Description</label>
-              <input type="text" class="form-control" id="InputPhaseDescription" aria-describedby="PhaseDescHelp"/>
+              <label for="phaseName">Phase Name</label>
+              <input type="text" class="form-control" id="phaseName" name="phaseName" aria-describedby="PhaseNameHelp"/>
+              <small id="PhaseNameHelp" class="form-text text-muted">any help text</small>
+            </div>
+            <div class="form-group">
+              <label for="phaseDescription">Phase Description</label>
+              <input type="text" class="form-control" id="phaseDescription" name="phaseDescription" aria-describedby="PhaseDescHelp"/>
               <small id="PhaseDescHelp" class="form-text text-muted">any help text</small>
             </div>
           </form>
@@ -467,10 +476,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formCreatePaymentMethod">
             <div class="form-group">
-              <label for="InputNewPaymentMethod">Payment Method</label>
-              <input type="text" class="form-control" id="InputNewPaymentMethod" aria-describedby="NewPaymentMethodHelp"/>
+              <label for="newPaymentMethod">Payment Method</label>
+              <input type="text" class="form-control" id="newPaymentMethod" name="newPaymentMethod" aria-describedby="NewPaymentMethodHelp"/>
               <small id="NewPaymentMethodHelp" class="form-text text-muted">any help text</small>
             </div>
           </form>
@@ -494,10 +503,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formEditPaymentMethod">
             <div class="form-group">
-              <label for="InputPaymentMethod">Payment Method</label>
-              <input type="text" class="form-control" id="InputPaymentMethod" aria-describedby="PaymentMethodHelp"/>
+              <label for="paymentMethod">Payment Method</label>
+              <input type="text" class="form-control" id="paymentMethod" name="paymentMethod" aria-describedby="PaymentMethodHelp"/>
               <small id="PaymentMethodHelp" class="form-text text-muted">any help text</small>
             </div>
           </form>
@@ -524,10 +533,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formCreatePaymentType">
             <div class="form-group">
-              <label for="InputNewPaymentType">Payment Type</label>
-              <input type="text" class="form-control" id="InputNewPaymentType" aria-describedby="NewPaymentTypeHelp"/>
+              <label for="newPaymentType">Payment Type</label>
+              <input type="text" class="form-control" id="newPaymentType" name="newPaymentType" aria-describedby="NewPaymentTypeHelp"/>
               <small id="NewPaymentTypeHelp" class="form-text text-muted">any help text</small>
             </div>
           </form>
@@ -551,10 +560,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="formEditPaymentType">
             <div class="form-group">
-              <label for="InputPaymentType">Payment Type</label>
-              <input type="text" class="form-control" id="InputPaymentType" aria-describedby="PaymentTypeHelp"/>
+              <label for="paymentType">Payment Type</label>
+              <input type="text" class="form-control" id="paymentType" name="paymentType" aria-describedby="PaymentTypeHelp"/>
               <small id="PaymentTypeHelp" class="form-text text-muted">any help text</small>
             </div>
           </form>

@@ -106,6 +106,25 @@ class SystemController extends Controller
     endif;
   }
   // /CREATE FUNCTION
+
+  // DELETE FUNCTION
+  public function deleteStudentPhase(Request $request)
+  {
+    //Validate phase id
+    $phaseId_validator = Validator::make($request->all(), [
+      'phase_id' => ['required', 'integer', 'exists:App\Models\Student\Phase,id'],
+    ]);
+
+    //Check validator fails
+    if($phaseId_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$phaseId_validator->errors()]);
+    else:
+      Phase::destroy($request->phase_id);
+      return response()->json(['status'=> 'success']);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+  }
+  // /DELETE FUNCTION
   // /STUDENT PHASE
 
 
@@ -134,22 +153,24 @@ class SystemController extends Controller
   }
   // /CREATE FUNCTION
 
-  // DELETE FUNTION 
-  public function deletePermission(Request $request){
-    $permission_id_validator = Validator::make($request->all(), [
+  // DELETE FUNCTION 
+  public function deletePermission(Request $request)
+  {
+    //Validate permission id
+    $permissionId_validator = Validator::make($request->all(), [
       'permission_id' => ['required', 'integer', 'exists:App\Models\User\Permission,id'],
     ]);
 
     //Check validator fails
-    if($permission_id_validator->fails()):
-      return response()->json(['status'=> 'error', 'errors'=>$permission_id_validator->errors()]);
+    if($permissionId_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$permissionId_validator->errors()]);
     else:
       Permission::destroy($request->permission_id);
       return response()->json(['status'=>'success']);
     endif;
     return response()->json(['status'=> 'error', 'data'=>$request->all()]);
   }
-  // /DELETE FUNTION
+  // /DELETE FUNCTION
   // /PERMISSION
 
   // SUBJECT
@@ -175,5 +196,25 @@ class SystemController extends Controller
     endif;
   }
   // /CREATE FUNCTION
-  // /PERMISSION
+
+  //DELETE FUNCTION
+  public function deleteSubject(Request $request)
+  {
+    //Validate subject id
+    $subjectId_validator = Validator::make($request->all(), [
+      'subject_id'=> ['required', 'integer', 'exists:App\Models\Subject,id'],
+    ]);
+
+    //Check validator fails
+    if($subjectId_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$subjectId_validator->errors()]);
+    else:
+      if(Subject::destroy($request->subject_id)):
+        return response()->json(['status'=> 'success']);
+      endif;
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+  }
+  // /DELETE FUNCTION
+  // /SUBJECT
 }
