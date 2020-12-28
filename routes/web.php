@@ -89,6 +89,8 @@ Route::post('/portal/staff/system/createSubject', [App\Http\Controllers\Portal\S
 Route::post('/portal/staff/system/deleteUserRole', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteUserRole']);
 Route::post('/portal/staff/system/deletePermission', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deletePermission']);
 Route::post('/portal/staff/system/deleteStudentPhase', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteStudentPhase']);
+Route::post('/porta/staff/system/deleteSubject', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteSubject']);
+
 
 // /STAFF SYSTEM PAGE CRUD OPERATIONS
 
