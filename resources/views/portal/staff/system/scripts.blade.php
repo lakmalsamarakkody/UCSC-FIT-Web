@@ -249,7 +249,7 @@
   // /EDIT
 
   // DELETE
-  delete_permission = () => {
+  delete_permission = (permission_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -257,10 +257,33 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Permission has been deleted.',
-        })
+        //Payload
+        var formData = new FormData();
+        formData.append('permission_id',permission_id);
+
+        //Delete permission controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/deletePermission') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteUserRole-'+permission_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in delete permission ajax.');
+            //remove delete data included row
+            $('#tbl-permission-tr-'+permission_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Permission has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('Error in delete permission ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({

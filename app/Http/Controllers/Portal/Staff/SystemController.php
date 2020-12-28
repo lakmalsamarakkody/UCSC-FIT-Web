@@ -133,6 +133,23 @@ class SystemController extends Controller
     endif;
   }
   // /CREATE FUNCTION
+
+  // DELETE FUNTION 
+  public function deletePermission(Request $request){
+    $permission_id_validator = Validator::make($request->all(), [
+      'permission_id' => ['required', 'integer', 'exists:App\Models\User\Permission,id'],
+    ]);
+
+    //Check validator fails
+    if($permission_id_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$permission_id_validator->errors()]);
+    else:
+      Permission::destroy($request->permission_id);
+      return response()->json(['status'=>'success']);
+    endif;
+    return response()->json(['status'=> 'error', 'data'=>$request->all()]);
+  }
+  // /DELETE FUNTION
   // /PERMISSION
 
   // SUBJECT
