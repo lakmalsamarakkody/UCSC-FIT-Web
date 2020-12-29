@@ -177,9 +177,20 @@ class SystemController extends Controller
   {
     //Validate exam type form fields
     $exam_type_validator = Validator::make($request->all(), [
-      'newExamTypeName'=> [],
+      'newExamTypeName'=> ['required','alpha_dash_space'],
     ]);
-     return response()->json(['status'=>'success']);
+    //Check validation errors
+    if($exam_type_validator->fails()):
+      return response()->json(['errors'=>$exam_type_validator->errors()]);
+      //Otherwise, Store data to the table
+    else:
+      $exam_type = new Types();
+      $exam_type->exam_type = $request->newExamTypeName;
+      if($exam_type->save()):
+        return response()->json(['status'=>'success', 'exam_type'=>$exam_type]);
+      endif;
+    endif;
+    return response()->json(['status'=>'error']);
   }
   // /CREATE FUNCTION
 
@@ -188,11 +199,18 @@ class SystemController extends Controller
   {
     //Validate exam type id
     $exam_type_id_validator = Validator::make($request->all(), [
-
+      'exam_type_id' => ['required', 'integer', 'exists:App\Models\Exam\Types,id'],
     ]);
 
-    return response()->json(['status'=>'success']);
-
+    //Check validator fails
+    if($exam_type_id_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$exam_type_id_validator->errors()]);
+    else:
+      if(Types::destroy($request->exam_type_id)):
+        return response()->json(['status'=>'success']);
+      endif;
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
   }
   // /DELETE FUNCTION
   // /EXAM TYPE

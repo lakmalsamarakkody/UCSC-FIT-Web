@@ -259,12 +259,13 @@
             <div class="form-group">
               <label for="newExamTypeName">Exam Type Name</label>
               <input type="text" class="form-control" id="newExamTypeName" name="newExamTypeName"/>
+              <span class="invalid-feedback" id="error-newExamTypeName" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="create_exam_type()">Create</button>
+          <button type="button" class="btn btn-outline-primary" id="btnCreateExamType" onclick="create_exam_type()">Create</button>
         </div>
       </div>
     </div>

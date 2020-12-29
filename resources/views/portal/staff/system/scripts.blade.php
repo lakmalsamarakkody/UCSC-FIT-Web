@@ -401,7 +401,7 @@
         //Delete subject controller
         $.ajax({
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url: "{{ url('/porta/staff/system/deleteSubject') }}",
+          url: "{{ url('/portal/staff/system/deleteSubject') }}",
           type: 'post',
           data: formData,
           processData: false,
@@ -442,11 +442,49 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Created!',
-          text: 'Exam Type created.',
-        })
-        $('#modal-create-exam-type').modal('hide')
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Payload
+        var formData = new FormData($('#formCreateExamType')[0]);
+
+        //Validate information
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/createExamType') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreateExamType').attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in create exam type ajax.');
+            $('#btnCreateExamType').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating data.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Create role is success');
+              SwalDoneSuccess.fire({
+              title: 'Created!',
+              text: 'Exam Type created.',
+              })
+              $('#modal-create-exam-type').modal('hide')
+              location.reload();
+              }
+          },
+          error: function(err){
+            $('#btnCreateExamType').removeAttr('disabled', 'disabled');
+            console.log('Error in creare exam type ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
@@ -482,7 +520,7 @@
   }
   // /EDIT
   //DELETE
-  delete_exam_type = () => {
+  delete_exam_type = (exam_type_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -490,10 +528,32 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Exam type has been deleted.',
-        })
+        // Payload
+        var formData = new FormData();
+        formData.append('exam_type_id',exam_type_id);
+
+        //Delete exam type controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/deleteExamType') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteExamType-'+exam_type_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in delete exam type ajax.');
+            $('#tbl-examType-tr-'+exam_type_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Exam type has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('Error in delete exam type ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
