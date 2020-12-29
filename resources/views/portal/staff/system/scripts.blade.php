@@ -713,16 +713,58 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Created!',
-          text: 'Payment method created.',
-        })
-        $('#modal-create-payment-method').modal('hide')
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Form Payload
+        var formData = new FormData($("#formCreatePaymentMethod")[0]);
+
+        //Validate information
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/staff/system/createPaymentMethod') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreatePaymentMethod').attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in create payment method ajax.');
+            $('#btnCreatePaymentMethod').removeAttr('disabled','disabled');
+            if(data['errors']){
+              console.log('Errors on validating data');
+              $('small').hide();
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+              //SwalCancelWarning.fire({title: 'Role creation Aborted!',text: 'You have no permission to create a role',})
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in create payment method.');
+              SwalDoneSuccess.fire({
+                title: 'Created!',
+                text: 'Payment method created.',
+                })
+                $('#modal-create-payment-method').modal('hide')
+                location.reload();
+            }
+          },
+          error: function(err){
+            $('#btnCreatePaymentMethod').removeAttr('disabled','disabled');
+            console.log('Error in create payment method ajax');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Payment method has not been created.',
+          text: 'Payment method creation cancelled.',
         })
       }
     })
@@ -753,7 +795,7 @@
   }
   // /EDIT
   // DELETE
-  delete_payment_method = () => {
+  delete_payment_method = (payment_method_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -761,10 +803,34 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Payment method has been deleted.',
-        })
+        // PAYLOAD
+        var formData = new FormData;
+        formData.append('payment_method_id', payment_method_id)
+
+        //DELETE PAYMENT METHOD CONTROLLER
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/staff/system/deletePaymentMethod') }}",
+          type: 'post',
+          data:formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeletePaymentMethod-'+payment_method_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success : delete payment method ajax.');
+            $('#tbl-paymentMethod-tr-'+payment_method_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Payment method has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('Error : delete payment method ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
@@ -773,7 +839,7 @@
         })
       }
     })
-  }
+  }    
   // /DELETE
 // /PAYMENT METHOD
 

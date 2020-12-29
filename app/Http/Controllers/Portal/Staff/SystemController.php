@@ -265,22 +265,42 @@ class SystemController extends Controller
   // CREATE FUNCTION
   public function createPaymentMethod(Request $request)
   {
-    //Validate payment method form fields
+    // Validate payment method form fields
     $payment_method_validator = Validator::make($request->all(), [
-      'newPaymentMethod'=> [],
+      'newPaymentMethod' => ['required','alpha_space','unique:App\Models\Student\Payment\Method,method'],
     ]);
-
+    //Check validation errors
+    if($payment_method_validator->fails()):
+      return response()->json(['errors'=>$payment_method_validator->errors()]);
+    //Otherwise, Store data to the table
+    else:
+      $payment_method = new Method();
+      $payment_method->method = $request->newPaymentMethod;
+      if($payment_method->save()):
+        return response()->json(['status'=>'success', 'payment_method'=>$payment_method]);
+      endif;
+    endif;
+    return response()->json(['status'=>'error']);
   }
   // /CREATE FUNCTION
 
   // DELETE FUNCTION
   public function deletePaymentMethod(Request $request)
   {
-    //Validate payment method id
+    // VALIDATE payment method id
     $payment_method_id_validator = Validator::make($request->all(), [
-
+      'payment_method_id' => ['required','integer','exists:App\Models\Student\Payment\Method,id'],
     ]);
 
+    // CHECK VALIDATOR FAILS
+    if($payment_method_id_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$payment_method_id_validator->errors()]);
+    else:
+      if(Method::destroy($request->payment_method_id)):
+        return response()->json(['status'=>'success']);
+      endif;
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
   }
   // /DELETE FUNCTION
   // /PAYMENT METHOD

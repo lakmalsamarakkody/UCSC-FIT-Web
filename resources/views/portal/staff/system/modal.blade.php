@@ -397,12 +397,13 @@
               <label for="newPaymentMethod">Payment Method</label>
               <input type="text" class="form-control" id="newPaymentMethod" name="newPaymentMethod" aria-describedby="NewPaymentMethodHelp"/>
               <small id="NewPaymentMethodHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-newPaymentMethod" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="create_payment_method()">Create</button>
+          <button type="button" class="btn btn-outline-primary" id="btnCreatePaymentMethod" onclick="create_payment_method()">Create</button>
         </div>
       </div>
     </div>
