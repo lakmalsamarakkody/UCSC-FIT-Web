@@ -111,7 +111,7 @@
   // /EDIT
 
   // DELETE
-  delete_role = () => {
+  delete_role = (role_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -119,10 +119,34 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'User role has been deleted.',
-        })
+        // PAYLOAD
+        var formData = new FormData;
+        formData.append('role_id', role_id)
+
+        //DELETE ROLE CONTROLLER
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/staff/system/deleteUserRole') }}",
+          type: 'post',
+          data:formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteUserRole-'+role_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('success : delete user role ajax');
+            $('#tbl-userRole-tr-'+role_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'User role has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('error : delete user role ajax');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
@@ -225,7 +249,7 @@
   // /EDIT
 
   // DELETE
-  delete_permission = () => {
+  delete_permission = (permission_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -233,10 +257,33 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Permission has been deleted.',
-        })
+        //Payload
+        var formData = new FormData();
+        formData.append('permission_id',permission_id);
+
+        //Delete permission controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/deletePermission') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeletePermission-'+permission_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in delete permission ajax.');
+            //remove delete data included row
+            $('#tbl-permission-tr-'+permission_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Permission has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('Error in delete permission ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
@@ -339,7 +386,7 @@
   // /EDIT
 
   //DELETE
-  delete_subject = () => {
+  delete_subject = (subject_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -347,10 +394,32 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Subject has been deleted.',
-        })
+        //Payload
+        var formData = new FormData();
+        formData.append('subject_id',subject_id);
+
+        //Delete subject controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/deleteSubject') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteSubject-'+subject_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in delete subject ajax.');
+            $('#tbl-subject-tr-'+subject_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Subject has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('Error in delete subjecr ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
@@ -373,11 +442,49 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Created!',
-          text: 'Exam Type created.',
-        })
-        $('#modal-create-exam-type').modal('hide')
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Payload
+        var formData = new FormData($('#formCreateExamType')[0]);
+
+        //Validate information
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/createExamType') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreateExamType').attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in create exam type ajax.');
+            $('#btnCreateExamType').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating data.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Create role is success');
+              SwalDoneSuccess.fire({
+              title: 'Created!',
+              text: 'Exam Type created.',
+              })
+              $('#modal-create-exam-type').modal('hide')
+              location.reload();
+              }
+          },
+          error: function(err){
+            $('#btnCreateExamType').removeAttr('disabled', 'disabled');
+            console.log('Error in creare exam type ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
@@ -413,7 +520,7 @@
   }
   // /EDIT
   //DELETE
-  delete_exam_type = () => {
+  delete_exam_type = (exam_type_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -421,10 +528,32 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Exam type has been deleted.',
-        })
+        // Payload
+        var formData = new FormData();
+        formData.append('exam_type_id',exam_type_id);
+
+        //Delete exam type controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/deleteExamType') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteExamType-'+exam_type_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in delete exam type ajax.');
+            $('#tbl-examType-tr-'+exam_type_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Exam type has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('Error in delete exam type ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
@@ -436,80 +565,6 @@
   }
   // /DELETE
 // /EXAM_TYPE
-
-// ACADEMIC YEAR
-  // CREATE
-  create_academic_year = () => {
-    SwalQuestionSuccessAutoClose.fire({
-    title: "Are you sure?",
-    text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, Create!',
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Created!',
-          text: 'Academic Year created.',
-        })
-        $('#modal-create-academic-year').modal('hide')
-      }
-      else{
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Academic Year has not been created.',
-        })
-      }
-    })
-  }
-  // /CREATE
-  // EDIT
-  edit_academic_year = () => {
-    SwalQuestionSuccessAutoClose.fire({
-    title: "Are you sure?",
-    text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, Update!',
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Updated!',
-          text: 'Academic year has been updated.',
-        })
-        $('#modal-edit-academic-year').modal('hide')
-      }
-      else{
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Academic year has not been updated.',
-        })
-      }
-    })
-  }
-  // /EDIT
-  // DELETE
-  delete_academic_year = () => {
-    SwalQuestionDanger.fire({
-    title: "Are you sure?",
-    text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, delete it!',
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Academic year has been deleted.',
-        })
-      }
-      else{
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Academic year has not been deleted.',
-        })
-      }
-    })
-  }
-  // /DELETE
-// /ACADEMIC YEAR
 
 // STUDENT PHASE
   // CREATE
@@ -602,7 +657,7 @@
   }
   // /EDIT
   // DELETE
-  delete_student_phase = () => {
+  delete_student_phase = (phase_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -610,10 +665,32 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Student phase has been deleted.',
-        })
+        //Payload
+        var formData = new FormData();
+        formData.append('phase_id',phase_id);
+
+        //Delete student phase controller
+        $.ajax({
+          headers: {'X-CSRF-token' : $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/deleteStudentPhase') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteStudentPhase-'+phase_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in delete student phase ajax.');
+            $('#tbl-studentPhase-tr-'+phase_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Student phase has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('Error in delete student phase ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({

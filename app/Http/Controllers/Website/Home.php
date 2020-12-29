@@ -13,7 +13,8 @@ class Home extends Controller
         $anouncements = Anouncements::orderBy('created_at', 'desc')->take(6)->get();
 
         return view('website/home', [
-            'anouncements'=>$anouncements
+            'anouncements'=>$anouncements,
+            'title' => 'Home'
         ]);
     }
 }

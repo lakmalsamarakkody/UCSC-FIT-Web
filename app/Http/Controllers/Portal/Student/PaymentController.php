@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Portal\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
@@ -47,8 +49,30 @@ class PaymentController extends Controller
     if($validator->fails()):
       return response()->json(['errors'=>$validator->errors()]);
     else:
+      $student_id = Auth::user()->student->id;
+      $payment = new Payment();
+      $payment->method_id = 2;
+      $payment->type_id = 1;
+      $payment->student_id = $student_id;
+      $payment->amount = $request->paidAmount;
+      $payment->bank_branch = $request->paidBank;
+      $payment->branch_code = $request->paidBankCode;
+      $payment->paid_date = $request->paidDate;
+
+      $file_ext = $request->file('bankSlip')->getClientOriginalExtension();
+      $file_name = $student_id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
+
+      $payment->payment_image = $file_name;
+
+      if($path = $request->file('bankSlip')->storeAs('public/bank_slips/registration',$file_name)):
+        if($payment->save()):
+          return response()->json(['success'=>'success']);
+        endif;
+
+      endif;
 
     endif;
+    return response()->json(['error'=>'error']);
   }
 
   public function saveExamPayment(Request $request)

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Portal\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -25,6 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('portal/student/home');
+        // GET STUDENT DETAILS
+        $student = Student::where('user_id', Auth::user()->id)->first();
+        return view('portal/student/home', compact('student'));
     }
 }

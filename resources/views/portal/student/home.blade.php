@@ -11,6 +11,8 @@
 
 </script>
 
+    @if( $student != NULL )
+
     <!-- CONTENT -->
     <div class="col-lg-12 information">
         <div class="row">
@@ -25,39 +27,35 @@
                                 <table class="table">
                                     <tr>
                                         <th>Registration Number:</th>
-                                        <td>F1335123232</td>
+                                        <td>{{ $student->reg_no }}</td>
                                     </tr>
                                     <tr>
                                         <th>Title:</th>
-                                        <td>Mr.</td>
+                                        <td>{{ $student->title }}.</td>
                                     </tr>
                                     <tr>
                                         <th>First Name:</th>
-                                        <td>John</td>
+                                        <td>{{ $student->first_name }}</td>
                                     </tr>
                                     <tr>
                                         <th>Middle Names:</th>
-                                        <td>John John John John John John John</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Last Name:</th>
-                                        <td>Doe</td>
+                                        <td>{{ $student->middle_names }}</td>
                                     </tr>
                                     <tr>
                                         <th>Full Name:</th>
-                                        <td>John John John John John John John John Doe</td>
+                                        <td>{{ $student->full_name }}</td>
                                     </tr>
                                     <tr>
                                         <th>Name with Initials:</th>
-                                        <td>J J J J J J J J Doe</td>
+                                        <td>{{ $student->initials }} {{ $student->last_name }}</td>
                                     </tr>
                                     <tr>
                                         <th>Gender:</th>
-                                        <td><i class="fa fa-lg fa-male"></i></td>
+                                        <td>@if($student->gender == 'Male')<i class="fa fa-lg fa-male"></i>@elseif($student->gender == 'Female')<i class="fa fa-lg fa-female"></i>@endif</td>
                                     </tr>
                                     <tr>
                                         <th>Date of Birth:</th>
-                                        <td>1990-04-01</td>
+                                        <td>{{ $student->dob }}</td>
                                     </tr>
                                     <tr>
                                         <th>Citizenship:</th>
@@ -213,7 +211,10 @@
         </div>
     </div>
     <!-- /CONTENT -->
+    @endif
+
     @include('portal.student.home.scripts')
+
 @endsection
 
 

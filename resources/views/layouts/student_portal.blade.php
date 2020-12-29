@@ -11,7 +11,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ asset('img/logo/fav.png') }}">
 
-  <title>FIT -Portal</title>
+  <title>FIT -Portal | {{ $title ?? '' }}</title>
   
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -176,7 +176,7 @@
             </div>
             <!-- /MOBILE NAV BAR -->
 
-            <main class="col-lg-12 py-md-4 px-md-5">
+            <main class="col-lg-12 py-md-4 px-md-5 min-vh-100">
               <div class="row">
                     @yield('content')
               </div>

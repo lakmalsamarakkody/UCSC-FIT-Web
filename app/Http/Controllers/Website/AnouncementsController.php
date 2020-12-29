@@ -12,7 +12,8 @@ class AnouncementsController extends Controller
 
         $anouncements = Anouncements::orderBy('created_at', 'desc')->get();
         return view('website/announcements', [
-            'announcements'=>$anouncements
+            'announcements'=>$anouncements,
+            'title' => 'Announcements'
         ]);
     }
 }

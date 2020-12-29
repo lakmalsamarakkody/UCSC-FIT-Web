@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 class PrivacyPolicy extends Controller
 {
     public function index(){
-        return view('website/privacyPolicy');
+        return view('website/privacyPolicy', [
+            'title' => 'Privacy Policy'
+        ]);
     }
 }

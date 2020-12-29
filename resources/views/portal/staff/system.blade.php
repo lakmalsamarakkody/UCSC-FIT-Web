@@ -45,13 +45,13 @@
                 </thead>
                 <thead>
                   @foreach ($roles as $role)
-                  <tr>
+                  <tr id="tbl-userRole-tr-{{$role->id}}">
                     <td>{{ $role->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-view-role"><i class="fas fa-eye"></i></button>
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-role"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" onclick="delete_role();"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" id="btnDeleteUserRole-{{$role->id}}" onclick="delete_role({{ $role->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
@@ -81,13 +81,13 @@
                 </thead>
                 <thead>
                   @foreach ($permissions as $permission)
-                  <tr>
+                  <tr id="tbl-permission-tr-{{$permission->id}}">
                     <td>{{ $permission->permission }}</td>
                     <td>{{ $permission->description }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-permission"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" onclick="delete_permission();"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" id="btnDeletePermission-{{$permission->id}}" onclick="delete_permission({{ $permission->id }});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
@@ -117,13 +117,13 @@
                 </thead>
                 <thead>
                   @foreach ($subjects as $subject)
-                  <tr>
+                  <tr id="tbl-subject-tr-{{$subject->id}}">
                     <td><b>FIT{{ $subject->code }}</b></td>
                     <td>{{ $subject->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-subject"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" onclick="delete_subject();"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" id="btnDeleteSubject-{{$subject->id}}" onclick="delete_subject({{$subject->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
@@ -152,12 +152,12 @@
                 </thead>
                 <thead>
                   @foreach ($exam_types as $type)
-                  <tr>
+                  <tr id="tbl-examType-tr-{{$type->id}}">
                     <td>{{ $type->exam_type }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-exam-type"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" onclick="delete_exam_type();"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" id="btnDeleteExamType-{{$type->id}}" onclick="delete_exam_type({{$type->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
@@ -188,14 +188,14 @@
                 </thead>
                 <thead>
                   @foreach ($phases as $phase)
-                  <tr>
+                  <tr id="tbl-studentPhase-tr-{{$phase->id}}">
                     <td>{{ $phase->code }}</td>
                     <td>{{ $phase->name }}</td>
                     <td>{{ $phase->description }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-student-phase"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" onclick="delete_student_phase();"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" id="btnDeleteStudentPhase-{{$phase->id}}" onclick="delete_student_phase({{$phase->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
