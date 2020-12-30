@@ -60,7 +60,20 @@
       }
       function display_ct() {
         var dt = new Date()
-        var timeString = dt.getFullYear() +  "/" + dt.getMonth() + "/" + dt.getDate() + "&nbsp;&nbsp;&nbsp;" + dt.getHours() + ":" + dt.getMinutes() +":" + dt.getSeconds()
+        var month = new Array();
+        month[0] = "Jan";
+        month[1] = "Feb";
+        month[2] = "Mar";
+        month[3] = "Apr";
+        month[4] = "May";
+        month[5] = "Jun";
+        month[6] = "Jul";
+        month[7] = "Aug";
+        month[8] = "Sep";
+        month[9] = "Oct";
+        month[10] = "Nov";
+        month[11] = "Dec";
+        var timeString = dt.getFullYear() +  " " + month[dt.getMonth()] + " " + dt.getDate() + "&nbsp;&nbsp;&nbsp;" + dt.getHours() + ":" + dt.getMinutes() +":" + dt.getSeconds()
         document.getElementById('ct').innerHTML = timeString;
         display_c();
       }
