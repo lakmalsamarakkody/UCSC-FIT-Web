@@ -18,63 +18,63 @@ class PermissionSeeder extends Seeder
         DB::table('permissions')->insert(
             array (
                 [
-                    'permission'=>'add user',
+                    'name'=>'add user',
                     'description'=>'can add an user',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
 
                 [
-                    'permission'=>'edit user',
+                    'name'=>'edit user',
                     'description'=>'can edit an user',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
 
                 [
-                    'permission'=>'delete user',
+                    'name'=>'delete user',
                     'description'=>'can delete an user',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 
                 [
-                    'permission'=>'view dashboard',
+                    'name'=>'view dashboard',
                     'description'=>'can view the dashboard page',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 
                 [
-                    'permission'=>'view exams',
+                    'name'=>'view exams',
                     'description'=>'can view the exams page',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 
                 [
-                    'permission'=>'view students',
+                    'name'=>'view students',
                     'description'=>'can view the students page',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 
                 [
-                    'permission'=>'view results',
+                    'name'=>'view results',
                     'description'=>'can view the results page',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 
                 [
-                    'permission'=>'view user page',
+                    'name'=>'view user page',
                     'description'=>'can view the user page',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 
                 [
-                    'permission'=>'view system',
+                    'name'=>'view system',
                     'description'=>'can view the system page',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'

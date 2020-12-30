@@ -148,7 +148,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">view-dashboard</h5>
+          <h5 class="modal-title" id="modal-edit-permission-title">Permission Title</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -157,6 +157,7 @@
           <form id="formEditPermission">
             <div class="form-group">
               <label for="permissionName">Permission Name</label>
+              <input type="hidden" class="form-control" id="permissionID" name="permissionID" />
               <input type="text" class="form-control" id="permissionName" name="permissionName" />
             </div>
             <div class="form-group">
