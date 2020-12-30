@@ -331,10 +331,19 @@ class SystemController extends Controller
   // DELETE FUNCTION
   public function deletePaymentType(Request $request)
   {
-    //Validate payment type id
+    // VALIDATE Payment type id
     $payment_type_id_validator = Validator::make($request->all(), [
-
+      'payment_type_id' => ['required','integer','exists:App\Models\Student\Payment\Type,id'],
     ]);
+
+    // CHECK VALIDATOR FAILS
+    if($payment_type_id_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$payment_type_id_validator->errors()]);
+    else:
+      Type::destroy($request->payment_type_id);
+      return response()->json(['status'=>'success']);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
   }
   // /DELETE FUNCTION
   // /PAYMENT TYPE

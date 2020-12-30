@@ -935,7 +935,7 @@
   }
   // /EDIT
   // DELETE
-  delete_payment_type = () => {
+  delete_payment_type = (payment_type_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -943,10 +943,34 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Payment type has been deleted.',
-        })
+        // PAYLOAD
+        var formData = new FormData;
+        formData.append('payment_type_id', payment_type_id)
+
+        //DELETE ROLE CONTROLLER
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/staff/system/deletePaymentType') }}",
+          type: 'post',
+          data:formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeletePaymentType-'+payment_type_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success : delete payment type ajax');
+            $('#tbl-paymentType-tr-'+payment_type_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Payment type has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('Error : delete payment type ajax');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({

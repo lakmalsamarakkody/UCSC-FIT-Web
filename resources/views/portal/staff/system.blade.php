@@ -258,12 +258,12 @@
                 </thead>
                 <thead>
                   @foreach ($payment_types as $type)
-                  <tr>
+                  <tr id="tbl-paymentType-tr-{{$type->id}}">
                     <td>{{ $type->type }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-payment-type"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" onclick="delete_payment_type();"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" id="btnDeletePaymentType-{{$type->id}}" onclick="delete_payment_type({{$type->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
@@ -275,7 +275,7 @@
           <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-payment-type"><i class="fas fa-plus"></i></button></div>
         </div>
       </div>
-      <!-- /PAYMENT METHODS -->
+      <!-- /PAYMENT TYPES -->
 
       @include('portal.staff.system.modal')
     
