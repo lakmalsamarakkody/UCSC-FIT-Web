@@ -6,7 +6,7 @@
 
     // ACTIVE NAVIGATION ENTRY
     $(document).ready(function ($) {
-      $('#exams').addClass("active");
+      $('#registration').addClass("active");
     });
 
 </script>
@@ -41,10 +41,8 @@
 
                   <div class="col-12">
                     <div class="row">
-                      <div class="col-md-4">Last Registration Expires On:</div>
-                      <div class="col-md-8">2019.12.31</div>
-                      <div class="col-md-4">Due Registrations :</div>
-                      <div class="col-md-8">2</div>
+                      <div class="col-md-4">Registration Expires On:</div>
+                      <div class="col-md-8" >{{ now()->year+1 }}-{{ now()->month }}-{{ now()->day}}</div>
                     </div>
   
                   </div>
