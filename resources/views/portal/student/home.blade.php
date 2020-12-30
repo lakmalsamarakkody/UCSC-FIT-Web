@@ -59,11 +59,11 @@
                                     </tr>
                                     <tr>
                                         <th>Citizenship:</th>
-                                        <td>F1335123232</td>
+                                        <td>{{ $student->citizenship }}</td>
                                     </tr>
                                     <tr>
                                         <th>NIC/ Postal/ Passport No:</th>
-                                        <td>9012256545V</td>
+                                        <td></td>
                                     </tr>
                                 </table>
                             </div>
@@ -97,7 +97,7 @@
                                 <table class="table">
                                     <tr>
                                         <th>Highest Qualification</th>
-                                        <td>Advanced/ Higher Diploma from a nationally or internationally recognized organisation</td>                                        
+                                        <td>{{ $student->education }}</td>                                        
                                     </tr>
                                 </table>
                             </div>
@@ -115,11 +115,11 @@
                                 <h5>Permanent Address</h5>
                                 <hr>
                                 <div class="ml-lg-4">
-                                   <p>House Name/ No.</p>  
-                                   <p>Adress Line 1 </p>
-                                   <p>Address Line 2</p>  
-                                   <p>Address Line 3</p>  
-                                   <p>Address Line 4 </p>
+                                   <p>{{ $student->permanent_house }}</p>  
+                                   <p>{{ $student->permanent_address_line1 }}</p>
+                                   <p>{{ $student->permanent_address_line2 }}</p>  
+                                   <p>{{ $student->permanent_address_line3 }}</p>  
+                                   <p>{{ $student->permanent_address_line4 }}</p>
                                    <p>City </p> 
                                    <p>Country</p> 
                                 </div>
@@ -128,11 +128,11 @@
                                 <h5>Current Address</h5>
                                 <hr>
                                 <div class="ml-lg-4">
-                                   <p>House Name/ No.</p>  
-                                   <p>Adress Line 1 </p>
-                                   <p>Address Line 2</p>  
-                                   <p>Address Line 3</p>  
-                                   <p>Address Line 4 </p>
+                                   <p>{{ $student->current_house }}</p>  
+                                   <p>{{ $student->current_address_line1 }}</p>
+                                   <p>{{ $student->current_address_line2 }}</p>  
+                                   <p>{{ $student->current_address_line3 }}</p>  
+                                   <p>{{ $student->current_address_line4 }}</p>
                                    <p>City </p> 
                                    <p>Country</p> 
                                 </div>
@@ -141,7 +141,7 @@
                                 <table class="table">
                                     <tr>
                                         <th>Telephone No.</th>
-                                        <td>+94 777 123 456</td>
+                                        <td>{{ $student->telephone_country_code }} {{ $student->telephone }}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -167,7 +167,7 @@
                                 <table class="table">
                                     <tr>
                                         <th>Designation</th>
-                                        <td>CEO, Company Name, Address</td>                                        
+                                        <td>{{ $student->designation }}</td>                                        
                                     </tr>
                                 </table>
                             </div>
