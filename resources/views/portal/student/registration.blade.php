@@ -561,11 +561,11 @@
 
                     </div>
                 </div>
-                @else
+                {{-- @else
                     <div class="alert alert-success border-success">
                         <h4 class="my-4">Application Submitted</h4>
                         <p style="font-weight: bold;">Please wait for Administrator Approval</p>
-                    </div>
+                    </div> --}}
                 @endif
             </div>
         </div>
