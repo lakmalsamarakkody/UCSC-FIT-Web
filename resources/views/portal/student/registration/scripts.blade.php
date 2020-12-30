@@ -586,7 +586,14 @@
             console.log('registration submit ajax success');
             $('#btnSubmitApplication').removeAttr('disabled','disabled');
             if(data['status'] == 'success'){
-              SwalDoneSuccess.fire({title: 'Submitted!',text: 'Your information has been submitted for registration.',})
+              SwalDoneSuccess.fire({
+                title: 'Submitted!',
+                text: 'Your information has been submitted for registration.'
+              }).then((result) => {
+                if(result.isConfirmed) {
+                  location.reload()
+                }
+              });
             }
             else if(data['status'] == 'error'){
               SwalCancelWarning.fire({title: 'Submittion Aborted!',text: 'You have not met the requirements to submit the application.',})
