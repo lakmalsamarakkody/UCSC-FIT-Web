@@ -27,7 +27,7 @@ class SystemController extends Controller
   public function index()
   {
     $roles = Role::orderby('name')->get();
-    $permissions = Permission::orderby('permission')->get();
+    $permissions = Permission::orderby('name')->get();
     $subjects = Subject::orderby('code')->get();
     $exam_types = Types::orderby('id')->get();
     $phases = Phase::orderby('code')->get();
@@ -87,7 +87,7 @@ class SystemController extends Controller
   {
     //Validate permission form fields
     $permission_validator = Validator::make($request->all(), [
-      'newPermissionName'=> ['required','alpha_space','unique:App\Models\User\Permission,permission'],
+      'newPermissionName'=> ['required','alpha_space','unique:App\Models\User\Permission,name'],
       'newPermissionDescription'=> ['nullable'],
     ]);
 
@@ -97,7 +97,7 @@ class SystemController extends Controller
     //Otherwise, Store data to the table
     else:
       $permission = new Permission();
-      $permission->permission = $request->newPermissionName;
+      $permission->name = $request->newPermissionName;
       $permission->description = $request->newPermissionDescription;
       if($permission->save()):
         return response()->json(['status'=>'success', 'permission'=>$permission]);
@@ -105,6 +105,25 @@ class SystemController extends Controller
     endif;
   }
   // /CREATE FUNCTION
+
+  // EDIT FUNCTIONS
+  public function editPermissionGetDetails(Request $request){
+
+    //Validate permission id
+    $permissionId_validator = Validator::make($request->all(), [
+      'permission_id' => ['required', 'integer', 'exists:App\Models\User\Permission,id'],
+    ]);
+
+    //Check validator fails
+    if($permissionId_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$permissionId_validator->errors()]);
+    else:
+      $permission = Permission::find($request->permission_id);
+      return response()->json(['status'=>'success', 'permission'=>$permission]);
+    endif;
+    return response()->json(['status'=> 'error', 'data'=>$request->all()]);
+  }
+  // /EDIT FUNCTIONS
 
   // DELETE FUNCTION 
   public function deletePermission(Request $request)

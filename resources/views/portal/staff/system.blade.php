@@ -82,11 +82,11 @@
                 <thead>
                   @foreach ($permissions as $permission)
                   <tr id="tbl-permission-tr-{{$permission->id}}">
-                    <td>{{ $permission->permission }}</td>
+                    <td>{{ $permission->name }}</td>
                     <td>{{ $permission->description }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-permission"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-warning" id="btnEditPermission-{{$permission->id}}" onclick="edit_permission_modal_invoke({{ $permission->id }});"><i class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-outline-danger" id="btnDeletePermission-{{$permission->id}}" onclick="delete_permission({{ $permission->id }});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>

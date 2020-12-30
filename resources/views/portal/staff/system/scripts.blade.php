@@ -224,6 +224,39 @@
   // /CREATE
 
   // EDIT
+  edit_permission_modal_invoke = (permission_id) =>{
+    //Payload
+    var formData = new FormData();
+    formData.append('permission_id',permission_id);
+
+    //Edit permission get detials
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/system/editPermissionGetDetails') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){$('#btnEditPermission-'+permission_id).attr('disabled','disabled');},
+      success: function(data){
+        console.log('Success in edit permission get detials ajax.');
+        if(data['status'] == 'success'){
+          $('#modal-edit-permission-title').html(data['permission']['name']);
+          $('#permissionID').val(data['permission']['id']);
+          $('#permissionName').val(data['permission']['name']);
+          $('#permissionDescription').val(data['permission']['description']);
+          $('#modal-edit-permission').modal('show');
+          $('#btnEditPermission-'+permission_id).removeAttr('disabled','disabled');
+        }
+      },
+      error: function(err){
+        console.log('Error in edit permission get details ajax.');
+        $('#btnEditPermission-'+permission_id).removeAttr('disabled','disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+
   edit_permission = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
