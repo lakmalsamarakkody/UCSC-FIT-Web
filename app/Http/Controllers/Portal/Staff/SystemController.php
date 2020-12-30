@@ -309,11 +309,22 @@ class SystemController extends Controller
   // CREATE FUNCTION
   public function createPaymentType(Request $request)
   {
-    //Validate payment type form fields
+    // Validate payment type form fields
     $payment_type_validator = Validator::make($request->all(), [
-      'newPaymentType'=> [],
+      'newPaymentType' => ['required','alpha_space','unique:App\Models\Student\Payment\Type,type'],
     ]);
-
+    //Check validation errors
+    if($payment_type_validator->fails()):
+      return response()->json(['errors'=>$payment_type_validator->errors()]);
+    //Otherwise, Store data to the table
+    else:
+      $payment_type = new Type();
+      $payment_type->type = $request->newPaymentType;
+      if($payment_type->save()):
+        return response()->json(['status'=>'success', 'payment_type'=>$payment_type]);
+      endif;
+    endif;
+    return response()->json(['status'=>'error']);
   }
   // /CREATE FUNCTION
 

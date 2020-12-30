@@ -853,16 +853,58 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Created!',
-          text: 'Payment type created.',
-        })
-        $('#modal-create-payment-type').modal('hide')
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Form Payload
+        var formData = new FormData($("#formCreatePaymentType")[0]);
+
+        //Validate information
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/staff/system/createPaymentType') }}",
+          type: 'post',
+          data:formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreatePaymentType').attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success : create payment type ajax.');
+            $('#btnCreatePaymentType').removeAttr('disabled','disabled');
+            if(data['errors']){
+              console.log('errors on validating data');
+              $('small').hide();
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+              //SwalCancelWarning.fire({title: 'Role creation Aborted!',text: 'You have no permission to create a role',})
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success: create payment type.');
+              SwalDoneSuccess.fire({
+                title: 'Created!',
+                text: 'Payment type created.',
+                })
+                $('#modal-create-payment-type').modal('hide')
+                location.reload();
+            }
+          },
+          error: function(err){
+            $('#btnCreatePaymentType').removeAttr('disabled','disabled');
+            console.log('Error : create payment type ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Payment type has not been created.',
+          text: 'Payment type creation cancelled.',
         })
       }
     })

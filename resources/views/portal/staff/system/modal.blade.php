@@ -455,12 +455,13 @@
               <label for="newPaymentType">Payment Type</label>
               <input type="text" class="form-control" id="newPaymentType" name="newPaymentType" aria-describedby="NewPaymentTypeHelp"/>
               <small id="NewPaymentTypeHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-newPaymentType" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="create_payment_type()">Create</button>
+          <button type="button" class="btn btn-outline-primary" id="btnCreatePaymentType" onclick="create_payment_type()">Create</button>
         </div>
       </div>
     </div>
