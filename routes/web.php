@@ -92,22 +92,27 @@ Route::post('/portal/staff/system/deletePermission', [App\Http\Controllers\Porta
 
 Route::post('/portal/staff/system/createSubject', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createSubject']);
 Route::post('/portal/staff/system/editSubjectGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editSubjectGetDetails']);
+Route::post('/portal/staff/system/editSubject', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editSubject']);
 Route::post('/portal/staff/system/deleteSubject', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteSubject']);
 
 Route::post('/portal/staff/system/createExamType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createExamType']);
 Route::post('/portal/staff/system/editExamTypeGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editExamTypeGetDetails']);
+Route::post('/portal/staff/system/editExamType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editExamType']);
 Route::post('/portal/staff/system/deleteExamType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteExamType']);
 
 Route::post('/portal/staff/system/createStudentPhase', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createStudentPhase']);
 Route::post('/portal/staff/system/editStudentPhaseGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editStudentPhaseGetDetails']);
+Route::post('/portal/staff/system/editStudentPhase', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editStudentPhase']);
 Route::post('/portal/staff/system/deleteStudentPhase', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteStudentPhase']);
 
 Route::post('/portal/staff/system/createPaymentMethod', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createPaymentMethod']);
 Route::post('/portal/staff/system/editPaymentMethodGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editPaymentMethodGetDetails']);
+Route::post('/portal/staff/system/editPaymentMethod', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editPaymentMethod']);
 Route::post('/portal/staff/system/deletePaymentMethod', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deletePaymentMethod']);
 
 Route::post('/portal/staff/system/createPaymentType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createPaymentType']);
 Route::post('/portal/staff/system/editPaymentTypeGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editPaymentTypeGetDetails']);
+Route::post('/portal/staff/system/editPaymentType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editPaymentType']);
 Route::post('/portal/staff/system/deletePaymentType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deletePaymentType']);
 // /STAFF SYSTEM PAGE CRUD OPERATIONS
 

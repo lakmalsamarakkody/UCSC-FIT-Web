@@ -210,6 +210,15 @@ class SystemController extends Controller
     endif;
     return response()->json(['status'=> 'error', 'data'=>$request->all()]);
   }
+
+  public function editSubject(Request $request)
+  {
+    //Validate form data
+    $edit_subject_validator = Validator::make($request->all(), [
+
+    ]);
+
+  }
   // /EDIT FUNCTIONS
 
   // DELETE FUNCTION
@@ -272,6 +281,15 @@ class SystemController extends Controller
       return response()->json(['status'=>'success', 'exam_type'=>$exam_type]);
     endif;
     return response()->json(['status'=>'error', 'data'=>$request->all()]);
+  }
+
+  public function editExamType(Request $request)
+  {
+    //Validate form data
+    $edit_exam_type_validator = Validator::make($request->all(), [
+
+    ]);
+
   }
   // EDIT FUNCTIONS
 
@@ -340,6 +358,15 @@ class SystemController extends Controller
     endif;
     return response()->json(['status'=>'error', 'data'=>$request->all()]);
   }
+
+  public function editStudentPhase(Request $request)
+  {
+    //Validate form data
+    $edit_student_phase_validator = Validator::make($request->all(), [
+
+    ]);
+
+  }
   // /EDIT FUNCTIONS
 
   // DELETE FUNCTION
@@ -392,6 +419,15 @@ class SystemController extends Controller
     $payment_methodId_validator = Validator::make($request->all(), [
 
     ]);
+  }
+
+  public function editPaymentMethod(Request $request)
+  {
+    //Validate form data
+    $edit_payment_method_validator = Validator::make($request->all(), [
+
+    ]);
+
   }
   // /EDIT FUNCTIONS
 
@@ -446,6 +482,16 @@ class SystemController extends Controller
     $payment_typeId_validator = Validator::make($request->all(), [
 
     ]);
+
+  }
+
+  public function editPaymentType(Request $request)
+  {
+    //Validate form data
+    $edit_payment_type_validator = Validator::make($request->all(), [
+
+    ]);
+    
   }
   // /EDIT FUNCTIONS
 
