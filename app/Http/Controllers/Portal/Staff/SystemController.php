@@ -305,8 +305,18 @@ class SystemController extends Controller
   {
     //Validate student phase id
     $student_phaseId_validator = Validator::make($request->all(), [
-      
+      'student_phase_id'=> ['required', 'integer', 'exists:App\Models\Student\Phase,id'],
     ]);
+
+    //Check validator fails
+    if($student_phaseId_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$student_phaseId_validator->errors()]);
+    else:
+      if($student_phase = Phase::find($request->student_phase_id)):
+        return response()->json(['status'=>'success', 'student_phase'=>$student_phase]);
+      endif;
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
   }
   // /EDIT FUNCTIONS
 

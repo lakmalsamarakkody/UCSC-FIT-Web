@@ -194,7 +194,7 @@
                     <td>{{ $phase->description }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-student-phase"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-warning" id="btnEditStudentPhase-{{$phase->id}}" onclick="edit_student_phase_modal_invoke({{$phase->id}});"><i class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-outline-danger" id="btnDeleteStudentPhase-{{$phase->id}}" onclick="delete_student_phase({{$phase->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>

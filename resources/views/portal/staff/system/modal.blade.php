@@ -349,7 +349,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Phase 1 - Fresh User</h5>
+          <h5 class="modal-title" id="modal-edit-student-phase-title">Phase 1 - Fresh User</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -358,6 +358,7 @@
           <form id="formEditPhase">
             <div class="form-group">
               <label for="phaseCode">Phase Code</label>
+              <input type="hidden" class="form-control" name="phaseId" id="phaseId">
               <input type="text" class="form-control" id="phaseCode" name="phaseCode" aria-describedby="PhaseCodeHelp"/>
               <small id="PhaseCodeHelp" class="form-text text-muted">any help text</small>
             </div>

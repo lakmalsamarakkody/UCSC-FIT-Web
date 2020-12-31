@@ -730,6 +730,40 @@
   }
   // /CREATE
   // EDIT
+  edit_student_phase_modal_invoke = (student_phase_id) => {
+    //Form payload
+    var formData = new FormData();
+    formData.append('student_phase_id',student_phase_id);
+
+    //Edit student phase get details
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/system/editStudentPhaseGetDetails') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){$('#btnEditStudentPhase-'+student_phase_id).attr('disabled', 'disabled');},
+      success: function(data){
+        console.log('Success in edit student phase get details ajax.');
+        if(data['status'] == 'success'){
+          $('#modal-edit-student-phase-title').html(data['student_phase']['name']);
+          $('#phaseId').val(data['student_phase']['id']);
+          $('#phaseCode').val(data['student_phase']['code']);
+          $('#phaseName').val(data['student_phase']['name']);
+          $('#phaseDescription').val(data['student_phase']['description']);
+          $('#modal-edit-student-phase').modal('show');
+          $('#btnEditStudentPhase-'+student_phase_id).removeAttr('disabled','disabled');
+        }
+      },
+      error: function(err){
+        console.log('Error in edit student phase get details ajax.');
+        $('#btnEditStudentPhase-'+student_phase_id).removeAttr('disabled','disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+
   edit_student_phase = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
