@@ -1,6 +1,6 @@
 @section('script')
 <script type="text/javascript">
-  // SAVE PAYMENT
+  // UPLOAD BIRTH CERTIFICATE
   save_payment = () => {
 
     
@@ -60,6 +60,6 @@
       }
     });
   }
-  // /SAVE PAYMENT
+  // /UPLOAD BIRTH CERTIFICATE
 </script>
 @endsection
