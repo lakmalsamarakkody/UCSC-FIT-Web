@@ -89,7 +89,7 @@ class SystemController extends Controller
     //Validate permission form fields
     $permission_validator = Validator::make($request->all(), [
       'newPermissionName'=> ['required','alpha_space','unique:App\Models\User\Permission,name'],
-      'newPermissionDescription'=> ['nullable'],
+      'newPermissionDescription'=> ['required'],
     ]);
 
     //Check validation errors
@@ -123,6 +123,28 @@ class SystemController extends Controller
       return response()->json(['status'=>'success', 'permission'=>$permission]);
     endif;
     return response()->json(['status'=> 'error', 'data'=>$request->all()]);
+  }
+
+  public function editPermission(Request $request)
+  {
+    //Validating form data
+    $edit_permission_validator = Validator::make($request->all(), [
+      'permissionID'=>['required', 'integer', 'exists:App\Models\User\Permission,id'],
+      'permissionName'=>['required', 'alpha_space', 'unique:App\Models\User\Permission,name'],
+      'permissionDescription'=>['required'],
+    ]);
+
+    //Check validator fails
+    if($edit_permission_validator->fails()):
+      return response()->json(['stutus'=>'error', 'errors'=>$edit_permission_validator->errors()]);
+    else:
+      $permission = Permission::find($request->permissionID);
+      $permission->name = $request->permissionName;
+      $permission->description = $request->permissionDescription;
+      if($permission->save()):
+        return response()->json(['status'=> 'success', 'permission'=>$permission]);
+      endif;
+    endif;
   }
   // /EDIT FUNCTIONS
 

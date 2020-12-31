@@ -158,17 +158,20 @@
             <div class="form-group">
               <label for="permissionName">Permission Name</label>
               <input type="hidden" class="form-control" id="permissionID" name="permissionID" />
+              <span class="invalid-feedback" id="error-permissionID" role="alert"></span>
               <input type="text" class="form-control" id="permissionName" name="permissionName" />
+              <span class="invalid-feedback" id="error-permissionName" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="permissionDescription">Permission Description</label>
               <input type="text" class="form-control" id="permissionDescription" name="permissionDescription" />
+              <span class="invalid-feedback" id="error-permissionDescription" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_permission()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditPermission" onclick="edit_permission()">Update</button>
         </div>
       </div>
     </div>

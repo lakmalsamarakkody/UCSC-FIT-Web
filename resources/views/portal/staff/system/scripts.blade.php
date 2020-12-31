@@ -265,11 +265,49 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Updated!',
-          text: 'Permission has been updated.',
-        })
-        $('#modal-edit-permission').modal('hide')
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Form payload
+        var formData = new FormData($('#formEditPermission')[0]);
+
+        //Edit permission
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/editPermission') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnModalEditPermission').attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in edit permission ajax.');
+            $('#btnModalEditPermission').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating data.');
+              $.each(data['errors'], function(key,value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Edit permission is success.');
+              SwalDoneSuccess.fire({
+                title: 'Updated!',
+                text: 'Permission has been updated.',
+              })
+              $('#modal-edit-permission').modal('hide')
+              location.reload();
+            }
+          },
+          error: function(err){
+            $('#btnModalEditPermission').removeAttr('disabled','disabled');
+            console.log('Error in edit permission ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
