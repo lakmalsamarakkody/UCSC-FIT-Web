@@ -133,7 +133,7 @@
                                    <p>{{ $student->current_address_line2 }}</p>  
                                    <p>{{ $student->current_address_line3 }}</p>  
                                    <p>{{ $student->current_address_line4 }}</p>
-                                   <p>City </p> 
+                                   <p>City</p> 
                                    <p>Country</p> 
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
                                 <table class="table">
                                     <tr>
                                         <th>Telephone No.</th>
-                                        <td>{{ $student->telephone_country_code }} {{ $student->telephone }}</td>
+                                        <td>+{{ $student->telephone_country_code }} {{ $student->telephone }}</td>
                                     </tr>
                                 </table>
                             </div>
