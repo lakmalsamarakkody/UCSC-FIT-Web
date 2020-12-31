@@ -169,6 +169,26 @@ class SystemController extends Controller
   }
   // /CREATE FUNCTION
 
+  // EDIT FUNCTIONS
+  public function editSubjectGetDetails(Request $request)
+  {
+    //Validate subject id
+    $subjectId_validator = Validator::make($request->all(), [
+      'subject_id'=> ['required', 'integer', 'exists:App\Models\Subject,id'],
+    ]);
+
+    //Check validator fails
+    if($subjectId_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$subjectId_validator->errors()]);
+    else:
+      if($subject = Subject::find($request->subject_id)):
+        return response()->json(['status'=>'success', 'subject'=>$subject]);
+      endif;
+    endif;
+    return response()->json(['status'=> 'error', 'data'=>$request->all()]);
+  }
+  // /EDIT FUNCTIONS
+
   // DELETE FUNCTION
   public function deleteSubject(Request $request)
   {
@@ -212,6 +232,11 @@ class SystemController extends Controller
     return response()->json(['status'=>'error']);
   }
   // /CREATE FUNCTION
+
+  // EDIT FUNCTIONS
+
+
+  // EDIT FUNCTIONS
 
   // DELETE FUNCTION
   public function deleteExamType(Request $request)

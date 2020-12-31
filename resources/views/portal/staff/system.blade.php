@@ -122,7 +122,7 @@
                     <td>{{ $subject->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-subject"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-warning" id="btnEditSubject-{{$subject->id}}" onclick="edit_subject_modal_invoke({{$subject->id}});"><i class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-outline-danger" id="btnDeleteSubject-{{$subject->id}}" onclick="delete_subject({{$subject->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
@@ -156,7 +156,7 @@
                     <td>{{ $type->exam_type }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-exam-type"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-warning" id="editExamType-{{$type->id}}" onclick="edit_exam_type_modal_invoke({{$type->id}});"><i class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-outline-danger" id="btnDeleteExamType-{{$type->id}}" onclick="delete_exam_type({{$type->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>

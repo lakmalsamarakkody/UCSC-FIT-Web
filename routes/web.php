@@ -90,7 +90,7 @@ Route::post('/portal/staff/system/editPermissionGetDetails', [App\Http\Controlle
 Route::post('/portal/staff/system/deletePermission', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deletePermission']);
 
 Route::post('/portal/staff/system/createSubject', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createSubject']);
-Route::post('/portal/staff/system/editSubjectOnGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editSubjectOnGetDetails']);
+Route::post('/portal/staff/system/editSubjectGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editSubjectGetDetails']);
 Route::post('/portal/staff/system/deleteSubject', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteSubject']);
 
 Route::post('/portal/staff/system/createExamType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createExamType']);

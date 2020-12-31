@@ -216,7 +216,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">FIT 103 - ICT Applications</h5>
+          <h5 class="modal-title" id="modal_edit_subject_title">Subject Title</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -225,6 +225,7 @@
           <form id="formEditSubject">
             <div class="form-group">
               <label for="subjectCode">Subject Code</label>
+              <input type="hidden" class="form-control" id="subjectId" name="subjectId" />
               <input type="Scode" class="form-control" id="subjectCode" name="subjectCode" aria-describedby="ScodeHelp"/>
               <small id="ScodeHelp" class="form-text text-muted">any help text</small>
             </div>
@@ -277,7 +278,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">e-Test</h5>
+          <h5 class="modal-title" id="modal-edit-exam-type-title">Exam type title</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -286,6 +287,7 @@
           <form id="formEditExamType">
             <div class="form-group">
               <label for="examTypeName">Name</label>
+              <input type="hidden" class="form-control" id="examTypeId" name="examTypeId" />
               <input type="Ename" class="form-control" id="examTypeName" name="examTypeName" aria-describedby="ETnameHelp"/>
               <small id="ETnameHelp" class="form-text text-muted">any help text</small>
             </div>

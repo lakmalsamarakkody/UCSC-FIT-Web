@@ -394,6 +394,39 @@
   // /CREATE
 
   // EDIT
+  edit_subject_modal_invoke = (subject_id) => {
+    //Form payload
+    var formData = new FormData();
+    formData.append('subject_id',subject_id);
+
+    //Edit subject get details
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/system/editSubjectGetDetails') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){$('#btnEditSubject-'+subject_id).attr('disabled','disabled');},
+      success: function(data){
+        console.log('Success in edit subject get details ajax.');
+        if(data['status'] == 'success'){
+          $('#modal_edit_subject_title').html(data['subject']['name']);
+          $('#subjectId').val(data['subject']['id']);
+          $('#subjectCode').val(data['subject']['code']);
+          $('#subjectName').val(data['subject']['name']);
+          $('#modal-edit-subject').modal('show');
+          $('#btnEditSubject-'+subject_id).removeAttr('disabled','disabled');
+        }
+      },
+      error: function(err){
+        console.log('Error in edit subject get details ajax.');
+        $('#btnEditSubject-'+subject_id).removeAttr('disabled','disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+
   edit_subject = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
