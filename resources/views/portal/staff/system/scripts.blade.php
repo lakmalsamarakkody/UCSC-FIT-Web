@@ -562,6 +562,37 @@
   }
   // /CREATE
   // EDIT
+  edit_exam_type_modal_invoke = (exam_type_id) => {
+    //Form payload
+    var formData = new FormData();
+    formData.append('exam_type_id',exam_type_id);
+
+    //Edit exam type get details
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/system/editExamTypeGetDetails') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){$('#bntEditExamType-'+exam_type_id).attr('disabled','disabled');},
+      success: function(data){
+        console.log('Success in edit exam type get details ajax.');
+        if(data['status'] == 'success'){
+          $('#modal-edit-exam-type-title').html(data['exam_type']['name']);
+          $('#examTypeId').val(data['exam_type']['id']);
+          $('#examTypeName').val(data['exam_type']['name']);
+          $('#modal-edit-exam-type').modal('show');
+          $('#bntEditExamType-'+exam_type_id).removeAttr('disabled','disabled');
+        }
+      },
+      error: function(err){
+        console.log('Error in edit exam type get details ajax.');
+        $('#bntEditExamType-'+exam_type_id).removeAttr('disabled','disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
   edit_exam_type = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",

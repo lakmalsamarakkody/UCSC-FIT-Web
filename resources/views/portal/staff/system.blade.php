@@ -153,10 +153,10 @@
                 <thead>
                   @foreach ($exam_types as $type)
                   <tr id="tbl-examType-tr-{{$type->id}}">
-                    <td>{{ $type->exam_type }}</td>
+                    <td>{{ $type->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" id="editExamType-{{$type->id}}" onclick="edit_exam_type_modal_invoke({{$type->id}});"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-warning" id="bntEditExamType-{{$type->id}}" onclick="edit_exam_type_modal_invoke({{$type->id}});"><i class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-outline-danger" id="btnDeleteExamType-{{$type->id}}" onclick="delete_exam_type({{$type->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>

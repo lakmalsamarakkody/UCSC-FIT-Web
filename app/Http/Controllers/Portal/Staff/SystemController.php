@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Models\Exam;
 use Illuminate\Http\Request;
 use App\Models\User\Role;
 use App\Models\Subject;
@@ -224,7 +225,7 @@ class SystemController extends Controller
       //Otherwise, Store data to the table
     else:
       $exam_type = new Types();
-      $exam_type->exam_type = $request->newExamTypeName;
+      $exam_type->name = $request->newExamTypeName;
       if($exam_type->save()):
         return response()->json(['status'=>'success', 'exam_type'=>$exam_type]);
       endif;
@@ -237,9 +238,18 @@ class SystemController extends Controller
   public function editExamTypeGetDetails(Request $request)
   {
     //Validate exam type id
-    $exam_type_id_validator = Validator::make($request->all(), [
-      'exam_type_id' => ['required', 'integer', 'exists: App\Models\Exam\Types,id'],
+    $exam_typeId_validator = Validator::make($request->all(), [
+      'exam_type_id' => ['required', 'integer', 'exists:App\Models\Exam\Types,id'],
     ]);
+
+    //Check validator fails
+    if($exam_typeId_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$exam_typeId_validator->errors()]);
+    else:
+      $exam_type = Types::find($request->exam_type_id);
+      return response()->json(['status'=>'success', 'exam_type'=>$exam_type]);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
   }
   // EDIT FUNCTIONS
 
