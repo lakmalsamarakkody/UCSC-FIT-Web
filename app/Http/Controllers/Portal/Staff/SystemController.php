@@ -234,8 +234,13 @@ class SystemController extends Controller
   // /CREATE FUNCTION
 
   // EDIT FUNCTIONS
-
-
+  public function editExamTypeGetDetails(Request $request)
+  {
+    //Validate exam type id
+    $exam_type_id_validator = Validator::make($request->all(), [
+      'exam_type_id' => ['required', 'integer', 'exists: App\Models\Exam\Types,id'],
+    ]);
+  }
   // EDIT FUNCTIONS
 
   // DELETE FUNCTION
@@ -285,6 +290,16 @@ class SystemController extends Controller
   }
   // /CREATE FUNCTION
 
+  // EDIT FUNCTIONS
+  public function editStudentPhaseGetDetails(Request $request)
+  {
+    //Validate student phase id
+    $student_phaseId_validator = Validator::make($request->all(), [
+      
+    ]);
+  }
+  // /EDIT FUNCTIONS
+
   // DELETE FUNCTION
   public function deleteStudentPhase(Request $request)
   {
@@ -327,6 +342,16 @@ class SystemController extends Controller
     return response()->json(['status'=>'error']);
   }
   // /CREATE FUNCTION
+
+  // EDIT FUNCTIONS
+  public function editPaymentMethodGetDetails(Request $request)
+  {
+    //Validate payment method id
+    $payment_methodId_validator = Validator::make($request->all(), [
+
+    ]);
+  }
+  // /EDIT FUNCTIONS
 
   // DELETE FUNCTION
   public function deletePaymentMethod(Request $request)
@@ -371,6 +396,16 @@ class SystemController extends Controller
     return response()->json(['status'=>'error']);
   }
   // /CREATE FUNCTION
+
+  // EDIT FUNCTIONS
+  public function editPaymentTypeGetDetails(Request $request)
+  {
+    //Validate payment type id
+    $payment_typeId_validator = Validator::make($request->all(), [
+
+    ]);
+  }
+  // /EDIT FUNCTIONS
 
   // DELETE FUNCTION
   public function deletePaymentType(Request $request)
