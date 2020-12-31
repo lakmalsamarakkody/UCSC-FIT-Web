@@ -16,10 +16,10 @@ class ExamTypeSeeder extends Seeder
     {
         DB::table('exam_types')->insert(
             array(
-                ['exam_type'=> 'E-Test',
+                ['name'=> 'E-Test',
                 'created_at'=> '2020-11-25 10:13:53',
                 'updated_at'=> '2020-11-25 10:13:53'],
-                ['exam_type'=> 'Practical',
+                ['name'=> 'Practical',
                 'created_at'=> '2020-11-25 10:13:53',
                 'updated_at'=> '2020-11-25 10:13:53']
             )
