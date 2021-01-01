@@ -480,8 +480,20 @@ class SystemController extends Controller
   {
     //Validate form data
     $edit_payment_method_validator = Validator::make($request->all(), [
-
+      'paymentMethodId'=> ['required', 'integer', 'exists:App\Models\Student\Payment\Method,id'],
+      'paymentMethodName'=> ['required', 'alpha_space'],
     ]);
+
+    //Check validator fails
+    if($edit_payment_method_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$edit_payment_method_validator->errors()]);
+    else:
+      $payment_method = Method::find($request->paymentMethodId);
+      $payment_method->name = $request->paymentMethodName;
+      if($payment_method->save()):
+        return response()->json(['status'=>'success', 'payment_method'=>$payment_method]);
+      endif;
+    endif;
 
   }
   // /EDIT FUNCTIONS

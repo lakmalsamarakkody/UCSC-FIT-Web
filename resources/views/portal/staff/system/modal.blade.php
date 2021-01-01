@@ -441,14 +441,16 @@
             <div class="form-group">
               <label for="paymentMethodName">Payment Method</label>
               <input type="hidden" class="form-control" id="paymentMethodId" name="paymentMethodId" />
+              <span class="invalid-feedback" id="error-paymentMethodId" role="alert"></span>
               <input type="text" class="form-control" id="paymentMethodName" name="paymentMethodName" aria-describedby="PaymentMethodHelp"/>
               <small id="PaymentMethodHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-paymentMethodName" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_payment_method()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditPaymentMethod" onclick="edit_payment_method()">Update</button>
         </div>
       </div>
     </div>
