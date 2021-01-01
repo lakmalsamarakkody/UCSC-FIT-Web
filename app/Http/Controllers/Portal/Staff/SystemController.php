@@ -13,6 +13,7 @@ use App\Models\Student\Payment\Type;
 use App\Models\Student\Phase;
 use App\Models\User\Permission;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Unique;
 
 use function GuzzleHttp\Promise\all;
 
@@ -130,7 +131,7 @@ class SystemController extends Controller
     //Validating form data
     $edit_permission_validator = Validator::make($request->all(), [
       'permissionID'=>['required', 'integer', 'exists:App\Models\User\Permission,id'],
-      'permissionName'=>['required', 'alpha_space', 'unique:App\Models\User\Permission,name'],
+      'permissionName'=>['required', 'alpha_space'],
       'permissionDescription'=>['required'],
     ]);
 
@@ -215,9 +216,22 @@ class SystemController extends Controller
   {
     //Validate form data
     $edit_subject_validator = Validator::make($request->all(), [
-
+      'subjectId'=> ['required','integer', 'exists:App\Models\Subject,id'],
+      'subjectCode'=> ['required', 'integer'],
+      'subjectName'=> ['required', 'alpha_space'],
     ]);
 
+    //Check validator fails
+    if($edit_subject_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$edit_subject_validator->errors()]);
+    else:
+      $subject = Subject::find($request->subjectId);
+      $subject->code = $request->subjectCode;
+      $subject->name = $request->subjectName;
+      if($subject->save()):
+        return response()->json(['status'=>'success', 'subject'=>$subject]);
+      endif;
+    endif;
   }
   // /EDIT FUNCTIONS
 

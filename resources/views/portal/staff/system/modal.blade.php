@@ -229,18 +229,21 @@
             <div class="form-group">
               <label for="subjectCode">Subject Code</label>
               <input type="hidden" class="form-control" id="subjectId" name="subjectId" />
+              <span class="invalid-feedback" id="error-subjectId" role="alert"></span>
               <input type="Scode" class="form-control" id="subjectCode" name="subjectCode" aria-describedby="ScodeHelp"/>
               <small id="ScodeHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-subjectCode" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="subjectName">Subject Name</label>
               <input type="text" class="form-control" id="subjectName" name="subjectName"/>
+              <span class="invalid-feedback" id="error-subjectName" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_subject()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditSubject"onclick="edit_subject()">Update</button>
         </div>
       </div>
     </div>

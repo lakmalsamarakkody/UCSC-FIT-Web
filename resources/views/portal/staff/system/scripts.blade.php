@@ -473,11 +473,50 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Updated!',
-          text: 'Subject has been updated.',
-        })
-        $('#modal-edit-subject').modal('hide')
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Form pyload
+        var formData = new FormData($('#formEditSubject')[0]);
+
+        //Edit subject
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/editSubject') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnModalEditSubject').attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in edit subject ajax.');
+            $('#btnModalEditSubject').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating edit subject data.');
+              $('small').hide();
+              $.each(data['errors'], function(key,value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in edit subject.');
+              SwalDoneSuccess.fire({
+                title: 'Updated!',
+                text: 'Subject has been updated.',
+              })
+              $('#modal-edit-subject').modal('hide')
+              location.reload();
+            }
+          },
+          error: function(err){
+            $('#btnModalEditSubject').removeAttr('disabled', 'disabled');
+            console.log('Error in edit subject ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
