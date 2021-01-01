@@ -17,19 +17,19 @@ class PaymentTypeSeeder extends Seeder
         DB::table('payment_types')->insert(
             array (
                 [
-                    'type'=>'registration',
+                    'name'=>'registration',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 
                 [
-                    'type'=>'e-Test',
+                    'name'=>'e-Test',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 
                 [
-                    'type'=>'practical',
+                    'name'=>'practical',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ]
