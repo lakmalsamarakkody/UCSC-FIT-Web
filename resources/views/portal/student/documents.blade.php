@@ -26,28 +26,29 @@
       <!-- UPLOAD BIRTH CERTIFICATE -->
       <div class="col-12 mt-2 px-0">
         <div class="card">
-          <div class="card-header">Birth Cettificate</div>
-          <div class="card-body">
-            <form id="birthCertificate">  
+          <div class="card-header pb-0">Birth Certificate</div>
+          <div class="card-body pt-2">
+            <span><strong>Please Upload clear images of both sides of the birth certificate with your details are clearly visible</strong> </span> 
+            <form id="birthCertificateForm">  
               <div class="form-row">
                 <div class="col-lg-6">
                   <div class="form-group">
                     <small id="birthCertificateHelp" class="form-text text-muted">Upload your scanned front side of the birth certificate here in JPEG/ PNG file format</small>
                     <div class="drop-zone">
                       <span class="drop-zone__prompt">Scanned Birth Cettificate (Front)<br><small>Drop image File here or click to upload</small> </span>
-                      <input type="file" name="birthcertificate" id="birthcertificate" class="drop-zone__input form-control"/>
+                      <input type="file" name="birthCertificateFront" id="birthCertificateFront" class="drop-zone__input form-control"/>
                     </div>
-                    <span class="invalid-feedback" id="error-birthcertificate" role="alert"><strong>The identification birth certificate front is required</strong></span>
+                    <span class="invalid-feedback birth" id="error-birthCertificateFront" role="alert"></span>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <small id="birthCertificateHelp" class="form-text text-muted">Upload your scanned front side of the birth certificate here in JPEG/ PNG file format</small>
+                    <small id="birthCertificateHelp" class="form-text text-muted">Upload your scanned reverse side of the birth certificate here in JPEG/ PNG file format</small>
                     <div class="drop-zone">
                       <span class="drop-zone__prompt">Scanned Birth Cettificate (Back)<br><small>Drop image File here or click to upload</small> </span>
-                      <input type="file" name="birthcertificate" id="birthcertificate" class="drop-zone__input form-control"/>
+                      <input type="file" name="birthCertificateBack" id="birthCertificateBack" class="drop-zone__input form-control"/>
                     </div>
-                    <span class="invalid-feedback" id="error-birthcertificate" role="alert"><strong>The identification birth certificate back is required</strong></span>
+                    <span class="invalid-feedback birth" id="error-birthCertificateBack" role="alert"></span>
                   </div>
                 </div>
               </div>
@@ -56,9 +57,9 @@
                     <button type="button" class="btn btn-secondary form-control" id="btnResetForm" onclick="reset_form()">Discard</button>
                 </div>
                 <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2" id="divSaveInformation">
-                    <button type="button" class="btn btn-outline-primary form-control" id="btnSavePayment" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_payment()">
+                    <button type="button" class="btn btn-outline-primary form-control" id="btnSaveBirth" role="button" aria-expanded="false" aria-controls="declaration" onclick="upload_birth()">
                       Upload
-                      <span id="spinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
+                      <span id="spinnerBirth" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
                     </button>
                 </div>
               </div>
@@ -71,39 +72,42 @@
       <!-- APPLIED EXAMS TABLE -->
       <div class="col-12 mt-4 px-0">
         <div class="card">
-          <div class="card-header">Valid identification document with a photograph</div>
-          <div class="card-body">
-            <form id="idDocument">                
-              <div class="form-row">
-                <div class="col-lg-6">
+          <div class="card-header pb-0">Valid identification document with a photograph</div>
+          <div class="card-body pt-2">            
+            <span><strong>Please Upload a clear image with your details and the photograph is clearly visible</strong> </span>  
+            <form id="idDocumentForm">                
+              <div class="form-row">               
+                <div class="col">
                   <div class="form-group">
-                    <small id="birthCertificateHelp" class="form-text text-muted">Upload your scanned front side of the document here in JPEG/ PNG file format</small>
+                    <small id="documentFrontHelp" class="form-text text-muted">Upload your scanned front side of the {{ $document }} here in JPEG/ PNG file format</small>
                     <div class="drop-zone">
-                      <span class="drop-zone__prompt">Scanned Front<br><small>Drop image File here or click to upload</small> </span>
-                      <input type="file" name="birthcertificate" id="birthcertificate" class="drop-zone__input form-control"/>
+                      <span class="drop-zone__prompt">Scanned {{ $document }} Front<br><small>Drop image File here or click to upload</small> </span>
+                      <input type="file" name="documentFront" id="documentFront" class="drop-zone__input form-control"/>
                     </div>
-                    <span class="invalid-feedback" id="error-birthcertificate" role="alert"><strong>The identification document front is required</strong></span>
+                    <span class="invalid-feedback id-doc" id="error-documentFront" role="alert"></span>
                   </div>
                 </div>
-                <div class="col-lg-6">
+                @if($student->nic_old != NULL) 
+                <div class="col">
                   <div class="form-group">
-                    <small id="birthCertificateHelp" class="form-text text-muted">Upload your scanned front side of the document here in JPEG/ PNG file format</small>
+                    <small id="documentBackHelp" class="form-text text-muted">Upload your scanned reverse side of the {{ $document }} here in JPEG/ PNG file format</small>
                     <div class="drop-zone">
-                      <span class="drop-zone__prompt">Scanned Back<br><small>Drop image File here or click to upload</small> </span>
-                      <input type="file" name="birthcertificate" id="birthcertificate" class="drop-zone__input form-control"/>
+                      <span class="drop-zone__prompt">Scanned {{ $document }} Back<br><small>Drop image File here or click to upload</small> </span>
+                      <input type="file" name="documentBack" id="documentBack" class="drop-zone__input form-control"/>
                     </div>
-                    <span class="invalid-feedback" id="error-birthcertificate" role="alert"><strong>The identification document back is required</strong></span>
+                    <span class="invalid-feedback id-doc" id="error-documentBack" role="alert"></span>
                   </div>
                 </div>
+                @endif
               </div>
               <div class="form-row justify-content-end">
                 <div class="mt-3 col-xl-2 col-md-6 order-sm-1 order-3" id="divResetForm">
                     <button type="button" class="btn btn-secondary form-control" id="btnResetForm" onclick="reset_form()">Discard</button>
                 </div>
                 <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2" id="divSaveInformation">
-                    <button type="button" class="btn btn-outline-primary form-control" id="btnSavePayment" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_payment()">
+                    <button type="button" class="btn btn-outline-primary form-control" id="btnSaveId" role="button" aria-expanded="false" aria-controls="declaration" onclick="upload_id()">
                       Upload
-                      <span id="spinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
+                      <span id="spinnerId" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
                     </button>
                 </div>
               </div>
@@ -120,4 +124,6 @@
       </div>
     </div>
     <!-- /CONTENT -->
+    
+    @include('portal.student.documents.scripts')
 @endsection
