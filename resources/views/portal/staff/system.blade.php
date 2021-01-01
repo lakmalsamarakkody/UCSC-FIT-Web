@@ -228,7 +228,7 @@
                     <td>{{ $method->method }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-payment-method"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-warning" id="btnEditPaymentMethod-{{$method->id}}" onclick="edit_payment_method_modal_invoke({{$method->id}})"><i class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-outline-danger" id="btnDeletePaymentMethod-{{$method->id}}" onclick="delete_payment_method({{$method->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>

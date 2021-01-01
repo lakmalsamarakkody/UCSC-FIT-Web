@@ -352,6 +352,7 @@
     </div>
   </div>
   <!--/ CREATE -->
+
   <!-- EDIT -->
   <div class="modal fade" id="modal-edit-student-phase" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
@@ -363,28 +364,32 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="formEditPhase">
+          <form id="formEditStudentPhase">
             <div class="form-group">
               <label for="phaseCode">Phase Code</label>
               <input type="hidden" class="form-control" name="phaseId" id="phaseId">
+              <span class="invalid-feedback" id="error-phaseId" role="alert"></span>
               <input type="text" class="form-control" id="phaseCode" name="phaseCode" aria-describedby="PhaseCodeHelp"/>
               <small id="PhaseCodeHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-phaseCode" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="phaseName">Phase Name</label>
               <input type="text" class="form-control" id="phaseName" name="phaseName" aria-describedby="PhaseNameHelp"/>
               <small id="PhaseNameHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-phaseName" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="phaseDescription">Phase Description</label>
               <input type="text" class="form-control" id="phaseDescription" name="phaseDescription" aria-describedby="PhaseDescHelp"/>
               <small id="PhaseDescHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-phaseDescription" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_student_phase()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditStudentPhase" onclick="edit_student_phase()">Update</button>
         </div>
       </div>
     </div>
@@ -426,7 +431,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Online</h5>
+          <h5 class="modal-title" id="modal-edit-payment-method-title">Online</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -435,6 +440,7 @@
           <form id="formEditPaymentMethod">
             <div class="form-group">
               <label for="paymentMethod">Payment Method</label>
+              <input type="hidden" class="form-control" id="paymentMethodId" name="paymentMethodId" />
               <input type="text" class="form-control" id="paymentMethod" name="paymentMethod" aria-describedby="PaymentMethodHelp"/>
               <small id="PaymentMethodHelp" class="form-text text-muted">any help text</small>
             </div>

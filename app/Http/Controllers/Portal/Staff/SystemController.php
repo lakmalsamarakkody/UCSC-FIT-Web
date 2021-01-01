@@ -13,6 +13,7 @@ use App\Models\Student\Payment\Type;
 use App\Models\Student\Phase;
 use App\Models\User\Permission;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Unique;
 
 use function GuzzleHttp\Promise\all;
@@ -346,7 +347,7 @@ class SystemController extends Controller
   {
     //Validate phase form fields
     $student_phase_validator = Validator::make($request->all(), [
-      'newPhaseCode' => ['required','numeric','unique:App\Models\Student\Phase,code'],
+      'newPhaseCode' => ['required','integer','unique:App\Models\Student\Phase,code'],
       'newPhaseName' => ['required','alpha_space','unique:App\Models\Student\Phase,name'],
       'newPhaseDescription' => ['nullable'],
     ]);
@@ -388,9 +389,26 @@ class SystemController extends Controller
   public function editStudentPhase(Request $request)
   {
     //Validate form data
+    $phase = Phase::find($request->phaseId);
     $edit_student_phase_validator = Validator::make($request->all(), [
-
+      'phaseId'=> ['required', 'integer', 'exists:App\Models\Student\Phase,id'],
+      'phaseCode'=> ['required', 'integer'],
+      'phaseName'=> ['required', 'alpha_space'],
+      'phaseDescription'=> ['nullable'],
     ]);
+
+    //Chack validator fails
+    if($edit_student_phase_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$edit_student_phase_validator->errors()]);
+    else:
+      $student_phase = Phase::find($request->phaseId);
+      $student_phase->code = $request->phaseCode;
+      $student_phase->name = $request->phaseName;
+      $student_phase->description = $request->phaseDescription;
+      if($student_phase->save()):
+        return response()->json(['status'=>'success', 'student_phase'=>$student_phase]);
+      endif;
+    endif;
 
   }
   // /EDIT FUNCTIONS
@@ -443,6 +461,7 @@ class SystemController extends Controller
   {
     //Validate payment method id
     $payment_methodId_validator = Validator::make($request->all(), [
+      'payment_method_id'=> [],
 
     ]);
   }
