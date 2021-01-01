@@ -525,7 +525,7 @@ class SystemController extends Controller
   {
     // Validate payment type form fields
     $payment_type_validator = Validator::make($request->all(), [
-      'newPaymentType' => ['required','alpha_space','unique:App\Models\Student\Payment\Type,type'],
+      'newPaymentType' => ['required','alpha_space','unique:App\Models\Student\Payment\Type,name'],
     ]);
     //Check validation errors
     if($payment_type_validator->fails()):
@@ -547,8 +547,17 @@ class SystemController extends Controller
   {
     //Validate payment type id
     $payment_typeId_validator = Validator::make($request->all(), [
-
+      'edit_payment_type_id'=> ['required', 'integer', 'exists:App\Models\Student\Payment\Type,id'],
     ]);
+
+    //Check validator fails
+    if($payment_typeId_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$payment_typeId_validator->errors()]);
+    else:
+      $edit_payment_type = Type::find($request->edit_payment_type_id);
+      return response()->json(['status'=>'success', 'edit_payment_type'=>$edit_payment_type]);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
 
   }
 

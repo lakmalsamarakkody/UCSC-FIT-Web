@@ -487,12 +487,13 @@
     </div>
   </div>
   <!--/ CREATE -->
+
   <!-- EDIT -->
   <div class="modal fade" id="modal-edit-payment-type" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Year Registration</h5>
+          <h5 class="modal-title" id="modal-edit-payment-type-title">Payment Type</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -500,15 +501,16 @@
         <div class="modal-body">
           <form id="formEditPaymentType">
             <div class="form-group">
-              <label for="paymentType">Payment Type</label>
-              <input type="text" class="form-control" id="paymentType" name="paymentType" aria-describedby="PaymentTypeHelp"/>
+              <label for="paymentTypeName">Payment Type</label>
+              <input type="hidden" class="form-control" name="paymentTypeId" id="paymentTypeId">
+              <input type="text" class="form-control" id="paymentTypeName" name="paymentTypeName" aria-describedby="PaymentTypeHelp"/>
               <small id="PaymentTypeHelp" class="form-text text-muted">any help text</small>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_payment_type()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditPaymentType" onclick="edit_payment_type()">Update</button>
         </div>
       </div>
     </div>

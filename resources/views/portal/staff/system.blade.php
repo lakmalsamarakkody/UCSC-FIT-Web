@@ -259,10 +259,10 @@
                 <thead>
                   @foreach ($payment_types as $type)
                   <tr id="tbl-paymentType-tr-{{$type->id}}">
-                    <td>{{ $type->type }}</td>
+                    <td>{{ $type->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-payment-type"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-warning" id="btnEditPaymentType-{{$type->id}}" onclick="edit_payment_type_modal_invoke({{$type->id}});"><i class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-outline-danger" id="btnDeletePaymentType-{{$type->id}}" onclick="delete_payment_type({{$type->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>

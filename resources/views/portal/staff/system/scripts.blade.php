@@ -1283,7 +1283,42 @@
     })
   }
   // /CREATE
+
   // EDIT
+  // Fill modal with relevant data
+  edit_payment_type_modal_invoke = (edit_payment_type_id) => {
+    //Form payload
+    var formData = new FormData();
+    formData.append('edit_payment_type_id',edit_payment_type_id);
+
+    //Edit payment type get details
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/system/editPaymentTypeGetDetails') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){$('#btnEditPaymentType-'+edit_payment_type_id).attr('disabled', 'disabled');},
+      success: function(data){
+        console.log('Success in edit payment type get details ajax.');
+        if(data['status'] == 'success'){
+          $('#modal-edit-payment-type-title').html(data['edit_payment_type']['name']);
+          $('#paymentTypeId').val(data['edit_payment_type']['id']);
+          $('#paymentTypeName').val(data['edit_payment_type']['name']);
+          $('#modal-edit-payment-type').modal('show');
+          $('#btnEditPaymentType-'+edit_payment_type_id).removeAttr('disabled', 'disabled');
+        }
+      },
+      error: function(err){
+        console.log('Érror in edit payment type get details ajax.');
+        $('#btnEditPaymentType-'+edit_payment_type_id).removeAttr('disabled', 'disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+  // /Fill modal with relevant data
+
   edit_payment_type = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
