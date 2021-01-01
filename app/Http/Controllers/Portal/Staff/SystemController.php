@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User\Role;
 use App\Models\Subject;
 use App\Models\Exam\Types;
+use App\Models\Student\Payment;
 use App\Models\Student\Payment\Method;
 use App\Models\Student\Payment\Type;
 use App\Models\Student\Phase;
@@ -439,7 +440,7 @@ class SystemController extends Controller
   {
     // Validate payment method form fields
     $payment_method_validator = Validator::make($request->all(), [
-      'newPaymentMethod' => ['required','alpha_space','unique:App\Models\Student\Payment\Method,method'],
+      'newPaymentMethod' => ['required','alpha_space','unique:App\Models\Student\Payment\Method,name'],
     ]);
     //Check validation errors
     if($payment_method_validator->fails()):
@@ -447,7 +448,7 @@ class SystemController extends Controller
     //Otherwise, Store data to the table
     else:
       $payment_method = new Method();
-      $payment_method->method = $request->newPaymentMethod;
+      $payment_method->name = $request->newPaymentMethod;
       if($payment_method->save()):
         return response()->json(['status'=>'success', 'payment_method'=>$payment_method]);
       endif;
@@ -461,9 +462,18 @@ class SystemController extends Controller
   {
     //Validate payment method id
     $payment_methodId_validator = Validator::make($request->all(), [
-      'payment_method_id'=> [],
-
+      'payment_method_id'=> ['required', 'integer', 'exists:App\Models\Student\Payment\Method,id'],
     ]);
+
+    //Check validator fails
+    if($payment_methodId_validator->fails()):
+      return response()->json(['status'=>'erros', 'errors'=>$payment_methodId_validator->errors()]);
+    else:
+      if($payment_method = Method::find($request->payment_method_id)):
+        return response()->json(['status'=>'success', 'payment_method'=>$payment_method]);
+      endif;
+    endif;
+    return response()->json(['status'=> 'error', 'data'=>$request->all()]);
   }
 
   public function editPaymentMethod(Request $request)

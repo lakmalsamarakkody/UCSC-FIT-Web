@@ -439,9 +439,9 @@
         <div class="modal-body">
           <form id="formEditPaymentMethod">
             <div class="form-group">
-              <label for="paymentMethod">Payment Method</label>
+              <label for="paymentMethodName">Payment Method</label>
               <input type="hidden" class="form-control" id="paymentMethodId" name="paymentMethodId" />
-              <input type="text" class="form-control" id="paymentMethod" name="paymentMethod" aria-describedby="PaymentMethodHelp"/>
+              <input type="text" class="form-control" id="paymentMethodName" name="paymentMethodName" aria-describedby="PaymentMethodHelp"/>
               <small id="PaymentMethodHelp" class="form-text text-muted">any help text</small>
             </div>
           </form>

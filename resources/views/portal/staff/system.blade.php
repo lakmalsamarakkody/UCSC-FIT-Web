@@ -225,7 +225,7 @@
                 <thead>
                   @foreach ($payment_methods as $method)
                   <tr id="tbl-paymentMethod-tr-{{$method->id}}">
-                    <td>{{ $method->method }}</td>
+                    <td>{{ $method->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" id="btnEditPaymentMethod-{{$method->id}}" onclick="edit_payment_method_modal_invoke({{$method->id}})"><i class="fas fa-edit"></i></button>

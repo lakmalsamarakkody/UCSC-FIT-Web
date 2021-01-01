@@ -1071,11 +1071,40 @@
   // /CREATE
 
   // EDIT
-  edit_payment_method_modal_invoke = (payment_method_id) => {
+  // Fill modal with relevant data
+  edit_payment_method_modal_invoke = (payment_method_id) =>{
     //Form payload
     var formData = new FormData();
     formData.append('payment_method_id', payment_method_id);
+
+    //Edit payment method get details
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/system/editPaymentMethodGetDetails') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){$('#btnEditPaymentMethod-'+payment_method_id).attr('disabled', 'disabled');},
+      success: function(data){
+        console.log('Success in edit payment method get details ajax.');
+        if(data['status'] == 'success'){
+          $('#modal-edit-payment-method-title').html(data['payment_method']['name']);
+          $('#paymentMethodId').val(data['payment_method']['id']);
+          $('#paymentMethodName').val(data['payment_method']['name']);
+          $('#modal-edit-payment-method').modal('show');
+          $('#btnEditPaymentMethod-'+payment_method_id).removeAttr('disabled', 'disabled');
+        }
+      },
+      error: function(err){
+        console.log('Error in edit payment method ajax.');
+        $('#btnEditPaymentMethod-'+payment_method_id).removeAttr('disabled', 'disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
   }
+  // /Fill modal with relevant data
+
   edit_payment_method = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
