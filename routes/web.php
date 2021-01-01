@@ -146,6 +146,9 @@ Route::get('/guest/{email}/fit/{token}', [App\Http\Controllers\Portal\Student\Us
 Route::post('/guest/update/account', [App\Http\Controllers\Portal\Student\UserController::class,'updateAccount'])->name('update.account');
 
 Route::get('/portal/student/document/registration',[App\Http\Controllers\Portal\Student\DocumentController::class,'index'])->name('document.registration');
+Route::post('/portal/student/document/registration/birth',[App\Http\Controllers\Portal\Student\DocumentController::class,'uploadBirth'])->name('document.birth');
+Route::post('/portal/student/document/registration/id',[App\Http\Controllers\Portal\Student\DocumentController::class,'uploadId'])->name('document.id');
+
 
 
 
