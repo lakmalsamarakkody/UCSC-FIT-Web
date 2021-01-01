@@ -17,13 +17,13 @@ class PaymentMethodSeeder extends Seeder
         DB::table('payment_methods')->insert(
             array (
                 [
-                    'method'=>'online',
+                    'name'=>'online',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 
                 [
-                    'method'=>'bank slip',
+                    'name'=>'bank slip',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ]

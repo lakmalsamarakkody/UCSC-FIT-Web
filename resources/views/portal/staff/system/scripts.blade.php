@@ -740,6 +740,7 @@
     })
   }
   // /EDIT
+
   //DELETE
   delete_exam_type = (exam_type_id) => {
     SwalQuestionDanger.fire({
@@ -899,11 +900,50 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Updated!',
-          text: 'Student phase has been updated.',
-        })
-        $('#modal-edit-student-phase').modal('hide')
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedaback').hide();
+        //Form payload
+        var formData = new FormData($('#formEditStudentPhase')[0]);
+
+        //Edit student phase
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/editStudentPhase') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnModalEditStudentPhase').attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in edit student phase ajax.');
+            $('#btnModalEditStudentPhase').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating student phase data.');
+              $('small').hide();
+              $.each(data['errors'], function(key,value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in edit student phase.');
+              SwalDoneSuccess.fire({
+                title: 'Updated!',
+                text: 'Student phase has been updated.',
+              })
+              $('#modal-edit-student-phase').modal('hide')
+              location.reload();
+            }
+          },
+          error: function(err){
+            console.log('Error in edit student phase ajax.')
+            $('#btnModalEditStudentPhase').removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
@@ -1031,6 +1071,40 @@
   // /CREATE
 
   // EDIT
+  // Fill modal with relevant data
+  edit_payment_method_modal_invoke = (payment_method_id) =>{
+    //Form payload
+    var formData = new FormData();
+    formData.append('payment_method_id', payment_method_id);
+
+    //Edit payment method get details
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/system/editPaymentMethodGetDetails') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){$('#btnEditPaymentMethod-'+payment_method_id).attr('disabled', 'disabled');},
+      success: function(data){
+        console.log('Success in edit payment method get details ajax.');
+        if(data['status'] == 'success'){
+          $('#modal-edit-payment-method-title').html(data['payment_method']['name']);
+          $('#paymentMethodId').val(data['payment_method']['id']);
+          $('#paymentMethodName').val(data['payment_method']['name']);
+          $('#modal-edit-payment-method').modal('show');
+          $('#btnEditPaymentMethod-'+payment_method_id).removeAttr('disabled', 'disabled');
+        }
+      },
+      error: function(err){
+        console.log('Error in edit payment method ajax.');
+        $('#btnEditPaymentMethod-'+payment_method_id).removeAttr('disabled', 'disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+  // /Fill modal with relevant data
+
   edit_payment_method = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
