@@ -301,8 +301,20 @@ class SystemController extends Controller
   {
     //Validate form data
     $edit_exam_type_validator = Validator::make($request->all(), [
-
+      'examTypeId'=> ['required', 'integer', 'exists:App\Models\Exam\Types,id'],
+      'examTypeName'=> ['required', 'alpha_dash_space'],
     ]);
+
+    //Check validator fails
+    if($edit_exam_type_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$edit_exam_type_validator->errors()]);
+    else:
+      $exam_type = Types::find($request->examTypeId);
+      $exam_type->name = $request->examTypeName;
+      if($exam_type->save()):
+        return response()->json(['status'=>'success', 'exma_type'=>$exam_type]);
+      endif;
+    endif;
 
   }
   // EDIT FUNCTIONS

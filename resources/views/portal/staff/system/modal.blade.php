@@ -294,14 +294,16 @@
             <div class="form-group">
               <label for="examTypeName">Name</label>
               <input type="hidden" class="form-control" id="examTypeId" name="examTypeId" />
+              <span class="invalid-feedback" id="error-examTypeId" role="alert"></span>
               <input type="Ename" class="form-control" id="examTypeName" name="examTypeName" aria-describedby="ETnameHelp"/>
               <small id="ETnameHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-examTypeName" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_exam_type()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditExamType" onclick="edit_exam_type()">Update</button>
         </div>
       </div>
     </div>

@@ -224,6 +224,7 @@
   // /CREATE
 
   // EDIT
+  // Fill modal with relevant data
   edit_permission_modal_invoke = (permission_id) =>{
     //Payload
     var formData = new FormData();
@@ -256,6 +257,7 @@
       }
     });
   }
+  // /Fill modal with relevant data
 
   edit_permission = () => {
     SwalQuestionSuccessAutoClose.fire({
@@ -303,8 +305,8 @@
             }
           },
           error: function(err){
-            $('#btnModalEditPermission').removeAttr('disabled','disabled');
             console.log('Error in edit permission ajax.');
+            $('#btnModalEditPermission').removeAttr('disabled','disabled');
             SwalSystemErrorDanger.fire();
           }
         });
@@ -432,6 +434,7 @@
   // /CREATE
 
   // EDIT
+  // Fill modal with relevant data
   edit_subject_modal_invoke = (subject_id) => {
     //Form payload
     var formData = new FormData();
@@ -464,6 +467,7 @@
       }
     });
   }
+  // /Fill modal with relevant data
 
   edit_subject = () => {
     SwalQuestionSuccessAutoClose.fire({
@@ -638,7 +642,9 @@
     })
   }
   // /CREATE
+
   // EDIT
+  // Fill modal with relevant data
   edit_exam_type_modal_invoke = (exam_type_id) => {
     //Form payload
     var formData = new FormData();
@@ -670,6 +676,8 @@
       }
     });
   }
+  // /Fill modal with relevant data
+
   edit_exam_type = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
@@ -678,11 +686,50 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Updated!',
-          text: 'Exam type has been updated.',
-        })
-        $('#modal-edit-exam-type').modal('hide')
+        //Remove previous validation error messages
+        $('.from-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //From payload
+        var formData = new FormData($('#formEditExamType')[0]);
+
+        //Edit exam type
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/editExamType') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnModalEditExamType').attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in edit exam type ajax.');
+            $('#btnModalEditExamType').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating data.');
+              $('small').hide();
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in edit exam type.')
+              SwalDoneSuccess.fire({
+                title: 'Updated!',
+                text: 'Exam type has been updated.',
+              })
+              $('#modal-edit-exam-type').modal('hide')
+              location.reload();
+            }
+          },
+          error: function(err){
+            console.log('Error in edit exam type ajax.');
+            $('#btnModalEditExamType').removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
@@ -806,7 +853,9 @@
     })
   }
   // /CREATE
+
   // EDIT
+  // Fill modal with relevant data
   edit_student_phase_modal_invoke = (student_phase_id) => {
     //Form payload
     var formData = new FormData();
@@ -840,6 +889,7 @@
       }
     });
   }
+  // /Fill modal with relevant data
 
   edit_student_phase = () => {
     SwalQuestionSuccessAutoClose.fire({
@@ -864,6 +914,7 @@
     })
   }
   // /EDIT
+
   // DELETE
   delete_student_phase = (phase_id) => {
     SwalQuestionDanger.fire({
@@ -978,6 +1029,7 @@
     })
   }
   // /CREATE
+
   // EDIT
   edit_payment_method = () => {
     SwalQuestionSuccessAutoClose.fire({
