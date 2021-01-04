@@ -8,11 +8,14 @@ use Illuminate\Http\Request;
 use App\Models\User\Role;
 use App\Models\Subject;
 use App\Models\Exam\Types;
+use App\Models\Student\Payment;
 use App\Models\Student\Payment\Method;
 use App\Models\Student\Payment\Type;
 use App\Models\Student\Phase;
 use App\Models\User\Permission;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 
 use function GuzzleHttp\Promise\all;
 
@@ -89,7 +92,7 @@ class SystemController extends Controller
     //Validate permission form fields
     $permission_validator = Validator::make($request->all(), [
       'newPermissionName'=> ['required','alpha_space','unique:App\Models\User\Permission,name'],
-      'newPermissionDescription'=> ['nullable'],
+      'newPermissionDescription'=> ['required'],
     ]);
 
     //Check validation errors
@@ -123,6 +126,28 @@ class SystemController extends Controller
       return response()->json(['status'=>'success', 'permission'=>$permission]);
     endif;
     return response()->json(['status'=> 'error', 'data'=>$request->all()]);
+  }
+
+  public function editPermission(Request $request)
+  {
+    //Validating form data
+    $edit_permission_validator = Validator::make($request->all(), [
+      'permissionID'=>['required', 'integer', 'exists:App\Models\User\Permission,id'],
+      'permissionName'=>['required', 'alpha_space'],
+      'permissionDescription'=>['required'],
+    ]);
+
+    //Check validator fails
+    if($edit_permission_validator->fails()):
+      return response()->json(['stutus'=>'error', 'errors'=>$edit_permission_validator->errors()]);
+    else:
+      $permission = Permission::find($request->permissionID);
+      $permission->name = $request->permissionName;
+      $permission->description = $request->permissionDescription;
+      if($permission->save()):
+        return response()->json(['status'=> 'success', 'permission'=>$permission]);
+      endif;
+    endif;
   }
   // /EDIT FUNCTIONS
 
@@ -188,6 +213,28 @@ class SystemController extends Controller
     endif;
     return response()->json(['status'=> 'error', 'data'=>$request->all()]);
   }
+
+  public function editSubject(Request $request)
+  {
+    //Validate form data
+    $edit_subject_validator = Validator::make($request->all(), [
+      'subjectId'=> ['required','integer', 'exists:App\Models\Subject,id'],
+      'subjectCode'=> ['required', 'integer'],
+      'subjectName'=> ['required', 'alpha_space'],
+    ]);
+
+    //Check validator fails
+    if($edit_subject_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$edit_subject_validator->errors()]);
+    else:
+      $subject = Subject::find($request->subjectId);
+      $subject->code = $request->subjectCode;
+      $subject->name = $request->subjectName;
+      if($subject->save()):
+        return response()->json(['status'=>'success', 'subject'=>$subject]);
+      endif;
+    endif;
+  }
   // /EDIT FUNCTIONS
 
   // DELETE FUNCTION
@@ -251,6 +298,27 @@ class SystemController extends Controller
     endif;
     return response()->json(['status'=>'error', 'data'=>$request->all()]);
   }
+
+  public function editExamType(Request $request)
+  {
+    //Validate form data
+    $edit_exam_type_validator = Validator::make($request->all(), [
+      'examTypeId'=> ['required', 'integer', 'exists:App\Models\Exam\Types,id'],
+      'examTypeName'=> ['required', 'alpha_dash_space'],
+    ]);
+
+    //Check validator fails
+    if($edit_exam_type_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$edit_exam_type_validator->errors()]);
+    else:
+      $exam_type = Types::find($request->examTypeId);
+      $exam_type->name = $request->examTypeName;
+      if($exam_type->save()):
+        return response()->json(['status'=>'success', 'exma_type'=>$exam_type]);
+      endif;
+    endif;
+
+  }
   // EDIT FUNCTIONS
 
   // DELETE FUNCTION
@@ -280,7 +348,7 @@ class SystemController extends Controller
   {
     //Validate phase form fields
     $student_phase_validator = Validator::make($request->all(), [
-      'newPhaseCode' => ['required','numeric','unique:App\Models\Student\Phase,code'],
+      'newPhaseCode' => ['required','integer','unique:App\Models\Student\Phase,code'],
       'newPhaseName' => ['required','alpha_space','unique:App\Models\Student\Phase,name'],
       'newPhaseDescription' => ['nullable'],
     ]);
@@ -318,6 +386,32 @@ class SystemController extends Controller
     endif;
     return response()->json(['status'=>'error', 'data'=>$request->all()]);
   }
+
+  public function editStudentPhase(Request $request)
+  {
+    //Validate form data
+    $phase = Phase::find($request->phaseId);
+    $edit_student_phase_validator = Validator::make($request->all(), [
+      'phaseId'=> ['required', 'integer', 'exists:App\Models\Student\Phase,id'],
+      'phaseCode'=> ['required', 'integer'],
+      'phaseName'=> ['required', 'alpha_space'],
+      'phaseDescription'=> ['nullable'],
+    ]);
+
+    //Chack validator fails
+    if($edit_student_phase_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$edit_student_phase_validator->errors()]);
+    else:
+      $student_phase = Phase::find($request->phaseId);
+      $student_phase->code = $request->phaseCode;
+      $student_phase->name = $request->phaseName;
+      $student_phase->description = $request->phaseDescription;
+      if($student_phase->save()):
+        return response()->json(['status'=>'success', 'student_phase'=>$student_phase]);
+      endif;
+    endif;
+
+  }
   // /EDIT FUNCTIONS
 
   // DELETE FUNCTION
@@ -346,7 +440,7 @@ class SystemController extends Controller
   {
     // Validate payment method form fields
     $payment_method_validator = Validator::make($request->all(), [
-      'newPaymentMethod' => ['required','alpha_space','unique:App\Models\Student\Payment\Method,method'],
+      'newPaymentMethod' => ['required','alpha_space','unique:App\Models\Student\Payment\Method,name'],
     ]);
     //Check validation errors
     if($payment_method_validator->fails()):
@@ -354,7 +448,7 @@ class SystemController extends Controller
     //Otherwise, Store data to the table
     else:
       $payment_method = new Method();
-      $payment_method->method = $request->newPaymentMethod;
+      $payment_method->name = $request->newPaymentMethod;
       if($payment_method->save()):
         return response()->json(['status'=>'success', 'payment_method'=>$payment_method]);
       endif;
@@ -368,8 +462,39 @@ class SystemController extends Controller
   {
     //Validate payment method id
     $payment_methodId_validator = Validator::make($request->all(), [
-
+      'payment_method_id'=> ['required', 'integer', 'exists:App\Models\Student\Payment\Method,id'],
     ]);
+
+    //Check validator fails
+    if($payment_methodId_validator->fails()):
+      return response()->json(['status'=>'erros', 'errors'=>$payment_methodId_validator->errors()]);
+    else:
+      if($payment_method = Method::find($request->payment_method_id)):
+        return response()->json(['status'=>'success', 'payment_method'=>$payment_method]);
+      endif;
+    endif;
+    return response()->json(['status'=> 'error', 'data'=>$request->all()]);
+  }
+
+  public function editPaymentMethod(Request $request)
+  {
+    //Validate form data
+    $edit_payment_method_validator = Validator::make($request->all(), [
+      'paymentMethodId'=> ['required', 'integer', 'exists:App\Models\Student\Payment\Method,id'],
+      'paymentMethodName'=> ['required', 'alpha_space'],
+    ]);
+
+    //Check validator fails
+    if($edit_payment_method_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$edit_payment_method_validator->errors()]);
+    else:
+      $payment_method = Method::find($request->paymentMethodId);
+      $payment_method->name = $request->paymentMethodName;
+      if($payment_method->save()):
+        return response()->json(['status'=>'success', 'payment_method'=>$payment_method]);
+      endif;
+    endif;
+
   }
   // /EDIT FUNCTIONS
 
@@ -400,7 +525,7 @@ class SystemController extends Controller
   {
     // Validate payment type form fields
     $payment_type_validator = Validator::make($request->all(), [
-      'newPaymentType' => ['required','alpha_space','unique:App\Models\Student\Payment\Type,type'],
+      'newPaymentType' => ['required','alpha_space','unique:App\Models\Student\Payment\Type,name'],
     ]);
     //Check validation errors
     if($payment_type_validator->fails()):
@@ -422,8 +547,27 @@ class SystemController extends Controller
   {
     //Validate payment type id
     $payment_typeId_validator = Validator::make($request->all(), [
+      'edit_payment_type_id'=> ['required', 'integer', 'exists:App\Models\Student\Payment\Type,id'],
+    ]);
+
+    //Check validator fails
+    if($payment_typeId_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$payment_typeId_validator->errors()]);
+    else:
+      $edit_payment_type = Type::find($request->edit_payment_type_id);
+      return response()->json(['status'=>'success', 'edit_payment_type'=>$edit_payment_type]);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+
+  }
+
+  public function editPaymentType(Request $request)
+  {
+    //Validate form data
+    $edit_payment_type_validator = Validator::make($request->all(), [
 
     ]);
+    
   }
   // /EDIT FUNCTIONS
 

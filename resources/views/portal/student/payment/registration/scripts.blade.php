@@ -1,6 +1,6 @@
 @section('script')
 <script type="text/javascript">
-  // SEND EMAIL
+  // SAVE PAYMENT
   save_payment = () => {
 
     
@@ -60,6 +60,6 @@
       }
     });
   }
-  // /SEND EMAIL
+  // /SAVE PAYMENT
 </script>
 @endsection

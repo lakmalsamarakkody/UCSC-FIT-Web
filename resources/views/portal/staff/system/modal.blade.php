@@ -158,17 +158,20 @@
             <div class="form-group">
               <label for="permissionName">Permission Name</label>
               <input type="hidden" class="form-control" id="permissionID" name="permissionID" />
+              <span class="invalid-feedback" id="error-permissionID" role="alert"></span>
               <input type="text" class="form-control" id="permissionName" name="permissionName" />
+              <span class="invalid-feedback" id="error-permissionName" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="permissionDescription">Permission Description</label>
               <input type="text" class="form-control" id="permissionDescription" name="permissionDescription" />
+              <span class="invalid-feedback" id="error-permissionDescription" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_permission()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditPermission" onclick="edit_permission()">Update</button>
         </div>
       </div>
     </div>
@@ -226,18 +229,21 @@
             <div class="form-group">
               <label for="subjectCode">Subject Code</label>
               <input type="hidden" class="form-control" id="subjectId" name="subjectId" />
+              <span class="invalid-feedback" id="error-subjectId" role="alert"></span>
               <input type="Scode" class="form-control" id="subjectCode" name="subjectCode" aria-describedby="ScodeHelp"/>
               <small id="ScodeHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-subjectCode" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="subjectName">Subject Name</label>
               <input type="text" class="form-control" id="subjectName" name="subjectName"/>
+              <span class="invalid-feedback" id="error-subjectName" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_subject()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditSubject"onclick="edit_subject()">Update</button>
         </div>
       </div>
     </div>
@@ -288,14 +294,16 @@
             <div class="form-group">
               <label for="examTypeName">Name</label>
               <input type="hidden" class="form-control" id="examTypeId" name="examTypeId" />
+              <span class="invalid-feedback" id="error-examTypeId" role="alert"></span>
               <input type="Ename" class="form-control" id="examTypeName" name="examTypeName" aria-describedby="ETnameHelp"/>
               <small id="ETnameHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-examTypeName" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_exam_type()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditExamType" onclick="edit_exam_type()">Update</button>
         </div>
       </div>
     </div>
@@ -344,6 +352,7 @@
     </div>
   </div>
   <!--/ CREATE -->
+
   <!-- EDIT -->
   <div class="modal fade" id="modal-edit-student-phase" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
@@ -355,28 +364,32 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="formEditPhase">
+          <form id="formEditStudentPhase">
             <div class="form-group">
               <label for="phaseCode">Phase Code</label>
               <input type="hidden" class="form-control" name="phaseId" id="phaseId">
+              <span class="invalid-feedback" id="error-phaseId" role="alert"></span>
               <input type="text" class="form-control" id="phaseCode" name="phaseCode" aria-describedby="PhaseCodeHelp"/>
               <small id="PhaseCodeHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-phaseCode" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="phaseName">Phase Name</label>
               <input type="text" class="form-control" id="phaseName" name="phaseName" aria-describedby="PhaseNameHelp"/>
               <small id="PhaseNameHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-phaseName" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="phaseDescription">Phase Description</label>
               <input type="text" class="form-control" id="phaseDescription" name="phaseDescription" aria-describedby="PhaseDescHelp"/>
               <small id="PhaseDescHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-phaseDescription" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_student_phase()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditStudentPhase" onclick="edit_student_phase()">Update</button>
         </div>
       </div>
     </div>
@@ -418,7 +431,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Online</h5>
+          <h5 class="modal-title" id="modal-edit-payment-method-title">Online</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -426,15 +439,18 @@
         <div class="modal-body">
           <form id="formEditPaymentMethod">
             <div class="form-group">
-              <label for="paymentMethod">Payment Method</label>
-              <input type="text" class="form-control" id="paymentMethod" name="paymentMethod" aria-describedby="PaymentMethodHelp"/>
+              <label for="paymentMethodName">Payment Method</label>
+              <input type="hidden" class="form-control" id="paymentMethodId" name="paymentMethodId" />
+              <span class="invalid-feedback" id="error-paymentMethodId" role="alert"></span>
+              <input type="text" class="form-control" id="paymentMethodName" name="paymentMethodName" aria-describedby="PaymentMethodHelp"/>
               <small id="PaymentMethodHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-paymentMethodName" role="alert"></span>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_payment_method()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditPaymentMethod" onclick="edit_payment_method()">Update</button>
         </div>
       </div>
     </div>
@@ -471,12 +487,13 @@
     </div>
   </div>
   <!--/ CREATE -->
+
   <!-- EDIT -->
   <div class="modal fade" id="modal-edit-payment-type" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Year Registration</h5>
+          <h5 class="modal-title" id="modal-edit-payment-type-title">Payment Type</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -484,15 +501,16 @@
         <div class="modal-body">
           <form id="formEditPaymentType">
             <div class="form-group">
-              <label for="paymentType">Payment Type</label>
-              <input type="text" class="form-control" id="paymentType" name="paymentType" aria-describedby="PaymentTypeHelp"/>
+              <label for="paymentTypeName">Payment Type</label>
+              <input type="hidden" class="form-control" name="paymentTypeId" id="paymentTypeId">
+              <input type="text" class="form-control" id="paymentTypeName" name="paymentTypeName" aria-describedby="PaymentTypeHelp"/>
               <small id="PaymentTypeHelp" class="form-text text-muted">any help text</small>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_payment_type()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditPaymentType" onclick="edit_payment_type()">Update</button>
         </div>
       </div>
     </div>
