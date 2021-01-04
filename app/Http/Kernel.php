@@ -66,11 +66,11 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'revalidate' => \App\Http\Middleware\RevalidateBackHistory::class,
-        'registration.check' => \App\Http\Middleware\Portal\Student\Registration\RegistrationCheck::class,
-        'student.auth' => \App\Http\Middleware\Portal\Student\StudentAuthorization::class,
         'staff.auth' => \App\Http\Middleware\Portal\Staff\StaffAuthorization::class,
-        'submit.check' => \App\Http\Middleware\Portal\Student\Registration\ApplicationSubmitCheck::class,
-        'payment' => \App\Http\Middleware\Portal\Student\Payment\ViewPaymentPage::class,
-        'payment.submit.check' => \App\Http\Middleware\Portal\Student\Payment\PaymentSubmitCheck::class
+        'student.registration.check' => \App\Http\Middleware\Portal\Student\Registration\RegistrationCheck::class,
+        'student.auth' => \App\Http\Middleware\Portal\Student\StudentAuthorization::class,
+        'student.submit.check' => \App\Http\Middleware\Portal\Student\Registration\ApplicationSubmitCheck::class,
+        'student.payment' => \App\Http\Middleware\Portal\Student\Payment\ViewPaymentPage::class,
+        'student.payment.submit.check' => \App\Http\Middleware\Portal\Student\Payment\PaymentSubmitCheck::class
     ];
 }

@@ -65,6 +65,14 @@ class SystemController extends Controller
   }
   // /CREATE FUNCTION
 
+  // VIEW FUNCTION
+  public function viewUserRoleGetDetails(Request $request)
+  {
+    
+  }
+  // /VIEW FUNCTION
+
+
   // DELETE FUNCTION
   public function deleteUserRole(Request $request)
   {
@@ -264,7 +272,7 @@ class SystemController extends Controller
   {
     //Validate exam type form fields
     $exam_type_validator = Validator::make($request->all(), [
-      'newExamTypeName'=> ['required','alpha_dash_space'],
+      'newExamTypeName'=> ['required','alpha_dash_space', 'unique:App\Models\Exam\Types,name'],
     ]);
     //Check validation errors
     if($exam_type_validator->fails()):
@@ -533,7 +541,7 @@ class SystemController extends Controller
     //Otherwise, Store data to the table
     else:
       $payment_type = new Type();
-      $payment_type->type = $request->newPaymentType;
+      $payment_type->name = $request->newPaymentType;
       if($payment_type->save()):
         return response()->json(['status'=>'success', 'payment_type'=>$payment_type]);
       endif;

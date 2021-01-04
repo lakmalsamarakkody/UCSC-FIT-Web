@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Portal\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use App\Models\Student\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,8 @@ class PaymentController extends Controller
   {
     $this->middleware('auth');
     $this->middleware('revalidate');
-    $this->middleware('payment');
+    $this->middleware('student.auth');
+    $this->middleware('student.payment');
   }
 
   /**
@@ -41,7 +43,7 @@ class PaymentController extends Controller
     $validator = Validator::make($request->all(), 
       [     
           'paidBank'=> ['required'],
-          'paidBankCode'=>['required','integer'],
+          'paidBankCode'=>['required','numeric'],
           'paidDate'=>['required', 'before_or_equal:today'],
           'paidAmount'=>['required', 'numeric'],
           'bankSlip'=>['required', 'image']
@@ -50,23 +52,27 @@ class PaymentController extends Controller
     if($validator->fails()):
       return response()->json(['errors'=>$validator->errors()]);
     else:
-      $student_id = Auth::user()->student->id;
+      $student = Student::where('user_id', Auth::user()->id)->first();
       $payment = new Payment();
       $payment->method_id = 2;
       $payment->type_id = 1;
-      $payment->student_id = $student_id;
-      $payment->amount = $request->paidAmount;
+      $payment->student_id = $student->id;
+      $payment->amount = $request->paidAmount;  
+      $payment->bank = "PEOPLE'S BANK";
       $payment->bank_branch = $request->paidBank;
       $payment->branch_code = $request->paidBankCode;
       $payment->paid_date = $request->paidDate;
 
       $file_ext = $request->file('bankSlip')->getClientOriginalExtension();
-      $file_name = $student_id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
+      $file_name = $student->id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
 
       $payment->payment_image = $file_name;
 
       if($path = $request->file('bankSlip')->storeAs('public/bank_slips/registration',$file_name)):
         if($payment->save()):
+          $student->registration()->update([
+            'payment_id' => $payment->id,
+          ]);
           return response()->json(['success'=>'success']);
         endif;
 

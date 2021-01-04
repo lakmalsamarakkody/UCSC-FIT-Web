@@ -12,24 +12,25 @@ class DocumentController extends Controller
 {
     public function __construct() 
     {
-        $this->middleware('payment.submit.check');
+        $this->middleware('student.auth');
+        $this->middleware('student.payment.submit.check');
     }
+    
     public function index()
     {
         $student = Student::where('user_id', Auth::user()->id)->first();
         if($student->nic_old != Null || $student->nic_new != Null):
             $document='NIC';
-        else: 
+        else:
             if($student->postal != Null):
-                $document='Postal ID';
+                $document='Postal';
             else:
                 if($student->passport != Null):
                     $document='Passport';
                 endif;
             endif;
-
         endif;
-        return view('portal/student/documents', compact('student', 'document'));
+        return view('portal/student/documents/documents', compact('student', 'document'));
     }
 
     public function uploadBirth(Request $request)
