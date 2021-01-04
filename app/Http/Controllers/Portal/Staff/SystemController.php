@@ -139,7 +139,7 @@ class SystemController extends Controller
 
     //Check validator fails
     if($edit_permission_validator->fails()):
-      return response()->json(['stutus'=>'error', 'errors'=>$edit_permission_validator->errors()]);
+      return response()->json(['status'=>'error', 'errors'=>$edit_permission_validator->errors()]);
     else:
       $permission = Permission::find($request->permissionID);
       $permission->name = $request->permissionName;
@@ -525,7 +525,7 @@ class SystemController extends Controller
   {
     // Validate payment type form fields
     $payment_type_validator = Validator::make($request->all(), [
-      'newPaymentType' => ['required','alpha_space','unique:App\Models\Student\Payment\Type,name'],
+      'newPaymentType' => ['required','alpha_dash_space','unique:App\Models\Student\Payment\Type,name'],
     ]);
     //Check validation errors
     if($payment_type_validator->fails()):
@@ -565,9 +565,20 @@ class SystemController extends Controller
   {
     //Validate form data
     $edit_payment_type_validator = Validator::make($request->all(), [
-
+      'paymentTypeId'=> ['required', 'integer', 'exists:App\Models\Student\Payment\Type,id'],
+      'paymentTypeName'=> ['required', 'alpha_dash_space'],
     ]);
-    
+
+    //Check validator fails
+    if($edit_payment_type_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$edit_payment_type_validator->errors()]);
+    else:
+      $payment_type = Type::find($request->paymentTypeId);
+      $payment_type->name = $request->paymentTypeName;
+      if($payment_type->save()):
+        return response()->json(['status'=>'success', 'payment_type'=>$payment_type]);
+      endif;
+    endif;
   }
   // /EDIT FUNCTIONS
 
