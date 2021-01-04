@@ -83,6 +83,7 @@ Route::get('/portal/staff/user/profile',[App\Http\Controllers\Portal\Staff\Users
 Route::get('/portal/staff/system', [App\Http\Controllers\Portal\Staff\SystemController::class, 'index'])->name('system');
 
 Route::post('/portal/staff/system/createUserRole', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createUserRole']);
+Route::post('/portal/staff/system/viewUserRoleGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'viewUserRoleGetDetails']);
 Route::post('/portal/staff/system/deleteUserRole', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteUserRole']);
 
 Route::post('/portal/staff/system/createPermission', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createPermission']);
