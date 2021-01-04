@@ -32,8 +32,8 @@ class RegistrationController extends Controller
     $this->middleware('auth');
     $this->middleware('revalidate');
     //$this->middleware('registration.check');
-    // $this->middleware('student.auth');
-    $this->middleware('submit.check');
+    //$this->middleware('student.auth');
+    //$this->middleware('submit.check');
   }
 
   /**
@@ -375,6 +375,9 @@ class RegistrationController extends Controller
       // CREATE STUDENT FLAG RECORD
       $student->flag()->create();
 
+      // CREATE STUDENT REGISTRATION RECORD
+      $student->registration()->create();
+
       //RETURN SUCCESS
       return response()->json(['status'=>'success', 'student'=>$student]);
     endif;
@@ -462,6 +465,8 @@ class RegistrationController extends Controller
       $student->flag()->update([
         'info_editable' => 0,
         'declaration' => 1,
+      ]);
+      $student->registration()->update([
         'application_submit' =>1
       ]);
       return response()->json(['status'=>'success']);

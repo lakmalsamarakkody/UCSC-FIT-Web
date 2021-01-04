@@ -121,7 +121,7 @@
                   }
                 },
                 error: function(err){
-                  console.log('error');
+                  console.log('error in saveInfo Ajax');
                   SwalSystemErrorDanger.fire()
                 }
               });
@@ -470,7 +470,7 @@
       $('#divSelectCurrentState').collapse('hide');
       $('#selectCurrentState').attr('disabled', 'disabled');
     }
-    else if($('#currentCountry').val() != '67' && $('#currentCountry').val() != null ){
+    else if($('#currentCountry').val() != '67' && $('#currentCountry').val() != null   ){
       $('#divSelectCurrentDistrict').collapse('hide');
       $('#selectCurrentDistrict').attr('disabled', 'disabled');
       $('#divSelectCurrentState').collapse('show');

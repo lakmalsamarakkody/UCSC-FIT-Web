@@ -20,7 +20,7 @@ class ApplicationSubmitCheck
     {
         $uid = Auth::user()->id;
         $student = Student::where('user_id', $uid)->get()->first();
-        if($student == NULL || ($student != NULL && is_null($student->flag->application_submit) || $student->flag->application_submit==null)):
+        if($student == NULL || ($student != NULL && is_null($student->registration->application_submit) || $student->registration->application_submit==0)):
             return $next($request);
         else:
             return redirect('/portal/student/payment/registration');
