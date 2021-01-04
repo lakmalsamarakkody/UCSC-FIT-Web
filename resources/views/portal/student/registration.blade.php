@@ -16,7 +16,6 @@
         <div class="row">
 
             <div class="col-12 px-0">
-                @if($student == NULL || ($student != NULL && $student->registration->application_submit == 0))
                 <div class="card">
                     <div class="card-header text-center">Register to FIT Programme<br><small style="text-transform: initial;">Please fill all the details correctly</small></div>
                     <div class="card-body">
@@ -561,12 +560,6 @@
 
                     </div>
                 </div>
-                {{-- @else
-                    <div class="alert alert-success border-success">
-                        <h4 class="my-4">Application Submitted</h4>
-                        <p style="font-weight: bold;">Please wait for Administrator Approval</p>
-                    </div> --}}
-                @endif
             </div>
         </div>
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Portal\Student\Payment;
 
 use App\Models\Student;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RegistrationCheck
+class PaymentSubmitCheck
 {
     /**
      * Handle an incoming request.
@@ -19,11 +19,11 @@ class RegistrationCheck
     public function handle(Request $request, Closure $next)
     {
         $uid = Auth::user()->id;
-        $student = Student::select('reg_no')->where('user_id', $uid)->get()->first();
-        if(is_null($student) || $student==null):
+        $student = Student::where('user_id', $uid)->get()->first();
+        if($student->flag->payment_submit==1):
             return $next($request);
         else:
-            return redirect('portal/student/');
+            return redirect('/portal/student/payment/registration');
         endif;
     }
 }

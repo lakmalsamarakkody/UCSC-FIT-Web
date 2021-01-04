@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Portal\Student\Registration;
 
+use App\Models\Student;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class StaffAuthorization
+class RegistrationCheck
 {
     /**
      * Handle an incoming request.
@@ -17,11 +18,12 @@ class StaffAuthorization
      */
     public function handle(Request $request, Closure $next)
     {
-        $role = Auth::user()->role_id;
-        if($role==2 || $role==3 || $role==4 || $role==5):
+        $uid = Auth::user()->id;
+        $student = Student::select('reg_no')->where('user_id', $uid)->first();
+        if(is_null($student) || $student==null || ($student != NULL && $student->reg_no == NULL)):
             return $next($request);
         else:
-            return redirect('/login');
+            return redirect('portal/student/');
         endif;
     }
 }

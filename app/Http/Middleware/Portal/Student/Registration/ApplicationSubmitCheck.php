@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Portal\Student\Registration;
 
 use App\Models\Student;
 use Closure;
@@ -19,8 +19,8 @@ class ApplicationSubmitCheck
     public function handle(Request $request, Closure $next)
     {
         $uid = Auth::user()->id;
-        $student = Student::where('user_id', $uid)->get()->first();
-        if($student == NULL || ($student != NULL && is_null($student->registration->application_submit) || $student->registration->application_submit==0)):
+        $student = Student::where('user_id', $uid)->first();
+        if($student == NULL || ($student != NULL && $student->registration->first()->application_submit == 0)):
             return $next($request);
         else:
             return redirect('/portal/student/payment/registration');

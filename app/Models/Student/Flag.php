@@ -11,6 +11,7 @@ class Flag extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    
     protected $table='student_flags';
 
     public function student()

@@ -1327,11 +1327,50 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Updated!',
-          text: 'Payment type has been updated.',
-        })
-        $('#modal-edit-payment-type').modal('hide')
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Form payload
+        var formData = new FormData($('#formEditPaymentType')[0]);
+
+        //Edit payment type
+        $.ajax({
+          headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/editPaymentType') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnModalEditPaymentType').attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in edit payment type ajax.');
+            $('#btnModalEditPaymentType').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating edit payment type data.');
+              $('small').hide();
+              $.each(data['errors'], function(key,value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in edit payment type.');
+              SwalDoneSuccess.fire({
+                title: 'Updated!',
+                text: 'Payment type has been updated.',
+              })
+              $('#modal-edit-payment-type').modal('hide')
+              location.reload();
+            }
+          },
+          error: function(err){
+            console.log('Error in edit payment type ajax.');
+            $('#btnModalEditPaymentType').removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
