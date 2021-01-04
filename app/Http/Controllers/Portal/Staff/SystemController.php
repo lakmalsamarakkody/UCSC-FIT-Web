@@ -65,6 +65,14 @@ class SystemController extends Controller
   }
   // /CREATE FUNCTION
 
+  // VIEW FUNCTION
+  public function viewUserRoleGetDetails(Request $request)
+  {
+    
+  }
+  // /VIEW FUNCTION
+
+
   // DELETE FUNCTION
   public function deleteUserRole(Request $request)
   {

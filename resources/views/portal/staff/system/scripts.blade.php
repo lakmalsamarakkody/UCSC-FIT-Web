@@ -2,17 +2,44 @@
 // USER ROLE
   // ROLE NAME EDITABILITY
   InputRoleName_editable = () => {
-    if($('#InputRoleName').attr('disabled')){
-      $('#InputRoleName').removeAttr('disabled');
+    if($('#roleName').attr('disabled')){
+      $('#roleName').removeAttr('disabled');
     }
     else{
-      document.getElementById('InputRoleName').setAttribute("disabled","disabled");
+      document.getElementById('roleName').setAttribute("disabled","disabled");
     }
   }
   function InputRoleName_readonly() {
-    document.getElementById('InputRoleName').setAttribute("disabled","disabled");
+    document.getElementById('roleName').setAttribute("disabled","disabled");
   }
   // /ROLE NAME EDITABILITY
+
+  // VIEW
+  view_role_modal_invoke = (role_id) => {
+    //Form payload
+    var formData = new FormData();
+    formData.append('role_id',role_id);
+
+    //View role get details
+    $.ajax({
+      headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/system/viewUserRoleGetDetails') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){$('#btnViewUserRole-'+role_id).attr('disabled', 'disabled');},
+      success: function(data){
+        console.log('Success in view role get details ajax.');
+        if(data['status'] == 'success'){
+          $('#btnViewUserRole-'+role_id).removeAttr('disabled', 'disabled');
+          
+        }
+        
+      }
+    })
+  }
+  // /VIEW
 
   // CREATE
   create_role = () => {
