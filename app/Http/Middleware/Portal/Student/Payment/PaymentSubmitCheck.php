@@ -19,9 +19,11 @@ class PaymentSubmitCheck
     public function handle(Request $request, Closure $next)
     {
         $uid = Auth::user()->id;
-        $student = Student::where('user_id', $uid)->get()->first();
-        if($student->flag->payment_submit==1):
+        $student = Student::where('user_id', $uid)->first();
+        if($student != NULL && $student->registration->first()->payment_id != NULL):
             return $next($request);
+        elseif ($student == NULL):
+            return redirect('/portal/student/registration');
         else:
             return redirect('/portal/student/payment/registration');
         endif;

@@ -10,23 +10,36 @@
     });
 
 </script>
-
     <!-- CONTENT -->
     <div class="col-lg-12 student-exams min-vh-100">
       <div class="row">
 
-    @if($student->flag->payment_approve==0)
-    <div class="col-12">
-      <div class="alert alert-success border-success">
-          <h4 class="my-4">Application Submitted</h4>
-          <p style="font-weight: bold;">Please wait for Administrator Approval</p>
+    @if($student->registration()->first()->payment_status != 'OK')
+    <div class="col-12 px-0">
+      <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading"><i class="far fa-check-circle"></i> Payment Submitted Successfully</h4>
+        <p>Come back later to check whether your payment has beend approved.</p>
+        <hr>
+        <p class="font-weight-bold mb-0">Prepare Your Scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) </p>
       </div>
     </div>
-    @else
+
+    @elseif ($student->registration()->first()->payment_status == 'OK')
+      {{-- PAYMENT APPROVED --}}
+      <div class="col-12 px-0">
+        <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading"><i class="far fa-check-circle"></i> Payment Approved</h4>
+          <p>Your payment has beend approved.</p>
+          <hr>
+          <p class="font-weight-bold mb-0">Upload your Your Scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) below here.. </p>
+        </div>
+      </div>
+      {{-- /PAYMENT APPROVED --}}
+
       <!-- UPLOAD BIRTH CERTIFICATE -->
-      <div class="col-12 mt-2 px-0">
+      <div class="col-12 mt-4 px-0">
         <div class="card">
-          <div class="card-header pb-0">Birth Certificate</div>
+          <div class="card-header">Birth Certificate</div>
           <div class="card-body pt-2">
             <span><strong>Please Upload clear images of both sides of the birth certificate with your details are clearly visible</strong> </span> 
             <form id="birthCertificateForm">  
@@ -35,7 +48,7 @@
                   <div class="form-group">
                     <small id="birthCertificateHelp" class="form-text text-muted">Upload your scanned front side of the birth certificate here in JPEG/ PNG file format</small>
                     <div class="drop-zone">
-                      <span class="drop-zone__prompt">Scanned Birth Cettificate (Front)<br><small>Drop image File here or click to upload</small> </span>
+                      <span class="drop-zone__prompt">Scanned Birth Certificate (Front)<br><small>Drop image File here or click to upload</small> </span>
                       <input type="file" name="birthCertificateFront" id="birthCertificateFront" class="drop-zone__input form-control"/>
                     </div>
                     <span class="invalid-feedback birth" id="error-birthCertificateFront" role="alert"></span>
@@ -45,7 +58,7 @@
                   <div class="form-group">
                     <small id="birthCertificateHelp" class="form-text text-muted">Upload your scanned reverse side of the birth certificate here in JPEG/ PNG file format</small>
                     <div class="drop-zone">
-                      <span class="drop-zone__prompt">Scanned Birth Cettificate (Back)<br><small>Drop image File here or click to upload</small> </span>
+                      <span class="drop-zone__prompt">Scanned Birth Certificate (Back)<br><small>Drop image File here or click to upload</small> </span>
                       <input type="file" name="birthCertificateBack" id="birthCertificateBack" class="drop-zone__input form-control"/>
                     </div>
                     <span class="invalid-feedback birth" id="error-birthCertificateBack" role="alert"></span>
@@ -69,10 +82,10 @@
       </div>
       <!-- /UPLOAD BIRTH CERTIFICATE-->
 
-      <!-- APPLIED EXAMS TABLE -->
-      <div class="col-12 mt-4 px-0">
+      <!-- UPLOAD UNIQUE ID -->
+      <div class="col-12 mt-5 px-0">
         <div class="card">
-          <div class="card-header pb-0">Valid identification document with a photograph</div>
+          <div class="card-header">Valid identification document with a photograph</div>
           <div class="card-body pt-2">            
             <span><strong>Please Upload a clear image with your details and the photograph is clearly visible</strong> </span>  
             <form id="idDocumentForm">                
@@ -115,7 +128,7 @@
           </div>
         </div>
       </div>
-      <!-- /APPLIED EXAMS TABLE-->
+      <!-- /UPLOAD UNIQUE ID -->
     @endif
 
 

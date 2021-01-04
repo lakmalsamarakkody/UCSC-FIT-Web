@@ -19,11 +19,11 @@ class CreateStudentRegistrationsTable extends Migration
             $table->date('registered_at')->nullable();
             $table->date('registration_expire_at')->nullable();
             $table->boolean('application_submit')->default(false);
-            $table->boolean('application_approve')->default(false);
+            $table->string('application_status')->length(25)->nullable();
             $table->integer('payment_id')->nullable();
-            $table->boolean('payment_approve')->default(false);
-            $table->boolean('document_approve')->default(false);
-            $table->boolean('registration_status')->default(false);
+            $table->string('payment_status')->length(25)->nullable();
+            $table->string('document_status')->length(25)->nullable();
+            $table->boolean('registration_status')->length(25)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
