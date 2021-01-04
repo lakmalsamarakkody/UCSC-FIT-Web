@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Portal\Student\Payment;
 
+use App\Models\Student;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class StudentAuthorization
+class ViewPaymentPage
 {
     /**
      * Handle an incoming request.
@@ -17,11 +18,12 @@ class StudentAuthorization
      */
     public function handle(Request $request, Closure $next)
     {
-        $role = Auth::user()->role->name;
-        if($role=='Student'):
+        $uid = Auth::user()->id;
+        $student = Student::where('user_id', $uid)->get()->first();
+        if($student != NULL && (is_null($student->flag->payment_submit) || $student->flag->payment_submit==null)):
             return $next($request);
         else:
-            return redirect('/login');
+            return redirect('/portal/student/document/registration');
         endif;
     }
 }

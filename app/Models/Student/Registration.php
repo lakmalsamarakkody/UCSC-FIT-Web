@@ -14,12 +14,6 @@ class Registration extends Model
 
     protected $table='student_registrations';
 
-    protected $fillable=[
-        'year_id',
-        'student_id',
-        'deadline'
-    ];
-
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id', 'id');
