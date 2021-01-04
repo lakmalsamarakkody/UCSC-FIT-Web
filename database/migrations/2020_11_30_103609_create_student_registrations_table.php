@@ -16,9 +16,10 @@ class CreateStudentRegistrationsTable extends Migration
         Schema::create('student_registrations', function (Blueprint $table) {            
             $table->id();
             $table->integer('student_id');
-            $table->date('registered_at');
-            $table->date('registration_expire_at');
-            $table->boolean('registration_status')->default(true);
+            $table->date('registered_at')->nullable();
+            $table->date('registration_expire_at')->nullable();
+            $table->boolean('application_submit')->default(false);
+            $table->boolean('registration_status')->default(false);
             $table->integer('payment_id');
             $table->timestamps();
             $table->softDeletes();

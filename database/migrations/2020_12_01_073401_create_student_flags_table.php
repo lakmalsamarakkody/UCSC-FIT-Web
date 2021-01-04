@@ -19,7 +19,6 @@ class CreateStudentFlagsTable extends Migration
             $table->boolean('info_complete')->default(false);
             $table->boolean('info_editable')->default(true);
             $table->boolean('declaration')->default(false);
-            $table->boolean('application_submit')->default(false);
             $table->boolean('payment_submit')->default(false);
             $table->boolean('payment_approve')->default(false);
             $table->boolean('birth_cert')->default(false);
