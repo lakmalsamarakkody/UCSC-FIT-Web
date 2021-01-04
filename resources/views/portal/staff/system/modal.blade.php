@@ -503,8 +503,10 @@
             <div class="form-group">
               <label for="paymentTypeName">Payment Type</label>
               <input type="hidden" class="form-control" name="paymentTypeId" id="paymentTypeId">
+              <span class="invalid-feedback" id="error-paymentTypeId" role="alert"></span>
               <input type="text" class="form-control" id="paymentTypeName" name="paymentTypeName" aria-describedby="PaymentTypeHelp"/>
               <small id="PaymentTypeHelp" class="form-text text-muted">any help text</small>
+              <span class="invalid-feedback" id="error-paymentTypeName" role="alert"></span>
             </div>
           </form>
         </div>
