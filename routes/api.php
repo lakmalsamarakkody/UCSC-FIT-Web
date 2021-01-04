@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Mobileapp\MobileLogin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,12 +24,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("reguserCount",[RegUsersController::class,'countRegUser']);
-Route::get("active",[RegUsersController::class,'activeStudents']);
-Route::get('examSchedule',[StudentExamController::class,'examSchedule']);
-Route::get('currentExam',[StudentExamController::class,'currentExam']);
-Route::get('studentDetails/{id}',[StduentDetailsController::class,'studentDetails']);
-Route::get('searchStudents',[StduentDetailsController::class,'searchStudents']);
-Route::get('subjectDetails',[SubjectController::class,'subjectDetails']);
-Route::get('subjectresult/{id}/{year?}/{month?}',[SubjectController::class,'subjectresult']);
-Route::get('resultoverview/{year?}',[ResultOverviewController::class,'resultoverview']);
+
+Route::post("login",[MobileLogin::class, 'login']);
+
+Route::group(['middleware'=>['auth:sanctum']],function(){
+
+    Route::post("logout",[MobileLogin::class, 'logout']);
+    Route::get("reguserCount",[RegUsersController::class,'countRegUser']);
+    Route::get("active",[RegUsersController::class,'activeStudents']);
+    Route::get('examSchedule',[StudentExamController::class,'examSchedule']);
+    Route::get('currentExam',[StudentExamController::class,'currentExam']);
+    Route::get('studentDetails/{id}',[StduentDetailsController::class,'studentDetails']);
+    Route::get('searchStudents',[StduentDetailsController::class,'searchStudents']);
+    Route::get('subjectDetails',[SubjectController::class,'subjectDetails']);
+    Route::get('subjectresult/{id}/{year?}/{month?}',[SubjectController::class,'subjectresult']);
+    Route::get('resultoverview/{year?}',[ResultOverviewController::class,'resultoverview']);
+
+
+});
