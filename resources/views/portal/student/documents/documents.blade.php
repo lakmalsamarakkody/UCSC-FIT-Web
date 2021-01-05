@@ -72,7 +72,7 @@
                 <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2" id="divSaveInformation">
                     <button type="button" class="btn btn-outline-primary form-control" id="btnSaveBirth" role="button" aria-expanded="false" aria-controls="declaration" onclick="upload_birth()">
                       Upload
-                      <span id="spinnerBirth" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
+                      <span id="spinnerBirth" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                     </button>
                 </div>
               </div>

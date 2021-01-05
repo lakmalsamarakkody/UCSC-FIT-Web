@@ -36,29 +36,29 @@ class DocumentController extends Controller
     public function uploadBirth(Request $request)
     {
         $validator = Validator::make($request->all(), 
-        [     
-            'birthCertificateFront'=> ['required', 'image'],
-            'birthCertificateBack'=>['required', 'image']
-        ]
-      );
-      if($validator->fails()):
-        return response()->json(['errors'=>$validator->errors()]);
-      else:
-        $student_id = Auth::user()->student->id;
-        
-        $file_ext = $request->file('birthCertificateFront')->getClientOriginalExtension();
-        $file_1_name = $student_id.'front'.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
-        $file_2_name = $student_id.'back'.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
-  
-  
-        if($path = $request->file('birthCertificateFront')->storeAs('public/birthCertificates/birthCertificates/'.$student_id, $file_1_name)):
-            if($path = $request->file('birthCertificateBack')->storeAs('public/birthCertificates/birthCertificates/'.$student_id, $file_2_name)):
-                
-                return response()->json(['success'=>'success']);
+            [     
+                'birthCertificateFront'=> ['required', 'image'],
+                'birthCertificateBack'=>['required', 'image']
+            ]);
+
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()]);
+        else:
+            $student_id = Auth::user()->student->id;
+            
+            $file_ext_1 = $request->file('birthCertificateFront')->getClientOriginalExtension();
+            $file_ext_2 = $request->file('birthCertificateBack')->getClientOriginalExtension();
+            $file_1_name = $student_id.'_'.'front'.'_'.date('Y-m-d').'_'.time().'.'. $file_ext_1;
+            $file_2_name = $student_id.'_'.'back'.'_'.date('Y-m-d').'_'.time().'.'. $file_ext_2;
+    
+    
+            if($path = $request->file('birthCertificateFront')->storeAs('public/birthCertificates/'.$student_id, $file_1_name)):
+                if($path = $request->file('birthCertificateBack')->storeAs('public/birthCertificates/'.$student_id, $file_2_name)):
+                    return response()->json(['success'=>'success']);
+                endif;  
             endif;  
-        endif;  
-      endif;
-      return response()->json(['error'=>'error']);
+        endif;
+        return response()->json(['error'=>'error']);
     }
 
     public function uploadId(Request $request)
@@ -67,6 +67,7 @@ class DocumentController extends Controller
         [     
             'documentFront'=> ['required', 'image']
         ]);
+
         if(Auth::user()->student->nic_old != Null):
             $validator_back = Validator::make($request->all(), 
             [     
@@ -78,23 +79,24 @@ class DocumentController extends Controller
                 'documentBack'=> ['image']
             ]);
         endif;
-      if($validator_front->fails() || $validator_back->fails()):
-        return response()->json(['errors'=>array_merge(json_decode($validator_front->errors(), true), json_decode($validator_back->errors(),true))]);
-      else:
-        $student_id = Auth::user()->student->id;
-        
-        $file_ext = $request->file('birthCertificateFront')->getClientOriginalExtension();
-        $file_name = $student_id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
-  
-  
-        if($path = $request->file('birthCertificateFront')->storeAs('public/birthCertificates/birthCertificates',$file_name)):
 
-            return response()->json(['success'=>'success']);
+        if($validator_front->fails() || $validator_back->fails()):
+            return response()->json(['errors'=>array_merge(json_decode($validator_front->errors(), true), json_decode($validator_back->errors(),true))]);
+        else:
+            $student_id = Auth::user()->student->id;
+            
+            $file_ext = $request->file('birthCertificateFront')->getClientOriginalExtension();
+            $file_name = $student_id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
+    
+    
+            if($path = $request->file('birthCertificateFront')->storeAs('public/birthCertificates/birthCertificates',$file_name)):
 
-  
+                return response()->json(['success'=>'success']);
+
+    
+            endif;
+    
         endif;
-  
-      endif;
       return response()->json(['error'=>'error']);
     }
 
