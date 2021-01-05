@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
             //StudentFlagSeeder::class,
             PermissionSeeder::class,
             RolePermissionSeeder::class,
+            BankSeeder::class,
+            BankBranchSeeder::class,
             PaymentTypeSeeder::class,
             PaymentMethodSeeder::class,
             // PaymentSeeder::class,
