@@ -23,7 +23,8 @@ class CreatePaymentsTable extends Migration
             $table->string('bank_branch')->nullable();
             $table->string('branch_code')->nullable();
             $table->date('paid_date');
-            $table->string('payment_image')->nullable();
+            $table->string('image')->nullable();
+            $table->string('status')->length(25)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
