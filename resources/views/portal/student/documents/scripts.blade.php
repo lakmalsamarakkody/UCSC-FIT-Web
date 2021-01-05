@@ -117,5 +117,13 @@
     });
   }
   // /UPLOAD BIRTH CERTIFICATE
+
+  //RESET FORM
+  reset_form = (formName) => {
+    console.log('reset form : '+formName);
+    $(formName).trigger("reset");
+    location.reload();
+  }
+  // /RESET FORM
 </script>
 @endsection
