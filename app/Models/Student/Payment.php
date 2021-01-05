@@ -19,7 +19,7 @@ class Payment extends Model
         return $this->belongsTo(Type::class, 'type_id', 'id');
     }
 
-    public function Method()
+    public function method()
     {
         return $this->belongsTo(Method::class,'method_id','id');
     }
@@ -27,5 +27,14 @@ class Payment extends Model
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id', 'id');
+    }
+
+    public function registration(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasOne(Registration::class,'payment_id','id');
     }
 }
