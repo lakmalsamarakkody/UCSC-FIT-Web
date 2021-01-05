@@ -18,4 +18,9 @@ class Registration extends Model
     {
         return $this->belongsTo(Student::class, 'student_id', 'id');
     }
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, 'payment_id', 'id');
+    }
 }
