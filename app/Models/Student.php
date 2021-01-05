@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Student\Document;
 use App\Models\Student\Flag;
 use App\Models\Student\hasExam;
 use App\Models\Student\Payment;
@@ -36,6 +37,15 @@ class Student extends Model
          * connecting model , foreign_key , local_key
          */
         return $this->hasMany(Payment::class,'student_id','id');
+    }
+
+    public function document(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasMany(Document::class,'student_id','id');
     }
     
     public function hasExam(){
