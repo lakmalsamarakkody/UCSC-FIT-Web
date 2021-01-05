@@ -58,7 +58,7 @@ class PaymentController extends Controller
       $payment->type_id = 1;
       $payment->student_id = $student->id;
       $payment->amount = $request->paidAmount;  
-      $payment->bank = "PEOPLE'S BANK";
+      $payment->bank = "peoples bank";
       $payment->bank_branch = $request->paidBank;
       $payment->branch_code = $request->paidBankCode;
       $payment->paid_date = $request->paidDate;
@@ -66,9 +66,9 @@ class PaymentController extends Controller
       $file_ext = $request->file('bankSlip')->getClientOriginalExtension();
       $file_name = $student->id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
 
-      $payment->payment_image = $file_name;
+      $payment->image = $file_name;
 
-      if($path = $request->file('bankSlip')->storeAs('public/bank_slips/registration',$file_name)):
+      if($path = $request->file('bankSlip')->storeAs('public/payments/registration/'.$student->id,$file_name)):
         if($payment->save()):
           $student->registration()->update([
             'payment_id' => $payment->id,
