@@ -27,5 +27,12 @@ class StduentDetailsController extends Controller
     function searchStudents(){
          return Student::all();
     }
-
+   function searchStudentsbyname($name=''){
+       if($name==''){
+        return Student::all();
+       }
+       else{
+       return Student::where('first_name','LIKE',"%{$name}%")->get();
+   }
+}
 }
