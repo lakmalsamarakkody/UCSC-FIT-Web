@@ -226,4 +226,66 @@
 
 // /EXAM SCHEDULES
 
+// EXAM LIST
+
+  //CREATE
+  onclick_create_exam = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "Exam will be create.",
+      confirmButtonText: "Yes, Create!",
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Form payload
+        var formData = new FormData($('#formCreateExam')[0]);
+
+        //Create exam
+        $.ajax({
+          headears: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/createExam') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreateExam').attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in create exam ajax.');
+            $('#btnCreateExam').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating exam data.');
+              $.each(data['errors'], function(key,value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in create exam.');
+              SwalDoneSuccess.fire({
+                title: "Created!",
+                text: "Exam created.",
+              })
+              location.reload();
+            }
+          },
+          error: function(err){
+            console.log('Error in create exam ajax.');
+            $('#btnCreateExam').removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Exam has not been created.",
+        })
+      }
+    })
+  }
+  // /CREATE
+
+// / EXAM LIST
+
 </script>
