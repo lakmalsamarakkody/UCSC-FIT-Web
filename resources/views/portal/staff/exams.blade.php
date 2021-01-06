@@ -31,6 +31,9 @@
       <div class="row">
 
         <!-- CREATE EXAM SCHEDULE -->
+        <div class="form-group col-xl-12 col-lg-12">
+          <button type="button" class="btn btn-outline-primary form-control" id="btnExamList"><a href="">Exam List</a></button>
+        </div>
         <div class="col-12 mb-5">
           <div class="card">
             <div class="card-header">Create Exam Schedule</div>
@@ -49,7 +52,7 @@
                     <label for="examType">Exam Type</label>
                     <select name="examType" id="examType" class="form-control">
                       @foreach ($exam_types as $type)
-                          <option value="{{ $type->id }}">{{ $type->exam_type }}</option>
+                          <option value="{{ $type->id }}">{{ $type->name }}</option>
                       @endforeach
                     </select>
                   </div>
@@ -91,7 +94,7 @@
                     <tr>
                       <td>FIT {{ $exam->subject->code }}</td>
                       <td>{{ $exam->subject->name }}</td>
-                      <td>{{ $exam->type->exam_type }}</td>
+                      <td>{{ $exam->type->name }}</td>
                       <td>{{ $exam->date }}</td>
                       <td>{{ $exam->start_time }}</td>
                       <td>{{ $exam->end_time }}</td>
@@ -140,7 +143,7 @@
                   <tr class="text-center">
                     <td>FIT {{ $exam->subject->code }}</td>
                     <td>{{ $exam->subject->name }}</td>
-                    <td>{{ $exam->type->exam_type }}</td>
+                    <td>{{ $exam->type->name }}</td>
                     <td>{{ $exam->date }}</td>
                     <td>{{ $exam->start_time }}</td>
                     <td>{{ $exam->end_time }}</td>
@@ -185,7 +188,7 @@
                     <label for="selectSearchExamType">Exam Type</label>
                     <select name="selectSearchExamType" id="selectSearchExamType" class="form-control">
                       @foreach ($exam_types as $type)
-                          <option value="{{ $type->id }}">{{ $type->exam_type }}</option>
+                          <option value="{{ $type->id }}">{{ $type->name }}</option>
                       @endforeach
                     </select>
                   </div>
