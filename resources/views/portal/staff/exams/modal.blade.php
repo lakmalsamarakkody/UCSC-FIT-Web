@@ -29,16 +29,16 @@
                             </select>
                           </div>
                           <div class="form-group col-xl-2 col-lg-4">
-                            <label for="examDate">Date</label>
-                            <input type="date" name="examDate" id="examDate" class="form-control"/>
+                            <label for="editExamDate">Date</label>
+                            <input type="date" name="editExamDate" id="editExamDate" class="form-control"/>
                           </div>
                           <div class="form-group col-xl-2 col-lg-4">
-                            <label for="startTime">Start Time</label>
-                            <input type="time" name="startTime" id="startTime" class="form-control"/>
+                            <label for="editStartTime">Start Time</label>
+                            <input type="time" name="editStartTime" id="editStartTime" class="form-control"/>
                           </div>
                           <div class="form-group col-xl-2 col-lg-4">
-                            <label for="endTime">End Time</label>
-                            <input type="time" name="endTime" id="endTime" class="form-control"/>
+                            <label for="editEndTime">End Time</label>
+                            <input type="time" name="editEndTime" id="editEndTime" class="form-control"/>
                           </div>
                         </div>
                     </form>
@@ -73,16 +73,16 @@
                     <form>
                         <div class="form-row align-items-center">
                             <div class="form-group col-4">
-                                <label for="examDate">Date</label>
-                                <input type="date" class="form-control" name="examDate" id="examDate" />
+                                <label for="postponeExamDate">Date</label>
+                                <input type="date" class="form-control" name="postponeExamDate" id="postponeExamDate" />
                             </div>
                             <div class="form-group col-4">
-                                <label for="startTime">Start Time</label>
-                                <input type="time" class="form-control" name="startTime" id="startTime" />
+                                <label for="postponeExamStartTime">Start Time</label>
+                                <input type="time" class="form-control" name="postponeExamStartTime" id="postponeExamStartTime" />
                             </div>
                             <div class="form-group col-4">
-                                <label for="endTime">End Time</label>
-                                <input type="time" class="form-control" name="endTime" id="endTime" />
+                                <label for="postponeExamEndTime">End Time</label>
+                                <input type="time" class="form-control" name="postponeExamEndTime" id="postponeExamEndTime" />
                             </div>
 
                         </div>

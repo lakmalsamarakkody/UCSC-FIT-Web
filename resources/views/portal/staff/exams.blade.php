@@ -57,20 +57,20 @@
                     </select>
                   </div>
                   <div class="form-group col-xl-3 col-lg-6">
-                    <label for="examDate">Date</label>
-                    <input type="date" name="examDate" class="form-control"/>
+                    <label for="examScheduleDate">Date</label>
+                    <input type="date" id="examScheduleDate" name="examScheduleDate" class="form-control"/>
                   </div>
                   <div class="form-group col-xl-2 col-lg-6">
-                    <label for="startTime">Start Time</label>
-                    <input type="time" name="startTime" class="form-control"/>
+                    <label for="scheduleStartTime">Start Time</label>
+                    <input type="time" id="scheduleStartTime" name="scheduleStartTime" class="form-control"/>
                   </div>
                   {{-- <div class="form-group col-xl-1 col-lg-4">
                     <label for="endTime">End Time</label>
                     <input type="time" name="endTime" class="form-control"/>
                   </div> --}}
                   <div class="form-group col-xl-1 col-lg-12">
-                    <label for="submitExam">&nbsp;</label>
-                    <button type="button" class="btn btn-outline-primary form-control" onclick="create_schedule();" id="submitExam" name="submitExam"><i class="fas fa-plus"></i></button>
+                    <label for="submitExamSchedule">&nbsp;</label>
+                    <button type="button" class="btn btn-outline-primary form-control" onclick="create_schedule();" id="submitExamSchedule" name="submitExamSchedule"><i class="fas fa-plus"></i></button>
                   </div>
                   
                 </div>
@@ -202,8 +202,8 @@
                     </select>
                   </div>
                   <div class="form-group col-xl-3 col-lg-12">
-                    <label for="btnSearchExam">&nbsp;</label>
-                    <button type="button" class="btn btn-outline-primary form-control" onclick="" id="btnSearchExam" name="btnSearchExam"><i class="fa fa-search"></i> Search</button>
+                    <label for="btnSearchExamSchedule">&nbsp;</label>
+                    <button type="button" class="btn btn-outline-primary form-control" onclick="" id="btnSearchExamSchedule" name="btnSearchExamSchedule"><i class="fa fa-search"></i> Search</button>
                   </div>
 
                 </div>
