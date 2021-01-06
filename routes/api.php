@@ -36,6 +36,7 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
     Route::get('currentExam',[StudentExamController::class,'currentExam']);
     Route::get('studentDetails/{id}',[StduentDetailsController::class,'studentDetails']);
     Route::get('searchStudents',[StduentDetailsController::class,'searchStudents']);
+    Route::get('searchStudentsbyname/{name?}',[StduentDetailsController::class,'searchStudentsbyname']);
     Route::get('subjectDetails',[SubjectController::class,'subjectDetails']);
     Route::get('subjectresult/{id}/{year?}/{month?}',[SubjectController::class,'subjectresult']);
     Route::get('resultoverview/{year?}',[ResultOverviewController::class,'resultoverview']);
