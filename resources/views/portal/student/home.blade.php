@@ -133,8 +133,8 @@
                                    <p>{{ $student->current_address_line2 }}</p>  
                                    <p>{{ $student->current_address_line3 }}</p>  
                                    <p>{{ $student->current_address_line4 }}</p>
-                                   <p>City</p> 
-                                   <p>Country</p> 
+                                   <p>City</p>
+                                   <p>Country</p>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">

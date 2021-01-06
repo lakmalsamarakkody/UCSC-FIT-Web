@@ -56,7 +56,7 @@ class DocumentController extends Controller
     
     
             //SAVE BC FRONT IMAGE
-            if($path = $request->file('birthCertificateFront')->storeAs('public/documents/'.$student_id, $birth_front_name)):
+            if($path = $request->file('birthCertificateFront')->storeAs('public/students/'.$student_id, $birth_front_name)):
                 //SAVE BC FRONT IMAGE DB RECORD
                 $birth_front = new Document();
                 $birth_front->student_id = $student_id;
@@ -64,7 +64,7 @@ class DocumentController extends Controller
                 $birth_front->side = 'front';
                 $birth_front->image = $birth_front_name;
                 if($birth_front->save()):
-                    if($path = $request->file('birthCertificateBack')->storeAs('public/documents/'.$student_id, $birth_back_name)):
+                    if($path = $request->file('birthCertificateBack')->storeAs('public/students/'.$student_id, $birth_back_name)):
                         $birth_back = new Document();
                         $birth_back->student_id = $student_id;
                         $birth_back->type = 'birth';

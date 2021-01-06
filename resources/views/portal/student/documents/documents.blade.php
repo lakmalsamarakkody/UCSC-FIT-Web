@@ -41,8 +41,8 @@
           </div>
           {{-- /PAYMENT APPROVED --}}
 
-          <!-- UPLOAD BIRTH CERTIFICATE -->
           @if($student->document()->where('type', 'birth')->where('side', 'front')->first() == NULL || $student->document()->where('type', 'birth')->where('side', 'back')->first() == NULL)
+          <!-- UPLOAD BIRTH CERTIFICATE -->
           <div class="col-12 mt-4 px-0">
             <div class="card">
               <div class="card-header">Birth Certificate</div>
@@ -90,8 +90,46 @@
               </div>
             </div>
           </div>
-          @endif
           <!-- /UPLOAD BIRTH CERTIFICATE-->
+          @else
+          {{-- SHOW UPLOADED BC IMAGES --}}
+          <div class="col-12 mt-4 px-0">
+            <div class="card">
+              <div class="card-header">Birth Certificate</div>
+              <div class="card-body pt-2">
+                <div class="form-row">
+                  <div class="col-lg">
+                    <div class="form-group">
+                      <small class="form-text text-muted">Front Image</small>
+                      <div class="drop-zone">
+                        <img src="{{ asset('storage/app/public/students/test.jpg')}}"/>
+                      </div>
+                      <span class="invalid-feedback birth" id="error-birthCertificateFront" role="alert"></span>
+                    </div>
+                  </div>
+                  <div class="col-lg">
+                    <div class="form-group">
+                      <small class="form-text text-muted">Back Image</small>
+                      <div class="drop-zone">
+                        <img src="{{ asset('storage/app/public/students/test.jpg')}}"/>
+                      </div>
+                      <span class="invalid-feedback birth" id="error-birthCertificateBack" role="alert"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row justify-content-end">
+                  <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2">
+                      <button type="button" class="btn btn-outline-danger form-control" id="btnDeleteBirth" role="button" aria-expanded="false" aria-controls="declaration" onclick="delete_birth()">
+                        Delete
+                        <span id="spinnerDeleteBirth" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                      </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{-- /SHOW UPLOADED BC IMAGES --}}
+          @endif
 
           <!-- UPLOAD UNIQUE ID -->
           <div class="col-12 mt-5 px-0">
