@@ -28,7 +28,7 @@
 
     <!-- CONTENT -->
     
-    <div class="col-12 staff-exams">
+    <div class="col-12 exams-list">
       <div class="row">
 
         <!-- CREATE EXAM -->
@@ -36,25 +36,27 @@
           <div class="card">
             <div class="card-header">Create Exam</div>
             <div class="card-body">
-              <form action="" method="POST">
+              <form id="formCreateExam" action="" method="POST">
                 <div class="form-row align-items-center px-4">
                   <div class="form-group col-xl-4 col-lg-6">
-                    <label for="selectYear">Year</label>
-                    <select name="selectYear" id="selectYear" class="form-control">
+                    <label for="examYear">Year</label>
+                    <select name="examYear" id="examYear" class="form-control">
                       <option value="2021">2021</option>
                       <option value="2022">2022</option>
                     </select>
+                    <span class="invalid-feedback" id="error-examYear" role="alert"></span>
                   </div>
                   <div class="form-group col-xl-4 col-lg-6">
-                    <label for="selectMonth">Month</label>
-                    <select name="selectMonth" id="selectMonth" class="form-control">
+                    <label for="examMonth">Month</label>
+                    <select name="examMonth" id="examMonth" class="form-control">
                       <option value="January">January</option>
                       <option value="February">February</option>
                     </select>
+                    <span class="invalid-feedback" id="error-examMonth" role="alert"></span>
                   </div>
                   <div class="form-group col-xl-4 col-lg-12">
                     <label for="btnCreateExam">&nbsp;</label>
-                    <button type="button" class="form-control btn btn-outline-primary" id="btnCreateExam" name="btnCreateExam" onclick=""><i class="fas fa-plus"></i></button>
+                    <button type="button" class="form-control btn btn-outline-primary" id="btnCreateExam" name="btnCreateExam" onclick="onclick_create_exam();"><i class="fas fa-plus"></i></button>
                   </div>
                 </div>
               </form>
@@ -64,7 +66,7 @@
         <!-- /CREATE EXAM -->
 
 
-        <!-- EXAMS TABLE -->
+        <!-- EXAM TABLE -->
         <div class="col-12 md-5">
           <div class="card">
             <div class="card-header">Exam List</div>
@@ -96,7 +98,7 @@
             </div>
           </div>
         </div>
-        <!-- /EXAMS TABLE-->
+        <!-- /EXAM TABLE-->
 
 
         @include('portal.staff.exams.modal')
