@@ -100,20 +100,14 @@
                 <div class="form-row">
                   <div class="col-lg">
                     <div class="form-group">
-                      <small class="form-text text-muted">Front Image</small>
-                      <div class="drop-zone">
-                        <img src="{{ asset('storage/students/1/1_birth_back_2021-01-06_1609917974.jpg')}}" width="50px"/>
-                      </div>
-                      <span class="invalid-feedback birth" id="error-birthCertificateFront" role="alert"></span>
+                      <span class="form-text text-muted">Front Image</span>
+                      <div class="drop-zone" style="background: url({{ asset('storage/students/'.$student->id.'/'.$student->document()->where('type', 'birth')->where('side', 'front')->first()->image)}}) no-repeat center; background-size: cover;"></div>
                     </div>
                   </div>
                   <div class="col-lg">
                     <div class="form-group">
-                      <small class="form-text text-muted">Back Image</small>
-                      <div class="drop-zone">
-                        <img src="{{ asset('storage/app/public/students/test.jpg')}}"/>
-                      </div>
-                      <span class="invalid-feedback birth" id="error-birthCertificateBack" role="alert"></span>
+                      <span class="form-text text-muted">Back Image</span>
+                      <div class="drop-zone" style="background: url({{ asset('storage/students/'.$student->id.'/'.$student->document()->where('type', 'birth')->where('side', 'back')->first()->image)}}) no-repeat center; background-size: cover;"></div>
                     </div>
                   </div>
                 </div>
