@@ -102,7 +102,7 @@
                     <div class="form-group">
                       <small class="form-text text-muted">Front Image</small>
                       <div class="drop-zone">
-                        <img src="{{ asset('storage/app/public/students/test.jpg')}}"/>
+                        <img src="{{ asset('storage/bank_slips/registration/1_2020-12-28_1609155636.jpg')}}" width="50px"/>
                       </div>
                       <span class="invalid-feedback birth" id="error-birthCertificateFront" role="alert"></span>
                     </div>
