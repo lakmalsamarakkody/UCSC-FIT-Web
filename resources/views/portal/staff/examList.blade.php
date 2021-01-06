@@ -58,38 +58,6 @@
                   </div>
                 </div>
               </form>
-
-              <div class="col-12 mt-5">
-                <table class="table yajra-datatable">
-                  <thead class="text-center">
-                    <tr>
-                      <th>Year</th>
-                      <th>Month</th>
-                      <th>&nbsp;</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-center">
-                    <tr>
-                      <td>2021</td>
-                      <td>February</td>
-                      <td>
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Delete Exam"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>2021</td>
-                      <td>March</td>
-                      <td>
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Delete Exam"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
             </div>
           </div>
         </div>
@@ -110,24 +78,18 @@
                   </tr>
                 </thead>
                 <tbody class="text-center">
+                  @foreach ($exams as $exam)
                   <tr>
-                    <td>2021</td>
-                    <td>February</td>
+                    <td>{{ $exam->year }}</td>
+                    <td>{{ $exam->month }}</td>
                     <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button>
+                        <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Delete Exam"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td>2021</td>
-                    <td>March</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button>
-                      </div>
-                    </td>
-                  </tr>
+                  @endforeach
                 </tbody>
               </table>
 
