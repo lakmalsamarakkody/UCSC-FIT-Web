@@ -41,6 +41,7 @@
                   <div class="form-group col-xl-4 col-lg-6">
                     <label for="examYear">Year</label>
                     <select name="examYear" id="examYear" class="form-control">
+                      <option value="" selected disabled>Select Year</option>
                       <option value="2021">2021</option>
                       <option value="2022">2022</option>
                     </select>
@@ -49,6 +50,7 @@
                   <div class="form-group col-xl-4 col-lg-6">
                     <label for="examMonth">Month</label>
                     <select name="examMonth" id="examMonth" class="form-control">
+                      <option value="" selected disabled>Select Month</option>
                       <option value="January">January</option>
                       <option value="February">February</option>
                     </select>
@@ -56,7 +58,7 @@
                   </div>
                   <div class="form-group col-xl-4 col-lg-12">
                     <label for="btnCreateExam">&nbsp;</label>
-                    <button type="button" class="form-control btn btn-outline-primary" id="btnCreateExam" name="btnCreateExam" onclick="onclick_create_exam();"><i class="fas fa-plus"></i></button>
+                    <button type="button" class="form-control btn btn-outline-primary" data-tooltip="tooltip" title="Create Exam" data-placement="bottom" id="btnCreateExam" name="btnCreateExam" onclick="onclick_create_exam();"><i class="fas fa-plus"></i></button>
                   </div>
                 </div>
               </form>

@@ -237,6 +237,10 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
         //Form payload
         var formData = new FormData($('#formCreateExam')[0]);
 
