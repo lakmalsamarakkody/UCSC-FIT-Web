@@ -31,11 +31,11 @@
       <div class="row">
 
         <!-- CREATE EXAM SCHEDULE -->
-        <div class="form-group col-xl-12 col-lg-12">
-          <button type="button" class="btn btn-outline-primary form-control" id="btnExamList"><a href="">Exam List</a></button>
-        </div>
         <div class="col-12 mb-5">
           <div class="card">
+            <div class="form-group col-12 mt-4 mb-2">
+              <a href="/portal/staff/exams/examList" target="_blank"><button type="button" class="btn btn-outline-primary form-control" id="btnExamList">Exam List</button></a>
+            </div>
             <div class="card-header">Create Exam Schedule</div>
             <div class="card-body">
               <form action="" method="POST">

@@ -54,5 +54,10 @@ class ExamsController extends Controller
 
     }
 
+    public function examList()
+    {
+        return view('portal/staff/examList');
+    }
+
     
 }
