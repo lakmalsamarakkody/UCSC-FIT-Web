@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
                 'updated_at'=> '2020-11-23 10:13:53'],
                 
                 ['name'=> 'Super Admin',
-                'email'=>"fit.ucsc.cmb.ac@gmail.com",
+                'email'=>"fit.ucsc.cmb.ac.lk@gmail.com",
                 'password'=>'$2y$10$chLDig2zqSahPLNRnur.0O3xzyvjlzH54Jwsp.gblzj3Ltp.dfxkG',
                 'role_id'=> '2',
                 'status'=> true,
