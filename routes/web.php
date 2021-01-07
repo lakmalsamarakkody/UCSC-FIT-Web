@@ -151,7 +151,9 @@ Route::post('/portal/student/payment/exam',[App\Http\Controllers\Portal\Student\
 // DOCUMENT PAGE
 Route::get('/portal/student/document/registration',[App\Http\Controllers\Portal\Student\DocumentController::class,'index'])->name('document.registration');
 Route::post('/portal/student/document/registration/birth',[App\Http\Controllers\Portal\Student\DocumentController::class,'uploadBirth'])->name('document.birth');
+Route::post('/portal/student/document/registration/birth/delete',[App\Http\Controllers\Portal\Student\DocumentController::class,'deleteBirth'])->name('document.birth.delete');
 Route::post('/portal/student/document/registration/id',[App\Http\Controllers\Portal\Student\DocumentController::class,'uploadId'])->name('document.id');
+Route::post('/portal/student/document/registration/id/delete',[App\Http\Controllers\Portal\Student\DocumentController::class,'deleteId'])->name('document.id.delete');
 // /DOCUMENT PAGE
 
 // GUESTS

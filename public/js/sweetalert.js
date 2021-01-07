@@ -45,13 +45,21 @@ const SwalDoneSuccess = Swal.mixin({
   icon: 'success',
   confirmButtonColor: color_success,
   allowOutsideClick: false,
+});
+const SwalDoneWarning = Swal.mixin({
+  icon: 'warning',
+  confirmButtonColor: color_warning,
+  allowOutsideClick: false,
 })
+
+// /SWEETALERT DONE 
 
 // SWEETALERT CANCEL 
 const SwalCancelWarning = Swal.mixin({
   icon: 'warning',
   iconColor: color_warning,
   confirmButtonColor: color_warning,
+  allowOutsideClick: false,
 })
 
 // SWEETALERT ERROR 
@@ -66,7 +74,7 @@ const SwalSystemErrorDanger = Swal.mixin({
   icon: 'error',
   iconColor: color_danger,
   title: 'System Error!',
-  text: 'Please contact your System Administrator',
+  text: 'Please contact System Administrator: admin@fit.bit.lk',
   confirmButtonColor: color_danger,
   allowOutsideClick: false,
 })
