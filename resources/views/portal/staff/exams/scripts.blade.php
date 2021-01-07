@@ -271,6 +271,15 @@
                 text: "Exam created.",
               })
               location.reload();
+              /*
+              var newData = '<tr>';
+              newData += '<td>'+data['exam']['year']+'</td>'+'<td>'+data['exam']['month']+'</td>'+'<td><div class="btn-group">'
+                        +'<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button>'
+                        +'<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Delete Exam"><i class="fas fa-trash-alt"></i></button>'
+                      +'</div></td></tr>';
+              $('#tbodyExam').prepend(newData);
+              $('#examYear').val('Default').attr('selected','selected');
+              $('#examMonth').val('Default').attr('selected', 'selected'); */
             }
           },
           error: function(err){

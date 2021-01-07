@@ -59,7 +59,7 @@ class ExamsController extends Controller
     //View examList page
     public function examList()
     {
-        $exams = Exam::orderBy('year','asc')->orderBy('month','asc')->get();
+        $exams = Exam::orderBy('year','asc')->get();
         return view('portal/staff/examList', compact('exams'));
     }
     

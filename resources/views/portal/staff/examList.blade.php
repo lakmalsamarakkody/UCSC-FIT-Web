@@ -41,7 +41,7 @@
                   <div class="form-group col-xl-4 col-lg-6">
                     <label for="examYear">Year</label>
                     <select name="examYear" id="examYear" class="form-control">
-                      <option value="" selected disabled>Select Year</option>
+                      <option value="Default" selected disabled>Select Year</option>
                       <option value="2021">2021</option>
                       <option value="2022">2022</option>
                     </select>
@@ -50,7 +50,7 @@
                   <div class="form-group col-xl-4 col-lg-6">
                     <label for="examMonth">Month</label>
                     <select name="examMonth" id="examMonth" class="form-control">
-                      <option value="" selected disabled>Select Month</option>
+                      <option value="Default" selected disabled>Select Month</option>
                       <option value="January">January</option>
                       <option value="February">February</option>
                     </select>
@@ -73,7 +73,7 @@
           <div class="card">
             <div class="card-header">Exam List</div>
             <div class="card-body">
-              <table class="table yajra-datatable">
+              <table class="table yajra-datatable tableExam">
                 <thead class="text-center">
                   <tr>
                     <th>Year</th>
@@ -81,7 +81,7 @@
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
-                <tbody class="text-center">
+                <tbody class="text-center" id="tbodyExam">
                   @foreach ($exams as $exam)
                   <tr>
                     <td>{{ $exam->year }}</td>
