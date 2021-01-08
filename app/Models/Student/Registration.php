@@ -14,6 +14,15 @@ class Registration extends Model
 
     protected $table='student_registrations';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'document_submit',
+    ];
+
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id', 'id');
