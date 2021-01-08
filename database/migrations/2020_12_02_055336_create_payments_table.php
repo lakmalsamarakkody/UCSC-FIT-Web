@@ -19,9 +19,8 @@ class CreatePaymentsTable extends Migration
             $table->tinyInteger('method_id');
             $table->tinyInteger('type_id');            
             $table->decimal('amount',10,2);
-            $table->string('bank')->nullable();
-            $table->string('bank_branch')->nullable();
-            $table->string('branch_code')->nullable();
+            $table->string('bank_id')->nullable();
+            $table->string('bank_branch_id')->nullable();
             $table->date('paid_date');
             $table->string('image')->nullable();
             $table->string('status')->length(25)->nullable();

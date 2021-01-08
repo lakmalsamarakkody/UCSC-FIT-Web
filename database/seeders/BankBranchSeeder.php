@@ -336,7 +336,7 @@ class BankBranchSeeder extends Seeder
                 ['bank_id'=> '1', 'district_id'=> '21', 'code'=> '005', 'name'=> 'Polonnaruwa', 'created_at' => '2021-01-05 10:13:53', 'updated_at' => '2021-01-05 10:13:53'],
                 ['bank_id'=> '1', 'district_id'=> '21', 'code'=> '006', 'name'=> 'Hingurakgoda', 'created_at' => '2021-01-05 10:13:53', 'updated_at' => '2021-01-05 10:13:53'],
                 ['bank_id'=> '1', 'district_id'=> '21', 'code'=> '203', 'name'=> 'Habarana', 'created_at' => '2021-01-05 10:13:53', 'updated_at' => '2021-01-05 10:13:53'],
-                ['bank_id'=> '1', 'district_id'=> '21', 'code'=> '231', 'name'=> 'Mederigiriya', 'created_at' => '2021-01-05 10:13:53', 'updated_at' => '2021-01-05 10:13:53'],
+                ['bank_id'=> '1', 'district_id'=> '21', 'code'=> '231', 'name'=> 'Medirigiriya', 'created_at' => '2021-01-05 10:13:53', 'updated_at' => '2021-01-05 10:13:53'],
                 ['bank_id'=> '1', 'district_id'=> '21', 'code'=> '232', 'name'=> 'Polonnaruwa -Town', 'created_at' => '2021-01-05 10:13:53', 'updated_at' => '2021-01-05 10:13:53'],
                 ['bank_id'=> '1', 'district_id'=> '21', 'code'=> '242', 'name'=> 'Bakamuna', 'created_at' => '2021-01-05 10:13:53', 'updated_at' => '2021-01-05 10:13:53'],
                 ['bank_id'=> '1', 'district_id'=> '21', 'code'=> '253', 'name'=> 'Aralaganwila', 'created_at' => '2021-01-05 10:13:53', 'updated_at' => '2021-01-05 10:13:53'],
