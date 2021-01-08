@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             WorldCountriesTableSeeder::class,
             WorldDivisionsTableSeeder::class,
             WorldCitiesTableSeeder::class,
+            FeeSeeder::class,
         ]);
     }
 }
