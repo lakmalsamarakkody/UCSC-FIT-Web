@@ -60,21 +60,17 @@
       }
       function display_ct() {
         var dt = new Date()
-        var month = new Array();
-        month[0] = "Jan";
-        month[1] = "Feb";
-        month[2] = "Mar";
-        month[3] = "Apr";
-        month[4] = "May";
-        month[5] = "Jun";
-        month[6] = "Jul";
-        month[7] = "Aug";
-        month[8] = "Sep";
-        month[9] = "Oct";
-        month[10] = "Nov";
-        month[11] = "Dec";
-        var timeString = dt.getFullYear() +  " " + month[dt.getMonth()] + " " + dt.getDate() + "&nbsp;&nbsp;&nbsp;" + dt.getHours() + ":" + dt.getMinutes() +":" + dt.getSeconds()
-        document.getElementById('ct').innerHTML = timeString;
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        // SET LEADING ZEROS
+        if(dt.getHours() < 10){var hours = "0" +dt.getHours()}else{var hours = dt.getHours()}
+        if(dt.getMinutes() < 10){var minutes = "0" + dt.getMinutes()}else{var minutes = dt.getMinutes()}
+        if(dt.getSeconds() < 10){var seconds = "0" + dt.getSeconds()}else{var seconds = dt.getSeconds()}
+        // /SET LEADING ZEROS
+
+        var date = days[dt.getDay()] + " " + dt.getDate() + " " + months[dt.getMonth()] + " " + dt.getFullYear()
+        var time = hours + " : " + minutes + " : " + seconds
+        document.getElementById('ct').innerHTML = date + " - " + time;
         display_c();
       }
     </script>
