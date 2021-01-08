@@ -21,7 +21,7 @@ class CreateScheduleTable extends Migration
             $table->date('date');
             $table->time('start_time');
             $table->time('end_time')->nullable();
-            $table->boolean('result_released')->default(false);
+            $table->string('result_released')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
