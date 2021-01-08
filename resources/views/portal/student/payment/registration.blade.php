@@ -42,7 +42,7 @@
                   <div class="col-12">
                     <div class="row">
                       <div class="col-md-4">Registration Expires On:</div>
-                      <div class="col-md-8" >{{ now()->year+1 }}-{{ now()->month }}-{{ now()->day}}</div>
+                      <div class="col-md-8" >{{now()->isoFormat('MMMM Do')}} {{ now()->year+1 }}</div>
                     </div>
   
                   </div>
@@ -57,7 +57,7 @@
           <div class="col">
             <div class="card w-100 my-2">
               <div class="card-header">
-                <div class="text-left">TOTAL PAYMENT : 2800/=</div>
+                <div class="text-left">TOTAL PAYMENT : {{ $reg_fee}}/=</div>
                 <div class="text-right">
                   <a class="btn btn-warning" target="_blank" href="{{ asset('documents/Payment_Voucher.pdf') }}">Download Payment Voucher</a>
                 </div>
@@ -83,23 +83,39 @@
                           <div class="form-row">                    
                             <div class="col-lg-6">
                               <div class="form-group row">
-                                <label for="selectPaidBank" class="col-sm-3 col-form-label">Paid Bank Branch</label>
+                                <label for="selectPaidBank" class="col-sm-3 col-form-label">Paid Bank</label>
                                 <div class="col-sm-9">
                                   <select class="form-control" id="paidBank" name="paidBank">
-                                    <option value="">Select Bank Branch</option>
-                                    <option value="Colombo 04">Colombo 04</option>
-                                    <option value="Gampaha">Gampaha</option>
-                                    <option value="Kandy">Kandy</option>
-                                    <option value="Galle">Galle</option>
+                                    <option value="" selected disabled>Select Bank</option>
+                                    @if($banks != NULL)
+                                      @foreach ($banks as $bank)
+                                        @if($bank->name == 'Peoples Bank')
+                                          <option value="{{$bank->id}}" selected>{{$bank->name}}</option>
+                                        @else
+                                          <option value="{{$bank->id}}">{{$bank->name}}</option>
+                                        @endif;
+                                      @endforeach
+                                    @else
+                                      <option value="" disabled>No Banks Found</option>
+                                    @endif
                                   </select>
                                   <span class="invalid-feedback" id="error-paidBank" role="alert"></span>
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <label for="inputPaidBankCode" class="col-sm-3 col-form-label">Paid Branch Code</label>
+                                <label for="inputPaidBankBranch" class="col-sm-3 col-form-label">Paid Branch Branch</label>
                                 <div class="col-sm-9">
-                                  <input type="number" class="form-control" id="paidBankCode" name="paidBankCode">
-                                  <span class="invalid-feedback" id="error-paidBankCode" role="alert"></span>
+                                  <select class="form-control" id="paidBankBranch" name="paidBankBranch">
+                                    <option value="" selected disabled>Select Bank Branch</option>
+                                    @if($banks != NULL)
+                                      @foreach ($banks->where('name', 'Peoples Bank')->first()->branch()->orderBy('name')->get() as $branch)
+                                        <option value="{{$branch->id}}">{{$branch->name}}</option>
+                                      @endforeach
+                                    @else
+                                      <option value="" disabled>No Branches Found</option>
+                                    @endif
+                                  </select>
+                                  <span class="invalid-feedback" id="error-paidBankBranch" role="alert"></span>
                                 </div>
                               </div>
                               <div class="form-group row">
