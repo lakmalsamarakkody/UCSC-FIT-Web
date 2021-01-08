@@ -20,6 +20,7 @@ class CreateBankBranchesTable extends Migration
             $table->integer('code');
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
