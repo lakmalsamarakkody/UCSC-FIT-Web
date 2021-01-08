@@ -135,6 +135,6 @@
       </div>
     </div> -->
 
-    @include('portal.staff.exams.scripts')
+    @include('portal.staff.exams.list.scripts')
 
 @endsection
