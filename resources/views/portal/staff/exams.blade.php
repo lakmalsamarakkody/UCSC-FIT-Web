@@ -34,7 +34,7 @@
         <div class="col-12 mb-5">
           <div class="card">
             <div class="form-group col-12 mt-4 mb-2">
-              <a href="/portal/staff/exams/examList" target="_blank"><button type="button" class="btn btn-outline-primary form-control" id="btnExamList">Exam List</button></a>
+              <a href="/portal/staff/exams/list" target="_blank"><button type="button" class="btn btn-outline-primary form-control" id="btnExamList">Exam List</button></a>
             </div>
             <div class="card-header">Create Exam Schedule</div>
             <div class="card-body">

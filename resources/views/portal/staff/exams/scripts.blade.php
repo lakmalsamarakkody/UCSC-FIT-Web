@@ -247,7 +247,7 @@
         //Create exam
         $.ajax({
           headears: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url: "{{ url('/portal/staff/exams/createExam') }}",
+          url: "{{ url('/portal/staff/exams/list/create') }}",
           type: 'post',
           data: formData,
           processData: false,
