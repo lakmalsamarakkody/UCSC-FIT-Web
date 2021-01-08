@@ -6,7 +6,7 @@
 
     // ACTIVE NAVIGATION ENTRY
     $(document).ready(function ($) {
-        $('#information').addClass("active");
+        $('#home').addClass("active");
     });
 
 </script>
