@@ -7,8 +7,13 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class InformationController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -25,6 +30,6 @@ class HomeController extends Controller
     {
         // GET STUDENT DETAILS
         $student = Student::where('user_id', Auth::user()->id)->first();
-        return view('portal/student/home', compact('student'));
+        return view('portal/student/information', compact('student'));
     }
 }

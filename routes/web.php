@@ -137,6 +137,8 @@ Route::post('/portal/student/registration/getstates',[App\Http\Controllers\Porta
 Route::post('/portal/student/registration/getcities',[App\Http\Controllers\Portal\Student\RegistrationController::class,'getCities']);
 // /REGISTRATION PAGE
 
+Route::get('/portal/student/information', [App\Http\Controllers\Portal\Student\InformationController::class, 'index'])->name('student.information');
+
 Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsController::class,'index'])->name('student.exams');
 
 Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\ResultsController::class,'index'])->name('student.results');
@@ -154,6 +156,7 @@ Route::post('/portal/student/document/registration/birth',[App\Http\Controllers\
 Route::post('/portal/student/document/registration/birth/delete',[App\Http\Controllers\Portal\Student\DocumentController::class,'deleteBirth'])->name('document.birth.delete');
 Route::post('/portal/student/document/registration/id',[App\Http\Controllers\Portal\Student\DocumentController::class,'uploadId'])->name('document.id');
 Route::post('/portal/student/document/registration/id/delete',[App\Http\Controllers\Portal\Student\DocumentController::class,'deleteId'])->name('document.id.delete');
+Route::post('/portal/student/document/registration/submit',[App\Http\Controllers\Portal\Student\DocumentController::class,'submitDocs'])->name('document.submit');
 // /DOCUMENT PAGE
 
 // GUESTS

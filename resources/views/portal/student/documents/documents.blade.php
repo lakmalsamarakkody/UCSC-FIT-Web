@@ -30,6 +30,19 @@
 
         @elseif ($payment->status == 'OK')
 
+          {{-- SHOW SUBMIT DOCUMENTS BUTTON --}}
+          @if($student->document()->where('type', 'birth')->first() != NULL && $student->document()->where('type', 'NIC')->orWhere('type', 'Postal')->orWhere('type', 'Passport')->first() != NULL)
+            {{-- SUBMIT DOCUMENTS --}}
+            <div class="col-12 px-0">
+              <div class="alert alert-primary" role="alert">
+                <h4 class="alert-heading"><i class="far fa-check-circle"></i> Required Identification Documents has been uploaded</h4>
+                <p>Submit your documents for approval</p>
+                <hr>
+                <button class="btn btn-outline-primary" id="btnSubmitDocs" onclick="submitDocuments()">Submit Documents <span id="spinnerSubmitDocs" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+              </div>
+            </div>
+            {{-- /SUBMIT DOCUMENTS --}}
+          @else
           {{-- PAYMENT APPROVED --}}
           <div class="col-12 px-0">
             <div class="alert alert-success" role="alert">
@@ -40,6 +53,8 @@
             </div>
           </div>
           {{-- /PAYMENT APPROVED --}}
+          @endif
+          {{-- /SHOW SUBMIT DOCUMENTS BUTTON --}}
 
           {{-- CHECK BC UPLOADED --}}
           @if($student->document()->where('type', 'birth')->where('side', 'front')->first() == NULL || $student->document()->where('type', 'birth')->where('side', 'back')->first() == NULL)

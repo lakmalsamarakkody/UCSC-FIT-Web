@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class DocumentController extends Controller
 {
-    public function __construct() 
-    {
+    public function __construct() {
+        $this->middleware('auth');
+        $this->middleware('revalidate');
         $this->middleware('student.auth');
         $this->middleware('student.payment.submit.check');
     }
     
-    public function index()
-    {
+    public function index(){
         $student = Auth::user()->student;
         $registration = $student->registration()->where('status', NULL)->first();
         $payment = $registration->payment()->first();
@@ -34,8 +34,7 @@ class DocumentController extends Controller
     }
 
     // UPLOAD BIRTH CERTIFICATE
-    public function uploadBirth(Request $request)
-    {
+    public function uploadBirth(Request $request){
         $validator = Validator::make($request->all(), 
             [     
                 'birthCertificateFront'=> ['required', 'image'],
@@ -80,8 +79,7 @@ class DocumentController extends Controller
     // /UPLOAD BIRTH CERTIFICATE
 
     // DELETE BIRTH CERTIFICATE
-    public function deleteBirth()
-    {
+    public function deleteBirth(){
         $student = Auth::user()->student;
         $birth_certificates = $student->document()->where('type', 'birth')->get();
         foreach($birth_certificates as $birth_certificate):
@@ -92,8 +90,7 @@ class DocumentController extends Controller
     // /DELETE BIRTH CERTIFICATE
 
     // UPLOAD ID
-    public function uploadId(Request $request)
-    {
+    public function uploadId(Request $request){
         $validator_front = Validator::make($request->all(), 
         [     
             'documentFront'=> ['required', 'image']
@@ -158,27 +155,32 @@ class DocumentController extends Controller
     }
     // /UPLOAD ID
 
-     // DELETE ID
-     public function deleteId()
-     {
-        $student = Auth::user()->student;
-        if($student->nic_old != Null || $student->nic_new != Null):
-            $document_type='NIC';
+    // DELETE ID
+    public function deleteId(){
+    $student = Auth::user()->student;
+    if($student->nic_old != Null || $student->nic_new != Null):
+        $document_type='NIC';
+    else:
+        if($student->postal != Null):
+            $document_type='Postal';
         else:
-            if($student->postal != Null):
-                $document_type='Postal';
-            else:
-                if($student->passport != Null):
-                    $document_type='Passport';
-                endif;
+            if($student->passport != Null):
+                $document_type='Passport';
             endif;
         endif;
+    endif;
 
-        $IDs = $student->document()->where('type', $document_type)->get();
-        foreach($IDs as $ID):
-            Document::destroy($ID->id);
-        endforeach;
-        return response()->json(['status'=>'success', $IDs]);
-     }
-     // /DELETE ID
+    $IDs = $student->document()->where('type', $document_type)->get();
+    foreach($IDs as $ID):
+        Document::destroy($ID->id);
+    endforeach;
+    return response()->json(['status'=>'success', $IDs]);
+    }
+    // /DELETE ID
+
+    // SUBMIT DOCS
+    public function submitDocs(){
+
+    }
+    // /SUBMIT DOCS
 }

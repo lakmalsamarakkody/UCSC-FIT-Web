@@ -231,5 +231,58 @@
     location.reload();
   }
   // /RESET FORM
+
+  // SUBMIT DOCUMENTS
+  submitDocuments = () =>{
+    SwalQuestionWarningAutoClose.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to change uploaded documents after submit.",
+    }).then((result) => {
+      if(result.isConfirmed){
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ route('document.submit') }}",
+          type: 'post',
+          processData: false,
+          contentType: false,           
+          beforeSend: function(){
+            // Show loader
+            $("#spinnerSubmitDocs").removeClass('d-none');
+            $('#btnSubmitDocs').attr('disabled','disabled');
+          },
+          success: function(data){
+            $("#spinnerSubmitDocs").addClass('d-none');
+            $('#btnSubmitDocs').removeAttr('disabled');
+            if (data['status'] = 'success'){
+              SwalDoneSuccess.fire({
+                title: 'Documents submitted successfully!',
+                text: 'Your registration will be completed after submitted document approval completed',
+              }).then((result) => {
+                if(result.isConfirmed) {
+                  location.reload()
+                }
+              });
+            }else{
+              SwalSystemErrorDanger.fire({
+                title: 'Documents submission Failed!',
+              });
+            }
+          },
+          error: function(err){
+            $("#spinnerSubmitDocs").addClass('d-none');
+            $('#btnSubmitDocs').removeAttr('disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Documents submission process Aborted!',
+        });
+      }
+    });
+  }
+  // /SUBMIT DOCUMENTS
 </script>
 @endsection
