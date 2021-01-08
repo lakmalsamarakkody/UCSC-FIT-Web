@@ -72,8 +72,11 @@ Route::get('/portal/staff/exams', [App\Http\Controllers\Portal\Staff\ExamsContro
 Route::get('exam-list',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'getExamList'])->name('exams.list');
 Route::post('portal/staff/exams',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'createSchedule'])->name('exams.create');
 
+// EXAM LIST PAGE
 Route::get('/portal/staff/exams/list', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class, 'index']);
 Route::post('/portal/staff/exams/list/create', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class, 'createExam']);
+Route::post('/portal/staff/exams/list/delete', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class , 'deleteExam']);
+// /EXAM LIST PAGE
 
 Route::get('/portal/staff/results', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'index'])->name('results');
 Route::get('/portal/staff/result/view/{id}', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'viewResults'])->where('id', '[0-9]+')->name('results.view');
