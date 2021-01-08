@@ -18,7 +18,7 @@ class ExamListController extends Controller
         return view('portal/staff/exams/exam_list', compact('exams'));
     }
     
-    //Create exam
+    //Create
     public function createExam(Request $request)
     {
         //Validate form data
@@ -39,4 +39,26 @@ class ExamListController extends Controller
             endif;
         endif;
     }
+    // /Create
+
+    // Delete
+    public function deleteExam(Request $request)
+    {
+        //Validate exam id
+        $exam_id_validator = Validator::make($request->all(), [
+            'exam_id' => ['required', 'integer', 'exists:App\Models\Exam,id'],
+        ]);
+
+        //Check validator fails
+        if($exam_id_validator->fails()):
+            return response()->json(['status'=>'error', 'errors'=>$exam_id_validator->errors()]);
+        else:
+            if($exam = Exam::destroy($request->exam_id)):
+                return response()->json(['status'=>'success']);
+            endif;
+        endif;
+        return response()->json(['status'=>'error', 'data'=>$request->all()]);
+    }
+
+    // /Delete
 }

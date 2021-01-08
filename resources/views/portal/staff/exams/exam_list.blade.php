@@ -83,13 +83,13 @@
                 </thead>
                 <tbody class="text-center" id="tbodyExam">
                   @foreach ($exams as $exam)
-                  <tr>
+                  <tr id="tbl-exam-tr-{{$exam->id}}">
                     <td>{{ $exam->year }}</td>
                     <td>{{ $exam->month }}</td>
                     <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button>
-                        <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Delete Exam"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete Exam" id="btnDeleteExam-{{$exam->id}}" onclick="onclick_delete_exam({{$exam->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
@@ -102,38 +102,12 @@
         </div>
         <!-- /EXAM TABLE-->
 
-
         @include('portal.staff.exams.modal')
 
       </div>
     </div>
 
     <!-- /CONTENT -->
-
-
-
-    <!-- HEADING -->
-
-    <!--
-    <div class="col-lg-12 mt-5">
-        <div class="row">
-          
-          <div class="card w-100">
-              <div class="card-header">{{ __('Dashboard') }}</div>
-
-              <div class="card-body">
-                  @if (session('status'))
-                      <div class="alert alert-success" role="alert">
-                          {{ session('status') }}
-                      </div>
-                  @endif
-
-                  {{ __('You are logged in as Staff!') }}
-              </div>
-          </div>
-
-      </div>
-    </div> -->
 
     @include('portal.staff.exams.list.scripts')
 

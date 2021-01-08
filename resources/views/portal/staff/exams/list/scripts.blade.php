@@ -69,4 +69,51 @@
     })
   }
   // /CREATE
+
+  // DELETE
+  onclick_delete_exam = (exam_id) => {
+      SwalQuestionDanger.fire({
+        title: "Are you sure?",
+        text: "You wont be able to revert this!",
+        confirmButtonText: 'Yes, delete it!',
+      })
+      .then((result) => {
+          if(result.isConfirmed) {
+            //Payload
+            var formData = new FormData();
+            formData.append('exam_id',exam_id);
+
+            //Delete exam controller
+            $.ajax({
+                headears: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+                url: "{{ url('/portal/staff/exams/list/delete') }}",
+                type: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function(){$('#btnDeleteExam-'+exam_id).attr('disabled', 'disabled');},
+                success: function(data){
+                    console.log('Success in delete exam ajax');
+                    //Remove delete data included row
+                    $('#tbl-exam-tr-'+exam_id).remove();
+                    SwalDoneSuccess.fire({
+                        title: 'Deleted!',
+                        text: 'Exam has been deleted.',
+                    })
+                },
+                error: function(err){
+                    console.log('Error in delete exam ajax.');
+                    SwalSystemErrorDanger.fire();
+                }
+            });
+          }
+          else{
+            SwalNotificationWarningAutoClose.fire({
+                title: 'Cancelled!',
+                text: 'Exam has not been deleted.',
+                })
+            }
+      })
+  }
+  // /DELETE
 </script>
