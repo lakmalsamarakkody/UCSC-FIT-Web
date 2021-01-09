@@ -7,10 +7,12 @@ use App\Models\Exam;
 use App\Models\Exam\Schedule;
 use App\Models\Subject;
 use App\Models\Exam\Types;
-use Dotenv\Validator;
+//use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Carbon;
 
 class ExamsController extends Controller
 {    
@@ -23,10 +25,11 @@ class ExamsController extends Controller
     
     public function index()
     {
-        $exams=Schedule::orderby('date','desc')->take(6)->get();
+        $exam_schedules=Schedule::orderby('date','desc')->take(6)->get();
         $subjects=Subject::orderby('id')->get();
         $exam_types=Types::orderby('id')->get();
-        return view('portal/staff/exams',compact('exams','subjects','exam_types'));
+        $exams = Exam::orderby('year')->get();
+        return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'exams'));
     }
 
     public function getExamList(Request $request)
@@ -45,12 +48,33 @@ class ExamsController extends Controller
         }
     }
 
-    public function createSchedule(Request $request)
+    public function createExamSchedule(Request $request)
     {
-        $schedule = new Schedule();
-        $schedule->subject_id = request('subject');
-        $schedule->exam_type_id = request('examType');
-        $schedule->date = request('examDate');
-        $schedule->start_time = request('startTime');
+        //Validate form data
+        $exam_schedule_validator = Validator::make($request->all(), [
+            'scheduleExam' => ['required','exists:App\Models\Exam,id'],
+            'scheduleSubject' => ['required','exists:App\Models\Subject,id'],
+            'scheduleExamType' => ['required','exists:App\Models\Exam\Types,id'],
+            'scheduleDate' => ['required', 'date', 'after:today'],
+            'scheduleStartTime' => ['required'],
+        ]);
+
+        //Check validation errors
+        if($exam_schedule_validator->fails()):
+            return response()->json(['errors'=>$exam_schedule_validator->errors()]);
+        else:
+            $exam_schedule = new Schedule();
+            $exam_schedule->exam_id = $request->scheduleExam;
+            $exam_schedule->subject_id = $request->scheduleSubject;
+            $exam_schedule->exam_type_id = $request->scheduleExamType;
+            $exam_schedule->date = $request->scheduleDate;
+            $exam_schedule->start_time = $request->scheduleStartTime;
+            $exam_schedule->end_time = Carbon::parse($request->scheduleStartTime)->addHours('2');
+            //Check if data save to db
+            if($exam_schedule->save()):
+                return response()->json(['status'=>'success', 'exam_schedule'=>$exam_schedule]);
+            endif;
+        endif;
+        return response()->json(['status'=>'error']);
     }
 }

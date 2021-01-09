@@ -67,10 +67,11 @@ Route::get('/portal/staff/student/profile',[App\Http\Controllers\Portal\Staff\St
 Route::get('/portal/staff/student/application', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'index'])->name('student.application');
 Route::get('/portal/staff/student/exams/application', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'index'])->name('student.exams');
 
-
+// EXAMS PAGE
 Route::get('/portal/staff/exams', [App\Http\Controllers\Portal\Staff\ExamsController::class, 'index'])->name('exams');
 Route::get('exam-list',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'getExamList'])->name('exams.list');
-Route::post('portal/staff/exams',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'createSchedule'])->name('exams.create');
+Route::post('/portal/staff/exams/schedule/create',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'createExamSchedule'])->name('schedule.create');
+// /EXAMS PAGE
 
 // EXAM LIST PAGE
 Route::get('/portal/staff/exams/list', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class, 'index']);

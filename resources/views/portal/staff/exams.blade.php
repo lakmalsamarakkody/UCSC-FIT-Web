@@ -38,39 +38,53 @@
             </div>
             <div class="card-header">Create Exam Schedule</div>
             <div class="card-body">
-              <form action="" method="POST">
+              <form action="" method="POST" id="formCreateSchedule">
                 <div class="form-row align-items-center px-4">
-                  <div class="form-group col-xl-3 col-lg-6">
-                    <label for="subject">Subejct</label>
-                    <select name="subject" id="subject" class="form-control">
+                  <div class="form-group col-xl-2 col-lg-4">
+                    <label for="scheduleExam">Exam</label>
+                    <select name="scheduleExam" id="scheduleExam" class="form-control">
+                      <option value="Default" disabled selected>Select Exam</option>
+                      @foreach ($exams as $exam)
+                          <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
+                      @endforeach
+                    </select>
+                    <span class="invalid-feedback" id="error-scheduleExam" role="alert"></span>
+                  </div>
+                  <div class="form-group col-xl-3 col-lg-4">
+                    <label for="scheduleSubject">Subejct</label>
+                    <select name="scheduleSubject" id="scheduleSubject" class="form-control">
                       @foreach ($subjects as $subject)
                       <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                       @endforeach
                     </select>
+                    <span class="invalid-feedback" id="error-scheduleSubject" role="alert"></span>
                   </div>
-                  <div class="form-group col-xl-3 col-lg-6">
-                    <label for="examType">Exam Type</label>
-                    <select name="examType" id="examType" class="form-control">
+                  <div class="form-group col-xl-2 col-lg-4">
+                    <label for="scheduleExamType">Exam Type</label>
+                    <select name="scheduleExamType" id="scheduleExamType" class="form-control">
                       @foreach ($exam_types as $type)
                           <option value="{{ $type->id }}">{{ $type->name }}</option>
                       @endforeach
                     </select>
+                    <span class="invalid-feedback" id="error-scheduleExamType" role="alert"></span>
                   </div>
-                  <div class="form-group col-xl-3 col-lg-6">
-                    <label for="examScheduleDate">Date</label>
-                    <input type="date" id="examScheduleDate" name="examScheduleDate" class="form-control"/>
+                  <div class="form-group col-xl-2 col-lg-6">
+                    <label for="scheduleDate">Date</label>
+                    <input type="date" id="scheduleDate" name="scheduleDate" class="form-control"/>
+                    <span class="invalid-feedback" id="error-scheduleDate" role="alert"></span>
                   </div>
                   <div class="form-group col-xl-2 col-lg-6">
                     <label for="scheduleStartTime">Start Time</label>
                     <input type="time" id="scheduleStartTime" name="scheduleStartTime" class="form-control"/>
+                    <span class="invalid-feedback" id="error-scheduleStartTime" role="alert"></span>
                   </div>
                   {{-- <div class="form-group col-xl-1 col-lg-4">
                     <label for="endTime">End Time</label>
                     <input type="time" name="endTime" class="form-control"/>
                   </div> --}}
-                  <div class="form-group col-xl-1 col-lg-12">
-                    <label for="submitExamSchedule">&nbsp;</label>
-                    <button type="button" class="btn btn-outline-primary form-control" onclick="create_schedule();" id="submitExamSchedule" name="submitExamSchedule"><i class="fas fa-plus"></i></button>
+                  <div class="form-group col-xl-1 col-lg-12 text-center">
+                    <label for="btnCreateSchedule">&nbsp;</label>
+                    <button type="button" class="btn btn-outline-primary form-control" onclick="create_schedule();" id="btnCreateSchedule" name="btnCreateSchedule"><i class="fas fa-plus"></i></button>
                   </div>
                   
                 </div>
@@ -90,14 +104,14 @@
                     </tr>
                   </thead>
                   <tbody class="text-center">
-                    @foreach ($exams as $exam)
+                    @foreach ($exam_schedules as $schedule)
                     <tr>
-                      <td>FIT {{ $exam->subject->code }}</td>
-                      <td>{{ $exam->subject->name }}</td>
-                      <td>{{ $exam->type->name }}</td>
-                      <td>{{ $exam->date }}</td>
-                      <td>{{ $exam->start_time }}</td>
-                      <td>{{ $exam->end_time }}</td>
+                      <td>FIT {{ $schedule->subject->code }}</td>
+                      <td>{{ $schedule->subject->name }}</td>
+                      <td>{{ $schedule->type->name }}</td>
+                      <td>{{ $schedule->date }}</td>
+                      <td>{{ $schedule->start_time }}</td>
+                      <td>{{ $schedule->end_time }}</td>
                       <td>
                         <div class="btn-group">
                           <button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" onclick="approve_schedule()"><i class="fas fa-file-signature"></i></button>
@@ -139,14 +153,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($exams as $exam)
+                  @foreach ($exam_schedules as $schedule)
                   <tr class="text-center">
-                    <td>FIT {{ $exam->subject->code }}</td>
-                    <td>{{ $exam->subject->name }}</td>
-                    <td>{{ $exam->type->name }}</td>
-                    <td>{{ $exam->date }}</td>
-                    <td>{{ $exam->start_time }}</td>
-                    <td>{{ $exam->end_time }}</td>
+                    <td>FIT {{ $schedule->subject->code }}</td>
+                    <td>{{ $schedule->subject->name }}</td>
+                    <td>{{ $schedule->type->name }}</td>
+                    <td>{{ $schedule->date }}</td>
+                    <td>{{ $schedule->start_time }}</td>
+                    <td>{{ $schedule->end_time }}</td>
                     <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" data-toggle="modal" data-target="#postponeExam"><i class="fas fa-calendar-plus"></i></button>
@@ -223,14 +237,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($exams as $exam)
+                  @foreach ($exam_schedules as $schedule)
                   <tr class="text-center">
-                    <td>FIT {{ $exam->subject->code }}</td>
-                    <td>{{ $exam->subject->name }}</td>
-                    <td>{{ $exam->type->exam_type }}</td>
-                    <td>{{ $exam->date }}</td>
-                    <td>{{ $exam->start_time }}</td>
-                    <td>{{ $exam->end_time }}</td>
+                    <td>FIT {{ $schedule->subject->code }}</td>
+                    <td>{{ $schedule->subject->name }}</td>
+                    <td>{{ $schedule->type->name }}</td>
+                    <td>{{ $schedule->date }}</td>
+                    <td>{{ $schedule->start_time }}</td>
+                    <td>{{ $schedule->end_time }}</td>
                   </tr>
                       
                   @endforeach

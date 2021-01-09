@@ -9,10 +9,48 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: "Created!",
-          text: "Exam schedule created.",
-        })
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Form payload
+        var formData = new FormData($('#formCreateSchedule')[0]);
+
+        //Create schedule controller
+        $.ajax({
+          hearder: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/create') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreateSchedule').attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in create schedule ajax.');
+            $('#btnCreateSchedule').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validate schedule data.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Create exam schedule success.');
+              SwalDoneSuccess.fire({
+                title: "Created!",
+                text: "Exam schedule created.",
+              })
+              location.reload();
+            }
+          },
+          error: function(err){
+            console.log('Errors in create exam schedule ajax.');
+            $('#btnCreateSchedule').removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
