@@ -47,7 +47,10 @@ class ExamsController extends Controller
             ->make(true);
         }
     }
+    
+    // SCHEDULE
 
+    // CREATE
     public function createExamSchedule(Request $request)
     {
         //Validate form data
@@ -77,4 +80,32 @@ class ExamsController extends Controller
         endif;
         return response()->json(['status'=>'error']);
     }
+    // CREATE
+
+    // EDIT
+
+    // /EDIT
+
+    // DELETE
+    public function deleteExamSchedule(Request $request)
+    {
+        //Validate schedule id
+        $schedule_id_validator = Validator::make($request->all(), [
+            'schedule_id' => ['required', 'integer', 'exists:App\Models\Exam\Schedule,id'],
+        ]);
+
+        //Check validator fails
+        if($schedule_id_validator->fails()):
+            return response()->json(['status'=>'error','errors'=>$schedule_id_validator->errors()]);
+        else:
+            if(Schedule::destroy($request->schedule_id)):
+                return response()->json(['status'=>'success']);
+            endif;
+        endif;
+        return response()->json(['status'=>'error', 'data'=>$request->all()]);
+            
+    }
+    // /DELETE
+
+    // /SCHEDULE
 }

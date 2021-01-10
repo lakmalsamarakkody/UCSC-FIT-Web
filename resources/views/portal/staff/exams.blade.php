@@ -105,7 +105,7 @@
                   </thead>
                   <tbody class="text-center">
                     @foreach ($exam_schedules as $schedule)
-                    <tr>
+                    <tr id="tbl-examSchedule-tr-{{$schedule->id}}">
                       <td>FIT {{ $schedule->subject->code }}</td>
                       <td>{{ $schedule->subject->name }}</td>
                       <td>{{ $schedule->type->name }}</td>
@@ -118,7 +118,7 @@
                           <button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Request Approval" onclick="request_schedule_approval()"><i class="fas fa-share-square"></i></button>
                           <button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" onclick="relase_individual_schedule()" ><i class="fas fa-hand-point-right"></i></button>
                           <button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Edit" data-target="#editSchedule"><i class="fas fa-edit"></i></button>
-                          <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" onclick="delete_before_release()"><i class="fas fa-trash-alt"></i></button>
+                          <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteExamSchedule-{{$schedule->id}}" onclick="delete_before_release({{$schedule->id}})"><i class="fas fa-trash-alt"></i></button>
                         </div>
                       </td>
                     </tr>

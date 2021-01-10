@@ -88,7 +88,7 @@
   // /EDIT
 
   // DELETE(BEFORE RELEASE)
-  delete_before_release = () => {
+  delete_before_release = (schedule_id) => {
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
@@ -96,10 +96,33 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Deleted!',
-          text: 'Scheduled exam has been deleted.',
-        })
+        //Form payload
+        var formData = new FormData();
+        formData.append('schedule_id', schedule_id);
+
+        //Delete exam schedule controller
+        $.ajax({
+          hearders: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/delete') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteExamSchedule-'+schedule_id).attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in delete exam schedule ajax.');
+            //Remove deleted table row
+            $('#tbl-examSchedule-tr-'+schedule_id).remove();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Scheduled exam has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('Error in delete exam schedule ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
