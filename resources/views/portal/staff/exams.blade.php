@@ -31,7 +31,7 @@
 
 
         {{-- EXAM LIST --}}
-        <div class="col-lg-4 col-12 mb-4">
+        <div class="col-lg-4 col-12 mb-5">
           <a href="/portal/staff/exams/list" style="text-decoration: none">
             <button type="button" class="btn btn-outline-primary w-100 py-4 font-weight-bold" id="btnExamList">Exam List</button>
           </a>
