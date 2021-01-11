@@ -23,12 +23,18 @@ class ExamsController extends Controller
         $this->middleware('staff.auth');
     }
     
-    public function index()
+    public function index(Request $request)
     {
-        $exam_schedules=Schedule::orderby('date','desc')->take(6)->get();
+        $exam_schedules=Schedule::orderby('date','desc');
         $subjects=Subject::orderby('id')->get();
         $exam_types=Types::orderby('id')->get();
         $exams = Exam::orderby('year')->get();
+
+        if ($request->selectSearchExamType != null) {
+            $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
+        }
+
+        $exam_schedules = $exam_schedules->paginate(6);
         return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'exams'));
     }
 
