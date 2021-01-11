@@ -3,22 +3,22 @@
     <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="viewApplication">Applicant Information</h5>
+                <h5 class="modal-title" id="viewApplication"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="col-12 mt-3">
+                <div class="col-12 px-0">
                     <div class="card shadow-none">
-                        <div class="card-header"></div>
+                        <div class="card-header">Applicant Information</div>
                         <div class="card-body">                        
                             <div class="row">
                                 <div class="col-12">
                                     <table class="table text-left">
                                         <tr>
                                             <th>Submitted on: </th>
-                                            <td><span id="spanSubmittedOn"></span></td>                                        
+                                            <td><span id="spanSubmittedOn"></span> <small class="text-muted">(DD/MM/YY)</small></td>                                        
                                         </tr>
                                         <tr>
                                             <th>Type: </th>
@@ -54,7 +54,7 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-8 order-md-1 order-2">
-                                                        <table class="table">
+                                                        <table id="tblPersonal" class="table">
                                                             <tr>
                                                                 <th>Title:</th>
                                                                 <td><span id="spanTitle"></span></td>
@@ -81,20 +81,20 @@
                                                             </tr>
                                                             <tr>
                                                                 <th>Gender:</th>
-                                                                <td><i class="fa fa-lg fa-male"></i></td>
+                                                                <td><i id="iconGender" class="fa fa-lg"></i><span id="spanGender"></span></td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Date of Birth:</th>
-                                                                <td><span id="spanDOB"></span></td>
+                                                                <td><span id="spanDOB"></span> <small class="text-muted">(DD/MM/YY)</small></td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Citizenship:</th>
                                                                 <td><span id="spanCitizenship"></span></td>
                                                             </tr>
-                                                            <tr>
+                                                            {{-- <tr>
                                                                 <th>NIC/ Postal/ Passport No:</th>
                                                                 <td>9012256545V</td>
-                                                            </tr>
+                                                            </tr> --}}
                                                         </table>
                                                     </div>
                                                 </div>
@@ -123,8 +123,8 @@
                                             </div>
                                             <div class="card-body">     
                                                 <div class="row">                                               
-                                                    <div class="col-12 col-md-6">
-                                                        <h5>Permanent Address</h5>
+                                                    <div class="col-12 col-lg-6">
+                                                        <h5>Permanent Address:</h5>
                                                         <hr>
                                                         <div class="ml-lg-4">
                                                             <p><span id="spanHouseNo"></span></p>  
@@ -134,11 +134,11 @@
                                                             <p><span id="spanAddress4"></span></p>
                                                             <p>City 1</p> 
                                                             <p>District/State</p>
-                                                            <p>Sri Lanka</p> 
+                                                            <p>Country</p> 
                                                         </div>
                                                     </div>                    
-                                                    <div class="col-12 col-md-6">
-                                                        <h5>Current Address</h5>
+                                                    <div class="col-12 col-lg-6">
+                                                        <h5>Current Address:</h5>
                                                         <hr>
                                                         <div class="ml-lg-4">
                                                             <p><span id="spanCurrentHouseNo"></span></p>  
@@ -148,22 +148,22 @@
                                                             <p><span id="spanCurrentAddress4"></span> </p>
                                                             <p>District/State</p>
                                                             <p>City 2 </p> 
-                                                            <p>Sri Lanka</p> 
+                                                            <p>Country</p> 
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 col-md-6">
+                                                    <div class="col-12 col-lg-6">
                                                         <table class="table">
                                                             <tr>
-                                                                <th>Telephone No.</th>
+                                                                <th>Telephone No:</th>
                                                                 <td>+<span id="spanTelephoneCode"></span> <span id="spanTelephone"></span></td>
                                                             </tr>
                                                         </table>
                                                     </div>
-                                                    <div class="col-12 col-md-6">
+                                                    <div class="col-12 col-lg-6">
                                                         <table class="table">
                                                             <tr>
-                                                                <th>Email</th>
-                                                                <td>johndoe@gmail.com</td>
+                                                                <th>Email:</th>
+                                                                <td><span id="spanEmail"></span></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -179,7 +179,7 @@
                                                     <div class="col-12">
                                                         <table class="table">
                                                             <tr>
-                                                                <th>Designation</th>
+                                                                <th>Designation:</th>
                                                                 <td><span id="spanDesignation"></span></td>                                        
                                                             </tr>
                                                         </table>

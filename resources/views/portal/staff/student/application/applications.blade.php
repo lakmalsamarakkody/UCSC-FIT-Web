@@ -51,7 +51,7 @@
                     <tr class="text-center">
                       <td>{{$application->student->initials}} {{$application->student->last_name}}</td>
                       <td>{{$application->student->user->email}}</td>
-                      <td>{{$application->created_at->isoFormat('Do dddd MMMM YYYY')}}</td>
+                      <td>{{$application->created_at->isoFormat('YYYY-MM-DD')}}</td>
                       <td>
                         <div class="btn-group">
                           <button type="button" class="btn btn-outline-primary" id="btnViewModalApplicant{{$application->student->id}}" data-tooltip="tooltip" data-placement="bottom" title="View Applicant Details" onclick="view_modal_applicant({{$application->student->id}})"><i class="fas fa-user"></i> View <span id="spinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>

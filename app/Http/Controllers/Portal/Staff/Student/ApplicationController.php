@@ -25,7 +25,8 @@ class ApplicationController extends Controller
     {
         $student = Student::find($request->student_id)->first();
         $registration = $student->registration()->first();
-        return response()->json(['status'=>'success', 'student'=>$student , 'registration'=>$registration]);
+        $email = $student->user->email;
+        return response()->json(['status'=>'success', 'student'=>$student , 'registration'=>$registration, 'email'=>$email]);
         
     }
 }
