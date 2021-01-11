@@ -10,7 +10,18 @@
     });
 
 </script>
-
+@if($student->reg_no == NULL)
+        {{-- REGISTRATION  PENDING --}}
+        <div class="col-12 px-0">
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading"><i class="far fa-check-circle"></i> Complete Your Registration! </h4>
+                <p>Complete your registration to continue FIT. If your having any issues with the registration, please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+                <hr>
+                <a href="" class="px-0 btn btn-link ">Click here to Complete Registration</a>
+            </div>
+        </div>
+        {{-- /REGISTRATION PENDING --}}
+@endif
     @if( $student != NULL )
 
     <!-- CONTENT -->
