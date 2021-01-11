@@ -199,18 +199,19 @@
           </div>
         </div>
         <!-- PAGE AREA -->
-            <!-- FOOTER -->
-            <div class="col-12 mt-5" style="bottom: 0;">
-              <hr class="bg-primary" width="100%"/>
-              <div class="row">
-                
-              <div class=" w-100 text-right pb-2 pr-3" >
-                Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" > UCSC</a> </strong>. All Rights Reserved |
-                Powered by <strong><a target="_blank" href="http://www.e-learning.lk/">e-Learning Center - UCSC </a> </strong>
-              </div>
-              </div>
-            </div>
-            <!-- /FOOTER -->
+
+        <!-- FOOTER -->
+        <div class="col-12 mt-5" style="bottom: 0;">
+          <hr class="bg-primary" width="100%"/>
+          <div class="row">
+            
+          <div class=" w-100 text-right pb-2 pr-3" >
+            Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" > UCSC</a> </strong>. All Rights Reserved |
+            Powered by <strong><a target="_blank" href="http://www.e-learning.lk/">e-Learning Center - UCSC </a> </strong>
+          </div>
+          </div>
+        </div>
+        <!-- /FOOTER -->
       </div>
     </div>
     <!-- /Page container-fluid -->
