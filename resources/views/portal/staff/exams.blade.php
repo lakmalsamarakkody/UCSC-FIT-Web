@@ -94,6 +94,7 @@
                 <table class="table yajra-datatable">
                   <thead class="text-center">
                     <tr>
+                      <th>Exam</th>
                       <th>Subject Code</th>
                       <th>Subject Name</th>
                       <th>Exam Type</th>
@@ -106,6 +107,7 @@
                   <tbody class="text-center">
                     @foreach ($exam_schedules as $schedule)
                     <tr id="tbl-examSchedule-tr-{{$schedule->id}}">
+                      <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
                       <td>FIT {{ $schedule->subject->code }}</td>
                       <td>{{ $schedule->subject->name }}</td>
                       <td>{{ $schedule->type->name }}</td>
@@ -143,6 +145,7 @@
               <table class="table yajra-datatable">
                 <thead class="text-center">
                   <tr>
+                    <th>Exam</th>
                     <th>Subject Code</th>
                     <th>Subject Name</th>
                     <th>Exam Type</th>
@@ -155,6 +158,7 @@
                 <tbody>
                   @foreach ($exam_schedules as $schedule)
                   <tr class="text-center">
+                    <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
                     <td>FIT {{ $schedule->subject->code }}</td>
                     <td>{{ $schedule->subject->name }}</td>
                     <td>{{ $schedule->type->name }}</td>
@@ -229,6 +233,7 @@
               <table class="table yajra-datatable mb-4">
                 <thead class="text-center">
                   <tr>
+                    <th>Exam</th>
                     <th>Subject Code</th>
                     <th>Subject Name</th>
                     <th>Exam Type</th>
@@ -240,14 +245,14 @@
                 <tbody>
                   @foreach ($exam_schedules as $schedule)
                   <tr class="text-center">
+                    <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
                     <td>FIT {{ $schedule->subject->code }}</td>
                     <td>{{ $schedule->subject->name }}</td>
                     <td>{{ $schedule->type->name }}</td>
                     <td>{{ $schedule->date }}</td>
                     <td>{{ $schedule->start_time }}</td>
                     <td>{{ $schedule->end_time }}</td>
-                  </tr>
-                      
+                  </tr>   
                   @endforeach
                 </tbody>
               </table>
@@ -269,31 +274,6 @@
     </div>
 
     <!-- /CONTENT -->
-
-
-
-    <!-- HEADING -->
-
-    <!--
-    <div class="col-lg-12 mt-5">
-        <div class="row">
-          
-          <div class="card w-100">
-              <div class="card-header">{{ __('Dashboard') }}</div>
-
-              <div class="card-body">
-                  @if (session('status'))
-                      <div class="alert alert-success" role="alert">
-                          {{ session('status') }}
-                      </div>
-                  @endif
-
-                  {{ __('You are logged in as Staff!') }}
-              </div>
-          </div>
-
-      </div>
-    </div> -->
 
     @include('portal.staff.exams.scripts')
 

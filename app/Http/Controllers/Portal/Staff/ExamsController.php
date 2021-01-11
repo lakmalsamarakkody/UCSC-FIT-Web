@@ -89,6 +89,7 @@ class ExamsController extends Controller
     // CREATE
 
     // EDIT
+    // Load schedule details to modal
     public function editScheduleGetDetails(Request $request)
     {
         //Validate schedule id
@@ -105,16 +106,37 @@ class ExamsController extends Controller
             endif;
         endif;
         return response()->json(['status'=>'error', 'data'=>$request->all()]);
-
     }
+    // /Load schedule details to modal
 
     public function editExamSchedule(Request $request)
     {
         //Validate edit fields
         $edit_schedule_validator = Validator::make($request->all(), [
-
+            'editScheduleExam'=>['required', 'exists:App\Models\Exam,id'],
+            'editScheduleId'=> ['required', 'integer', 'exists:App\Models\Exam\Schedule,id'],
+            'editScheduleSubject'=> ['required', 'exists:App\Models\Subject,id'],
+            'editScheduleExamType'=> ['required', 'exists:App\Models\Exam\Types,id'],
+            'editScheduleExamDate'=> ['required', 'date', 'after:today'],
+            'editScheduleStartTime'=> ['required'],
+            'editScheduleEndTime'=> ['required'],
         ]);
 
+        //Check validator fails
+        if($edit_schedule_validator->fails()):
+            return response()->json(['status'=>'error', 'errors'=>$edit_schedule_validator->errors()]);
+        else:
+            $schedule = Schedule::find($request->editScheduleId);
+            $schedule->exam_id = $request->editScheduleExam;
+            $schedule->subject_id = $request->editScheduleSubject;
+            $schedule->exam_type_id = $request->editScheduleExamType;
+            $schedule->date = $request->editScheduleExamDate;
+            $schedule->start_time = $request->editScheduleStartTime;
+            $schedule->end_time = $request->editScheduleEndTime;
+            if($schedule->save()):
+                return response()->json(['status'=>'success', 'schedule'=>$schedule]);
+            endif;
+        endif;
     }
     // /EDIT
 

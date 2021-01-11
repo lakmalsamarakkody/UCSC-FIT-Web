@@ -102,8 +102,6 @@
         </div>
         <!-- /EXAM TABLE-->
 
-        @include('portal.staff.exams.modal')
-
       </div>
     </div>
 
