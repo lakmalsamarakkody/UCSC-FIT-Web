@@ -1,44 +1,46 @@
-<!-- CREATE SHEDULE -->
+<!-- CREATE SCHEDULE -->
 
     <!-- EDIT -->
-    <div class="modal fade" id="editSchedule" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticEditSchedule" aria-hidden="true">
+    <div class="modal fade" id="modal-edit-schedule" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modal-edit-schedule-title" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticEditSchedule">Edit Exam Schedule</h5>
+                    <h5 class="modal-title" id="modal-edit-schedule-title">Edit Exam Schedule</h5>
                     <button type="butoon" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="class-body">
-                    <form>
+                    <form id="formEditSchedule">
                         <div class="form-row align-items-center px-4">
                           <div class="form-group col-xl-3 col-lg-6">
-                            <label for="subject">Subejct</label>
-                            <select name="subject" id="subject" class="form-control">
-                              <option value="">ICT Applications</option>
-                              <option value="">English for ICT</option>
-                              <option value="">Mathematics for ICT</option>
+                            <label for="editScheduleSubject">Subejct</label>
+                            <input type="hidden" class="form-control" id="editScheduleId" name="editScheduleId">
+                            <select name="editScheduleSubject" id="editScheduleSubject" class="form-control">
+                              @foreach ($subjects as $subject)
+                                <option value="{{$subject->id}}">{{$subject->name}}</option>
+                              @endforeach
                             </select>
                           </div>
                           <div class="form-group col-xl-3 col-lg-6">
-                            <label for="examType">Exam Type</label>
-                            <select name="examType" id="examType" class="form-control">
-                              <option value="">e-Test</option>
-                              <option value="">Practical</option>
+                            <label for="editScheduleExamType">Exam Type</label>
+                            <select name="editScheduleExamType" id="editScheduleExamType" class="form-control">
+                              @foreach ($exam_types as $type)
+                                <option value="{{$type->id}}">{{$type->name}}</option>
+                              @endforeach
                             </select>
                           </div>
                           <div class="form-group col-xl-2 col-lg-4">
-                            <label for="editExamDate">Date</label>
-                            <input type="date" name="editExamDate" id="editExamDate" class="form-control"/>
+                            <label for="editScheduleExamDate">Date</label>
+                            <input type="date" name="editScheduleExamDate" id="editScheduleExamDate" class="form-control"/>
                           </div>
                           <div class="form-group col-xl-2 col-lg-4">
-                            <label for="editStartTime">Start Time</label>
-                            <input type="time" name="editStartTime" id="editStartTime" class="form-control"/>
+                            <label for="editScheduleStartTime">Start Time</label>
+                            <input type="time" name="editScheduleStartTime" id="editScheduleStartTime" class="form-control"/>
                           </div>
                           <div class="form-group col-xl-2 col-lg-4">
-                            <label for="editEndTime">End Time</label>
-                            <input type="time" name="editEndTime" id="editEndTime" class="form-control"/>
+                            <label for="editScheduleEndTime">End Time</label>
+                            <input type="time" name="editScheduleEndTime" id="editScheduleEndTime" class="form-control"/>
                           </div>
                         </div>
                     </form>
@@ -54,10 +56,10 @@
 
     <!-- /EDIT -->
 
-<!-- /CREATE SHEDULE -->
+<!-- /CREATE SCHEDULE -->
 
 
-<!-- SHEDULE TABLE -->
+<!-- SCHEDULE TABLE -->
 
     <!-- POSTPONE-->
     <div class="modal fade" id="postponeExam" data-backdrop="static" tabindex="-1" aria-labelledby="postponeExamLabel" aria-hidden="true">
@@ -100,4 +102,4 @@
 
     <!-- /POSTPONE -->
 
-<!-- /SHEDULE TABLE -->
+<!-- /SCHEDULE TABLE -->

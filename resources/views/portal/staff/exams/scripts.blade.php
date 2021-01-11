@@ -18,7 +18,7 @@
 
         //Create schedule controller
         $.ajax({
-          hearder: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
           url: "{{ url('/portal/staff/exams/schedule/create') }}",
           type: 'post',
           data: formData,
@@ -63,6 +63,44 @@
   // /CREATE
 
   // EDIT
+
+  // Fill edit modal with relevant data
+  edit_schedule_modal_invoke = (schedule_id) => {
+    // Form payload
+    var formData = new FormData();
+    formData.append('schedule_id', schedule_id);
+
+    // Edit schedule get details controller
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/exams/schedule/edit/details') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){$('#btnEditSchedule-'+schedule_id).attr('disabled', 'disabled');},
+      success: function(data){
+        console.log('Success in edit schedule get details ajax.');
+        if(data['status'] == 'success'){
+          $('#editScheduleId').val(data['schedule']['id']);
+          $('#editScheduleSubject').val(data['schedule']['subject_id']);
+          $('#editScheduleExamType').val(data['schedule']['exam_type_id']);
+          $('#editScheduleExamDate').val(data['schedule']['date']);
+          $('#editScheduleStartTime').val(data['schedule']['start_time']);
+          $('#editScheduleEndTime').val(data['schedule']['end_time']);
+          $('#modal-edit-schedule').modal('show');
+          $('#btnEditSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+        }
+      },
+      error: function(err){
+        console.log('Error in edit schedule get details ajax.');
+        $('#btnEditSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+  // /Fill edit modal with relevant data
+
   edit_schedule = () => {
     SwalQuestionSuccessAutoClose.fire({
       title: "Are you sure ?",
@@ -102,7 +140,7 @@
 
         //Delete exam schedule controller
         $.ajax({
-          hearders: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+          headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
           url: "{{ url('/portal/staff/exams/schedule/delete') }}",
           type: 'post',
           data: formData,

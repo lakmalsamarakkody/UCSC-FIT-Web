@@ -83,7 +83,33 @@ class ExamsController extends Controller
     // CREATE
 
     // EDIT
+    public function editScheduleGetDetails(Request $request)
+    {
+        //Validate schedule id
+        $schedule_id_validator = Validator::make($request->all(), [
+            'schedule_id'=> ['required', 'integer', 'exists:App\Models\Exam\Schedule,id'],
+        ]);
 
+        //Check validator fails
+        if($schedule_id_validator->fails()):
+            return response()->json(['status'=>'error', 'errors'=>$schedule_id_validator->errors()]);
+        else:
+            if($schedule = Schedule::find($request->schedule_id)):
+                return response()->json(['status'=>'success', 'schedule'=>$schedule]);
+            endif;
+        endif;
+        return response()->json(['status'=>'error', 'data'=>$request->all()]);
+
+    }
+
+    public function editExamSchedule(Request $request)
+    {
+        //Validate edit fields
+        $edit_schedule_validator = Validator::make($request->all(), [
+
+        ]);
+
+    }
     // /EDIT
 
     // DELETE
