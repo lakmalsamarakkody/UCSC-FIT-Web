@@ -183,7 +183,8 @@
             <div class="card-header">Exams Held</div>
             <div class="card-body">
               <!-- SEARCH -->
-              <form>
+              <form action="{{ route('exam.held.search') }}" method="post">
+              @csrf
                 <div class="form-row mb-5">
                   <div class="form-group col-xl-2 col-lg-3">
                     <label for="selectSearchExamYear">Year</label>
@@ -217,7 +218,7 @@
                   </div>
                   <div class="form-group col-xl-3 col-lg-12">
                     <label for="btnSearchExamSchedule">&nbsp;</label>
-                    <button type="button" class="btn btn-outline-primary form-control" onclick="" id="btnSearchExamSchedule" name="btnSearchExamSchedule"><i class="fa fa-search"></i> Search</button>
+                    <button type="submit" class="btn btn-outline-primary form-control" id="btnSearchExamSchedule" name="btnSearchExamSchedule"><i class="fa fa-search"></i> Search</button>
                   </div>
 
                 </div>
@@ -250,6 +251,9 @@
                   @endforeach
                 </tbody>
               </table>
+              <div class="pt-4 float-right">
+                {{ $exam_schedules->links( "pagination::bootstrap-4") }}
+              </div>
               <!-- /HELD EXAM TABLE -->
 
           </div>
