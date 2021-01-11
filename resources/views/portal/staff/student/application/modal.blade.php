@@ -61,23 +61,23 @@
                                                             </tr>
                                                             <tr>
                                                                 <th>First Name:</th>
-                                                                <td>John</td>
+                                                                <td><span id="spanFirstName"></span></td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Middle Names:</th>
-                                                                <td>John John John John John John John</td>
+                                                                <td><span id="spanMiddleNames"></span></td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Initials:</th>
-                                                                <td>J J J J J J J J</td>
+                                                                <td><span id="spanInitials"></span></td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Last Name:</th>
-                                                                <td>Doe</td>
+                                                                <td><span id="spanLastName"></span></td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Full Name:</th>
-                                                                <td>John John John John John John John John Doe</td>
+                                                                <td><span id="spanFullName"></span></td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Gender:</th>
@@ -85,11 +85,11 @@
                                                             </tr>
                                                             <tr>
                                                                 <th>Date of Birth:</th>
-                                                                <td>1990-04-01</td>
+                                                                <td><span id="spanDOB"></span></td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Citizenship:</th>
-                                                                <td>Sri Lankan</td>
+                                                                <td><span id="spanCitizenship"></span></td>
                                                             </tr>
                                                             <tr>
                                                                 <th>NIC/ Postal/ Passport No:</th>
@@ -110,7 +110,7 @@
                                                         <table class="table">
                                                             <tr>
                                                                 <th>Highest Qualification</th>
-                                                                <td>Advanced/ Higher Diploma from a nationally or internationally recognized organisation</td>                                        
+                                                                <td><span id="spanEducation"></span></td>                                        
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -127,35 +127,35 @@
                                                         <h5>Permanent Address</h5>
                                                         <hr>
                                                         <div class="ml-lg-4">
-                                                            <p>House Name/ No.</p>  
-                                                            <p>Adress Line 1 </p>
-                                                            <p>Address Line 2</p>  
-                                                            <p>Address Line 3</p>  
-                                                            <p>Address Line 4 </p>
-                                                            <p>City </p> 
+                                                            <p><span id="spanHouseNo"></span></p>  
+                                                            <p><span id="spanAddress1"></span></p>
+                                                            <p><span id="spanAddress2"></span></p>  
+                                                            <p><span id="spanAddress3"></span></p>  
+                                                            <p><span id="spanAddress4"></span></p>
+                                                            <p>City 1</p> 
                                                             <p>District/State</p>
-                                                            <p>Country</p> 
+                                                            <p>Sri Lanka</p> 
                                                         </div>
                                                     </div>                    
                                                     <div class="col-12 col-md-6">
                                                         <h5>Current Address</h5>
                                                         <hr>
                                                         <div class="ml-lg-4">
-                                                            <p>House Name/ No.</p>  
-                                                            <p>Adress Line 1 </p>
-                                                            <p>Address Line 2</p>  
-                                                            <p>Address Line 3</p>  
-                                                            <p>Address Line 4 </p>
+                                                            <p><span id="spanCurrentHouseNo"></span></p>  
+                                                            <p><span id="spanCurrentAddress1"></span></p>
+                                                            <p><span id="spanCurrentAddress2"></span></p>  
+                                                            <p><span id="spanCurrentAddress3"></span></p>  
+                                                            <p><span id="spanCurrentAddress4"></span> </p>
                                                             <p>District/State</p>
-                                                            <p>City </p> 
-                                                            <p>Country</p> 
+                                                            <p>City 2 </p> 
+                                                            <p>Sri Lanka</p> 
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-md-6">
                                                         <table class="table">
                                                             <tr>
                                                                 <th>Telephone No.</th>
-                                                                <td>+94 777 123 456</td>
+                                                                <td>+<span id="spanTelephoneCode"></span> <span id="spanTelephone"></span></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -180,7 +180,7 @@
                                                         <table class="table">
                                                             <tr>
                                                                 <th>Designation</th>
-                                                                <td>CEO, Company Name, Address</td>                                        
+                                                                <td><span id="spanDesignation"></span></td>                                        
                                                             </tr>
                                                         </table>
                                                     </div>
