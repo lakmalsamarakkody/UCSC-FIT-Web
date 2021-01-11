@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
-use App\Models\Student_Registration\Academic_Year;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -26,8 +25,7 @@ class StudentController extends Controller
         }
 
         $students = $students->paginate(10);
-        $years=Academic_Year::select('year')->get();
-        return view('portal/staff/students', compact('years', 'students'));
+        return view('portal/staff/students', compact('students'));
     }
 
     public function getStudentList(Request $request)

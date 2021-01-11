@@ -57,9 +57,9 @@
                         <label for="InputStudentNIC">Year</label>
                         <select id="inputState" name="inputState" class="form-control form-control-sm">
                           <option selected>select here---</option>
-                          @foreach($years as $year)                          
+                          {{-- @foreach($years as $year)                          
                           <option value="{{ $year->year }}">{{ $year->year }}</option>
-                          @endforeach
+                          @endforeach --}}
                         </select>
                       </div>
                       <div class="form-group col">
