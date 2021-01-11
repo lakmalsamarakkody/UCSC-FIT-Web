@@ -6,7 +6,7 @@
 
     // ACTIVE NAVIGATION ENTRY
     $(document).ready(function ($) {
-        $('#dashboard').addClass("active");
+        $('#students').addClass("active");
     });
 
 </script>
@@ -21,13 +21,15 @@
             </ol>
           </nav>
 
+
+
         </div>
     </section>
     <!-- /BREACRUMB -->
 
     <!-- CONTENT -->
     
-    <div class="col-12 applications">
+    <div class="col-12 applications min-vh-100">
       <div class="row">
           
         <!-- APPLICATIONS LIST -->
@@ -45,16 +47,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="text-center">
-                    <td>John Doe</td>
-                    <td>johndoe@gmail.com</td>
-                    <td>2020/12/21</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Applicant Details" data-toggle="modal" data-target="#modal-view-applicant"><i class="fas fa-user">View</i></button>
-                      </div>
-                    </td>
-                  </tr>
+                  @foreach ($applications as $application)
+                    <tr class="text-center">
+                      <td>{{$application->student->initials}} {{$application->student->last_name}}</td>
+                      <td>{{$application->student->user->email}}</td>
+                      <td>{{$application->created_at->isoFormat('Do dddd MMMM YYYY')}}</td>
+                      <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-outline-primary" id="btnViewModalApplicant{{$application->student->id}}" data-tooltip="tooltip" data-placement="bottom" title="View Applicant Details" onclick="view_modal_applicant({{$application->student->id}})"><i class="fas fa-user"></i> View <span id="spinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                        </div>
+                      </td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
 

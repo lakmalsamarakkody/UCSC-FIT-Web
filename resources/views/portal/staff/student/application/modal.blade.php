@@ -10,19 +10,19 @@
             </div>
             <div class="modal-body">
                 <div class="col-12 mt-3">
-                    <div class="card border border-primary rounded">
+                    <div class="card shadow-none">
                         <div class="card-header"></div>
                         <div class="card-body">                        
                             <div class="row">
-                                <div class="col-md-8 order-md-1 order-2">
+                                <div class="col-12">
                                     <table class="table text-left">
                                         <tr>
                                             <th>Submitted on: </th>
-                                            <td>2020/12/21 Monday 12.21PM</td>                                        
+                                            <td><span id="spanSubmittedOn"></span></td>                                        
                                         </tr>
                                         <tr>
                                             <th>Type: </th>
-                                            <td>Payment</td>
+                                            <td>Registration</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -57,7 +57,7 @@
                                                         <table class="table">
                                                             <tr>
                                                                 <th>Title:</th>
-                                                                <td>Mr.</td>
+                                                                <td><span id="spanTitle"></span></td>
                                                             </tr>
                                                             <tr>
                                                                 <th>First Name:</th>
