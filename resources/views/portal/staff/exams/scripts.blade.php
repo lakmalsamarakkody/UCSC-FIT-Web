@@ -63,7 +63,6 @@
   // /CREATE
 
   // EDIT
-
   // Fill edit modal with relevant data
   edit_schedule_modal_invoke = (schedule_id) => {
     // Form payload
@@ -83,6 +82,7 @@
         console.log('Success in edit schedule get details ajax.');
         if(data['status'] == 'success'){
           $('#editScheduleId').val(data['schedule']['id']);
+          $('#editScheduleExam').val(data['schedule']['exam_id']);
           $('#editScheduleSubject').val(data['schedule']['subject_id']);
           $('#editScheduleExamType').val(data['schedule']['exam_type_id']);
           $('#editScheduleExamDate').val(data['schedule']['date']);
@@ -109,11 +109,49 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: "Updated!",
-          text: "Exam schedule updated.",
-        })
-        $('#editSchedule').modal('hide')
+        // Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        // Form payload
+        var formData = new FormData($('#formEditSchedule')[0]);
+
+        // Edit exam schedule controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/edit') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnModalEditSchedule').attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in edit exam schedule ajax.');
+            $('#btnModalEditSchedule').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating edit schedule data.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in edit exam schedule.');
+              SwalDoneSuccess.fire({
+                title: "Updated!",
+                text: "Exam schedule updated.",
+              })
+              $('#modal-edit-schedule').modal('hide');
+              location.reload();
+            }
+          },
+          error: function(err){
+            console.log('Error in edit exam schedule ajax.')
+            $('#btnModalEditSchedule').removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({

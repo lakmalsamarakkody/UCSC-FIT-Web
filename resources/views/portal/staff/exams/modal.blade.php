@@ -13,34 +13,50 @@
                 <div class="class-body">
                     <form id="formEditSchedule">
                         <div class="form-row align-items-center px-4">
-                          <div class="form-group col-xl-3 col-lg-6">
-                            <label for="editScheduleSubject">Subejct</label>
+                          <div class="form-group col-xl-2 col-lg-4">
+                            <label for="editScheduleExam">Exam</label>
                             <input type="hidden" class="form-control" id="editScheduleId" name="editScheduleId">
+                            <span class="invalid-feedback" id="error-editScheduleId" role="alert"></span>
+                            <select name="editScheduleExam" id="editScheduleExam" class="form-control">
+                                <option value="Default" disabled selected>Select Exam</option>
+                                @foreach ($exams as $exam)
+                                    <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
+                                @endforeach
+                            </select>
+                            <span class="invalid-feedback" id="error-editScheduleExam" role="alert"></span>
+                          </div>
+                          <div class="form-group col-xl-2 col-lg-4">
+                            <label for="editScheduleSubject">Subejct</label>
                             <select name="editScheduleSubject" id="editScheduleSubject" class="form-control">
                               @foreach ($subjects as $subject)
                                 <option value="{{$subject->id}}">{{$subject->name}}</option>
                               @endforeach
                             </select>
+                            <span class="invalid-feedback" id="error-editScheduleSubject" role="alert"></span>
                           </div>
-                          <div class="form-group col-xl-3 col-lg-6">
+                          <div class="form-group col-xl-2 col-lg-4">
                             <label for="editScheduleExamType">Exam Type</label>
                             <select name="editScheduleExamType" id="editScheduleExamType" class="form-control">
                               @foreach ($exam_types as $type)
                                 <option value="{{$type->id}}">{{$type->name}}</option>
                               @endforeach
                             </select>
+                            <span class="invalid-feedback" id="error-editScheduleExamType" role="alert"></span>
                           </div>
                           <div class="form-group col-xl-2 col-lg-4">
                             <label for="editScheduleExamDate">Date</label>
                             <input type="date" name="editScheduleExamDate" id="editScheduleExamDate" class="form-control"/>
+                            <span class="invalid-feedback" id="error-editScheduleExamDate" role="alert"></span>
                           </div>
                           <div class="form-group col-xl-2 col-lg-4">
                             <label for="editScheduleStartTime">Start Time</label>
                             <input type="time" name="editScheduleStartTime" id="editScheduleStartTime" class="form-control"/>
+                            <span class="invalid-feedback" id="error-editScheduleStartTime" role="alert"></span>
                           </div>
                           <div class="form-group col-xl-2 col-lg-4">
                             <label for="editScheduleEndTime">End Time</label>
                             <input type="time" name="editScheduleEndTime" id="editScheduleEndTime" class="form-control"/>
+                            <span class="invalid-feedback" id="error-editScheduleEndTime" role="alert"></span>
                           </div>
                         </div>
                     </form>
@@ -48,12 +64,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="edit_schedule();">Apply Changes</button>
+                    <button type="button" class="btn btn-outline-primary" id="btnModalEditSchedule" onclick="edit_schedule();">Apply Changes</button>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- /EDIT -->
 
 <!-- /CREATE SCHEDULE -->
