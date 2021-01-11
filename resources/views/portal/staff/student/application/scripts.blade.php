@@ -32,11 +32,12 @@ view_modal_applicant = (student_id) => {
         if(data['student']['gender'] == 'Male'){$('#iconGender').addClass('fa-male'); $('#spanGender').html('(Male)');}else{$('#iconGender').addClass('fa-female'); $('#spanGender').html('(Female)');};
         $('#spanDOB').html(new Date(data['student']['dob']).toLocaleDateString());
         $('#spanCitizenship').html(data['student']['citizenship']);
-        //set ID
-        if(data['student']['nic_old'] != null){$("#tblPersonal").append('<tr><th>NIC (old):</th><td>'+ data['student']['nic_old'] +'</td></tr>');}
-        if(data['student']['nic_new'] != null){$("#tblPersonal").append('<tr><th>NIC (new):</th><td>'+ data['student']['nic_new'] +'</td></tr>');}
-        if(data['student']['postal'] != null){$("#tblPersonal").append('<tr><th>Postal ID:</th><td>'+ data['student']['postal'] +'</td></tr>');}
-        if(data['student']['passport'] != null){$("#tblPersonal").append('<tr><th>Passport ID:</th><td>'+ data['student']['passport'] +'</td></tr>');}
+        //set IDs
+        $('.trIDs').remove();
+        if(data['student']['nic_old'] != null){$("#tblPersonal").append('<tr class="trIDs"><th>NIC (old):</th><td>'+ data['student']['nic_old'] +'</td></tr>');}
+        if(data['student']['nic_new'] != null){$("#tblPersonal").append('<tr class="trIDs"><th>NIC (new):</th><td>'+ data['student']['nic_new'] +'</td></tr>');}
+        if(data['student']['postal'] != null){$("#tblPersonal").append('<tr class="trIDs"><th>Postal ID:</th><td>'+ data['student']['postal'] +'</td></tr>');}
+        if(data['student']['passport'] != null){$("#tblPersonal").append('<tr class="trIDs"><th>Passport ID:</th><td>'+ data['student']['passport'] +'</td></tr>');}
         
         $('#spanEducation').html(data['student']['education']);
 
@@ -46,9 +47,9 @@ view_modal_applicant = (student_id) => {
         $('#spanAddress2').html(data['student']['permanent_address_line2']);
         $('#spanAddress3').html(data['student']['permanent_address_line3']);
         $('#spanAddress4').html(data['student']['permanent_address_line4']);
-        //$('#').html(data['student']['']);
-        //$('#').html(data['student']['']);
-        //$('#').html(data['student']['']);
+        $('#spanCity').html(data['permanentAddressDetails']['permanentCity']);
+        $('#spanState').html(data['permanentAddressDetails']['permanentState']);
+        $('#spanCountry').html(data['permanentAddressDetails']['permanentCountry']);
 
         //current address
         $('#spanCurrentHouseNo').html(data['student']['current_house']);
@@ -56,9 +57,9 @@ view_modal_applicant = (student_id) => {
         $('#spanCurrentAddress2').html(data['student']['current_address_line2']);
         $('#spanCurrentAddress3').html(data['student']['current_address_line3']);
         $('#spanCurrentAddress4').html(data['student']['current_address_line4']);
-        //$('#').html(data['student']['']);
-        //$('#').html(data['student']['']);
-        //$('#').html(data['student']['']);
+        $('#spanCurrentCity').html(data['currentAddressDetails']['currentCity']);
+        $('#spanCurrentState').html(data['currentAddressDetails']['currentState']);
+        $('#spanCurrentCountry').html(data['currentAddressDetails']['currentCountry']);
 
         $('#spanTelephoneCode').html(data['student']['telephone_country_code']);
         $('#spanTelephone').html(data['student']['telephone']);

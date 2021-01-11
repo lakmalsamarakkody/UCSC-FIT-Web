@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12 mt-3">
+                <div class="col-lg-12">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">Details</a>
@@ -53,7 +53,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-md-8 order-md-1 order-2">
+                                                    <div class="col-md-12 order-md-1 order-2">
                                                         <table id="tblPersonal" class="table">
                                                             <tr>
                                                                 <th>Title:</th>
@@ -124,7 +124,7 @@
                                             <div class="card-body">     
                                                 <div class="row">                                               
                                                     <div class="col-12 col-lg-6">
-                                                        <h5>Permanent Address:</h5>
+                                                        <h6>Permanent Address:</h6>
                                                         <hr>
                                                         <div class="ml-lg-4">
                                                             <p><span id="spanHouseNo"></span></p>  
@@ -132,23 +132,23 @@
                                                             <p><span id="spanAddress2"></span></p>  
                                                             <p><span id="spanAddress3"></span></p>  
                                                             <p><span id="spanAddress4"></span></p>
-                                                            <p>City 1</p> 
-                                                            <p>District/State</p>
-                                                            <p>Country</p> 
+                                                            <p><span id="spanCity"></span></p>
+                                                            <p><span id="spanState"></span></p> 
+                                                            <p><span id="spanCountry"></span></p> 
                                                         </div>
                                                     </div>                    
                                                     <div class="col-12 col-lg-6">
-                                                        <h5>Current Address:</h5>
+                                                        <h6>Current Address:</h6>
                                                         <hr>
                                                         <div class="ml-lg-4">
                                                             <p><span id="spanCurrentHouseNo"></span></p>  
                                                             <p><span id="spanCurrentAddress1"></span></p>
                                                             <p><span id="spanCurrentAddress2"></span></p>  
                                                             <p><span id="spanCurrentAddress3"></span></p>  
-                                                            <p><span id="spanCurrentAddress4"></span> </p>
-                                                            <p>District/State</p>
-                                                            <p>City 2 </p> 
-                                                            <p>Country</p> 
+                                                            <p><span id="spanCurrentAddress4"></span></p>
+                                                            <p><span id="spanCurrentCity"></span></p>
+                                                            <p><span id="spanCurrentState"></span></p> 
+                                                            <p><span id="spanCurrentCountry"></span></p> 
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-lg-6">
