@@ -52,6 +52,18 @@ html{
   scroll-behavior: smooth;
 }
 
+.bg-main-theme{
+  background-color:var(--main-theme-color);
+}
+
+.text-main-theme{
+  color:var(--main-theme-color);
+}
+
+.border-main-theme{
+  border-color: var(--main-theme-color);
+}
+
 /* buttons */
 .btn.btn-primary{
   color: var(--white);
