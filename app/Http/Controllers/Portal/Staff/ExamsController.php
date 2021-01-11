@@ -34,6 +34,14 @@ class ExamsController extends Controller
             $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
         }
 
+        if ($request->selectSearchExamYear != null) {
+            $exam_schedules = $exam_schedules->exam->where('year', $request->selectSearchExamYear);
+        }
+
+        if ($request->selectSearchSubject != null) {
+            $exam_schedules = $exam_schedules->where('subject_id', $request->selectSearchSubject);
+        }
+
         $exam_schedules = $exam_schedules->paginate(6);
         return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'exams'));
     }
