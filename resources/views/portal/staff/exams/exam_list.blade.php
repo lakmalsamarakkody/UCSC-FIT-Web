@@ -42,8 +42,8 @@
                     <label for="examYear">Year</label>
                     <select name="examYear" id="examYear" class="form-control">
                       <option value="Default" selected disabled>Select Year</option>
-                      <option value="2021">2021</option>
-                      <option value="2022">2022</option>
+                      <option value="{{now()->year}}">{{now()->year}}</option>
+                      <option value="{{now()->year+1}}">{{now()->year+1}}</option>
                     </select>
                     <span class="invalid-feedback" id="error-examYear" role="alert"></span>
                   </div>
