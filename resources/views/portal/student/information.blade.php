@@ -81,7 +81,7 @@
                             <div class="col-md-4 order-md-2 order-1 mb-3 align-middle">  
                                 <div class="row">                               
                                     <div class="img mt-5 mb-2 text-center position-relative">
-                                        <button class="btn btn-outline-warning position-absolute m-3" data-tooltip="tooltip" data-placement="bottom" title="Change Profile Picture"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-outline-warning position-absolute m-3" data-tooltip="tooltip" data-placement="bottom" title="Change Profile Picture" data-toggle="modal" data-target="#modal-profile-picture"><i class="fa fa-edit"></i></button>
                                         <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}.png" alt="Avatar" class="avatar" width="60%" onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
                                     </div>
                                     <div class="text-center w-100 ">
@@ -100,7 +100,7 @@
                 <div class="card mt-3">
                     <div class="card-header">
                         Education Qualifications
-                        <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details" data-toggle="modal" data-target="#modal-education-qualification"><i class="fa fa-edit"></i></button>
                     </div>
                     <div class="card-body">                        
                         <div class="row">
@@ -123,7 +123,7 @@
                 <div class="card mt-3 contact">
                     <div class="card-header ">
                         Contact Details
-                        <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details" data-toggle="modal" data-target="#modal-contact-details"><i class="fa fa-edit"></i></button>
                     </div>
                     <div class="card-body">     
                         <div class="row">                                               
@@ -214,39 +214,40 @@
                     </div>
                     <div class="card-body">                        
                         <div class="col-12">
-                            <form action="">
+                            <form id="changePassword">
                                 <div class="form-row">     
-                                  <div class="form-group col-12 col-md-3">
+                                  <div class="form-group col-lg col-12">
                                     <label for="currentPassword">Current Password</label>
                                     <input type="password" class="form-control form-control-sm" id="currentPassword" name="currentPassword"/>
                                     <small id="InputCurrentPasswordHelp" class="form-text text-muted">Enter Current Password</small>
                                   </div> 
-                                  <div class="form-group col-12 col-md-3">
+                                  <div class="form-group col-lg col-12">
                                     <label for="newPassword">New Password</label>
                                     <input type="password" class="form-control form-control-sm" id="newPassword" name="newPassword"/>
                                     <small id="InputNewPasswordHelp" class="form-text text-muted">Enter New Password</small>
                                   </div> 
-                                  <div class="form-group col-12 col-md-3">
+                                  <div class="form-group col-lg col-12">
                                     <label for="reNewPassword">Re-Type Password</label>
                                     <input type="password" class="form-control form-control-sm" id="reNewPassword" name="reNewPassword"/>
                                     <small id="InputReNewPasswordHelp" class="form-text text-muted">Re-Type New Password</small>
                                   </div>
                                 </div>
-                                <div class=" text-right w-100">
-                                    <button class="btn btn-secondary">Discard</button>
-                                    <button class="btn btn-outline-primary">Change Password</button>
-                                </div>
                             </form>
+                                <div class=" text-right w-100">
+                                    <button class="btn btn-secondary" onclick="reset_form()">Discard</button>
+                                    <button class="btn btn-outline-primary" onclick="update_account()">Change Password</button>
+                                </div>
                         </div>
                     </div>
                 </div>
             </div>
+            @include('portal.student.information.modal')
         </div>
     </div>
     <!-- /CONTENT -->
     @endif
 
-    @include('portal.student.home.scripts')
+    @include('portal.student.information.scripts')
 
 @endsection
 
