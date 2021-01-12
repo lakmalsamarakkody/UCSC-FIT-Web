@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Student;
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
@@ -19,20 +20,22 @@ class RedirectIfAuthenticated
      */
 
     public function handle($request, Closure $next, $guard = null){
+        
+        
         if (Auth::guard($guard)->check()):
-             $role = Auth::user()->role->name;
-             $status= Auth::user()->status;
-             switch ($role):
-                 case 'Student':
-                     if($status==0):
-                         return redirect('/portal/student/registration');
-                     else:
-                         return redirect('/portal/student');
-                     endif;
-                   break;           
-                default:
-                   return redirect('/portal/staff/'); 
-                   break;
+            $role = Auth::user()->role->name;
+            switch ($role):
+                case 'Student':
+                $student = Student::where('user_id', Auth::user()->id)->first();
+                if($student == NULL || $student->registration->first()->status == NULL):
+                    return redirect('/portal/student/registration');
+                else:
+                    return redirect('/portal/student');
+                endif;
+                break;           
+            default:
+                return redirect('/portal/staff/'); 
+                break;
             endswitch;
         endif;
         
