@@ -26,16 +26,21 @@
     <!-- /BREACRUMB -->
 
     <!-- CONTENT -->
-    
     <div class="col-12 staff-exams">
       <div class="row">
+
+
+        {{-- EXAM LIST --}}
+        <div class="col-lg-4 col-12 mb-5">
+          <a href="/portal/staff/exams/list" style="text-decoration: none">
+            <button type="button" class="btn btn-outline-primary w-100 py-4 font-weight-bold" id="btnExamList">Exam List</button>
+          </a>
+        </div>
+        {{-- /EXAM LIST --}}
 
         <!-- CREATE EXAM SCHEDULE -->
         <div class="col-12 mb-5">
           <div class="card">
-            <div class="form-group col-12 mt-4 mb-2">
-              <a href="/portal/staff/exams/list" target="_blank"><button type="button" class="btn btn-outline-primary form-control" id="btnExamList">Exam List</button></a>
-            </div>
             <div class="card-header">Create Exam Schedule</div>
             <div class="card-body">
               <form action="" method="POST" id="formCreateSchedule">

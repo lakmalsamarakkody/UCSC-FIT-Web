@@ -108,7 +108,12 @@
                                 <table class="table">
                                     <tr>
                                         <th>Highest Qualification</th>
-                                        <td>{{ $student->education }}</td>                                        
+                                        <td>@if($student->education == 'degree')<p>Bachelor's Degree</p>
+                                        @elseif($student->education == 'higherdiploma')<p>Advanced/Higher Diploma from a nationally or internationally recognized organisation</p>
+                                        @elseif($student->education == 'diploma')<p>Diploma from a nationally or internationally recognized organisation</p>
+                                        @elseif($student->education == 'advancedlevel')<p>GCE Advanced Level</p>
+                                        @elseif($student->education == 'ordinarylevel')<p>GCE Ordinary Level</p>
+                                        @elseif($student->education == 'otherqualification')<p>Any other qualification</p>@endif</td>           
                                     </tr>
                                 </table>
                             </div>
