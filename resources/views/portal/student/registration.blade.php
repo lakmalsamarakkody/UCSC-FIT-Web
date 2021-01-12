@@ -16,6 +16,12 @@
         <div class="row">
 
             <div class="col-12 px-0">
+                @if($student != NULL && $student->)
+                <div class="alert alert-success">
+
+                </div>
+                @endif
+
                 <div class="card">
                     <div class="card-header text-center">Register to FIT Programme<br><small style="text-transform: initial;">Please fill all the details correctly</small></div>
                     <div class="card-body">
@@ -192,7 +198,8 @@
                             <!-- CONTACT DETAILS -->
                             <div class="details px-3 mt-4 pb-3">
                                 <h6 class="text-left mt-4 mb-4">Contact Details</h6>
-                                <small>* If your current address is not the Permanent Address please click on 'Current Address (Optional)' to enter your current address.</small>
+                                <small>* If your current address is not the Permanent Address please click on 'Current Address (Optional)' to enter your current address.
+                                    If your city or state is not in the list,please type it in an extra address line field.</small>
                                 <div class="form-row align-item-center mt-3">
                                     <div class="form-group col-xl-6 col-md-12">
                                         <h6 style="color: black;" class="mb-4">Permanent Address</h6>
@@ -247,8 +254,7 @@
                                                     @endif
                                                 </select>
                                                 <span class="invalid-feedback" id="error-city" role="alert"></span>
-                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.<br>
-                                                    (If your city is not in the list, please type it in the above extra address line field)</small>
+                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectDistrict">
@@ -286,8 +292,7 @@
                                                     @endif
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectState" role="alert"></span>
-                                                <small class="form-text text-muted">* States are shown after selecting a Country.<br>
-                                                (If your state is not in the list, please type it in the above extra address line field)</small>
+                                                <small class="form-text text-muted">* States are shown after selecting a Country.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -341,7 +346,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="currentAddressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2:</label>
+                                            <label for="currentAddressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2: <small>(Optional)</small></label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('currentAddressLine2') is-invalid @enderror" id="currentAddressLine2" name="currentAddressLine2" @if($student != NULL) value="{{$student->current_address_line2 }}" @endif disabled>
                                                 <span class="invalid-feedback" id="error-currentAddressLine2" role="alert"></span>
@@ -353,7 +358,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="currentAddressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3:</label>
+                                            <label for="currentAddressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3: <small>(Optional)</small></label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('currentAddressLine3') is-invalid @enderror" id="currentAddressLine3" name="currentAddressLine3" @if($student != NULL) value="{{ $student->currentAddressLine3 }}" @endif disabled>
                                                 <span class="invalid-feedback" id="error-currentAddressLine3" role="alert"></span>
@@ -392,8 +397,7 @@
                                                     @endif
                                                 </select>
                                                 <span class="invalid-feedback" id="error-currentCity" role="alert"></span>
-                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.<br>
-                                                (If your city is not in the list, please type it in the above extra address line field)</small>
+                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectCurrentDistrict">
@@ -431,8 +435,7 @@
                                                     @endif
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectCurrentState" role="alert"></span>
-                                                <small class="form-text text-muted">* States are shown after selecting a Country.<br>
-                                                (If your state is not in the list, please type it in the above extra address line field)</small>
+                                                <small class="form-text text-muted">* States are shown after selecting a Country.</small>
                                             </div>
                                         </div>
                                         <div class="form-group row">

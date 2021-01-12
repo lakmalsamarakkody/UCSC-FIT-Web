@@ -15,7 +15,7 @@
       <div class="row">
 
         {{-- PAYMENT CHECK --}}
-        @if($payment->status != 'OK')
+        @if($payment->status != 'Approved')
 
           {{-- PAYMENT APPROVAL PENDING --}}
           <div class="col-12 px-0">
@@ -28,7 +28,7 @@
           </div>
           {{-- /PAYMENT APPROVAL PENDING --}}
 
-        @elseif ($payment->status == 'OK')
+        @elseif ($payment->status == 'Approved')
 
           {{-- DOCUMENT SUBMIT CHECK --}}
           @if($registration->document_submit == 1)

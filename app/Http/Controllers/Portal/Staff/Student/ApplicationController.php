@@ -20,16 +20,21 @@ class ApplicationController extends Controller
         $this->middleware('revalidate');
         $this->middleware('staff.auth');
     }
-    public function index()
+    //NEW APPLICANT
+    public function Applications()
     {
-        $applications = Registration::where('registered_at', NULL)->where('application_submit', '1')->get();
-        return view('portal/staff/student/applications', compact('applications'));
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->get();
+        return view('portal/staff/student/applications', compact('registrations'));
+    }
+    public function reviewPayment(){
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', 'Approved')->where('payment_id', '!=', NULL)->whereHas('payment', function ($query) {$query->where('status', 'Approved');})->get();
+        return view('portal/staff/student/applications', compact('registrations'));
     }
 
     public function applicantInfo(Request $request)
     {
-        $student = Student::find($request->student_id)->first();
-        $registration = $student->registration()->first();
+        $registration = Registration::find($request->registration_id);
+        $student = Registration::find($request->registration_id)->student;
         $email = $student->user->email;
         
         //PERMANENT ADDRESS
@@ -85,5 +90,28 @@ class ApplicationController extends Controller
         // /CURRENT ADDRESS
         return response()->json(['status'=>'success', 'student'=>$student , 'registration'=>$registration, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
         
+    }
+
+    public function approveApplication(Request $request){
+        $registration = Registration::find($request->registration_id);
+        $registration->application_status = "Approved";
+        if($registration->save()):
+            return response()->json([ 'status'=>'success']);
+        endif;
+        return response()->json([ 'status'=>'error']);
+    }
+
+    public function declineApplication(Request $request){
+        $registration = Registration::find($request->registration_id);
+        $registration->registered_at = NULL;
+        $registration->registration_expire_at = NULL;
+        $registration->application_submit = 0;
+        $registration->application_status = "Declined";
+        $registration->declined_msg = $request->declined_msg;
+        $registration->status = NULL;
+        if($registration->save()):
+            return response()->json([ 'status'=>'success']);
+        endif;
+        return response()->json([ 'status'=>'error']);
     }
 }

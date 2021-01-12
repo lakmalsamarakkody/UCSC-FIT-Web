@@ -61,8 +61,11 @@ Route::get('/portal/staff/', [App\Http\Controllers\Portal\Staff\HomeController::
 Route::get('/portal/staff/students', [App\Http\Controllers\Portal\Staff\StudentController::class, 'index'])->name('students');
 Route::get('student-list',[App\Http\Controllers\Portal\Staff\StudentController::class, 'getStudentList'])->name('student.list');
 Route::get('/portal/staff/student/profile',[App\Http\Controllers\Portal\Staff\StudentController::class, 'viewStudent'])->name('student.profile');
-Route::get('/portal/staff/student/application', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'index'])->name('student.application');
+Route::get('/portal/staff/student/application', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'Applications'])->name('student.application');
 Route::post('/portal/staff/student/application/applicantInfo', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'applicantInfo'])->name('student.application.applicantInfo');
+Route::post('/portal/staff/student/application/approveApplication', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'approveApplication'])->name('student.application.approveApplication');
+Route::post('/portal/staff/student/application/declineApplication', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'declineApplication'])->name('student.application.declineApplication');
+Route::get('/portal/staff/student/application/payment', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'reviewPayment'])->name('student.application.reviewPayment');
 Route::get('/portal/staff/student/exams/application', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'index'])->name('student.exams');
 
 // EXAMS PAGE
