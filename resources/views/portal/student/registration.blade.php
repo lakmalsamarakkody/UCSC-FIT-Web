@@ -16,11 +16,17 @@
         <div class="row">
 
             <div class="col-12 px-0">
-                @if($student != NULL && $student->)
-                <div class="alert alert-success">
 
-                </div>
+                {{-- DECLINED MESAGE IF APPLICATION DECLINED --}}
+                @if($registration != NULL)
+                    <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Application Declined!</h4>
+                    <p>{{ $registration->declined_msg }}</p>
+                    <hr>
+                    <p class="font-weight-bold mb-0">Please check your informations and submit application again.</p>
+                    </div>
                 @endif
+                {{-- /DECLINED MESAGE IF APPLICATION DECLINED --}}
 
                 <div class="card">
                     <div class="card-header text-center">Register to FIT Programme<br><small style="text-transform: initial;">Please fill all the details correctly</small></div>

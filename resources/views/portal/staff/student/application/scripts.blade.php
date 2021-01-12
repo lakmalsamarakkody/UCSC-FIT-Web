@@ -16,7 +16,7 @@ view_modal_applicant = (registration_id) => {
     contentType: false,
     beforeSend: function(){
       $('#btnViewModalApplicant-'+registration_id).attr('disabled','disabled');
-      $('#spinnerBnViewModalApplicant-'+registration_id).removeClass('d-none');
+      $('#spinnerBtnViewModalApplicant-'+registration_id).removeClass('d-none');
     },
     success: function(data){
       console.log('Success in invoke applicant modal get detials ajax.');
@@ -74,14 +74,14 @@ view_modal_applicant = (registration_id) => {
         $('#btnDeclineApplicationModal').attr('onclick', 'decline_application('+registration_id+')');
 
         // /APPLICATION
-        $('#spinnerBnViewModalApplicant-'+registration_id).removeClass('d-none');
+        $('#spinnerBtnViewModalApplicant-'+registration_id).addClass('d-none');
         $('#modal-view-applicant').modal('show');
         $('#btnViewModalApplicant-'+registration_id).removeAttr('disabled','disabled');
       }
     },
     error: function(err){
       console.log('Error in invoke applicant modal get detials ajax.');
-      $('#spinnerBnViewModalApplicant-'+registration_id).removeClass('d-none');
+      $('#spinnerBtnViewModalApplicant-'+registration_id).addClass('d-none');
       $('#btnViewModalApplicant-'+registration_id).attr('disabled','disabled');
       SwalSystemErrorDanger.fire();
     }

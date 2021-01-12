@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Portal\Student;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\Student\Flag;
+use App\Models\Student\Registration;
 use Illuminate\Http\Request;
 
 use App\Models\Student\Title;
@@ -49,6 +50,12 @@ class RegistrationController extends Controller
     //GET STUDENT DETAILS IF EXISTS
     if(Student::where('user_id', $user->id)->first()):
       $student = Student::where('user_id', $user->id)->first();
+
+      if($student->registration->where('registered_at', NULL)->where('status', '!=', 'Active')->first()):
+        $registration = $student->registration->where('registered_at', NULL)->where('status', '!=', 'Active')->first();
+      else:
+        $registration = NULL;
+      endif;
 
       //GET STATES AND CITIES FOR PERMANENT ADDRESS
       if($student->permanent_country_id == 67):
@@ -100,6 +107,7 @@ class RegistrationController extends Controller
       'city_list' => $city_list,
       'current_city_list' => $current_city_list,
       'student' => $student,
+      'registration' => $registration,
     ]);
   }
 
@@ -473,7 +481,9 @@ class RegistrationController extends Controller
         'declaration' => 1,
       ]);
       $student->registration()->update([
-        'application_submit' =>1
+        'application_submit' =>1,
+        'application_status' => NULL,
+        'declined_msg' => NULL,
       ]);
       return response()->json(['status'=>'success']);
     else:

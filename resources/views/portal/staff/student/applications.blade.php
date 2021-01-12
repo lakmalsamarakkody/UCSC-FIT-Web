@@ -56,7 +56,7 @@
                       <td>{{$registration->updated_at->isoFormat('YYYY-MM-DD')}}</td>
                       <td>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-outline-primary" id="btnViewModalApplicant{{$registration->student->id}}" data-tooltip="tooltip" data-placement="bottom" title="View Applicant Details" onclick="view_modal_applicant({{$registration->id}})"><i class="fas fa-user"></i> View <span id="spinnerBnViewModalApplicant-{{$registration->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                          <button type="button" class="btn btn-outline-primary" id="btnViewModalApplicant{{$registration->student->id}}" data-tooltip="tooltip" data-placement="bottom" title="View Applicant Details" onclick="view_modal_applicant({{$registration->id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalApplicant-{{$registration->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                         </div>
                       </td>
                     </tr>
