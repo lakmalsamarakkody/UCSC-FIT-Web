@@ -248,7 +248,7 @@
                                                 </select>
                                                 <span class="invalid-feedback" id="error-city" role="alert"></span>
                                                 <small class="form-text text-muted">* Cities are shown after selecting a District/State.<br>
-                                                    (If your city is not in the list, please type it in the above extra address field)</small>
+                                                    (If your city is not in the list, please type it in the above extra address line field)</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectDistrict">
@@ -286,7 +286,8 @@
                                                     @endif
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectState" role="alert"></span>
-                                                <small class="form-text text-muted">* States are shown after selecting a Country.</small>
+                                                <small class="form-text text-muted">* States are shown after selecting a Country.<br>
+                                                (If your state is not in the list, please type it in the above extra address line field)</small>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -391,7 +392,8 @@
                                                     @endif
                                                 </select>
                                                 <span class="invalid-feedback" id="error-currentCity" role="alert"></span>
-                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.</small>
+                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.<br>
+                                                (If your city is not in the list, please type it in the above extra address line field)</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectCurrentDistrict">
@@ -429,7 +431,8 @@
                                                     @endif
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectCurrentState" role="alert"></span>
-                                                <small class="form-text text-muted">* States are shown after selecting a Country.</small>
+                                                <small class="form-text text-muted">* States are shown after selecting a Country.<br>
+                                                (If your city is not in the list, please type it in the above extra address line field)</small>
                                             </div>
                                         </div>
                                         <div class="form-group row">
