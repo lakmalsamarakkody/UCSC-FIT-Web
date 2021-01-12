@@ -27,7 +27,7 @@ class ApplicationController extends Controller
         return view('portal/staff/student/applications', compact('registrations'));
     }
     public function reviewPayment(){
-        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', 'Approved')->where('payment_id', '!=', NULL)->get();
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', 'Approved')->where('payment_id', '!=', NULL)->whereHas('payment', function ($query) {$query->where('status', 'Approved');})->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
 
@@ -95,6 +95,20 @@ class ApplicationController extends Controller
     public function approveApplication(Request $request){
         $registration = Registration::find($request->registration_id);
         $registration->application_status = "Approved";
+        if($registration->save()):
+            return response()->json([ 'status'=>'success']);
+        endif;
+        return response()->json([ 'status'=>'error']);
+    }
+
+    public function declineApplication(Request $request){
+        $registration = Registration::find($request->registration_id);
+        $registration->registered_at = NULL;
+        $registration->registration_expire_at = NULL;
+        $registration->application_submit = 0;
+        $registration->application_status = "Declined";
+        $registration->declined_msg = $request->declined_msg;
+        $registration->status = NULL;
         if($registration->save()):
             return response()->json([ 'status'=>'success']);
         endif;

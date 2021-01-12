@@ -43,6 +43,7 @@
                     <th>Student Name</th>
                     <th>Email</th>
                     <th>Submitted Date</th>
+                    <th>Last Updated</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -52,6 +53,7 @@
                       <td>{{$registration->student->initials}} {{$registration->student->last_name}}</td>
                       <td>{{$registration->student->user->email}}</td>
                       <td>{{$registration->created_at->isoFormat('YYYY-MM-DD')}}</td>
+                      <td>{{$registration->updated_at->isoFormat('YYYY-MM-DD')}}</td>
                       <td>
                         <div class="btn-group">
                           <button type="button" class="btn btn-outline-primary" id="btnViewModalApplicant{{$registration->student->id}}" data-tooltip="tooltip" data-placement="bottom" title="View Applicant Details" onclick="view_modal_applicant({{$registration->id}})"><i class="fas fa-user"></i> View <span id="spinnerBnViewModalApplicant-{{$registration->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>

@@ -316,7 +316,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-warning" onclick="decline_application_payment()">Decline</button>
+                <button id="btnDeclineApplicationModal" type="button" class="btn btn-warning">Decline</button>
             </div>
         </div>
     </div>

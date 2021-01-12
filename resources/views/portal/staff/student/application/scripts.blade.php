@@ -71,7 +71,7 @@ view_modal_applicant = (registration_id) => {
         // approve button
         $('#btnApproveApplication').attr('onclick', 'approve_application('+registration_id+')');
         // decline button
-        $('#btnDeclineApplication').attr('onclick', 'decline_application('+registration_id+')');
+        $('#btnDeclineApplicationModal').attr('onclick', 'decline_application('+registration_id+')');
 
         // /APPLICATION
         $('#spinnerBnViewModalApplicant-'+registration_id).removeClass('d-none');
@@ -118,7 +118,7 @@ approve_application = (registration_id) => {
           $('#btnApproveApplication').attr('disabled','disabled');
         },
         success: function(data){
-          console.log('Approve Application Success');
+          console.log('Approve Application Ajax Success');
           $("#spinnerBtnApproveApplication").addClass('d-none');
           $('#btnApproveApplication').removeAttr('disabled');
           if (data['status'] == 'success'){
@@ -175,30 +175,31 @@ decline_application = (registration_id) => {
       // FORM PAYLOAD
       var formData = new FormData();
       formData.append('registration_id', registration_id)
+      formData.append('declined_msg', $('#declineMessage').val())
 
       $.ajax({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "{{ route('student.application.approveApplication') }}",
+        url: "{{ route('student.application.declineApplication') }}",
         type: 'post',
         data: formData,
         processData: false,
         contentType: false,           
         beforeSend: function(){
           // Show loader
-          $("#spinnerBtnApproveApplication").removeClass('d-none');
-          $('#btnApproveApplication').attr('disabled','disabled');
+          $("#spinnerBtnDeclineApplication").removeClass('d-none');
+          $('#btnDeclineApplication').attr('disabled','disabled');
         },
         success: function(data){
-          console.log('Approve Application Success');
-          $("#spinnerBtnApproveApplication").addClass('d-none');
-          $('#btnApproveApplication').removeAttr('disabled');
+          console.log('Decline Application Ajax Success');
+          $("#spinnerBtnDeclineApplication").addClass('d-none');
+          $('#btnDeclineApplication').removeAttr('disabled');
           if (data['status'] == 'success'){
             $('.form-control').val('');
             SwalDoneSuccess.fire({
-              title: 'Approved!',
-              text: 'Application approved successfully',
+              title: 'Declined!',
+              text: 'Application declined successfully',
             }).then((result) => {
               if(result.isConfirmed) {
                 location.reload()
@@ -206,24 +207,19 @@ decline_application = (registration_id) => {
             });
           }else{
             SwalSystemErrorDanger.fire({
-              title: 'Approve Process Failed!',
+              title: 'Decline Process Failed!',
             })
           }
         },
         error: function(err){
-          console.log('Approve Application Error');
-          $("#spinnerBtnApproveApplication").addClass('d-none');
-          $('#btnApproveApplication').removeAttr('disabled');
+          console.log('Decline Application Error');
+          $("#spinnerBtnDeclineApplication").addClass('d-none');
+          $('#btnDeclineApplication').removeAttr('disabled');
           SwalSystemErrorDanger.fire({
-            title: 'Approve Process Failed!',
+            title: 'Decline Process Failed!',
           })
         }
       });
-      // SwalDoneSuccess.fire({
-      //     title: 'Approved!',
-      //     text: 'The application has been approved.',
-      // })
-      // $('#modal-view-applicant').modal('hide')
     }
     else{
       SwalNotificationWarningAutoClose.fire({
