@@ -13,6 +13,7 @@ use App\Models\Support\SlDistrict;
 use App\Models\Support\WorldCity;
 use App\Models\Support\WorldCountry;
 use App\Models\Support\WorldDivision;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -377,6 +378,11 @@ class RegistrationController extends Controller
 
       // CREATE STUDENT REGISTRATION RECORD
       $student->registration()->create();
+
+      //UPDATE USERNAME 
+      $user_rec = User::where('id', $user->id)->first();
+      $user_rec->name = $request->firstName;
+      $user_rec->save();
 
       //RETURN SUCCESS
       return response()->json(['status'=>'success', 'student'=>$student]);
