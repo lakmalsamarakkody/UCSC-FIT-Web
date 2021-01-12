@@ -19,4 +19,20 @@ class WorldDivision extends Model
     public function city(){  
         return $this->hasMany(WorldCity::class, 'division_id', 'id');
     }
+    public function student_permanent(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasMany(Student::class, 'permanent_state_id', 'id');
+    }
+    public function student_current(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasMany(Student::class, 'current_state_id', 'id');
+    }
 }

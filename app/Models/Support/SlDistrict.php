@@ -24,4 +24,20 @@ class SlDistrict extends Model
     public function bankbranch(){
         return $this->hasMany(BankBranch::class,'district_id', 'id');
     }
+    public function student_permanent(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasMany(Student::class, 'permanent_state_id', 'id');
+    }
+    public function student_current(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasMany(Student::class, 'current_state_id', 'id');
+    }
 }

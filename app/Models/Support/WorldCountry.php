@@ -21,4 +21,20 @@ class WorldCountry extends Model
     {
         return $this->hasMany(WorldCity::class, 'country_id', 'id');
     }
+    public function student_permanent(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasMany(Student::class, 'permanent_country_id', 'id');
+    }
+    public function student_current(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasMany(Student::class, 'current_country_id', 'id');
+    }
 }
