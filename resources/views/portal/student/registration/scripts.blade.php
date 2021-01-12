@@ -380,7 +380,7 @@
             $('#selectCurrentDistrict').attr('disabled', 'disabled');
             $('#divSelectCurrentDistrict').collapse('hide');
             $('#divSelectCurrentState').collapse('show');
-            $('#selectCurrentState').removeAattr('disabled', 'disabled');
+            $('#selectCurrentState').removeAttr('disabled', 'disabled');
             $.each(data['state_list'], function(key,value){
               $('#selectCurrentState').append($('<option>', {value: value.id,text: value.name}));
             })
