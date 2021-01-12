@@ -9,6 +9,6 @@ class ExamApplicationController extends Controller
 {
     public function index()
     {
-        return view('portal/staff/student/exams/exam_application');
+        return view('portal/staff/student/exam_application');
     }
 }

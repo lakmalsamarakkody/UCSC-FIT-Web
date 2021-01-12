@@ -23,7 +23,7 @@ class ApplicationController extends Controller
     public function index()
     {
         $applications = Registration::where('registered_at', NULL)->where('application_submit', '1')->get();
-        return view('portal/staff/student/application/applications', compact('applications'));
+        return view('portal/staff/student/applications', compact('applications'));
     }
 
     public function applicantInfo(Request $request)
