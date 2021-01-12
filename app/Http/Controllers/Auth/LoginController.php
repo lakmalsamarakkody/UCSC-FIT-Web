@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -33,18 +34,23 @@ class LoginController extends Controller
     public function redirectTo(){
         $role = Auth::user()->role->name;
         $status= Auth::user()->status;
-        switch ($role):
-            case 'Student':
-                if($status==0):
-                    return '/portal/student/registration';
-                else:
-                    return '/portal/student';
-                endif;
-                break;
-            default:
-                return '/portal/staff';
-                break;
-        endswitch;
+        if($status != 0):
+            switch ($role):
+                case 'Student':
+                    $student = Student::where('user_id', Auth::user()->id)->first();
+                    if($student == NULL || $student->registration->first()->status == NULL):
+                        return '/portal/student/registration';
+                    else:
+                        return '/portal/student';
+                    endif;
+                    break;
+                default:
+                    return '/portal/staff';
+                    break;
+            endswitch;
+        else:
+            return abort(403);
+        endif;
     }
 
     /**

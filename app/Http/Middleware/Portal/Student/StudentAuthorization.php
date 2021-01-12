@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Portal\Student;
 
+use App\Models\Student;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
