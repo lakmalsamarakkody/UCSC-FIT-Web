@@ -20,16 +20,21 @@ class ApplicationController extends Controller
         $this->middleware('revalidate');
         $this->middleware('staff.auth');
     }
-    public function index()
+    //NEW APPLICANT
+    public function Applications()
     {
-        $applications = Registration::where('registered_at', NULL)->where('application_submit', '1')->get();
-        return view('portal/staff/student/applications', compact('applications'));
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->get();
+        return view('portal/staff/student/applications', compact('registrations'));
+    }
+    public function reviewPayment(){
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', 'Approved')->where('payment_id', '!=', NULL)->get();
+        return view('portal/staff/student/applications', compact('registrations'));
     }
 
     public function applicantInfo(Request $request)
     {
-        $student = Student::find($request->student_id)->first();
-        $registration = $student->registration()->first();
+        $registration = Registration::find($request->registration_id);
+        $student = Registration::find($request->registration_id)->student;
         $email = $student->user->email;
         
         //PERMANENT ADDRESS
@@ -85,5 +90,14 @@ class ApplicationController extends Controller
         // /CURRENT ADDRESS
         return response()->json(['status'=>'success', 'student'=>$student , 'registration'=>$registration, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
         
+    }
+
+    public function approveApplication(Request $request){
+        $registration = Registration::find($request->registration_id);
+        $registration->application_status = "Approved";
+        if($registration->save()):
+            return response()->json([ 'status'=>'success']);
+        endif;
+        return response()->json([ 'status'=>'error']);
     }
 }

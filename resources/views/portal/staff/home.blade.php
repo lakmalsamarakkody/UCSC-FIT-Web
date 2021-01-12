@@ -36,14 +36,14 @@
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">5000</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>new Applicants</h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>New Applicants</h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
         </div>
         
         <div class="col-xl-2 col-lg-4 p-1">
-          <a class="" href="">
+          <a class="" href="{{ url('/portal/staff/student/application/payment') }}">
             <div class="card card-dash shadow red" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">125</div>

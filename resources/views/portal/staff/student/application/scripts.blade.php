@@ -1,10 +1,10 @@
 <script type="text/javascript">
 
 // INVOKE APPLICANT INFORMATION MODAL
-view_modal_applicant = (student_id) => {
+view_modal_applicant = (registration_id) => {
   // PAYLOAD
   var formData = new FormData();
-  formData.append('student_id',student_id);
+  formData.append('registration_id',registration_id);
 
   // GET DETAILS
   $.ajax({
@@ -15,8 +15,8 @@ view_modal_applicant = (student_id) => {
     processData: false,
     contentType: false,
     beforeSend: function(){
-      $('#btnViewModalApplicant-'+student_id).attr('disabled','disabled');
-      $("#spinner").removeClass('d-none');
+      $('#btnViewModalApplicant-'+registration_id).attr('disabled','disabled');
+      $('#spinnerBnViewModalApplicant-'+registration_id).removeClass('d-none');
     },
     success: function(data){
       console.log('Success in invoke applicant modal get detials ajax.');
@@ -24,6 +24,8 @@ view_modal_applicant = (student_id) => {
         var date = new Date(data['registration']['created_at']);
         $('#spanSubmittedOn').html(date.toLocaleDateString());
         $('#spanTitle').html(data['student']['title']);
+
+        //APPLICATION
         $('#spanFirstName').html(data['student']['first_name']);
         $('#spanMiddleNames').html(data['student']['middle_names']);
         $('#spanInitials').html(data['student']['initials']);
@@ -65,70 +67,172 @@ view_modal_applicant = (student_id) => {
         $('#spanTelephone').html(data['student']['telephone']);
         $('#spanEmail').html(data['email']);
         $('#spanDesignation').html(data['student']['designation']);
-        $("#spinner").addClass('d-none');
+        
+        // approve button
+        $('#btnApproveApplication').attr('onclick', 'approve_application('+registration_id+')');
+        // decline button
+        $('#btnDeclineApplication').attr('onclick', 'decline_application('+registration_id+')');
+
+        // /APPLICATION
+        $('#spinnerBnViewModalApplicant-'+registration_id).removeClass('d-none');
         $('#modal-view-applicant').modal('show');
-        $('#btnViewModalApplicant-'+student_id).removeAttr('disabled','disabled');
+        $('#btnViewModalApplicant-'+registration_id).removeAttr('disabled','disabled');
       }
     },
     error: function(err){
       console.log('Error in invoke applicant modal get detials ajax.');
-      $("#spinner").addClass('d-none');
-      $('#btnViewModalApplicant-'+student_id).attr('disabled','disabled');
+      $('#spinnerBnViewModalApplicant-'+registration_id).removeClass('d-none');
+      $('#btnViewModalApplicant-'+registration_id).attr('disabled','disabled');
       SwalSystemErrorDanger.fire();
     }
   });
 }
 // /INVOKE APPLICANT INFORMATION MODAL
 
-// DECLINE APPLICATION/PAYMENT
-decline_application_payment = () => {
-    SwalQuestionWarningAutoClose.fire({
+// APPROVE APPLICATION
+approve_application = (registration_id) => {
+  SwalQuestionWarningAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Approve!',
+  })
+  .then((result) => {
+    if(result.isConfirmed) {
+
+      // FORM PAYLOAD
+      var formData = new FormData();
+      formData.append('registration_id', registration_id)
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('student.application.approveApplication') }}",
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,           
+        beforeSend: function(){
+          // Show loader
+          $("#spinnerBtnApproveApplication").removeClass('d-none');
+          $('#btnApproveApplication').attr('disabled','disabled');
+        },
+        success: function(data){
+          console.log('Approve Application Success');
+          $("#spinnerBtnApproveApplication").addClass('d-none');
+          $('#btnApproveApplication').removeAttr('disabled');
+          if (data['status'] == 'success'){
+            $('.form-control').val('');
+            SwalDoneSuccess.fire({
+              title: 'Approved!',
+              text: 'Application approved successfully',
+            }).then((result) => {
+              if(result.isConfirmed) {
+                location.reload()
+              }
+            });
+          }else{
+            SwalSystemErrorDanger.fire({
+              title: 'Approve Process Failed!',
+            })
+          }
+        },
+        error: function(err){
+          console.log('Approve Application Error');
+          $("#spinnerBtnApproveApplication").addClass('d-none');
+          $('#btnApproveApplication').removeAttr('disabled');
+          SwalSystemErrorDanger.fire({
+            title: 'Approve Process Failed!',
+          })
+        }
+      });
+      // SwalDoneSuccess.fire({
+      //     title: 'Approved!',
+      //     text: 'The application has been approved.',
+      // })
+      // $('#modal-view-applicant').modal('hide')
+    }
+    else{
+      SwalNotificationWarningAutoClose.fire({
+        title: 'Aborted!',
+        text: 'Application approval process aborted.',
+      })
+    }
+  })
+}
+// /APPROVE APPLICATION
+
+// DECLINE APPLICATION
+decline_application = (registration_id) => {
+  SwalQuestionWarningAutoClose.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
     confirmButtonText: 'Yes, Decline!',
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-        SwalDoneSuccess.fire({
-          title: 'Declined!',
-          text: 'Application/Payment declined. Message has been sent to the applicant.',
-        })
-        $('#modal-decline-message').modal('hide')
-        $('#modal-view-applicant').modal('hide')
-      }
-      else{
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Application/Payment has not been declined.',
-        })
-      }
-    })
-  }
-  // /DECLINE APPLICATION/PAYMENT
+  })
+  .then((result) => {
+    if(result.isConfirmed) {
 
-  // APPROVE APPLICATION
-  approve_application = () => {
-    SwalQuestionWarningAutoClose.fire({
-        title: "Are you sure?",
-        text: "You wont be able to revert this!",
-        confirmButtonText: 'Yes, Approve!',
-    })
-    .then((result) => {
-        if(result.isConfirmed) {
+      // FORM PAYLOAD
+      var formData = new FormData();
+      formData.append('registration_id', registration_id)
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('student.application.approveApplication') }}",
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,           
+        beforeSend: function(){
+          // Show loader
+          $("#spinnerBtnApproveApplication").removeClass('d-none');
+          $('#btnApproveApplication').attr('disabled','disabled');
+        },
+        success: function(data){
+          console.log('Approve Application Success');
+          $("#spinnerBtnApproveApplication").addClass('d-none');
+          $('#btnApproveApplication').removeAttr('disabled');
+          if (data['status'] == 'success'){
+            $('.form-control').val('');
             SwalDoneSuccess.fire({
-                title: 'Approved!',
-                text: 'The application has been approved.',
+              title: 'Approved!',
+              text: 'Application approved successfully',
+            }).then((result) => {
+              if(result.isConfirmed) {
+                location.reload()
+              }
+            });
+          }else{
+            SwalSystemErrorDanger.fire({
+              title: 'Approve Process Failed!',
             })
-            $('#modal-view-applicant').modal('hide')
+          }
+        },
+        error: function(err){
+          console.log('Approve Application Error');
+          $("#spinnerBtnApproveApplication").addClass('d-none');
+          $('#btnApproveApplication').removeAttr('disabled');
+          SwalSystemErrorDanger.fire({
+            title: 'Approve Process Failed!',
+          })
         }
-        else{
-            SwalNotificationWarningAutoClose.fire({
-                title: 'Cancelled!',
-                text: 'Application has not been approved.',
-            })
-        }
-    })
-  }
-  // /APPROVE APPLICATION
+      });
+      // SwalDoneSuccess.fire({
+      //     title: 'Approved!',
+      //     text: 'The application has been approved.',
+      // })
+      // $('#modal-view-applicant').modal('hide')
+    }
+    else{
+      SwalNotificationWarningAutoClose.fire({
+        title: 'Aborted!',
+        text: 'Application approval process aborted.',
+      })
+    }
+  })
+}
+// /DECLINE APPLICATION
 
 </script>

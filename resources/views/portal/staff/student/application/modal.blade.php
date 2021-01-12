@@ -192,10 +192,10 @@
                             </div>
                             <div class="mt-4 col-12 text-center">
                                 <div class="btn-group col-xl-3 col-md-6">
-                                    <button type="button" class="btn btn-success form-control" id="btnApproveInfo" onclick="approve_documents()">Approve</button>
+                                    <button type="button" class="btn btn-success form-control" id="btnApproveApplication">Approve <span id="spinnerBtnApproveApplication" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                                 <div class="btn-group col-xl-3 col-md-6">
-                                    <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message" id="btnDeclineInfo" data-toggle="modal">Decline</button>
+                                    <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message" id="btnDeclineApplication" data-toggle="modal">Decline <span id="spinnerBtnDeclineApplication" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </div>
@@ -231,7 +231,7 @@
                             </div>
                             <div class="mt-4 col-12 text-center">
                                 <div class="btn-group col-xl-3 col-md-6">
-                                    <button type="button" class="btn btn-success form-control" id="btnApprovePayment" onclick="approve_documents()">Approve</button>
+                                    <button type="button" class="btn btn-success form-control" id="btnApprovePayment" onclick="approve_payment()">Approve</button>
                                 </div>
                                 <div class="btn-group col-xl-3 col-md-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message" id="btnDeclinePayment" data-toggle="modal">Decline</button>
