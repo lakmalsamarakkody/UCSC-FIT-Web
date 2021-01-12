@@ -432,7 +432,7 @@
                                                 </select>
                                                 <span class="invalid-feedback" id="error-selectCurrentState" role="alert"></span>
                                                 <small class="form-text text-muted">* States are shown after selecting a Country.<br>
-                                                (If your city is not in the list, please type it in the above extra address line field)</small>
+                                                (If your state is not in the list, please type it in the above extra address line field)</small>
                                             </div>
                                         </div>
                                         <div class="form-group row">
