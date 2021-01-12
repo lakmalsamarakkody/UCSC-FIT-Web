@@ -1,3 +1,40 @@
+CREATE TABLE sl_cities (
+        id int(11) NOT NULL, 
+        district_id int(11) NOT NULL,
+        name varchar(255) DEFAULT NULL, 
+        name_si varchar(255) DEFAULT NULL, 
+        name_ta varchar(255) DEFAULT NULL, 
+        sub_name varchar(255) DEFAULT NULL, 
+        sub_name_si varchar(255) DEFAULT NULL, 
+        sub_name_ta varchar(255) DEFAULT NULL, 
+        postcode varchar(255) DEFAULT NULL, 
+        latitude double(20,10) DEFAULT NULL, 
+        longitude double(20,10) DEFAULT NULL, 
+        created_at timestamp NULL DEFAULT NULL, 
+        updated_at timestamp NULL DEFAULT NULL,
+        deleted_at timestamp NULL DEFAULT NULL
+        );
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `sl_cities`
+--
+ALTER TABLE `sl_cities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `sl_cities`
+--
+ALTER TABLE `sl_cities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
 INSERT INTO sl_cities (`id`, `district_id`, `name`, `name_si`, `name_ta`, `sub_name`, `sub_name_si`, `sub_name_ta`, `postcode`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
         (1, 1, 'Akkaraipattu', 'අක්කරපත්තුව', 'NULL', 'NULL', 'NULL', 'NULL', '32400', 7.2167, 81.85, '2020-11-25 10:13:53', '2020-11-25 10:13:53'),
         (2, 1, 'Ambagahawatta', 'අඹගහවත්ත', 'NULL', 'NULL', 'NULL', 'NULL', '90326', 7.4, 81.3, '2020-11-25 10:13:53', '2020-11-25 10:13:53'),

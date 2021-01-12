@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             PaymentTypeSeeder::class,
             PaymentMethodSeeder::class,
             // PaymentSeeder::class,
-            //StudentExamSeeder::class,
+            StudentExamSeeder::class,
             SlProvinceSeeder::class,
             SlDistrictSeeder::class,
             SlCitiesSeeder::class,
