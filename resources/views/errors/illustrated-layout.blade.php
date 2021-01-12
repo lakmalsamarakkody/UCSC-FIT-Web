@@ -482,7 +482,14 @@
                         <button class="button bg-indigo-light text-white font-bold uppercase tracking-wide py-3 px-6 border-0 rounded-lg">
                             {{ __('Go Home') }}
                         </button>
-                    </a>                    
+                    </a>   
+                    
+                        @if(Auth::user()->id)                            
+                            <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="button bg-indigo-light text-white font-bold uppercase tracking-wide py-3 px-6 border-0 rounded-lg">
+                                {{ __('Logout') }}
+                            </button>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                        @endif                 
                     <div class="text-white text-3xl  my-3">
                         {{ __('Or Contact Administrator:') }}
                         <a class="text-white" href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a>
