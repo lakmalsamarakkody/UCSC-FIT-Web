@@ -10,18 +10,18 @@
     });
 
 </script>
-@if($student->reg_no == NULL)
-        {{-- REGISTRATION  PENDING --}}
-        <div class="col-12 px-0">
-            <div class="alert alert-danger" role="alert">
-                <h4 class="alert-heading"><i class="far fa-check-circle"></i> Complete Your Registration! </h4>
-                <p>Complete your registration to continue FIT. If your having any issues with the registration, please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
-                <hr>
-                <a href="" class="px-0 btn btn-link ">Click here to Complete Registration</a>
-            </div>
+    @if($student->reg_no == NULL)
+    {{-- REGISTRATION  PENDING --}}
+    <div class="col-12 px-0">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"><i class="far fa-check-circle"></i> Complete Your Registration! </h4>
+            <p>Complete your registration to continue FIT. If your having any issues with the registration, please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+            <hr>
+            <a href="{{ route('student.registration') }}" class="px-0 btn btn-link ">Click here to Complete Registration</a>
         </div>
-        {{-- /REGISTRATION PENDING --}}
-@endif
+    </div>
+    {{-- /REGISTRATION PENDING --}}
+    @endif
     @if( $student != NULL )
 
     <!-- CONTENT -->
@@ -131,8 +131,15 @@
                                    <p>{{ $student->permanent_address_line2 }}</p>  
                                    <p>{{ $student->permanent_address_line3 }}</p>  
                                    <p>{{ $student->permanent_address_line4 }}</p>
-                                   <p>City </p> 
-                                   <p>Country</p> 
+                                   @if( $student->permanent_country_id == 67 )                                         
+                                    <p>{{ $student->permanent_city_sl->name ?? ''}}</p>                                       
+                                    <p>{{ $student->permanent_district_sl->name ?? ''}}</p>
+                                    <p>{{ $student->permanent_country->name ?? ''}}</p>
+                                   @else                                    
+                                    <p>{{ $student->permanent_city_world->name ?? ''}}</p>
+                                    <p>{{ $student->permanent_district_world->name ?? ''}}</p>
+                                    <p>{{ $student->permanent_country->name ?? ''}}</p>
+                                   @endif
                                 </div>
                             </div>                    
                             <div class="col-12 col-md-6">
@@ -144,8 +151,15 @@
                                    <p>{{ $student->current_address_line2 }}</p>  
                                    <p>{{ $student->current_address_line3 }}</p>  
                                    <p>{{ $student->current_address_line4 }}</p>
-                                   <p>City</p>
-                                   <p>Country</p>
+                                   @if( $student->permanent_country_id == 67 )                                         
+                                    <p>{{ $student->current_city_sl->name ?? ''}}</p>                                       
+                                    <p>{{ $student->current_district_sl->name ?? ''}}</p>
+                                    <p>{{ $student->current_country->name ?? ''}}</p>
+                                   @else                                    
+                                    <p>{{ $student->current_city_world->name ?? ''}}</p>
+                                    <p>{{ $student->current_district_world->name ?? ''}}</p>
+                                    <p>{{ $student->current_country->name ?? ''}}</p>
+                                   @endif
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
@@ -160,13 +174,14 @@
                                 <table class="table">
                                     <tr>
                                         <th>Email</th>
-                                        <td>johndoe@gmail.com</td>
+                                        <td>{{ $student->user->email }}</td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
+                @if($student->designation != NULL)
                 <div class="card mt-3">
                     <div class="card-header">
                         Employment Details
@@ -185,6 +200,8 @@
                         </div>
                     </div>
                 </div>
+                @endif
+
                 <hr>
                 <div class="card mt-3" id="account">
                     <div class="card-header">
