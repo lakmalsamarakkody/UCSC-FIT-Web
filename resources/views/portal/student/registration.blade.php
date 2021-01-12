@@ -211,14 +211,14 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="addressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2:</label>
+                                            <label for="addressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2: <small>(Optional)</small></label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control" id="addressLine2" name="addressLine2" @if($student != NULL) value="{{ $student->permanent_address_line2 }}" @endif>
                                                 <span class="invalid-feedback" id="error-addressLine2" role="alert"></span>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="addressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3:</label>
+                                            <label for="addressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3: <small>(Optional)</small></label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control" id="addressLine3" name="addressLine3" @if($student != NULL) value="{{ $student->permanent_address_line3 }}" @endif>
                                                 <span class="invalid-feedback" id="error-addressLine3" role="alert"></span>
@@ -247,7 +247,8 @@
                                                     @endif
                                                 </select>
                                                 <span class="invalid-feedback" id="error-city" role="alert"></span>
-                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.</small>
+                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.<br>
+                                                    (If your city is not in the list, please type it in the above extra address field)</small>
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="divSelectDistrict">
