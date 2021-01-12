@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 |
 |   example -   Method 1 -  use App\Http\Controllers\HomeController;
 |                           Route::get('/home',[HomeController::class,'indexhome']);
-|               Method 2 -  Route::get('/home','App\Http\Controllers\HomeController@indexhome');
+|               Method 2 -  Route::get('/home',[App\Http\Controllers\HomeController::class,'indexhome']);
 */
 
 /*
