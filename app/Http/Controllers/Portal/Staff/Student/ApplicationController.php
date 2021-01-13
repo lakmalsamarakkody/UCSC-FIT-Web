@@ -26,11 +26,14 @@ class ApplicationController extends Controller
         $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
+
+    //NEW APPLICANT PAYMENT
     public function reviewRegPayment(){
         $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->orwhere('application_status', '!=', 'Declined')->whereHas('payment', function ($query) {$query->where('status', NULL);})->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
 
+    //GET APPLICANT INFO
     public function applicantInfo(Request $request)
     {
         $registration = Registration::find($request->registration_id);
