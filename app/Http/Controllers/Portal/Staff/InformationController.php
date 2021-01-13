@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Portal\Student;
+namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
-use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class InformationController extends Controller
 {
-    /**
+        /**
      * Create a new controller instance.
      *
      * @return void
@@ -20,8 +19,7 @@ class InformationController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('revalidate');
-        $this->middleware('student.auth');
-        $this->middleware('student.info.view');
+        $this->middleware('staff.auth');
     }
 
     /**
@@ -31,9 +29,8 @@ class InformationController extends Controller
      */
     public function index()
     {
-        // GET STUDENT DETAILS
-        $student = Student::where('user_id', Auth::user()->id)->first();
-        return view('portal/student/information', compact('student'));
+        // GET USER DETAILS
+        return view('portal/staff/information');
     }
 
 
