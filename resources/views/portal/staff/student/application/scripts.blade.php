@@ -68,11 +68,21 @@ view_modal_applicant = (registration_id) => {
         $('#spanEmail').html(data['email']);
         $('#spanDesignation').html(data['student']['designation']);
         
-        // approve button
-        $('#btnApproveApplication').attr('onclick', 'approve_application('+registration_id+')');
-        // decline button
-        $('#btnDeclineApplicationModal').attr('onclick', 'decline_application('+registration_id+')');
-
+        //BUTTONS
+        if(data['registration']['application_status'] == 'Approved'){
+          $('#iconDetailStatus').addClass('fa-check-circle text-success');
+          $('#divBtnApproveApplication').addClass('d-none');
+          $('#btnDeclineApplicationModal').attr('onclick', 'decline_application('+registration_id+')');
+        }
+        else if(data['registration']['application_status'] == 'Declined'){
+          $('#iconDetailStatus').addClass('fa-times-circle text-danger');
+          $('#divBtnDeclineApplication').addClass('d-none');
+          $('#btnApproveApplication').attr('onclick', 'approve_application('+registration_id+')');
+        }
+        else{
+          $('#btnApproveApplication').attr('onclick', 'approve_application('+registration_id+')');
+          $('#btnDeclineApplicationModal').attr('onclick', 'decline_application('+registration_id+')');
+        }
         // /APPLICATION
         $('#spinnerBtnViewModalApplicant-'+registration_id).addClass('d-none');
         $('#modal-view-applicant').modal('show');

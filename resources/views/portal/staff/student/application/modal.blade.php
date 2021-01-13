@@ -9,27 +9,42 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="col-12 px-0">
-                    <div class="card shadow-none">
-                        <div class="card-header">Applicant Information</div>
-                        <div class="card-body">                        
-                            <div class="row">
-                                <div class="col-12">
-                                    <table class="table text-left">
-                                        <tr>
-                                            <th>Submitted on: </th>
-                                            <td><span id="spanSubmittedOn"></span> <small class="text-muted">(DD/MM/YY)</small></td>                                        
-                                        </tr>
-                                        <tr>
-                                            <th>Type: </th>
-                                            <td>Registration</td>
-                                        </tr>
-                                    </table>
-                                </div>
+                
+                <div class="card shadow-none">
+                    <div class="card-header pb-0">Application</div>
+                    <div class="card-body pb-0">                        
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table text-left">
+                                    <tr>
+                                        <th>Submitted on: </th>
+                                        <td><span id="spanSubmittedOn"></span> <small class="text-muted">(DD/MM/YY)</small></td>                                        
+                                    </tr>
+                                    <tr>
+                                        <th>Type: </th>
+                                        <td>Registration</td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                {{-- APPROVED STATUS --}}
+                <div class="card shadow-none">
+                    <div class="card-header pb-0">Approval Status</div>
+                    <div class="card-body pb-0 text-main-theme">                        
+                        <div class="row">
+                            <div class="col-lg-4">Details : <i id="iconDetailStatus" class="fas"></i></div>
+                            <div class="col-lg-4">Payment : <i id="iconPaymentStatus" class="fas"></i></div>
+                            <div class="col-lg-4">Documents : <i id="iconDocumentStatus" class="fas"></i></div>
+                        </div>
+                    </div>
+                </div>
+                {{-- /APPROVED STATUS --}}
+
+                <h6 class="card-header mt-4 mb-2">Applicant Information</h6>
+
                 <div class="col-lg-12">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -191,10 +206,10 @@
                                 </div>
                             </div>
                             <div class="mt-4 col-12 text-center">
-                                <div class="btn-group col-xl-3 col-md-6">
+                                <div id="divBtnApproveApplication" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-success form-control" id="btnApproveApplication">Approve <span id="spinnerBtnApproveApplication" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
-                                <div class="btn-group col-xl-3 col-md-6">
+                                <div id="divBtnDeclineApplication" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message" id="btnDeclineApplication" data-toggle="modal">Decline <span id="spinnerBtnDeclineApplication" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                             </div>
@@ -278,10 +293,10 @@
                                 </div>
                             </div>
                             <div class="mt-4 col-12 text-center">
-                                <div class="btn-group col-xl-3 col-md-6">
+                                <div id="divBtnApproveDocument" class="btn-group col-xl-3 col-md-6">
                                     <button type="button" class="btn btn-success form-control" id="btnApproveDocument" onclick="approve_documents()">Approve</button>
                                 </div>
-                                <div class="btn-group col-xl-3 col-md-6">
+                                <div id="divBtnDeclineDocument" class="btn-group col-xl-3 col-md-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message" id="btnDeclineDocument" data-toggle="modal">Decline</button>
                                 </div>
                             </div>
