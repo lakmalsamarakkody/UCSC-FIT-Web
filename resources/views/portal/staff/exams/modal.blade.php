@@ -19,7 +19,7 @@
                             <span class="invalid-feedback" id="error-editScheduleId" role="alert"></span>
                             <select name="editScheduleExam" id="editScheduleExam" class="form-control">
                                 <option value="Default" disabled selected>Select Exam</option>
-                                @foreach ($exams as $exam)
+                                @foreach ($schedule_exams as $exam)
                                     <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
                                 @endforeach
                             </select>

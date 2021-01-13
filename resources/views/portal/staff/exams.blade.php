@@ -49,7 +49,7 @@
                     <label for="scheduleExam">Exam</label>
                     <select name="scheduleExam" id="scheduleExam" class="form-control">
                       <option value="Default" disabled selected>Select Exam</option>
-                      @foreach ($exams as $exam)
+                      @foreach ($schedule_exams as $exam)
                           <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
                       @endforeach
                     </select>
@@ -132,6 +132,9 @@
                     @endforeach
                   </tbody>
                 </table>
+                <div class="pt-4 float-right">
+                  {{ $upcoming_schedules->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }}
+                </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-outline-primary" onclick="release_schedules()">RELEASE EXAM SCHEDULE</button>
                 </div>
@@ -180,9 +183,6 @@
                   @endforeach
                 </tbody>
               </table>
-              <div class="pt-4 float-right">
-                {{ $upcoming_schedules->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }}
-              </div>
 
             </div>
           </div>
@@ -211,7 +211,7 @@
                     <label for="selectSearchExam">Exam</label>
                     <select name="selectSearchExam" id="selectSearchExam" class="form-control">
                       <option value="" selected>Select Exam</option>
-                      @foreach ($exams as $exam)   
+                      @foreach ($search_exams as $exam)   
                         <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
                       @endforeach
                     </select>

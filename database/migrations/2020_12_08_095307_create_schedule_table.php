@@ -15,9 +15,9 @@ class CreateScheduleTable extends Migration
     {
         Schema::create('exam_schedules', function (Blueprint $table) {
             $table->id();
-            $table->String('exam_id');
-            $table->String('subject_id');
-            $table->String('exam_type_id');
+            $table->integer('exam_id');
+            $table->integer('subject_id');
+            $table->integer('exam_type_id');
             $table->date('date');
             $table->time('start_time');
             $table->time('end_time')->nullable();
