@@ -79,10 +79,10 @@
                                 </table>
                             </div>
                             <div class="col-md-4 order-md-2 order-1 mb-3 align-middle">  
-                                <div class="row">                               
-                                    <div class="img mt-5 mb-2 text-center position-relative">
+                                <div class="row  justify-content-center">                               
+                                    <div class="img mt-5 mb-2  position-relative">
                                         <button class="btn btn-outline-warning position-absolute m-3" data-tooltip="tooltip" data-placement="bottom" title="Change Profile Picture" data-toggle="modal" data-target="#modal-profile-picture"><i class="fa fa-edit"></i></button>
-                                        <img src="{{ asset('storage/portal/avatar/'.$student->user_id.'/'.$student->user->profile_pic)}}" alt="Avatar" class="avatar" width="60%" onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
+                                        <img src="{{ asset('storage/portal/avatar/'.$student->user_id.'/'.$student->user->profile_pic)}}" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
                                     </div>
                                     <div class="text-center w-100 ">
                                         <a href="#account" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="Change Password">

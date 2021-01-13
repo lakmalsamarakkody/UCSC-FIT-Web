@@ -12,7 +12,7 @@
             <form id="profilePicForm">
               <div class="form-row">
                 <div class="form-group col">
-                  <label for="resultFile">Upload image here</label>
+                  <label for="resultFile">Upload a new image here</label>
                   <div class="drop-zone">
                     <span class="drop-zone__prompt">Drag & Drop Image File here or click to upload</span>
                     <input type="file" name="profileImage" id="profileImage" class="drop-zone__input"/>
@@ -22,14 +22,25 @@
               </div>
               
             </form>
-
+            <div class="float-right">
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+              <button type="button" id="btnUploadProfilePic" class="btn btn-outline-primary" onclick="upload_profile_pic()">
+              Upload
+               <span id="spinnerprofilePic" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+              </button>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" id="btnUploadProfilePic" class="btn btn-outline-primary" onclick="upload_profile_pic()">
-          Upload
-           <span id="spinnerprofilePic" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+        <div class="modal-footer d-block px-5">
+
+          <h6>
+            Or Select a previous Image</h6>
+          <div class="past-img float-left">          
+          @foreach(File::glob(public_path('storage/portal/avatar/'.$student->id).'/*') as $path)
+          <button class="btn btn-link" onclick="select_profile_pic('{{ str_replace(public_path(), '', $path) }}')">
+            <img src="{{ url('') }}{{ str_replace(public_path(), '', $path) }}" width="50px">
           </button>
+          @endforeach
+          </div>
         </div>
       </div>
     </div>
