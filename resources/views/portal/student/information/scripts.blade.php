@@ -89,7 +89,7 @@
     });
   }
   // /UPDATE PROFILE PIC
-  select_profile_pic = (path) => {
+  function select_profile_pic (path) {
     
     $.ajax({
       headers: {
