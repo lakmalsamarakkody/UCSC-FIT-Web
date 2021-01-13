@@ -16,6 +16,7 @@ class Schedule extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'exam_schedule';
 
     protected $table='exam_schedules';
 

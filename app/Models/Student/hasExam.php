@@ -16,6 +16,7 @@ class hasExam extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'student_exam';
 
     protected $table='student_exams';
 

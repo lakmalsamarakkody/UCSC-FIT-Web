@@ -19,6 +19,7 @@ class Payment extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'payment';
 
     public function type()
     {

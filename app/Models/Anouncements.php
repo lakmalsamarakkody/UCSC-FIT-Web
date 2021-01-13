@@ -14,4 +14,5 @@ class Anouncements extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'announcement';
 }

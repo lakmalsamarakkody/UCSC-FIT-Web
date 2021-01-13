@@ -18,6 +18,7 @@ class User extends Authenticatable
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'user';
     /**
      * The attributes that are mass assignable.
      *

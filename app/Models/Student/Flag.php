@@ -15,6 +15,7 @@ class Flag extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'student_flag';
     
     protected $table='student_flags';
 

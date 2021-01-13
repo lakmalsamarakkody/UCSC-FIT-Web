@@ -16,6 +16,7 @@ class Subject extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'subject';
 
     protected $fillable = [
         'code',

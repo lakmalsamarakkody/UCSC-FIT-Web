@@ -14,6 +14,7 @@ class Document extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'document';
 
     protected $table='documents';
 
