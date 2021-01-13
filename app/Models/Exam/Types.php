@@ -6,6 +6,7 @@ use App\Models\Support\Fee;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Types extends Model
 {
@@ -13,6 +14,9 @@ class Types extends Model
     
     use SoftDeletes;
     use HasFactory;
+    use LogsActivity;
+
+    protected static $logAttributes = ['*'];
 
     public function schedule()
     {

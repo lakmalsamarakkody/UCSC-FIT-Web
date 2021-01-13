@@ -6,11 +6,15 @@ use App\Models\Exam\Schedule;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Exam extends Model
 {
   use HasFactory;
   use SoftDeletes;
+  use LogsActivity;
+
+  protected static $logAttributes = ['*'];
 
   protected $table='exams';
 
