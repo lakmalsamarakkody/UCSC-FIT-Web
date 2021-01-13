@@ -60,8 +60,8 @@ class InformationController extends Controller
             //SAVE BC FRONT IMAGE
             if($path = $request->file('profileImage')->storeAs('public/portal/avatar/'.$user_id, $img_name)):
                 //SAVE BC FRONT IMAGE DB RECORD
-                $user = User::find($user_id);
-                $user->profile_pic = $img_name;
+                $user = User::find($user_id)->update(['profile_pic'=> $img_name]);
+                // $user->profile_pic = $img_name;
                 if($user->save()):
                         return response()->json(['success'=>'success']);
                 endif;
