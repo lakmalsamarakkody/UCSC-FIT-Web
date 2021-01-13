@@ -25,12 +25,15 @@ class ExamsController extends Controller
     
     public function index(Request $request)
     {
-        $exam_schedules=Schedule::orderby('date','desc');
+        $today = Carbon::today();
+        $exam_schedules=Schedule::where('date', '<', $today)->orderby('date','desc');
         $subjects=Subject::orderby('id')->get();
         $exam_types=Types::orderby('id')->get();
-        $exams = Exam::orderby('year')->get();
-        $years = Exam::select('year')->orderby('year','asc')->distinct()->get();
-        $upcoming_schedules = Schedule::orderby('date','asc')->paginate(6,['*'], 'upcoming');
+        $schedule_exams = Exam::where('year', '>=', $today->year)->orderby('year', 'asc')->get();
+        $search_exams = Exam::where('year', '<=', $today->year)->orderby('year','desc')->get();
+        $years = Exam::select('year')->whereYear('year', '<=', $today->year)->orderby('year','asc')->distinct()->get();
+        $upcoming_schedules = Schedule::where('date', '>=',$today)->orderby('date','asc')->paginate(5,['*'], 'upcoming');
+        //$released_upcoming_scheduless = Schedule::where('date', '>=', $today)->orderby('date', 'asc')->paginate(5,['*'],'released_schedule');
 
         if ($request->selectSearchExamYear != null) {
             $exam_schedules = $exam_schedules->whereYear('date', $request->selectSearchExamYear);
@@ -47,8 +50,8 @@ class ExamsController extends Controller
         if ($request->selectSearchExamType != null) {
             $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
         }
-        $exam_schedules = $exam_schedules->paginate(6,['*'], 'held');
-        return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'exams', 'years', 'upcoming_schedules'));
+        $exam_schedules = $exam_schedules->paginate(5,['*'], 'held');
+        return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'schedule_exams', 'search_exams', 'years', 'upcoming_schedules'));
     }
 
     public function getExamList(Request $request)
