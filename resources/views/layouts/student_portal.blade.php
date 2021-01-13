@@ -21,6 +21,7 @@
     <!-- LINE AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/line-awesome/css/line-awesome.css') }}">
     <!-- ANIMATE -->        <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}"> 
     <!-- DROPZONE -->       <link rel="stylesheet" href="{{ asset('lib/dropzone/drop-zone.css') }}">
+    <!-- DROPZONE -->       <link rel="stylesheet" href="{{ asset('lib/croppie/croppie.css') }}">
 
     <!-- DATATABLE  -->
     <link rel="stylesheet" href="{{ asset('lib/datatables/css/dataTables.min.css') }}" >
@@ -217,6 +218,7 @@
     <!-- /Page container-fluid -->
 </body>
 <!-- DROPZONE JS--> <script src="{{ asset('lib/dropzone/drop-zone.js') }}"></script>
+<!-- DROPZONE JS--> <script src="{{ asset('lib/croppie/croppie.js') }}"></script>
 @yield('script')
 
 <script type="text/javascript">
