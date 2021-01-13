@@ -51,7 +51,7 @@
                             <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">Details</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="payment-tab" data-toggle="tab" href="#payment" role="tab" aria-controls="payment" aria-selected="false">Payments</a>
+                            <a class="nav-link" id="payment-tab" data-toggle="tab" href="#payment" role="tab" aria-controls="payment" aria-selected="false">Payment</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents</a>
@@ -221,19 +221,27 @@
                                     <div class="card-header"></div>
                                     <div class="card-body">                        
                                         <div class="row">
-                                            <div class="col-md-8 order-md-1 order-2">
+                                            <div class="col-12 order-md-1 order-2">
                                                 <table class="table text-left">
                                                     <tr>
                                                         <th>Date: </th>
-                                                        <td>2020/12/21</td>                                        
+                                                        <td><span id="spanPaymentDate"></span></td>                                        
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Paid Bank: </th>
+                                                        <td><span id="spanPaymentBank"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Paid Bank Branch: </th>
+                                                        <td><span id="spanPaymentBankBranch"></span></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Paid Bank Branch Code: </th>
-                                                        <td>600</td>
+                                                        <td><span id="spanPaymentBankBranchCode"></span></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Paid Amount: </th>
-                                                        <td>Rs.2750.00</td>
+                                                        <td>Rs.<span id="spanPaymentAmount"></span></td>
                                                     </tr>
                                                 </table>
                                                 <div class="col-lg-12 divImage text-center">

@@ -84,6 +84,14 @@ view_modal_applicant = (registration_id) => {
           $('#btnDeclineApplicationModal').attr('onclick', 'decline_application('+registration_id+')');
         }
         // /APPLICATION
+
+        // PAYMENT
+        $('#spanPaymentDate').html(data['payment']['details']['paid_date']);
+        $('#spanPaymentBank').html(data['payment']['bank']['name']);
+        $('#spanPaymentBankBranch').html(data['payment']['bankBranch']['name']);
+        $('#spanPaymentBankBranchCode').html(data['payment']['bankBranch']['code']);
+        $('#spanPaymentAmount').html(data['payment']['details']['amount']);
+        // /PAYMENT
         $('#spinnerBtnViewModalApplicant-'+registration_id).addClass('d-none');
         $('#modal-view-applicant').modal('show');
         $('#btnViewModalApplicant-'+registration_id).removeAttr('disabled','disabled');

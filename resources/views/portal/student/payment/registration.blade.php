@@ -58,15 +58,8 @@
                 <div class="card-body">
                   <div class="col-12">
                     <div class="row">
-<<<<<<< Updated upstream
-                      {{-- PAYMENT TYPE --}}
-                      <div class="col-md-4">Payment Type :</div>
-                      <div class="col-md-8">Year Registration</div>
-                      {{-- /PAYMENT TYPE --}}
-=======
                       <div class="col-md-4">Registration Expires On:</div>
                       <div class="col-md-8" >{{now()->isoFormat('MMMM Do')}} {{ now()->year+1 }} (Approximately)</div>
->>>>>>> Stashed changes
                     </div>
                   </div>
                 </div>
