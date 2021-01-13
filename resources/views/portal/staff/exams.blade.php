@@ -211,6 +211,7 @@
                   <div class="form-group col-xl-2 col-lg-3">
                     <label for="selectSearchExamType">Exam Type</label>
                     <select name="selectSearchExamType" id="selectSearchExamType" class="form-control">
+                      <option value="0" selected>Select Type</option>
                       @foreach ($exam_types as $type)
                           <option value="{{ $type->id }}">{{ $type->name }}</option>
                       @endforeach
@@ -219,6 +220,7 @@
                   <div class="form-group col-xl-3 col-lg-3">
                     <label for="selectSearchSubject">Subject</label>
                     <select name="selectSearchSubject" id="selectSearchSubject" class="form-control">
+                      <option value="0">Select Subject</option>
                       @foreach ($subjects as $subject)
                       <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                       @endforeach
