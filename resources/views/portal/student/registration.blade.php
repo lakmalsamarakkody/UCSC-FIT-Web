@@ -16,11 +16,11 @@
         <div class="row">
 
             <div class="col-12 px-0">
-                @if($student != NULL && $student->)
+                {{-- @if($student != NULL && $student->)
                 <div class="alert alert-success">
 
                 </div>
-                @endif
+                @endif --}}
 
                 <div class="card">
                     <div class="card-header text-center">Register to FIT Programme<br><small style="text-transform: initial;">Please fill all the details correctly</small></div>

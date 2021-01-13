@@ -15,7 +15,7 @@
       <div class="row">
 
         {{-- PAYMENT CHECK --}}
-        @if($payment->status != 'Approved')
+        @if($registration->payment_status != 'Declined' && $registration->payment_status != 'Approved')
 
           {{-- PAYMENT APPROVAL PENDING --}}
           <div class="col-12 px-0">
@@ -27,11 +27,35 @@
             </div>
           </div>
           {{-- /PAYMENT APPROVAL PENDING --}}
+        
+        @elseif($registration->payment_status == 'Declined')
 
-        @elseif ($payment->status == 'Approved')
+          {{-- PAYMENT APPROVAL DECLINED --}}
+          <div class="col-12 px-0">
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Payment Declined!</h4>
+              <p>{{ $registration->declined_msg }}</p>
+              <hr>
+              <p class="font-weight-bold mb-0">Please attach your payment slip and send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+              </div>
+          </div>
+          {{-- /PAYMENT APPROVAL DECLINED --}}
+
+        @elseif ($payment->payment_status == 'Approved')
+
+          {{-- PAYMENT APPROVED --}}
+          <div class="col-12 px-0">
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading"><i class="far fa-check-circle"></i> Payment Approved</h4>
+              <p>Your payment has beend approved.</p>
+              <hr>
+              <p class="font-weight-bold mb-0">Upload your Your Scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) below here.. </p>
+            </div>
+          </div>
+          {{-- /PAYMENT APPROVED --}}
 
           {{-- DOCUMENT SUBMIT CHECK --}}
-          @if($registration->document_submit == 1)
+          @if($registration->document_submit == 1 && $registration->document_status != 'Declined')
             {{-- DOCUMENT APPROVAL PENDING --}}
             <div class="col-12 px-0">
               <div class="alert alert-info" role="alert">
@@ -56,16 +80,7 @@
               </div>
               {{-- /SUBMIT DOCUMENTS --}}
             @else
-            {{-- PAYMENT APPROVED --}}
-            <div class="col-12 px-0">
-              <div class="alert alert-success" role="alert">
-                <h4 class="alert-heading"><i class="far fa-check-circle"></i> Payment Approved</h4>
-                <p>Your payment has beend approved.</p>
-                <hr>
-                <p class="font-weight-bold mb-0">Upload your Your Scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) below here.. </p>
-              </div>
-            </div>
-            {{-- /PAYMENT APPROVED --}}
+            
             @endif
             {{-- /SHOW SUBMIT DOCUMENTS BUTTON --}}
 
