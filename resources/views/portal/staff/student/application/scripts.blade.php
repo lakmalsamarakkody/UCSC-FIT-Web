@@ -91,6 +91,8 @@ view_modal_applicant = (registration_id) => {
         $('#spanPaymentBankBranch').html(data['payment']['bankBranch']['name']);
         $('#spanPaymentBankBranchCode').html(data['payment']['bankBranch']['code']);
         $('#spanPaymentAmount').html(data['payment']['details']['amount']);
+        $('#imgPaymentBankSlip').attr('style', 'background: url(/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+')');
+        $('#imgPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+'")');
         // /PAYMENT
         $('#spinnerBtnViewModalApplicant-'+registration_id).addClass('d-none');
         $('#modal-view-applicant').modal('show');

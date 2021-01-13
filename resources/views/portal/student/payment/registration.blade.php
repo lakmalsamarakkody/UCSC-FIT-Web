@@ -78,7 +78,7 @@
                     <div class="col-12">
                       <div class="row">
                         <div class="col-md-4">Registration Expires On:</div>
-                        <div class="col-md-8" >{{now()->isoFormat('MMMM Do')}} {{ now()->year+1 }}</div>
+                        <div class="col-md-8" >{{now()->isoFormat('MMMM Do')}} {{ now()->year+1 }} (Approximately)</div>
                       </div>
     
                     </div>
@@ -117,7 +117,7 @@
                         <div class="tab-pane fade show active mt-4" id="bank" role="tabpanel" aria-labelledby="bank-tab">
                           <form enctype="multipart/form-data">
                             <div class="form-row">                    
-                              <div class="col-lg-6">
+                              <div class="col-lg-12">
                                 <div class="form-group row">
                                   <label for="selectPaidBank" class="col-sm-3 col-form-label">Paid Bank</label>
                                   <div class="col-sm-9">
@@ -173,18 +173,18 @@
                                   </div>
                                 </div>  
                               </div>
-                              <div class="col-lg-6">
+                              <div class="col-lg-12">
                                 <div class="form-group mx-2">
                                   @if($payment != NULL)
-                                    <small id="InputUploadedBankslipHelp" class="form-text text-muted">Uploaded scanned bank slip</small>
-                                    <div class="drop-zone" style="background: url({{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image)}}) no-repeat center; background-size: cover;"></div>
-                                    <small id="InputBankslipHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</small>
+                                    <span id="InputUploadedBankslipHelp" class="form-text text-muted">Uploaded bank slip</span>
+                                    <div class="drop-zone" onclick="window.open('{{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image)}}')" style="background: url({{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image)}}) no-repeat center; background-size: cover;"></div>
+                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</span>
                                     <div class="drop-zone">
                                       <span class="drop-zone__prompt">Reupload Bank Slip <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
                                     </div>
                                   @else
-                                  <small id="InputBankslipHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</small>
+                                  <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</span>
                                     <div class="drop-zone">
                                       <span class="drop-zone__prompt">Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
