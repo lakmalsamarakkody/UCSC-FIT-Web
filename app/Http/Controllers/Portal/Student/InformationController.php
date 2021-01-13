@@ -66,4 +66,21 @@ class InformationController extends Controller
         return response()->json(['error'=>'error']);
     } 
     // /UPLOAD PROFILE PIC
+
+    // SELECT PROFILE PIC
+    public function selectProfilePic(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $path = $request->path;
+        $img_name = str_replace('storage/portal/avatar/'.$user_id.'/','',$path);
+
+        $user = User::find($user_id);
+        $user = User::find($user_id);
+        $user->profile_pic = $img_name;
+        if($user->save()):
+                return response()->json(['success'=>'success']);
+        endif;        
+        return response()->json(['error'=>'error']);
+    }
+    // /SELECT PROFILE PIC
 }
