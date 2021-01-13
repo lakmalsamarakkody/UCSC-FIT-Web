@@ -84,7 +84,8 @@ class PaymentController extends Controller
         if($payment->save()):
           $registration->update([
             'payment_id' => $payment->id,
-            'payment_status' => NULL
+            'payment_status' => NULL,
+            'declined_msg' => NULL,
           ]);
           return response()->json(['success'=>'success']);
         endif;

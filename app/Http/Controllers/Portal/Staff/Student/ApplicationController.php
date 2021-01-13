@@ -27,7 +27,7 @@ class ApplicationController extends Controller
         return view('portal/staff/student/applications', compact('registrations'));
     }
     public function reviewRegPayment(){
-        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->orwhere('application_status', 'Approved')->whereHas('payment', function ($query) {$query->where('status', NULL);})->get();
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->orwhere('application_status', '!=', 'Declined')->whereHas('payment', function ($query) {$query->where('status', NULL);})->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
 
