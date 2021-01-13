@@ -30,24 +30,23 @@ class ExamsController extends Controller
         $exam_types=Types::orderby('id')->get();
         $exams = Exam::orderby('year')->get();
         $years = Exam::select('year')->orderby('year','asc')->distinct()->get();
-        $upcoming_schedules = Schedule::orderby('date','asc');
+        $upcoming_schedules = Schedule::orderby('date','asc')->paginate(6);
 
-        if ($request->selectSearchExamYear != 0) {
+        if ($request->selectSearchExamYear != null) {
             $exam_schedules = $exam_schedules->whereYear('date', $request->selectSearchExamYear);
         }
-        if ($request->selectSearchExam != 0) {
+        if ($request->selectSearchExam != null) {
             $exam_schedules = $exam_schedules->where('exam_id', $request->selectSearchExam);
         }
         if($request->selectSearchExamDate != null) {
             $exam_schedules = $exam_schedules->where('date',$request->selectSearchExamDate);
         }
-        if ($request->selectSearchExamType != 0) {
-            $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
-        }
-        if ($request->selectSearchSubject != 0) {
+        if ($request->selectSearchSubject != null) {
             $exam_schedules = $exam_schedules->where('subject_id', $request->selectSearchSubject);
         }
-
+        if ($request->selectSearchExamType != null) {
+            $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
+        }
         $exam_schedules = $exam_schedules->paginate(6);
         return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'exams', 'years', 'upcoming_schedules'));
     }
