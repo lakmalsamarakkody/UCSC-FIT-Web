@@ -96,7 +96,7 @@
               </form>
 
               <div class="col-12 mt-5">
-                <table class="table yajra-datatable">
+                <table class="table">
                   <thead class="text-center">
                     <tr>
                       <th>Exam</th>
@@ -133,7 +133,7 @@
                   </tbody>
                 </table>
                 <div class="pt-4 float-right">
-                  {{ $upcoming_schedules->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }}
+                  {{-- {{ $upcoming_schedules->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }} --}}
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-outline-primary" onclick="release_schedules()">RELEASE EXAM SCHEDULE</button>
@@ -150,7 +150,7 @@
           <div class="card">
             <div class="card-header">Exam Schedules</div>
             <div class="card-body">
-              <table class="table yajra-datatable">
+              <table class="table">
                 <thead class="text-center">
                   <tr>
                     <th>Exam</th>
@@ -195,13 +195,13 @@
             <div class="card-header">Exams Held</div>
             <div class="card-body">
               <!-- SEARCH -->
-              <form action="{{ route('exam.held.search') }}" method="post">
+              <form action="{{ route('exams.held.search') }}" method="post">
               @csrf
                 <div class="form-row mb-5">
                   <div class="form-group col-xl-2 col-lg-4">
                     <label for="selectSearchExamYear">Year</label>
                     <select name="selectSearchExamYear" id="selectSearchExamYear" class="form-control">
-                      <option value="">Select Year</option>
+                      <option value="" selected disabled>Select Year</option>
                       @foreach ($years as $year)
                           <option value="{{$year->year}}">{{$year->year}}</option>
                       @endforeach
@@ -210,7 +210,7 @@
                   <div class="form-group col-xl-2 col-lg-4">
                     <label for="selectSearchExam">Exam</label>
                     <select name="selectSearchExam" id="selectSearchExam" class="form-control">
-                      <option value="" selected>Select Exam</option>
+                      <option value="" selected disabled>Select Exam</option>
                       @foreach ($search_exams as $exam)   
                         <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
                       @endforeach
@@ -218,24 +218,32 @@
                   </div>
                   <div class="form-group col-xl-2 col-lg-4">
                     <label for="selectSearchExamDate">Date</label>
-                    <input type="date" class="form-control" id="selectSearchExamDate" name="selectSearchExamDate" />
+                    <input type="date" class="form-control" id="selectSearchExamDate" name="selectSearchExamDate" value="{{ old('selectSearchExamDate') }}" />
                   </div>
                   <div class="form-group col-xl-2 col-lg-6">
                     <label for="selectSearchSubject">Subject</label>
                     <select name="selectSearchSubject" id="selectSearchSubject" class="form-control">
-                      <option value="">Select Subject</option>
+                      <option value="" selected disabled>Select Subject</option>
                       @foreach ($subjects as $subject)
-                      <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                        @if(old('selectSearchSubject') == $subject->id)
+                          <option value="{{ $subject->id }}" selected>{{ $subject->name }}</option>
+                        @else
+                          <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                        @endif
                       @endforeach
                     </select>
                   </div>
                   <div class="form-group col-xl-2 col-lg-6">
                     <label for="selectSearchExamType">Exam Type</label>
                     <select name="selectSearchExamType" id="selectSearchExamType" class="form-control">
-                      <option value="" selected>Select Type</option>
-                      @foreach ($exam_types as $type)
+                      <option value="" selected disabled>Select Type</option>
+                        @foreach ($exam_types as $type)
+                          @if(old('selectSearchExamType') == $type->id)
+                            <option value="{{ $type->id }}" selected>{{ $type->name }}</option>
+                          @else
                           <option value="{{ $type->id }}">{{ $type->name }}</option>
-                      @endforeach
+                          @endif
+                        @endforeach
                     </select>
                   </div>
                   <div class="form-group col-xl-2 col-lg-12">
@@ -247,7 +255,7 @@
               <!-- /SEARCH -->
               
               <!-- HELD EXAM TABLE -->
-              <table class="table yajra-datatable mb-4">
+              <table class="table mb-4">
                 <thead class="text-center">
                   <tr>
                     <th>Exam</th>
@@ -274,7 +282,7 @@
                 </tbody>
               </table>
               <div class="pt-4 float-right">
-                {{ $exam_schedules->appends(['held' => $exam_schedules->currentPage()])->links("pagination::bootstrap-4") }}
+                {{-- {{ $exam_schedules->appends(['held' => $exam_schedules->currentPage()])->links("pagination::bootstrap-4") }} --}}
               </div>
               <!-- /HELD EXAM TABLE -->
 
