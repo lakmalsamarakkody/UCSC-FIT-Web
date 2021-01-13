@@ -161,7 +161,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($exam_schedules as $schedule)
+                  @foreach ($upcoming_schedules as $schedule)
                   <tr class="text-center">
                     <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
                     <td>FIT {{ $schedule->subject->code }}</td>

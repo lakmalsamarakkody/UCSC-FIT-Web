@@ -29,7 +29,8 @@ class ExamsController extends Controller
         $subjects=Subject::orderby('id')->get();
         $exam_types=Types::orderby('id')->get();
         $exams = Exam::orderby('year')->get();
-        $years = Exam::select('year')->distinct()->get();
+        $years = Exam::select('year')->orderby('year','asc')->distinct()->get();
+        $upcoming_schedules = Schedule::orderby('date','asc');
 
         if ($request->selectSearchExamYear != 0) {
             $exam_schedules = $exam_schedules->whereYear('date', $request->selectSearchExamYear);
@@ -48,7 +49,7 @@ class ExamsController extends Controller
         }
 
         $exam_schedules = $exam_schedules->paginate(6);
-        return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'exams', 'years'));
+        return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'exams', 'years', 'upcoming_schedules'));
     }
 
     public function getExamList(Request $request)
