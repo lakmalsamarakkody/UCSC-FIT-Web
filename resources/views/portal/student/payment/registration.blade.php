@@ -117,7 +117,7 @@
                         <div class="tab-pane fade show active mt-4" id="bank" role="tabpanel" aria-labelledby="bank-tab">
                           <form enctype="multipart/form-data">
                             <div class="form-row">                    
-                              <div class="col-lg-6">
+                              <div class="col-lg-12">
                                 <div class="form-group row">
                                   <label for="selectPaidBank" class="col-sm-3 col-form-label">Paid Bank</label>
                                   <div class="col-sm-9">
@@ -173,7 +173,7 @@
                                   </div>
                                 </div>  
                               </div>
-                              <div class="col-lg-6">
+                              <div class="col-lg-12">
                                 <div class="form-group mx-2">
                                   @if($payment != NULL)
                                     <small id="InputUploadedBankslipHelp" class="form-text text-muted">Uploaded scanned bank slip</small>
