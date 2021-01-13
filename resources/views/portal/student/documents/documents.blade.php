@@ -14,34 +14,7 @@
     <div class="col-lg-12 student-exams min-vh-100">
       <div class="row">
 
-        {{-- PAYMENT CHECK --}}
-        @if($registration->payment_status != 'Declined' && $registration->payment_status != 'Approved')
-
-          {{-- PAYMENT APPROVAL PENDING --}}
-          <div class="col-12 px-0">
-            <div class="alert alert-info" role="alert">
-              <h4 class="alert-heading"><i class="far fa-check-circle"></i> Payment Submitted Successfully</h4>
-              <p>Come back later to check whether your payment has beend approved. If your payment didn't get approved within 2 weeks please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
-              <hr>
-              <p class="font-weight-bold mb-0">Prepare Your Scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) </p>
-            </div>
-          </div>
-          {{-- /PAYMENT APPROVAL PENDING --}}
-        
-        @elseif($registration->payment_status == 'Declined')
-
-          {{-- PAYMENT APPROVAL DECLINED --}}
-          <div class="col-12 px-0">
-            <div class="alert alert-danger" role="alert">
-              <h4 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Payment Declined!</h4>
-              <p>{{ $registration->declined_msg }}</p>
-              <hr>
-              <p class="font-weight-bold mb-0">Please attach your payment slip and send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
-              </div>
-          </div>
-          {{-- /PAYMENT APPROVAL DECLINED --}}
-
-        @elseif ($payment->payment_status == 'Approved')
+        @if ($payment->payment_status == 'Approved')
 
           {{-- PAYMENT APPROVED --}}
           <div class="col-12 px-0">
