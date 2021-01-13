@@ -36,6 +36,9 @@ class ExamsController extends Controller
         if ($request->selectSearchExam != 0) {
             $exam_schedules = $exam_schedules->where('exam_id', $request->selectSearchExam);
         }
+        if($request->selectSearchExamDate != null) {
+            $exam_schedules = $exam_schedules->where('date',$request->selectSearchExamDate);
+        }
         if ($request->selectSearchExamType != 0) {
             $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
         }
