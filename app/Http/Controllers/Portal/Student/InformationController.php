@@ -41,8 +41,12 @@ class InformationController extends Controller
     {
         $validator = Validator::make($request->all(), 
         [     
-            'profileImage'=> ['required', 'image']
-        ]);
+            'profileImage'=> ['required', 'image', 'dimensions:ratio=1/1']
+        ],
+        [
+            'dimensions'=>'image must be cropped to a square shape (Ratio= 1:1)'
+        ]
+    );
 
         if($validator->fails()):
             return response()->json(['errors'=>$validator->errors()]);

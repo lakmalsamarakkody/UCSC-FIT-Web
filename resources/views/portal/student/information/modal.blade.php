@@ -22,6 +22,8 @@
               </div>
               
             </form>
+            <span class="alert alert-danger d-block text-center " role="alert">Avoid upploading inappropiate images! Accounts with such images will be banned without notice.</span>
+            
             <div class="float-right">
               <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
               <button type="button" id="btnUploadProfilePic" class="btn btn-outline-primary" onclick="upload_profile_pic()">
