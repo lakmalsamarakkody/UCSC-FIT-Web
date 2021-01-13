@@ -37,13 +37,22 @@ class PaymentController extends Controller
   }  
   public function registration()
   {
+    $student = Auth::user()->student;
+    $registration = $student->registration()->where('registered_at', NULL)->where('status', NULL)->first();
+    if($registration->payment_id != NULL):
+      $payment = $registration->payment;
+    else:
+      $payment = NULL;
+    endif;
     $reg_fee = Fee::where('purpose', 'registration')->first()->amount;
     $banks = Bank::orderBy('name')->get();
-    return view('portal/student/payment/registration', compact( 'reg_fee', 'banks'));
+    return view('portal/student/payment/registration', compact( 'reg_fee', 'banks', 'student', 'registration', 'payment'));
   }
 
   public function saveRegPayment(Request $request)
   {
+    $student = Auth::user()->student;
+    $registration = $student->registration()->where('registered_at', NULL)->where('status', NULL);
     $reg_fee = Fee::where('purpose', 'registration')->first()->amount;
     $validator = Validator::make($request->all(), 
       [     
@@ -57,7 +66,6 @@ class PaymentController extends Controller
     if($validator->fails()):
       return response()->json(['errors'=>$validator->errors()]);
     else:
-      $student = Student::where('user_id', Auth::user()->id)->first();
       $payment = new Payment();
       $payment->method_id = 2;
       $payment->type_id = 1;
@@ -74,8 +82,9 @@ class PaymentController extends Controller
 
       if($path = $request->file('bankSlip')->storeAs('public/payments/registration/'.$student->id,$file_name)):
         if($payment->save()):
-          $student->registration()->update([
+          $registration->update([
             'payment_id' => $payment->id,
+            'payment_status' => NULL
           ]);
           return response()->json(['success'=>'success']);
         endif;
