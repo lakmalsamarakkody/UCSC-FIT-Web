@@ -9,14 +9,15 @@
           </button>
         </div>
         <div class="modal-body p-5">
-            <form>
+            <form id="profilePicForm">
               <div class="form-row">
                 <div class="form-group col">
                   <label for="resultFile">Upload image here</label>
                   <div class="drop-zone">
                     <span class="drop-zone__prompt">Drag & Drop Image File here or click to upload</span>
-                    <input type="file" name="resultFile" id="resultFile" class="drop-zone__input"/>
+                    <input type="file" name="profileImage" id="profileImage" class="drop-zone__input"/>
                   </div>
+                  <span class="invalid-feedback birth" id="error-profileImage" role="alert"></span>
                 </div>
               </div>
               
@@ -25,8 +26,9 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" id="btnCreateUserRole" name="btnCreateUserRole" class="btn btn-outline-primary" onclick="create_role()">
+          <button type="button" id="btnUploadProfilePic" class="btn btn-outline-primary" onclick="upload_profile_pic()">
           Upload
+           <span id="spinnerprofilePic" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
           </button>
         </div>
       </div>
