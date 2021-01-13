@@ -195,7 +195,7 @@
               <form action="{{ route('exam.held.search') }}" method="post">
               @csrf
                 <div class="form-row mb-5">
-                  <div class="form-group col-xl-2 col-lg-3">
+                  <div class="form-group col-xl-2 col-lg-4">
                     <label for="selectSearchExamYear">Year</label>
                     <select name="selectSearchExamYear" id="selectSearchExamYear" class="form-control">
                       <option value="">2017</option>
@@ -204,28 +204,38 @@
                       <option value="">2020</option>
                     </select>
                   </div>
-                  <div class="form-group col-xl-2 col-lg-3">
+                  <div class="form-group col-xl-2 col-lg-4">
+                    <label for="selectSearchExam">Exam</label>
+                    <select name="selectSearchExam" id="selectSearchExam" class="form-control">
+                      <option value="0" selected>Select Exam</option>
+                      @foreach ($exams as $exam)   
+                        <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group col-xl-2 col-lg-4">
                     <label for="selectSearchExamDate">Date</label>
                     <input type="date" class="form-control" id="selectSearchExamDate" name="selectSearchExamDate" />
                   </div>
-                  <div class="form-group col-xl-2 col-lg-3">
+                  <div class="form-group col-xl-2 col-lg-6">
+                    <label for="selectSearchSubject">Subject</label>
+                    <select name="selectSearchSubject" id="selectSearchSubject" class="form-control">
+                      <option value="0">Select Subject</option>
+                      @foreach ($subjects as $subject)
+                      <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group col-xl-2 col-lg-6">
                     <label for="selectSearchExamType">Exam Type</label>
                     <select name="selectSearchExamType" id="selectSearchExamType" class="form-control">
+                      <option value="0" selected>Select Type</option>
                       @foreach ($exam_types as $type)
                           <option value="{{ $type->id }}">{{ $type->name }}</option>
                       @endforeach
                     </select>
                   </div>
-                  <div class="form-group col-xl-3 col-lg-3">
-                    <label for="selectSearchSubject">Subject</label>
-                    <select name="selectSearchSubject" id="selectSearchSubject" class="form-control">
-                      @foreach ($subjects as $subject)
-                      <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                      @endforeach
-                     
-                    </select>
-                  </div>
-                  <div class="form-group col-xl-3 col-lg-12">
+                  <div class="form-group col-xl-2 col-lg-12">
                     <label for="btnSearchExamSchedule">&nbsp;</label>
                     <button type="submit" class="btn btn-outline-primary form-control" id="btnSearchExamSchedule" name="btnSearchExamSchedule"><i class="fa fa-search"></i> Search</button>
                   </div>

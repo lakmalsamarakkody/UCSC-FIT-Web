@@ -30,15 +30,19 @@ class ExamsController extends Controller
         $exam_types=Types::orderby('id')->get();
         $exams = Exam::orderby('year')->get();
 
-        if ($request->selectSearchExamType != null) {
-            $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
-        }
-
         if ($request->selectSearchExamYear != null) {
             $exam_schedules = $exam_schedules->exam->where('year', $request->selectSearchExamYear);
         }
-
-        if ($request->selectSearchSubject != null) {
+        if ($request->selectSearchExam != 0) {
+            $exam_schedules = $exam_schedules->where('exam_id', $request->selectSearchExam);
+        }
+        if($request->selectSearchExamDate != null) {
+            $exam_schedules = $exam_schedules->where('date',$request->selectSearchExamDate);
+        }
+        if ($request->selectSearchExamType != 0) {
+            $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
+        }
+        if ($request->selectSearchSubject != 0) {
             $exam_schedules = $exam_schedules->where('subject_id', $request->selectSearchSubject);
         }
 

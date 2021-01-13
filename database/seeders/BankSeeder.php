@@ -20,12 +20,7 @@ class BankSeeder extends Seeder
                     'name'=>'Peoples Bank',
                     'created_at' => '2021-01-05 09:32:41',
                     'updated_at' => '2021-01-05 09:32:41'
-                ],
-                [
-                    'name'=>'Sampath Bank',
-                    'created_at' => '2021-01-05 09:32:41',
-                    'updated_at' => '2021-01-05 09:32:41'
-                ],
+                ]
             )
         );
     }
