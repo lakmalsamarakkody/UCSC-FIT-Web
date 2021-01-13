@@ -162,7 +162,7 @@
                   --}}
                 </div>
                 <div class="col-3 text-right"> 
-                  <button title="Settings" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg nav-item"><i class="fa fa-cog"></i></button>     
+                  <a href="{{ route('student.information') }}" title="Settings" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg nav-item"><i class="fa fa-cog"></i></a>     
                 </div>
 
               </div>
