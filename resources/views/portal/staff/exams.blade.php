@@ -218,7 +218,7 @@
                   </div>
                   <div class="form-group col-xl-2 col-lg-4">
                     <label for="selectSearchExamDate">Date</label>
-                    <input type="date" class="form-control" id="selectSearchExamDate" name="selectSearchExamDate" value="{{ old('selectSearchExamDate') }}" />
+                    <input type="date" class="form-control" id="selectSearchExamDate" name="selectSearchExamDate" />
                   </div>
                   <div class="form-group col-xl-2 col-lg-6">
                     <label for="selectSearchSubject">Subject</label>
