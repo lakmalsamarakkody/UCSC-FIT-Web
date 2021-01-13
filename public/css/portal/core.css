@@ -249,6 +249,10 @@ html{
 .nav-item:hover{
   color: var(--nav-hover-bg-color);
 }
+
+button.btn.btn-link.btn-lg.px-5.nav-item:focus{
+  box-shadow: none !important
+}
 /* /NAV BAR */
 
 /* MOBILE NAV BAR */
