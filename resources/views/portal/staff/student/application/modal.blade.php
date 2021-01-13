@@ -244,9 +244,10 @@
                                                         <td>Rs.<span id="spanPaymentAmount"></span></td>
                                                     </tr>
                                                 </table>
-                                                <div class="col-lg-12 divImage text-center">
-                                                    <img name="registerBankSlip" id="registerBankSlip" src="" />
-                                                </div>
+                                                <div name="imgPaymentBankSlip" id="imgPaymentBankSlip" class="drop-zone" style="background:no-repeat center; background-size: cover;" onclick="" ></div>
+                                                {{-- <div class="col-lg-12 divImage text-center">
+                                                    <img name="imgPaymentBankSlip" id="imgPaymentBankSlip" style="background:no-repeat center; background-size: cover;" />
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
