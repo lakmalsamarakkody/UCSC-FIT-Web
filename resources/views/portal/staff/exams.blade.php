@@ -110,7 +110,7 @@
                     </tr>
                   </thead>
                   <tbody class="text-center">
-                    @foreach ($exam_schedules as $schedule)
+                    @foreach ($upcoming_schedules as $schedule)
                     <tr id="tbl-examSchedule-tr-{{$schedule->id}}">
                       <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
                       <td>FIT {{ $schedule->subject->code }}</td>
@@ -180,6 +180,9 @@
                   @endforeach
                 </tbody>
               </table>
+              <div class="pt-4 float-right">
+                {{ $upcoming_schedules->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }}
+              </div>
 
             </div>
           </div>
@@ -198,7 +201,7 @@
                   <div class="form-group col-xl-2 col-lg-4">
                     <label for="selectSearchExamYear">Year</label>
                     <select name="selectSearchExamYear" id="selectSearchExamYear" class="form-control">
-                      <option value="0">Select Year</option>
+                      <option value="">Select Year</option>
                       @foreach ($years as $year)
                           <option value="{{$year->year}}">{{$year->year}}</option>
                       @endforeach
@@ -207,7 +210,7 @@
                   <div class="form-group col-xl-2 col-lg-4">
                     <label for="selectSearchExam">Exam</label>
                     <select name="selectSearchExam" id="selectSearchExam" class="form-control">
-                      <option value="0" selected>Select Exam</option>
+                      <option value="" selected>Select Exam</option>
                       @foreach ($exams as $exam)   
                         <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
                       @endforeach
@@ -220,7 +223,7 @@
                   <div class="form-group col-xl-2 col-lg-6">
                     <label for="selectSearchSubject">Subject</label>
                     <select name="selectSearchSubject" id="selectSearchSubject" class="form-control">
-                      <option value="0">Select Subject</option>
+                      <option value="">Select Subject</option>
                       @foreach ($subjects as $subject)
                       <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                       @endforeach
@@ -229,7 +232,7 @@
                   <div class="form-group col-xl-2 col-lg-6">
                     <label for="selectSearchExamType">Exam Type</label>
                     <select name="selectSearchExamType" id="selectSearchExamType" class="form-control">
-                      <option value="0" selected>Select Type</option>
+                      <option value="" selected>Select Type</option>
                       @foreach ($exam_types as $type)
                           <option value="{{ $type->id }}">{{ $type->name }}</option>
                       @endforeach
@@ -239,7 +242,6 @@
                     <label for="btnSearchExamSchedule">&nbsp;</label>
                     <button type="submit" class="btn btn-outline-primary form-control" id="btnSearchExamSchedule" name="btnSearchExamSchedule"><i class="fa fa-search"></i> Search</button>
                   </div>
-
                 </div>
               </form>
               <!-- /SEARCH -->
@@ -272,7 +274,7 @@
                 </tbody>
               </table>
               <div class="pt-4 float-right">
-                {{ $exam_schedules->links( "pagination::bootstrap-4") }}
+                {{ $exam_schedules->appends(['held' => $exam_schedules->currentPage()])->links("pagination::bootstrap-4") }}
               </div>
               <!-- /HELD EXAM TABLE -->
 

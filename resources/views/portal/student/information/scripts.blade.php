@@ -26,6 +26,70 @@
   }
   // /EMAIL
 
+  // UPDATE PROFILE PIC
+  upload_profile_pic = () => {
+    
+    $('.form-control').removeClass('is-invalid');
+    $('.invalid-feedback').html('');
+    $('.invalid-feedback').hide();
+
+
+    // FORM PAYLOAD
+    var formData = new FormData($("#profilePicForm")[0]);
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{ route('upload.profile.pic') }}",
+      type: 'post',
+      data: formData,  
+      processData: false,
+      contentType: false,         
+      beforeSend: function(){
+        // Show loader
+        $("#spinnerprofilePic").removeClass('d-none');
+        $('#btnUploadProfilePic').attr('disabled','disabled');
+      },
+      success: function(data){
+        $("#spinnerprofilePic").addClass('d-none');
+        $('#btnUploadProfilePic').removeAttr('disabled');
+        if(data['errors']){
+          $.each(data['errors'], function(key, value){
+            $('#error-'+key).show();
+            $('#'+key).addClass('is-invalid');
+            $('#error-'+key).append('<strong>'+value+'</strong>');
+            window.location.hash = '#'+key;
+          });
+        }else if (data['success']){
+          $('.form-control').val('');
+          SwalDoneSuccess.fire({
+            title: 'Payment Submitted to review!',
+            text: 'You\'ll be notified once reviewed',
+          }).then((result) => {
+            if(result.isConfirmed) {
+              location.reload()
+            }
+          });
+        }else if (data['error']){
+          SwalSystemErrorDanger.fire({
+            title: 'PaymentFailed!',
+            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+          })
+        }
+      },
+      error: function(err){
+        $("#spinnerprofilePic").addClass('d-none');
+        $('#btnUploadProfilePic').removeAttr('disabled');
+        SwalErrorDanger.fire({
+          title: 'Email Failed!',
+          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+        })
+      }
+    });
+  }
+  // /UPDATE PROFILE PIC
+
   // UPDATE ACCOUNT
   update_account = () => {
     

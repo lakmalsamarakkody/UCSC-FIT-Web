@@ -147,8 +147,10 @@ Route::post('/portal/student/registration/getstates',[App\Http\Controllers\Porta
 Route::post('/portal/student/registration/getcities',[App\Http\Controllers\Portal\Student\RegistrationController::class,'getCities']);
 // /REGISTRATION PAGE
 
+// INFROMATION PAGE
 Route::get('/portal/student/information', [App\Http\Controllers\Portal\Student\InformationController::class, 'index'])->name('student.information');
-
+Route::post('/portal/student/information/upload/profilePic', [App\Http\Controllers\Portal\Student\InformationController::class, 'uploadProfilePic'])->name('upload.profile.pic');
+// /INFROMATION PAGE
 Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsController::class,'index'])->name('student.exams');
 
 Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\ResultsController::class,'index'])->name('student.results');
