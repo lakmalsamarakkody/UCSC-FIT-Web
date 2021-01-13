@@ -26,21 +26,20 @@ class ExamsController extends Controller
     public function index(Request $request)
     {
         $request->validate([
-            'selectSearchExamDate' => 'date',
             'selectSearchSubject' => 'integer',
             'selectSearchExamType' => 'integer'
         ]);
 
         $today = Carbon::today();
-        $exam_schedules=Schedule::where('date', '<', $today)->orderby('date','desc');
-        $subjects=Subject::orderby('id')->get();
-        $exam_types=Types::orderby('id')->get();
-        $schedule_exams = Exam::where('year', '>=', $today->year)->orderby('year', 'asc')->get();
-        $search_exams = Exam::where('year', '<=', $today->year)->orderby('year','desc')->get();
-        $years = Exam::select('year')->where('year', '<=', $today->year)->orderby('year','asc')->distinct()->get();
-        //$upcoming_schedules = Schedule::where('date', '>=',$today)->orderby('date','asc')->paginate(5,['*'], 'upcoming');
-        $upcoming_schedules = Schedule::where('date', '>=',$today)->orderby('date','asc')->get();
-        //$released_upcoming_scheduless = Schedule::where('date', '>=', $today)->orderby('date', 'asc')->paginate(5,['*'],'released_schedule');
+        $exam_schedules=Schedule::where('date', '<', $today)->orderBy('date','desc');
+        $subjects=Subject::orderBy('id')->get();
+        $exam_types=Types::orderBy('id')->get();
+        $schedule_exams = Exam::where('year', '>=', $today->year)->orderBy('year', 'asc')->get();
+        $search_exams = Exam::where('year', '<=', $today->year)->orderBy('year','desc')->get();
+        $years = Exam::select('year')->where('year', '<=', $today->year)->orderBy('year','asc')->distinct()->get();
+        //$upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->paginate(5,['*'], 'upcoming');
+        $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->get();
+        //$released_upcoming_scheduless = Schedule::where('date', '>=', $today)->orderBy('date', 'asc')->paginate(5,['*'],'released_schedule');
 
         if ($request->selectSearchExamYear != null) {
             $exam_schedules = $exam_schedules->where('date', $request->selectSearchExamYear);
