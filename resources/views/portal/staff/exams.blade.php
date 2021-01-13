@@ -207,6 +207,7 @@
                   <div class="form-group col-xl-2 col-lg-4">
                     <label for="selectSearchExam">Exam</label>
                     <select name="selectSearchExam" id="selectSearchExam" class="form-control">
+                      <option value="0" selected>Select Exam</option>
                       @foreach ($exams as $exam)   
                         <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
                       @endforeach
