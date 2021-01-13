@@ -198,10 +198,10 @@
                   <div class="form-group col-xl-2 col-lg-4">
                     <label for="selectSearchExamYear">Year</label>
                     <select name="selectSearchExamYear" id="selectSearchExamYear" class="form-control">
-                      <option value="">2017</option>
-                      <option value="">2018</option>
-                      <option value="">2019</option>
-                      <option value="">2020</option>
+                      <option value="0">Select Year</option>
+                      @foreach ($years as $year)
+                          <option value="{{$year->year}}">{{$year->year}}</option>
+                      @endforeach
                     </select>
                   </div>
                   <div class="form-group col-xl-2 col-lg-4">
