@@ -18,14 +18,12 @@ class PaymentSubmitCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        $uid = Auth::user()->id;
-        $student = Student::where('user_id', $uid)->first();
-        if($student != NULL && $student->registration->first()->payment_id != NULL && $student->registration->first()->application_status != 'Declined'):
+        $student = Auth::user()->student;
+        $registration = $student->registration()->where('registered_at', NULL)->where('status', NULL)->first();
+        if($student != NULL && $registration->payment_id != NULL && $registration->application_status != 'Declined' && $registration->payment_status == 'Approved'):
             return $next($request);
-        elseif ($student == NULL || $student->registration->first()->application_status != 'Approved'):
-            return redirect('/portal/student/registration');
         else:
-            return redirect('/portal/student/payment/registration');
+            return redirect('/portal/student/registration');
         endif;
     }
 }
