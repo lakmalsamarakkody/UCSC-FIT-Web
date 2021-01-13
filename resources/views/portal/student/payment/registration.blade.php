@@ -58,8 +58,10 @@
                 <div class="card-body">
                   <div class="col-12">
                     <div class="row">
-                      <div class="col-md-4">Registration Expires On:</div>
-                      <div class="col-md-8" >{{now()->isoFormat('MMMM Do')}} {{ now()->year+1 }} (Approximately)</div>
+                      {{-- PAYMENT TYPE --}}
+                      <div class="col-md-4">Payment Type :</div>
+                      <div class="col-md-8">Year Registration</div>
+                      {{-- /PAYMENT TYPE --}}
                     </div>
                   </div>
                 </div>
@@ -70,7 +72,7 @@
             {{-- SUBJECT DETAILS --}}
               <div class="col mb-3">        
                 <div class="card w-100 h-100" >
-                  <div class="card-header">Year Details</div>
+                  <div class="card-header">Registration Details</div>
                   <div class="card-body">
 
                     <div class="col-12">
