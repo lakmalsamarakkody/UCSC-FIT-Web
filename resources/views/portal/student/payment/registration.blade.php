@@ -173,7 +173,6 @@
                                   </div>
                                 </div>  
                               </div>
-<<<<<<< Updated upstream
                               <div class="col-lg-6">
                                 <div class="form-group mx-2">
                                   @if($payment != NULL)
@@ -192,22 +191,6 @@
                                     </div>
                                   @endif
                                   <span class="invalid-feedback" id="error-bankSlip" role="alert"></span>
-=======
-                              <div class="form-group row">
-                                <label for="inputPaidAmount" class="col-sm-3 col-form-label">Paid Amount</label>
-                                <div class="col-sm-9">
-                                  <input readonly type="number" class="form-control" id="paidAmount" name="paidAmount" value="{{ $reg_fee}}">
-                                  <span class="invalid-feedback" id="error-paidAmount" role="alert"></span>
-                                </div>
-                              </div>  
-                            </div>
-                            <div class="col-lg-6">
-                              <div class="form-group mx-2">
-                                <small id="InputStudentNameHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</small>
-                                <div class="drop-zone">
-                                  <span class="drop-zone__prompt">Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
-                                  <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
->>>>>>> Stashed changes
                                 </div>
                               </div>
                             </div>
