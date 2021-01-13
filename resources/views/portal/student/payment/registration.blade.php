@@ -78,7 +78,7 @@
                     <div class="col-12">
                       <div class="row">
                         <div class="col-md-4">Registration Expires On:</div>
-                        <div class="col-md-8" >{{now()->isoFormat('MMMM Do')}} {{ now()->year+1 }}</div>
+                        <div class="col-md-8" >{{now()->isoFormat('MMMM Do')}} {{ now()->year+1 }} (Approximately)</div>
                       </div>
     
                     </div>
