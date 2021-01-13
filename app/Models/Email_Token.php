@@ -12,6 +12,7 @@ class Email_Token extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'email_token';
 
     protected $table = 'email_tokens';
 }

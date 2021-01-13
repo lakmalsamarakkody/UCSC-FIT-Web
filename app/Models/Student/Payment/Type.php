@@ -15,6 +15,7 @@ class Type extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'payment_type';
 
     protected $table = 'payment_types';
 

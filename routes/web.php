@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Auth;
 |               Method 2 -  Route::get('/home',[App\Http\Controllers\HomeController::class,'indexhome']);
 */
 
+Route::post('logout',[App\Http\Controllers\Auth\LoginController::class,'logout']);
+
 /*
 |--------------------------------------------------------------------------
 | WEBSITE ROUTES

@@ -14,6 +14,7 @@ class Subscriber extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'subscriber';
 
     /**
      * The attributes that are mass assignable.

@@ -17,6 +17,7 @@ class Types extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'exam_type';
 
     public function schedule()
     {

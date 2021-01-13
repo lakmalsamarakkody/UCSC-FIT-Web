@@ -16,6 +16,7 @@ class Role extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'user_role';
 
     public function user()
     {

@@ -15,6 +15,7 @@ class Registration extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'student_registration';
 
     protected $table='student_registrations';
 

@@ -14,6 +14,7 @@ class Phase extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'student_phase';
 
     protected $table='student_phases';
 

@@ -15,6 +15,7 @@ class Permission extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'permission_type';
 
     public function hasPermission()
     {

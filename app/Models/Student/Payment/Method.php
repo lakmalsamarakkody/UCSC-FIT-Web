@@ -15,6 +15,7 @@ class Method extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
+    protected static $logName = 'payment_method';
 
     protected $table = 'payment_methods';
 

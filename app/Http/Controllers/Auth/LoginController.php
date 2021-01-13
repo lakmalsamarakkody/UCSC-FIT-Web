@@ -35,6 +35,7 @@ class LoginController extends Controller
         $role = Auth::user()->role->name;
         $status= Auth::user()->status;
         if($status != 0):
+            activity()->log('login');
             switch ($role):
                 case 'Student':
                     $student = Student::where('user_id', Auth::user()->id)->first();
@@ -51,6 +52,12 @@ class LoginController extends Controller
         else:
             return abort(403);
         endif;
+    }
+
+    public function logout(Request $request)
+    {
+        activity()->log('logout');
+        return redirect('/login')->with(Auth::logout());
     }
 
     /**
