@@ -20,4 +20,8 @@ class BankBranch extends Model
     public function district(){
         return $this->belongsTo(SlDistrict::class, 'district_id', 'id');
     }
+
+    public function payment(){
+        return $this->hasMany(Payment::class, 'bank_branch_id', 'id');
+    }
 }

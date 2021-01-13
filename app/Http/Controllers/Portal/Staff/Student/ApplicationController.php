@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Portal\Staff\Student;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\Student\Registration;
+use App\Models\Support\Bank;
+use App\Models\Support\BankBranch;
 use App\Models\Support\SlCity;
 use App\Models\Support\SlDistrict;
 use App\Models\Support\WorldCity;
@@ -39,6 +41,13 @@ class ApplicationController extends Controller
         $registration = Registration::find($request->registration_id);
         $student = Registration::find($request->registration_id)->student;
         $email = $student->user->email;
+        $payment = NULL;
+        if($registration->payment_id != NULL):
+            $payment = $registration->payment;
+            $bank = Bank::find($payment->bank_id);
+            $bankBranch = BankBranch::find($payment->bank_branch_id);
+            $payment = array('details'=>$payment,'bank'=>$bank,'bankBranch'=>$bankBranch);
+        endif;
         
         //PERMANENT ADDRESS
         $permanentCountry = WorldCountry::where('id',$student->permanent_country_id)->first()->name;
@@ -91,7 +100,7 @@ class ApplicationController extends Controller
         endif;
         $currentAddressDetails = array('currentCountry'=>$currentCountry, 'currentState'=>$currentState, 'currentCity'=>$currentCity);
         // /CURRENT ADDRESS
-        return response()->json(['status'=>'success', 'student'=>$student , 'registration'=>$registration, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
+        return response()->json(['status'=>'success', 'student'=>$student , 'registration'=>$registration, 'payment'=> $payment, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
         
     }
 

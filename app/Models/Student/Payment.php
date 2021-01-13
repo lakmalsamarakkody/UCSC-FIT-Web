@@ -5,6 +5,8 @@ namespace App\Models\Student;
 use App\Models\Student;
 use App\Models\Student\Payment\Method;
 use App\Models\Student\Payment\Type;
+use App\Models\Support\Bank;
+use App\Models\Support\BankBranch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,6 +29,16 @@ class Payment extends Model
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id', 'id');
+    }
+
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class, 'bank_id', 'id');
+    }
+
+    public function bankBranch()
+    {
+        return $this->belongsTo(BankBranch::class, 'bank_branch_id', 'id');
     }
 
     public function registration(){
