@@ -72,7 +72,7 @@
                   <div class="col-lg-4 ">  
                       <div class="row">                               
                           <div class="img my-2 text-center">
-                              <img src="{{ asset('img/portal/avatar') }}/{{ Auth::user()->id }}/{{ Auth::user()->profile_pic }}" alt="Avatar" class="avatar" width="60%">
+                              <img src="{{ asset('storage/portal/avatar/'.$student->user_id.'/'.$student->user->profile_pic)}}" alt="Avatar" class="avatar" width="60%">
                           </div>
                           <div class="text-center w-100 ">
                             <button onclick="reset_password()" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="Reset Password">
