@@ -46,15 +46,14 @@ class RegistrationController extends Controller
   public function index()
   {
     $user = Auth::user();
-
+    $registration = NULL;
     //GET STUDENT DETAILS IF EXISTS
     if(Student::where('user_id', $user->id)->first()):
       $student = Student::where('user_id', $user->id)->first();
 
       if($student->registration->where('registered_at', NULL)->where('status', '!=', 'Active')->first()):
         $registration = $student->registration->where('registered_at', NULL)->where('status', '!=', 'Active')->first();
-      else:
-        $registration = NULL;
+             
       endif;
 
       //GET STATES AND CITIES FOR PERMANENT ADDRESS
