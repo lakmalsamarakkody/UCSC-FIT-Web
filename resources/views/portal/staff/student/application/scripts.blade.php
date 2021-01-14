@@ -80,6 +80,7 @@ view_modal_applicant = (registration_id) => {
           $('#btnApproveApplication').attr('onclick', 'approve_application('+registration_id+')');
         }
         else{
+          $('#iconDetailStatus').addClass('fa-exclamation-triangle text-main-theme-warning');
           $('#btnApproveApplication').attr('onclick', 'approve_application('+registration_id+')');
           $('#btnDeclineApplicationModal').attr('onclick', 'decline_application('+registration_id+')');
         }
@@ -93,6 +94,24 @@ view_modal_applicant = (registration_id) => {
         $('#spanPaymentAmount').html(data['payment']['details']['amount']);
         $('#imgPaymentBankSlip').attr('style', 'background: url(/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+')');
         $('#imgPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+'")');
+        //BUTTONS
+        if(data['payment'] != null){
+          if(data['registration']['payment_status'] == 'Approved'){
+            $('#iconPaymentStatus').addClass('fa-check-circle text-success');
+            $('#divBtnApprovePayment').addClass('d-none');
+            $('#btnDeclinePaymentModal').attr('onclick', 'decline_payment('+registration_id+')');
+          }
+          else if(data['registration']['payment_status'] == 'Declined'){
+            $('#iconPaymentStatus').addClass('fa-times-circle text-danger');
+            $('#divBtnDeclinePayment').addClass('d-none');
+            $('#btnApprovePayment').attr('onclick', 'approve_payment('+registration_id+')');
+          }
+          else{
+            $('#iconPaymentStatus').addClass('fa-exclamation-triangle text-main-theme-warning');
+            $('#btnApprovePayment').attr('onclick', 'approve_payment('+registration_id+')');
+            $('#btnDeclinePaymentModal').attr('onclick', 'decline_payment('+registration_id+')');
+          }
+        }
         // /PAYMENT
         $('#spinnerBtnViewModalApplicant-'+registration_id).addClass('d-none');
         $('#modal-view-applicant').modal('show');
@@ -142,7 +161,6 @@ approve_application = (registration_id) => {
           $("#spinnerBtnApproveApplication").addClass('d-none');
           $('#btnApproveApplication').removeAttr('disabled');
           if (data['status'] == 'success'){
-            $('.form-control').val('');
             SwalDoneSuccess.fire({
               title: 'Approved!',
               text: 'Application approved successfully',
@@ -153,7 +171,7 @@ approve_application = (registration_id) => {
             });
           }else{
             SwalSystemErrorDanger.fire({
-              title: 'Approve Process Failed!',
+              title: 'Application Approve Process Failed!',
             })
           }
         },
@@ -166,11 +184,6 @@ approve_application = (registration_id) => {
           })
         }
       });
-      // SwalDoneSuccess.fire({
-      //     title: 'Approved!',
-      //     text: 'The application has been approved.',
-      // })
-      // $('#modal-view-applicant').modal('hide')
     }
     else{
       SwalNotificationWarningAutoClose.fire({
@@ -195,7 +208,7 @@ decline_application = (registration_id) => {
       // FORM PAYLOAD
       var formData = new FormData();
       formData.append('registration_id', registration_id)
-      formData.append('declined_msg', $('#declineMessage').val())
+      formData.append('declined_msg', $('#declineMessageApplication').val())
 
       $.ajax({
         headers: {
@@ -216,7 +229,6 @@ decline_application = (registration_id) => {
           $("#spinnerBtnDeclineApplication").addClass('d-none');
           $('#btnDeclineApplication').removeAttr('disabled');
           if (data['status'] == 'success'){
-            $('.form-control').val('');
             SwalDoneSuccess.fire({
               title: 'Declined!',
               text: 'Application declined successfully',
@@ -227,7 +239,7 @@ decline_application = (registration_id) => {
             });
           }else{
             SwalSystemErrorDanger.fire({
-              title: 'Decline Process Failed!',
+              title: 'Application Decline Process Failed!',
             })
           }
         },
@@ -244,11 +256,146 @@ decline_application = (registration_id) => {
     else{
       SwalNotificationWarningAutoClose.fire({
         title: 'Aborted!',
-        text: 'Application approval process aborted.',
+        text: 'Application decline process aborted.',
       })
     }
   })
 }
 // /DECLINE APPLICATION
+
+// APPROVE PAYMENT
+approve_payment = (registration_id) => {
+  SwalQuestionWarningAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Approve!',
+  })
+  .then((result) => {
+    if(result.isConfirmed) {
+
+      // FORM PAYLOAD
+      var formData = new FormData();
+      formData.append('registration_id', registration_id)
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('student.application.approvePayment') }}",
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,           
+        beforeSend: function(){
+          // Show loader
+          $("#spinnerBtnApprovePayment").removeClass('d-none');
+          $('#btnApprovePayment').attr('disabled','disabled');
+        },
+        success: function(data){
+          console.log('Approve Payment Ajax Success');
+          $("#spinnerBtnApprovePayment").addClass('d-none');
+          $('#btnApprovePayment').removeAttr('disabled');
+          if (data['status'] == 'success'){
+            SwalDoneSuccess.fire({
+              title: 'Approved!',
+              text: 'Payment approved successfully',
+            }).then((result) => {
+              if(result.isConfirmed) {
+                location.reload()
+              }
+            });
+          }else{
+            SwalSystemErrorDanger.fire({
+              title: 'Payment Approve Process Failed!',
+            })
+          }
+        },
+        error: function(err){
+          console.log('Approve Payment Error');
+          $("#spinnerBtnApprovePayment").addClass('d-none');
+          $('#btnApprovePayment').removeAttr('disabled');
+          SwalSystemErrorDanger.fire({
+            title: 'Payment Approve Process Failed!',
+          })
+        }
+      });
+    }
+    else{
+      SwalNotificationWarningAutoClose.fire({
+        title: 'Aborted!',
+        text: 'Payment approval process aborted.',
+      })
+    }
+  })
+}
+// /APPROVE PAYMENT
+
+// DECLINE PAYMENT
+decline_payment = (registration_id) => {
+  SwalQuestionWarningAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Decline!',
+  })
+  .then((result) => {
+    if(result.isConfirmed) {
+
+      // FORM PAYLOAD
+      var formData = new FormData();
+      formData.append('registration_id', registration_id)
+      formData.append('declined_msg', $('#declineMessagePayment').val())
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('student.application.declinePayment') }}",
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,           
+        beforeSend: function(){
+          // Show loader
+          $("#spinnerBtnDeclinePayment").removeClass('d-none');
+          $('#btnDeclinePayment').attr('disabled','disabled');
+        },
+        success: function(data){
+          console.log('Decline Payment Ajax Success');
+          $("#spinnerBtnDeclinePayment").addClass('d-none');
+          $('#btnDeclinePayment').removeAttr('disabled');
+          if (data['status'] == 'success'){
+            SwalDoneSuccess.fire({
+              title: 'Declined!',
+              text: 'Payment declined successfully',
+            }).then((result) => {
+              if(result.isConfirmed) {
+                location.reload()
+              }
+            });
+          }else{
+            SwalSystemErrorDanger.fire({
+              title: 'Payment Decline Process Failed!',
+            })
+          }
+        },
+        error: function(err){
+          console.log('Decline Payment Error');
+          $("#spinnerBtnDeclinePayment").addClass('d-none');
+          $('#btnDeclinePayment').removeAttr('disabled');
+          SwalSystemErrorDanger.fire({
+            title: 'Payment Decline Process Failed!',
+          })
+        }
+      });
+    }
+    else{
+      SwalNotificationWarningAutoClose.fire({
+        title: 'Aborted!',
+        text: 'Payment decline process aborted.',
+      })
+    }
+  })
+}
+// /DECLINE PAYMENT
 
 </script>

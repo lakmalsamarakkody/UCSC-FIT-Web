@@ -64,6 +64,10 @@ html{
   border-color: var(--main-theme-color);
 }
 
+.text-main-theme-warning{
+  color:var(--color-warning-dark);
+}
+
 /* buttons */
 .btn.btn-primary{
   color: var(--white);

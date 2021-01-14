@@ -68,6 +68,10 @@ Route::post('/portal/staff/student/application/applicantInfo', [App\Http\Control
 Route::post('/portal/staff/student/application/approveApplication', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'approveApplication'])->name('student.application.approveApplication');
 Route::post('/portal/staff/student/application/declineApplication', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'declineApplication'])->name('student.application.declineApplication');
 Route::get('/portal/staff/student/application/payment', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'reviewRegPayment'])->name('student.application.reviewRegPayment');
+Route::post('/portal/staff/student/application/approvePayment', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'approvePayment'])->name('student.application.approvePayment');
+Route::post('/portal/staff/student/application/declinePayment', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'declinePayment'])->name('student.application.declinePayment');
+
+
 Route::get('/portal/staff/student/exams/application', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'index'])->name('student.exams');
 
 // EXAMS PAGE

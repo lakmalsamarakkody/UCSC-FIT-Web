@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Portal\Staff\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\Student\Payment;
 use App\Models\Student\Registration;
 use App\Models\Support\Bank;
 use App\Models\Support\BankBranch;
@@ -31,7 +32,8 @@ class ApplicationController extends Controller
 
     //NEW APPLICANT PAYMENT
     public function reviewRegPayment(){
-        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->orwhere('application_status', '!=', 'Declined')->whereHas('payment', function ($query) {$query->where('status', NULL);})->get();
+        //$registrations = Registration::where('registered_at', NULL)->whereHas('payment', function ($query) {$query->where('status', NULL);})->get();
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', NULL)->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
 
@@ -104,26 +106,45 @@ class ApplicationController extends Controller
         
     }
 
+    // APPLICATION
     public function approveApplication(Request $request){
-        $registration = Registration::find($request->registration_id);
-        $registration->application_status = "Approved";
-        if($registration->save()):
+        $registration = Registration::where('id', $request->registration_id);
+        if($registration->update(['application_status'=> 'Approved'])):
             return response()->json([ 'status'=>'success']);
         endif;
         return response()->json([ 'status'=>'error']);
     }
 
     public function declineApplication(Request $request){
-        $registration = Registration::find($request->registration_id);
-        $registration->registered_at = NULL;
-        $registration->registration_expire_at = NULL;
-        $registration->application_submit = 0;
-        $registration->application_status = "Declined";
-        $registration->declined_msg = $request->declined_msg;
-        $registration->status = NULL;
-        if($registration->save()):
+        $registration = Registration::where('id', $request->registration_id);
+        if($registration->update(['registered_at'=> NULL, 'registration_expire_at'=>NULL, 'application_submit'=>0, 'application_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
             return response()->json([ 'status'=>'success']);
         endif;
         return response()->json([ 'status'=>'error']);
     }
+    // /APPLICATION
+
+    // PAYMENT
+    public function approvePayment(Request $request){
+        $registration = Registration::where('id', $request->registration_id);
+        $payment = Payment::where('id', $registration->first()->payment_id);
+        if($payment->update(['status'=>'Approved'])):
+            if($registration->update(['payment_status'=>'Approved'])):
+                return response()->json([ 'status'=>'success']);
+            endif;
+        endif;
+        return response()->json([ 'status'=>'error']);
+    }
+
+    public function declinePayment(Request $request){
+        $registration = Registration::where('id', $request->registration_id);
+        $payment = Payment::where('id', $registration->first()->payment_id);
+        if($payment->update(['status'=>'Declined'])):
+            if($registration->update(['registered_at'=> NULL, 'registration_expire_at'=>NULL, 'payment_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
+                return response()->json([ 'status'=>'success']);
+            endif;
+        endif;
+        return response()->json([ 'status'=>'error']);
+    }
+    // PAYMENT
 }

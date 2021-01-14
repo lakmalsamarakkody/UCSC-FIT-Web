@@ -21,7 +21,6 @@ class DocumentController extends Controller
     public function index(){
         $student = Auth::user()->student;
         $registration = $student->registration()->where('status', NULL)->first();
-        $payment = $registration->payment()->first();
         if($student->nic_old != Null || $student->nic_new != Null):
             $document_type='NIC';
         elseif($student->postal != Null):
@@ -30,7 +29,7 @@ class DocumentController extends Controller
         elseif($student->passport != Null):
             $document_type='Passport';
         endif;
-        return view('portal/student/documents/documents', compact('student', 'document_type', 'registration', 'payment'));
+        return view('portal/student/documents/documents', compact('student', 'document_type', 'registration'));
     }
 
     // UPLOAD BIRTH CERTIFICATE
