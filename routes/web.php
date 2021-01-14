@@ -52,6 +52,8 @@ Route::get('/{email}/unsubscribe/{token}', [App\Http\Controllers\Website\Registr
 |--------------------------------------------------------------------------
 */
 Auth::routes();
+Route::post('/portal/information/upload/profilePic', [App\Http\Controllers\Portal\AccountController::class, 'uploadProfilePic'])->name('upload.profile.pic');
+Route::post('/portal/information/select/profilePic', [App\Http\Controllers\Portal\AccountController::class, 'selectProfilePic'])->name('select.profile.pic');
 
 /*
 |--------------------------------------------------------------------------
@@ -135,6 +137,10 @@ Route::post('/portal/staff/system/editPaymentType', [App\Http\Controllers\Portal
 Route::post('/portal/staff/system/deletePaymentType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deletePaymentType']);
 // /SYSTEM PAGE
 
+// INFORMATION PAGE
+Route::get('/portal/staff/information', [App\Http\Controllers\Portal\Staff\InformationController::class, 'index'])->name('staff.information');
+// /INFORMATION PAGE
+
 /*
 |--------------------------------------------------------------------------
 | STUDENT PORTAL ROUTES
@@ -155,8 +161,6 @@ Route::post('/portal/student/registration/getcities',[App\Http\Controllers\Porta
 
 // INFROMATION PAGE
 Route::get('/portal/student/information', [App\Http\Controllers\Portal\Student\InformationController::class, 'index'])->name('student.information');
-Route::post('/portal/student/information/upload/profilePic', [App\Http\Controllers\Portal\Student\InformationController::class, 'uploadProfilePic'])->name('upload.profile.pic');
-Route::post('/portal/student/information/select/profilePic', [App\Http\Controllers\Portal\Student\InformationController::class, 'selectProfilePic'])->name('select.profile.pic');
 // /INFROMATION PAGE
 Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsController::class,'index'])->name('student.exams');
 

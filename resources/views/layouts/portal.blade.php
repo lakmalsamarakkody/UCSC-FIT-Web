@@ -169,7 +169,7 @@
                   --}}
                 </div>
                 <div class="col-lg-3 p-2 my-2  text-right"> 
-                  <button class="btn btn-link btn-lg  px-5 nav-item"><i class="fa fa-cog"></i></button>     
+                  <a class="btn btn-link btn-lg  px-5 nav-item" href="{{ route('staff.information') }}"><i class="fa fa-cog"></i></a>     
                 </div>
 
 
