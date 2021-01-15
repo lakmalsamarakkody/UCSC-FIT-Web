@@ -3,18 +3,66 @@
   reset_email = () => {
     SwalQuestionSuccess.fire({
       input: 'email',
-      inputLabel: 'Enter New Student E-mail',
+      inputLabel: 'Enter New E-mail',
       inputPlaceholder: 'Email',
       title: "Are you sure ?",
       text: "Verification email will be sent",
       confirmButtonText: "Yes, Send!",
     })
     .then((result) => {
+      event.preventDefault();
+      // alert(result.value);
       if (result.isConfirmed) {
-        SwalNotificationSuccessAutoClose.fire({
-          title: "Sent!",
-          text: "Verification email sent",
-        })
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ route('update.email') }}",
+          type: 'post',
+          data: { 'email': result.value},         
+          beforeSend: function(){
+            // Show loader
+            $('body').addClass('freeze');
+            Swal.showLoading();
+          },
+          success: function(data){
+            $('body').removeClass('freeze');
+            Swal.hideLoading();
+            if(data['errors']){
+              $.each(data['errors'], function(key, value){
+                SwalNotificationErrorDanger.fire({
+                  title: 'Error!',
+                  text: value
+                })
+                // alert(value)
+              });
+            }else if (data['success']){
+              SwalDoneSuccess.fire({
+                title: 'Verify Email!',
+                text: 'Email Verification is emailed to ',
+              }).then((result) => {
+                if(result.isConfirmed) {
+                  location.reload()
+                }
+              });
+            }else if (data['error']){
+              SwalSystemErrorDanger.fire({
+                title: 'Update Failed!',
+                text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+              })
+            }
+          },
+          error: function(err){
+            $('body').removeClass('freeze');
+            Swal.hideLoading();
+            SwalErrorDanger.fire({
+              title: 'Update Failed!',
+              text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+            })
+          }
+        });
+
+      
       }
       else{
         SwalNotificationWarningAutoClose.fire({

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Portal;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ChangeEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AccountController extends Controller
 {    
@@ -37,12 +40,12 @@ class AccountController extends Controller
             $img_name = $user_id.'_profile_pic_'.date('Y-m-d').'_'.time().'.'. $image_ext;
 
 
-            //SAVE BC FRONT IMAGE
+            //SAVE PROFILE IMAGE
             if($path = $request->file('profileImage')->storeAs('public/portal/avatar/'.$user_id, $img_name)):
-                //SAVE BC FRONT IMAGE DB RECORD
-                $user = User::find($user_id)->update(['profile_pic'=> $img_name]);
+                //SAVE PROFILE IMAGE DB RECORD
+                
                 // $user->profile_pic = $img_name;
-                if($user->save()):
+                if(User::where('id',$user_id)->update(['profile_pic'=> $img_name])):
                         return response()->json(['success'=>'success']);
                 endif;
             endif;
@@ -58,13 +61,65 @@ class AccountController extends Controller
         $path = $request->path;
         $img_name = str_replace('storage/portal/avatar/'.$user_id.'/','',$path);
 
-        $user = User::find($user_id);
-        $user = User::find($user_id);
-        $user->profile_pic = $img_name;
-        if($user->save()):
+        
+        if(User::where('id',$user_id)->update(['profile_pic'=> $img_name])):
                 return response()->json(['success'=>'success']);
         endif;        
         return response()->json(['error'=>'error']);
     }
     // /SELECT PROFILE PIC
+
+    // UPDATE EMAIL
+    public function updateEmail(Request $request)
+    {
+       
+        $validator = Validator::make($request->all(), 
+            [     
+                'email'=> ['required', 'email', 'unique:users']
+            ],
+            $messages=[
+                'unique'=>'Email already in use'
+            ]
+        );
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        else:
+            $email =  $request->email;
+            $token = Str::random(32);
+            $user_id = Auth::user()->id;
+
+            $details = [
+                'id' => $user_id,
+                'email' => $email,
+                'token' => $token
+            ];
+
+            if(Mail::to($email)->send(new ChangeEmail($details))):
+                return response()->json(['error'=>'error']);
+            else:
+                if(User::where('id',$user_id)->update(['email_change_token'=> $token])):
+                    return response()->json(['success'=>'success']);
+                endif;
+            endif;
+
+        endif;
+        return response()->json(['error'=>'error']);
+    }
+    // /UPDATE EMAIL
+
+    // CHANGE EMAIL
+    public function verifyEmail($email, $token, $id)
+    {
+        $user = User::find($id);
+        $token_old = $user->email_change_token;
+        if($token == $token_old):
+            if(User::where('id',$user->id)->update(['email'=>$email, 'email_change_token'=>NULL])):
+                return redirect('/email/changed/success');
+            endif;
+        else:
+            return abort(419);
+        endif;
+        return abort(403);
+    }
+    // /CHANGE EMAIL
 }
