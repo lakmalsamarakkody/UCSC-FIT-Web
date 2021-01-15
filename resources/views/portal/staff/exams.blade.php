@@ -91,7 +91,10 @@
                     <label for="btnCreateSchedule">&nbsp;</label>
                     <button type="button" class="btn btn-outline-primary form-control" onclick="create_schedule();" id="btnCreateSchedule" name="btnCreateSchedule"><i class="fas fa-plus"></i></button>
                   </div>
-                  
+                  <div class="form-group col-xl-12 col-lg-12 text-center">
+                    <input type="hidden" id="schedule" name="schedule" class="form-control">
+                    <span class="invalid-feedback" id="error-schedule" role="alert"></span>
+                  </div>
                 </div>
               </form>
 
@@ -143,7 +146,6 @@
           </div>
         </div>
         <!-- /CREATE EXAM SCHEDULE -->
-
 
         <!-- EXAM SCHEDULE TABLE -->
         <div class="col-12 md-5">

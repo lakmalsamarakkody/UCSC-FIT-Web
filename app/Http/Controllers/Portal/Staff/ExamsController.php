@@ -91,9 +91,20 @@ class ExamsController extends Controller
             'scheduleStartTime' => ['required'],
         ]);
 
+       $exists_schedule = Schedule::where('subject_id', $request->scheduleSubject)->where('exam_type_id', $request->scheduleExamType)
+       ->where('date',$request->scheduleDate)->first();
+        //Check if the exact schedule is in the table
+        if($exists_schedule != null):
+            $exists_schedule_validator = Validator::make($request->all(), [
+                'schedule' => ['multicolumn_unique'],
+            ]);
+        endif;
+    
         //Check validation errors
         if($exam_schedule_validator->fails()):
             return response()->json(['errors'=>$exam_schedule_validator->errors()]);
+        elseif(isset($exists_schedule_validator) && $exists_schedule_validator->fails()):
+            return response()->json(['errors'=>$exists_schedule_validator->errors()]);
         else:
             $exam_schedule = new Schedule();
             $exam_schedule->exam_id = $request->scheduleExam;

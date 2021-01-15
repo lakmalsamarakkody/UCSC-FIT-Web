@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Exam\Schedule;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // CUSTOM VALIDATION RULES
+        
+        // INPUTS
         Validator::extend('alpha_space', function ($attribute, $value) {
             // This will only accept alpha and spaces. 
             return preg_match('/^[\pL\s]+$/u', $value); 
@@ -45,7 +48,14 @@ class AppServiceProvider extends ServiceProvider
             //Old NIC number format
             return preg_match('/^[0-9]{9}[V|v]$/',$value);
         });
-        
+        // /INPUTS
+
+        // MULTICOLUMN UNIQUE
+        Validator::extend('multicolumn_unique', function($attribute, $value) {
+            // Exam schedule
+        });
+        // MULTICOLUMN UNIQUE
+
         // /CUSTOM VALIDATION RULES
     }
 }
