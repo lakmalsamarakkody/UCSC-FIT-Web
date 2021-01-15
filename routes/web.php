@@ -54,6 +54,7 @@ Route::get('/{email}/unsubscribe/{token}', [App\Http\Controllers\Website\Registr
 Auth::routes();
 Route::post('/portal/information/upload/profilePic', [App\Http\Controllers\Portal\AccountController::class, 'uploadProfilePic'])->name('upload.profile.pic');
 Route::post('/portal/information/select/profilePic', [App\Http\Controllers\Portal\AccountController::class, 'selectProfilePic'])->name('select.profile.pic');
+Route::post('/portal/information/update/email', [App\Http\Controllers\Portal\AccountController::class, 'updateEmail'])->name('update.email');
 
 /*
 |--------------------------------------------------------------------------
