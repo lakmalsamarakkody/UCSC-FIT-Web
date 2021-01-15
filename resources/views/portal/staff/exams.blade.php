@@ -195,7 +195,7 @@
             <div class="card-header">Exams Held</div>
             <div class="card-body">
               <!-- SEARCH -->
-              <form action="{{ route('exams.held.search') }}" method="post">
+              <form action="{{ route('exams.held.search') }}" method="get">
               @csrf
                 <div class="form-row mb-5">
                   <div class="form-group col-xl-2 col-lg-4">
@@ -282,7 +282,8 @@
                 </tbody>
               </table>
               <div class="pt-4 float-right">
-                {{-- {{ $exam_schedules->appends(['held' => $exam_schedules->currentPage()])->links("pagination::bootstrap-4") }} --}}
+                {{--{{ $exam_schedules->appends(['held' => $exam_schedules->currentPage()])->links("pagination::bootstrap-4") }} --}}
+                {{ $exam_schedules->withQueryString()->appends(['held' => $exam_schedules])->links("pagination::bootstrap-4") }}
               </div>
               <!-- /HELD EXAM TABLE -->
 

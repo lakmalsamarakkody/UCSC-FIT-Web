@@ -37,12 +37,12 @@ class ExamsController extends Controller
         $schedule_exams = Exam::where('year', '>=', $today->year)->orderBy('year', 'asc')->get();
         $search_exams = Exam::where('year', '<=', $today->year)->orderBy('year','desc')->get();
         $years = Exam::select('year')->where('year', '<=', $today->year)->orderBy('year','asc')->distinct()->get();
-        //$upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->paginate(5,['*'], 'upcoming');
+        $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->paginate(5,['*'], 'upcoming');
         $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->get();
         //$released_upcoming_scheduless = Schedule::where('date', '>=', $today)->orderBy('date', 'asc')->paginate(5,['*'],'released_schedule');
 
         if ($request->selectSearchExamYear != null) {
-            $exam_schedules = $exam_schedules->where('date', $request->selectSearchExamYear);
+            $exam_schedules = $exam_schedules->whereYear('date', $request->selectSearchExamYear);
         }
         if ($request->selectSearchExam != null) {
             $exam_schedules = $exam_schedules->where('exam_id', $request->selectSearchExam);
@@ -56,27 +56,27 @@ class ExamsController extends Controller
         if ($request->selectSearchExamType != null) {
             $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
         }
-        //$exam_schedules = $exam_schedules->paginate(5,['*'], 'held');
-        $exam_schedules = $exam_schedules->get();
+        $exam_schedules = $exam_schedules->paginate(5,['*'], 'held');
+        //$exam_schedules = $exam_schedules->get();
         return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'schedule_exams', 'search_exams', 'years', 'upcoming_schedules'));
     }
 
-    // public function getExamList(Request $request)
-    // {
-    //     if ($request->ajax()) {
-    //         $data = Schedule::latest()->get();
-    //         return DataTables::of($data)
-    //         ->addIndexColumn()
-    //         ->addColumn('action', function($row){
-    //             $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> 
-    //             <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-    //             return $actionBtn;
-    //         })
-    //         ->rawColumns(['sction'])
-    //         ->make(true);
-    //     }
-    // }
-    
+    public function getExamList(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Schedule::latest()->get();
+            return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> 
+                <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                return $actionBtn;
+            })
+            ->rawColumns(['sction'])
+            ->make(true);
+        }
+    }
+
     // SCHEDULE
 
     // CREATE
