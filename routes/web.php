@@ -78,12 +78,12 @@ Route::get('/portal/staff/student/exams/application', [App\Http\Controllers\Port
 
 // EXAMS PAGE
 Route::get('/portal/staff/exams', [App\Http\Controllers\Portal\Staff\ExamsController::class, 'index'])->name('exams');
-Route::post('/portal/staff/exams', [App\Http\Controllers\Portal\Staff\ExamsController::class, 'index'])->name('exams.held.search');
 Route::get('exam-list',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'getExamList'])->name('exams.list');
 Route::post('/portal/staff/exams/schedule/create',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'createExamSchedule'])->name('schedule.create');
 Route::post('/portal/staff/exams/schedule/edit/details',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'editScheduleGetDetails']);
 Route::post('/portal/staff/exams/schedule/edit',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'editExamSchedule']);
 Route::post('/portal/staff/exams/schedule/delete',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'deleteExamSchedule']);
+Route::get('/portal/staff/exams/held/search', [App\Http\Controllers\Portal\Staff\ExamsController::class, 'index'])->name('exams.held.search');
 // /EXAMS PAGE
 
 // EXAM LIST PAGE
