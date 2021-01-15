@@ -257,6 +257,10 @@ html{
 button.btn.btn-link.btn-lg.px-5.nav-item:focus{
   box-shadow: none !important
 }
+
+a.btn.btn-link.btn-lg.px-5.nav-item:focus{
+  box-shadow: none !important
+}
 /* /NAV BAR */
 
 /* MOBILE NAV BAR */
