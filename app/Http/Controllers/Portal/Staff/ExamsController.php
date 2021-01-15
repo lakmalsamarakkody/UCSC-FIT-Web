@@ -61,22 +61,22 @@ class ExamsController extends Controller
         return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'schedule_exams', 'search_exams', 'years', 'upcoming_schedules'));
     }
 
-    // public function getExamList(Request $request)
-    // {
-    //     if ($request->ajax()) {
-    //         $data = Schedule::latest()->get();
-    //         return DataTables::of($data)
-    //         ->addIndexColumn()
-    //         ->addColumn('action', function($row){
-    //             $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> 
-    //             <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-    //             return $actionBtn;
-    //         })
-    //         ->rawColumns(['sction'])
-    //         ->make(true);
-    //     }
-    // }
-    
+    public function getExamList(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Schedule::latest()->get();
+            return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> 
+                <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                return $actionBtn;
+            })
+            ->rawColumns(['sction'])
+            ->make(true);
+        }
+    }
+
     // SCHEDULE
 
     // CREATE

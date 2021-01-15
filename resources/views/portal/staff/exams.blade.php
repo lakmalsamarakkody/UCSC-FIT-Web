@@ -283,7 +283,7 @@
               </table>
               <div class="pt-4 float-right">
                 {{--{{ $exam_schedules->appends(['held' => $exam_schedules->currentPage()])->links("pagination::bootstrap-4") }} --}}
-                {!! $exam_schedules->appends(['held' => $exam_schedules])->links("pagination::bootstrap-4") !!}
+                {{ $exam_schedules->withQueryString()->appends(['held' => $exam_schedules])->links("pagination::bootstrap-4") }}
               </div>
               <!-- /HELD EXAM TABLE -->
 
