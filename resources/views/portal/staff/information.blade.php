@@ -17,8 +17,7 @@
             <div class="col-12">        
                 <div class="card">
                     <div class="card-header">
-                        User Details
-                        <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details" data-toggle="modal" data-target="#modal-user-details"><i class="fa fa-edit"></i></button>
+                        User Details                    
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -48,7 +47,7 @@
                             </div>
                             <div class="col-md-4 order-md-2 order-1 mb-3 align-middle">  
                                 <div class="row  justify-content-center">                               
-                                    <div class="img mt-5 mb-2  position-relative">
+                                    <div class="img mt-1 mb-2  position-relative">
                                         <button class="btn btn-outline-warning position-absolute m-3" data-tooltip="tooltip" data-placement="bottom" title="Change Profile Picture" data-toggle="modal" data-target="#modal-profile-picture"><i class="fa fa-edit"></i></button>
                                         <img src="{{ asset('storage/portal/avatar/'.Auth::user()->id.'/'.Auth::user()->profile_pic)}}" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
                                     </div>
