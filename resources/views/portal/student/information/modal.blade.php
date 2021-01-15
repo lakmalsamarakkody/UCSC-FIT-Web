@@ -4,7 +4,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Update Profile Picture</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"  onclick="window.location.reload();>
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -25,7 +25,7 @@
             <span class="alert alert-danger d-block text-center " role="alert">Avoid upploading inappropiate images! Accounts with such images will be banned without notice.</span>
             
             <div class="float-right">
-              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"  onclick="window.location.reload();>Discard</button>
               <button type="button" id="btnUploadProfilePic" class="btn btn-outline-primary" onclick="upload_profile_pic()">
               Upload
                <span id="spinnerprofilePic" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
