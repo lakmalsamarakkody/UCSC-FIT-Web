@@ -68,6 +68,10 @@ html{
   color:var(--color-warning-dark);
 }
 
+.freeze{
+  pointer-events: none;
+}
+
 /* buttons */
 .btn.btn-primary{
   color: var(--white);
