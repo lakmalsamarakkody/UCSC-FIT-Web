@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->integer('role_id')->nullable();
             $table->boolean('status')->default(false);
             $table->string('profile_pic')->nullable();
+            $table->string('email_change_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
