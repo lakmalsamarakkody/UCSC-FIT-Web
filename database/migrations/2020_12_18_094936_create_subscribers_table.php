@@ -18,7 +18,6 @@ class CreateSubscribersTable extends Migration
             $table->string('email')->unique();
             $table->string('token');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
