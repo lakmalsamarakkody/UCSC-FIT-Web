@@ -23,19 +23,44 @@ class ApplicationController extends Controller
         $this->middleware('revalidate');
         $this->middleware('staff.auth');
     }
-    //NEW APPLICANT
+    // NEW APPLICANT
     public function Applications()
     {
         $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
 
-    //NEW APPLICANT PAYMENT
+    // NEW APPLICANT PAYMENT
     public function reviewRegPayment(){
         //$registrations = Registration::where('registered_at', NULL)->whereHas('payment', function ($query) {$query->where('status', NULL);})->get();
         $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', NULL)->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
+
+    // NEW APPLICANT DOCUMENTS
+    public function reviewRegDocumentsPending(){
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '0')->where('document_status', NULL)->get();
+        return view('portal/staff/student/applications', compact('registrations'));
+    }
+    public function reviewRegDocuments(){
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status', NULL)->get();
+        return view('portal/staff/student/applications', compact('registrations'));
+    }
+    // /NEW APPLICANT DOCUMENTS
+
+    // PENDING REGISTRATION
+    public function reviewRegistration(){
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status',  'Approved')->get();
+        return view('portal/staff/student/applications', compact('registrations'));
+    }
+
+    // REGISTERED
+    public function registered(){
+        $registrations = Registration::where('registered_at', '!=', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status', 'Approved')->where('status', 'Active')->get();
+        return view('portal/staff/student/applications', compact('registrations'));
+    }
+
+
 
     //GET APPLICANT INFO
     public function applicantInfo(Request $request)

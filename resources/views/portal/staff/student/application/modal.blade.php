@@ -265,10 +265,11 @@
                                     <div class="card-header">Birth Certificate</div>
                                     <div class="card-body">                        
                                         <div class="row">
-                                            <div class="col-md-8 order-md-1 order-2">
-                                                <div class="col-lg-12 divImage text-center">
-                                                    <img name="imgBirthCertificate" id="imgBirthCertificate" src="" />
-                                                </div>
+                                            <div class="col-lg-6">
+                                                <div name="imgBirthFront" id="imgBirthFront" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div name="imgBirthBack" id="imgBirthBack" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
                                             </div>
                                         </div>
                                     </div>
@@ -279,7 +280,7 @@
                                     <div class="card-header">Nic/Postal/Passport</div>
                                     <div class="card-body">                        
                                         <div class="row">
-                                            <div class="col-md-8 order-md-1 order-2">
+                                            <div class="col-12 order-md-1 order-2">
                                                 <table class="table text-left">
                                                     <tr>
                                                         <th>Type: </th>
@@ -290,9 +291,12 @@
                                                         <td>960567896V</td>
                                                     </tr>
                                                 </table>
-                                                <div class="col-lg-12 divImage text-center">
-                                                    <img name="imgNicPassport" id="imgNicPassport" src="" />
-                                                </div>
+                                            </div>
+                                            <div class="col-lg">
+                                                <div name="imgIdFront" id="imgIdFront" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
+                                            </div>
+                                            <div class="col-lg">
+                                                <div name="imgIdBack" id="imgIdBack" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
                                             </div>
                                         </div>
                                     </div>

@@ -75,7 +75,10 @@ Route::post('/portal/staff/student/application/declineApplication', [App\Http\Co
 Route::get('/portal/staff/student/application/payment', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'reviewRegPayment'])->name('student.application.reviewRegPayment');
 Route::post('/portal/staff/student/application/approvePayment', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'approvePayment'])->name('student.application.approvePayment');
 Route::post('/portal/staff/student/application/declinePayment', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'declinePayment'])->name('student.application.declinePayment');
-
+Route::get('/portal/staff/student/application/documents', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'reviewRegDocuments'])->name('student.application.reviewRegDocuments');
+Route::get('/portal/staff/student/application/documents/pending', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'reviewRegDocumentsPending'])->name('student.application.reviewRegDocumentsPending');
+Route::get('/portal/staff/student/application/reviewRegistration', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'reviewRegistration'])->name('student.application.reviewRegistration');
+Route::get('/portal/staff/student/registered', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'registered'])->name('student.application.registered');
 
 Route::get('/portal/staff/student/exams/application', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'index'])->name('student.exams');
 
