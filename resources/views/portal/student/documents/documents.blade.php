@@ -14,12 +14,11 @@
     <div class="col-lg-12 student-exams min-vh-100">
       <div class="row">
 
-        {{-- PAYMENT CHECK --}}
-        @if ($registration->document_submit == 0)
+        @if ($registration->document_submit == 0 && $registration->document_status == NULL)
           {{-- PAYMENT APPROVED --}}
           <div class="col-12 px-0">
             <div class="alert alert-success" role="alert">
-              <h4 class="alert-heading"><i class="far fa-check-circle"></i> Payment Approved</h4>
+              <h4 class="alert-heading"><i class="fas fa-check-circle"></i> Payment Approved</h4>
               <p>Your payment has been approved.</p>
               <hr>
               <p class="font-weight-bold mb-0">Upload your Your Scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) below here.. </p>
@@ -27,14 +26,14 @@
           </div>
           {{-- /PAYMENT APPROVED --}}
         @endif
-        {{-- /PAYMENT CHECK --}}
+
 
         {{-- DOCUMENT SUBMIT CHECK --}}
         @if($registration->document_submit == 1 && $registration->document_status != 'Declined')
           {{-- DOCUMENT APPROVAL PENDING --}}
           <div class="col-12 px-0">
-            <div class="alert alert-info" role="alert">
-              <h4 class="alert-heading"><i class="far fa-check-circle"></i> Documents Submitted Successfully</h4>
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading"><i class="fas fa-check-circle"></i> Documents Submitted Successfully</h4>
               <p>Your registration process will be completed after submitted documents are approved.</p>
               <hr>
               <p class="font-weight-bold mb-0">If your registration didn't get approved within 2 weeks please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
@@ -49,8 +48,8 @@
           @if($student->document()->where('type', 'birth')->first() != NULL && $student->document()->where('type', 'NIC')->orWhere('type', 'Postal')->orWhere('type', 'Passport')->first() != NULL)
             {{-- SUBMIT DOCUMENTS --}}
             <div class="col-12 px-0">
-              <div class="alert alert-primary" role="alert">
-                <h4 class="alert-heading"><i class="far fa-check-circle"></i> Required Identification Documents has been uploaded</h4>
+              <div class="alert alert-warning" role="alert">
+                <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Required Identification Documents has been uploaded</h4>
                 <p>Submit your documents for approval</p>
                 <hr>
                 <button class="btn btn-outline-primary" id="btnSubmitDocs" onclick="submitDocuments()">Submit Documents <span id="spinnerSubmitDocs" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
@@ -128,6 +127,22 @@
             
           {{-- IF ALL UNCOMPLETE --}}
           @else
+
+            {{-- DOCUMENT DECLINED CHECK --}}
+            @if ($registration->document_submit == 0 && $registration->document_status == 'Declined')
+              {{-- DOCUMENT DECLINED --}}
+              <div class="col-12 px-0">
+                <div class="alert alert-danger" role="alert">
+                  <h4 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Documents Declined!</h4>
+                  <p>{{ $registration->declined_msg }}</p>
+                  <hr>
+                  <p class="font-weight-bold mb-0">Please upload correct document images</p>
+                  <p class="font-weight-bold mb-0">If you think this was mistaken resubmit documents and send an email attached with your documents and  to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+                  </div>
+              </div>
+              {{-- /DOCUMENT DECLINED --}}
+            @endif
+            {{-- / DOCUMENT DECLINED CHECK --}}
 
             {{-- CHECK BC UPLOADED --}}
             @if($student->document()->where('type', 'birth')->where('side', 'front')->first() == NULL || $student->document()->where('type', 'birth')->where('side', 'back')->first() == NULL)

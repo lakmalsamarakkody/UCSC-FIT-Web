@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Portal\Staff\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\Student\Document;
 use App\Models\Student\Payment;
 use App\Models\Student\Registration;
 use App\Models\Support\Bank;
@@ -39,7 +40,7 @@ class ApplicationController extends Controller
 
     // NEW APPLICANT DOCUMENTS
     public function reviewRegDocumentsPending(){
-        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '0')->where('document_status', NULL)->get();
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '0')->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
     public function reviewRegDocuments(){
@@ -48,17 +49,16 @@ class ApplicationController extends Controller
     }
     // /NEW APPLICANT DOCUMENTS
 
-    // PENDING REGISTRATION
+    // REGISTRATION
     public function reviewRegistration(){
         $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status',  'Approved')->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
-
-    // REGISTERED
     public function registered(){
         $registrations = Registration::where('registered_at', '!=', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status', 'Approved')->where('status', 'Active')->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
+    // /REGISTRATION
 
 
 
@@ -186,4 +186,42 @@ class ApplicationController extends Controller
         return response()->json([ 'status'=>'error']);
     }
     // PAYMENT
+
+    // DOCUMENTS
+    public function approveDocuments(Request $request){
+        $registration = Registration::where('id', $request->registration_id);
+        if($registration->update(['document_status'=>'Approved'])):
+            return response()->json([ 'status'=>'success']);
+        endif;
+        return response()->json([ 'status'=>'error']);
+    }
+    public function declineDocumentBirth(Request $request){
+        $registration = Registration::where('id', $request->registration_id);
+        $student = $registration->first()->student;
+        $documents = $student->document()->where('type', 'Birth')->get();
+        if($documents):
+            foreach($documents as $document):
+                Document::destroy($document->id);
+            endforeach;
+            if($registration->update(['registered_at'=>NULL, 'registration_expire_at'=>NULL, 'document_submit'=>0, 'document_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
+                return response()->json([ 'status'=>'success']);
+            endif;
+        endif;
+        return response()->json([ 'status'=>'error']);
+    }
+    public function declineDocumentId(Request $request){
+        $registration = Registration::where('id', $request->registration_id);
+        $student = $registration->first()->student;
+        $documents = $student->document()->where('type', $request->docType)->get();
+        if($documents):
+            foreach($documents as $document):
+                Document::destroy($document->id);
+            endforeach;
+            if($registration->update(['registered_at'=>NULL, 'registration_expire_at'=>NULL, 'document_submit'=>0, 'document_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
+                return response()->json([ 'status'=>'success']);
+            endif;
+        endif;
+        return response()->json([ 'status'=>'error']);
+    }
+    // /DOCUMENTS
 }
