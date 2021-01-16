@@ -252,7 +252,7 @@
                             </div>
                             <div class="mt-4 col-12 text-center">
                                 <div class="btn-group col-xl-3 col-md-6">
-                                    <button type="button" class="btn btn-success form-control" id="btnApprovePayment">Approve</button>
+                                    <button type="button" class="btn btn-success form-control" id="btnApprovePayment">Approve <span id="spinnerBtnApprovePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                                 <div class="btn-group col-xl-3 col-md-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message-payment" id="btnDeclinePayment" data-toggle="modal">Decline</button>
@@ -314,7 +314,7 @@
                             </div>
                             <div class="mt-4 col-12 text-center">
                                 <div id="divBtnApproveDocuments" class="btn-group col-xl-3 col-md-6">
-                                    <button type="button" class="btn btn-success form-control" id="btnApproveDocuments">Approve</button>
+                                    <button type="button" class="btn btn-success form-control" id="btnApproveDocuments">Approve <span id="spinnerBtnApproveDocuments" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </div>

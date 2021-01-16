@@ -180,8 +180,8 @@ class DocumentController extends Controller
     // SUBMIT DOCS
     public function submitDocs(){
         $student = Auth::user()->student;
-        $registration = $student->registration()->where('document_submit', '!= ','OK')->first();
-        if ( $registration->update(['document_submit' => 1])):
+        $registration = $student->registration()->where('document_submit', '!=', 1);
+        if ($registration->update(['document_submit' => 1, 'document_status'=> NULL, 'declined_msg'=>NULL])):
             return response()->json(['status'=>'success']);
         endif;
         return response()->json(['status'=>'error']);

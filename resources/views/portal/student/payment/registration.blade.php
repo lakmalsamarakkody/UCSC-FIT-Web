@@ -41,7 +41,7 @@
               <p>{{ $registration->declined_msg }}</p>
               <hr>
               <p class="font-weight-bold mb-0">Please upload correct payment details</p>
-              <p class="font-weight-bold mb-0">If you think this was mistaken attach your payment slip and send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+              <p class="font-weight-bold mb-0">If you think this was mistaken resubmit and send an email attached with your payment slip to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
               </div>
           </div>
           {{-- /PAYMENT APPROVAL DECLINED --}}
