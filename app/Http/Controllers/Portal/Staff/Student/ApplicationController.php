@@ -69,11 +69,25 @@ class ApplicationController extends Controller
         $student = Registration::find($request->registration_id)->student;
         $email = $student->user->email;
         $payment = NULL;
+        $documents = NULL;
+        // PAYMENT DETAILS
         if($registration->payment_id != NULL):
             $payment = $registration->payment;
             $bank = Bank::find($payment->bank_id);
             $bankBranch = BankBranch::find($payment->bank_branch_id);
             $payment = array('details'=>$payment,'bank'=>$bank,'bankBranch'=>$bankBranch);
+        endif;
+        // DOCUMENT DETAILS
+        if($registration->document_submit == 1):
+            $bcFront = $student->document->where('type', 'Birth')->where('side', 'front')->first()->image;
+            $bcBack = $student->document->where('type', 'Birth')->where('side', 'back')->first()->image;
+            $id = $student->document->whereIn('type', ['NIC', 'Postal', 'Passport'])->where('side', 'front')->first();
+            $idFront = $id->image;
+            $idBack = NULL;
+            if( $id->type == 'NIC'):
+                $idBack = $student->document->where('type', 'NIC')->where('side', 'back')->first()->image;
+            endif;  
+            $documents = array('bcFront' => $bcFront, 'bcBack' => $bcBack, 'idFront' => $idFront, 'idBack' => $idBack);
         endif;
         
         //PERMANENT ADDRESS
@@ -127,7 +141,7 @@ class ApplicationController extends Controller
         endif;
         $currentAddressDetails = array('currentCountry'=>$currentCountry, 'currentState'=>$currentState, 'currentCity'=>$currentCity);
         // /CURRENT ADDRESS
-        return response()->json(['status'=>'success', 'student'=>$student , 'registration'=>$registration, 'payment'=> $payment, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
+        return response()->json(['status'=>'success', 'student'=>$student , 'registration'=>$registration, 'payment'=> $payment, 'documents'=> $documents, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
         
     }
 

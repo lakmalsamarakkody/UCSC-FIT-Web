@@ -87,15 +87,16 @@ view_modal_applicant = (registration_id) => {
         // /APPLICATION
 
         // PAYMENT
-        $('#spanPaymentDate').html(data['payment']['details']['paid_date']);
-        $('#spanPaymentBank').html(data['payment']['bank']['name']);
-        $('#spanPaymentBankBranch').html(data['payment']['bankBranch']['name']);
-        $('#spanPaymentBankBranchCode').html(data['payment']['bankBranch']['code']);
-        $('#spanPaymentAmount').html(data['payment']['details']['amount']);
-        $('#imgPaymentBankSlip').attr('style', 'background: url(/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+')');
-        $('#imgPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+'")');
-        //BUTTONS
         if(data['payment'] != null){
+          $('#spanPaymentDate').html(data['payment']['details']['paid_date']);
+          $('#spanPaymentBank').html(data['payment']['bank']['name']);
+          $('#spanPaymentBankBranch').html(data['payment']['bankBranch']['name']);
+          $('#spanPaymentBankBranchCode').html(data['payment']['bankBranch']['code']);
+          $('#spanPaymentAmount').html(data['payment']['details']['amount']);
+          $('#imgPaymentBankSlip').attr('style', 'background: url(/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+')');
+          $('#imgPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+'")');
+          
+          //BUTTONS
           if(data['registration']['payment_status'] == 'Approved'){
             $('#iconPaymentStatus').addClass('fa-check-circle text-success');
             $('#divBtnApprovePayment').addClass('d-none');
@@ -113,9 +114,60 @@ view_modal_applicant = (registration_id) => {
           }
         }
         // /PAYMENT
+
+        //DOCUMENTS
+        if(data['documents'] != null){
+          $('#imgBirthFront').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['bcFront']+')');
+          $('#imgBirthBack').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['bcBack']+')');
+          $('#imgIdFront').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['idFront']+')');
+          $('#imgIdBack').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+')');
+
+          $('#imgBirthFront').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['bcFront']+'")');
+          $('#imgBirthBack').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['bcBack']+'")');
+          $('#imgIdFront').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['idFront']+'")');
+          $('#imgIdBack').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+'")');
+
+          if(data['student']['nic_old']){
+            $('#spanIdType').html('NIC');
+            $('#spanIdentity').html(data['student']['nic_old']);
+          }
+          else if(data['student']['nic_new']){
+            $('#spanIdType').html('NIC');
+            $('#spanIdentity').html(data['student']['nic_new']);
+          }
+          else if(data['student']['postal']){
+            $('#spanIdType').html('Postal ID');
+            $('#spanIdentity').html(data['student']['postal']);
+          }
+          else if(data['student']['passport']){
+            $('#spanIdType').html('Passport ID');
+            $('#spanIdentity').html(data['student']['passport']);
+          }
+
+          //BUTTONS
+          if(data['registration']['document_status'] == 'Approved'){
+            $('#iconDocumentsStatus').addClass('fa-check-circle text-success');
+            $('#divBtnApproveDocuments').addClass('d-none');
+            $('#btnDeclineDocumentBirthModal').attr('onclick', 'decline_documentBirth('+registration_id+')');
+            $('#btnDeclineDocumentIdModal').attr('onclick', 'decline_documentId('+registration_id+')');
+          }
+          else if(data['registration']['document_status'] == 'Declined'){
+            $('#iconDocumentsStatus').addClass('fa-times-circle text-danger');
+            $('#divBtnDeclineDocumentBirth').addClass('d-none');
+            $('#divBtnDeclineDocumentId').addClass('d-none');
+            $('#btnApproveDocuments').attr('onclick', 'approve_documents('+registration_id+')');
+          }
+          else{
+            $('#iconDocumentsStatus').addClass('fa-exclamation-triangle text-main-theme-warning');
+            $('#btnApproveDocuments').attr('onclick', 'approve_documents('+registration_id+')');
+            $('#btnDeclineDocumentBirthModal').attr('onclick', 'decline_documentBirth('+registration_id+')');
+            $('#btnDeclineDocumentIdModal').attr('onclick', 'decline_documentId('+registration_id+')');
+          }
+        }
+        // /DOCUMENTS
         $('#spinnerBtnViewModalApplicant-'+registration_id).addClass('d-none');
-        $('#modal-view-applicant').modal('show');
         $('#btnViewModalApplicant-'+registration_id).removeAttr('disabled','disabled');
+        $('#modal-view-applicant').modal('show');
       }
     },
     error: function(err){
