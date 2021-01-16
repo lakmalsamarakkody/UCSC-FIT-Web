@@ -70,6 +70,10 @@
                     <label for="btnCreateExam">&nbsp;</label>
                     <button type="button" class="form-control btn btn-outline-primary" data-tooltip="tooltip" title="Create Exam" data-placement="bottom" id="btnCreateExam" name="btnCreateExam" onclick="onclick_create_exam();"><i class="fas fa-plus"></i></button>
                   </div>
+                  <div class="form-group col-xl-12 col-lg-12 text-center">
+                    <input type="hidden" id="exam" name="exam" class="form-control" />
+                    <span class="invalid-feedback" id="error-exam" role="alert"></span>
+                  </div>
                 </div>
               </form>
             </div>
