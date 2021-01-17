@@ -14,7 +14,7 @@ class ExamListController extends Controller
     //Exam list view
     public function index()
     {
-        $exams = Exam::orderBy('year','asc')->get();
+        $exams = Exam::orderby('year', 'desc')->get();
         return view('portal/staff/exams/exam_list', compact('exams'));
     }
     
@@ -27,9 +27,18 @@ class ExamListController extends Controller
             'examMonth'=>['required', 'alpha', Rule::in(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])],
         ]);
 
+        $exists_exam = Exam::where('year',$request->examYear)->where('month', $request->examMonth);
+        if($exists_exam->exists()):
+            $exists_exam_validator = Validator::make($request->all(), [
+                'exam' => ['multicolumn_unique'],
+            ]);
+        endif;
+        
         //Check validator fails
         if($exam_validator->fails()):
-            return response()->json(['status'=>'error', 'errors'=>$exam_validator->errors()]);
+            return response()->json(['errors'=>$exam_validator->errors()]);
+        elseif(isset($exists_exam_validator) && $exists_exam_validator->fails()):
+            return response()->json(['errors'=>$exists_exam_validator->errors()]);
         else:
             $exam = new Exam();
             $exam->year = $request->examYear;
@@ -38,6 +47,7 @@ class ExamListController extends Controller
                 return response()->json(['status'=>'success', 'exam'=>$exam]);
             endif;
         endif;
+        return response()->json(['status'=>'error']);
     }
     // /Create
 

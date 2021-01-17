@@ -25,10 +25,10 @@ class ExamsController extends Controller
     
     public function index(Request $request)
     {
-        $request->validate([
-            'selectSearchSubject' => 'integer',
-            'selectSearchExamType' => 'integer'
-        ]);
+        // $request->validate([
+        //     'selectSearchSubject' => 'integer',
+        //     'selectSearchExamType' => 'integer'
+        // ]);
 
         $today = Carbon::today();
         $exam_schedules=Schedule::where('date', '<', $today)->orderBy('date','desc');
@@ -38,7 +38,6 @@ class ExamsController extends Controller
         $search_exams = Exam::where('year', '<=', $today->year)->orderBy('year','desc')->get();
         $years = Exam::select('year')->where('year', '<=', $today->year)->orderBy('year','asc')->distinct()->get();
         $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->paginate(5,['*'], 'upcoming');
-        $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->get();
         //$released_upcoming_scheduless = Schedule::where('date', '>=', $today)->orderBy('date', 'asc')->paginate(5,['*'],'released_schedule');
 
         if ($request->selectSearchExamYear != null) {
@@ -57,6 +56,7 @@ class ExamsController extends Controller
             $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
         }
         $exam_schedules = $exam_schedules->paginate(5,['*'], 'held');
+        //$upcoming_schedules = $upcoming_schedules->paginate(5,['*'],'upcoming');
         //$exam_schedules = $exam_schedules->get();
         return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'schedule_exams', 'search_exams', 'years', 'upcoming_schedules'));
     }
@@ -91,9 +91,20 @@ class ExamsController extends Controller
             'scheduleStartTime' => ['required'],
         ]);
 
+       $exists_schedule = Schedule::where('subject_id', $request->scheduleSubject)->where('exam_type_id', $request->scheduleExamType)
+       ->where('date',$request->scheduleDate)->first();
+        //Check if the exact schedule is in the table
+        if($exists_schedule != null):
+            $exists_schedule_validator = Validator::make($request->all(), [
+                'schedule' => ['multicolumn_unique'],
+            ]);
+        endif;
+    
         //Check validation errors
         if($exam_schedule_validator->fails()):
             return response()->json(['errors'=>$exam_schedule_validator->errors()]);
+        elseif(isset($exists_schedule_validator) && $exists_schedule_validator->fails()):
+            return response()->json(['errors'=>$exists_schedule_validator->errors()]);
         else:
             $exam_schedule = new Schedule();
             $exam_schedule->exam_id = $request->scheduleExam;

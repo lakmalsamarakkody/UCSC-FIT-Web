@@ -87,15 +87,16 @@ view_modal_applicant = (registration_id) => {
         // /APPLICATION
 
         // PAYMENT
-        $('#spanPaymentDate').html(data['payment']['details']['paid_date']);
-        $('#spanPaymentBank').html(data['payment']['bank']['name']);
-        $('#spanPaymentBankBranch').html(data['payment']['bankBranch']['name']);
-        $('#spanPaymentBankBranchCode').html(data['payment']['bankBranch']['code']);
-        $('#spanPaymentAmount').html(data['payment']['details']['amount']);
-        $('#imgPaymentBankSlip').attr('style', 'background: url(/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+')');
-        $('#imgPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+'")');
-        //BUTTONS
         if(data['payment'] != null){
+          $('#spanPaymentDate').html(data['payment']['details']['paid_date']);
+          $('#spanPaymentBank').html(data['payment']['bank']['name']);
+          $('#spanPaymentBankBranch').html(data['payment']['bankBranch']['name']);
+          $('#spanPaymentBankBranchCode').html(data['payment']['bankBranch']['code']);
+          $('#spanPaymentAmount').html(data['payment']['details']['amount']);
+          $('#imgPaymentBankSlip').attr('style', 'background: url(/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+')');
+          $('#imgPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+'")');
+          
+          //BUTTONS
           if(data['registration']['payment_status'] == 'Approved'){
             $('#iconPaymentStatus').addClass('fa-check-circle text-success');
             $('#divBtnApprovePayment').addClass('d-none');
@@ -113,9 +114,64 @@ view_modal_applicant = (registration_id) => {
           }
         }
         // /PAYMENT
+
+        //DOCUMENTS
+        if(data['documents'] != null){
+          $('#imgBirthFront').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['bcFront']+')');
+          $('#imgBirthBack').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['bcBack']+')');
+          $('#imgIdFront').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['idFront']+')');
+          $('#imgIdBack').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+')');
+
+          $('#imgBirthFront').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['bcFront']+'")');
+          $('#imgBirthBack').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['bcBack']+'")');
+          $('#imgIdFront').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['idFront']+'")');
+          $('#imgIdBack').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+'")');
+
+          if(data['student']['nic_old']){
+            $('#spanIdType').html('NIC');
+            $('#spanIdentity').html(data['student']['nic_old']);
+            var Id_type = 'NIC';
+          }
+          else if(data['student']['nic_new']){
+            $('#spanIdType').html('NIC');
+            $('#spanIdentity').html(data['student']['nic_new']);
+            var Id_type = 'NIC';
+          }
+          else if(data['student']['postal']){
+            $('#spanIdType').html('Postal ID');
+            $('#spanIdentity').html(data['student']['postal']);
+            var Id_type = 'Postal';
+          }
+          else if(data['student']['passport']){
+            $('#spanIdType').html('Passport ID');
+            $('#spanIdentity').html(data['student']['passport']);
+            var Id_type = 'Passport';
+          }
+
+          //BUTTONS
+          if(data['registration']['document_status'] == 'Approved'){
+            $('#iconDocumentsStatus').addClass('fa-check-circle text-success');
+            $('#divBtnApproveDocuments').addClass('d-none');
+            $('#btnDeclineDocumentBirthModal').attr('onclick', 'decline_documentBirth('+registration_id+')');
+            $('#btnDeclineDocumentIdModal').attr('onclick', 'decline_documentId('+registration_id+',"'+Id_type+'")');
+          }
+          else if(data['registration']['document_status'] == 'Declined'){
+            $('#iconDocumentsStatus').addClass('fa-times-circle text-danger');
+            $('#divBtnDeclineDocumentBirth').addClass('d-none');
+            $('#divBtnDeclineDocumentId').addClass('d-none');
+            $('#btnApproveDocuments').attr('onclick', 'approve_documents('+registration_id+')');
+          }
+          else{
+            $('#iconDocumentsStatus').addClass('fa-exclamation-triangle text-main-theme-warning');
+            $('#btnApproveDocuments').attr('onclick', 'approve_documents('+registration_id+')');
+            $('#btnDeclineDocumentBirthModal').attr('onclick', 'decline_documentBirth('+registration_id+')');
+            $('#btnDeclineDocumentIdModal').attr('onclick', 'decline_documentId('+registration_id+',"'+Id_type+'")');
+          }
+        }
+        // /DOCUMENTS
         $('#spinnerBtnViewModalApplicant-'+registration_id).addClass('d-none');
-        $('#modal-view-applicant').modal('show');
         $('#btnViewModalApplicant-'+registration_id).removeAttr('disabled','disabled');
+        $('#modal-view-applicant').modal('show');
       }
     },
     error: function(err){
@@ -176,7 +232,7 @@ approve_application = (registration_id) => {
           }
         },
         error: function(err){
-          console.log('Approve Application Error');
+          console.log('Approve Application Ajax Error');
           $("#spinnerBtnApproveApplication").addClass('d-none');
           $('#btnApproveApplication').removeAttr('disabled');
           SwalSystemErrorDanger.fire({
@@ -244,7 +300,7 @@ decline_application = (registration_id) => {
           }
         },
         error: function(err){
-          console.log('Decline Application Error');
+          console.log('Decline Application Ajax Error');
           $("#spinnerBtnDeclineApplication").addClass('d-none');
           $('#btnDeclineApplication').removeAttr('disabled');
           SwalSystemErrorDanger.fire({
@@ -311,7 +367,7 @@ approve_payment = (registration_id) => {
           }
         },
         error: function(err){
-          console.log('Approve Payment Error');
+          console.log('Approve Payment Ajax Error');
           $("#spinnerBtnApprovePayment").addClass('d-none');
           $('#btnApprovePayment').removeAttr('disabled');
           SwalSystemErrorDanger.fire({
@@ -379,7 +435,7 @@ decline_payment = (registration_id) => {
           }
         },
         error: function(err){
-          console.log('Decline Payment Error');
+          console.log('Decline Payment Ajax Error');
           $("#spinnerBtnDeclinePayment").addClass('d-none');
           $('#btnDeclinePayment').removeAttr('disabled');
           SwalSystemErrorDanger.fire({
@@ -397,5 +453,209 @@ decline_payment = (registration_id) => {
   })
 }
 // /DECLINE PAYMENT
+
+// APPROVE DOCUMENTS
+approve_documents = (registration_id) => {
+  SwalQuestionWarningAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Approve!',
+  })
+  .then((result) => {
+    if(result.isConfirmed) {
+
+      // FORM PAYLOAD
+      var formData = new FormData();
+      formData.append('registration_id', registration_id)
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('student.application.approveDocuments') }}",
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,           
+        beforeSend: function(){
+          // Show loader
+          $("#spinnerBtnApproveDocuments").removeClass('d-none');
+          $('#btnApproveDocuments').attr('disabled','disabled');
+        },
+        success: function(data){
+          console.log('Approve Documents Ajax Success');
+          $("#spinnerBtnApproveDocuments").addClass('d-none');
+          $('#btnApproveDocuments').removeAttr('disabled');
+          if (data['status'] == 'success'){
+            SwalDoneSuccess.fire({
+              title: 'Approved!',
+              text: 'Documents approved successfully',
+            }).then((result) => {
+              if(result.isConfirmed) {
+                location.reload()
+              }
+            });
+          }else{
+            SwalSystemErrorDanger.fire({
+              title: 'Documents Approve Process Failed!',
+            })
+          }
+        },
+        error: function(err){
+          console.log('Approve Documents Ajax Error');
+          $("#spinnerBtnApproveDocuments").addClass('d-none');
+          $('#btnApproveDocuments').removeAttr('disabled');
+          SwalSystemErrorDanger.fire({
+            title: 'Documents Approve Process Failed!',
+          })
+        }
+      });
+    }
+    else{
+      SwalNotificationWarningAutoClose.fire({
+        title: 'Aborted!',
+        text: 'Documents approval process aborted.',
+      })
+    }
+  })
+}
+// /APPROVE DOCUMENTS
+
+// DECLINE DOCUMENT BC
+decline_documentBirth = (registration_id) => {
+  SwalQuestionWarningAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Decline!',
+  })
+  .then((result) => {
+    if(result.isConfirmed) {
+
+      // FORM PAYLOAD
+      var formData = new FormData();
+      formData.append('registration_id', registration_id)
+      formData.append('declined_msg', $('#declineMessageDocumentBirth').val())
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('student.application.declineDocumentBirth') }}",
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,           
+        beforeSend: function(){
+          // Show loader
+          $("#spinnerBtnDeclineDocumentBirth").removeClass('d-none');
+          $('#btnDeclineDocumentBirth').attr('disabled','disabled');
+        },
+        success: function(data){
+          console.log('Decline DocumentBirth Ajax Success');
+          $("#spinnerBtnDeclineDocumentBirth").addClass('d-none');
+          $('#btnDeclineDocumentBirth').removeAttr('disabled');
+          if (data['status'] == 'success'){
+            SwalDoneSuccess.fire({
+              title: 'Declined!',
+              text: 'Birth Certificate declined successfully',
+            }).then((result) => {
+              if(result.isConfirmed) {
+                location.reload()
+              }
+            });
+          }else{
+            SwalSystemErrorDanger.fire({
+              title: 'Birth Certificate Decline Process Failed!',
+            })
+          }
+        },
+        error: function(err){
+          console.log('Decline DocumentBirth Ajax Error');
+          $("#spinnerBtnDeclineDocumentBirth").addClass('d-none');
+          $('#btnDeclineDocumentBirth').removeAttr('disabled');
+          SwalSystemErrorDanger.fire({
+            title: 'Birth Certificate Decline Process Failed!',
+          })
+        }
+      });
+    }
+    else{
+      SwalNotificationWarningAutoClose.fire({
+        title: 'Aborted!',
+        text: 'Birth Certificate decline process aborted.',
+      })
+    }
+  })
+}
+// /DECLINE DOCUMENT BC
+
+// DECLINE DOCUMENT ID
+decline_documentId = (registration_id, docType) => {
+  SwalQuestionWarningAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Decline!',
+  })
+  .then((result) => {
+    if(result.isConfirmed) {
+
+      // FORM PAYLOAD
+      var formData = new FormData();
+      formData.append('registration_id', registration_id);
+      formData.append('docType', docType)
+      formData.append('declined_msg', $('#declineMessageDocumentId').val());
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('student.application.declineDocumentId') }}",
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,           
+        beforeSend: function(){
+          // Show loader
+          $("#spinnerBtnDeclineDocumentId").removeClass('d-none');
+          $('#btnDeclineDocumentId').attr('disabled','disabled');
+        },
+        success: function(data){
+          console.log('Decline DocumentId Ajax Success');
+          $("#spinnerBtnDeclineDocumentId").addClass('d-none');
+          $('#btnDeclineDocumentId').removeAttr('disabled');
+          if (data['status'] == 'success'){
+            SwalDoneSuccess.fire({
+              title: 'Declined!',
+              text: 'Id declined successfully',
+            }).then((result) => {
+              if(result.isConfirmed) {
+                location.reload()
+              }
+            });
+          }else{
+            SwalSystemErrorDanger.fire({
+              title: 'Id Decline Process Failed!',
+            })
+          }
+        },
+        error: function(err){
+          console.log('Decline DocumentId Ajax Error');
+          $("#spinnerBtnDeclineDocumentId").addClass('d-none');
+          $('#btnDeclineDocumentId').removeAttr('disabled');
+          SwalSystemErrorDanger.fire({
+            title: 'Id Decline Process Failed!',
+          })
+        }
+      });
+    }
+    else{
+      SwalNotificationWarningAutoClose.fire({
+        title: 'Aborted!',
+        text: 'Id decline process aborted.',
+      })
+    }
+  })
+}
+// /DECLINE DOCUMENT ID
 
 </script>

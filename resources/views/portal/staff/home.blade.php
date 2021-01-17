@@ -29,9 +29,10 @@
     <div class="col-lg-12 dashboard">
       <div class="row">
 
+        <h5 class="col-12 title font-weight-bold">REGISTRATIONS</h5>
         <!-- SUMMARY CARDS -->
         <div class="col-xl-2 col-lg-4 p-1">
-          <a class="" href="{{ url('/portal/staff/student/application') }}">
+          <a class="" href="{{ route('student.application') }}">
             <div class="card card-dash shadow green" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">5000</div>
@@ -43,7 +44,7 @@
         </div>
         
         <div class="col-xl-2 col-lg-4 p-1">
-          <a class="" href="{{ url('/portal/staff/student/application/payment') }}">
+          <a class="" href="{{ route('student.application.reviewRegPayment') }}">
             <div class="card card-dash shadow red" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">125</div>
@@ -55,7 +56,7 @@
         </div>
 
         <div class="col-xl-2 col-lg-4 p-1">
-          <a class="" href="">
+          <a class="" href="{{ route('student.application.reviewRegDocumentsPending') }}">
             <div class="card card-dash shadow black" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">100</div>
@@ -67,7 +68,7 @@
         </div>
 
         <div class="col-xl-2 col-lg-4 p-1">
-          <a class="" href="">
+          <a class="" href="{{ route('student.application.reviewRegDocuments') }}">
             <div class="card card-dash shadow yellow" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">95</div>
@@ -79,31 +80,33 @@
         </div>
         
         <div class="col-xl-2 col-lg-4 p-1">
-          <a class="" href="">
-            <div class="card card-dash shadow black" style="max-width: 18rem;">
+          <a class="" href="{{ route('student.application.reviewRegistration') }}">
+            <div class="card card-dash shadow red" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">1500</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>Total Registered</h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Pending Approvals</h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
         </div>
 
         <div class="col-xl-2 col-lg-4 p-1">
-          <a class="" href="">
-            <div class="card card-dash shadow red" style="max-width: 18rem;">
+          <a class="" href="{{ route('student.application.registered') }}">
+            <div class="card card-dash shadow black" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">2</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>Medicals to Review</h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Registered</h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
         </div>
         <!-- SUMMARY CARDS -->
 
-        <div class="col-lg-6 col-md-12 mt-5 px-1">
+        <h5 class="col-12 title font-weight-bold mt-5 ">EXAMS</h5>
+
+        <div class="col-lg-6 col-md-12 px-1">
             <a class="" href="{{ route('exams') }}" style="height: 30rem;">
               <div class="card" style="height: 30rem;">
                 <div class="card-header">Upcoming Exams</div>
@@ -136,7 +139,7 @@
             </a>
         </div>
 
-        <div class="col-lg-6 col-md-12 mt-5 px-1">
+        <div class="col-lg-6 col-md-12 px-1">
             <a class="" href="{{ route('exams') }}" style="height: 30rem;">
               <div class="card overflow-auto" style="height: 30rem;">
                 <div class="card-header">Exams Held</div>

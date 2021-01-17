@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-lg-4">Details : <i id="iconDetailStatus" class="fas"></i> <span id="spanDetailStatus"></span></div>
                             <div class="col-lg-4">Payment : <i id="iconPaymentStatus" class="fas"></i> <span id="spanPaymentStatus"></span></div>
-                            <div class="col-lg-4">Documents : <i id="iconDocumentStatus" class="fas"></i> <span id="spanDocumentStatus"></span></div>
+                            <div class="col-lg-4">Documents : <i id="iconDocumentsStatus" class="fas"></i> <span id="spanDocumentsStatus"></span></div>
                         </div>
                     </div>
                 </div>
@@ -252,7 +252,7 @@
                             </div>
                             <div class="mt-4 col-12 text-center">
                                 <div class="btn-group col-xl-3 col-md-6">
-                                    <button type="button" class="btn btn-success form-control" id="btnApprovePayment">Approve</button>
+                                    <button type="button" class="btn btn-success form-control" id="btnApprovePayment">Approve <span id="spinnerBtnApprovePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                                 <div class="btn-group col-xl-3 col-md-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message-payment" id="btnDeclinePayment" data-toggle="modal">Decline</button>
@@ -265,11 +265,17 @@
                                     <div class="card-header">Birth Certificate</div>
                                     <div class="card-body">                        
                                         <div class="row">
-                                            <div class="col-md-8 order-md-1 order-2">
-                                                <div class="col-lg-12 divImage text-center">
-                                                    <img name="imgBirthCertificate" id="imgBirthCertificate" src="" />
-                                                </div>
+                                            <div class="col-lg-6">
+                                                <div name="imgBirthFront" id="imgBirthFront" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
                                             </div>
+                                            <div class="col-lg-6">
+                                                <div name="imgBirthBack" id="imgBirthBack" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div id="divBtnDeclineDocumentBirth" class="btn-group col-xl-3 col-md-6 col-12 px-0">
+                                            <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message-document-birth" id="btnDeclineDocumentBirth" data-toggle="modal">Decline</button>
                                         </div>
                                     </div>
                                 </div>
@@ -279,31 +285,36 @@
                                     <div class="card-header">Nic/Postal/Passport</div>
                                     <div class="card-body">                        
                                         <div class="row">
-                                            <div class="col-md-8 order-md-1 order-2">
+                                            <div class="col-12">
                                                 <table class="table text-left">
                                                     <tr>
                                                         <th>Type: </th>
-                                                        <td>NIC</td>
+                                                        <td><span id="spanIdType"></span></td>
                                                     </tr>
                                                     <tr>
                                                         <th>NIC/Postal/Passport No: </th>
-                                                        <td>960567896V</td>
+                                                        <td><span id="spanIdentity"></span></td>
                                                     </tr>
                                                 </table>
-                                                <div class="col-lg-12 divImage text-center">
-                                                    <img name="imgNicPassport" id="imgNicPassport" src="" />
-                                                </div>
                                             </div>
+                                            <div class="col-lg">
+                                                <div name="imgIdFront" id="imgIdFront" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
+                                            </div>
+                                            <div class="col-lg">
+                                                <div name="imgIdBack" id="imgIdBack" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div id="divBtnDeclineDocumentId" class="btn-group col-xl-3 col-md-6 col-12 px-0">
+                                            <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message-document-Id" id="btnDeclineDocumentId" data-toggle="modal">Decline</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="mt-4 col-12 text-center">
-                                <div id="divBtnApproveDocument" class="btn-group col-xl-3 col-md-6">
-                                    <button type="button" class="btn btn-success form-control" id="btnApproveDocuments">Approve</button>
-                                </div>
-                                <div id="divBtnDeclineDocument" class="btn-group col-xl-3 col-md-6">
-                                    <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message-documents" id="btnDeclineDocuments" data-toggle="modal">Decline</button>
+                                <div id="divBtnApproveDocuments" class="btn-group col-xl-3 col-md-6">
+                                    <button type="button" class="btn btn-success form-control" id="btnApproveDocuments">Approve <span id="spinnerBtnApproveDocuments" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </div>
@@ -324,7 +335,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="declineMessageApplicationLabel">Decline Message</h5>
+                <h5 class="modal-title" id="declineMessageApplicationLabel">Decline Application</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -349,7 +360,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="declineMessagePaymentLabel">Decline Message</h5>
+                <h5 class="modal-title" id="declineMessagePaymentLabel">Decline Payment</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -369,29 +380,54 @@
 </div>
 <!-- /DECLINE MESSAGE : PAYMENT -->
 
-<!-- DECLINE MESSAGE : DOCUMENTS -->
-<div class="modal fade" id="modal-decline-message-documents" tabindex="-1" aria-labelledby="declineMessagedocumentsLabel" aria-hidden="true" data-backdrop="static">
+<!-- DECLINE MESSAGE : DOCUMENT BIRTH -->
+<div class="modal fade" id="modal-decline-message-document-birth" tabindex="-1" aria-labelledby="declineMessagedocumentBirthLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="declineMessageDocumentsLabel">Decline Message</h5>
+                <h5 class="modal-title" id="declineMessageDocumentBirthLabel">Decline Birth Certificate</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="declineMessageDocuments" class="col-form-label">Message</label>
-                    <textarea class="form-control" name="declineMessage" id="declineMessageDocuments" cols="30" rows="10" placeholder="If you need to send a specilized message to apllicant enter it here. If not default message will be sent."></textarea>
+                    <label for="declineMessageDocumentBirth" class="col-form-label">Message</label>
+                    <textarea class="form-control" name="declineMessage" id="declineMessageDocumentBirth" cols="30" rows="10" placeholder="If you need to send a specilized message to apllicant enter it here. If not default message will be sent."></textarea>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="btnDeclineDocumentsModal" type="button" class="btn btn-warning">Decline</button>
+                <button id="btnDeclineDocumentBirthModal" type="button" class="btn btn-warning">Decline</button>
             </div>
         </div>
     </div>
 </div>
-<!-- /DECLINE MESSAGE : DOCUMENTS -->
+<!-- /DECLINE MESSAGE : BIRTH -->
+
+<!-- DECLINE MESSAGE : DOCUMENT ID -->
+<div class="modal fade" id="modal-decline-message-document-Id" tabindex="-1" aria-labelledby="declineMessagedocumentIdLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="declineMessageDocumentIdLabel">Decline ID</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="declineMessageDocumentId" class="col-form-label">Message</label>
+                    <textarea class="form-control" name="declineMessage" id="declineMessageDocumentId" cols="30" rows="10" placeholder="If you need to send a specilized message to apllicant enter it here. If not default message will be sent."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="btnDeclineDocumentIdModal" type="button" class="btn btn-warning">Decline</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /DECLINE MESSAGE : Id -->
 
 

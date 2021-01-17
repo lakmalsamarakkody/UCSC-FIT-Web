@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Exam;
+use Facade\FlareClient\Time\Time;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class ExamScheduleSeeder extends Seeder
 {
@@ -39,7 +41,7 @@ class ExamScheduleSeeder extends Seeder
                   'exam_type_id' => $Etid,
                   'date' => $faker->dateTimeBetween($exam_id->year .'-'. $exam_id->month.'-01', '2021-12-31'),
                   'start_time' => $faker->time($format = 'H:i'),
-                  'end_time' => $faker->time($format = 'H:i'),
+                  'end_time' => Carbon::now()->addHours(rand(1,8)),
                   'created_at' => '2020-11-27 17:36:23',
                   'updated_at' => '2020-11-27 17:36:23'
                 ]

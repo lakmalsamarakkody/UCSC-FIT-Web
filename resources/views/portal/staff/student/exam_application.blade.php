@@ -64,8 +64,8 @@
         <!-- /APPLICATIONS LIST -->
 
       </div>
-      @include('portal.staff.student.exams.modal')
-      @include('portal.staff.student.exams.scripts')
+      @include('portal.staff.student.exam_application.modal')
+      @include('portal.staff.student.exam_application.scripts')
     </div>
     <!-- /CONTENT -->
 

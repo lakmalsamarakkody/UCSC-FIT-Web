@@ -94,6 +94,7 @@ return [
         'string' => 'The :attribute must be at least :min characters.',
         'array' => 'The :attribute must have at least :min items.',
     ],
+    'multicolumn_unique'=> 'The :attribute is already exists.',
     'multiple_of' => 'The :attribute must be a multiple of :value',
     'nic_old' => 'The :attribute should be format of old id number.(eg:123456789V)',
     'not_in' => 'The selected :attribute is invalid.',
