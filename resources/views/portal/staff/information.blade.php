@@ -77,23 +77,29 @@
                                   <div class="form-group col-lg col-12">
                                     <label for="currentPassword">Current Password</label>
                                     <input type="password" class="form-control form-control-sm" id="currentPassword" name="currentPassword"/>
+                                    <span class="invalid-feedback" id="error-currentPassword" role="alert"></span>
                                     <small id="InputCurrentPasswordHelp" class="form-text text-muted">Enter Current Password</small>
                                   </div> 
                                   <div class="form-group col-lg col-12">
                                     <label for="newPassword">New Password</label>
                                     <input type="password" class="form-control form-control-sm" id="newPassword" name="newPassword"/>
+                                    <span class="invalid-feedback" id="error-newPassword" role="alert"></span>
                                     <small id="InputNewPasswordHelp" class="form-text text-muted">Enter New Password</small>
                                   </div> 
                                   <div class="form-group col-lg col-12">
                                     <label for="reNewPassword">Re-Type Password</label>
                                     <input type="password" class="form-control form-control-sm" id="reNewPassword" name="reNewPassword"/>
+                                    <span class="invalid-feedback" id="error-reNewPassword" role="alert"></span>
                                     <small id="InputReNewPasswordHelp" class="form-text text-muted">Re-Type New Password</small>
                                   </div>
                                 </div>
                             </form>
                                 <div class=" text-right w-100">
-                                    <button class="btn btn-secondary" onclick="reset_form()">Discard</button>
-                                    <button class="btn btn-outline-primary" onclick="update_account()">Change Password</button>
+                                    <button class="btn btn-secondary" onclick="window.location.reload();">Discard</button>
+                                    <button id="btnChangePassword" class="btn btn-outline-primary" onclick="update_password()">
+                                    Change Password
+                                    <span id="spinnerPassword" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                    </button>
                                 </div>
                         </div>
                     </div>

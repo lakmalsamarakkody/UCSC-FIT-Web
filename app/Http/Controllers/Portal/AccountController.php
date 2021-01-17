@@ -7,6 +7,7 @@ use App\Mail\ChangeEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -77,7 +78,7 @@ class AccountController extends Controller
             [     
                 'email'=> ['required', 'email', 'unique:users']
             ],
-            $messages=[
+            [
                 'unique'=>'Email already in use'
             ]
         );
@@ -122,4 +123,36 @@ class AccountController extends Controller
         return abort(403);
     }
     // /CHANGE EMAIL
+
+    // CHANGE PASSWORD
+    public function changePassword(Request $request)
+    {
+        if(Hash::check($request->currentPassword, Auth::user()->password)):
+            $validator = Validator::make($request->all(), 
+                [     
+                    'newPassword'=> ['required', 'string', 'min:8', 'different:currentPassword'],
+                    'reNewPassword'=> ['required', 'string', 'same:newPassword']
+                ],
+                [
+                    'same'=>'The password must match with re-type password<br>'
+                ]
+            );
+            if($validator->fails()):
+                return response()->json(['errors'=>$validator->errors()]);
+            else:
+                $password = Hash::make($request->newPassword);
+                if(User::where('id', Auth::user()->id)->update(['password'=>$password])):
+                    return response()->json(['success'=>'success']);
+                endif;
+            endif;
+        else:
+            $errors = [
+                'currentPassword'=> 'Current Password Does Not Match'
+            ];
+            return response()->json(['errors'=>$errors]);
+        endif;
+        return response()->json(['error'=>'error']);
+        
+    }
+    // /CHANGE PASSWORD
 }
