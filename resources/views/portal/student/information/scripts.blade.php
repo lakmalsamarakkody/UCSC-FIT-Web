@@ -187,13 +187,15 @@
 
   // /SELECT PROFILE PIC
 
-  // UPDATE ACCOUNT
-  update_account = () => {
+  // UPDATE PASSWORD
+  update_password = () => {
     
     $('.form-control').removeClass('is-invalid');
     $('.invalid-feedback').html('');
     $('.invalid-feedback').hide();
-    $('#InputPasswordHelp').show();
+    $('#InputCurrentPasswordHelp').show();
+    $('#InputNewPasswordHelp').show();
+    $('#InputReNewPasswordHelp').show();
 
 
     // FORM PAYLOAD
@@ -203,22 +205,22 @@
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      url: "",
+      url: "{{ route('change.password') }}",
       type: 'post',
       data: formData,  
       processData: false,
       contentType: false,         
       beforeSend: function(){
         // Show loader
-        $("#spinner").removeClass('d-none');
-        $('#submit').attr('disabled','disabled');
+        $("#spinnerPassword").removeClass('d-none');
+        $('#btnChangePassword').attr('disabled','disabled');
       },
       success: function(data){
-        $("#spinner").addClass('d-none');
-        $('#submit').removeAttr('disabled');
+        $("#spinnerPassword").addClass('d-none');
+        $('#btnChangePassword').removeAttr('disabled');
         if(data['errors']){
           $.each(data['errors'], function(key, value){
-            $('#erremail').show();
+            $('#error-'+key).show();
             $('.form-text').hide();
             $('#error-'+key).show();
             $('#'+key).addClass('is-invalid');
@@ -227,28 +229,33 @@
         }else if (data['success']){
           $('.form-control').val('');
           SwalDoneSuccess.fire({
-            title: 'User Account Created!',
-            text: 'Please Login to Continue',
+            title: 'Password Updated!',
+            text: 'Please Login with New Password to Continue',
+          }).then((result) => {
+            if(result.isConfirmed) {
+              event.preventDefault(); 
+              document.getElementById('logout-form').submit();
+            }
           });
-          window.location.replace("{{ route('login') }}");
+          
         }else if (data['error']){
           SwalErrorDanger.fire({
-            title: 'Email Failed!',
+            title: 'Pasword Update Failed!',
             text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
           })
         }
       },
       error: function(err){
-        $("#emailSpinner").addClass('d-none');
-        $('#submit').removeAttr('disabled');
+        $("#spinnerPassword").addClass('d-none');
+        $('#btnChangePassword').removeAttr('disabled');
         SwalErrorDanger.fire({
-          title: 'Email Failed!',
+          title: 'Pasword Update Failed!',
           text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
         })
       }
     });
   }
-  // /UPDATE ACCOUNT
+  // /UPDATE PASSWORD
 
   // RESET FORM
   reset_form = () => {    
