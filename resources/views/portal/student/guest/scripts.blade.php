@@ -42,8 +42,11 @@
           SwalDoneSuccess.fire({
             title: 'User Account Created!',
             text: 'Please Login to Continue',
+          }).then((result) => {
+            if(result.isConfirmed) {
+              window.location.replace("{{ route('logout') }}");
+            }
           });
-          window.location.replace("{{ route('login') }}");
         }else if (data['error']){
           SwalErrorDanger.fire({
             title: 'Email Failed!',
