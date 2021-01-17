@@ -170,7 +170,7 @@
             <!-- /NAV BAR -->
 
             <!-- MOBILE NAV BAR -->
-            <div class="col-12 mobile-nav py-2">
+            <div class="col-12 mobile-nav py-2 mb-3">
               <div class="row">
                 <div class="col-6"><a href="">FIT | UCSC<small> &nbsp;Student Portal</small></a></div>
                 <div class="col-6 text-right align-self-center"><i class="fa fa-bars fa-2x" data-toggle="collapse" data-target="#collapseMobileNav" aria-expanded="false"></i></div>
