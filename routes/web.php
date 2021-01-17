@@ -56,6 +56,7 @@ Route::post('/portal/information/upload/profilePic', [App\Http\Controllers\Porta
 Route::post('/portal/information/select/profilePic', [App\Http\Controllers\Portal\AccountController::class, 'selectProfilePic'])->name('select.profile.pic');
 Route::post('/portal/information/update/email', [App\Http\Controllers\Portal\AccountController::class, 'updateEmail'])->name('update.email');
 Route::get('/portal/information/verify/{email}/token/{token}/id/{id}', [App\Http\Controllers\Portal\AccountController::class, 'verifyEmail'])->name('change.email.verify');
+Route::post('/portal/information/update/password', [App\Http\Controllers\Portal\AccountController::class, 'changePassword'])->name('change.password');
 Route::get('/email/changed/success', [App\Http\Controllers\Portal\EmailChanged::class, 'index'])->name('changed.success');
 
 /*
