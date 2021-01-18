@@ -29,15 +29,15 @@
     <div class="col-lg-12 dashboard">
       <div class="row">
 
-        <h5 class="col-12 title font-weight-bold">REGISTRATIONS</h5>
+        <h5 class="col-12 title font-weight-bold px-0">REGISTRATIONS</h5>
         <!-- SUMMARY CARDS -->
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="{{ route('student.application') }}">
-            <div class="card card-dash shadow green" style="max-width: 18rem;">
+            <div class="card card-dash shadow green-none bg-primary" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
-                <div class="card-title text-center m-0">5000</div>
+                <div class="card-title text-center m-0">{{ $applicationCount }}</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>New Applicants</h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>New <br/> Applicants</h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
@@ -45,11 +45,11 @@
         
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="{{ route('student.application.reviewRegPayment') }}">
-            <div class="card card-dash shadow red" style="max-width: 18rem;">
+            <div class="card card-dash shadow red-none bg-main-warning" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
-                <div class="card-title text-center m-0">125</div>
+                <div class="card-title text-center m-0">{{ $paymentReviewCount }}</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>Payments to Review</h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1> Review <br/> Payments</h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
@@ -57,11 +57,11 @@
 
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="{{ route('student.application.reviewRegDocumentsPending') }}">
-            <div class="card card-dash shadow black" style="max-width: 18rem;">
+            <div class="card card-dash shadow black-none bg-primary" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
-                <div class="card-title text-center m-0">100</div>
+                <div class="card-title text-center m-0">{{ $documentPendingCount }}</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>Documents Pending</h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1> Pending <br/> Documents</h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
@@ -69,11 +69,11 @@
 
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="{{ route('student.application.reviewRegDocuments') }}">
-            <div class="card card-dash shadow yellow" style="max-width: 18rem;">
+            <div class="card card-dash shadow yellow-none bg-main-warning" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
-                <div class="card-title text-center m-0">95</div>
+                <div class="card-title text-center m-0">{{ $documentReviewCount }}</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>Documents to Review</h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1> Review <br/> Documents </h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
@@ -81,30 +81,30 @@
         
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="{{ route('student.application.reviewRegistration') }}">
-            <div class="card card-dash shadow red" style="max-width: 18rem;">
+            <div class="card card-dash shadow red-none bg-danger" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
-                <div class="card-title text-center m-0">1500</div>
+                <div class="card-title text-center m-0">{{ $pendingRegistration }}</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>Pending Approvals</h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Pending <br/> Registrations</h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
         </div>
 
         <div class="col-xl-2 col-lg-4 p-1">
-          <a class="" href="{{ route('student.application.registered') }}">
-            <div class="card card-dash shadow black" style="max-width: 18rem;">
+          <a class="" href="{{ route('students') }}">
+            <div class="card card-dash shadow black-none bg-success" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
-                <div class="card-title text-center m-0">2</div>
+                <div class="card-title text-center m-0">{{ $totalRegistered }}</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>Registered</h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Registered <br/> &nbsp;</h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
         </div>
         <!-- SUMMARY CARDS -->
 
-        <h5 class="col-12 title font-weight-bold mt-5 ">EXAMS</h5>
+        <h5 class="col-12 title font-weight-bold mt-5 px-0">EXAMS</h5>
 
         <div class="col-lg-6 col-md-12 px-1">
             <a class="" href="{{ route('exams') }}" style="height: 30rem;">
@@ -120,11 +120,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach($upcomings as $upcoming)
+                      @foreach($upcomingExams as $upcomingExam)
                         <tr class="text-center">
-                          <td>{{ $upcoming->date }}</td>
-                          <td>{{ $upcoming->subject->name }}</td>
-                          <td>{{ $upcoming->type->exam_type }}</td>
+                          <td>{{ $upcomingExam->date }}</td>
+                          <td>{{ $upcomingExam->subject->name }}</td>
+                          <td>{{ $upcomingExam->type->exam_type }}</td>
                         </tr>
                       @endforeach
                     </tbody>
@@ -153,11 +153,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach($dones as $done)
+                      @foreach($heldExams as $heldExam)
                         <tr class="text-center">
-                          <td>{{ $done->date }}</td>
-                          <td>{{ $done->subject->name }}</td>
-                          <td>{{ $done->type->exam_type }}</td>
+                          <td>{{ $heldExam->date }}</td>
+                          <td>{{ $heldExam->subject->name }}</td>
+                          <td>{{ $heldExam->type->exam_type }}</td>
                         </tr>
                       @endforeach
                     </tbody>
