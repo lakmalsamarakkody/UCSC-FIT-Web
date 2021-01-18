@@ -1,10 +1,23 @@
 <script type="text/javascript">
+
+
+
   $(function () {
   
     var table = $('.user-list-yajradt').DataTable({
+      searching: false,
       processing: true,
       serverSide: true,
-      ajax: "{{ route('user.list') }}",
+      ajax: {
+        url :"{{ route('user.list') }}",
+        data : function (d) {
+          d.name = $('#name').val();
+          d.search = $('#searchAll').val();
+          d.email = $('#email').val();
+          d.role = $('#role').val();
+          d.status = $('#status').val();
+        }
+      },
       columns: [
         {
           data: 'name', 
@@ -48,6 +61,11 @@
         },
       ]
     });
+
+    search = () => {
+        table.draw();
+
+    }
   });
 
   view_user = () => {

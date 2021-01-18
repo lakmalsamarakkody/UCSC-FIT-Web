@@ -42,32 +42,51 @@
                     <div class="input-group-prepend">
                       <button type="button" class="form-control btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false"><i class="fa fa-filter"></i>&nbsp;Filter</button>
                     </div>
-                    <input type="text" class="form-control" placeholder="Enter search details.."/>
+                    <input id="searchAll" type="text" class="form-control" placeholder="Enter search details.."/>
                     <div class="input-group-append">
-                      <button type="button" class="form-control btn btn-primary"><i class="fa fa-search"></i>&nbsp;Search</button>
+                      <button type="button" class="form-control btn btn-primary" onclick="search()"><i class="fa fa-search"></i>&nbsp;Search</button>
                     </div>
                   </div>
                 </div>
               </div>
-            </form>
             <div class="collapse" id="collapseFilters">
               <div class="card shadow-none">
                 <div class="card-body">
                   <div class="form-row">
                     <div class="form-group col">
-                      <label for="InputStudentName">Name</label>
-                      <input type="text" class="form-control form-control-sm" id="InputStudentName" aria-describedby="InputStudentNameHelp"/>
-                      <small id="InputStudentNameHelp" class="form-text text-muted">any help text</small>
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control form-control-sm" id="name" aria-describedby="NameHelp"/>
+                      <small id="nameHelp" class="form-text text-muted">Search by name or part of the name</small>
                     </div>
                     <div class="form-group col">
-                      <label for="InputStudentNIC">NIC</label>
-                      <input type="text" class="form-control form-control-sm" id="InputStudentNIC" aria-describedby="InputStudentNICHelp"/>
-                      <small id="InputStudentNICHelp" class="form-text text-muted">any help text</small>
+                      <label for="email">Email</label>
+                      <input type="text" class="form-control form-control-sm" id="email" aria-describedby="nicHelp"/>
+                      <small id="emailHelp" class="form-text text-muted">Search by email or part of the email</small>
+                    </div>
+                    <div class="form-group col">
+                      <label for="role">Role</label>
+                      <select id="role" class="form-control form-control-sm">
+                        <option value="">Select a user role</option>
+                        @foreach($roles as $role)                          
+                          <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                      </select>
+                      <small id="roleHelp" class="form-text text-muted">Search by user role</small>
+                    </div>
+                    <div class="form-group col">
+                      <label for="status">Status</label>
+                      <select id="status" class="form-control form-control-sm">
+                        <option value="">Select a user status</option>
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                      </select>
+                      <small id="statusHelp" class="form-text text-muted">Search by user status</small>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            </form>
           </div>
         </div>
       </div>
@@ -78,7 +97,7 @@
         <div class="card">
           <div class="card-header">Users</div>
           <div class="card-body">
-            <table class="table user-list-yajradt">
+            <table class="table user-list-yajradt" >
               <thead class="text-center">
                 <tr>
                   <th>Username</th>
@@ -88,7 +107,7 @@
                   <th>&nbsp;</th>
                 </tr>
               </thead>
-              <tbody class="text-center">
+              <tbody class="text-center" id="userTblBody">
               </tbody>
             </table>
           </div>
