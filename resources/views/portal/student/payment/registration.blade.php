@@ -93,7 +93,7 @@
             <div class="col">
               <div class="card w-100 my-2">
                 <div class="card-header">
-                  <div class="text-left">TOTAL PAYMENT : {{ $reg_fee}}/=</div>
+                  <div class="text-left">TOTAL PAYMENT : {{ $reg_fee->amount}}/=</div>
                   <div class="text-right">
                     <a class="btn btn-warning" target="_blank" href="{{ asset('documents/Payment_Voucher.pdf') }}">Download Payment Voucher</a>
                   </div>
@@ -168,7 +168,7 @@
                                 <div class="form-group row">
                                   <label for="inputPaidAmount" class="col-sm-3 col-form-label">Paid Amount</label>
                                   <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="paidAmount" name="paidAmount" @if($payment != NULL) value="{{$payment->amount}}" @endif>
+                                    <input type="number" class="form-control" id="paidAmount" name="paidAmount" value="{{ $reg_fee->amount }}" @if($payment != NULL) value="{{$payment->amount}}" @endif>
                                     <span class="invalid-feedback" id="error-paidAmount" role="alert"></span>
                                   </div>
                                 </div>  

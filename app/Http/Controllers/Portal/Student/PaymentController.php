@@ -44,7 +44,7 @@ class PaymentController extends Controller
     else:
       $payment = NULL;
     endif;
-    $reg_fee = Fee::where('purpose', 'registration')->first()->amount;
+    $reg_fee = Fee::where('purpose', 'registration')->first();
     $banks = Bank::orderBy('name')->get();
     return view('portal/student/payment/registration', compact( 'reg_fee', 'banks', 'student', 'registration', 'payment'));
   }
