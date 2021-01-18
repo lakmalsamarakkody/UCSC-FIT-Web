@@ -659,14 +659,80 @@ decline_documentId = (registration_id, docType) => {
 // /DECLINE DOCUMENT ID
 
 // REGISTER STUDENT
-view_modal_registerStudent = (registration_id) => {
-
-  // PAYLOAD
-  // var formData = new FormData();
-  // formData.append('registration_id',registration_id);
-
+view_modal_registerStudent = (registration_id,email) => {
+  $('#regStudentEmail').html(email);
+  $('#btnRegisterStudent').attr('onclick','registerStudent('+registration_id+')');
   $('#modal-register-student').modal('show');
 }
+
+registerStudent = (registration_id) => {
+
+  SwalQuestionWarningAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Register now!',
+  })
+  .then((result) => {
+    if(result.isConfirmed) {
+
+      // PAYLOAD
+      var formData = new FormData();
+      formData.append('registration_id',registration_id);
+      formData.append('regDate', $('#regDate').val());
+      formData.append('regExpireDate', $('#regExpireDate').val());
+      formData.append('regStatus', $('#regStatus').val());
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('student.application.registerStudent') }}",
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,           
+        beforeSend: function(){
+          // Show loader
+          $("#spinnerBtnRegisterStudent").removeClass('d-none');
+          $('#btnRegisterStudent').attr('disabled','disabled');
+        },
+        success: function(data){
+          console.log('Student Register Ajax Success');
+          $("#spinnerBtnRegisterStudent").addClass('d-none');
+          $('#btnRegisterStudent').removeAttr('disabled');
+          if (data['status'] == 'success'){
+            SwalDoneSuccess.fire({
+              title: 'Done!',
+              text: 'Student registered successfully',
+            }).then((result) => {
+              if(result.isConfirmed) {
+                location.reload()
+              }
+            });
+          }else{
+            SwalSystemErrorDanger.fire({
+              title: 'Student Registration Process Failed!',
+            })
+          }
+        },
+        error: function(err){
+          console.log('Student Register Ajax Error');
+          $("#spinnerBtnRegisterStudent").addClass('d-none');
+          $('#btnRegisterStudent').removeAttr('disabled');
+          SwalSystemErrorDanger.fire({
+            title: 'Student Registration Process Failed!',
+          })
+        }
+      });
+    }
+    else{
+      SwalNotificationWarningAutoClose.fire({
+        title: 'Aborted!',
+        text: 'Student Registration process aborted.',
+      })
+    }
+  })
+} 
 // /REGISTER STUDENT
 
 </script>

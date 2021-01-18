@@ -348,7 +348,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="btnDeclineApplicationModal" type="button" class="btn btn-warning">Decline</button>
+                <button id="btnDeclineApplicationModal" type="button" class="btn btn-warning">Decline <span id="spinnerBtnDeclineApplication" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
             </div>
         </div>
     </div>
@@ -373,7 +373,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="btnDeclinePaymentModal" type="button" class="btn btn-warning">Decline</button>
+                <button id="btnDeclinePaymentModal" type="button" class="btn btn-warning">Decline <span id="spinnerBtnDeclinePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
             </div>
         </div>
     </div>
@@ -398,7 +398,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="btnDeclineDocumentBirthModal" type="button" class="btn btn-warning">Decline</button>
+                <button id="btnDeclineDocumentBirthModal" type="button" class="btn btn-warning">Decline <span id="spinnerBtnDeclineDocumentBirth" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
             </div>
         </div>
     </div>
@@ -423,7 +423,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="btnDeclineDocumentIdModal" type="button" class="btn btn-warning">Decline</button>
+                <button id="btnDeclineDocumentIdModal" type="button" class="btn btn-warning">Decline <span id="spinnerBtnDeclineDocumentId" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
             </div>
         </div>
     </div>
@@ -443,8 +443,8 @@
             <div class="modal-body">
                 {{-- STUDENT NAME --}}
                 <div class="form-group">
-                    <label for="regStudentName" class="col-form-label">Name:</label>
-                    <label name="regStudentName" id="regStudentName"></label>
+                    <label for="regStudentEmail" class="col-form-label">Email:</label><br/>
+                    <label name="regStudentEmail" id="regStudentEmail" class="text-info font-weight-bold"></label>
                 </div>
 
                 <div class="form-group">
@@ -457,10 +457,18 @@
                     <input type="date" class="form-control" name="regExpireDate" id="regExpireDate" value="{{ $regExpireDate ?? NULL }}"/>
                 </div>
 
+                <div class="form-group">
+                    <label for="regStatus" class="col-form-label">Status:</label>
+                    <select class="form-control" name="regStatus" id="regStatus">
+                        <option value="1" selected>Active</option>
+                        <option value="0">Deactive</option>
+                    </select>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="registerStudent" type="button" class="btn btn-success"><i class="fas fa-thumbs-up"></i> Register</button>
+                <button id="btnRegisterStudent" type="button" class="btn btn-success"><i class="fas fa-thumbs-up"></i> Register <span id="spinnerBtnRegisterStudent" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
             </div>
         </div>
     </div>

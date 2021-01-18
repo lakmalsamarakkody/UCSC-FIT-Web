@@ -227,4 +227,34 @@ class ApplicationController extends Controller
         return response()->json([ 'status'=>'error']);
     }
     // /DOCUMENTS
+
+    // REGISTRATION
+    public function registerStudent(Request $request){
+        $registration = Registration::where('id', $request->registration_id);
+        $dateFormat = Carbon::now()->isoFormat('YYMMDD');
+        $lastRegNo = Student::where('reg_no', 'like', 'F'.$dateFormat.'%')->orderBy('reg_no', 'desc')->first();
+        if($lastRegNo != NULL):
+            //SETTING REG_NO
+            $lastRegNoSerial = (int)substr($lastRegNo->reg_no, -3);
+            $newRegNoSerial = $lastRegNoSerial+1;
+            $newRegNoSerialCode = str_pad($newRegNoSerial, 3, '0', STR_PAD_LEFT);
+            //SAVE REG NO
+            if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.$newRegNoSerialCode])):
+                // UPDATE REGISTRATION
+                if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
+                    return response()->json([ 'status'=>'success']);
+                endif;
+            endif;
+        else:
+            //SAVE REG NO
+            if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.'001'])):
+                // UPDATE REGISTRATION
+                if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
+                    return response()->json([ 'status'=>'success']);
+                endif;
+            endif;
+        endif;
+        return response()->json([ 'status'=>'error', 'data'=>$dateFormat]);
+    }
+    // /REGISTRATION
 }
