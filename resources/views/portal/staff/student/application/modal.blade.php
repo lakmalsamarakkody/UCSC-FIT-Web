@@ -430,4 +430,41 @@
 </div>
 <!-- /DECLINE MESSAGE : Id -->
 
+{{-- REGISTER STUDENT --}}
+<div class="modal fade" id="modal-register-student" tabindex="-1" aria-labelledby="registerStudentLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerStudentLabel">Register Student</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{-- STUDENT NAME --}}
+                <div class="form-group">
+                    <label for="regStudentName" class="col-form-label">Name:</label>
+                    <label name="regStudentName" id="regStudentName"></label>
+                </div>
+
+                <div class="form-group">
+                    <label for="regDate" class="col-form-label">Registration Date:</label>
+                    <input type="date" class="form-control" name="regDate" id="regDate" value="{{ $regDate ?? NULL }}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="regExpireDate" class="col-form-label">Registration Expires On:</label>
+                    <input type="date" class="form-control" name="regExpireDate" id="regExpireDate" value="{{ $regExpireDate ?? NULL }}"/>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="registerStudent" type="button" class="btn btn-success"><i class="fas fa-thumbs-up"></i> Register</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- /REGISTER STUDENT --}}
+
 

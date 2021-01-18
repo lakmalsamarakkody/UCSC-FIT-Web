@@ -57,6 +57,9 @@
                       <td>
                         <div class="btn-group">
                           <button type="button" class="btn btn-outline-primary" id="btnViewModalApplicant{{$registration->student->id}}" data-tooltip="tooltip" data-placement="bottom" title="View Applicant Details" onclick="view_modal_applicant({{$registration->id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalApplicant-{{$registration->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                          @if($registration->application_status == 'Approved' && $registration->payment_status == 'Approved' && $registration->document_status == 'Approved')
+                            <button type="button" class="btn btn-outline-success" id="btnApproveRegistration{{$registration->id}}" data-tooltip="tooltip" data-placement="bottom" title="Register Student" onclick="view_modal_registerStudent({{$registration->id}})"><i class="fas fa-thumbs-up"></i> Register <span id="spinnerBtnApproveRegistration-{{$registration->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                          @endif
                         </div>
                       </td>
                     </tr>

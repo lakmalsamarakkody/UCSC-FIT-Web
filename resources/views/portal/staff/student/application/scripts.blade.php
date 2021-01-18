@@ -658,4 +658,15 @@ decline_documentId = (registration_id, docType) => {
 }
 // /DECLINE DOCUMENT ID
 
+// REGISTER STUDENT
+view_modal_registerStudent = (registration_id) => {
+
+  // PAYLOAD
+  // var formData = new FormData();
+  // formData.append('registration_id',registration_id);
+
+  $('#modal-register-student').modal('show');
+}
+// /REGISTER STUDENT
+
 </script>

@@ -14,6 +14,7 @@ use App\Models\Support\SlDistrict;
 use App\Models\Support\WorldCity;
 use App\Models\Support\WorldCountry;
 use App\Models\Support\WorldDivision;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
@@ -51,8 +52,10 @@ class ApplicationController extends Controller
 
     // REGISTRATION
     public function reviewRegistration(){
+        $regDate = Carbon::now()->isoFormat('YYYY-MM-DD');
+        $regExpireDate = Carbon::now()->addYear()->isoFormat('YYYY-MM-DD');
         $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status',  'Approved')->get();
-        return view('portal/staff/student/applications', compact('registrations'));
+        return view('portal/staff/student/applications', compact('registrations', 'regDate', 'regExpireDate'));
     }
     public function registered(){
         $registrations = Registration::where('registered_at', '!=', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status', 'Approved')->where('status', 1)->get();
