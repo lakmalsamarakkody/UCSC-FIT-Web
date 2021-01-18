@@ -60,7 +60,7 @@
           </button>
         </div>
         <div class="modal-body p-5">
-            <form>
+            <form id="qualificationForm">
               <div class="form-row">
                 <div class="form-group col">
                   <div class="details px-3 mt-4 pb-4">
@@ -118,9 +118,10 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" id="btnCreateUserRole" name="btnCreateUserRole" class="btn btn-outline-primary" onclick="create_role()">
-          Update
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+            <button type="button" id="btnUpdateQualification" class="btn btn-outline-primary" onclick="update_qualification()">
+            Update
+            <span id="spinnerQualification" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
           </button>
         </div>
       </div>

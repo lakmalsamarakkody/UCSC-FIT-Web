@@ -72,10 +72,30 @@
                                         <th>Citizenship:</th>
                                         <td>{{ $student->citizenship }}</td>
                                     </tr>
+                                    @if($student->nic_old)                                        
                                     <tr>
-                                        <th>NIC/ Postal/ Passport No:</th>
-                                        <td></td>
+                                        <th>NIC (old):</th>
+                                        <td>{{ $student->nic_old }}</td>
                                     </tr>
+                                    @endif
+                                    @if($student->nic_new)                                     
+                                    <tr>
+                                        <th>NIC (new):</th>
+                                        <td>{{ $student->nic_new }}</td>
+                                    </tr>
+                                    @endif
+                                    @if($student->postal)                                     
+                                    <tr>
+                                        <th>Postal ID:</th>
+                                        <td>{{ $student->postal }}</td>
+                                    </tr>
+                                    @endif
+                                    @if($student->passport)                                     
+                                    <tr>
+                                        <th>Passport No:</th>
+                                        <td>{{ $student->passport }}</td>
+                                    </tr>
+                                    @endif
                                 </table>
                             </div>
                             <div class="col-md-4 order-md-2 order-1 mb-3 align-middle">  
@@ -156,7 +176,7 @@
                                    <p>{{ $student->current_address_line2 }}</p>  
                                    <p>{{ $student->current_address_line3 }}</p>  
                                    <p>{{ $student->current_address_line4 }}</p>
-                                   @if( $student->permanent_country_id == 67 )                                         
+                                   @if( $student->current_country_id == 67 )                                         
                                     <p>{{ $student->current_city_sl->name ?? ''}}</p>                                       
                                     <p>{{ $student->current_district_sl->name ?? ''}}</p>
                                     <p>{{ $student->current_country->name ?? ''}}</p>

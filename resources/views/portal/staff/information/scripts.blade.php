@@ -137,7 +137,9 @@
     });
   }
   // /UPDATE PROFILE PIC
-  function select_profile_pic (path) {
+
+  // SELECT PROFILE PIC
+  select_profile_pic = (path) => {
     
     $.ajax({
       headers: {
@@ -183,8 +185,6 @@
       }
     });
   }
-  // SELECT PROFILE PIC
-
   // /SELECT PROFILE PIC
 
   // UPDATE PASSWORD

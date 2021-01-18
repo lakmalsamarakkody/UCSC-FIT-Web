@@ -124,7 +124,7 @@ class RegistrationController extends Controller
       'gender' => ['nullable', Rule::in(['Male', 'Female'])],
       'citizenship' => ['nullable', Rule::in(['Sri Lankan', 'Foreign National'])],
       'uniqueType' => ['nullable', Rule::in(['nic', 'postal', 'passport'])],
-      'qualification' => ['required', Rule::in(['degree', 'higherdiploma', 'diploma', 'advancedlevel', 'ordinarylevel', 'otherqualification'])],
+      'qualification' => ['nullable', Rule::in(['degree', 'higherdiploma', 'diploma', 'advancedlevel', 'ordinarylevel', 'otherqualification'])],
 
       'house' => ['nullable', 'address'],
       'addressLine1' => ['nullable', 'address'],

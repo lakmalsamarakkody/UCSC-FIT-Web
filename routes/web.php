@@ -176,6 +176,9 @@ Route::post('/portal/student/registration/getcities',[App\Http\Controllers\Porta
 
 // INFROMATION PAGE
 Route::get('/portal/student/information', [App\Http\Controllers\Portal\Student\InformationController::class, 'index'])->name('student.information');
+Route::post('/portal/student/information/update/qualification', [App\Http\Controllers\Portal\Student\InformationController::class, 'updateQualification'])->name('update.qualification');
+Route::post('/portal/student/information/update/contact-details', [App\Http\Controllers\Portal\Student\InformationController::class, 'updateContactDetails']);
+
 // /INFROMATION PAGE
 Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsController::class,'index'])->name('student.exams');
 

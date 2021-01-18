@@ -137,7 +137,9 @@
     });
   }
   // /UPDATE PROFILE PIC
-  function select_profile_pic (path) {
+
+  // SELECT PROFILE PIC
+  select_profile_pic = (path) => {
     
     $.ajax({
       headers: {
@@ -183,9 +185,71 @@
       }
     });
   }
-  // SELECT PROFILE PIC
-
   // /SELECT PROFILE PIC
+
+  // UPDATE QUALIFICATION
+  update_qualification = () => {
+    
+    $('.form-control').removeClass('is-invalid');
+    $('.invalid-feedback').html('');
+    $('.invalid-feedback').hide();
+
+
+    // FORM PAYLOAD
+    var formData = new FormData($("#qualificationForm")[0]);
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{ route('update.qualification') }}",
+      type: 'post',
+      data: formData,  
+      processData: false,
+      contentType: false,         
+      beforeSend: function(){
+        // Show loader
+        $("#spinnerQualification").removeClass('d-none');
+        $('#btnUpdateQualification').attr('disabled','disabled');
+      },
+      success: function(data){
+        $("#spinnerQualification").addClass('d-none');
+        $('#btnUpdateQualification').removeAttr('disabled');
+        if(data['errors']){
+          $.each(data['errors'], function(key, value){
+            $('#error-'+key).show();
+            $('#'+key).addClass('is-invalid');
+            $('#error-'+key).append('<strong>'+value+'</strong>');
+            window.location.hash = '#'+key;
+          });
+        }else if (data['success']){
+          $('.form-control').val('');
+          SwalDoneSuccess.fire({
+            title: 'Succesfully Updated!',
+            text: 'Educational Qualification updated succefully',
+          }).then((result) => {
+            if(result.isConfirmed) {
+              location.reload()
+            }
+          });
+        }else if (data['error']){
+          SwalSystemErrorDanger.fire({
+            title: 'Update Failed!',
+            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+          })
+        }
+      },
+      error: function(err){
+        $("#spinnerQualification").addClass('d-none');
+        $('#btnUpdateQualification').removeAttr('disabled');
+        SwalErrorDanger.fire({
+          title: 'Update Failed!',
+          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+        })
+      }
+    });
+  }
+  // /UPDATE QUALIFICATION
 
   // UPDATE PASSWORD
   update_password = () => {
