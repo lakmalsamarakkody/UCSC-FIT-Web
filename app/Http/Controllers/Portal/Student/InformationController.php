@@ -36,5 +36,23 @@ class InformationController extends Controller
         return view('portal/student/information', compact('student'));
     }
 
+    // UPDATE QUALIFICATION
+    public function updateQualification(Request $request)
+    {
+        $validator = Validator::make($request->all(), 
+            [     
+                'qualification'=> ['required']
+            ]
+        );
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()]);
+        else:
+            if(Student::where('user_id', Auth::user()->id)->update(['education'=>$request->qualification])):
+                return response()->json(['success'=>'success']);
+            endif;
+        endif;
+        return response()->json(['error'=>'error']);
+    }
+    // /UPDATE QUALIFICATION
 
 }
