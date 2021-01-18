@@ -136,7 +136,7 @@
                   </tbody>
                 </table>
                 <div class="pt-4 float-right">
-                  {{-- {{ $upcoming_schedules->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }} --}}
+                  {{ $upcoming_schedules->withQueryString()->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }}
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-outline-primary" onclick="release_schedules()">RELEASE EXAM SCHEDULE</button>
