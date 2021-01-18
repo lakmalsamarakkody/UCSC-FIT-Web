@@ -56,6 +56,10 @@ html{
   background-color:var(--main-theme-color);
 }
 
+.bg-main-warning{
+  background-color:var(--color-warning-dark);
+}
+
 .text-main-theme{
   color:var(--main-theme-color);
 }
