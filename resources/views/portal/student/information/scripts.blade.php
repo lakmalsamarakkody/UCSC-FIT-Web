@@ -251,6 +251,262 @@
   }
   // /UPDATE QUALIFICATION
 
+  // UPDATE CONTACT DETAILS
+  // Insert current address
+  address_editable = () => {
+    console.log('address editable invoked');
+    if($('#current_address').prop("checked")) {
+      console.log('current address enabled');
+      $('#currentHouse').removeAttr('disabled');
+      $('#currentAddressLine1').removeAttr('disabled');
+      $('#currentAddressLine2').removeAttr('disabled');
+      $('#currentAddressLine3').removeAttr('disabled');
+      $('#currentAddressLine4').removeAttr('disabled');
+      $('#currentCity').removeAttr('disabled');
+      $('#currentCountry').removeAttr('disabled');
+      $('#divCollapsePlus2').collapse('show');
+      $('#plusCurrentField').removeAttr('disabled');
+      $('#selectCurrentDistrict').removeAttr('disabled');
+      $('#selectCurrentState').removeAttr('disabled');
+    }
+    else{
+      console.log('current address disabled');
+      $('#currentHouse').attr('disabled','disabled');
+      $('#currentAddressLine1').attr('disabled','disabled');
+      $('#currentAddressLine2').attr('disabled','disabled');
+      $('#currentAddressLine3').attr('disabled','disabled');
+      $('#currentAddressLine4').attr('disabled','disabled');
+      $('#currentCity').attr('disabled','disabled');
+      $('#currentCountry').attr('disabled','disabled');
+      $('#plusCurrentField').attr('disabled','disabled');
+      $('#divCollapsePlus2').collapse('hide');
+      $('#selectCurrentDistrict').attr('disabled','disabled');
+      $('#selectCurrentState').attr('disabled','disabled');
+    }
+  }
+  // /Insert current address
+
+  // ONCHANGE Country GET District/States
+  onChangeCountry = () => {
+
+    //SET DISTRICT OR STATE VIEW 
+    if($('#country').val() == '67') {
+      // set visible selects
+      $('#divSelectDistrict').collapse('show');
+      $('#divSelectState').collapse('hide');
+    }
+    else if($('#country').val() != '67') {
+      $('#divSelectDistrict').collapse('hide')
+      $('#divSelectState').collapse('show')
+    }
+    // FORM PAYLOAD
+    var formData = new FormData();
+    // ADD DATA
+    formData.append('country', $('#country').val())
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{ url('/portal/student/information/update/get-states') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(data){
+        console.log('success');
+        if(data['status'] == 'error'){
+          SwalNotificationErrorDanger.fire({title: 'Error!',text: $.each(data['errors'], function(key, value){value}),
+          });
+        }
+        else if (data['status'] == 'success'){
+          // CLEAR CURRENT LIST
+          $('#selectState').find('option').remove().end().append('<option selected disabled>Select your state</option>')
+          $('#selectDistrict').find('option').remove().end().append('<option selected disabled>Select your district</option>')
+          $('#city').find('option').remove().end().append('<option selected disabled>Select your city</option>')
+          // APPEND COUNTRY LIST
+          if(data['state_type'] == 'districts'){
+            $.each(data['state_list'], function(key,value){
+              $('#selectDistrict').append($('<option>', { value: value.id,text : value.name}));
+            })
+          }
+          else if(data['state_type'] == 'divisions'){
+            $.each(data['state_list'], function(key,value){
+              $('#selectState').append($('<option>', { value: value.id,text : value.name}));
+            })
+            $.each(data['city_list'], function(key,value){
+              $('#city').append($('<option>', { value: value.id,text : value.name}));
+            })
+          }
+        }
+      },
+      error: function(err){
+        console.log('error');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+  // /ONCHANGE Country GET District/States
+
+  // ONCHANGE Current Country GET Current District/States
+  onChangeCurrentCountry = () => {
+
+    // FORM PAYLOAD
+    var formData =  new FormData();
+    // ADD DATA
+    formData.append('currentCountry', $('#currentCountry').val())
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{ url('/portal/student/information/update/get-states') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(data){
+        console.log('success');
+        if(data['status'] == 'error'){
+          SwalNotificationErrorDanger.fire({title: 'Error!', text: $.each(data['errors'], function(key, value){value}),
+          });
+        }
+        else if (data['status'] == 'success'){
+          //CLEAR CURRENT LIST
+          $('#selectCurrentState').find('option').remove().end().append('<option selected disabled>Select your state</option>')
+          $('#selectCurrentDistrict').find('option').remove().end().append('<option selected disabled>Select your district</option>')
+          $('#currentCity').find('option').remove().end().append('<option selected disabled>Select your city</option>')
+          //APPEND COUNTRY LIST
+          if(data['state_type'] == 'districts'){
+            $('#selectCurrentState').attr('disabled', 'disabled');
+            $('#divSelectCurrentState').collapse('hide');
+            $('#divSelectCurrentDistrict').collapse('show');
+            $('#selectCurrentDistrict').removeAttr('disabled', 'disabled');
+            $.each(data['state_list'], function(key,value){
+              $('#selectCurrentDistrict').append($('<option>',{value: value.id,text: value.name}));
+            })
+          }
+          else if(data['state_type'] == 'divisions'){
+            $('#selectCurrentDistrict').attr('disabled', 'disabled');
+            $('#divSelectCurrentDistrict').collapse('hide');
+            $('#divSelectCurrentState').collapse('show');
+            $('#selectCurrentState').removeAttr('disabled', 'disabled');
+            $.each(data['state_list'], function(key,value){
+              $('#selectCurrentState').append($('<option>', {value: value.id,text: value.name}));
+            })
+            $.each(data['city_list'], function(key,value){
+              $('#currentCity').append($('<option>', {value: value.id,text: value.name}));
+            })
+          }
+        }
+      },
+      error: function(err){
+        console.log('error');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+  // /ONCHANGE Country GET Current District/States
+
+  // ONCHANGE State GET Cities
+  onChangeState = (stateType) => {
+    // FORM PAYLOAD
+    var formData = new FormData();
+    // ADD DATA
+    formData.append('stateType', stateType);
+    if(stateType == 'foreignState'){
+      formData.append('selectState', $('#selectState').val());
+      formData.append('selectDistrict', null);
+    }
+    else if(stateType == 'sriLanka'){
+      formData.append('selectState', null);
+      formData.append('selectDistrict', $('#selectDistrict').val());
+    }
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{ url('/portal/student/information/update/get-cities') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(data){
+        console.log('success');
+        if(data['status'] == 'error'){
+          SwalNotificationErrorDanger.fire({title: 'Error!',text: $.each(data['errors'], function(key, value){value})});
+        }
+        else if (data['status'] == 'success'){
+          // CLEAR CURRENT LIST
+          $('#city').find('option').remove().end().append('<option selected disabled>Select your city</option>')
+          // APPEND CITY LIST
+          if(data['city_list']){
+            $.each(data['city_list'], function(key,value){
+              $('#city').append($('<option>', { value: value.id,text : value.name}));
+            })
+          }
+        }
+      },
+      error: function(err){
+        console.log('error');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+  // /ONCHANGE State GET Cities
+
+  // ONCHANGE Current State GET Current Cities
+  onChangeCurrentState = (currentStateType) => {
+    //FORM PAYLOAD
+    var formData = new FormData();
+    // ADD DATA
+    formData.append('currentStateType', currentStateType);
+    if(currentStateType == 'foreignState'){
+      formData.append('selectCurrentState', $('#selectCurrentState').val());
+      formData.append('selectCurrentDistrict',null);
+    }
+    else if(currentStateType == 'sriLanka'){
+      formData.append('selectCurrentState', null);
+      formData.append('selectCurrentDistrict', $('#selectCurrentDistrict').val());
+    }
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{ url('/portal/student/information/update/get-cities') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(data){
+        console.log('success');
+        if(data['status'] == 'error'){
+          SwalNotificationErrorDanger.fire({title: 'Error!', text: $.each(data['errors'], function(key, value){value})});
+        }
+        else if (data['status'] == 'success'){
+          // CLEAR CURRENT LIST
+          $('#currentCity').find('option').remove().end().append('<option selected disabled>Select your city</option>')
+          // APPEND CITY LIST
+          if(data['city_list']){
+            $.each(data['city_list'], function(key,value){
+              $('#currentCity').append($('<option>', {value: value.id,text: value.name}));
+            })
+          }
+        }
+      },
+      error: function(err){
+        console.log('error');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  } 
+  // /ONCHANGE State GET Current Cities
+
+  // UPDATE CONTACT DETAILS
+
+
   // UPDATE PASSWORD
   update_password = () => {
     

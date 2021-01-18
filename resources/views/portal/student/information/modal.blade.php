@@ -140,7 +140,7 @@
           </button>
         </div>
         <div class="modal-body p-5">
-            <form>
+            <form id="formUpdateContactDetails">
               <div class="form-row">
                 <div class="form-group col-xl-6 col-md-12">
                     <h6 style="color: black;" class="mb-4">Permanent Address</h6>
@@ -184,7 +184,7 @@
                         <div class="col-xl-8 col-md-12">
                             <select name="city" id="city" class="form-control">
                                 <option disabled selected>Select your city</option>
-                                {{-- @if ($student != NULL)
+                                @if ($student != NULL)
                                     @foreach ($city_list as $city)
                                         @if($student->permanent_city_id == $city->id)
                                             <option value="{{ $city->id }}" selected>{{ $city->name }}</option>
@@ -192,7 +192,7 @@
                                             <option value="{{ $city->id }}">{{ $city->name }}</option>
                                         @endif
                                     @endforeach
-                                @endif --}}
+                                @endif
                             </select>
                             <span class="invalid-feedback" id="error-city" role="alert"></span>
                             <small class="form-text text-muted">* Cities are shown after selecting a District/State.<br>
@@ -204,7 +204,7 @@
                         <div class="col-xl-8 col-md-12">
                             <select name="selectDistrict" id="selectDistrict" class="form-control" onchange="onChangeState('sriLanka')">
                                 <option disabled selected>Select your district</option>
-                                {{-- @if ($student != NULL)
+                                @if ($student != NULL)
                                     @foreach ($states_list as $states)
                                         @if($student->permanent_state_id == $states->id)
                                             <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
@@ -212,7 +212,7 @@
                                             <option value="{{ $states->id }}">{{ $states->name }}</option>
                                         @endif
                                     @endforeach
-                                @endif --}}
+                                @endif
                             </select>
                             <span class="invalid-feedback" id="error-selectDistrict" role="alert"></span>
                             <small class="form-text text-muted">* Districts are shown after selecting a Country.</small>
@@ -223,7 +223,7 @@
                         <div class="col-xl-8 col-md-12">
                             <select name="selectState" id="selectState" class="form-control" onchange="onChangeState('foreignState')">
                                 <option disabled selected>Select your state</option>
-                                {{-- @if ($student != NULL)
+                                @if ($student != NULL)
                                     @foreach ($states_list as $states)
                                         @if($student->permanent_state_id == $states->id)
                                             <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
@@ -231,7 +231,7 @@
                                             <option value="{{ $states->id }}">{{ $states->name }}</option>
                                         @endif
                                     @endforeach
-                                @endif --}}
+                                @endif
                             </select>
                             <span class="invalid-feedback" id="error-selectState" role="alert"></span>
                             <small class="form-text text-muted">* States are shown after selecting a Country.<br>
@@ -243,7 +243,7 @@
                         <div class="col-xl-8 col-md-12">
                             <select id="country" name="country" class="form-control" onchange="onChangeCountry()">
                                 <option disabled selected>Select your country</option>
-                                {{-- @foreach ($countries_list as $countries)
+                                @foreach ($countries_list as $countries)
                                     @if ($student != NULL)
                                         @if($student->permanent_country_id == $countries->id)
                                             <option value="{{ $countries->id }}" selected>{{ $countries->name }}</option>
@@ -253,7 +253,7 @@
                                     @else
                                         <option value="{{ $countries->id }}">{{ $countries->name }}</option>
                                     @endif
-                                @endforeach --}}
+                                @endforeach
                             </select>
                             <span class="invalid-feedback" id="error-country" role="alert"></span>
                             <small class="form-text text-muted">* Select country to show District/State.</small>
@@ -289,7 +289,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="currentAddressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2:</label>
+                        <label for="currentAddressLine2" class="col-xl-4 col-md-12 col-form-label">Address Line 2: <small>(Optional)</small></label>
                         <div class="col-xl-8 col-md-12">
                             <input type="text" class="form-control @error('currentAddressLine2') is-invalid @enderror" id="currentAddressLine2" name="currentAddressLine2" @if($student != NULL) value="{{$student->current_address_line2 }}" @endif disabled>
                             <span class="invalid-feedback" id="error-currentAddressLine2" role="alert"></span>
@@ -301,7 +301,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="currentAddressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3:</label>
+                        <label for="currentAddressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3: <small>(Optional)</small></label>
                         <div class="col-xl-8 col-md-12">
                             <input type="text" class="form-control @error('currentAddressLine3') is-invalid @enderror" id="currentAddressLine3" name="currentAddressLine3" @if($student != NULL) value="{{ $student->currentAddressLine3 }}" @endif disabled>
                             <span class="invalid-feedback" id="error-currentAddressLine3" role="alert"></span>
@@ -329,7 +329,7 @@
                         <div class="col-xl-8 col-md-12">
                             <select id="currentCity" name="currentCity" class="form-control" disabled>
                                 <option selected disabled>Select your city</option>
-                                {{-- @if ($student != NULL)
+                                @if ($student != NULL)
                                     @foreach ($current_city_list as $city)
                                         @if($student->current_city_id == $city->id)
                                             <option value="{{ $city->id }}" selected>{{ $city->name }}</option>
@@ -337,7 +337,7 @@
                                             <option value="{{ $city->id }}">{{ $city->name }}</option>
                                         @endif
                                     @endforeach
-                                @endif --}}
+                                @endif
                             </select>
                             <span class="invalid-feedback" id="error-currentCity" role="alert"></span>
                             <small class="form-text text-muted">* Cities are shown after selecting a District/State.<br>
@@ -349,7 +349,7 @@
                         <div class="col-xl-8 col-md-12">
                             <select name="selectCurrentDistrict" id="selectCurrentDistrict" class="form-control" disabled onchange="onChangeCurrentState('sriLanka')">
                                 <option selected disabled>Select your district</option>
-                                {{-- @if ($student != NULL)
+                                @if ($student != NULL)
                                     @foreach ($current_states_list as $states)
                                         @if($student->current_state_id == $states->id)
                                             <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
@@ -357,7 +357,7 @@
                                             <option value="{{ $states->id }}">{{ $states->name }}</option>
                                         @endif
                                     @endforeach
-                                @endif --}}
+                                @endif
                             </select>
                             <span class="invalid-feedback" id="error-selectCurrentDistrict" role="alert"></span>
                             <small class="form-text text-muted">* Districts are shown after selecting a Country.</small>
@@ -368,7 +368,7 @@
                         <div class="col-xl-8 col-md-12">
                             <select name="selectCurrentState" id="selectCurrentState" class="form-control" disabled onchange="onChangeCurrentState('foreignState')">
                                 <option selected disabled>Select your state</option>
-                                {{-- @if ($student != NULL)
+                                @if ($student != NULL)
                                     @foreach ($current_states_list as $states)
                                         @if($student->current_state_id == $states->id)
                                             <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
@@ -376,7 +376,7 @@
                                             <option value="{{ $states->id }}">{{ $states->name }}</option>
                                         @endif
                                     @endforeach
-                                @endif --}}
+                                @endif
                             </select>
                             <span class="invalid-feedback" id="error-selectCurrentState" role="alert"></span>
                             <small class="form-text text-muted">* States are shown after selecting a Country.<br>
@@ -388,7 +388,7 @@
                         <div class="col-xl-8 col-md-12">
                             <select name="currentCountry" id="currentCountry" class="form-control" disabled onchange="onChangeCurrentCountry()">
                                 <option disabled selected>Select your country</option>
-                                {{-- @foreach ($countries_list as $countries)
+                                @foreach ($countries_list as $countries)
                                     @if ($student != NULL)
                                         @if($student->current_country_id == $countries->id)
                                             <option value="{{ $countries->id }}" selected>{{ $countries->name }}</option>
@@ -398,7 +398,7 @@
                                     @else
                                         <option value="{{ $countries->id }}">{{ $countries->name }}</option>
                                     @endif
-                                @endforeach --}}
+                                @endforeach
                             </select>
                             <span class="invalid-feedback" id="error-currentCountry" role="alert"></span>
                             <small class="form-text text-muted">* Select country to show District/State.</small>
@@ -414,7 +414,7 @@
                         <div class="input-group-prepend col-4 px-0">
                             <select name="telephoneCountryCode" id="telephoneCountryCode" class="form-control countryCodeSelect">
                                 <option disabled selected>Code</option>
-                                {{-- @foreach ($countries_list as $countries)
+                                @foreach ($countries_list as $countries)
                                     @if($student != NULL)
                                         @if($student->telephone_country_code == $countries->callingcode && $countries->callingcode != NULL )
                                         <option class="countryCodeOption" value="{{ $countries->callingcode }}" selected>{{ $countries->code }} (+{{ $countries->callingcode }})</option>
@@ -424,7 +424,7 @@
                                     @else
                                     <option class="countryCodeOption" value="{{ $countries->callingcode }}">{{ $countries->code }} (+{{ $countries->callingcode }})</option>
                                     @endif
-                                @endforeach --}}
+                                @endforeach
                             </select>
                         </div>
                         <input type="tel" class="form-control" id="telephone" name="telephone" @if($student != NULL) value="{{ $student->telephone }}" @endif placeholder="Number without leading zeros"/>
@@ -445,8 +445,9 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" id="btnCreateUserRole" name="btnCreateUserRole" class="btn btn-outline-primary" onclick="create_role()">
+          <button type="button" id="btnUpdateContactDetails" name="btnUpdateContactDetails" class="btn btn-outline-primary" onclick="update_contact_details()">
           Update
+          <span id="spinnerContactDetails" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
           </button>
         </div>
       </div>
