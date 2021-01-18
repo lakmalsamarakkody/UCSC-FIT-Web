@@ -371,7 +371,7 @@
                                         <div class="form-group row">
                                             <label for="currentAddressLine3" class="col-xl-4 col-md-12 col-form-label">Address Line 3: <small>(Optional)</small></label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control @error('currentAddressLine3') is-invalid @enderror" id="currentAddressLine3" name="currentAddressLine3" @if($student != NULL) value="{{ $student->currentAddressLine3 }}" @endif disabled>
+                                                <input type="text" class="form-control @error('currentAddressLine3') is-invalid @enderror" id="currentAddressLine3" name="currentAddressLine3" @if($student != NULL) value="{{ $student->current_address_line3 }}" @endif disabled>
                                                 <span class="invalid-feedback" id="error-currentAddressLine3" role="alert"></span>
                                                 @error('currentAddressLine3')
                                                   <span class="invalid-feedback" role="alert">
@@ -383,7 +383,7 @@
                                         <div class="form-group row collapse" id="addCurrentField">
                                             <label for="currentAddressLine4" class="col-xl-4 col-md-12 col-form-label">Address Line 4:</label>
                                             <div class="col-xl-8 col-md-12">
-                                                <input type="text" class="form-control @error('currentAddressLine4') is-invalid @enderror" id="currentAddressLine4" name="currentAddressLine4" @if($student != NULL) value="{{ $student->currentAddressLine4 }}" @endif disabled>
+                                                <input type="text" class="form-control @error('currentAddressLine4') is-invalid @enderror" id="currentAddressLine4" name="currentAddressLine4" @if($student != NULL) value="{{ $student->current_address_line4 }}" @endif disabled>
                                                 <span class="invalid-feedback" id="error-currentAddressLine4" role="alert"></span>
                                                 @error('currentAddressLine4')
                                                   <span class="invalid-feedback" role="alert">
