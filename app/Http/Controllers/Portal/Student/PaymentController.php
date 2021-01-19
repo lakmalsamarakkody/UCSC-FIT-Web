@@ -23,6 +23,7 @@ class PaymentController extends Controller
     $this->middleware('auth');
     $this->middleware('revalidate');
     $this->middleware('student.auth');
+    $this->middleware('student.registration.check');
     $this->middleware('student.payment');
   }
 
