@@ -193,12 +193,7 @@ class RegistrationController extends Controller
     endif;
 
     // VALIDATE CURRENT ADDRESS
-    if($request->current_address == true):
-      $current_address_validator = Validator::make($request->all(), [
-        'currentHouse' => ['required'],
-        'currentAddressLine1' => ['required'],
-        'currentCountry' => ['required'],
-      ]);
+    if($request->current_address != NULL ):
       if($request->currentCountry == '67'):
         $current_address_validator = Validator::make($request->all(), [
           'currentCity' => ['nullable', 'numeric', 'exists:sl_cities,id'],

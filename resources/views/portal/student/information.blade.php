@@ -143,7 +143,7 @@
                 <div class="card mt-3 contact">
                     <div class="card-header ">
                         Contact Details
-                        <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details" data-toggle="modal" data-target="#modal-contact-details"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details" data-toggle="modal" data-target="#modal-contact-details" onclick="address_editable();"><i class="fa fa-edit"></i></button>
                     </div>
                     <div class="card-body">     
                         <div class="row">                                               

@@ -18,7 +18,7 @@
             <div class="col-12 px-0">
 
                 {{-- DECLINED MESAGE IF APPLICATION DECLINED --}}
-                @if($registration != NULL)
+                @if($registration != NULL && $registration->application_status == 'Declined')
                     <div class="alert alert-danger" role="alert">
                     <h4 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Application Declined!</h4>
                     <p>{{ $registration->declined_msg }}</p>
