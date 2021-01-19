@@ -102,7 +102,111 @@ class InformationController extends Controller
     // UPDATE CONTACT DETAILS
     public function updateContactDetails(Request $request)
     {
+        //Validate data
+        $update_contact_details_validator = Validator::make($request->all(), [
+            'house' => ['required', 'address'],
+            'addressLine1' => ['required', 'address'],
+            'addressLine2' => ['nullable', 'address'],
+            'addressLine3' => ['nullable', 'address'],
+            'addressLine4' => ['nullable', 'address'],
+            'city' => ['nullable', 'numeric'],
+            'selectDistrict' => ['nullable'],
+            'selectState' => ['nullable'],
+            'country' => ['required', 'exists:world_countries,id'],
 
+            'currentHouse' => ['nullable', 'address'],
+            'currentAddressLine1' => ['nullable', 'address'],
+            'currentAddressLine2' => ['nullable', 'address'],
+            'currentAddressLine3' => ['nullable', 'address'],
+            'currentAddressLine4' => ['nullable', 'address'],
+            'currentCity' => ['nullable', 'numeric'],
+            'selectCurrentDistrict' => ['nullable'],
+            'selectCurrentState' => ['nullable'],
+            'currentCountry' => ['nullable', 'exists:world_countries,id'],
+            
+            'telephoneCountryCode' => ['nullable', 'numeric', 'digits_between:1,5' ],
+            'telephone' => ['nullable', 'numeric', 'digits_between:8,15'],
+        ]);
+
+        // Validate permanent address
+        if($request->country == '67'):
+            $update_permanent_address_validator = Validator::make($request->all(), [
+                'city' => ['nullable', 'numeric', 'exists:sl_cities,id'],
+                'selectDistrict' => ['nullable', 'numeric', 'exists:sl_districts,id'],
+            ]);
+        else:
+            $update_permanent_address_validator = Validator::make($request->all(), [
+                'city' => ['nullable', 'numeric', 'exists:world_cities,id'],
+                'selectState' => ['nullable', 'numeric', 'exists:world_divisions,id'],
+            ]);
+        endif;
+  
+        // Validate current address
+        if($request->current_address == true):
+            $update_current_address_validator = Validator::make($request->all(), [
+                'currentHouse' => ['required'],
+                'currentAddressLine1' => ['required'],
+                'currentCountry' => ['required'],
+            ]);
+            if($request->currentCountry == '67'):
+            $update_current_address_validator = Validator::make($request->all(), [
+                'currentCity' => ['nullable', 'numeric', 'exists:sl_cities,id'],
+                'selectCurrentDistrict' => ['nullable', 'numeric', 'exists:sl_districts,id'],
+            ]);
+            else:
+            $update_current_address_validator = Validator::make($request->all(), [
+                'currentCity' => ['nullable', 'numeric', 'exists:world_cities,id'],
+                'selectCurrentState' => ['nullable', 'numeric', 'exists:world_divisions,id'],
+            ]);
+            endif;
+        endif;
+
+        if($update_contact_details_validator->fails()):
+            return response()->json(['errors'=>$update_contact_details_validator->errors()]);
+        elseif(isset($update_permanent_address_validator) && $update_permanent_address_validator->fails()):
+            return response()->json(['errors'=>$update_permanent_address_validator->errors()]);
+        elseif(isset($update_current_address_validator) && $update_current_address_validator->fails()):
+            return response()->json(['errors'=>$update_current_address_validator->errors()]);
+        else:
+            if(Student::where('user_id', Auth::user()->id)->first()):
+                $student = Student::where('user_id', Auth::user()->id)->first();
+                $student->permanent_house = $request->house;
+                $student->permanent_address_line1 = $request->addressLine1;
+                $student->permanent_address_line2 = $request->addressLine2;
+                $student->permanent_address_line3 = $request->addressLine3;
+                $student->permanent_address_line4 = $request->addressLine4;
+                $student->permanent_city_id = $request->city;
+                // Set relevent state or district
+                if ($request->country == '67'):
+                    $student->permanent_state_id = $request->selectDistrict;
+                else:
+                    $student->permanent_state_id = $request->selectState;
+                endif;
+                $student->permanent_country_id = $request->country;
+
+                $student->current_house = $request->currentHouse;
+                $student->current_address_line1 = $request->currentAddressLine1;
+                $student->current_address_line2 = $request->currentAddressLine2;
+                $student->current_address_line3 = $request->currentAddressLine3;
+                $student->current_address_line4 = $request->currentAddressLine4;
+                $student->current_city_id = $request->currentCity;
+                // Set relevent current state or district
+                if ($request->country == '67'):
+                    $student->current_state_id = $request->selectCurrentDistrict;
+                else:
+                    $student->current_state_id = $request->selectCurrentState;
+                endif;
+                $student->current_country_id = $request->currentCountry;
+
+                $student->telephone_country_code = $request->telephoneCountryCode;
+                $student->telephone = $request->telephone;
+
+                // Update contact details
+                if($student->save()):
+                    return response()->json(['status'=>'success', 'student'=>$student]);
+                endif;
+            endif;
+        endif;
     }
     // /UPDATE CONTACT DETAILS
 
@@ -130,7 +234,7 @@ class InformationController extends Controller
                 endif;
                 return response()->json(['status'=>'success', 'state_type'=>$state_type, 'state_list'=>$state_list, 'city_list'=>$city_list]);
             endif;
-            //Get using current country
+        //Get using current country
         elseif(isset($request->currentCountry)):
             // validate current country
             $validator = Validator::make($request->all(), [
