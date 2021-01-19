@@ -484,7 +484,7 @@
                         </button>
                     </a>   
                     
-                        @if(Auth::user()->id)                            
+                        @if(Auth::check())                            
                             <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="button bg-indigo-light text-white font-bold uppercase tracking-wide py-3 px-6 border-0 rounded-lg">
                                 {{ __('Logout') }}
                             </button>
