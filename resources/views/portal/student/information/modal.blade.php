@@ -266,7 +266,7 @@
                 
                 <div class="form-group col-xl-6 col-md-12">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="current_address" id="current_address" onclick="address_editable()" data-toggle="collapse" data-target="#collapsePlus" aria-expanded="false" aria-controls="collapsePlus" @if($student != NULL && $student->current_house!=NULL) checked @endif >
+                        <input type="checkbox" class="form-check-input" name="current_address" id="current_address" onclick="address_editable();" data-toggle="collapse" data-target="#collapsePlus" aria-expanded="false" aria-controls="collapsePlus" @if($student != NULL && $student->current_house!=NULL) checked @endif >
                         <label for="current_address" class="form-check-label" ><h6 style="color: black;" class="mb-4">Current Address (Optional)</h6></label>
                     </div>
                     <div class="form-group row">

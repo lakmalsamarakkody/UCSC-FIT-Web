@@ -1,4 +1,9 @@
 <script type="text/javascript">
+
+$(document).ready(function(){
+  address_editable();
+  setViewDistrictState();
+})
   // EMAIL
   reset_email = () => {
     SwalQuestionSuccess.fire({
@@ -250,6 +255,44 @@
     });
   }
   // /UPDATE QUALIFICATION
+
+  // DISPLAY DISTRICT OR STATE ACCORDING TO COUNTRY
+  setViewDistrictState = () => {
+    //Permanent address district/state
+    if($('#country').val() == '67') {
+      $('#divSelectState').collapse('hide');
+      $('#divSelectDistrict').collapse('show');
+    }
+    else if($('#country').val() != '67' && $('#country').val() != null) {
+      $('#divSelectDistrict').collapse('hide');
+      $('#divSelectState').collapse('show');
+    }
+    else {
+      $('#divSelectDistrict').collapse('hide');
+      $('#divSelectState').collapse('hide');
+    }
+
+    // Current address district/state
+    if($('#currentCountry').val() == '67') {
+      $('#divSelectCurrentState').attr('disabled', 'disabled');
+      $('#divSelectCurrentState').collapse('hide');
+      $('#divSelectCurrentDistrict').removeAttr('disabled', 'disabled');
+      $('#divSelectCurrentDistrict').collapse('show');
+    }
+    else if($('#currentCountry').val() != '67' && $('#currentCountry').val() != null) {
+      $('#divSelectCurrentDistrict').attr('disabled', 'disabled');
+      $('#divSelectCurrentDistrict').collapse('hide');
+      $('#divSelectCurrentState').removeAttr('disabled', 'disabled');
+      $('#divSelectCurrentState').collapse('show');
+    }
+    else {
+      $('#divSelectCurrentDistrict').attr('disabled', 'disabled');
+      $('#divSelectCurrentDistrict').collapse('hide');
+      $('#divSelectCurrentState').attr('disabled', 'disabled');
+      $('#divSelectCurrentState').collapse('hide');
+    }
+  }
+  // /DISPLAY DISTRICT OR STATE ACCORDING TO COUNTRY
 
   // Insert current address
   address_editable = () => {
