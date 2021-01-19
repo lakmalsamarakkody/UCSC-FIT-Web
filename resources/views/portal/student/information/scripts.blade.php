@@ -251,7 +251,6 @@
   }
   // /UPDATE QUALIFICATION
 
-  // UPDATE CONTACT DETAILS
   // Insert current address
   address_editable = () => {
     console.log('address editable invoked');
@@ -505,7 +504,70 @@
   // /ONCHANGE State GET Current Cities
 
   // UPDATE CONTACT DETAILS
+  update_contact_details = () => {
+    
+    $('.form-control').removeClass('is-invalid');
+    $('.invalid-feedback').html('');
+    $('.invalid-feedback').hide();
 
+    // FORM PAYLOAD
+    var formData = new FormData($("#formUpdateContactDetails")[0]);
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{ url('/portal/student/information/update/contact-details') }}",
+      type: 'post',
+      data: formData,  
+      processData: false,
+      contentType: false,         
+      beforeSend: function(){
+        // Show loader
+        $("#spinnerContactDetails").removeClass('d-none');
+        $('#btnUpdateContactDetails').attr('disabled','disabled');
+      },
+      success: function(data){
+        console.log('Success in update contact details ajax.');
+        $("#spinnerContactDetails").addClass('d-none');
+        $('#btnUpdateContactDetails').removeAttr('disabled');
+        if(data['errors']){
+          console.log('Errors in validating contact details.');
+          $.each(data['errors'], function(key, value){
+            $('#error-'+key).show();
+            $('#'+key).addClass('is-invalid');
+            $('#error-'+key).append('<strong>'+value+'</strong>');
+            window.location.hash = '#'+key;
+          });
+        }else if (data['status'] == 'success'){
+          console.log('Success in update contact details.');
+          $('.form-control').val('');
+          SwalDoneSuccess.fire({
+            title: 'Succesfully Updated!',
+            text: 'Çontact Details updated succefully',
+          }).then((result) => {
+            if(result.isConfirmed) {
+              location.reload()
+            }
+          });
+        }else if (data['error']){
+          SwalSystemErrorDanger.fire({
+            title: 'Update Failed!',
+            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+          })
+        }
+      },
+      error: function(err){
+        $("#spinnerContactDetails").addClass('d-none');
+        $('#btnUpdateContactDetails').removeAttr('disabled');
+        SwalErrorDanger.fire({
+          title: 'Update Failed!',
+          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+        })
+      }
+    });
+  }
+  // /UPDATE CONTACT DETAILS
 
   // UPDATE PASSWORD
   update_password = () => {
