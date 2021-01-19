@@ -149,12 +149,12 @@ class InformationController extends Controller
                 'currentCountry' => ['required'],
             ]);
             if($request->currentCountry == '67'):
-            $update_current_address_validator = Validator::make($request->all(), [
+            $update_current_city_validator = Validator::make($request->all(), [
                 'currentCity' => ['nullable', 'numeric', 'exists:sl_cities,id'],
                 'selectCurrentDistrict' => ['nullable', 'numeric', 'exists:sl_districts,id'],
             ]);
             else:
-            $update_current_address_validator = Validator::make($request->all(), [
+            $update_current_city_validator = Validator::make($request->all(), [
                 'currentCity' => ['nullable', 'numeric', 'exists:world_cities,id'],
                 'selectCurrentState' => ['nullable', 'numeric', 'exists:world_divisions,id'],
             ]);
@@ -167,6 +167,8 @@ class InformationController extends Controller
             return response()->json(['errors'=>$update_permanent_address_validator->errors()]);
         elseif(isset($update_current_address_validator) && $update_current_address_validator->fails()):
             return response()->json(['errors'=>$update_current_address_validator->errors()]);
+        elseif(isset($update_current_city_validator) && $update_current_city_validator->fails()):
+            return response()->json(['errors'=>$update_current_city_validator ->errors()]);
         else:
             if(Student::where('user_id', Auth::user()->id)->first()):
                 $student = Student::where('user_id', Auth::user()->id)->first();
