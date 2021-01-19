@@ -42,9 +42,9 @@
                     <div class="input-group-prepend">
                       <button type="button" class="form-control btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"><i class="fa fa-filter"></i>&nbsp;Filter</button>
                     </div>
-                    <input type="text" class="form-control" placeholder="Enter search details.."/>
+                    <input id="searchAll" type="text" class="form-control" placeholder="Enter search details.."/>
                     <div class="input-group-append">
-                      <button type="button" class="form-control btn btn-primary"><i class="fa fa-search"></i>&nbsp;Search</button>
+                      <button type="button" class="form-control btn btn-primary" onclick="search()"><i class="fa fa-search"></i>&nbsp;Search</button>
                     </div>
                   </div>
                 </div>
@@ -54,36 +54,41 @@
                   <div class="card-body">
                     <div class="form-row">                    
                       <div class="form-group col">
-                        <label for="InputStudentNIC">Year</label>
-                        <select id="inputState" name="inputState" class="form-control form-control-sm">
-                          <option selected>select here---</option>
+                        <label for="year">Year</label>
+                        <select id="year" name="year" class="form-control form-control-sm">
+                          <option value="">select here---</option>
                           {{-- @foreach($years as $year)                          
                           <option value="{{ $year->year }}">{{ $year->year }}</option>
                           @endforeach --}}
                         </select>
                       </div>
                       <div class="form-group col">
-                        <label for="InputStudentName">Name</label>
-                        <input type="text" class="form-control form-control-sm" id="InputStudentName" aria-describedby="InputStudentNameHelp"/>
-                        <small id="InputStudentNameHelp" class="form-text text-muted">Enter Name Here</small>
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control form-control-sm" id="name" aria-describedby="nameHelp"/>
+                        <small id="nameHelp" class="form-text text-muted">Enter Name Here</small>
                       </div>
                       <div class="form-group col">
-                        <label for="InputStudentNIC">Registration Number</label>
-                        <input type="text" class="form-control form-control-sm" id="InputStudentNIC" aria-describedby="InputStudentNICHelp"/>
-                        <small id="InputStudentNICHelp" class="form-text text-muted">Enter Registration Number Here</small>
-                      </div>                 
+                        <label for="regNo">Registration Number</label>
+                        <input type="text" class="form-control form-control-sm" id="regNo" aria-describedby="regNoHelp"/>
+                        <small id="regNoHelp" class="form-text text-muted">Enter Registration Number Here</small>
+                      </div>
                       <div class="form-group col">
-                        <label for="InputStudentNIC">BIT</label>
-                        <select id="inputState" name="inputState" class="form-control form-control-sm">
-                          <option selected>select here---</option>
+                        <label for="nic">NIC</label>
+                        <input type="text" class="form-control form-control-sm" id="nic" aria-describedby="nicHelp"/>
+                        <small id="nicHelp" class="form-text text-muted">Enter NIC Here</small>
+                      </div>                  
+                      <div class="form-group col">
+                        <label for="bit">BIT</label>
+                        <select id="bit" name="bit" class="form-control form-control-sm">
+                          <option value="">select here---</option>
                           <option value="1">Eligible</option>
                           <option value="0">Not-Eligible</option>
                         </select>
                       </div>            
                       <div class="form-group col">
-                        <label for="InputStudentNIC">FIT Certificate</label>
-                        <select id="inputState" name="inputState" class="form-control form-control-sm">
-                          <option selected>select here---</option>
+                        <label for="fit">FIT Certificate</label>
+                        <select id="fit" name="fit" class="form-control form-control-sm">
+                          <option value="">select here---</option>
                           <option value="1">Eligible</option>
                           <option value="0">Not-Eligible</option>
                         </select>

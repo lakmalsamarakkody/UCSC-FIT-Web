@@ -28,7 +28,7 @@ class StudentFlagSeeder extends Seeder
             DB::table('student_flags')->insert(
                 array(
                     [
-                        'id'=>$student->id,
+                        'student_id'=>$student->id,
                         'bit_eligible'=>$bit,
                         'fit_cert'=>$fit,
                     ]

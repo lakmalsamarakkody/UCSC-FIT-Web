@@ -3,9 +3,21 @@
     $(function () {
         
         var table = $('.yajra-datatable').DataTable({
+            searching: false,
             processing: true,
             serverSide: true,
-            ajax: "{{ route('student.list') }}",
+            ajax: {
+                url:"{{ route('student.list') }}",
+                data : function (d) {
+                    d.year = $('#year').val();
+                    d.name = $('#name').val();
+                    d.search = $('#searchAll').val();
+                    d.regNo = $('#regNo').val();
+                    d.nic = $('#nic').val();
+                    d.bit = $('#bit').val();
+                    d.fit = $('#fit').val();
+                }
+            },
             columns: [
                 {
                     data: 'reg_no', 
@@ -69,6 +81,11 @@
                 }
             ]   
         });
+
+        search = () => {
+            table.draw();
+
+        }
 
         view_student = () => {
             // alert('asda');
