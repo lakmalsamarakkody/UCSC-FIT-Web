@@ -445,7 +445,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" id="btnUpdateContactDetails" name="btnUpdateContactDetails" class="btn btn-outline-primary" onclick="update_contact_details()">
+          <button type="button" id="btnUpdateContactDetails" name="btnUpdateContactDetails" class="btn btn-outline-primary" onclick="update_contact_details();">
           Update
           <span id="spinnerContactDetails" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
           </button>
