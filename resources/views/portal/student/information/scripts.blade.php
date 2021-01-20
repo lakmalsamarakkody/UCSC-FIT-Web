@@ -548,74 +548,82 @@ $(document).ready(function(){
 
   // UPDATE CONTACT DETAILS
   update_contact_details = () => {
-    
-    $('.form-control').removeClass('is-invalid');
-    $('.invalid-feedback').html('');
-    $('.invalid-feedback').hide();
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "Your Contact details will be updated!",
+    confirmButtonText: 'Yes, Update!',
+    })
+    .then((result) => {
+      if(result.isConfirmed) {
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Form payload
+        var formData = new FormData($('#formUpdateContactDetails')[0]);
 
-    // FORM PAYLOAD
-    var formData = new FormData($("#formUpdateContactDetails")[0]);
-
-    $.ajax({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      url: "{{ url('/portal/student/information/update/contact-details') }}",
-      type: 'post',
-      data: formData,  
-      processData: false,
-      contentType: false,         
-      beforeSend: function(){
-        // Show loader
-        $("#spinnerContactDetails").removeClass('d-none');
-        $('#btnUpdateContactDetails').attr('disabled','disabled');
-      },
-      success: function(data){
-        console.log('Success in update contact details ajax.');
-        $("#spinnerContactDetails").addClass('d-none');
-        $('#btnUpdateContactDetails').removeAttr('disabled');
-        if(data['errors']){
-          console.log('Errors in validating contact details.');
-          $.each(data['errors'], function(key, value){
-            $('#error-'+key).show();
-            $('#'+key).addClass('is-invalid');
-            $('#error-'+key).append('<strong>'+value+'</strong>');
-            window.location.hash = '#'+key;
-          });
-        }else if (data['status'] == 'success'){
-          console.log('Success in update contact details.');
-          $('.form-control').val('');
-          SwalQuestionSuccessAutoClose.fire({
-            title: "Are you sure?",
-            text: "Your contact details will be updated!",
-            confirmButtonText: 'Yes, Update!',
-            })
-            .then((result) => {
-            if(result.isConfirmed) {
+        // Update contact details controller
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/student/information/update/contact-details') }}",
+          type: 'post',
+          data: formData,  
+          processData: false,
+          contentType: false,         
+          beforeSend: function(){
+            // Show loader
+            $("#spinnerContactDetails").removeClass('d-none');
+            $('#btnUpdateContactDetails').attr('disabled','disabled');
+          },
+          success: function(data) {
+            console.log('Success in update contact details ajax.');
+            $("#spinnerContactDetails").addClass('d-none');
+            $('#btnUpdateContactDetails').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating contact details.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+                window.location.hash = '#'+key;
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in edit contact details.');
               SwalDoneSuccess.fire({
-                title: 'Succesfully Updated!',
-                text: 'Çontact Details updated succefully',
+                title: 'Successfully Updated!',
+                text: 'Your Contact details has been updated.',
               })
-              $('#modal-contact-details').modal('hide');
+              $('#modal-contact-details').modal('hide')
               location.reload();
             }
-          });
-        }else if (data['error']){
-          SwalSystemErrorDanger.fire({
-            title: 'Update Failed!',
-            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
-          })
-        }
-      },
-      error: function(err){
-        $("#spinnerContactDetails").addClass('d-none');
-        $('#btnUpdateContactDetails').removeAttr('disabled');
-        SwalErrorDanger.fire({
-          title: 'Update Failed!',
-          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+            else if (data['error']){
+              SwalSystemErrorDanger.fire({
+                title: 'Update Failed!',
+                text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+              })
+            }
+          },
+          error: function(err){
+            console.log('Error in update contact details ajax.');
+            $("#spinnerContactDetails").addClass('d-none');
+            $('#btnUpdateContactDetails').removeAttr('disabled', 'disabled');
+            SwalErrorDanger.fire({
+              title: 'Update Failed!',
+              text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+            })
+          }
         })
       }
-    });
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Your Contact details has not been updated.',
+        })
+      }
+    })
   }
   // /UPDATE CONTACT DETAILS
 
