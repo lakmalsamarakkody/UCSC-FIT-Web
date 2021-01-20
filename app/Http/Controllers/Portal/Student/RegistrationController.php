@@ -261,7 +261,7 @@ class RegistrationController extends Controller
       $student->current_address_line4 = $request->currentAddressLine4;
       $student->current_city_id = $request->currentCity;
       //SET RELEVENT STATE OR DISTRICT
-      if ($request->country == '67'):
+      if ($request->currentCountry == '67'):
         $student->current_state_id = $request->selectCurrentDistrict;
       else:
         $student->current_state_id = $request->selectCurrentState;
@@ -344,7 +344,7 @@ class RegistrationController extends Controller
       $student->current_address_line4 = $request->currentAddressLine4;
       $student->current_city_id = $request->currentCity;
       //SET RELEVENT STATE OR DISTRICT
-      if ($request->country == '67'):
+      if ($request->currentCountry == '67'):
         $student->current_state_id = $request->selectCurrentDistrict;
       else:
         $student->current_state_id = $request->selectCurrentState;
