@@ -620,7 +620,7 @@ $(document).ready(function(){
       else {
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Contact details has not been updated.',
+          text: 'Your Contact details has not been updated.',
         })
       }
     })
