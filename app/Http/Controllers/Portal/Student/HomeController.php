@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Portal\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Exam\Schedule;
 use App\Models\Student;
+use App\Models\Student\Registration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +28,9 @@ class HomeController extends Controller
     {
         // GET STUDENT DETAILS
         $student = Student::where('user_id', Auth::user()->id)->first();
-        return view('portal/student/home', compact('student'));
+        $registration = Registration::where('student_id', $student->id)->latest()->first();
+        $upcomingExams=Schedule::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();
+        $heldExams=Schedule::where('date', '<', date('Y-m-d'))->orderby('date', 'desc')->take(6)->get();
+        return view('portal/student/home', compact('student', 'registration','upcomingExams','heldExams'));
     }
 }

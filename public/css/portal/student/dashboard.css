@@ -1,0 +1,89 @@
+:root{
+  --card-dash-header-text:#ffffff; 
+  --card-header-text-hover: #000000; 
+
+  --card-background-green:#188839 !important;
+  --card-background-blue:#193474 !important;
+  --card-background-red:#8d1414 !important;
+  --card-background-black:#414040 !important;
+  --card-background-yellow:#b99803 !important;
+
+  --card-header-text:#211870; 
+}
+/* number CARDS */
+.dashboard .card-dash{
+  border: none;
+  border-radius: 0;
+  color: var(--card-dash-header-text);
+}
+.dashboard .card:hover{
+  opacity: 80%;
+}
+.dashboard a:hover{
+  text-decoration: solid;
+}
+.dashboard .card:hover .card-footer{
+  color: var( --card-header-text-hover) ;
+}
+.dashboard .card-dash .card-title{
+  font-size: 1.5rem;
+  color: var(--card-dash-header-text);
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  text-transform: uppercase;
+}
+.dashboard .card-dash .card-header h1{
+  font-size: 1.6rem;
+  color: var(--card-dash-header-text);
+  /* font-family: 'Open Sans', sans-serif; */
+  text-transform: uppercase;
+  letter-spacing: .05rem;
+}
+
+.dashboard .green{  
+  background-color: var(--card-background-green);
+}
+
+.dashboard .blue{  
+  background-color: var(--card-background-blue);
+}
+
+.dashboard .red{  
+  background-color: var(--card-background-red);
+}
+
+.dashboard .black{  
+  background-color: var(--card-background-black);
+}
+
+.dashboard .yellow{  
+  background-color: var(--card-background-yellow);
+}
+/* /number CARDS */
+
+/* CARDS */
+.dashboard .card{
+  border: none;
+  border-radius: 0;
+  box-shadow:  0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  overflow-y: auto;
+}
+.dashboard .card-header{
+  color: var(--card-header-text);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.2rem;
+  vertical-align: middle;
+  padding: 1.5rem 0 0 1.5rem;
+}
+.dashboard .card .card-body th {
+  color: var(--system-card-table-th-text);
+}
+.dashboard .card .card-body td {
+  vertical-align: middle;
+}
+.dashboard .card .card-footer{
+  border-top: none;
+  background-color: var(--white);
+  text-align: right;
+}
+/* /CARDS */
