@@ -596,7 +596,7 @@ $(document).ready(function(){
                 title: 'Successfully Updated!',
                 text: 'Your Contact details has been updated.',
               })
-              $('#modal-edit-permission').modal('hide')
+              $('#modal-contact-details').modal('hide')
               location.reload();
             }
             else if (data['error']){
@@ -620,7 +620,7 @@ $(document).ready(function(){
       else {
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Permission has not been updated.',
+          text: 'Contact details has not been updated.',
         })
       }
     })
