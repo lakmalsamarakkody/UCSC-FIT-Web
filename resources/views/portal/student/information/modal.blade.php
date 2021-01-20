@@ -202,7 +202,7 @@
                     <div class="form-group row collapse" id="divSelectDistrict">
                         <label for="selectDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
                         <div class="col-xl-8 col-md-12">
-                            <select name="selectDistrict" id="selectDistrict" class="form-control" onchange="onChangeState('sriLanka')">
+                            <select name="selectDistrict" id="selectDistrict" class="form-control" onchange="onChangeState('sriLanka');">
                                 <option disabled selected>Select your district</option>
                                 @if ($student != NULL)
                                     @foreach ($states_list as $states)
@@ -221,7 +221,7 @@
                     <div class="form-group row collapse" id="divSelectState">
                         <label for="selectState" class="col-xl-4 col-md-12 col-form-label">State:</label>
                         <div class="col-xl-8 col-md-12">
-                            <select name="selectState" id="selectState" class="form-control" onchange="onChangeState('foreignState')">
+                            <select name="selectState" id="selectState" class="form-control" onchange="onChangeState('foreignState');">
                                 <option disabled selected>Select your state</option>
                                 @if ($student != NULL)
                                     @foreach ($states_list as $states)
@@ -241,7 +241,7 @@
                     <div class="form-group row">
                         <label for="country" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                         <div class="col-xl-8 col-md-12">
-                            <select id="country" name="country" class="form-control" onchange="onChangeCountry()">
+                            <select id="country" name="country" class="form-control" onchange="onChangeCountry();">
                                 <option disabled selected>Select your country</option>
                                 @foreach ($countries_list as $countries)
                                     @if ($student != NULL)
@@ -347,7 +347,7 @@
                     <div class="form-group row collapse" id="divSelectCurrentDistrict">
                         <label for="selectCurrentDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
                         <div class="col-xl-8 col-md-12">
-                            <select name="selectCurrentDistrict" id="selectCurrentDistrict" class="form-control" disabled onchange="onChangeCurrentState('sriLanka')">
+                            <select name="selectCurrentDistrict" id="selectCurrentDistrict" class="form-control" disabled onchange="onChangeCurrentState('sriLanka');">
                                 <option selected disabled>Select your district</option>
                                 @if ($student != NULL)
                                     @foreach ($current_states_list as $states)
@@ -366,7 +366,7 @@
                     <div class="form-group row collapse" id="divSelectCurrentState">
                         <label for="selectCurrentState" class="col-xl-4 col-md-12 col-form-label">State:</label>
                         <div class="col-xl-8 col-md-12">
-                            <select name="selectCurrentState" id="selectCurrentState" class="form-control" disabled onchange="onChangeCurrentState('foreignState')">
+                            <select name="selectCurrentState" id="selectCurrentState" class="form-control" disabled onchange="onChangeCurrentState('foreignState');">
                                 <option selected disabled>Select your state</option>
                                 @if ($student != NULL)
                                     @foreach ($current_states_list as $states)
@@ -386,7 +386,7 @@
                     <div class="form-group row">
                         <label for="currentCountry" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                         <div class="col-xl-8 col-md-12">
-                            <select name="currentCountry" id="currentCountry" class="form-control" disabled onchange="onChangeCurrentCountry()">
+                            <select name="currentCountry" id="currentCountry" class="form-control" disabled onchange="onChangeCurrentCountry();">
                                 <option disabled selected>Select your country</option>
                                 @foreach ($countries_list as $countries)
                                     @if ($student != NULL)

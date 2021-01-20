@@ -124,15 +124,15 @@ class InformationController extends Controller
             'selectCurrentState' => ['nullable'],
             'currentCountry' => ['nullable', 'exists:world_countries,id'],
             
-            'telephoneCountryCode' => ['nullable', 'numeric', 'digits_between:1,5' ],
-            'telephone' => ['nullable', 'numeric', 'digits_between:8,15'],
+            'telephoneCountryCode' => ['required', 'numeric', 'digits_between:1,5' ],
+            'telephone' => ['required', 'numeric', 'digits_between:8,15'],
         ]);
 
         // Validate permanent address
         if($request->country == '67'):
             $update_permanent_address_validator = Validator::make($request->all(), [
                 'city' => ['nullable', 'numeric', 'exists:sl_cities,id'],
-                'selectDistrict' => ['nullable', 'numeric', 'exists:sl_districts,id'],
+                'selectDistrict' => ['required', 'numeric', 'exists:sl_districts,id'],
             ]);
         else:
             $update_permanent_address_validator = Validator::make($request->all(), [
@@ -151,7 +151,7 @@ class InformationController extends Controller
             if($request->currentCountry == '67'):
             $update_current_city_validator = Validator::make($request->all(), [
                 'currentCity' => ['nullable', 'numeric', 'exists:sl_cities,id'],
-                'selectCurrentDistrict' => ['nullable', 'numeric', 'exists:sl_districts,id'],
+                'selectCurrentDistrict' => ['required', 'numeric', 'exists:sl_districts,id'],
             ]);
             else:
             $update_current_city_validator = Validator::make($request->all(), [
@@ -170,45 +170,85 @@ class InformationController extends Controller
         elseif(isset($update_current_city_validator) && $update_current_city_validator->fails()):
             return response()->json(['errors'=>$update_current_city_validator ->errors()]);
         else:
-            if(Student::where('user_id', Auth::user()->id)->first()):
-                $student = Student::where('user_id', Auth::user()->id)->first();
-                $student->permanent_house = $request->house;
-                $student->permanent_address_line1 = $request->addressLine1;
-                $student->permanent_address_line2 = $request->addressLine2;
-                $student->permanent_address_line3 = $request->addressLine3;
-                $student->permanent_address_line4 = $request->addressLine4;
-                $student->permanent_city_id = $request->city;
-                // Set relevent state or district
-                if ($request->country == '67'):
-                    $student->permanent_state_id = $request->selectDistrict;
+            // Get permanent address values
+            $permanentHouse = $request->house;
+            $permanentAddressLine1 = $request->addressLine1;
+            $permanentAddressLine2 = $request->addressLine2;
+            $permanentAddressLine3 = $request->addressLine3;
+            $permanentAddressLine4 = $request->addressLine4;
+            $permanentCity = $request->city;
+            if($request->country != null):
+                if($request->country == '67'):
+                    $permanentStateId = $request->selectDistrict;
                 else:
-                    $student->permanent_state_id = $request->selectState;
-                endif;
-                $student->permanent_country_id = $request->country;
-
-                $student->current_house = $request->currentHouse;
-                $student->current_address_line1 = $request->currentAddressLine1;
-                $student->current_address_line2 = $request->currentAddressLine2;
-                $student->current_address_line3 = $request->currentAddressLine3;
-                $student->current_address_line4 = $request->currentAddressLine4;
-                $student->current_city_id = $request->currentCity;
-                // Set relevent current state or district
-                if ($request->country == '67'):
-                    $student->current_state_id = $request->selectCurrentDistrict;
-                else:
-                    $student->current_state_id = $request->selectCurrentState;
-                endif;
-                $student->current_country_id = $request->currentCountry;
-
-                $student->telephone_country_code = $request->telephoneCountryCode;
-                $student->telephone = $request->telephone;
-
-                // Update contact details
-                if($student->save()):
-                    return response()->json(['status'=>'success', 'student'=>$student]);
+                    $permanentStateId = $request->selectState;
                 endif;
             endif;
+            $permanentCountry = $request->country;
+
+            //Pemanent address array
+            $permanentAddress = array('permanentHouse'=>$permanentHouse,
+                'permanentAddressLine1'=>$permanentAddressLine1,
+                'permanentAddressLine2'=>$permanentAddressLine2,
+                'permanentAddressLine3'=>$permanentAddressLine3,
+                'permanentAddressLine4'=>$permanentAddressLine4,
+                'permanentCity'=>$permanentCity,
+                'permanentStateId'=>$permanentStateId,
+                'permanentCountry'=>$permanentCountry);
+
+            // Get current address values
+            $currentHouse = $request->currentHouse;
+            $currentAddressLine1 = $request->currentAddressLine1;
+            $currentAddressLine2 = $request->currentAddressLine2;
+            $currentAddressLine3 = $request->currentAddressLine3;
+            $currentAddressLine4 = $request->currentAddressLine4;
+            $currentCity = $request->currentCity;
+            if($request->currentCountry != null):
+                if($request->currentCountry == '67'):
+                    $currentStateId = $request->selectCurrentDistrict;
+                else:
+                    $currentStateId = $request->selectCurrentState;
+                endif;
+            else:
+                $currentStateId = null;
+            endif;
+            $currentCountry = $request->currentCountry;
+
+            // Current address array
+            $currentAddress = array('currentHouse'=>$currentHouse,
+                'currentAddressLine1'=>$currentAddressLine1,
+                'currentAddressLine2'=>$currentAddressLine2,
+                'currentAddressLine3'=>$currentAddressLine3,
+                'currentAddressLine4'=>$currentAddressLine4,
+                'currentCity'=>$currentCity,
+                'currentStateId'=>$currentStateId,
+                'currentCountry'=>$currentCountry);
+
+            // Update contact details
+            if(Student::where('user_id', Auth::user()->id)->update([
+                'permanent_house' => $permanentAddress['permanentHouse'],
+                'permanent_address_line1' => $permanentAddress['permanentAddressLine1'],
+                'permanent_address_line2' => $permanentAddress['permanentAddressLine2'],
+                'permanent_address_line3' => $permanentAddress['permanentAddressLine3'],
+                'permanent_address_line4' => $permanentAddress['permanentAddressLine4'],
+                'permanent_city_id' => $permanentAddress['permanentCity'],
+                'permanent_state_id' => $permanentAddress['permanentStateId'],
+                'permanent_country_id' => $permanentAddress['permanentCountry'],
+                'current_house' => $currentAddress['currentHouse'],
+                'current_address_line1' => $currentAddress['currentAddressLine1'],
+                'current_address_line2' => $currentAddress['currentAddressLine2'],
+                'current_address_line3' => $currentAddress['currentAddressLine3'],
+                'current_address_line4' => $currentAddress['currentAddressLine4'],
+                'current_city_id' => $currentAddress['currentCity'],
+                'current_state_id' => $currentAddress['currentStateId'],
+                'current_country_id' => $currentAddress['currentCountry'],
+                'telephone_country_code' => $request->telephoneCountryCode,
+                'telephone' => $request->telephone
+            ])):
+                return response()->json(['status'=>'success']);
+            endif;
         endif;
+        return response()->json(['error'=>'error']);
     }
     // /UPDATE CONTACT DETAILS
 

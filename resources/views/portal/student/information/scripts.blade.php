@@ -585,12 +585,19 @@ $(document).ready(function(){
         }else if (data['status'] == 'success'){
           console.log('Success in update contact details.');
           $('.form-control').val('');
-          SwalDoneSuccess.fire({
-            title: 'Succesfully Updated!',
-            text: 'Çontact Details updated succefully',
-          }).then((result) => {
+          SwalQuestionSuccessAutoClose.fire({
+            title: "Are you sure?",
+            text: "Your contact details will be updated!",
+            confirmButtonText: 'Yes, Update!',
+            })
+            .then((result) => {
             if(result.isConfirmed) {
-              location.reload()
+              SwalDoneSuccess.fire({
+                title: 'Succesfully Updated!',
+                text: 'Çontact Details updated succefully',
+              })
+              $('#modal-contact-details').modal('hide');
+              location.reload();
             }
           });
         }else if (data['error']){
