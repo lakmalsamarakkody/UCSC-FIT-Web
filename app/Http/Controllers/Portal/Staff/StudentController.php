@@ -132,7 +132,8 @@ class StudentController extends Controller
                 if(Mail::to($email)->send(new ChangeEmail($details))):
                     return response()->json(['error'=>'error']);
                 else:
-                    if(User::where('id',$user_id)->update(['email_change_token'=> $token])):
+                    if(User::where('id',$user_id)->update(['email_change_token'=> $token,'email_change'=> $email])):
+                        activity()->withProperties(['student_id' => $request->id, 'email' => $email])->log('Email Change Request');
                         return response()->json(['success'=>'success']);
                     endif;
                 endif;
