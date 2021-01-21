@@ -73,7 +73,7 @@
                 <div class="input-group-prepend">
                   <button class="btn btn-warning" type="button" onclick="InputRoleName_editable();"><i class="fas fa-edit pr-0"></i></button>
                 </div>
-                <input type="text" class="form-control" id="roleName" onfocusout="InputRoleName_readonly()" disabled/>
+                <input type="text" class="form-control" name="roleNameEdit" id="roleNameEdit" onfocusout="InputRoleName_readonly()" disabled/>
               </div>
             </div>
           

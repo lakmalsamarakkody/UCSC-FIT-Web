@@ -131,7 +131,53 @@
   // /CREATE
 
   // EDIT
-  edit_role = () => {
+  edit_role_modal_invoke = (role_id) =>{
+
+    //Form payload
+    var formData = new FormData();
+    formData.append('role_id',role_id);
+
+    //View role get details
+    $.ajax({
+      headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/system/viewUserRoleGetDetails') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){
+        $('#btnEditUserRole-'+role_id).attr('disabled', 'disabled');
+        $("#spinnerBtnEditUserRole-"+role_id).removeClass('d-none');
+      },
+      success: function(data){
+        console.log('Success in Edit role get details ajax.');
+        $("#spinnerBtnEditUserRole-"+role_id).addClass('d-none');
+        $('#btnEditUserRole-'+role_id).removeAttr('disabled', 'disabled');
+        // $('#permissionList').html("");
+        if(data['status'] == 'success'){
+          $('#roleNameEdit').val(data['role']['name']);
+        //   let icon = "";
+        //   $.each(data['arrayPermissions'], function( index, value ) {
+        //     if(value['permission_status'] == true){
+        //       icon = "check";
+        //     }else{
+        //       icon = "times";
+        //     }
+        //     $('#permissionList').append("<div class='col-lg-3 col-md-6'><i class='fas fa-"+icon+ "'></i>" + value['permission_name'] +"</div>")
+        //     //console.log( index + ": "+ value['permission_name']+ " : " + value['permission_status'] );
+        // });
+          $('#modal-edit-role').modal('show');
+        }
+      },
+      error: function(err){
+        console.log('Error in Edit role get details ajax.');
+        $("#spinnerBtnEditUserRole-"+role_id).addClass('d-none');
+        $('#btnEditUserRole-'+role_id).removeAttr('disabled', 'disabled');
+      },
+    })
+  }
+
+  edit_role = (role_id) => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
