@@ -99,7 +99,7 @@
               </form>
 
               <div class="col-12 mt-5">
-                <table class="table schedule-before-release-yajradt">
+                <table class="table schedules-before-release-yajradt">
                   <thead class="text-center">
                     <tr>
                       <th>Exam</th>
@@ -135,9 +135,9 @@
                     @endforeach --}}
                   </tbody>
                 </table>
-                <div class="pt-4 float-right">
+                {{-- <div class="pt-4 float-right">
                   {{ $upcoming_schedules->withQueryString()->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }}
-                </div>
+                </div> --}}
                 <div class="text-center">
                   <button type="submit" class="btn btn-outline-primary" onclick="release_schedules()">RELEASE EXAM SCHEDULE</button>
                 </div>

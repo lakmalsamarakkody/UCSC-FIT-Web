@@ -1,18 +1,59 @@
 <script type="text/javascript">
 
 // YAJRA TABLES
+// Upcoming Exams(before release)
+$(function(){
+  var beforeReleaseTable = $('.schedules-before-release-yajradt').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: {
+      url: "{{ url('/portal/staff/exams/schedules/before/release') }}",
+    },
+    columns: [
+      {
+        data: 'exam',
+        name: 'exam'
+      },
+      {
+        data: 'subject_code',
+        name: 'subject_code'
+      },
+      {
+        data: 'subject_name',
+        name: 'subject_name'
+      },
+      {
+        data: 'exam_type',
+        name: 'exam_type'
+      },
+      {
+        data: 'date',
+        name: 'date'
+      },
+      {
+        data: 'start_time',
+        name: 'start_time'
+      },
+      {
+        data: 'end_time',
+        name: 'end_time'
+      },
+    ],
+    columnDefs: [
+      {
+        targets: 1,
+        render: function(data, type, row) {
+          return 'FIT' + data;
+        }
+      },
+    ]
+  });
+});
+// /Upcoming Exams(before release)
 
-// Upcoming Exams(before release)
-// $(function(){
-//   var beforeReleaseTable = $('.schedule-before-release-yajradt').DataTable({
-//     processing: true,
-//     serverSide: true,
-//     ajax: {
-//       url: "{{ url('') }}",
-//     },
-//   })
-// })
-// Upcoming Exams(before release)
+// Upcoming Exams(after release)
+// /Upcoming Exams(after release)
+
 // Held Exams
 $(function() {
   var heldTable = $('.held-exam-schedules-yajradt').DataTable({
@@ -59,8 +100,8 @@ $(function() {
         }
       }
     ]
-  })
-})
+  });
+});
 // /Held Exams
 // /YAJRA TABLES
 
