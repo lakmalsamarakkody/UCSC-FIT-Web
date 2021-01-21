@@ -2,15 +2,15 @@
 // USER ROLE
   // ROLE NAME EDITABILITY
   InputRoleName_editable = () => {
-    if($('#roleName').attr('disabled')){
-      $('#roleName').removeAttr('disabled');
+    if($('#roleNameEdit').attr('disabled')){
+      $('#roleNameEdit').removeAttr('disabled');
     }
     else{
-      document.getElementById('roleName').setAttribute("disabled","disabled");
+      $('#roleNameEdit').attr("disabled","disabled");
     }
   }
   function InputRoleName_readonly() {
-    document.getElementById('roleName').setAttribute("disabled","disabled");
+    $('#roleNameEdit').attr("disabled","disabled");
   }
   // /ROLE NAME EDITABILITY
 
@@ -153,19 +153,21 @@
         console.log('Success in Edit role get details ajax.');
         $("#spinnerBtnEditUserRole-"+role_id).addClass('d-none');
         $('#btnEditUserRole-'+role_id).removeAttr('disabled', 'disabled');
-        // $('#permissionList').html("");
+        $('#permissionListEdit').html("");
         if(data['status'] == 'success'){
           $('#roleNameEdit').val(data['role']['name']);
-        //   let icon = "";
-        //   $.each(data['arrayPermissions'], function( index, value ) {
-        //     if(value['permission_status'] == true){
-        //       icon = "check";
-        //     }else{
-        //       icon = "times";
-        //     }
-        //     $('#permissionList').append("<div class='col-lg-3 col-md-6'><i class='fas fa-"+icon+ "'></i>" + value['permission_name'] +"</div>")
-        //     //console.log( index + ": "+ value['permission_name']+ " : " + value['permission_status'] );
-        // });
+          let status = "";
+          $.each(data['arrayPermissions'], function( index, value ) {
+            if(value['permission_status'] == true){
+              status = 'checked';
+            }else{
+              status = "";
+            }
+            $('#permissionListEdit').append("<div class='col-lg-3 col-md-6'><input type='checkbox' name='permissionId-"+value['permission_id'] +"' value='"+ value['permission_id'] +"' "+status+" /> " + value['permission_name'] +"</div>")
+            //console.log( index + ": "+ value['permission_name']+ " : " + value['permission_status'] );
+          });
+          $('#roleNameEdit').attr("disabled","disabled");
+          $('#btnEditUserRolePermissions').attr('onclick', "edit_role("+role_id+")");
           $('#modal-edit-role').modal('show');
         }
       },
