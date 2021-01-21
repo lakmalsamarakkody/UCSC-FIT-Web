@@ -42,7 +42,7 @@
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
-          url: "{{ route('update.email') }}",
+          url: "{{ route('update.email.request') }}",
           type: 'post',
           data: { 'email': result.value, 'id': "{{ $student->id }}"},         
           beforeSend: function(){
