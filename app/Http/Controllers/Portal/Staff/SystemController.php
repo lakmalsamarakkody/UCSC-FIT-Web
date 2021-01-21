@@ -68,7 +68,19 @@ class SystemController extends Controller
   // VIEW FUNCTION
   public function viewUserRoleGetDetails(Request $request)
   {
-    
+    $arrayPermissions = array();
+    $permissions = Permission::get();
+    $role = Role::find($request->role_id);
+    foreach($permissions as $permission):
+      $hasPermission = $role->hasPermission()->where('permission_id', $permission->id)->first();
+      if($hasPermission != NULL):
+        $currentPermission = array(array('permission_id' => $permission->id, 'permission_name'=> $permission->name, 'permission_status'=>true));
+      else:
+        $currentPermission = array(array('permission_id' => $permission->id, 'permission_name'=> $permission->name, 'permission_status'=>false));
+      endif;
+      $arrayPermissions = array_merge($arrayPermissions, $currentPermission);
+    endforeach;
+    return response()->json(['status'=>'success', 'role'=>$role, 'arrayPermissions'=>$arrayPermissions]);
   }
   // /VIEW FUNCTION
 
@@ -149,11 +161,11 @@ class SystemController extends Controller
     if($edit_permission_validator->fails()):
       return response()->json(['status'=>'error', 'errors'=>$edit_permission_validator->errors()]);
     else:
-      $permission = Permission::find($request->permissionID);
-      $permission->name = $request->permissionName;
-      $permission->description = $request->permissionDescription;
-      if($permission->save()):
-        return response()->json(['status'=> 'success', 'permission'=>$permission]);
+      if(Permission::where('id', $request->permissionID)->update([
+        'name' => $request->permissionName,
+        'description' => $request->permissionDescription
+      ])):
+        return response()->json(['status'=> 'success']);
       endif;
     endif;
   }
@@ -235,11 +247,11 @@ class SystemController extends Controller
     if($edit_subject_validator->fails()):
       return response()->json(['status'=> 'error', 'errors'=>$edit_subject_validator->errors()]);
     else:
-      $subject = Subject::find($request->subjectId);
-      $subject->code = $request->subjectCode;
-      $subject->name = $request->subjectName;
-      if($subject->save()):
-        return response()->json(['status'=>'success', 'subject'=>$subject]);
+      if(Subject::where('id',$request->subjectId)->update([
+        'code' => $request->subjectCode,
+        'name' => $request->subjectName
+      ])):
+        return response()->json(['status'=>'success']);
       endif;
     endif;
   }
@@ -319,10 +331,10 @@ class SystemController extends Controller
     if($edit_exam_type_validator->fails()):
       return response()->json(['status'=>'error', 'errors'=>$edit_exam_type_validator->errors()]);
     else:
-      $exam_type = Types::find($request->examTypeId);
-      $exam_type->name = $request->examTypeName;
-      if($exam_type->save()):
-        return response()->json(['status'=>'success', 'exma_type'=>$exam_type]);
+      if(Types::where('id',$request->examTypeId)->update([
+        'name' => $request->examTypeName
+      ])):
+        return response()->json(['status'=>'success']);
       endif;
     endif;
 
@@ -410,12 +422,12 @@ class SystemController extends Controller
     if($edit_student_phase_validator->fails()):
       return response()->json(['status'=>'error', 'errors'=>$edit_student_phase_validator->errors()]);
     else:
-      $student_phase = Phase::find($request->phaseId);
-      $student_phase->code = $request->phaseCode;
-      $student_phase->name = $request->phaseName;
-      $student_phase->description = $request->phaseDescription;
-      if($student_phase->save()):
-        return response()->json(['status'=>'success', 'student_phase'=>$student_phase]);
+      if(Phase::where('id',$request->phaseId)->update([
+        'code' => $request->phaseCode,
+        'name' => $request->phaseName,
+        'description' => $request->phaseDescription
+      ])):
+        return response()->json(['status'=>'success']);
       endif;
     endif;
 
@@ -496,10 +508,10 @@ class SystemController extends Controller
     if($edit_payment_method_validator->fails()):
       return response()->json(['status'=> 'error', 'errors'=>$edit_payment_method_validator->errors()]);
     else:
-      $payment_method = Method::find($request->paymentMethodId);
-      $payment_method->name = $request->paymentMethodName;
-      if($payment_method->save()):
-        return response()->json(['status'=>'success', 'payment_method'=>$payment_method]);
+      if(Method::where('id', $request->paymentMethodId)->update([
+        'name' => $request->paymentMethodName
+      ])):
+        return response()->json(['status'=>'success']);
       endif;
     endif;
 
@@ -581,10 +593,10 @@ class SystemController extends Controller
     if($edit_payment_type_validator->fails()):
       return response()->json(['status'=> 'error', 'errors'=>$edit_payment_type_validator->errors()]);
     else:
-      $payment_type = Type::find($request->paymentTypeId);
-      $payment_type->name = $request->paymentTypeName;
-      if($payment_type->save()):
-        return response()->json(['status'=>'success', 'payment_type'=>$payment_type]);
+      if(Type::where('id', $request->paymentTypeId)->update([
+        'name' => $request->paymentTypeName
+      ])):
+        return response()->json(['status'=>'success']);
       endif;
     endif;
   }

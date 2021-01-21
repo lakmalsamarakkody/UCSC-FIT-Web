@@ -36,7 +36,7 @@ class RoleSeeder extends Seeder
                 'created_at'=> '2020-11-25 10:13:53',
                 'updated_at'=> '2020-11-25 10:13:53'],
 
-                ['name'=> 'Assistent Registar',
+                ['name'=> 'Assistant Registrar',
                 'description'=> 'eLC - UCSC',
                 'created_at'=> '2020-11-25 10:13:53',
                 'updated_at'=> '2020-11-25 10:13:53'],

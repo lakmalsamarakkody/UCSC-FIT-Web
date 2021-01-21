@@ -13,6 +13,7 @@ class hasPermission extends Model
     use SoftDeletes;
     use LogsActivity;
 
+    protected $table = 'role_permissions';
     protected static $logAttributes = ['*'];
     protected static $logName = 'user_permission';
 

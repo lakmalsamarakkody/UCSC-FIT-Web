@@ -13,6 +13,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ExamsController extends Controller
 {    
@@ -61,24 +62,37 @@ class ExamsController extends Controller
         return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'schedule_exams', 'search_exams', 'years', 'upcoming_schedules'));
     }
 
-    public function getExamList(Request $request)
+    // EXAMS TABLE(HELD)
+    public function getHeldExams(Request $request)
     {
+        $today = Carbon::today();
         if ($request->ajax()) {
-            $data = Schedule::latest()->get();
+            $data = Schedule::where('date', '<=', $today)->addSelect([
+                'exam' => Exam::select('year')->whereColumn('exam_id','exams.id'),
+                'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+                'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
+                'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')]);
             return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> 
-                <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                return $actionBtn;
-            })
-            ->rawColumns(['sction'])
+            ->rawColumns(['action'])
             ->make(true);
         }
     }
+    // /EXAMS TABLE(HELD)
+
+    // EXAMS TABLE(BEFORE RELEASE)
+    // public function getSchedulesBeforeRelease(Request $request)
+    // {
+    //     $today = Carbon::today();
+    //     if($request->ajax()) {
+    //         $data = Schedule::where('date', '>=' , $today)->addSelect([
+                
+    //         ]);
+    //     }
+
+    // }
+    // EXAMS TABLE(BEFORE RELEASE)
 
     // SCHEDULE
-
     // CREATE
     public function createExamSchedule(Request $request)
     {
@@ -194,6 +208,5 @@ class ExamsController extends Controller
             
     }
     // /DELETE
-
     // /SCHEDULE
 }

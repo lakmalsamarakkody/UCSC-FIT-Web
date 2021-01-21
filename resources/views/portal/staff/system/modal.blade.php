@@ -46,13 +46,7 @@
         <div class="modal-body">
           <h5>Permission List</h5>
           <div class="container-fluid">
-            <div class="row">
-              <div class="col-lg-3 col-md-6"><i class="fas fa-check"></i>view-dashboard</div>
-              <div class="col-lg-3 col-md-6"><i class="fas fa-times"></i>add-user</div>
-              <div class="col-lg-3 col-md-6"><i class="fas fa-times"></i>add-user</div>
-              <div class="col-lg-3 col-md-6"><i class="fas fa-times"></i>add-user</div>
-              <div class="col-lg-3 col-md-6"><i class="fas fa-times"></i>add-user</div>
-              <div class="col-lg-3 col-md-6"><i class="fas fa-times"></i>add-user</div>
+            <div id="permissionList" class="row">
             </div>
           </div>
         </div>
@@ -62,8 +56,8 @@
   <!--/ VIEW -->
 
   <!-- EDIT -->
-  <div class="modal fade" id="modal-edit-role" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+  <div class="modal fade" id="modal-edit-role" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">System Administrator</h5>
@@ -79,27 +73,21 @@
                 <div class="input-group-prepend">
                   <button class="btn btn-warning" type="button" onclick="InputRoleName_editable();"><i class="fas fa-edit pr-0"></i></button>
                 </div>
-                <input type="text" class="form-control" id="roleName" onfocusout="InputRoleName_readonly()" disabled/>
+                <input type="text" class="form-control" name="roleNameEdit" id="roleNameEdit" onfocusout="InputRoleName_readonly()" disabled/>
               </div>
             </div>
           
             <p class="mt-5">Permission List</p>
 
             <div class="container-fluid">
-              <div class="row">
-                <div class="col-lg-3 col-md-6"><input type="checkbox" name="permission" value="view-dashboard" checked> view-dashboard</div>
-                <div class="col-lg-3 col-md-6"><input type="checkbox" name="permission" value="view-dashboard"> add-user</div>
-                <div class="col-lg-3 col-md-6"><input type="checkbox" name="permission" value="view-dashboard"> add-user</div>
-                <div class="col-lg-3 col-md-6"><input type="checkbox" name="permission" value="view-dashboard"> add-user</div>
-                <div class="col-lg-3 col-md-6"><input type="checkbox" name="permission" value="view-dashboard"> add-user</div>
-                <div class="col-lg-3 col-md-6"><input type="checkbox" name="permission" value="view-dashboard"> add-user</div>
+              <div class="row" id="permissionListEdit">
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" onclick="edit_role()">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnEditUserRolePermissions">Update</button>
         </div>
       </div>
     </div>

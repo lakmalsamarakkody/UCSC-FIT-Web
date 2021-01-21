@@ -99,7 +99,7 @@
               </form>
 
               <div class="col-12 mt-5">
-                <table class="table">
+                <table class="table schedule-before-release-yajradt">
                   <thead class="text-center">
                     <tr>
                       <th>Exam</th>
@@ -112,8 +112,8 @@
                       <th>&nbsp;</th>
                     </tr>
                   </thead>
-                  <tbody class="text-center">
-                    @foreach ($upcoming_schedules as $schedule)
+                  <tbody class="text-center" id="shedulesBeforeReleaseTblBody">
+                    {{-- @foreach ($upcoming_schedules as $schedule)
                     <tr id="tbl-examSchedule-tr-{{$schedule->id}}">
                       <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
                       <td>FIT {{ $schedule->subject->code }}</td>
@@ -132,7 +132,7 @@
                         </div>
                       </td>
                     </tr>
-                    @endforeach
+                    @endforeach --}}
                   </tbody>
                 </table>
                 <div class="pt-4 float-right">
@@ -257,7 +257,7 @@
               <!-- /SEARCH -->
               
               <!-- HELD EXAM TABLE -->
-              <table class="table mb-4">
+              <table class="table mb-4 held-exam-schedules-yajradt">
                 <thead class="text-center">
                   <tr>
                     <th>Exam</th>
@@ -269,9 +269,9 @@
                     <th>Ended Time</th>
                   </tr>
                 </thead>
-                <tbody>
-                  @foreach ($exam_schedules as $schedule)
-                  <tr class="text-center">
+                <tbody class="text-center" id="heldScheduleTblBody">
+                  {{-- @foreach ($exam_schedules as $schedule)
+                  <tr>
                     <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
                     <td>FIT {{ $schedule->subject->code }}</td>
                     <td>{{ $schedule->subject->name }}</td>
@@ -280,12 +280,12 @@
                     <td>{{ $schedule->start_time }}</td>
                     <td>{{ $schedule->end_time }}</td>
                   </tr>   
-                  @endforeach
+                  @endforeach --}}
                 </tbody>
               </table>
               <div class="pt-4 float-right">
-                {{--{{ $exam_schedules->appends(['held' => $exam_schedules->currentPage()])->links("pagination::bootstrap-4") }} --}}
-                {{ $exam_schedules->withQueryString()->appends(['held' => $exam_schedules])->links("pagination::bootstrap-4") }}
+                {{-- {{ $exam_schedules->appends(['held' => $exam_schedules->currentPage()])->links("pagination::bootstrap-4") }}
+                {{ $exam_schedules->withQueryString()->appends(['held' => $exam_schedules])->links("pagination::bootstrap-4") }} --}}
               </div>
               <!-- /HELD EXAM TABLE -->
 

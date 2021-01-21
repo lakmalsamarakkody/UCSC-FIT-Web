@@ -48,7 +48,7 @@
             ],
             columnDefs: [
                 {
-                    targets: 3,
+                    targets: [3,4],
                     render: function ( data, type, row ) {
                         var color = 'dark';
                         var tag = 'times';
