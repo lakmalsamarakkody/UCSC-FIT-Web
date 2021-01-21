@@ -99,6 +99,7 @@ Route::get('/portal/staff/student/exams/application', [App\Http\Controllers\Port
 Route::get('/portal/staff/exams', [App\Http\Controllers\Portal\Staff\ExamsController::class, 'index'])->name('exams');
 Route::get('/portal/staff/exams/schedules/held',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'getHeldExams'])->name('exams.list');
 Route::get('/portal/staff/exams/schedules/before/release', [App\Http\Controllers\Portal\Staff\ExamsController::class, 'getSchedulesBeforeRelease']);
+Route::get('/portal/staff/exams/schedules/after/release', [App\Http\Controllers\Portal\Staff\ExamsController::class, 'getSchedulesAfterRelease']);
 Route::post('/portal/staff/exams/schedule/create',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'createExamSchedule'])->name('schedule.create');
 Route::post('/portal/staff/exams/schedule/edit/details',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'editScheduleGetDetails']);
 Route::post('/portal/staff/exams/schedule/edit',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'editExamSchedule']);
