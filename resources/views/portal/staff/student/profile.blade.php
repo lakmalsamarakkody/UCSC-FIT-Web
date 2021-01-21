@@ -1,4 +1,4 @@
-@extends('layouts.portal')
+@extends('layouts.profile')
 
 @section('content')
 
@@ -44,7 +44,11 @@
                     <table class="table">
                         <tr>
                             <th>Registration Number:</th>
-                            <td>{{ $student->reg_no }}</td>
+                            <td>{{ $student->reg_no ?? 'Not Registered Yet' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Registration Expire on:</th>
+                            <td>{{ $registration->registration_expire_at ?? 'Not Registered Yet' }}</td>
                         </tr>
                         <tr>
                             <th>Title:</th>
@@ -102,6 +106,14 @@
                             <td>{{ $student->passport }}</td>
                         </tr>
                         @endif
+                        <tr>
+                            <th>Email:</th>
+                            <td>{{ $student->user->email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Telephone No:</th>
+                            <td>+{{ $student->telephone_country_code }}{{ $student->telephone }}</td>
+                        </tr>
                     </table>
 
                   </div>
@@ -124,24 +136,66 @@
                               <i class="fa fa-user-alt-slash"></i>
                             </button>
                           </div>
-                      </div>   
-                  </div>
-                  <div class="col-lg-12">
-                      <hr>
-                      <div class="row">
-                          <div class="col-lg-6">
-                              <table class="table table-borderless">                        
+                          
+                              <table class="table table-borderless mt-4">                        
                                   <tr>
                                       <th>BIT Eligibility:</th>
+                                      @if( $student->flag->bit_eligible == 1 )                                        
                                       <td><h4><span class="badge badge-success">Eligible</span></h4></td>
-                                      <th>FIT Certificate:</th>
+                                      @else
                                       <td><h4><span class="badge badge-danger">Not Eligible</span></h4></td>
+                                      @endif
+                                      <th>FIT Certificate:</th>
+                                      @if($student->flag->fit_cert == 1)            
+                                      <td><h4><span class="badge badge-success">Eligible</span></h4></td>
+                                      @else
+                                      <td><h4><span class="badge badge-danger">Not Eligible</span></h4></td>                                        
+                                      @endif
                                   </tr>
                               </table>
-
-                          </div>                       
-
+                      </div>   
+                  </div>                                                            
+                  <div class="col-12 col-md-6">
+                      <h5>Permanent Address</h5>
+                      <hr>
+                      <div class="ml-lg-4">
+                          <p>{{ $student->permanent_house }}</p>  
+                          <p>{{ $student->permanent_address_line1 }}</p>
+                          <p>{{ $student->permanent_address_line2 }}</p>  
+                          <p>{{ $student->permanent_address_line3 }}</p>  
+                          <p>{{ $student->permanent_address_line4 }}</p>
+                          @if( $student->permanent_country_id == 67 )                                         
+                          <p>{{ $student->permanent_city_sl->name ?? ''}}</p>                                       
+                          <p>{{ $student->permanent_district_sl->name ?? ''}}</p>
+                          <p>{{ $student->permanent_country->name ?? ''}}</p>
+                          @else                                    
+                          <p>{{ $student->permanent_city_world->name ?? ''}}</p>
+                          <p>{{ $student->permanent_district_world->name ?? ''}}</p>
+                          <p>{{ $student->permanent_country->name ?? ''}}</p>
+                          @endif
                       </div>
+                  </div>                    
+                  <div class="col-12 col-md-6">
+                      <h5>Current Address</h5>
+                      <hr>
+                      <div class="ml-lg-4">
+                          <p>{{ $student->current_house }}</p>  
+                          <p>{{ $student->current_address_line1 }}</p>
+                          <p>{{ $student->current_address_line2 }}</p>  
+                          <p>{{ $student->current_address_line3 }}</p>  
+                          <p>{{ $student->current_address_line4 }}</p>
+                          @if( $student->current_country_id == 67 )                                         
+                          <p>{{ $student->current_city_sl->name ?? ''}}</p>                                       
+                          <p>{{ $student->current_district_sl->name ?? ''}}</p>
+                          <p>{{ $student->current_country->name ?? ''}}</p>
+                          @else                                    
+                          <p>{{ $student->current_city_world->name ?? ''}}</p>
+                          <p>{{ $student->current_district_world->name ?? ''}}</p>
+                          <p>{{ $student->current_country->name ?? ''}}</p>
+                          @endif
+                      </div>
+                  </div>
+                  <div class="col-lg-12">
                       <hr>
                       <div class="row">                        
                           <div class="col-lg-12">
