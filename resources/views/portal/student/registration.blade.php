@@ -58,28 +58,28 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="firstName">First Name</label>
-                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Start with Capital letter (e.g. Charith)" @if($student != NULL) value="{{ $student->first_name }}" @endif/>
+                                        <input type="text" class="form-control text-capitalize" id="firstName" name="firstName" placeholder="Start with Capital letter (e.g. Charith)" @if($student != NULL) value="{{ $student->first_name }}" @endif/>
                                         <span class="invalid-feedback" id="error-firstName" role="alert"></span>
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="middleNames">Middle Names</label>
-                                        <input type="text" class="form-control" id="middleNames" name="middleNames" placeholder="First Letters of name with Capital letter (e.g. Kumara Sampath)" @if($student != NULL) value="{{ $student->middle_names }}" @endif/>
+                                        <input type="text" class="form-control text-capitalize" id="middleNames" name="middleNames" placeholder="First Letters of name with Capital letter (e.g. Kumara Sampath)" @if($student != NULL) value="{{ $student->middle_names }}" @endif/>
                                         <span class="invalid-feedback" id="error-middleNames" role="alert"></span>
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="lastName">Name with Initials</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend col-4 px-0">
-                                                <input type="text" class="form-control" id="initials" name="initials" placeholder="e.g. CKS" @if($student != NULL) value="{{ $student->initials }}" @endif/>
+                                                <input type="text" class="form-control text-uppercase" id="initials" name="initials" placeholder="e.g. CKS" @if($student != NULL) value="{{ $student->initials }}" @endif/>
                                             </div>
-                                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" @if($student != NULL) value="{{ $student->last_name }}" @endif/>
+                                            <input type="text" class="form-control text-capitalize" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" @if($student != NULL) value="{{ $student->last_name }}" @endif/>
                                         </div>
                                         <span class="invalid-feedback" id="error-initials" role="alert"></span>
                                         <span class="invalid-feedback" id="error-lastName" role="alert"></span>
                                     </div>
                                     <div class="form-group col-xl-12 col-md-12">
                                         <label for="fullName">Full Name</label>
-                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="e.g. Charith Kumara Sampath Wickramarachchi" @if($student != NULL) value="{{ $student->full_name }}" @endif/>
+                                        <input type="text" class="form-control text-capitalize" id="fullName" name="fullName" placeholder="e.g. Charith Kumara Sampath Wickramarachchi" @if($student != NULL) value="{{ $student->full_name }}" @endif/>
                                         <span class="invalid-feedback" id="error-fullName" role="alert"></span>
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
