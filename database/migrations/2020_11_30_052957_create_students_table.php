@@ -53,7 +53,7 @@ class CreateStudentsTable extends Migration
             $table->integer('current_country_id')->nullable();
 
             $table->integer('telephone_country_code')->length(5)->nullable();
-            $table->integer('telephone')->length(16)->nullable();
+            $table->bigInteger('telephone')->length(16)->nullable();
             $table->string('designation')->nullable();
             $table->integer('reg_year')->length(4)->nullable();
             $table->timestamps();
