@@ -48,7 +48,7 @@
             ],
             columnDefs: [
                 {
-                    targets: 3,
+                    targets: [3,4],
                     render: function ( data, type, row ) {
                         var color = 'dark';
                         var tag = 'times';
@@ -63,22 +63,6 @@
                         return '<i class="fa fa-'+tag+'"></i>';
                     }
                 },
-                {
-                    targets: 4,
-                    render: function ( data, type, row ) {
-                        var color = 'dark';
-                        var tag = 'times';
-                        if (data == 0) {
-                            color = 'dark';
-                            tag = 'times';
-                        } 
-                        if (data == 1) {
-                            color = 'success';
-                            tag = 'check';
-                        }
-                        return '<i class="fa fa-'+tag+'"></i>';
-                    }
-                }
             ]   
         });
 
