@@ -150,7 +150,7 @@
 
 
                 <div class="col-lg-3 p-2 my-2 ml-0">
-                  <h4 class=" text-left p-0 m-0"><a href="">FIT | UCSC <br> <small>Staff Portal</small></a> </h5>
+                  <h4 class=" text-left p-0 m-0"><a href="{{ route('home') }}">FIT | UCSC <br> <small>Staff Portal</small></a> </h5>
                 </div>
 
 
