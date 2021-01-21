@@ -1,8 +1,10 @@
 <script type="text/javascript">
 
 // YAJRA TABLES
-// Upcoming Exams(before release)
+// UPCOMING EXAMS(before release)
 $(function(){
+
+  // Table
   var beforeReleaseTable = $('.schedules-before-release-yajradt').DataTable({
     processing: true,
     serverSide: true,
@@ -38,6 +40,12 @@ $(function(){
         data: 'end_time',
         name: 'end_time'
       },
+      {
+        data: 'id',
+        name: 'id',
+        orderable: false,
+        searchable: false
+      },
     ],
     columnDefs: [
       {
@@ -46,10 +54,133 @@ $(function(){
           return 'FIT ' + data;
         }
       },
+      {
+        targets: 7,
+        render: function(data, type, row) {
+          var btnGroup = '<div class="btn-group">'+
+          '<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" onclick="approve_schedule();"><i class="fas fa-file-signature"></i></button>'+
+          '<button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Request Approval" onclick="request_schedule_approval();"><i class="fas fa-share-square"></i></button>'+
+          '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" onclick="relase_individual_schedule();" ><i class="fas fa-hand-point-right"></i></button>'+
+          '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit" id="btnEditSchedule-'+data+'" onclick="edit_schedule_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>'+
+          '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteExamSchedule-'+data+'" onclick="delete_before_release('+data+');"><i class="fas fa-trash-alt"></i></button>'+
+          '</div>';
+          return btnGroup;
+        }
+      }
     ]
   });
+  // Table
+
+  // Edit
+  edit_schedule = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "Exam schedule will be update.",
+      confirmButtonText: "Yes, Update!",
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        // Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        // Form payload
+        var formData = new FormData($('#formEditSchedule')[0]);
+
+        // Edit exam schedule controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/edit') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnModalEditSchedule').attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in edit exam schedule ajax.');
+            $('#btnModalEditSchedule').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating edit schedule data.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in edit exam schedule.');
+              SwalDoneSuccess.fire({
+                title: "Updated!",
+                text: "Exam schedule updated.",
+              })
+              $('#modal-edit-schedule').modal('hide');
+              beforeReleaseTable.draw();
+            }
+          },
+          error: function(err){
+            console.log('Error in edit exam schedule ajax.')
+            $('#btnModalEditSchedule').removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Exam schedule has not been updated.",
+        })
+      }
+    })
+  }
+  // /Edit
+
+  // Delete
+  delete_before_release = (schedule_id) => {
+    SwalQuestionDanger.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Delete it!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Form payload
+        var formData = new FormData();
+        formData.append('schedule_id', schedule_id);
+
+        //Delete exam schedule controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/delete') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteExamSchedule-'+schedule_id).attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in delete exam schedule ajax.');
+            beforeReleaseTable.draw();
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Scheduled exam has been deleted.',
+            })
+          },
+          error: function(err){
+            console.log('Error in delete exam schedule ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Scheduled exam has not been deleted.',
+        })
+      }
+    })
+  }
+  // /Delete
 });
-// /Upcoming Exams(before release)
+// /UPCOMING EXAMS(before release)
 
 // Upcoming Exams(after release)
 $(function() {
@@ -153,7 +284,6 @@ $(function() {
 // /Held Exams
 // /YAJRA TABLES
 
-
 // CREATE EXAM SCHEDULE
   // CREATE
   create_schedule = () => {
@@ -255,115 +385,6 @@ $(function() {
     });
   }
   // /Fill edit modal with relevant data
-
-  edit_schedule = () => {
-    SwalQuestionSuccessAutoClose.fire({
-      title: "Are you sure ?",
-      text: "Exam schedule will be update.",
-      confirmButtonText: "Yes, Update!",
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-        // Remove previous validation error messages
-        $('.form-control').removeClass('is-invalid');
-        $('.invalid-feedback').html('');
-        $('.invalid-feedback').hide();
-        // Form payload
-        var formData = new FormData($('#formEditSchedule')[0]);
-
-        // Edit exam schedule controller
-        $.ajax({
-          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url: "{{ url('/portal/staff/exams/schedule/edit') }}",
-          type: 'post',
-          data: formData,
-          processData: false,
-          contentType: false,
-          beforeSend: function(){$('#btnModalEditSchedule').attr('disabled', 'disabled');},
-          success: function(data){
-            console.log('Success in edit exam schedule ajax.');
-            $('#btnModalEditSchedule').removeAttr('disabled', 'disabled');
-            if(data['errors']){
-              console.log('Errors in validating edit schedule data.');
-              $.each(data['errors'], function(key, value){
-                $('#error-'+key).show();
-                $('#'+key).addClass('is-invalid');
-                $('#error-'+key).append('<strong>'+value+'</strong>');
-              });
-            }
-            else if(data['status'] == 'success'){
-              console.log('Success in edit exam schedule.');
-              SwalDoneSuccess.fire({
-                title: "Updated!",
-                text: "Exam schedule updated.",
-              })
-              $('#modal-edit-schedule').modal('hide');
-              location.reload();
-            }
-          },
-          error: function(err){
-            console.log('Error in edit exam schedule ajax.')
-            $('#btnModalEditSchedule').removeAttr('disabled', 'disabled');
-            SwalSystemErrorDanger.fire();
-          }
-        });
-      }
-      else{
-        SwalNotificationWarningAutoClose.fire({
-          title: "Cancelled!",
-          text: "Exam schedule has not been updated.",
-        })
-      }
-    })
-  }
-  // /EDIT
-
-  // DELETE(BEFORE RELEASE)
-  delete_before_release = (schedule_id) => {
-    SwalQuestionDanger.fire({
-    title: "Are you sure?",
-    text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, Delete it!',
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-        //Form payload
-        var formData = new FormData();
-        formData.append('schedule_id', schedule_id);
-
-        //Delete exam schedule controller
-        $.ajax({
-          headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
-          url: "{{ url('/portal/staff/exams/schedule/delete') }}",
-          type: 'post',
-          data: formData,
-          processData: false,
-          contentType: false,
-          beforeSend: function(){$('#btnDeleteExamSchedule-'+schedule_id).attr('disabled', 'disabled');},
-          success: function(data){
-            console.log('Success in delete exam schedule ajax.');
-            //Remove deleted table row
-            $('#tbl-examSchedule-tr-'+schedule_id).remove();
-            SwalDoneSuccess.fire({
-              title: 'Deleted!',
-              text: 'Scheduled exam has been deleted.',
-            })
-          },
-          error: function(err){
-            console.log('Error in delete exam schedule ajax.');
-            SwalSystemErrorDanger.fire();
-          }
-        });
-      }
-      else{
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Scheduled exam has not been deleted.',
-        })
-      }
-    })
-  }
-  // /DELETE(BEFORE RELEASE)
 
   // APPROVE SCHEDULE
   approve_schedule = () => {
