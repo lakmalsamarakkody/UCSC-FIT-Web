@@ -98,7 +98,7 @@ class AccountController extends Controller
             if(Mail::to($email)->send(new ChangeEmail($details))):
                 return response()->json(['error'=>'error']);
             else:
-                if(User::where('id',$user_id)->update(['email_change_token'=> $token])):
+                if(User::where('id',$user_id)->update(['email_change_token'=> $token,'email_change'=> $email])):
                     return response()->json(['success'=>'success']);
                 endif;
             endif;
@@ -113,8 +113,9 @@ class AccountController extends Controller
     {
         $user = User::find($id);
         $token_old = $user->email_change_token;
-        if($token == $token_old):
-            if(User::where('id',$user->id)->update(['email'=>$email, 'email_change_token'=>NULL])):
+        $email_change = $user->email_change;
+        if($token == $token_old && $email == $email_change):
+            if(User::where('id',$user->id)->update(['email'=>$email_change, 'email_change_token'=>NULL, 'email_change'=>NULL])):
                 return redirect('/email/changed/success');
             endif;
         else:
