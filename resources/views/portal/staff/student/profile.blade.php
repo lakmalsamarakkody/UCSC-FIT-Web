@@ -16,8 +16,8 @@
            
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb ">
-              <li class="breadcrumb-item"><a href="{{ url('/portal/staff/') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ url('/portal/staff/') }}">Students</a></li>
+              <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="">Students</a></li>
               <li class="breadcrumb-item active" aria-current="page">Student Profile</li>
             </ol>
           </nav>
