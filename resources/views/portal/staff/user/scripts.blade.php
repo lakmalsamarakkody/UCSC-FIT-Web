@@ -58,7 +58,7 @@
             }
             return '<span class="text-'+color+' font-weight-bold">'+status+'</span>';
           }
-        },
+        }
       ]
     });
 

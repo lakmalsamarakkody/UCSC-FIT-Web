@@ -66,9 +66,11 @@ Route::get('/email/changed/success', [App\Http\Controllers\Portal\EmailChanged::
 */
 Route::get('/portal/staff/', [App\Http\Controllers\Portal\Staff\HomeController::class, 'index'])->name('home');
 
+// STUDENT PAGE
 Route::get('/portal/staff/students', [App\Http\Controllers\Portal\Staff\StudentController::class, 'index'])->name('students');
 Route::get('student-list',[App\Http\Controllers\Portal\Staff\StudentController::class, 'getStudentList'])->name('student.list');
-Route::get('/portal/staff/student/profile',[App\Http\Controllers\Portal\Staff\StudentController::class, 'viewStudent'])->name('student.profile');
+Route::get('/portal/staff/student/profile/{id}/',[App\Http\Controllers\Portal\Staff\StudentController::class, 'viewStudent'])->name('student.profile');
+// /STUDENT PAGE
 
 // HOME PAGE
 // REGISTRATION CARDS

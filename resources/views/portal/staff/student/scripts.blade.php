@@ -40,8 +40,8 @@
                     name: 'fit_cert'
                 },
                 {
-                    data: 'action', 
-                    name: 'action', 
+                    data: 'student_id', 
+                    name: 'student_id', 
                     orderable: false, 
                     searchable: false
                 },
@@ -78,6 +78,13 @@
                         }
                         return '<i class="fa fa-'+tag+'"></i>';
                     }
+                },
+                {
+                    targets: 5,
+                    render: function ( data, type, row ) {
+                        var button = '<a onclick="view_student('+data+');" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>'
+                        return button;
+                    }
                 }
             ]   
         });
@@ -87,9 +94,17 @@
 
         }
 
-        view_student = () => {
-            // alert('asda');
-            window.open("{{ route('student.profile') }}", '_blank')
+        $(".view-student").on('click',function() {
+            alert ('sdfsd');
+            var id = $(this).closest("tr").find('.id').text();   
+                       alert (id);
+        });
+
+        view_student = (id) => {
+            var url = '{{ route("student.profile", ":id") }}';
+            url = url.replace(':id', id);
+                       alert (id)
+            window.open( url, '_blank')
         }
         
         $(".collapse.show").each(function(){

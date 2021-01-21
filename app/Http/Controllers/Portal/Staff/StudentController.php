@@ -81,17 +81,18 @@ class StudentController extends Controller
             $data = $data->get();
             return DataTables::of($data)
             ->addIndexColumn()
-            ->addColumn('action', function($row){
-                $actionBtn = '<a onclick="view_student();" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>';
-                return $actionBtn;
-            })
+            // ->addColumn('action', function($row){
+            //     $actionBtn = '<a onclick="view_student();" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>';
+            //     return $actionBtn;
+            // })
             ->rawColumns(['action'])
             ->make(true);
         }
     }
 
-    public function viewStudent()
+    public function viewStudent($id)
     {
-        return view('portal/staff/student/profile');
+        $student = Student::find($id);
+        return view('portal/staff/student/profile', compact('student'));
     }
 }

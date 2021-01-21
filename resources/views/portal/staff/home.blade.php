@@ -124,7 +124,7 @@
                         <tr class="text-center">
                           <td>{{ $upcomingExam->date }}</td>
                           <td>{{ $upcomingExam->subject->name }}</td>
-                          <td>{{ $upcomingExam->type->exam_type }}</td>
+                          <td>{{ $upcomingExam->type->name }}</td>
                         </tr>
                       @endforeach
                     </tbody>
@@ -157,7 +157,7 @@
                         <tr class="text-center">
                           <td>{{ $heldExam->date }}</td>
                           <td>{{ $heldExam->subject->name }}</td>
-                          <td>{{ $heldExam->type->exam_type }}</td>
+                          <td>{{ $heldExam->type->name }}</td>
                         </tr>
                       @endforeach
                     </tbody>

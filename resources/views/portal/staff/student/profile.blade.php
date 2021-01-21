@@ -41,38 +41,74 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-lg-8">
-                      <table class="table">
-                          <tr>
-                              <th>Registration Number:</th>
-                              <td>John John</td>
-                          </tr>
-                          <tr>
-                              <th>Email:</th>
-                              <td>John@gmail.com</td>
-                          </tr>
-                          <tr>
-                              <th>Telephone No:</th>
-                              <td>+94777156654</td>
-                          </tr>
-                          <tr>
-                              <th>Title:</th>
-                              <td id="title">Mr.</td>
-                          </tr>
-                          <tr>
-                              <th>Full Name:</th>
-                              <td id="first_name">John John John John John John John John Doe</td>
-                          </tr>
-                          <tr>
-                              <th>Name with Initials:</th>
-                              <td id="middle_names">J J J J J J J J Doe</td>
-                          </tr>
-                      </table>
+                    <table class="table">
+                        <tr>
+                            <th>Registration Number:</th>
+                            <td>{{ $student->reg_no }}</td>
+                        </tr>
+                        <tr>
+                            <th>Title:</th>
+                            <td>{{ $student->title }}.</td>
+                        </tr>
+                        <tr>
+                            <th>First Name:</th>
+                            <td>{{ $student->first_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Middle Names:</th>
+                            <td>{{ $student->middle_names }}</td>
+                        </tr>
+                        <tr>
+                            <th>Full Name:</th>
+                            <td>{{ $student->full_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Name with Initials:</th>
+                            <td>{{ $student->initials }} {{ $student->last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Gender:</th>
+                            <td>@if($student->gender == 'Male')<i class="fa fa-lg fa-male"></i>@elseif($student->gender == 'Female')<i class="fa fa-lg fa-female"></i>@endif</td>
+                        </tr>
+                        <tr>
+                            <th>Date of Birth:</th>
+                            <td>{{ $student->dob }}</td>
+                        </tr>
+                        <tr>
+                            <th>Citizenship:</th>
+                            <td>{{ $student->citizenship }}</td>
+                        </tr>
+                        @if($student->nic_old)                                        
+                        <tr>
+                            <th>NIC (old):</th>
+                            <td>{{ $student->nic_old }}</td>
+                        </tr>
+                        @endif
+                        @if($student->nic_new)                                     
+                        <tr>
+                            <th>NIC (new):</th>
+                            <td>{{ $student->nic_new }}</td>
+                        </tr>
+                        @endif
+                        @if($student->postal)                                     
+                        <tr>
+                            <th>Postal ID:</th>
+                            <td>{{ $student->postal }}</td>
+                        </tr>
+                        @endif
+                        @if($student->passport)                                     
+                        <tr>
+                            <th>Passport No:</th>
+                            <td>{{ $student->passport }}</td>
+                        </tr>
+                        @endif
+                    </table>
 
                   </div>
-                  <div class="col-lg-4 ">  
-                      <div class="row">                               
-                          <div class="img my-2 text-center">
-                              <img src="{{ asset('storage/portal/avatar/'.$student->user_id.'/'.$student->user->profile_pic)}}" alt="Avatar" class="avatar"width="250px">
+                  <div class="col-md-4 align-middle">  
+                      <div class="row  justify-content-center">                               
+                          <div class="img mt-5 mb-2  position-relative">
+                              <img src="{{ asset('storage/portal/avatar/'.$student->user_id.'/'.$student->user->profile_pic)}}" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
                           </div>
                           <div class="text-center w-100 ">
                             <button onclick="reset_password()" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="Reset Password">
