@@ -1,4 +1,50 @@
 <script type="text/javascript">
+
+// YAJRA TABLES
+// Held Exams
+$(function() {
+  var heldTable = $('.held-exam-schedule-yajradt').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: {
+      url: "{{ url('/portal/staff/exams/exam-list') }}",
+    },
+    columns: [
+      {
+        data: 'exam_id',
+        name: 'exam_id'
+      },
+      {
+        data: 'subject_code',
+        name: 'subject_code'
+      },
+      {
+        data: 'subject_name',
+        name: 'subject_name'
+      },
+      {
+        data: 'exam_type',
+        name: 'exam_type'
+      },
+      {
+        data: 'date',
+        name: 'date'
+      },
+      {
+        data: 'start_time',
+        name: 'start_time'
+      },
+      {
+        data: 'end_time',
+        name: 'end_time'
+      },
+    ]
+  })
+})
+// /Held Exams
+// /YAJRA TABLES
+
+
 // CREATE EXAM SCHEDULE
   // CREATE
   create_schedule = () => {

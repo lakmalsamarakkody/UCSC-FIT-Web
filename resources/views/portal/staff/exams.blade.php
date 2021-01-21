@@ -257,7 +257,7 @@
               <!-- /SEARCH -->
               
               <!-- HELD EXAM TABLE -->
-              <table class="table mb-4">
+              <table class="table mb-4 held-exam-schedule-yajradt">
                 <thead class="text-center">
                   <tr>
                     <th>Exam</th>
@@ -269,9 +269,9 @@
                     <th>Ended Time</th>
                   </tr>
                 </thead>
-                <tbody>
-                  @foreach ($exam_schedules as $schedule)
-                  <tr class="text-center">
+                <tbody class="text-center" id="heldScheduleTblBody">
+                  {{-- @foreach ($exam_schedules as $schedule)
+                  <tr>
                     <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
                     <td>FIT {{ $schedule->subject->code }}</td>
                     <td>{{ $schedule->subject->name }}</td>
@@ -280,7 +280,7 @@
                     <td>{{ $schedule->start_time }}</td>
                     <td>{{ $schedule->end_time }}</td>
                   </tr>   
-                  @endforeach
+                  @endforeach --}}
                 </tbody>
               </table>
               <div class="pt-4 float-right">
