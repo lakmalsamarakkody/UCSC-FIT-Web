@@ -1,18 +1,30 @@
 <script type="text/javascript">
 
 // YAJRA TABLES
+
+// Upcoming Exams(before release)
+// $(function(){
+//   var beforeReleaseTable = $('.schedule-before-release-yajradt').DataTable({
+//     processing: true,
+//     serverSide: true,
+//     ajax: {
+//       url: "{{ url('') }}",
+//     },
+//   })
+// })
+// Upcoming Exams(before release)
 // Held Exams
 $(function() {
-  var heldTable = $('.held-exam-schedule-yajradt').DataTable({
+  var heldTable = $('.held-exam-schedules-yajradt').DataTable({
     processing: true,
     serverSide: true,
     ajax: {
-      url: "{{ url('/portal/staff/exams/exam-list') }}",
+      url: "{{ url('/portal/staff/exams/schedules/held') }}",
     },
     columns: [
       {
-        data: 'exam_id',
-        name: 'exam_id'
+        data: 'exam',
+        name: 'exam'
       },
       {
         data: 'subject_code',
@@ -38,6 +50,14 @@ $(function() {
         data: 'end_time',
         name: 'end_time'
       },
+    ],
+    columnDefs: [
+      {
+        targets: 1,
+        render : function(data, type, row) {
+          return 'FIT '+data;
+        }
+      }
     ]
   })
 })
