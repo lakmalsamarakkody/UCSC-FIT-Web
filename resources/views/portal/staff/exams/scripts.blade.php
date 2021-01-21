@@ -43,7 +43,7 @@ $(function(){
       {
         targets: 1,
         render: function(data, type, row) {
-          return 'FIT' + data;
+          return 'FIT ' + data;
         }
       },
     ]
@@ -52,6 +52,54 @@ $(function(){
 // /Upcoming Exams(before release)
 
 // Upcoming Exams(after release)
+$(function() {
+
+  var afterReleaseTable = $('.schedules-after-release-yajradt').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: {
+      url: "{{ url('/portal/staff/exams/schedules/after/release') }}",
+    },
+    columns: [
+      {
+        data: 'exam',
+        name: 'exam'
+      },
+      {
+        data: 'subject_code',
+        name: 'subject_code'
+      },
+      {
+        data: 'subject_name',
+        name: 'subject_name'
+      },
+      {
+        data: 'exam_type',
+        name: 'exam_type'
+      },
+      {
+        data: 'date',
+        name: 'date'
+      },
+      {
+        data: 'start_time',
+        name: 'start_time'
+      },
+      {
+        data: 'end_time',
+        name: 'end_time'
+      },
+    ],
+    columnDefs: [
+      {
+        targets: 1,
+        render: function(data, type, row) {
+          return 'FIT ' + data;
+        }
+      }
+    ]
+  });
+});
 // /Upcoming Exams(after release)
 
 // Held Exams

@@ -80,6 +80,24 @@ class ExamsController extends Controller
     }
     // SCHEDULES TABLE(BEFORE RELEASE)
 
+    // SCHEDULES TABLE(AFTER RELEASE)
+    public function getSchedulesAfterRelease(Request $request)
+    {
+        $today = Carbon::today();
+        if($request->ajax()) {
+            $data = Schedule::where('date', '>=' , $today)->addSelect([
+                'exam' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
+                'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+                'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+                'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
+            ]);
+            return DataTables::of($data)
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+    }
+    // /SCHEDULES TABLE(AFTER RELEASE)
+
     // EXAMS TABLE(HELD)
     public function getHeldExams(Request $request)
     {

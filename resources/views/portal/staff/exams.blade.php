@@ -152,7 +152,7 @@
           <div class="card">
             <div class="card-header">Exam Schedules</div>
             <div class="card-body">
-              <table class="table">
+              <table class="table schedules-after-release-yajradt">
                 <thead class="text-center">
                   <tr>
                     <th>Exam</th>
@@ -165,8 +165,8 @@
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
-                <tbody>
-                  @foreach ($upcoming_schedules as $schedule)
+                <tbody class="text-center" id="shedulesAfterReleaseTblBody">
+                  {{-- @foreach ($upcoming_schedules as $schedule)
                   <tr class="text-center">
                     <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
                     <td>FIT {{ $schedule->subject->code }}</td>
@@ -182,7 +182,7 @@
                       </div>
                     </td>
                   </tr>
-                  @endforeach
+                  @endforeach --}}
                 </tbody>
               </table>
 
