@@ -49,7 +49,7 @@
                     <td>{{ $role->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-success" id="btnViewUserRole-{{$role->id}}" onclick="view_role_modal_invoke({{$role->id}});"><i class="fas fa-eye"></i></button>
+                        <button type="button" class="btn btn-outline-success" id="btnViewUserRole-{{$role->id}}" onclick="view_role_modal_invoke({{$role->id}});"><i class="fas fa-eye"></i> <span id="spinnerBtnViewUserRole-{{$role->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                         <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal-edit-role"><i class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-outline-danger" id="btnDeleteUserRole-{{$role->id}}" onclick="delete_role({{$role->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>

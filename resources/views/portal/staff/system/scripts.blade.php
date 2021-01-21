@@ -28,15 +28,34 @@
       data: formData,
       processData: false,
       contentType: false,
-      beforeSend: function(){$('#btnViewUserRole-'+role_id).attr('disabled', 'disabled');},
+      beforeSend: function(){
+        $('#btnViewUserRole-'+role_id).attr('disabled', 'disabled');
+        $("#spinnerBtnViewUserRole-"+role_id).removeClass('d-none');
+      },
       success: function(data){
         console.log('Success in view role get details ajax.');
+        $("#spinnerBtnViewUserRole-"+role_id).addClass('d-none');
+        $('#btnViewUserRole-'+role_id).removeAttr('disabled', 'disabled');
+        $('#permissionList').html("");
         if(data['status'] == 'success'){
-          $('#btnViewUserRole-'+role_id).removeAttr('disabled', 'disabled');
-          
+          let icon = "";
+          $.each(data['arrayPermissions'], function( index, value ) {
+            if(value['permission_status'] == true){
+              icon = "check";
+            }else{
+              icon = "times";
+            }
+            $('#permissionList').append("<div class='col-lg-3 col-md-6'><i class='fas fa-"+icon+ "'></i>" + value['permission_name'] +"</div>")
+            //console.log( index + ": "+ value['permission_name']+ " : " + value['permission_status'] );
+          });
+          $('#modal-view-role').modal('show');
         }
-        
-      }
+      },
+      error: function(err){
+        console.log('Error in view role get details ajax.');
+        $("#spinnerBtnViewUserRole-"+role_id).addClass('d-none');
+        $('#btnViewUserRole-'+role_id).removeAttr('disabled', 'disabled');
+      },
     })
   }
   // /VIEW

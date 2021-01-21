@@ -46,13 +46,7 @@
         <div class="modal-body">
           <h5>Permission List</h5>
           <div class="container-fluid">
-            <div class="row">
-              <div class="col-lg-3 col-md-6"><i class="fas fa-check"></i>view-dashboard</div>
-              <div class="col-lg-3 col-md-6"><i class="fas fa-times"></i>add-user</div>
-              <div class="col-lg-3 col-md-6"><i class="fas fa-times"></i>add-user</div>
-              <div class="col-lg-3 col-md-6"><i class="fas fa-times"></i>add-user</div>
-              <div class="col-lg-3 col-md-6"><i class="fas fa-times"></i>add-user</div>
-              <div class="col-lg-3 col-md-6"><i class="fas fa-times"></i>add-user</div>
+            <div id="permissionList" class="row">
             </div>
           </div>
         </div>

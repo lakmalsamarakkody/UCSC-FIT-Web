@@ -68,7 +68,19 @@ class SystemController extends Controller
   // VIEW FUNCTION
   public function viewUserRoleGetDetails(Request $request)
   {
-    
+    $arrayPermissions = array();
+    $permissions = Permission::get();
+    $role = Role::find($request->role_id);
+    foreach($permissions as $permission):
+      $hasPermission = $role->hasPermission()->where('permission_id', $permission->id)->first();
+      if($hasPermission != NULL):
+        $currentPermission = array(array('permission_id' => $permission->id, 'permission_name'=> $permission->name, 'permission_status'=>true));
+      else:
+        $currentPermission = array(array('permission_id' => $permission->id, 'permission_name'=> $permission->name, 'permission_status'=>false));
+      endif;
+      $arrayPermissions = array_merge($arrayPermissions, $currentPermission);
+    endforeach;
+    return response()->json(['status'=>'success', 'role'=>$role, 'arrayPermissions'=>$arrayPermissions]);
   }
   // /VIEW FUNCTION
 
