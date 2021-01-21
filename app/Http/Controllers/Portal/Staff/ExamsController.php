@@ -63,16 +63,14 @@ class ExamsController extends Controller
 
     public function getExamList(Request $request)
     {
+        $today = Carbon::today();
         if ($request->ajax()) {
-            $data = Schedule::latest()->get();
+            $data = Schedule::where('date', '<=', $today)->addSelect([
+                'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+                'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
+                'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')]);
             return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> 
-                <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                return $actionBtn;
-            })
-            ->rawColumns(['sction'])
+            ->rawColumns(['action'])
             ->make(true);
         }
     }
