@@ -95,7 +95,7 @@
         }
 
         $(".view-student").on('click',function() {
-            alert ('sdfsd');
+            // alert ('sdfsd');
             var id = $(this).closest("tr").find('.id').text();   
                        alert (id);
         });
@@ -103,7 +103,7 @@
         view_student = (id) => {
             var url = '{{ route("student.profile", ":id") }}';
             url = url.replace(':id', id);
-                       alert (id)
+                    //    alert (id)
             window.open( url, '_blank')
         }
         
