@@ -3,9 +3,16 @@
 namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ChangeEmail;
 use App\Models\Student;
+use App\Models\Student\Registration;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
@@ -93,6 +100,45 @@ class StudentController extends Controller
     public function viewStudent($id)
     {
         $student = Student::find($id);
-        return view('portal/staff/student/profile', compact('student'));
+        $registration = Registration::where('student_id', $id)->latest()->first();
+        return view('portal/staff/student/profile', compact('student', 'registration'));
     }
+
+        // UPDATE EMAIL
+        public function emailUpdateRequest(Request $request)
+        {
+           
+            $validator = Validator::make($request->all(), 
+                [     
+                    'email'=> ['required', 'email', 'unique:users']
+                ],
+                [
+                    'unique'=>'Email already in use'
+                ]
+            );
+            if($validator->fails()):
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            else:
+                $email =  $request->email;
+                $token = Str::random(32);
+                $user_id = Student::where('id', $request->id)->first()->user_id;
+    
+                $details = [
+                    'id' => $user_id,
+                    'email' => $email,
+                    'token' => $token
+                ];
+    
+                if(Mail::to($email)->send(new ChangeEmail($details))):
+                    return response()->json(['error'=>'error']);
+                else:
+                    if(User::where('id',$user_id)->update(['email_change_token'=> $token])):
+                        return response()->json(['success'=>'success']);
+                    endif;
+                endif;
+    
+            endif;
+            return response()->json(['error'=>'error']);
+        }
+        // /UPDATE EMAIL
 }
