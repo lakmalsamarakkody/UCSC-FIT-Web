@@ -115,8 +115,8 @@
                 <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                 <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
                 <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
-                <li id="exams"><a href="{{ route('student.exams') }}">Exams</a></li>
-                <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
+                {{-- <li id="exams"><a href="{{ route('student.exams') }}">Exams</a></li>
+                <li id="results"><a href="{{ route('student.results') }}">Results</a></li> --}}
               </ul>
 
                 <div class="logout-menu w-100 text-center " style="display:flex; align-items:flex-end;">
@@ -181,8 +181,8 @@
                     <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                     <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
                     <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
-                    <li id="exams"><a href="{{ route('student.exams') }}">Exams</a></li>
-                    <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
+                    {{-- <li id="exams"><a href="{{ route('student.exams') }}">Exams</a></li>
+                    <li id="results"><a href="{{ route('student.results') }}">Results</a></li> --}}
                   </ul>
                 </div>
               </div>
