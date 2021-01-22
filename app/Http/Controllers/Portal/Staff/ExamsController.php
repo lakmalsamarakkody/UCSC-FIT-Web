@@ -24,7 +24,7 @@ class ExamsController extends Controller
         $this->middleware('staff.auth');
     }
     
-    public function index(Request $request)
+    public function index()
     {
         // $request->validate([
         //     'selectSearchSubject' => 'integer',
@@ -41,21 +41,21 @@ class ExamsController extends Controller
         $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->paginate(5,['*'], 'upcoming');
         //$released_upcoming_scheduless = Schedule::where('date', '>=', $today)->orderBy('date', 'asc')->paginate(5,['*'],'released_schedule');
 
-        if ($request->selectSearchExamYear != null) {
-            $exam_schedules = $exam_schedules->whereYear('date', $request->selectSearchExamYear);
-        }
-        if ($request->selectSearchExam != null) {
-            $exam_schedules = $exam_schedules->where('exam_id', $request->selectSearchExam);
-        }
-        if($request->selectSearchExamDate != null) {
-            $exam_schedules = $exam_schedules->where('date', $request->selectSearchExamDate);
-        }
-        if ($request->selectSearchSubject != null) {
-            $exam_schedules = $exam_schedules->where('subject_id', $request->selectSearchSubject);
-        }
-        if ($request->selectSearchExamType != null) {
-            $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
-        }
+        // if ($request->selectSearchExamYear != null) {
+        //     $exam_schedules = $exam_schedules->whereYear('date', $request->selectSearchExamYear);
+        // }
+        // if ($request->selectSearchExam != null) {
+        //     $exam_schedules = $exam_schedules->where('exam_id', $request->selectSearchExam);
+        // }
+        // if($request->selectSearchExamDate != null) {
+        //     $exam_schedules = $exam_schedules->where('date', $request->selectSearchExamDate);
+        // }
+        // if ($request->selectSearchSubject != null) {
+        //     $exam_schedules = $exam_schedules->where('subject_id', $request->selectSearchSubject);
+        // }
+        // if ($request->selectSearchExamType != null) {
+        //     $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
+        // }
         $exam_schedules = $exam_schedules->paginate(5,['*'], 'held');
         //$upcoming_schedules = $upcoming_schedules->paginate(5,['*'],'upcoming');
         //$exam_schedules = $exam_schedules->get();
@@ -108,6 +108,28 @@ class ExamsController extends Controller
                 'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
                 'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')]);
+            
+            if($request->year != null) {
+                $data = $data->whereYear('date', $request->year);
+            }
+            if($request->exam != null) {
+                $data = $data->where('exam_id',$request->exam);
+            }
+            if($request->date != null) {
+                $data = $data->where('date', $request->date);
+            }
+            if($request->subject != null) {
+                $data = $data->where('subject_id', $request->subject);
+            }
+            if($request->type != null) {
+                $data = $data->where('exam_type_id', $request->type);
+            } 
+            if($request->year != null || $request->exam != null || $request->date != null || $request->subject != null || $request->type != null ) {
+                $data = $data->get();
+            }
+            else {
+                $data = $data->orderBy('id')->get(50);
+            }
             return DataTables::of($data)
             ->rawColumns(['action'])
             ->make(true);

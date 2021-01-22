@@ -178,7 +178,7 @@
                     <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" data-toggle="modal" data-target="#postponeExam"><i class="fas fa-calendar-plus"></i></button>
-                        <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" onclick="delete_after_release()"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" onclick="delete_after_release();"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </td>
                   </tr>
@@ -197,60 +197,51 @@
             <div class="card-header">Exams Held</div>
             <div class="card-body">
               <!-- SEARCH -->
-              <form action="{{ route('exams.held.search') }}" method="get">
-              @csrf
+              <form>
                 <div class="form-row mb-5">
                   <div class="form-group col-xl-2 col-lg-4">
-                    <label for="selectSearchExamYear">Year</label>
-                    <select name="selectSearchExamYear" id="selectSearchExamYear" class="form-control">
-                      <option value="" selected disabled>Select Year</option>
+                    <label for="searchExamYear">Year</label>
+                    <select name="searchExamYear" id="searchExamYear" class="form-control">
+                      <option value="" selected>Select Year</option>
                       @foreach ($years as $year)
                           <option value="{{$year->year}}">{{$year->year}}</option>
                       @endforeach
                     </select>
                   </div>
                   <div class="form-group col-xl-2 col-lg-4">
-                    <label for="selectSearchExam">Exam</label>
-                    <select name="selectSearchExam" id="selectSearchExam" class="form-control">
-                      <option value="" selected disabled>Select Exam</option>
+                    <label for="searchExam">Exam</label>
+                    <select name="searchExam" id="searchExam" class="form-control">
+                      <option value="" selected>Select Exam</option>
                       @foreach ($search_exams as $exam)   
                         <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
                       @endforeach
                     </select>
                   </div>
                   <div class="form-group col-xl-2 col-lg-4">
-                    <label for="selectSearchExamDate">Date</label>
-                    <input type="date" class="form-control" id="selectSearchExamDate" name="selectSearchExamDate" />
+                    <label for="searchExamDate">Date</label>
+                    <input type="date" class="form-control" id="searchExamDate" name="searchExamDate" />
                   </div>
                   <div class="form-group col-xl-2 col-lg-6">
-                    <label for="selectSearchSubject">Subject</label>
-                    <select name="selectSearchSubject" id="selectSearchSubject" class="form-control">
-                      <option value="" selected disabled>Select Subject</option>
+                    <label for="searchSubject">Subject</label>
+                    <select name="searchSubject" id="searchSubject" class="form-control">
+                      <option value="" selected>Select Subject</option>
                       @foreach ($subjects as $subject)
-                        @if(old('selectSearchSubject') == $subject->id)
-                          <option value="{{ $subject->id }}" selected>{{ $subject->name }}</option>
-                        @else
                           <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                        @endif
                       @endforeach
                     </select>
                   </div>
                   <div class="form-group col-xl-2 col-lg-6">
-                    <label for="selectSearchExamType">Exam Type</label>
-                    <select name="selectSearchExamType" id="selectSearchExamType" class="form-control">
-                      <option value="" selected disabled>Select Type</option>
+                    <label for="searchExamType">Exam Type</label>
+                    <select name="searchExamType" id="searchExamType" class="form-control">
+                      <option value="" selected>Select Type</option>
                         @foreach ($exam_types as $type)
-                          @if(old('selectSearchExamType') == $type->id)
-                            <option value="{{ $type->id }}" selected>{{ $type->name }}</option>
-                          @else
                           <option value="{{ $type->id }}">{{ $type->name }}</option>
-                          @endif
                         @endforeach
                     </select>
                   </div>
                   <div class="form-group col-xl-2 col-lg-12">
                     <label for="btnSearchExamSchedule">&nbsp;</label>
-                    <button type="submit" class="btn btn-outline-primary form-control" id="btnSearchExamSchedule" name="btnSearchExamSchedule"><i class="fa fa-search"></i> Search</button>
+                    <button type="button" class="btn btn-outline-primary form-control" onclick="searchHeldExams();" id="btnSearchExamSchedule" name="btnSearchExamSchedule"><i class="fa fa-search"></i> Search</button>
                   </div>
                 </div>
               </form>
@@ -283,10 +274,10 @@
                   @endforeach --}}
                 </tbody>
               </table>
-              <div class="pt-4 float-right">
-                {{-- {{ $exam_schedules->appends(['held' => $exam_schedules->currentPage()])->links("pagination::bootstrap-4") }}
-                {{ $exam_schedules->withQueryString()->appends(['held' => $exam_schedules])->links("pagination::bootstrap-4") }} --}}
-              </div>
+              {{-- <div class="pt-4 float-right">
+                {{ $exam_schedules->appends(['held' => $exam_schedules->currentPage()])->links("pagination::bootstrap-4") }}
+                {{ $exam_schedules->withQueryString()->appends(['held' => $exam_schedules])->links("pagination::bootstrap-4") }}
+              </div> --}}
               <!-- /HELD EXAM TABLE -->
 
           </div>
