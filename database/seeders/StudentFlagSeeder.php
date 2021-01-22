@@ -30,7 +30,11 @@ class StudentFlagSeeder extends Seeder
                     [
                         'student_id'=>$student->id,
                         'bit_eligible'=>$bit,
+                        'info_complete' => $faker->randomElement($array = array (true, false)),
+                        'info_editable' => $faker->randomElement($array = array (true, false)),
+                        'declaration' => $faker->randomElement($array = array (true, false)),
                         'fit_cert'=>$fit,
+                        'phase_id'=>'1',
                     ]
                 )
             );
