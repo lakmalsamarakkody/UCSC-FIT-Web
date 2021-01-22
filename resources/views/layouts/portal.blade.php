@@ -116,7 +116,9 @@
                 <li id="exams"><a href="{{ route('exams') }}">Exams</a></li>
                 <li id="results"><a href="{{ route('results') }}">Results</a></li>
                 <li id="users"><a href="{{ route('users') }}">Users</a></li>
-                <li id="system"><a href="{{ route('system') }}">System</a></li>
+                @if(Auth::user()->role->name == 'Super Administrator')
+                  <li id="system"><a href="{{ route('system') }}">System</a></li>
+                @endif
                
               </ul>
 
