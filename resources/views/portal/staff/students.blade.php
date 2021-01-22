@@ -122,32 +122,8 @@
                   </tr>
                 </thead>
                 <tbody class="text-center">
-                  <!-- @foreach($students as $student)
-                  <tr>
-                    <td>{{ $student->reg_no }}</td>
-                    <td>{{ $student->full_name }}</td>
-                    <td>{{ $student->nic_old }}{{ $student->nic_new }}{{ $student->postal }}{{ $student->passport }}</td>
-
-                    @if($student->flag->bit_eligible)
-                      <td>Eligible</td>                    
-                    @else                    
-                      <td>Not Eligible</td>             
-                    @endif
-                    @if($student->flag->fit_cert)
-                      <td>Eligible</td>                    
-                    @else                    
-                      <td>Not Eligible</td>             
-                    @endif
-                    <td>                    
-                        <button title="View Profile" data-toggle="tooltip" data-placement="left" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-view-role"><i class="fas fa-user"></i></button>
-                    </td>
-                  </tr>
-                  @endforeach -->
                 </tbody>
               </table>
-              <!-- <div class="float-right">
-                {{ $students->links( "pagination::bootstrap-4") }}
-              </div> -->
             </div>
           </div>
 
