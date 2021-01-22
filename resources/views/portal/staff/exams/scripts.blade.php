@@ -7,7 +7,7 @@
     // Table
     var beforeReleaseTable = $('.schedules-before-release-yajradt').DataTable({
       processing: true,
-      serverSide: true,
+      serverSide: false,
       ajax: {
         url: "{{ url('/portal/staff/exams/schedules/before/release') }}",
       },
@@ -249,7 +249,7 @@
 
     var afterReleaseTable = $('.schedules-after-release-yajradt').DataTable({
       processing: true,
-      serverSide: true,
+      serverSide: false,
       ajax: {
         url: "{{ url('/portal/staff/exams/schedules/after/release') }}",
       },
@@ -314,10 +314,18 @@
   // HELD EXAMS
   $(function() {
     var heldTable = $('.held-exam-schedules-yajradt').DataTable({
+      searching: false,
       processing: true,
       serverSide: true,
       ajax: {
         url: "{{ url('/portal/staff/exams/schedules/held') }}",
+        data: function(d) {
+          d.year = $('#searchExamYear').val();
+          d.exam = $('#searchExam').val();
+          d.date = $('#searchExamDate').val();
+          d.subject = $('#searchSubject').val();
+          d.type = $('#searchExamType').val();
+        }
       },
       columns: [
         {
@@ -358,6 +366,10 @@
         }
       ]
     });
+
+    searchHeldExams = () => {
+      heldTable.draw();
+    }
   });
   // /HELD EXAMS
 // /YAJRA TABLES
