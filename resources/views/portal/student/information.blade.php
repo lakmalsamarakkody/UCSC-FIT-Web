@@ -23,7 +23,21 @@
     {{-- /REGISTRATION PENDING --}}
     @endif
     @if( $student != NULL )
-
+    <div class="col-12">
+        <div class="row justify-content-end">
+            <div class="col-lg-4">
+                <button class="btn btn-lg mb-3 btn-danger w-100" onclick="print_window()"><i class="fa fa-print"></i> Print Information</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-5  d-none heading">
+        <div class="row justify-content-center">
+            <h1 class="text-center">
+                Application for Foundation of Information Technology <br>
+                <small>University of Colombo School of Computing</small> 
+            </h1>   
+        </div>
+    </div>
     <!-- CONTENT -->
     <div class="col-lg-12 information">
         <div class="row">
@@ -228,6 +242,7 @@
                 @endif
 
                 <hr>
+                <p class="">This is an system generated application</p>
                 <div class="card mt-3" id="account">
                     <div class="card-header">
                         Account Settings
