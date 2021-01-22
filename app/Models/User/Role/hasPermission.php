@@ -16,6 +16,7 @@ class hasPermission extends Model
     protected $table = 'role_permissions';
     protected static $logAttributes = ['*'];
     protected static $logName = 'user_permission';
+    protected $fillable = ['role_id', 'permission_id'];
 
     public function permission()
     {

@@ -125,6 +125,7 @@ Route::get('/portal/staff/system', [App\Http\Controllers\Portal\Staff\SystemCont
 
 Route::post('/portal/staff/system/createUserRole', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createUserRole']);
 Route::post('/portal/staff/system/viewUserRoleGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'viewUserRoleGetDetails']);
+Route::post('/portal/staff/system/editUserRolePermissions', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editUserRolePermissions']);
 Route::post('/portal/staff/system/deleteUserRole', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteUserRole']);
 
 Route::post('/portal/staff/system/createPermission', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createPermission']);

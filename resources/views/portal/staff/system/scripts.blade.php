@@ -163,6 +163,7 @@
             }else{
               status = "";
             }
+            //$('#permissionListEdit').append("<div class='col-lg-3 col-md-6'><input type='checkbox' name='permissionId-"+value['permission_id'] +"' "+status+" /> " + value['permission_name'] +"</div>")
             $('#permissionListEdit').append("<div class='col-lg-3 col-md-6'><input type='checkbox' name='permissionId-"+value['permission_id'] +"' value='"+ value['permission_id'] +"' "+status+" /> " + value['permission_name'] +"</div>")
             //console.log( index + ": "+ value['permission_name']+ " : " + value['permission_status'] );
           });
@@ -188,11 +189,38 @@
     .then((result) => {
       if (result.isConfirmed) {
 
-        SwalDoneSuccess.fire({
-          title: 'Updated!',
-          text: 'User role has been updated.',
+        //From payload
+        var formData = new FormData($('#formEditRole')[0]);
+        formData.append('role_id', role_id);
+        formData.append('role_name', $('#roleNameEdit').val());
+
+        //UPDATE PERMISSIONS AJAX
+        $.ajax({
+          headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/editUserRolePermissions') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){
+            $('#btnEditUserRolePermissions').attr('disabled', 'disabled');
+            $("#spinnerBtnEditUserRolePermissions").removeClass('d-none');
+          },
+          success: function(data){
+            console.log('Success in Edit role update permissions ajax.');
+            $("#spinnerBtnEditUserRolePermissions").addClass('d-none');
+            $('#btnEditUserRolePermissions').removeAttr('disabled', 'disabled');
+            if(data['status'] == 'success'){
+              SwalDoneSuccess.fire({title: 'Updated!',text: 'User role has been updated.',});
+              $('#modal-edit-role').modal('hide');
+            }
+          },
+          error: function(err){
+            console.log('Error in Edit role update permissions ajax.');
+            $("#spinnerBtnEditUserRolePermissions").addClass('d-none');
+            $('#btnEditUserRolePermissions').removeAttr('disabled', 'disabled');
+          },
         })
-        $('#modal-edit-role').modal('hide')
       }
       else{
         SwalNotificationWarningAutoClose.fire({

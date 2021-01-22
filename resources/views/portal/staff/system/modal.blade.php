@@ -87,7 +87,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" id="btnEditUserRolePermissions">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnEditUserRolePermissions">Update <span id="spinnerBtnEditUserRolePermissions" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
         </div>
       </div>
     </div>
