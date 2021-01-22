@@ -36,8 +36,8 @@
           name: 'status'
         },
         {
-          data: 'action', 
-          name: 'action', 
+          data: 'id', 
+          name: 'id', 
           orderable: false, 
           searchable: false
         },
@@ -54,10 +54,17 @@
             } 
             else {
               color = 'danger';
-              status = 'Inactive';
+              status = 'Deactive';
             }
             return '<span class="text-'+color+' font-weight-bold">'+status+'</span>';
           }
+        },
+        {
+            targets: 4,
+            render: function ( data, type, row ) {
+                var button = '<a onclick="view_profile('+data+');" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>'
+                return button;
+            }
         }
       ]
     });
@@ -68,8 +75,11 @@
     }
   });
 
-  view_user = () => {
-    // alert('asda');
-    window.open("{{ route('user.profile') }}", '_blank')
-  }
+        view_profile = (id) => {
+            var url = '{{ route("user.profile", ":id") }}';
+            url = url.replace(':id', id);
+            //    alert (id)
+            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1500,height=700,left=100,top=100`;
+            window.open( url,'User_Profile',params)
+        }
 </script>

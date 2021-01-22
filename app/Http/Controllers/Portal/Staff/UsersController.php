@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ChangeEmail;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\User;
 use App\Models\User\Role;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class UsersController extends Controller
@@ -49,17 +52,89 @@ class UsersController extends Controller
       return DataTables::of($data)
 
       ->addIndexColumn()
-      ->addColumn('action', function($row){
-          $actionBtn = '<a onclick="view_user();" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>';
-          return $actionBtn;
-      })
       ->rawColumns(['action'])
       ->make(true);
     }
   }
 
-  public function viewUser()
+  public function viewUser($id)
   {
-    return view('portal/staff/user/profile');
+    $user = User::find($id);
+    return view('portal/staff/user/profile', compact('user'));
+  }
+
+  // UPDATE EMAIL
+  public function emailUpdateRequest(Request $request)
+  {
+     
+      $validator = Validator::make($request->all(), 
+          [     
+              'email'=> ['required', 'email', 'unique:users']
+          ],
+          [
+              'unique'=>'Email already in use'
+          ]
+      );
+      if($validator->fails()):
+          return response()->json(['errors'=>$validator->errors()->all()]);
+      else:
+          $email =  $request->email;
+          $token = Str::random(32);
+          $user_id = $request->id;
+
+          $details = [
+              'id' => $user_id,
+              'email' => $email,
+              'token' => $token
+          ];
+
+          if(Mail::to($email)->send(new ChangeEmail($details))):
+              return response()->json(['error'=>'error']);
+          else:
+              if(User::where('id',$user_id)->update(['email_change_token'=> $token,'email_change'=> $email])):
+                  activity()->withProperties(['student_id' => $request->id, 'email' => $email])->log('Email Change Request');
+                  return response()->json(['success'=>'success']);
+              endif;
+          endif;
+
+      endif;
+      return response()->json(['error'=>'error']);
+  }
+  // /UPDATE EMAIL
+
+  public function deactivateAccount(Request $request)
+  {
+      $user_id = $request->id;
+      $validator = Validator::make($request->all(), 
+          [     
+              'message'=> ['required']
+          ]
+      );
+      if($validator->fails()):
+          return response()->json(['errors'=>$validator->errors()->all()]);
+      else:
+          if(User::where('id', $user_id)->update(['status' => 0, 'message' => $request->message])):
+              return response()->json(['success'=>'success']);
+          endif;
+      endif;
+      return response()->json(['error'=>'error']);
+  }
+
+  public function reactivateAccount(Request $request)
+  {
+      $user_id = $request->id;
+      $validator = Validator::make($request->all(), 
+          [     
+              'message'=> ['required']
+          ]
+      );
+      if($validator->fails()):
+          return response()->json(['errors'=>$validator->errors()->all()]);
+      else:
+          if(User::where('id', $user_id)->update(['status' => 1, 'message' => $request->message])):
+              return response()->json(['success'=>'success']);
+          endif;
+      endif;
+      return response()->json(['error'=>'error']);
   }
 }
