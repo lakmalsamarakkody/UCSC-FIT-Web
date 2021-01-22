@@ -16,20 +16,22 @@ class StudentSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        for($i=0;$i<10;$i++){
+        for($i=0;$i<30;$i++){
 
             $f_name= $faker->firstName;
             $l_name=$faker->lastName;
             $m_names=$f_name." ".$l_name;
             $initials= $f_name[0]." ".$l_name[0];
             $full_name=$f_name." ".$m_names." ".$l_name;
-            $gender=$faker->randomElement($array = array ('male', 'female'));
+            $gender=$faker->randomElement($array = array ('Male', 'Female'));
             $year=$faker->randomElement($array = array('2017','2018','2019','2020'));
+            $month = $faker->numberBetween($min = 1, $max = 12);
+            $date = $faker->numberBetween($min = 1, $max = 25);
 
             DB::table('students')->insert(
                 array(
     
-                    ['reg_no'=> 'F'. $faker->unique()->numerify('#########'),
+                    ['reg_no'=> 'F'. $year . $month. $date . $faker->unique()->numerify('###'),
                     'user_id'=>$faker->unique()->numerify('##'),
                     'title'=> $faker->title($gender),
                     'first_name'=> $f_name,
@@ -59,12 +61,12 @@ class StudentSeeder extends Seeder
                     'current_address_line4'=>$faker->streetName,
                     'current_city_id'=>$faker->numberBetween($min = 1, $max = 3700),
                     'current_country_id'=>$faker->numberBetween($min = 1, $max = 240),
-                    'telephone'=>'0'.$faker->unique()->numerify('#########'),
+                    'telephone_country_code'=>'94',
+                    'telephone'=>$faker->unique()->numerify('#########'),
                     'designation'=>$faker->jobTitle,
                     'reg_year'=>$year,
                     'created_at'=>$faker->dateTimeBetween('2020-11-01', '2020-11-30'),
                     'updated_at'=> '2020-11-30 13:14:56']
-    
                 )
             );
         }

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             TitleSeeder::class,
-            //StudentSeeder::class,
+            StudentSeeder::class,
             SubjectSeeder::class,
             StudentPhaseSeeder::class,
             ExamTypeSeeder::class,

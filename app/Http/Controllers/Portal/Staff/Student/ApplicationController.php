@@ -239,7 +239,7 @@ class ApplicationController extends Controller
             $newRegNoSerial = $lastRegNoSerial+1;
             $newRegNoSerialCode = str_pad($newRegNoSerial, 3, '0', STR_PAD_LEFT);
             //SAVE REG NO
-            if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.$newRegNoSerialCode])):
+            if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.$newRegNoSerialCode, 'reg_year'=> Carbon::now()->year])):
                 // UPDATE REGISTRATION
                 if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
                     return response()->json([ 'status'=>'success']);
@@ -247,7 +247,7 @@ class ApplicationController extends Controller
             endif;
         else:
             //SAVE REG NO
-            if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.'001'])):
+            if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.'001', 'reg_year'=> Carbon::now()->year])):
                 // UPDATE REGISTRATION
                 if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
                     return response()->json([ 'status'=>'success']);
