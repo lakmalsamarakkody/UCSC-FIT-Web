@@ -1,11 +1,15 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+  address_editable();
+  setViewDistrictState();
+})
 print_window = () => {  
   document.title = "{{ $student->full_name }}";
   $('body').addClass('freeze');
   $('.nav-bar').addClass('d-none');
   $('.sidebar').addClass('d-none');
+  $('#alertCompleteRegistration').addClass('d-none');
   $('.btn').addClass('d-none');
   $('#account').addClass('d-none');
   $('.mobile-nav').addClass('d-none');
@@ -16,10 +20,6 @@ print_window = () => {
   window.print();  
   location.reload();
 }
-
-  address_editable();
-  setViewDistrictState();
-})
   // EMAIL
   reset_email = () => {
     SwalQuestionSuccess.fire({
