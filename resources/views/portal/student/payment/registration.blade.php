@@ -107,9 +107,9 @@
                         <li class="nav-item" role="presentation">
                           <a class="nav-link active" id="bank-tab" data-toggle="tab" href="#bank" role="tab" aria-controls="bank" aria-selected="true">Pay Through Bank Slip</a>
                         </li>
-                        <li class="nav-item" role="presentation">
+                        {{-- <li class="nav-item" role="presentation">
                           <a class="nav-link" id="online-tab" data-toggle="tab" href="#online" role="tab" aria-controls="online" aria-selected="false">Pay Online</a>
-                        </li>
+                        </li> --}}
                       </ul>
 
                       <div class="tab-content col-12" id="PaymentMethodTabContent">
