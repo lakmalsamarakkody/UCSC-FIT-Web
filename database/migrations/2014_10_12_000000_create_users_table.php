@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('profile_pic')->nullable();
             $table->string('email_change_token')->nullable();
             $table->string('email_change')->nullable();
-            $table->string('deactivate_message')->nullable();
+            $table->longText('message')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
