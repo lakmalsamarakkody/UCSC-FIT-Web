@@ -17,6 +17,7 @@ class Role extends Model
 
     protected static $logAttributes = ['*'];
     protected static $logName = 'user_role';
+    protected $fillable = ['name', 'description'];
 
     public function user()
     {

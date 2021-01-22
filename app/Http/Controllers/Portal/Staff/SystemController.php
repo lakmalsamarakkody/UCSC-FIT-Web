@@ -13,6 +13,7 @@ use App\Models\Student\Payment\Method;
 use App\Models\Student\Payment\Type;
 use App\Models\Student\Phase;
 use App\Models\User\Permission;
+use App\Models\User\Role\hasPermission;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Unique;
@@ -83,6 +84,32 @@ class SystemController extends Controller
     return response()->json(['status'=>'success', 'role'=>$role, 'arrayPermissions'=>$arrayPermissions]);
   }
   // /VIEW FUNCTION
+
+  // EDIT FUNCTION
+  public function editUserRolePermissions(Request $request){
+    $role = Role::where('id',$request->role_id)->first();
+
+    //DELETE ALL CURRENT PERMISSIONS
+    hasPermission::where('role_id', $role->id)->forceDelete();
+
+    //UPDATE ROLE NAME
+    $role->update(['name'=>$request->role_name]);
+
+    // PERMISSION SAVE
+    // LOOP HAS BEEND TERMINATED BEFORE LAST 2 ELEMENTS BECAUSE ROLE_ID AND ROLE_NAME COMES ALONG WITH PERMISSION LIST
+    // so used array count and break foreach before last 2 elements
+    $count = count($request->all());
+    $currentCount = 0;
+    foreach($request->all() as $permission):
+      hasPermission::create(['role_id'=>$role->id, 'permission_id'=>$permission]);
+      $currentCount = $currentCount+1;
+      if($count == $currentCount+2) break;
+    endforeach;
+    // /PERMISSION SAVE 
+
+    return response()->json(['status'=>'success', 'request'=>$request->all()]);
+  }
+  // /EDIT FUNCTION
 
 
   // DELETE FUNCTION
