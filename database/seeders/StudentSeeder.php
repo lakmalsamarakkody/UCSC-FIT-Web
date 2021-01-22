@@ -25,8 +25,8 @@ class StudentSeeder extends Seeder
             $full_name=$f_name." ".$m_names." ".$l_name;
             $gender=$faker->randomElement($array = array ('Male', 'Female'));
             $year=$faker->randomElement($array = array('2017','2018','2019','2020'));
-            $month = $faker->numberBetween($min = 1, $max = 12);
-            $date = $faker->numberBetween($min = 1, $max = 25);
+            $month = $faker->numberBetween($min = 01, $max = 12);
+            $date = $faker->numberBetween($min = 01, $max = 25);
 
             DB::table('students')->insert(
                 array(
