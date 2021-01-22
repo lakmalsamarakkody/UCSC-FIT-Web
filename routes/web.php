@@ -71,6 +71,7 @@ Route::get('/portal/staff/students', [App\Http\Controllers\Portal\Staff\StudentC
 Route::get('student-list',[App\Http\Controllers\Portal\Staff\StudentController::class, 'getStudentList'])->name('student.list');
 Route::get('/portal/staff/student/profile/{id}/',[App\Http\Controllers\Portal\Staff\StudentController::class, 'viewStudent'])->name('student.profile');
 Route::post('/portal/staff/student/profile/update/email/request',[App\Http\Controllers\Portal\Staff\StudentController::class, 'emailUpdateRequest'])->name('update.email.request');
+Route::post('/portal/staff/student/profile/deactivate/account',[App\Http\Controllers\Portal\Staff\StudentController::class, 'deactivateAccount'])->name('deactivate.student');
 // /STUDENT PAGE
 
 // HOME PAGE
