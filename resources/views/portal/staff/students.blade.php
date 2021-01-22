@@ -124,9 +124,6 @@
                 <tbody class="text-center">
                 </tbody>
               </table>
-              <!-- <div class="float-right">
-                {{ $students->links( "pagination::bootstrap-4") }}
-              </div> -->
             </div>
           </div>
 
