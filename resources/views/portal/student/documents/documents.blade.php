@@ -30,6 +30,7 @@
 
         {{-- DOCUMENT SUBMIT CHECK --}}
         @if($registration->document_submit == 1 && $registration->document_status != 'Declined')
+
           {{-- DOCUMENT APPROVAL PENDING --}}
           <div class="col-12 px-0">
             <div class="alert alert-success" role="alert">
@@ -40,6 +41,33 @@
             </div>
           </div>
           {{-- /DOCUMENT APPROVAL PENDING --}}
+
+          {{-- SUBMIT HARD COPIES --}}
+          <div class="col-12 px-0">
+            <div class="alert alert-danger" role="alert">
+              <h3 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> POST YOUR APPLICATION, PAYMENT SLIP, IDENTITY DOCUMENTS </h3>
+              <p>Make sure to post your </p>
+                <p><i>
+                application - <button type="button" class="btn btn-sm btn-outline-danger" onclick="window.location.href='/portal/student/information'"> Application </button><br/>
+                payment slip - - Previously uploaded Scanned Payment Slip <br/>
+                documents (Birth Certificate and NIC/Postal/Passport image Copies) - Previously uploaded Scanned Images<br/>
+                </i></p>
+              <p>
+              through register post. <br/>
+              Posting above mentioned documents are mandatory in completion of your registration process.</p>
+              <hr>
+              <span>Address to post the FIT Application,Payment Slip and Documents: </span>
+              <p class="font-weight-bold mb-0">
+                Senior Assistant Registrar (EDC),<br/>
+                External Degrees Centre of UCSC,<br/>
+                University of Colombo School of Computing,<br/>
+                No. 35, Reid Avenue,<br/>
+                Colombo 07,<br/>
+                Sri Lanka.
+              </p>
+            </div>
+          </div>
+          {{-- /SUBMIT HARD COPIES --}}
         
         {{-- DOCUMENTS NOT SUBMITTED --}}
         @else
