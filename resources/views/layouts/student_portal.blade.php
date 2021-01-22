@@ -203,7 +203,7 @@
         <!-- PAGE AREA -->
 
         <!-- FOOTER -->
-        <div class="col-12 mt-5" style="bottom: 0;">
+        <div class="col-12 mt-5 foot" style="bottom: 0;">
           <hr class="bg-primary" width="100%"/>
           <div class="row">
             

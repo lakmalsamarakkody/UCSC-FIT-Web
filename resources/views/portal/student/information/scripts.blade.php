@@ -1,6 +1,22 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+print_window = () => {  
+  document.title = "{{ $student->full_name }}";
+  $('body').addClass('freeze');
+  $('.nav-bar').addClass('d-none');
+  $('.sidebar').addClass('d-none');
+  $('.btn').addClass('d-none');
+  $('#account').addClass('d-none');
+  $('.mobile-nav').addClass('d-none');
+  $('.heading').removeClass('d-none');
+  $('.foot').addClass('d-none');
+  $('.page-area').addClass('ml-5');
+
+  window.print();  
+  location.reload();
+}
+
   address_editable();
   setViewDistrictState();
 })
