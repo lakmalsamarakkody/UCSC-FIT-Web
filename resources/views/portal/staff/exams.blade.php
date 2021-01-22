@@ -48,7 +48,7 @@
                   <div class="form-group col-xl-2 col-lg-4">
                     <label for="scheduleExam">Exam</label>
                     <select name="scheduleExam" id="scheduleExam" class="form-control">
-                      <option value="Default" disabled selected>Select Exam</option>
+                      <option value="" selected>Select Exam</option>
                       @foreach ($schedule_exams as $exam)
                           <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
                       @endforeach
@@ -58,6 +58,7 @@
                   <div class="form-group col-xl-3 col-lg-4">
                     <label for="scheduleSubject">Subejct</label>
                     <select name="scheduleSubject" id="scheduleSubject" class="form-control">
+                      <option value="" selected>Select Subject</option>
                       @foreach ($subjects as $subject)
                       <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                       @endforeach
@@ -67,6 +68,7 @@
                   <div class="form-group col-xl-2 col-lg-4">
                     <label for="scheduleExamType">Exam Type</label>
                     <select name="scheduleExamType" id="scheduleExamType" class="form-control">
+                      <option value="" selected>Select Exam Type</option>
                       @foreach ($exam_types as $type)
                           <option value="{{ $type->id }}">{{ $type->name }}</option>
                       @endforeach
