@@ -56,7 +56,7 @@ class ExamsController extends Controller
         // if ($request->selectSearchExamType != null) {
         //     $exam_schedules = $exam_schedules->where('exam_type_id', $request->selectSearchExamType);
         // }
-        $exam_schedules = $exam_schedules->paginate(5,['*'], 'held');
+        //$exam_schedules = $exam_schedules->paginate(5,['*'], 'held');
         //$upcoming_schedules = $upcoming_schedules->paginate(5,['*'],'upcoming');
         //$exam_schedules = $exam_schedules->get();
         return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'schedule_exams', 'search_exams', 'years', 'upcoming_schedules'));
@@ -102,38 +102,40 @@ class ExamsController extends Controller
     public function getHeldExams(Request $request)
     {
         $today = Carbon::today();
-        if ($request->ajax()) {
+        if ($request->ajax()):
             $data = Schedule::where('date', '<=', $today)->addSelect([
                 'exam' => Exam::select('year')->whereColumn('exam_id','exams.id'),
                 'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
                 'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')]);
-            
-            if($request->year != null) {
-                $data = $data->whereYear('date', $request->year);
-            }
-            if($request->exam != null) {
-                $data = $data->where('exam_id',$request->exam);
-            }
-            if($request->date != null) {
-                $data = $data->where('date', $request->date);
-            }
-            if($request->subject != null) {
-                $data = $data->where('subject_id', $request->subject);
-            }
-            if($request->type != null) {
-                $data = $data->where('exam_type_id', $request->type);
-            } 
-            if($request->year != null || $request->exam != null || $request->date != null || $request->subject != null || $request->type != null ) {
+
+            if($request->year != null || $request->exam != null || $request->date != null || $request->subject != null || $request->type != null):
+
+                if($request->year != null):
+                    $data = $data->whereYear('date', $request->year);
+                endif;
+                
+                if($request->exam != null): 
+                    $data = $data->where('exam_id',$request->exam);
+                endif;
+                if($request->date != null):
+                    $data = $data->where('date', $request->date);
+                endif;
+                if($request->subject != null):
+                    $data = $data->where('subject_id', $request->subject);
+                endif;
+                if($request->type != null):
+                    $data = $data->where('exam_type_id', $request->type);
+                endif;
                 $data = $data->get();
-            }
-            else {
-                $data = $data->orderBy('id')->get(50);
-            }
+            else:
+                // $data = $data->orderByRaw('DATE_FORMAT(date, "%y-%m-%d")', 'asc')->take(15)->get();
+                $data = $data->orderBy('id', 'desc')->take(15)->get();
+            endif;
             return DataTables::of($data)
             ->rawColumns(['action'])
             ->make(true);
-        }
+        endif;
     }
     // /EXAMS TABLE(HELD)
 
