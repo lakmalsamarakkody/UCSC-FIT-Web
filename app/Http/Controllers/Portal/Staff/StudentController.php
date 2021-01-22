@@ -38,7 +38,7 @@ class StudentController extends Controller
     public function getStudentList(Request $request)
     {
         if ($request->ajax()) {
-            $data = Student::join('student_flags', 'students.id', '=', 'student_flags.id');
+            $data = Student::join('student_flags', 'students.id', '=', 'student_flags.student_id');
             if($request->name!=null){
                 $data = $data->where('first_name','like', '%'. $request->name.'%')
                 ->orWhere('last_name','like', '%'. $request->name.'%')
@@ -88,10 +88,6 @@ class StudentController extends Controller
             $data = $data->get();
             return DataTables::of($data)
             ->addIndexColumn()
-            // ->addColumn('action', function($row){
-            //     $actionBtn = '<a onclick="view_student();" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>';
-            //     return $actionBtn;
-            // })
             ->rawColumns(['action'])
             ->make(true);
         }
@@ -142,4 +138,40 @@ class StudentController extends Controller
             return response()->json(['error'=>'error']);
         }
         // /UPDATE EMAIL
+
+        public function deactivateAccount(Request $request)
+        {
+            $user_id = Student::where('id', $request->id)->first()->user_id;
+            $validator = Validator::make($request->all(), 
+                [     
+                    'message'=> ['required']
+                ]
+            );
+            if($validator->fails()):
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            else:
+                if(User::where('id', $user_id)->update(['status' => 0, 'message' => $request->message])):
+                    return response()->json(['success'=>'success']);
+                endif;
+            endif;
+            return response()->json(['error'=>'error']);
+        }
+
+        public function reactivateAccount(Request $request)
+        {
+            $user_id = Student::where('id', $request->id)->first()->user_id;
+            $validator = Validator::make($request->all(), 
+                [     
+                    'message'=> ['required']
+                ]
+            );
+            if($validator->fails()):
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            else:
+                if(User::where('id', $user_id)->update(['status' => 1, 'message' => $request->message])):
+                    return response()->json(['success'=>'success']);
+                endif;
+            endif;
+            return response()->json(['error'=>'error']);
+        }
 }

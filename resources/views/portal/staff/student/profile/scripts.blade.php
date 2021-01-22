@@ -1,28 +1,5 @@
 @section('script')
 <script type="text/javascript">
-  // PASSWORD
-  reset_password = () => {
-    SwalQuestionSuccessAutoClose.fire({
-      title: "Are you sure ?",
-      text: "Password reset email will be sent to the student",
-      confirmButtonText: "Yes, Send!",
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-        SwalNotificationSuccessAutoClose.fire({
-          title: "Sent!",
-          text: "Password reset link sent",
-        })
-      }
-      else{
-        SwalNotificationWarningAutoClose.fire({
-          title: "Cancelled!",
-          text: "Password reset link not sent",
-        })
-      }
-    })
-  }
-  // /PASSWORD
 
   // EMAIL
   reset_email = () => {
@@ -103,27 +80,93 @@
   activate_acc = () => {
     SwalQuestionSuccess.fire({
       title: "Are you sure ?",
-      text: "Account will be activated",
+      text: "Account will be re-activated",
       confirmButtonText: "Yes, Activate!",
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalNotificationSuccessAutoClose.fire({
-          title: "Activated!",
-          text: "Account Activated",
+
+        SwalQuestionSuccess.fire({
+          title: "Reason to Re-activate ?",
+          input: 'textarea',
+          inputLabel: 'Message',
+          inputPlaceholder: 'Type your message here...',
+          inputAttributes: {
+            'aria-label': 'Type your message here'
+          },
+          inputValidator: (value) => {
+            if (!value) {
+              return 'You need to write something!'
+            }
+          },
+          timer: false,
+          showCancelButton: true,
+          confirmButtonText: "Re-activate!",
+        }).then((result) => {
+          //alert(result.value)
+          $.ajax({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('reactivate.student') }}",
+            type: 'post',
+            data: { 'message': result.value, 'id': "{{ $student->id }}"},         
+            beforeSend: function(){
+              // Show loader
+              $('body').addClass('freeze');
+              Swal.showLoading();
+            },
+            success: function(data){
+              $('body').removeClass('freeze');
+              Swal.hideLoading();
+              if(data['errors']){
+                $.each(data['errors'], function(key, value){
+                  SwalNotificationErrorDanger.fire({
+                    title: 'Error!',
+                    text: value
+                  })
+                  // alert(value)
+                });
+              }else if (data['success']){
+                SwalDoneSuccess.fire({
+                  title: "Activated!",
+                  text: "Account Activated",
+                }).then((result) => {
+                  if(result.isConfirmed) {
+                    location.reload()
+                  }
+                });
+              }else if (data['error']){
+                SwalSystemErrorDanger.fire({
+                  title: 'Update Failed!',
+                  text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                })
+              }
+            },
+            error: function(err){
+              $('body').removeClass('freeze');
+              Swal.hideLoading();
+              SwalErrorDanger.fire({
+                title: 'Update Failed!',
+                text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+              })
+            }
+          });
+
         })
+        
       }
       else{
         SwalNotificationWarningAutoClose.fire({
           title: "Cancelled!",
-          text: "Account not activated",
+          text: "Account did not activate",
         })
       }
     })
   }
   // /ACTIVATE ACC
 
-  // ACTIVATE ACC
+  // DE-ACTIVATE ACC
   deactivate_acc = () => {
     SwalQuestionDanger.fire({
       title: "Are you sure ?",
@@ -132,9 +175,73 @@
     })
     .then((result) => {
       if (result.isConfirmed) {
-        SwalNotificationSuccessAutoClose.fire({
-          title: "Deactivated!",
-          text: "Account dectivated",
+        SwalQuestionDanger.fire({
+          title: "Reason to Deativate ?",
+          input: 'textarea',
+          inputLabel: 'Message',
+          inputPlaceholder: 'Type your message here...',
+          inputAttributes: {
+            'aria-label': 'Type your message here'
+          },
+          inputValidator: (value) => {
+            if (!value) {
+              return 'You need to write something!'
+            }
+          },
+          timer: false,
+          showCancelButton: true,
+          confirmButtonText: "Deactivate!",
+        }).then((result) => {
+          //alert(result.value)
+          $.ajax({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('deactivate.student') }}",
+            type: 'post',
+            data: { 'message': result.value, 'id': "{{ $student->id }}"},         
+            beforeSend: function(){
+              // Show loader
+              $('body').addClass('freeze');
+              Swal.showLoading();
+            },
+            success: function(data){
+              $('body').removeClass('freeze');
+              Swal.hideLoading();
+              if(data['errors']){
+                $.each(data['errors'], function(key, value){
+                  SwalNotificationErrorDanger.fire({
+                    title: 'Error!',
+                    text: value
+                  })
+                  // alert(value)
+                });
+              }else if (data['success']){
+                SwalDoneSuccess.fire({
+                  title: "Deactivated!",
+                  text: "Account dectivated",
+                }).then((result) => {
+                  if(result.isConfirmed) {
+                    location.reload()
+                  }
+                });
+              }else if (data['error']){
+                SwalSystemErrorDanger.fire({
+                  title: 'Update Failed!',
+                  text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                })
+              }
+            },
+            error: function(err){
+              $('body').removeClass('freeze');
+              Swal.hideLoading();
+              SwalErrorDanger.fire({
+                title: 'Update Failed!',
+                text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+              })
+            }
+          });
+
         })
       }
       else{
@@ -145,7 +252,7 @@
       }
     })
   }
-  // /ACTIVATE ACC
+  // /DE-ACTIVATE ACC
 
   $(function(){
     

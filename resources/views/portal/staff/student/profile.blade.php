@@ -12,7 +12,7 @@
 </script>
     <!-- BREACRUMB -->
     <section class="col-sm-12 mb-3">
-        <div class="row">
+        <div class="row justify-content-lg-between">
            
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb ">
@@ -21,6 +21,13 @@
               <li class="breadcrumb-item active" aria-current="page">Student Profile</li>
             </ol>
           </nav>
+
+          @if($student->user->status == 0)
+          <div class="alert alert-danger float-right" role="alert">
+            <h4>This Account has been Deactivated</h4> 
+          </div>
+            
+          @endif
 
         </div>
     </section>
@@ -123,18 +130,18 @@
                               <img src="{{ asset('storage/portal/avatar/'.$student->user_id.'/'.$student->user->profile_pic)}}" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
                           </div>
                           <div class="text-center w-100 ">
-                            <button onclick="reset_password()" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="Reset Password">
-                              <i class="fa fa-key"></i>
-                            </button>
                             <button onclick="reset_email()" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Reset Email">
                               <i class="fa fa-envelope"></i>
                             </button>
-                            <button onclick="activate_acc()" class="btn btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Activate Account">
-                              <i class="fa fa-user-alt"></i>
-                            </button>
+                            @if($student->user->status==1)
                             <button onclick="deactivate_acc()" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Deactivate Account">
                               <i class="fa fa-user-alt-slash"></i>
                             </button>
+                            @else                     
+                            <button onclick="activate_acc()" class="btn btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Activate Account">
+                              <i class="fa fa-user-alt"></i>
+                            </button>                           
+                            @endif     
                           </div>
                           
                               <table class="table table-borderless mt-4">                        
