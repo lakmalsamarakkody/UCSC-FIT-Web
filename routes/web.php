@@ -118,9 +118,14 @@ Route::post('/portal/staff/exams/list/delete', [App\Http\Controllers\Portal\Staf
 Route::get('/portal/staff/results', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'index'])->name('results');
 Route::get('/portal/staff/result/view/{id}', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'viewResults'])->where('id', '[0-9]+')->name('results.view');
 
+// USER PAGE
 Route::get('/portal/staff/users', [App\Http\Controllers\Portal\Staff\UsersController::class, 'index'])->name('users');
 Route::get('/portal/staff/users/user-list',[App\Http\Controllers\Portal\Staff\UsersController::class, 'getUserList'])->name('user.list');
-Route::get('/portal/staff/user/profile',[App\Http\Controllers\Portal\Staff\UsersController::class, 'viewUser'])->name('user.profile');
+Route::get('/portal/staff/user/profile/{id}',[App\Http\Controllers\Portal\Staff\UsersController::class, 'viewUser'])->name('user.profile');
+Route::post('/portal/staff/user/profile/update/email/request',[App\Http\Controllers\Portal\Staff\UsersController::class, 'emailUpdateRequest'])->name('user.update.email.request');
+Route::post('/portal/staff/user/profile/deactivate/account',[App\Http\Controllers\Portal\Staff\UsersController::class, 'deactivateAccount'])->name('deactivate.user');
+Route::post('/portal/staff/user/profile/reactivate/account',[App\Http\Controllers\Portal\Staff\UsersController::class, 'reactivateAccount'])->name('reactivate.user');
+// /USER PAGE
 
 // SYSTEM PAGE
 Route::get('/portal/staff/system', [App\Http\Controllers\Portal\Staff\SystemController::class, 'index'])->name('system');
