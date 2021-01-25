@@ -110,7 +110,7 @@
         @endif
 
         <!-- SUMMARY CARDS -->
-        <h5 class="col-12 title font-weight-bold mt-5 px-0">EXAMS</h5>
+        {{-- <h5 class="col-12 title font-weight-bold mt-5 px-0">EXAMS</h5>
 
         <div class="col-lg-6 col-md-12 px-1">
             <a class="" href="{{ route('exams') }}" style="height: 30rem;">
@@ -176,7 +176,7 @@
             
               </div>
             </a>
-        </div>
+        </div> --}}
         </div>
     </div>
     <!-- /CONTENT -->
