@@ -44,7 +44,8 @@
             text: 'Please Login to Continue',
           }).then((result) => {
             if(result.isConfirmed) {
-              window.location.replace("{{ route('logout') }}");
+              // event.preventDefault();
+              $('#logout-form').submit();
             }
           });
         }else if (data['error']){
