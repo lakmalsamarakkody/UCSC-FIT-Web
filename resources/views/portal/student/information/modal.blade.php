@@ -67,7 +67,11 @@
                       <h6 class="text-left mt-4 mb-4">Educational Qualifications</h6>
                       <small>* Choose your highest educational qualification.</small>
                       <div class="form-check px-5 mt-2">
-                          <input type="radio" class="form-check-input" name="qualification" id="degree" value="degree" checked/>
+                          @if($student != NULL && $student->education == 'degree')
+                            <input type="radio" class="form-check-input" name="qualification" id="degree" value="degree" checked />
+                          @else
+                            <input type="radio" class="form-check-input" name="qualification" id="degree" value="degree" />
+                          @endif  
                           <label for="degree" class="form-check-label">Bachelor's Degree</label>
                       </div>
                       <div class="form-check px-5">
