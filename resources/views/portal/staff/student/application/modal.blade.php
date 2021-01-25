@@ -18,7 +18,7 @@
                                 <table class="table text-left">
                                     <tr>
                                         <th>Submitted on: </th>
-                                        <td><span id="spanSubmittedOn"></span> <small class="text-muted">(DD/MM/YY)</small></td>                                        
+                                        <td><span id="spanSubmittedOn"></span> <small class="text-muted">(MM/DD/YY)</small></td>                                        
                                     </tr>
                                     <tr>
                                         <th>Type: </th>
@@ -100,7 +100,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <th>Date of Birth:</th>
-                                                                <td><span id="spanDOB"></span> <small class="text-muted">(DD/MM/YY)</small></td>
+                                                                <td><span id="spanDOB"></span> <small class="text-muted">(MM/DD/YY)</small></td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Citizenship:</th>
