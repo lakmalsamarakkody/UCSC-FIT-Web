@@ -25,16 +25,16 @@
                             <option selected>Month</option>
                             <option value="january">January</option>
                             <option value="february">February</option>
-                            <option value="march">January</option>
-                            <option value="april">January</option>
-                            <option value="may">January</option>
-                            <option value="june">January</option>
-                            <option value="july">January</option>
-                            <option value="august">January</option>
-                            <option value="september">January</option>
-                            <option value="october">January</option>
-                            <option value="november">January</option>
-                            <option value="december">January</option>
+                            <option value="march">March</option>
+                            <option value="april">April</option>
+                            <option value="may">May</option>
+                            <option value="june">June</option>
+                            <option value="july">July</option>
+                            <option value="august">August</option>
+                            <option value="september">September</option>
+                            <option value="october">October</option>
+                            <option value="november">November</option>
+                            <option value="december">December</option>
                           </select>
                         </div>
                       </div>
