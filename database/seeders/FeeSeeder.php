@@ -19,7 +19,7 @@ class FeeSeeder extends Seeder
                 ['purpose'=> 'registration',
                 'subject_id'=> NULL,
                 'exam_type_id' => NULL,
-                'amount' => '2800',
+                'amount' => '2750',
                 'created_at'=> '2020-11-25 10:13:53',
                 'updated_at'=> '2020-11-25 10:13:53'],
                 ['purpose'=> 'exam',
