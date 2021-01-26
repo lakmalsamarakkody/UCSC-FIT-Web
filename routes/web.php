@@ -35,6 +35,7 @@ Route::get('/contact',[App\Http\Controllers\Website\Contact::class,'index']);
 Route::get('/examination',[App\Http\Controllers\Website\Examination::class,'index']);
 Route::get('/faq',[App\Http\Controllers\Website\Faq::class, 'index']);
 Route::get('/announcements', [App\Http\Controllers\Website\AnouncementsController::class, 'index']);
+Route::get('/announcement/{id}', [App\Http\Controllers\Website\AnouncementsController::class, 'viewAnnouncement'])->name('web.announcement');
 Route::get('/privacyPolicy',[App\Http\Controllers\Website\PrivacyPolicy::class, 'index']);
 Route::get('/terms',[App\Http\Controllers\Website\Terms::class, 'index']);
 Route::get('/siteMap',[App\Http\Controllers\Website\SiteMap::class, 'index']);
@@ -170,6 +171,11 @@ Route::post('/portal/staff/system/deletePaymentType', [App\Http\Controllers\Port
 Route::get('/portal/staff/information', [App\Http\Controllers\Portal\Staff\InformationController::class, 'index'])->name('staff.information');
 // /INFORMATION PAGE
 
+// ANOUNCEMENT PAGE
+Route::get('/portal/staff/website', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'index'])->name('staff.website');
+Route::get('/portal/staff/website/announcements', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'getAnnouncementList'])->name('staff.website.announcements');
+// /ANOUNCEMENT PAGE
+
 /*
 |--------------------------------------------------------------------------
 | STUDENT PORTAL ROUTES
@@ -196,7 +202,8 @@ Route::post('/portal/student/information/update/get-states', [App\Http\Controlle
 Route::post('/portal/student/information/update/get-cities', [App\Http\Controllers\Portal\Student\InformationController::class, 'getCities']);
 
 // /INFROMATION PAGE
-Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsController::class,'index'])->name('student.exams');
+
+Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsController::class,'index'])->name('student.exam');
 
 Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\ResultsController::class,'index'])->name('student.results');
 

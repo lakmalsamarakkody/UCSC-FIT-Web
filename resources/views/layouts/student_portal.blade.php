@@ -115,7 +115,7 @@
                 <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                 <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
                 <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
-                {{-- <li id="exams"><a href="{{ route('student.exams') }}">Exams</a></li>
+                {{-- <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>
                 <li id="results"><a href="{{ route('student.results') }}">Results</a></li> --}}
               </ul>
 
@@ -181,7 +181,7 @@
                     <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                     <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
                     <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
-                    {{-- <li id="exams"><a href="{{ route('student.exams') }}">Exams</a></li>
+                    {{-- <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>
                     <li id="results"><a href="{{ route('student.results') }}">Results</a></li> --}}
                     <li id="logout"><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                   </ul>
