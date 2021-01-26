@@ -5,3 +5,13 @@
 .information .countryCodeSelect, .student-registration .countryCodeOption{
     text-transform: uppercase;
 }
+
+.information .modal small {
+  color: var(--sub-text-color);
+  font-size: 0.9rem;
+}
+
+.information .modal .modal-body h6 {
+  color: var(--black);
+  font-weight: bold;
+}
