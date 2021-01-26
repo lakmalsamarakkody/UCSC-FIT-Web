@@ -25,7 +25,7 @@ class Registration extends Controller
     {
         $validator = Validator::make($request->all(), 
             [     
-                'email'=> ['required', 'email', 'unique:email_tokens']
+                'email'=> ['required', 'email']
             ],
             $messages=[
                 'unique'=>'Registration link already emailed, please check Your email'
@@ -48,7 +48,12 @@ class Registration extends Controller
             else:
                 $email = $request->email;
                 $token = Str::random(32);
-                $email_token = new Email_Token();
+
+                if(Email_Token::where('email', $email)->first()):
+                    $email_token = Email_Token::where('email', $email)->first();
+                else:
+                    $email_token = new Email_Token();
+                endif;
                 $email_token->email = $email;
                 $email_token->token = $token;
     
