@@ -60,7 +60,7 @@ class PaymentController extends Controller
           'paidBank'=> ['required', 'numeric', 'exists:App\Models\Support\Bank,id', 'size:1'],
           'paidBankBranch'=>['required', 'numeric', 'exists:App\Models\Support\BankBranch,id'],
           'paidDate'=>['required', 'before_or_equal:today'],
-          'paidAmount'=>['required', 'numeric', 'size:2800'],
+          'paidAmount'=>['required', 'numeric', 'size:2750'],
           'bankSlip'=>['required', 'image']
       ]
     );

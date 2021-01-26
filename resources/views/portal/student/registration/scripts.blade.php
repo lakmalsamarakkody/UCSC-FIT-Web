@@ -50,9 +50,9 @@
       },
       success: function(data){
         console.log('success');
+        $('#btnSaveInformation').removeAttr('disabled','disabled');
         if(data['errors']){
           console.log('error on validating data');
-          $('#btnSaveInformation').removeAttr('disabled','disabled');
           $.each(data['errors'], function(key, value){
             $('#error-'+key).show();
             $('#'+key).addClass('is-invalid');
