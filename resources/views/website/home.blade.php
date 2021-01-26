@@ -29,14 +29,23 @@
                     <div class="announcement wow fadeIn" data-wow-delay="0.2s">
                         <ul class="pb-2">
                             @foreach($anouncements as $anouncement)
-
-                            <li>
-                                <p class="pr-4">
-                                    <a href="{{ url($anouncement->link)}}">{{ $anouncement->title }}</a>
-                                    <span class="float-right pr-4"><small>{{ \Carbon\Carbon::parse($anouncement->created_at)->format('M d Y') }}</small></span> 
-                                </p>
-                                <hr color="grey">
-                            </li>
+                                @if($anouncement->created_at >= \Carbon\Carbon::today()->subDays(30))  
+                                    <li>
+                                        <p class="pr-4">
+                                            <a href="{{ route('web.announcement', $anouncement->id) }}"><strong>{{ $anouncement->title }}</strong></a><br>
+                                            <span class="float-right pr-4"><small>{{ \Carbon\Carbon::parse($anouncement->created_at)->format('M d Y') }}</small></span> 
+                                        </p>
+                                        <hr color="grey">
+                                    </li>
+                                @else
+                                    <li>
+                                        <p class="pr-4">
+                                            <a href="{{ route('web.announcement', $anouncement->id) }}">{{ $anouncement->title }}</a><br>
+                                            <span class="float-right pr-4"><small>{{ \Carbon\Carbon::parse($anouncement->created_at)->format('M d Y') }}</small></span> 
+                                        </p>
+                                        <hr color="grey">
+                                    </li>
+                                @endif 
 
                             @endforeach
                         </ul>

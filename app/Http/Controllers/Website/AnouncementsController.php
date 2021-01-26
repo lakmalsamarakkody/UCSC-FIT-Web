@@ -10,10 +10,17 @@ class AnouncementsController extends Controller
 {
     public function index(){
 
-        $anouncements = Anouncements::orderBy('created_at', 'desc')->get();
-        return view('website/announcements', [
-            'announcements'=>$anouncements,
+        $announcements = Anouncements::orderBy('created_at', 'desc')->get();
+        return view('website.announcements', [
+            'announcements'=>$announcements,
             'title' => 'Announcements'
         ]);
+    }
+
+    public function viewAnnouncement($id)
+    {
+        $title = "Announcement";
+        $announcement = Anouncements::where('id', $id)->first();
+        return view('website.announcement.announcement', compact('announcement', 'title'));
     }
 }
