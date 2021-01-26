@@ -63,8 +63,7 @@
             <form id="qualificationForm">
               <div class="form-row">
                 <div class="form-group col">
-                  <div class="details px-3 mt-4 pb-4">
-                      <h6 class="text-left mt-4 mb-4">Educational Qualifications</h6>
+                  <div class="details px-3 pb-4">
                       <small>* Choose your highest educational qualification.</small>
                       <div class="form-check px-5 mt-2">
                           @if($student != NULL && $student->education == 'degree')
@@ -147,7 +146,7 @@
             <form id="formUpdateContactDetails">
               <div class="form-row">
                 <div class="form-group col-xl-6 col-md-12">
-                    <h6 style="color: black;" class="mb-4">Permanent Address</h6>
+                    <h6 class="mb-4">Permanent Address</h6>
                     <div class="form-group row">
                         <label for="house" class="col-xl-4 col-md-12 col-form-label">House Name/No:</label>
                         <div class="col-xl-8 col-md-12">
@@ -271,7 +270,7 @@
                 <div class="form-group col-xl-6 col-md-12">
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" name="current_address" id="current_address" onclick="address_editable();" data-toggle="collapse" data-target="#collapsePlus" aria-expanded="false" aria-controls="collapsePlus" @if($student != NULL && $student->current_house!=NULL) checked @endif >
-                        <label for="current_address" class="form-check-label" ><h6 style="color: black;" class="mb-4">Current Address (Optional)</h6></label>
+                        <label for="current_address" class="form-check-label" ><h6 class="mb-4">Current Address (Optional)</h6></label>
                     </div>
                     <div class="form-group row">
                         <label for="currentHouse" class="col-xl-4 col-md-12 col-form-label">House Name/No:</label>
@@ -458,3 +457,41 @@
     </div>
   </div>
 {{-- /CONTACT DETAILS --}}
+
+{{-- EMPLOYEMENT DETAILS --}}
+<div class="modal fade" id="modal-employment-details" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update Employment Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form id="formEmployment">
+                <div class="details pb-3">
+                    <small>* Please note that employment details would be kept confidential and will be utilized only for purposed of improving the FIT programme.</small>
+                    <div class="form-group row pt-4">
+                        <label for="designation" style="color: black; font-weight: bold;" class="col-xl-3 col-md-12 col-form-label">Designation:</label>
+                        <div class="col-xl-9 col-md-12">
+                            <input type="text" class="form-control" id="designation" name="designation" @if($student != NULL) value="{{ $student->designation }}" @endif placeholder="Please enter your designation" @if($student == NULL) disabled @endif>
+                            <span class="invalid-feedback" id="error-designation" role="alert"></span>
+                        </div>
+                    </div>
+                </div>
+              
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+            <button type="button" id="btnUpdateEmployment" class="btn btn-outline-primary" onclick="update_employment();">
+            Update
+            <span id="spinnerEmployment" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+{{-- /EMPLOYEMENT DETAILS --}}
