@@ -118,6 +118,7 @@
                 <li id="users"><a href="{{ route('users') }}">Users</a></li>
                 @if(Auth::user()->role->name == 'Super Administrator')
                   <li id="system"><a href="{{ route('system') }}">System</a></li>
+                  <li id="website"><a href="{{ route('staff.website') }}">Website</a></li>
                 @endif
                
               </ul>
