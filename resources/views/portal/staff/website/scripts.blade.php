@@ -51,6 +51,7 @@
                         var button_group =  "<div class=\"btn-group\" role=\"group\" aria-label=\"Basic example\">"+
                                             "<button title=\"View Announcement\" data-tooltip=\"tooltip\"  data-placement=\"bottom\" onclick=\"view_announcement("+data+");\" type=\"button\" class=\"btn btn-outline-success\"><i class=\"fas fa-eye\"></i></button>"+
                                             "<button title=\"Edit Announcement\" data-tooltip=\"tooltip\"  data-placement=\"bottom\" onclick=\"edit_announcement("+data+");\" type=\"button\" class=\"btn btn-outline-warning\"><i class=\"fas fa-edit\"></i></button>"+
+                                            "<button title=\"Publish Announcement\" data-tooltip=\"tooltip\"  data-placement=\"bottom\" onclick=\"publish_announcement("+data+");\" type=\"button\" class=\"btn btn-outline-primary\"><i class=\"fas fa-envelope\"></i></button>"+
                                             "</div>"
                         return button_group;
                     }
@@ -95,6 +96,84 @@ width=1200,height=1000,left=100,top=100`;
             $(this).prev(".card-header").find(".btn").removeClass("btn-show");
             $(this).prev(".card-header").find(".fa").removeClass("fa-chevron-down").addClass("fa-chevron-right");
         });
+
+        create_announcement = () => {
+            SwalQuestionSuccessAutoClose.fire({
+                title: "Are you sure?",
+                text: "You wont be able to revert this!",
+                confirmButtonText: 'Yes, Create!',
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    //Remove previous validation error messages
+                    $('.form-control').removeClass('is-invalid');
+                    $('.invalid-feedback').html('');
+                    $('.invalid-feedback').hide();
+                    //Form Payload
+                    var formData = new FormData($("#formUserRole")[0]);
+                    // var formData = new FormData();
+                    // //Add data
+                    // formData.append('inputNewRoleName', $('#inputNewRoleName').val())
+                    // formData.append('inputNewRoleDescription', $('#inputNewRoleDescription').val())
+
+                    //Validate information
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{ route('staff.website.announcements.create') }}",
+                        type: 'post',
+                        data:formData,
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function(){
+                            $('#btnCreateAnnouncement').attr('disabled','disabled');
+                        },
+                        success: function(data){
+                            console.log('success in create role ajax');
+                            $('#btnCreateAnnouncement').removeAttr('disabled','disabled');
+                            if(data['errors']){
+                            console.log('errors on validating data');
+                            $.each(data['errors'], function(key, value){
+                                $('#error-'+key).show();
+                                $('#'+key).addClass('is-invalid');
+                                $('#error-'+key).append('<strong>'+value+'</strong>');
+                            });
+                            }
+                            else if(data['success'] == 'success'){
+                            console.log('create role is success');
+                            SwalDoneSuccess.fire({
+                                title: 'Created!',
+                                text: 'Announcement created.',
+                                })
+                                .then((result) => {
+                                location.reload();
+                                })
+                            }
+                        },
+                        error: function(err){
+                            $('#btnCreateAnnouncement').removeAttr('disabled','disabled');
+                            console.log('error in create announcement ajax');
+                            SwalSystemErrorDanger.fire();
+                        }
+                    });
+                }
+                else{
+                    SwalNotificationWarningAutoClose.fire({
+                        title: 'Cancelled!',
+                        text: 'User role creation cancelled.',
+                    })
+                }
+            })
+
+        }
+
+        view_announcement = (id) => {
+            var url = "{{ route('web.announcement', ':id') }}"
+            url = url.replace(':id', id);
+            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=1000,left=100,top=100`;
+            window.open(url, 'Announcement', params)
+        }
 
     });
 </script>

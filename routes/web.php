@@ -174,6 +174,7 @@ Route::get('/portal/staff/information', [App\Http\Controllers\Portal\Staff\Infor
 // ANOUNCEMENT PAGE
 Route::get('/portal/staff/website', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'index'])->name('staff.website');
 Route::get('/portal/staff/website/announcements', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'getAnnouncementList'])->name('staff.website.announcements');
+Route::post('/portal/staff/website/announcements', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'createAnnouncement'])->name('staff.website.announcements.create');
 // /ANOUNCEMENT PAGE
 
 /*

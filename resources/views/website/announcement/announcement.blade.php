@@ -19,9 +19,10 @@
               <div class="row justify-content-center  about-container pt-5">
                 <div class="col-lg-12 content order-lg-1 order-1">
                     <div class="row justify-content-center">
-                        <a class="col-12 btn-link" href="{{ route($announcement->button_link) }}"><h3 class="title text-center mt-5">{{ $announcement->button_text }}</h3></a>                      
+                        <a class="col-12 btn-link" href="@if($announcement->button_link!=Null){{ route($announcement->button_link) }}@endif"><h3 class="title text-center mt-5">{{ $announcement->button_text }}</h3></a>     
+                        <p class="col-12 text-center">{{ $announcement->description }}</p>                 
                         <img class="col-lg-6" src="{{ asset('storage/announcements/'.$announcement->image) }}" width="100%" alt="">
-                        <a class="col-12 btn-link" href="{{ route($announcement->button_link) }}"><h3 class="title text-center mt-5">{{ $announcement->button_text }}</h3></a>
+                        <a class="col-12 btn-link" href="@if($announcement->button_link!=Null){{ route($announcement->button_link) }}@endif"><h3 class="title text-center mt-5">{{ $announcement->button_text }}</h3></a>
                     </div>
                     <div class="icon-box wow fadeInUp" data-wow-delay="0.2s"  style="padding-top: 70px;">
                         <a href="{{ url('/') }}"><div class="icon"><i class="fa fa-home"></i></div></a>
