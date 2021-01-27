@@ -37,36 +37,39 @@
           <div class="card">
             <div class="card-header">Applications</div>
             <div class="card-body">
-              <table class="table yajra-datatable">
-                <thead class="text-center">
-                  <tr>
-                    <th>Student Name</th>
-                    <th>Email</th>
-                    <th>Submitted Date</th>
-                    <th>Last Updated</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($registrations as $registration)
-                    <tr class="text-center">
-                      <td>{{$registration->student->initials}} {{$registration->student->last_name}}</td>
-                      <td>{{$registration->student->user->email}}</td>
-                      <td>{{$registration->created_at->isoFormat('YYYY-MM-DD')}}</td>
-                      <td>{{$registration->updated_at->isoFormat('YYYY-MM-DD')}}</td>
-                      <td>
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-outline-primary" id="btnViewModalApplicant{{$registration->student->id}}" data-tooltip="tooltip" data-placement="bottom" title="View Applicant Details" onclick="view_modal_applicant({{$registration->id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalApplicant-{{$registration->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-                          @if($registration->application_status == 'Approved' && $registration->payment_status == 'Approved' && $registration->document_status == 'Approved')
-                            <button type="button" class="btn btn-outline-success" id="btnApproveRegistration{{$registration->id}}" data-tooltip="tooltip" data-placement="bottom" title="Register Student" onclick="view_modal_registerStudent({{$registration->id}},'{{$registration->student->user->email}}')"><i class="fas fa-thumbs-up"></i> Register <span id="spinnerBtnApproveRegistration-{{$registration->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-                          @endif
-                        </div>
-                      </td>
+              @if(!$registrations->isEmpty())
+                <table class="table yajra-datatable">
+                  <thead class="text-center">
+                    <tr>
+                      <th>Student Name</th>
+                      <th>Email</th>
+                      <th>Submitted Date</th>
+                      <th>Last Updated</th>
+                      <th></th>
                     </tr>
-                  @endforeach
-                </tbody>
-              </table>
-
+                  </thead>
+                  <tbody>
+                    @foreach ($registrations as $registration)
+                      <tr class="text-center">
+                        <td>{{$registration->student->initials}} {{$registration->student->last_name}}</td>
+                        <td>{{$registration->student->user->email}}</td>
+                        <td>{{$registration->created_at->isoFormat('YYYY-MM-DD')}}</td>
+                        <td>{{$registration->updated_at->isoFormat('YYYY-MM-DD')}}</td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-outline-primary" id="btnViewModalApplicant{{$registration->student->id}}" data-tooltip="tooltip" data-placement="bottom" title="View Applicant Details" onclick="view_modal_applicant({{$registration->id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalApplicant-{{$registration->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                            @if($registration->application_status == 'Approved' && $registration->payment_status == 'Approved' && $registration->document_status == 'Approved')
+                              <button type="button" class="btn btn-outline-success" id="btnApproveRegistration{{$registration->id}}" data-tooltip="tooltip" data-placement="bottom" title="Register Student" onclick="view_modal_registerStudent({{$registration->id}},'{{$registration->student->user->email}}')"><i class="fas fa-thumbs-up"></i> Register <span id="spinnerBtnApproveRegistration-{{$registration->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                            @endif
+                          </div>
+                        </td>
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              @else
+              <div class="alert alert-info">No results found!</div>
+              @endif
             </div>
           </div>
         </div>

@@ -28,7 +28,7 @@ class ApplicationController extends Controller
     // NEW APPLICANT
     public function Applications()
     {
-        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->get();
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->where('payment_id', NULL)->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
 
