@@ -68,7 +68,7 @@ class ExamsController extends Controller
         $today = Carbon::today();
         if($request->ajax()) {
             $data = Schedule::where('date', '>=' , $today)->addSelect([
-                'exam' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
+                'exam' => Exam::select(DB::raw("CONCAT(month,' ', year) AS examname"))->whereColumn('exam_id', 'exams.id'),
                 'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
