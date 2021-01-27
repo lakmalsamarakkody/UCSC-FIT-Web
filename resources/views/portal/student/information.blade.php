@@ -134,7 +134,7 @@
                 <div class="card mt-3">
                     <div class="card-header">
                         Education Qualifications
-                        {{-- <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details" data-toggle="modal" data-target="#modal-education-qualification"><i class="fa fa-edit"></i></button> --}}
+                        <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details" data-toggle="modal" data-target="#modal-education-qualification"><i class="fa fa-edit"></i></button>
                     </div>
                     <div class="card-body">                        
                         <div class="row">
@@ -157,7 +157,7 @@
                 <div class="card mt-3 contact">
                     <div class="card-header ">
                         Contact Details
-                        {{-- <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details" data-toggle="modal" data-target="#modal-contact-details"><i class="fa fa-edit"></i></button> --}}
+                        <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details" data-toggle="modal" data-target="#modal-contact-details"><i class="fa fa-edit"></i></button>
                     </div>
                     <div class="card-body">     
                         <div class="row">                                               
@@ -224,7 +224,7 @@
                 <div class="card mt-3">
                     <div class="card-header">
                         Employment Details
-                        {{-- <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details" data-toggle="modal" data-target="#modal-employment-details"><i class="fa fa-edit"></i></button> --}}
+                        <button class="btn btn-outline-warning float-right" data-tooltip="tooltip" data-placement="bottom" title="Edit Details" data-toggle="modal" data-target="#modal-employment-details"><i class="fa fa-edit"></i></button>
                     </div>
                     <div class="card-body">                        
                         <div class="row">

@@ -252,6 +252,25 @@ class InformationController extends Controller
     }
     // /UPDATE CONTACT DETAILS
 
+    // UPDATE EMPLOYMENT DETAILS
+    public function updateEmploymentDetails(Request $request)
+    {
+        $update_employment_validator = Validator::make($request->all(), 
+            [     
+                'designation'=> ['required', 'regex:/^[a-zA-Z0-9\s]*$/', 'min:3']
+            ]
+        );
+        if($update_employment_validator->fails()):
+            return response()->json(['errors'=>$update_employment_validator->errors()]);
+        else:
+            if(Student::where('user_id', Auth::user()->id)->update(['designation'=>$request->designation])):
+                return response()->json(['status'=>'success']);
+            endif;
+        endif;
+        return response()->json(['error'=>'error']);
+    }
+    // /UPDATE EMPLOYMENT DETAILS
+
     //GET STATES OR DISTRICTS
     public function getStates(Request $request)
     {

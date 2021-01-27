@@ -198,6 +198,7 @@ Route::post('/portal/student/registration/getcities',[App\Http\Controllers\Porta
 Route::get('/portal/student/information', [App\Http\Controllers\Portal\Student\InformationController::class, 'index'])->name('student.information');
 Route::post('/portal/student/information/update/qualification', [App\Http\Controllers\Portal\Student\InformationController::class, 'updateQualification'])->name('update.qualification');
 Route::post('/portal/student/information/update/contact-details', [App\Http\Controllers\Portal\Student\InformationController::class, 'updateContactDetails']);
+Route::post('/portal/student/information/update/employment-details', [App\Http\Controllers\Portal\Student\InformationController::class, 'updateEmploymentDetails']);
 Route::post('/portal/student/information/update/get-states', [App\Http\Controllers\Portal\Student\InformationController::class, 'getStates']);
 Route::post('/portal/student/information/update/get-cities', [App\Http\Controllers\Portal\Student\InformationController::class, 'getCities']);
 

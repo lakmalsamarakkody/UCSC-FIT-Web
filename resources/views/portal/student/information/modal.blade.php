@@ -469,7 +469,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form id="formEmployment">
+            <form id="formUpdateEmployment">
                 <div class="details pb-3">
                     <small>* Please note that employment details would be kept confidential and will be utilized only for purposed of improving the FIT programme.</small>
                     <div class="form-group row pt-4">
