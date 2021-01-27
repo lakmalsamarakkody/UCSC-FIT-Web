@@ -29,17 +29,18 @@
     <div class="col-12 staff-exams">
       <div class="row">
 
-
         {{-- EXAM LIST --}}
-        <div class="col-lg-4 col-12 mb-5">
+        <div class="col-lg-3 col-md-6 col-12">
           <a href="/portal/staff/exams/list" style="text-decoration: none">
-            <button type="button" class="btn btn-outline-primary w-100 py-4 font-weight-bold" id="btnExamList">Exam List</button>
+            <div class="card">
+              <div class="card-header bg-primary text-center py-4 text-white">Exam List</div>
+            </div>
           </a>
         </div>
         {{-- /EXAM LIST --}}
 
         <!-- CREATE EXAM SCHEDULE -->
-        <div class="col-12 mb-5">
+        <div class="col-12 mb-5 mt-4">
           <div class="card">
             <div class="card-header">Create Exam Schedule</div>
             <div class="card-body">
