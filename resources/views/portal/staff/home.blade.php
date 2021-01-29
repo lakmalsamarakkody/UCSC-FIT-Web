@@ -104,8 +104,48 @@
         </div>
         <!-- SUMMARY CARDS -->
 
+      </div>
+      <div class="row">
         <h5 class="col-12 title font-weight-bold mt-5 px-0">EXAMS</h5>
 
+        <div class="col-xl-2 col-lg-4 p-1">
+          <a class="" href="{{ route('students') }}">
+            <div class="card card-dash shadow black-none bg-success" style="max-width: 18rem;">
+              <div class="card-body p-0 my-0 ">
+                <div class="card-title text-center m-0">{{ $totalRegistered }}</div>
+              </div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Review  <br/>Exams </h1></div>
+              <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-xl-2 col-lg-4 p-1">
+          <a class="" href="{{ route('students') }}">
+            <div class="card card-dash shadow black-none bg-success" style="max-width: 18rem;">
+              <div class="card-body p-0 my-0 ">
+                <div class="card-title text-center m-0">{{ $totalRegistered }}</div>
+              </div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Review  <br/>Schedules </h1></div>
+              <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-xl-2 col-lg-4 p-1">
+          <a class="" href="{{ route('students') }}">
+            <div class="card card-dash shadow black-none bg-main-warning" style="max-width: 18rem;">
+              <div class="card-body p-0 my-0 ">
+                <div class="card-title text-center m-0">{{ $totalRegistered }}</div>
+              </div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Review <br> Payments </h1></div>
+              <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
+            </div>
+          </a>
+        </div>
+      </div>
+      
+      <div class="row mt-3">        
         <div class="col-lg-6 col-md-12 px-1">
             <a class="" href="{{ route('exams') }}" style="height: 30rem;">
               <div class="card" style="height: 30rem;">
@@ -171,6 +211,10 @@
               </div>
             </a>
         </div>
+      </div>
+
+
+
 
         <div class="col-lg-12">
           <span>
