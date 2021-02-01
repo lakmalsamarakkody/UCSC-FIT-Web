@@ -27,7 +27,6 @@ class StudentExamController extends Controller
            'exam_schedules.end_time',
            'subjects.code',
            'subjects.name',
-           'exam_types.exam_type',
            'exams.year',
            'exams.month'
            )
