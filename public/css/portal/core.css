@@ -56,9 +56,9 @@ a, a:hover {
   text-decoration: none;
 }
 
-.card:hover {
+/* .card:hover {
   opacity: 0.8;
-}
+} */
 
 .bg-main-theme{
   background-color:var(--main-theme-color);
