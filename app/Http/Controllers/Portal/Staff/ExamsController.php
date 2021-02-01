@@ -198,15 +198,15 @@ class ExamsController extends Controller
         if($edit_schedule_validator->fails()):
             return response()->json(['status'=>'error', 'errors'=>$edit_schedule_validator->errors()]);
         else:
-            $schedule = Schedule::find($request->editScheduleId);
-            $schedule->exam_id = $request->editScheduleExam;
-            $schedule->subject_id = $request->editScheduleSubject;
-            $schedule->exam_type_id = $request->editScheduleExamType;
-            $schedule->date = $request->editScheduleExamDate;
-            $schedule->start_time = $request->editScheduleStartTime;
-            $schedule->end_time = $request->editScheduleEndTime;
-            if($schedule->save()):
-                return response()->json(['status'=>'success', 'schedule'=>$schedule]);
+            if(Schedule::where('id',$request->editScheduleId)->update([
+                'exam_id' => $request->editScheduleExam,
+                'subject_id' => $request->editScheduleSubject,
+                'exam_type_id' => $request->editScheduleExamType,
+                'date' => $request->editScheduleExamDate,
+                'start_time' => $request->editScheduleStartTime,
+                'end_time' => $request->editScheduleEndTime
+            ])):
+                return response()->json(['status'=>'success']);
             endif;
         endif;
     }
