@@ -33,7 +33,7 @@ class ExamsController extends Controller
         $schedule_exams = Exam::where('year', '>=', $today->year)->orderBy('year', 'asc')->get();
         $search_exams = Exam::where('year', '<=', $today->year)->orderBy('year','desc')->get();
         $years = Exam::select('year')->where('year', '<=', $today->year)->orderBy('year','asc')->distinct()->get();
-        $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->paginate(5,['*'], 'upcoming');
+        $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->get();
         //$released_upcoming_scheduless = Schedule::where('date', '>=', $today)->orderBy('date', 'asc')->paginate(5,['*'],'released_schedule');
 
         return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'schedule_exams', 'search_exams', 'years', 'upcoming_schedules'));
@@ -232,5 +232,28 @@ class ExamsController extends Controller
             
     }
     // /DELETE
+
+    // POSTPONE
+    // Load schedule details to modal
+    public function postponeScheduleGetDetails(Request $request)
+    {
+        //Validate schedule id
+        $schedule_id_validator = Validator::make($request->all(), [
+            'schedule_id' => ['required', 'integer', 'exists:App\Models\Exam\Schedule,id'],
+        ]);
+
+        //Check validator fails
+        if($schedule_id_validator->fails()):
+            return response()->json(['status'=>'error', 'errors'=>$schedule_id_validator->errors()]);
+        else:
+            if($schedule = Schedule::find($request->schedule_id)):
+                $subject = $schedule->subject->name;
+                return response()->json(['status'=> 'success', 'schedule'=> $schedule, 'subject'=> $subject]);
+            endif;
+        endif;
+        return response()->json(['status'=>'error', 'data'=>$request->all()]);
+    }
+    // Load schedule details to modal
+    // /POSTPONE
     // /SCHEDULE
 }

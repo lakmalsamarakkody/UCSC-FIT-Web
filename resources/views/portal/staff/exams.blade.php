@@ -51,7 +51,7 @@
                     <select name="scheduleExam" id="scheduleExam" class="form-control">
                       <option value="" selected>Select Exam</option>
                       @foreach ($schedule_exams as $exam)
-                          <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
+                          <option value="{{$exam->id}}">{{$exam->month}} {{$exam->year}}</option>
                       @endforeach
                     </select>
                     <span class="invalid-feedback" id="error-scheduleExam" role="alert"></span>
@@ -200,7 +200,7 @@
                     <select name="searchExam" id="searchExam" class="form-control">
                       <option value="" selected>Select Exam</option>
                       @foreach ($search_exams as $exam)   
-                        <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
+                        <option value="{{$exam->id}}">{{$exam->month}} {{$exam->year}}</option>
                       @endforeach
                     </select>
                   </div>

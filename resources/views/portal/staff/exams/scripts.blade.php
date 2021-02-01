@@ -302,7 +302,7 @@
           targets: 7,
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">'+
-            '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" data-toggle="modal" data-target="#postponeExam"><i class="fas fa-calendar-plus"></i></button>'+
+            '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" id="btnPostponeSchedule-'+data+'" onclick="postpone_exam_modal_invoke('+data+');"><i class="fas fa-calendar-plus"></i></button>'+
             '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" onclick="delete_after_release();"><i class="fas fa-trash-alt"></i></button>'+
             '</div>';
             return btnGroup;
@@ -515,6 +515,42 @@
 
 // EXAM SCHEDULES
   // POSTPONE
+  // FILL POSTPONE MODAL WITH RELEVANT DATA
+  postpone_exam_modal_invoke = (schedule_id) => {
+    // Form payload
+    var formData = new FormData();
+    formData.append('schedule_id',  schedule_id);
+
+    // Postpone exam get details controller
+    $.ajax({
+      headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/exams/schedule/postpone/details') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType:  false,
+      beforeSend: function() {$('#btnPostponeSchedule-'+schedule_id).attr('disabled', 'disabled');},
+      success: function(data) {
+        console.log('Success in postpone schedule get details ajax.');
+        if(data['status'] == 'success') {
+          $('#modal-postpone-schedule-title').html(data['subject']);
+          $('#postponeExamId').val(data['schedule']['id']);
+          $('#postponeExamDate').val(data['schedule']['date']);
+          $('#postponeExamStartTime').val(data['schedule']['start_time']);
+          $('#postponeExamEndTime').val(data['schedule']['end_time']);
+          $('#modal-postpone-schedule').modal('show');
+          $('#btnPostponeSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+        }
+      },
+      error: function(err) {
+        console.log('Error in postpone schedule get details ajax.');
+        $('#btnPostponeSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+  // FILL POSTPONE MODAL WITH RELEVANT DATA
+
   postpone_exam = () => {
     SwalQuestionSuccessAutoClose.fire({
       title: "Are you sure ?",

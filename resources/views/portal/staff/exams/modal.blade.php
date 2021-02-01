@@ -20,7 +20,7 @@
                             <select name="editScheduleExam" id="editScheduleExam" class="form-control">
                                 <option value="" selected>Select Exam</option>
                                 @foreach ($schedule_exams as $exam)
-                                    <option value="{{$exam->id}}">{{$exam->year}}-{{$exam->month}}</option>
+                                    <option value="{{$exam->id}}">{{$exam->month}} {{$exam->year}}</option>
                                 @endforeach
                             </select>
                             <span class="invalid-feedback" id="error-editScheduleExam" role="alert"></span>
@@ -79,29 +79,34 @@
 <!-- SCHEDULE TABLE -->
 
     <!-- POSTPONE-->
-    <div class="modal fade" id="postponeExam" data-backdrop="static" tabindex="-1" aria-labelledby="postponeExamLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-postpone-schedule" data-backdrop="static" tabindex="-1" aria-labelledby="modal-postpone-schedule-title" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="postponeExamLabel">Postpone Exam</h5>
+                    <h5 class="modal-title" id="modal-postpone-schedule-title">Postpone Exam</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="formPostponeSchedule">
                         <div class="form-row align-items-center">
                             <div class="form-group col-4">
                                 <label for="postponeExamDate">Date</label>
+                                <input type="hidden" class="form-control" id="postponeExamId" name="postponeExamId" />
+                                <span class="invalid-feedback" id="error-postponeExamId" role="alert"></span>
                                 <input type="date" class="form-control" name="postponeExamDate" id="postponeExamDate" />
+                                <span class="invalid-feedback" id="error-postponeExamDate" role="alert"></span>
                             </div>
                             <div class="form-group col-4">
                                 <label for="postponeExamStartTime">Start Time</label>
                                 <input type="time" class="form-control" name="postponeExamStartTime" id="postponeExamStartTime" />
+                                <span class="invalid-feedback" id="error-postponeExamStartTime" role="alert"></span>
                             </div>
                             <div class="form-group col-4">
                                 <label for="postponeExamEndTime">End Time</label>
                                 <input type="time" class="form-control" name="postponeExamEndTime" id="postponeExamEndTime" />
+                                <span class="invalid-feedback" id="error-postponeExamEndTime" role="alert"></span>
                             </div>
 
                         </div>
@@ -110,7 +115,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="postpone_exam()">Apply Changes</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="postpone_exam();">Apply Changes</button>
                 </div>
             </div>
         </div>
