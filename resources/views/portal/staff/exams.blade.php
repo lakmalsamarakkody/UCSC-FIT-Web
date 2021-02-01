@@ -169,23 +169,7 @@
                   </tr>
                 </thead>
                 <tbody class="text-center" id="shedulesAfterReleaseTblBody">
-                  {{-- @foreach ($upcoming_schedules as $schedule)
-                  <tr class="text-center">
-                    <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
-                    <td>FIT {{ $schedule->subject->code }}</td>
-                    <td>{{ $schedule->subject->name }}</td>
-                    <td>{{ $schedule->type->name }}</td>
-                    <td>{{ $schedule->date }}</td>
-                    <td>{{ $schedule->start_time }}</td>
-                    <td>{{ $schedule->end_time }}</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" data-toggle="modal" data-target="#postponeExam"><i class="fas fa-calendar-plus"></i></button>
-                        <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" onclick="delete_after_release();"><i class="fas fa-trash-alt"></i></button>
-                      </div>
-                    </td>
-                  </tr>
-                  @endforeach --}}
+                  
                 </tbody>
               </table>
 
@@ -264,23 +248,9 @@
                   </tr>
                 </thead>
                 <tbody class="text-center" id="heldScheduleTblBody">
-                  {{-- @foreach ($exam_schedules as $schedule)
-                  <tr>
-                    <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
-                    <td>FIT {{ $schedule->subject->code }}</td>
-                    <td>{{ $schedule->subject->name }}</td>
-                    <td>{{ $schedule->type->name }}</td>
-                    <td>{{ $schedule->date }}</td>
-                    <td>{{ $schedule->start_time }}</td>
-                    <td>{{ $schedule->end_time }}</td>
-                  </tr>   
-                  @endforeach --}}
+                  
                 </tbody>
               </table>
-              {{-- <div class="pt-4 float-right">
-                {{ $exam_schedules->appends(['held' => $exam_schedules->currentPage()])->links("pagination::bootstrap-4") }}
-                {{ $exam_schedules->withQueryString()->appends(['held' => $exam_schedules])->links("pagination::bootstrap-4") }}
-              </div> --}}
               <!-- /HELD EXAM TABLE -->
 
           </div>

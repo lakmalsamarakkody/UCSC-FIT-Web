@@ -8,6 +8,7 @@
     var beforeReleaseTable = $('.schedules-before-release-yajradt').DataTable({
       processing: true,
       serverSide: true,
+      searching: false,
       ajax: {
         url: "{{ url('/portal/staff/exams/schedules/before/release') }}",
       },
@@ -249,7 +250,8 @@
 
     var afterReleaseTable = $('.schedules-after-release-yajradt').DataTable({
       processing: true,
-      serverSide: false,
+      serverSide: true,
+      searching: false,
       ajax: {
         url: "{{ url('/portal/staff/exams/schedules/after/release') }}",
       },
