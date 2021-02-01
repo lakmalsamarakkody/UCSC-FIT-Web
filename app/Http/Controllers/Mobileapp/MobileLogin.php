@@ -44,7 +44,8 @@ class MobileLogin extends Controller
             'name',
              'email',
              'status',
-               'role_id'
+               'role_id',
+               'profile_pic'
 
         )
         ->first();
