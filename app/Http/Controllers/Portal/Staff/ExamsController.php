@@ -10,6 +10,7 @@ use App\Models\Exam\Types;
 //use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Carbon;
@@ -50,6 +51,13 @@ class ExamsController extends Controller
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
             ]);
+            if(Auth::user()->role->name == 'Co-Ordinator'):
+                $data = $data->where('approval_request', 1);
+            elseif(Auth::user()->role->name == 'Super Administrator'):
+                $data = $data->where('approval_request', 0)->orWhere('schedule_approve', 1)->where('date', '>=', $today);
+            else:
+                $data = $data;
+            endif;
             return DataTables::of($data)
             ->rawColumns(['action'])
             ->make(true);
@@ -67,7 +75,7 @@ class ExamsController extends Controller
                 'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
-            ]);
+            ])->where('approval_request', 1)->where('schedule_approve', 1)->where('schedule_release', 1);
             return DataTables::of($data)
             ->rawColumns(['action'])
             ->make(true);
