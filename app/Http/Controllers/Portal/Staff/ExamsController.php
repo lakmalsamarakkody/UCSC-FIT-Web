@@ -107,7 +107,7 @@ class ExamsController extends Controller
                 $data = $data->get();
             else:
                 // $data = $data->orderByRaw('DATE_FORMAT(date, "%y-%m-%d")', 'asc')->take(15)->get();
-                $data = $data->orderBy('id', 'desc')->take(15)->get();
+                $data = $data->get();
             endif;
             return DataTables::of($data)
             ->rawColumns(['action'])
