@@ -40,6 +40,11 @@ class RoleSeeder extends Seeder
                 'description'=> 'eLC - UCSC',
                 'created_at'=> '2020-11-25 10:13:53',
                 'updated_at'=> '2020-11-25 10:13:53'],
+
+                ['name'=> 'MA',
+                'description'=> 'FIT MA',
+                'created_at'=> '2020-11-25 10:13:53',
+                'updated_at'=> '2020-11-25 10:13:53'],
             )
         );
     }
