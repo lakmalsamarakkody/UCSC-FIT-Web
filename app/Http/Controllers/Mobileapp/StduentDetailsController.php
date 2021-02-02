@@ -25,7 +25,34 @@ class StduentDetailsController extends Controller
          ->get();
     }
     function searchStudents(){
-         return Student::all();
+         return DB::table('students')
+         ->join('student_flags','students.id',"=",'student_flags.student_id')
+         ->select(
+             "students.id",
+             "students.reg_no",
+             "students.user_id",
+             "students.first_name",
+             "students.middle_names",
+             "students.last_name",
+             "students.full_name",
+             "students.dob",
+             "students.gender",
+             "students.reg_year",
+             "students.citizenship",
+             "students.nic_new",
+             "students.education",
+             "students.permanent_house",
+             "students.permanent_address_line1",
+             "students.permanent_address_line2",
+             "students.permanent_address_line3",
+             "students.permanent_address_line4",
+             "students.telephone_country_code",
+             "students.telephone",
+             "student_flags.bit_eligible",
+             "student_flags.fit_cert"
+             
+         )
+         ->get();
     }
    function searchStudentsbyname($name=''){
        if($name==''){
