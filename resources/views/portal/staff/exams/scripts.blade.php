@@ -59,9 +59,13 @@
           targets: 7,
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">'+
+            '@if(Auth::user()->role->name == "Co-Ordinator")'+
             '<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" id="btnApproveSchedule-'+data+'" onclick="approve_schedule();"><i class="fas fa-file-signature"></i></button>'+
+            '@endif'+
+            '@if(Auth::user()->role->name == "Super Administrator")'+
             '<button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Request Approval" id="btnRequestApprovalSchedule-'+data+'" onclick="request_schedule_approval();"><i class="fas fa-share-square"></i></button>'+
             '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" id="btnReleaseSchedule-'+data+'" onclick="relase_individual_schedule();" ><i class="fas fa-hand-point-right"></i></button>'+
+            '@endif'+
             '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit" id="btnEditSchedule-'+data+'" onclick="edit_schedule_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>'+
             '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteExamSchedule-'+data+'" onclick="delete_before_release('+data+');"><i class="fas fa-trash-alt"></i></button>'+
             '</div>';
@@ -306,6 +310,7 @@
             '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" onclick="delete_after_release();"><i class="fas fa-trash-alt"></i></button>'+
             '</div>';
             return btnGroup;
+            
           }
         }
       ]
