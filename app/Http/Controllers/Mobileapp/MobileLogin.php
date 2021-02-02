@@ -53,6 +53,7 @@ class MobileLogin extends Controller
              'name'
         )->first();
         Arr::add($user,'rolename',$roletype->name);
+        Arr::add($user,'profile',asset('storage/portal/avatar/'.$user->id.'/'.$user->profile_pic));
         if($user->rolename=="Co-Ordinator" || $user->rolename=="Director" ||$user->rolename=="Super Administrator"){
             $token = $user->createToken('user-token',[$user->rolename])->plainTextToken;
         Arr::add($user,'token',$token);
