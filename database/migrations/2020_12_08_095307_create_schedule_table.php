@@ -22,11 +22,6 @@ class CreateScheduleTable extends Migration
             $table->time('start_time');
             $table->time('end_time')->nullable();
             $table->string('result_released')->nullable();
-            $table->boolean('approval_request')->default(false);
-            $table->boolean('schedule_approve')->default(false);
-            $table->boolean('schedule_release')->default(false);
-            $table->boolean('delete_request')->default(false);
-            $table->boolean('postpone_request')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
