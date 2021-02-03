@@ -14,6 +14,7 @@ class SlCitiesSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('sl_cities')->truncate();
     DB::raw("INSERT INTO `sl_cities` (`id`, `district_id`, `name`, `name_si`, `name_ta`, `sub_name`, `sub_name_si`, `sub_name_ta`, `postcode`, `latitude`, `longitude`, `created_at`, `updated_at`, `deleted_at`) VALUES
         (1, 1, 'Akkaraipattu', 'අක්කරපත්තුව', 'NULL', 'NULL', 'NULL', 'NULL', '32400', 7.2167, 81.85, '2020-11-25 10:13:53', '2020-11-25 10:13:53'),
@@ -1860,6 +1861,9 @@ class SlCitiesSeeder extends Seeder
         (1843, 5, 'Colombo 10', 'කොළඹ 10', 'கொழும்பு 10', 'Maradana', 'මරදාන', 'மருதானை', '1000', 6.928333, 79.864167, '2020-11-25 10:13:53', '2020-11-25 10:13:53'),
         (1844, 5, 'Colombo 11', 'කොළඹ 11', 'கொழும்பு 11', 'Pettah', 'පිට කොටුව', 'புறக் கோட்டை', '1100', 6.936667, 79.849722, '2020-11-25 10:13:53', '2020-11-25 10:13:53'),
         (1845, 5, 'Colombo 12', 'කොළඹ 12', 'கொழும்பு 12', 'Hulftsdorp', 'අලුත් කඩේ', 'புதுக்கடை', '1200', 6.9425, 79.858333, '2020-11-25 10:13:53', '2020-11-25 10:13:53'),
-        (1846, 5, 'Colombo 14', 'කොළඹ 14', 'கொழும்பு 14', 'Grandpass', 'ග්‍රන්ඩ්පාස්', 'பாலத்துறை', '1400', 6.9475, 79.874722, '2020-11-25 10:13:53', '2020-11-25 10:13:53')");
+        (1846, 5, 'Colombo 14', 'කොළඹ 14', 'கொழும்பு 14', 'Grandpass', 'ග්‍රන්ඩ්පාස්', 'பாலத்துறை', '1400', 6.9475, 79.874722, '2020-11-25 10:13:53', '2020-11-25 10:13:53')"
+        );
+        
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

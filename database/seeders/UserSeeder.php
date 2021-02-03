@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('users')->truncate();
 
         DB::table('users')->insert(
@@ -75,5 +76,7 @@ class UserSeeder extends Seeder
                 'updated_at'=> '2020-11-23 10:13:53'],
             )
         );
+        
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

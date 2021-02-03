@@ -14,6 +14,7 @@ class BankSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('banks')->truncate();
     DB::table('banks')->insert(
             array (
@@ -24,5 +25,7 @@ class BankSeeder extends Seeder
                 ]
             )
         );
+        
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

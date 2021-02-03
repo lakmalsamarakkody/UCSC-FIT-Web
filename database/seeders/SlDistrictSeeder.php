@@ -14,6 +14,7 @@ class SlDistrictSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('sl_districts')->truncate();
     DB::table('sl_districts')->insert(
             array(
@@ -45,5 +46,7 @@ class SlDistrictSeeder extends Seeder
                 [ 'province_id' => '9', 'name' => 'Vavuniya', 'name_si' => 'වව්නියාව', 'name_ta' => 'வவுனியா', 'created_at' => '2020-11-25 10:13:53', 'updated_at' => '2020-11-25 10:13:53']
             )
         );
+        
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

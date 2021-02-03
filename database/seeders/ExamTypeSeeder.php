@@ -14,6 +14,7 @@ class ExamTypeSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('exam_types')->truncate();
     DB::table('exam_types')->insert(
             array(
@@ -25,5 +26,7 @@ class ExamTypeSeeder extends Seeder
                 'updated_at'=> '2020-11-25 10:13:53']
             )
         );
+        
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

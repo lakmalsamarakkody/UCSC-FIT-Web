@@ -14,6 +14,7 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('role_permissions')->truncate();
     DB::table('role_permissions')->insert(
             array (
@@ -88,5 +89,7 @@ class RolePermissionSeeder extends Seeder
                 ]
             )
         );
+        
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

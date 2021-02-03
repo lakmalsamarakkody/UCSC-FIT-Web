@@ -14,6 +14,7 @@ class BankBranchSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('bank_branches')->truncate();
     DB::table('bank_branches')->insert(
             array (
@@ -391,5 +392,7 @@ class BankBranchSeeder extends Seeder
                 ['bank_id'=> '1', 'district_id'=> '25', 'code'=> '356', 'name'=> 'Chettikulam', 'created_at' => '2021-01-05 10:13:53', 'updated_at' => '2021-01-05 10:13:53']
                 )
         );
+        
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

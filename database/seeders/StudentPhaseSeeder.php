@@ -14,6 +14,7 @@ class StudentPhaseSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('student_phases')->truncate();
     DB::table('student_phases')->insert(
             array(
@@ -24,5 +25,7 @@ class StudentPhaseSeeder extends Seeder
                 'updated_at'=> '2020-11-25 10:13:53']
             )
         );
+        
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

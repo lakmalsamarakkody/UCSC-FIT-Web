@@ -16,7 +16,7 @@ class WorldDivisionsTableSeeder extends Seeder
     public function run()
     {
         
-
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('world_divisions')->truncate();
         
         DB::table('world_divisions')->insert(array (
@@ -1111,6 +1111,7 @@ class WorldDivisionsTableSeeder extends Seeder
             ),
         ));
         
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         
     }
 }

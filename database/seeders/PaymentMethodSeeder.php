@@ -14,6 +14,7 @@ class PaymentMethodSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('payment_methods')->truncate();
     DB::table('payment_methods')->insert(
             array (
@@ -31,5 +32,7 @@ class PaymentMethodSeeder extends Seeder
                 
             )
         );
+        
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

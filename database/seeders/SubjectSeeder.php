@@ -14,6 +14,7 @@ class SubjectSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('subjects')->truncate();
     $faker=\Faker\Factory::create();
         DB::table('subjects')->insert(
@@ -36,5 +37,7 @@ class SubjectSeeder extends Seeder
 
             )
         );
+        
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

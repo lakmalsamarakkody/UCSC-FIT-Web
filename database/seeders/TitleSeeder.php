@@ -14,6 +14,7 @@ class TitleSeeder extends Seeder
    */
   public function run()
   {
+    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('titles')->truncate();
     $titles = ["Rev", "Dr", "Master", "Mr", "Miss", "Mrs"];
     foreach( $titles as $key => $element):
@@ -26,6 +27,8 @@ class TitleSeeder extends Seeder
         ]
       ));
     endforeach;
+    
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
   }
 
 }

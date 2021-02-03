@@ -14,6 +14,7 @@ class SlProvinceSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('sl_provinces')->truncate();
     DB::table('sl_provinces')->insert(
             array(
@@ -28,5 +29,7 @@ class SlProvinceSeeder extends Seeder
                 ['name' => 'Northern', 'name_si' => 'උතුරු', 'name_ta' => 'வட', 'created_at' => '2020-11-25 10:13:53', 'updated_at' => '2020-11-25 10:13:53']
             )
         );
+        
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
