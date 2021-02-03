@@ -23,8 +23,7 @@ class UsersController extends Controller
 
   public function index()
   {
-    $roles = Role::all();
-
+    $roles = Role::all();    
     return view('portal/staff/users',compact('roles'));
   }
 
@@ -136,5 +135,20 @@ class UsersController extends Controller
           endif;
       endif;
       return response()->json(['error'=>'error']);
+  }
+
+  public function createUser(Request $request)
+  {
+    $validator = Validator::make($request->all(), 
+        [     
+            'userEmail'=> ['required', 'email', 'unique:users'],
+            'reTypeEmail' => ['required', 'same:userEmail'],
+            'UserRole' => ['required', 'exists:roles,name']
+        ]
+    );
+    if($validator->fails()):
+        return response()->json(['errors'=>$validator->errors()]);
+    else:
+    endif;
   }
 }
