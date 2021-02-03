@@ -30,6 +30,17 @@
   <div class="col-lg-12 users">
     <div class="row">
 
+
+      {{-- NEW USER --}}
+      <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <button class="btn w-100 p-0" data-toggle="modal" data-target="#newUserModal" style="text-decoration: none">
+          <div class="card">
+            <div class="card-header bg-primary text-center py-4 text-white">New User</div>
+          </div>
+        </button>
+      </div>
+      {{-- /NEW USER --}}
+
       <!-- SEARCH -->
       <div class="col-md-12">
         <div class="card">
@@ -117,6 +128,8 @@
     </div>
   </div>
   <!-- /CONTENT -->
+  @include('portal.staff.user.modals')
+
 @endsection
 
 @section('script')

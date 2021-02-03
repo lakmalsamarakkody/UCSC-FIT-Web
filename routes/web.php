@@ -128,6 +128,7 @@ Route::get('/portal/staff/user/profile/{id}',[App\Http\Controllers\Portal\Staff\
 Route::post('/portal/staff/user/profile/update/email/request',[App\Http\Controllers\Portal\Staff\UsersController::class, 'emailUpdateRequest'])->name('user.update.email.request');
 Route::post('/portal/staff/user/profile/deactivate/account',[App\Http\Controllers\Portal\Staff\UsersController::class, 'deactivateAccount'])->name('deactivate.user');
 Route::post('/portal/staff/user/profile/reactivate/account',[App\Http\Controllers\Portal\Staff\UsersController::class, 'reactivateAccount'])->name('reactivate.user');
+Route::post('/portal/staff/user/create/user',[App\Http\Controllers\Portal\Staff\UsersController::class, 'createUser'])->name('add.new.user');
 // /USER PAGE
 
 // SYSTEM PAGE
