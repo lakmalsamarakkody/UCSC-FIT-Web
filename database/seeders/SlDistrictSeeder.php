@@ -14,7 +14,8 @@ class SlDistrictSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sl_districts')->insert(
+    DB::table('sl_districts')->truncate();
+    DB::table('sl_districts')->insert(
             array(
 
                 [ 'province_id' => '6', 'name' => 'Ampara', 'name_si' => 'අම්පාර', 'name_ta' => 'அம்பாறை', 'created_at' => '2020-11-25 10:13:53', 'updated_at' => '2020-11-25 10:13:53'],

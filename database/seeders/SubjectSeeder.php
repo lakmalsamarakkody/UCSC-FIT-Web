@@ -14,7 +14,8 @@ class SubjectSeeder extends Seeder
      */
     public function run()
     {
-        $faker=\Faker\Factory::create();
+    DB::table('subjects')->truncate();
+    $faker=\Faker\Factory::create();
         DB::table('subjects')->insert(
             array(
                 ['name'=> 'ICT Applications',

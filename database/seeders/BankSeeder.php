@@ -14,7 +14,8 @@ class BankSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('banks')->insert(
+    DB::table('banks')->truncate();
+    DB::table('banks')->insert(
             array (
                 [
                     'name'=>'Peoples Bank',

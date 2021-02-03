@@ -14,7 +14,8 @@ class BankBranchSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('bank_branches')->insert(
+    DB::table('bank_branches')->truncate();
+    DB::table('bank_branches')->insert(
             array (
 
                 ['bank_id'=> '1', 'district_id'=> '1', 'code'=> '15', 'name'=> 'Ampara', 'created_at' => '2021-01-05 10:13:53', 'updated_at' => '2021-01-05 10:13:53'],

@@ -14,7 +14,8 @@ class SlProvinceSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sl_provinces')->insert(
+    DB::table('sl_provinces')->truncate();
+    DB::table('sl_provinces')->insert(
             array(
                 ['name' => 'Western', 'name_si' => 'බස්නාහිර', 'name_ta' => 'மேல்', 'created_at' => '2020-11-25 10:13:53', 'updated_at' => '2020-11-25 10:13:53'],
                 ['name' => 'Central', 'name_si' => 'මධ්‍යම', 'name_ta' => 'மத்திய', 'created_at' => '2020-11-25 10:13:53', 'updated_at' => '2020-11-25 10:13:53'],

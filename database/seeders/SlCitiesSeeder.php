@@ -14,7 +14,8 @@ class SlCitiesSeeder extends Seeder
      */
     public function run()
     {
-        DB::raw("INSERT INTO `sl_cities` (`id`, `district_id`, `name`, `name_si`, `name_ta`, `sub_name`, `sub_name_si`, `sub_name_ta`, `postcode`, `latitude`, `longitude`, `created_at`, `updated_at`, `deleted_at`) VALUES
+    DB::table('sl_cities')->truncate();
+    DB::raw("INSERT INTO `sl_cities` (`id`, `district_id`, `name`, `name_si`, `name_ta`, `sub_name`, `sub_name_si`, `sub_name_ta`, `postcode`, `latitude`, `longitude`, `created_at`, `updated_at`, `deleted_at`) VALUES
         (1, 1, 'Akkaraipattu', 'අක්කරපත්තුව', 'NULL', 'NULL', 'NULL', 'NULL', '32400', 7.2167, 81.85, '2020-11-25 10:13:53', '2020-11-25 10:13:53'),
         (2, 1, 'Ambagahawatta', 'අඹගහවත්ත', 'NULL', 'NULL', 'NULL', 'NULL', '90326', 7.4, 81.3, '2020-11-25 10:13:53', '2020-11-25 10:13:53'),
         (3, 1, 'Ampara', 'අම්පාර', 'அம்பாறை', 'NULL', 'NULL', 'NULL', '32000', 7.2833, 81.6667, '2020-11-25 10:13:53', '2020-11-25 10:13:53'),

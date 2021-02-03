@@ -14,7 +14,8 @@ class ExamTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('exam_types')->insert(
+    DB::table('exam_types')->truncate();
+    DB::table('exam_types')->insert(
             array(
                 ['name'=> 'E-Test',
                 'created_at'=> '2020-11-25 10:13:53',

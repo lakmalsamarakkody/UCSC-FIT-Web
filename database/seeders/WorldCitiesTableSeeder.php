@@ -17,7 +17,7 @@ class WorldCitiesTableSeeder extends Seeder
     {
         
 
-        // \DB::table('world_cities')->truncate();
+        DB::table('world_cities')->truncate();
         
         DB::table('world_cities')->insert(array (
             0 => 

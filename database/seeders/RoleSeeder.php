@@ -14,7 +14,8 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert(
+    DB::table('roles')->truncate();
+    DB::table('roles')->insert(
             array(
                 ['name'=> 'Student',
                 'description'=> 'FIT Student',

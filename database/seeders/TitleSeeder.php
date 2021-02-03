@@ -14,6 +14,7 @@ class TitleSeeder extends Seeder
    */
   public function run()
   {
+    DB::table('titles')->truncate();
     $titles = ["Rev", "Dr", "Master", "Mr", "Miss", "Mrs"];
     foreach( $titles as $key => $element):
       DB::table('titles')->insert(

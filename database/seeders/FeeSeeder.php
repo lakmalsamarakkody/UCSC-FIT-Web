@@ -14,7 +14,8 @@ class FeeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('fees')->insert(
+    DB::table('fees')->truncate();
+    DB::table('fees')->insert(
             array(
                 ['purpose'=> 'registration',
                 'subject_id'=> NULL,

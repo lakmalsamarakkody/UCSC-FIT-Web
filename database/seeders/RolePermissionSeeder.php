@@ -14,7 +14,8 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('role_permissions')->insert(
+    DB::table('role_permissions')->truncate();
+    DB::table('role_permissions')->insert(
             array (
                 [
                     'role_id'=>'1',

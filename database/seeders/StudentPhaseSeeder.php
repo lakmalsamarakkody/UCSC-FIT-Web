@@ -14,7 +14,8 @@ class StudentPhaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('student_phases')->insert(
+    DB::table('student_phases')->truncate();
+    DB::table('student_phases')->insert(
             array(
                 ['code'=> '1',
                 'name'=> 'Fresh User',
