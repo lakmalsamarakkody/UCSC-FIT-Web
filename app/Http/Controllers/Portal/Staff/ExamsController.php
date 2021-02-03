@@ -54,7 +54,13 @@ class ExamsController extends Controller
             if(Auth::user()->role->name == 'Co-Ordinator'):
                 $data = $data->where('approval_request', true)->where('schedule_approve', false)->where('schedule_release', false);
             elseif(Auth::user()->role->name == 'Super Administrator'):
-                $data = $data->where('approval_request', false)->orWhere('schedule_approve', true)->orWhere('schedule_release', false)->where('date', '>=', $today);
+                $data = $data->where('approval_request', false)->where(function ($query){
+                    $query->where('schedule_approve', false)
+                    ->where('schedule_release', false);
+                })->orWhere('approval_request', true)->where(function ($query) {
+                    $query->where('schedule_approve', true)
+                    ->where('schedule_release', false);
+                });
             else:
                 $data = $data;
             endif;
