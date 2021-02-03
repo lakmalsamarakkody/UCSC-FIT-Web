@@ -18,7 +18,7 @@ class StaffAuthorization
     public function handle(Request $request, Closure $next)
     {
         $role = Auth::user()->role_id;
-        if($role==2 || $role==3 || $role==4 || $role==5):
+        if($role!=1):
             return $next($request);
         else:
             return redirect('/login');
