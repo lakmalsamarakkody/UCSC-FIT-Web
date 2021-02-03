@@ -52,9 +52,9 @@ class ExamsController extends Controller
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
             ]);
             if(Auth::user()->role->name == 'Co-Ordinator'):
-                $data = $data->where('approval_request', 1);
+                $data = $data->where('approval_request', true)->where('schedule_approve', false)->where('schedule_release', false);
             elseif(Auth::user()->role->name == 'Super Administrator'):
-                $data = $data->where('approval_request', 0)->orWhere('schedule_approve', 1)->where('date', '>=', $today);
+                $data = $data->where('approval_request', false)->orWhere('schedule_approve', true)->orWhere('schedule_release', false)->where('date', '>=', $today);
             else:
                 $data = $data;
             endif;
@@ -75,7 +75,17 @@ class ExamsController extends Controller
                 'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
-            ])->where('approval_request', 1)->where('schedule_approve', 1)->where('schedule_release', 1);
+            ]);
+            if(Auth::user()->role->name == 'Super Administrator'):
+                $data = $data->where('approval_request', true)->where('schedule_approve', true)->where('schedule_release', true);
+            elseif(Auth::user()->role->name == 'Co-Ordinator'):
+                $data = $data->where('approval_request', true)->where('schedule_approve', true)->where('schedule_release', true)->where(function ($query){
+                    $query->where('delete_request', true)
+                    ->orWhere('postpone_request', true);
+                });
+            else:
+                $data = $data;
+            endif;
             return DataTables::of($data)
             ->rawColumns(['action'])
             ->make(true);
