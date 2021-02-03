@@ -31,7 +31,7 @@
 
         {{-- EXAM LIST --}}
         <div class="col-lg-3 col-md-6 col-12">
-          <a href="/portal/staff/exams/list" style="text-decoration: none">
+          <a href="{{ url('/portal/staff/exams/list') }}" style="text-decoration: none">
             <div class="card">
               <div class="card-header bg-primary text-center py-4 text-white">Exam List</div>
             </div>
