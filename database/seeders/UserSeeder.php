@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
                 ['name'=> 'dhananga',
                 'email'=>"pdv@ucsc.cmb.ac.lk",
                 'password'=>'$2y$10$chLDig2zqSahPLNRnur.0O3xzyvjlzH54Jwsp.gblzj3Ltp.dfxkG',
-                'role_id'=> '1',
+                'role_id'=> '6',
                 'status'=> true,
                 'created_at'=> '2020-11-23 10:13:53',
                 'updated_at'=> '2020-11-23 10:13:53'],

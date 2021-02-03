@@ -53,7 +53,7 @@ class ExamsController extends Controller
             ]);
             if(Auth::user()->role->name == 'Co-Ordinator'):
                 $data = $data->where('approval_request', true)->where('schedule_approve', false)->where('schedule_release', false);
-            elseif(Auth::user()->role->name == 'Super Administrator'):
+            elseif(Auth::user()->role->name == 'MA'):
                 $data = $data->where('approval_request', false)->where(function ($query){
                     $query->where('schedule_approve', false)
                     ->where('schedule_release', false);
@@ -82,7 +82,7 @@ class ExamsController extends Controller
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
             ]);
-            if(Auth::user()->role->name == 'Super Administrator'):
+            if(Auth::user()->role->name == 'MA'):
                 $data = $data->where('approval_request', true)->where('schedule_approve', true)->where('schedule_release', true);
             elseif(Auth::user()->role->name == 'Co-Ordinator'):
                 $data = $data->where('approval_request', true)->where('schedule_approve', true)->where('schedule_release', true)->where(function ($query){
