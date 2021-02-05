@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ChangeEmail;
+use App\Mail\StaffRegistration;
+use App\Models\Email_Token;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\User;
@@ -141,14 +143,43 @@ class UsersController extends Controller
   {
     $validator = Validator::make($request->all(), 
         [     
-            'userEmail'=> ['required', 'email', 'unique:users'],
+            'userEmail'=> ['required', 'email', 'unique:users,email'],
             'reTypeEmail' => ['required', 'same:userEmail'],
-            'UserRole' => ['required', 'exists:roles,name']
+            'userRole' => ['required', 'exists:roles,id']
         ]
     );
     if($validator->fails()):
         return response()->json(['errors'=>$validator->errors()]);
     else:
+        $email = $request->userEmail;
+        $token = Str::random(64);
+
+        if(Email_Token::where('email', $email)->first()):
+            $email_token = Email_Token::where('email', $email)->first();
+        else:
+            $email_token = new Email_Token();
+        endif;
+        $email_token->email = $email;
+        $email_token->token = $token;
+        $email_token->role = $request->userRole;
+
+
+        $details = [
+            'email' => $email_token->email,
+            'token' => $email_token->token,
+            'role' => $request->userRole
+        ];
+
+
+        
+
+        if(Mail::to($email)->send(new StaffRegistration($details))):
+            return response()->json(['error'=>'error']);
+        else:
+            if($email_token->save()):
+                return response()->json(['success'=>'success']);
+            endif;
+        endif;
     endif;
   }
 }

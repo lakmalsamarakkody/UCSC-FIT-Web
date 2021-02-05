@@ -108,7 +108,7 @@
           });
           //SwalCancelWarning.fire({title: 'Role creation Aborted!',text: 'You have no permission to create a role',})
         }
-        else if(data['status'] == 'success'){
+        else if(data['success'] == 'success'){
           console.log('create role is success');
           SwalDoneSuccess.fire({
             title: 'Created!',

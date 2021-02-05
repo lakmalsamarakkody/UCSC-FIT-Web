@@ -27,13 +27,13 @@
             <div class="form-row">
               <div class="form-group col">
                 <label for="inputEmail4">Role</label>
-                <select class="form-control" name="UserRole" id="UserRole" required>
+                <select class="form-control" name="userRole" id="userRole" required>
                   <option value="">Select Role</option>
                   @foreach($roles as $role)                          
                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                   @endforeach
                 </select>
-                <span class="invalid-feedback" id="error-UserRole" role="alert"></span>
+                <span class="invalid-feedback" id="error-userRole" role="alert"></span>
               </div>
             </div>
         </form>

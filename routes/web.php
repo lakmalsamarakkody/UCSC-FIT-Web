@@ -180,6 +180,11 @@ Route::get('/portal/staff/website/announcements', [App\Http\Controllers\Portal\S
 Route::post('/portal/staff/website/announcements', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'createAnnouncement'])->name('staff.website.announcements.create');
 // /ANOUNCEMENT PAGE
 
+// GUEST
+Route::get('/guest/{email}/fit/{token}/staff/{role}', [App\Http\Controllers\Portal\Staff\GuestController::class,'setPassword'])->name('email.link.staff');
+Route::post('/guest/update/account/staff', [App\Http\Controllers\Portal\Staff\GuestController::class,'updateAccount'])->name('update.account.staff');
+// /GUEST
+
 /*
 |--------------------------------------------------------------------------
 | STUDENT PORTAL ROUTES
