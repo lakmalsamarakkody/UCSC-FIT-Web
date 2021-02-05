@@ -458,16 +458,32 @@
         formData.append('schedule_id', schedule_id);
 
         $.ajax({
-        })
-        SwalDoneSuccess.fire({
-          title: 'Approval requested!',
-          text: 'Approval request has been sent to Coordinator.',
-        })
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/request/approval') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function() {$('#btnRequestApprovalSchedule-'+schedule_id).attr('disabled', 'disabled');},
+          success: function(data) {
+            console.log('Success in request schedule approval ajax.');
+            $('#btnRequestApprovalSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+            SwalDoneSuccess.fire({
+              title: 'Approval requested!',
+              text: 'Schedule approval request has been sent to Coordinator.',
+            })
+          },
+          error: function(err){
+            console.log('Error in request schedule approval ajax.');
+            $('#btnRequestApprovalSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Approval request has not been sent.',
+          text: 'Schedule approval request has not been sent.',
         })
       }
     })

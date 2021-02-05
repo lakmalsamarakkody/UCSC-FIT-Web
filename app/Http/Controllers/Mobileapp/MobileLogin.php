@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\User\Role;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\DB;
 
@@ -52,8 +53,9 @@ class MobileLogin extends Controller
         $roletype=Role::where('id',$user->role_id)->select(
              'name'
         )->first();
+        $pro=Storage::url('portal/avatar/'.$user->id.'/'.$user->profile_pic);
         Arr::add($user,'rolename',$roletype->name);
-        Arr::add($user,'profile',asset('storage/portal/avatar/'.$user->id.'/'.$user->profile_pic));
+        Arr::add($user,'profile',asset($pro));
         if($user->rolename=="Co-Ordinator" || $user->rolename=="Director" ||$user->rolename=="Super Administrator"){
             $token = $user->createToken('user-token',[$user->rolename])->plainTextToken;
         Arr::add($user,'token',$token);
