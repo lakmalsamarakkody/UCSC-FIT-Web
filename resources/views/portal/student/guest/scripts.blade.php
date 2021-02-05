@@ -50,7 +50,7 @@
           });
         }else if (data['error']){
           SwalErrorDanger.fire({
-            title: 'Email Failed!',
+            title: 'Account Creation Failed!',
             text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
           })
         }
@@ -59,7 +59,7 @@
         $("#emailSpinner").addClass('d-none');
         $('#submit').removeAttr('disabled');
         SwalErrorDanger.fire({
-          title: 'Email Failed!',
+          title: 'Account Creation Failed!',
           text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
         })
       }
