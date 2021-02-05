@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Student_Exam;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
+
 class StduentDetailsController extends Controller
 {
     function studentDetails($id){
@@ -25,7 +28,7 @@ class StduentDetailsController extends Controller
          ->get();
     }
     function searchStudents(){
-         return DB::table('students')
+         $stuData= DB::table('students')
          ->join('student_flags','students.id',"=",'student_flags.student_id')
          ->select(
              "students.id",
@@ -53,6 +56,7 @@ class StduentDetailsController extends Controller
              
          )
          ->get();
+         return $stuData;
     }
    function searchStudentsbyname($name=''){
        if($name==''){
