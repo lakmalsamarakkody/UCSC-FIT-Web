@@ -26,7 +26,7 @@
 </tr>
 </table>
 
-<p class="text-white" style="text-align: center; color: #fff !important;">OR <br> Use the Following Link <br><a href="{{ route('email.link', ['email'=>$details['email'], 'token'=>$details['token']]) }}">{{ route('email.link', ['email'=>$details['email'], 'token'=>$details['token']]) }}</a></p>
+<p class="text-white" style="text-align: center; color: #fff !important;">OR <br> If you’re having trouble clicking the "Check Registration Status" button, copy and paste the URL below into your web browser: <br><a href="{{ route('email.link', ['email'=>$details['email'], 'token'=>$details['token']]) }}">{{ route('email.link', ['email'=>$details['email'], 'token'=>$details['token']]) }}</a></p>
 
 
 </div>
