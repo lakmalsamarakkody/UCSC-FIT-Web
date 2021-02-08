@@ -59,7 +59,7 @@
           targets: 7,
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">'+
-            '<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" id="btnApproveSchedule-'+data+'" onclick="approve_schedule();"><i class="fas fa-file-signature"></i></button>'+
+            '<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" id="btnApproveSchedule-'+data+'" onclick="approve_schedule('+data+');"><i class="fas fa-file-signature"></i></button>'+
             '<button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-placement="bottom" title="Request Approval" id="btnRequestApprovalSchedule-'+data+'" onclick="request_schedule_approval('+data+');"><i class="fas fa-share-square"></i></button>'+
             '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" id="btnReleaseSchedule-'+data+'" onclick="relase_individual_schedule();" ><i class="fas fa-hand-point-right"></i></button>'+
             '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit" id="btnEditSchedule-'+data+'" onclick="edit_schedule_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>'+
@@ -290,6 +290,55 @@
     })
   }
   // /Request schedule approval
+
+  // Approve schedule
+  approve_schedule = (schedule_id) => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "You wont be able to revert this!",
+      confirmButtonText: "Yes, Approve Schedule!",
+    })
+    .then((result) => {
+      if(result.isConfirmed){
+        //Form payload
+        var formData = new FormData();
+        formData.append('schedule_id', schedule_id);
+
+        // Approve Schedule controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/approve') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function() {$('#btnApproveSchedule-'+schedule_id).attr('disabled', 'disabled');},
+          success: function(data) {
+            console.log('Success in approve schedule ajax.');
+            $('#btnApproveSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+            SwalDoneSuccess.fire({
+              title: 'Approved!',
+              text: 'Schedule has been approved.',
+            })
+            beforeReleaseTable.draw();
+          },
+          error: function(err){
+            console.log('Error in approve schedule ajax.');
+            $('#btnApproveSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Schedule has not been approved.',
+        })
+      }
+    })
+  }
+  // /Approve schedule
+
   });
   // /UPCOMING EXAMS(before release)
 
