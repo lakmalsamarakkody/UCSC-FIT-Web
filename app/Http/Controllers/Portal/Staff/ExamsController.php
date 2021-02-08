@@ -50,20 +50,18 @@ class ExamsController extends Controller
                 'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
-            ]);
-            if(Auth::user()->role->name == 'Co-Ordinator'):
-                $data = $data->where('approval_request', true)->where('schedule_approve', false)->where('schedule_release', false);
-            elseif(Auth::user()->role->name == 'MA'):
-                $data = $data->where('approval_request', false)->where(function ($query){
-                    $query->where('schedule_approve', false)
-                    ->where('schedule_release', false);
-                })->orWhere('approval_request', true)->where(function ($query) {
-                    $query->where('schedule_approve', true)
-                    ->where('schedule_release', false);
-                });
-            else:
-                $data = $data;
-            endif;
+            ])->where('schedule_release', false);
+            // if(Auth::user()->role->name == 'Co-Ordinator'):
+            //     $data = $data->where('schedule_approval', 'requested')->where('schedule_release', false);
+            // elseif(Auth::user()->role->name == 'MA'):
+            //     $data = $data->where('schedule_approval', null)->where(function ($query){
+            //         $query->where('schedule_release', false);
+            //     })->orWhere('schedule_approval', 'approve')->where(function ($query) {
+            //         $query->where('schedule_release', false);
+            //     });
+            // else:
+            //     $data = $data;
+            // endif;
             return DataTables::of($data)
             ->rawColumns(['action'])
             ->make(true);
@@ -81,17 +79,14 @@ class ExamsController extends Controller
                 'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
-            ]);
-            if(Auth::user()->role->name == 'MA'):
-                $data = $data->where('approval_request', true)->where('schedule_approve', true)->where('schedule_release', true);
-            elseif(Auth::user()->role->name == 'Co-Ordinator'):
-                $data = $data->where('approval_request', true)->where('schedule_approve', true)->where('schedule_release', true)->where(function ($query){
-                    $query->where('delete_request', true)
-                    ->orWhere('postpone_request', true);
-                });
-            else:
-                $data = $data;
-            endif;
+            ])->where('schedule_approval', 'approve')->where('schedule_release', true);
+            // if(Auth::user()->role->name == 'MA'):
+            //     $data = $data->where('schedule_approval', 'approve')->where('schedule_release', true);
+            // elseif(Auth::user()->role->name == 'Co-Ordinator'):
+            //     $data = $data->where('schedule_approval', 'approve')->where('schedule_release', true);
+            // else:
+            //     $data = $data;
+            // endif;
             return DataTables::of($data)
             ->rawColumns(['action'])
             ->make(true);
@@ -270,7 +265,7 @@ class ExamsController extends Controller
             return response()->json(['status'=>'error', 'errors'=>$schedule_id_validator->errors()]);
         else:
             if(Schedule::where('id', $request->schedule_id)->update([
-                'approval_request' => true
+                'schedule_approval' => 'requested'
             ])):
             return response()->json(['status'=>'success']);
             endif;
