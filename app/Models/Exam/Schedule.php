@@ -25,7 +25,8 @@ class Schedule extends Model
       'exam_type_id',
       'date',
       'start_time',
-      'end_time'
+      'end_time',
+      'schedule_approval'
     ];
 
     public function exam(){

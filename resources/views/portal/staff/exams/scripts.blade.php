@@ -268,11 +268,19 @@
           success: function(data) {
             console.log('Success in request schedule approval ajax.');
             $('#btnRequestApprovalSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-            SwalDoneSuccess.fire({
-              title: 'Approval requested!',
-              text: 'Schedule approval request has been sent to Coordinator.',
-            })
-            beforeReleaseTable.draw();
+            if(data['status'] == 'requested'){
+              SwalNotificationWarningAutoClose.fire({
+                title: 'Declined!',
+                text: 'The schedule has been already requested for approval.',
+              })
+            }
+            else if(data['status'] == 'success') {
+              SwalDoneSuccess.fire({
+                title: 'Approval requested!',
+                text: 'Schedule approval request has been sent to Coordinator.',
+              })
+              beforeReleaseTable.draw();
+            }
           },
           error: function(err){
             console.log('Error in request schedule approval ajax.');
