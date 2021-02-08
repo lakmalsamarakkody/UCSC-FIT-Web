@@ -442,10 +442,16 @@
             success: function(data) {
               console.log('Success in release individual schedule ajax.');
               $('#btnReleaseSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-              if(data['errors']) {
+              if(data['status'] == 'errors') {
                 SwalNotificationWarningAutoClose.fire({
                   title: 'Error!',
                   text: 'The id of the schedule is not found.',
+                })
+              }
+              else if(data['status'] == 'decline') {
+                SwalNotificationWarningAutoClose.fire({
+                  title: 'Decline!',
+                  text: 'The schedule not yet approved by the Coordinator.',
                 })
               }
               else if(data['status'] == 'success') {

@@ -309,12 +309,17 @@ class ExamsController extends Controller
 
         // Check validator fails
         if($schedule_id_validator->fails()):
-            return response()->json(['errors']);
+            return response()->json(['status'=>'errors']);
         else:
-            if(Schedule::where('id', $request->schedule_id)->update([
+            $schedule = Schedule::where('id',$request->schedule_id)->first();
+            if($schedule->schedule_approval != 'approve'):
+                return response()->json(['status'=>'decline']);
+            else:
+                if(Schedule::where('id', $request->schedule_id)->update([
                 'schedule_release' => true 
             ])):
             return response()->json(['status'=>'success']);
+                endif;
             endif;
         endif;
     }
