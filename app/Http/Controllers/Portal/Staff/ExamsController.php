@@ -299,6 +299,27 @@ class ExamsController extends Controller
     }
     // /REQUEST APPROVAL
 
+    // RELEASE INDIVIDUAL SCHEDULE
+    public function releaseIndividualSchedule(Request $request)
+    {
+        // Validate schedule id
+        $schedule_id_validator = Validator::make($request->all(), [
+            'schedule_id' => ['required', 'integer', 'exists:exam_schedules,id'],
+        ]);
+
+        // Check validator fails
+        if($schedule_id_validator->fails()):
+            return response()->json(['errors']);
+        else:
+            if(Schedule::where('id', $request->schedule_id)->update([
+                'schedule_release' => true 
+            ])):
+            return response()->json(['status'=>'success']);
+            endif;
+        endif;
+    }
+    // /RELEASE INDIVIDUAL SCHEDULE
+
 
     // POSTPONE
     // Load schedule details to modal
