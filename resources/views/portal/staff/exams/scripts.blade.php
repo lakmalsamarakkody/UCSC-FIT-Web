@@ -131,7 +131,7 @@
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">'+
             '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" id="btnPostponeSchedule-'+data+'" onclick="postpone_exam_modal_invoke('+data+');"><i class="fas fa-calendar-plus"></i></button>'+
-            '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" onclick="delete_after_release();"><i class="fas fa-trash-alt"></i></button>'+
+            '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteAfterRelease-'+data+'" onclick="delete_after_release('+data+');"><i class="fas fa-trash-alt"></i></button>'+
             '</div>';
             return btnGroup;
             
@@ -589,23 +589,57 @@
     // /Postpone(after release)
 
     // Delete(after release)
-    delete_after_release = () => {
+    delete_after_release = (schedule_id) => {
       SwalQuestionDanger.fire({
         title: "Are you sure ?",
         text: "You wont be able to revert this!",
-        confirmButtonText: 'Yes, Send request!',
+        confirmButtonText: 'Yes, Delete!',
       })
       .then((result) => {
         if(result.isConfirmed) {
-          SwalDoneSuccess.fire({
-            title: 'Request Delete!',
-            text: 'Delete request has been sent to Coordinator.',
-          })
+          // Form Payload
+          var formData = new FormData();
+          formData.append('schedule_id', schedule_id);
+
+          // Delete schedule after release controller
+          $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url: "{{ url('/portal/staff/exams/schedule/delete/after/release') }}",
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function() {$('btnDeleteAfterRelease-'+schedule_id).attr('disabled', 'disabled');},
+            success: function(data) {
+              console.log('Success in delete schedule after rlease ajax.');
+              $('btnDeleteAfterRelease-'+schedule_id).removeAttr('disabled', 'disabled');
+              if(data['status'] == 'success') {
+                console.log('Success in delete schedule after release.');
+                SwalDoneSuccess.fire({
+                  title: 'Deleted!',
+                  text: 'Exam schedule has been deleted.',
+                })
+                afterReleaseTable.draw();
+              }
+              else if(data['status'] == 'errors') {
+                console.log('Validation errors in delete schedule.');
+                SwalNotificationWarningAutoClose.fire({
+                  title: 'Error!',
+                  text: 'The id of the schedule not found.',
+                })
+              }
+            },
+            error: function(err) {
+              console.log('Error in delete schedule after release ajax.');
+              $('#btnDeleteAfterRelease-'+schedule_id).removeAttr('disabled', 'disabeld');
+              SwalSystemErrorDanger.fire();
+            }
+          });
         }
         else{
           SwalNotificationWarningAutoClose.fire({
             title: 'Cancelled!',
-            text: 'Delete request has not been sent.',
+            text: 'Exam schedule has not been deleted.',
           })
         }
       })
