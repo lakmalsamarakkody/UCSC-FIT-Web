@@ -19,64 +19,29 @@ class PermissionSeeder extends Seeder
     DB::table('permissions')->insert(
             array (
                 [
-                    'name'=>'create-exam',
-                    'description'=>'can add an user',
+                    'name'=>'system-role-add',
+                    'description'=>'can add a user role',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
 
                 [
-                    'name'=>'edit-user',
-                    'description'=>'can edit an user',
+                    'name'=>'system-role-view',
+                    'description'=>'can view permissions of an user',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
 
                 [
-                    'name'=>'delete-user',
-                    'description'=>'can delete an user',
+                    'name'=>'system-role-edit',
+                    'description'=>'can edit permissions of an user',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-                
+
                 [
-                    'name'=>'view-dashboard',
-                    'description'=>'can view the dashboard page',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                
-                [
-                    'name'=>'view-exams',
-                    'description'=>'can view the exams page',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                
-                [
-                    'name'=>'view-students',
-                    'description'=>'can view the students page',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                
-                [
-                    'name'=>'view-results',
-                    'description'=>'can view the results page',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                
-                [
-                    'name'=>'view-user-page',
-                    'description'=>'can view the user page',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                
-                [
-                    'name'=>'view-system',
-                    'description'=>'can view the system page',
+                    'name'=>'system-role-delete',
+                    'description'=>'can delete a user role',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
