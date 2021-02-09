@@ -14,7 +14,7 @@ class ExamListController extends Controller
     //Exam list view
     public function index()
     {
-        $exams = Exam::orderby('year', 'desc')->get();
+        $exams = Exam::orderby('year', 'desc')->orderBy('id', 'desc')->get();
         return view('portal/staff/exams/exam_list', compact('exams'));
     }
     
