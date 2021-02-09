@@ -241,7 +241,7 @@ class ExamsController extends Controller
 
         //Check validator fails
         if($schedule_id_validator->fails()):
-            return response()->json(['status'=>'error','errors'=>$schedule_id_validator->errors()]);
+            return response()->json(['status'=>'errors']);
         else:
             if(Schedule::destroy($request->schedule_id)):
                 return response()->json(['status'=>'success']);
@@ -262,7 +262,7 @@ class ExamsController extends Controller
 
         //Check validator fails
         if($schedule_id_validator->fails()):
-            return response()->json(['status'=>'error', 'errors'=>$schedule_id_validator->errors()]);
+            return response()->json(['status'=>'errors']);
         else:
             $schedule = Schedule::where('id', $request->schedule_id)->first();
             if($schedule->schedule_approval == 'requested'):
@@ -288,7 +288,7 @@ class ExamsController extends Controller
 
         //Check validator fails
         if($schedule_id_validator->fails()):
-            return response()->json(['status'=>'error', 'errors'=>$schedule_id_validator->errors()]);
+            return response()->json(['status'=>'errors']);
         else:
             if(Schedule::where('id', $request->schedule_id)->update([
                 'schedule_approval' => 'approve'

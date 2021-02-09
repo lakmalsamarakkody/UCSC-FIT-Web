@@ -335,7 +335,13 @@
             success: function(data) {
               console.log('Success in request schedule approval ajax.');
               $('#btnRequestApprovalSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-              if(data['status'] == 'requested'){
+              if(data['status'] == 'errors') {
+                SwalNotificationWarningAutoClose.fire({
+                  title: 'Error!',
+                  text: 'The id of the schedule is not found.',
+                })
+              }
+              else if(data['status'] == 'requested'){
                 SwalNotificationWarningAutoClose.fire({
                   title: 'Declined!',
                   text: 'The schedule has been already requested for approval.',
@@ -391,11 +397,19 @@
             success: function(data) {
               console.log('Success in approve schedule ajax.');
               $('#btnApproveSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-              SwalDoneSuccess.fire({
-                title: 'Approved!',
-                text: 'Scheduled exam has been approved.',
-              })
-              beforeReleaseTable.draw();
+              if(data['status'] == 'errors') {
+                SwalNotificationWarningAutoClose.fire({
+                  title: 'Error!',
+                  text: 'The id of the schedule is not found.',
+                })
+              }
+              else if(data['status'] == 'success') {
+                SwalDoneSuccess.fire({
+                  title: 'Approved!',
+                  text: 'Scheduled exam has been approved.',
+                })
+                beforeReleaseTable.draw();
+              }
             },
             error: function(err){
               console.log('Error in approve schedule ajax.');
