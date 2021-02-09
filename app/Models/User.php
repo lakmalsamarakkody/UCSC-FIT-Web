@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use App\Models\User\Role;
+use App\Models\User\Permission;
+use App\Models\User\Role\hasPermission;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -57,4 +60,20 @@ class User extends Authenticatable
     {
         return $this->hasOne(Student::class, 'user_id', 'id');
     }
+
+    // CHECK IF USER HAS SOME PERMISSION
+	public function hasPermission($permission) {
+
+		$permission = Permission::where('name', $permission)->first();
+
+		if ( $permission !== NULL ):
+			if ( hasPermission::where('role_id', Auth::user()->role->id)->where('permission_id', $permission->id)->first() !== NULL ):
+				return true;
+			else:
+				return false;
+			endif;
+		else:
+			return false;
+		endif;
+	}
 }
