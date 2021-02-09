@@ -113,7 +113,7 @@ Route::post('/portal/staff/exams/schedule/release/individual',[App\Http\Controll
 
 Route::post('/portal/staff/exams/schedule/postpone/details',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'postponeScheduleGetDetails']);
 Route::post('/portal/staff/exams/schedule/postpone',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'postponeExam']);
-Route::post('/portal/staff/exams/schedule/delete/after/release',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'deleteAfterRelease']);
+Route::post('/portal/staff/exams/schedule/delete/after/release',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'deleteScheduleAfterRelease']);
 //Route::get('/portal/staff/exams/held/search', [App\Http\Controllers\Portal\Staff\ExamsController::class, 'getHeldExams'])->name('exams.held.search');
 // /EXAMS PAGE
 

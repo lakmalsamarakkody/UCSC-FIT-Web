@@ -377,8 +377,9 @@ class ExamsController extends Controller
     // /POSTPONE
 
     // DELETE
-    public function deleteAfterRelease(Request $request)
+    public function deleteScheduleAfterRelease(Request $request)
     {
+        //
 
     }
     // /DELETE
