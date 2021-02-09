@@ -48,11 +48,13 @@
                   <tr id="tbl-userRole-tr-{{$role->id}}">
                     <td>{{ $role->name }}</td>
                     <td class="text-right">
+                      @if(Auth::user()->hasPermission('edit user'))
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-success" id="btnViewUserRole-{{$role->id}}" onclick="view_role_modal_invoke({{$role->id}});"><i class="fas fa-eye"></i> <span id="spinnerBtnViewUserRole-{{$role->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                         <button type="button" class="btn btn-outline-warning" id="btnEditUserRole-{{$role->id}}" onclick="edit_role_modal_invoke({{$role->id}});"><i class="fas fa-edit"></i> <span id="spinnerBtnEditUserRole-{{$role->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                         <button type="button" class="btn btn-outline-danger" id="btnDeleteUserRole-{{$role->id}}" onclick="delete_role({{$role->id}});"><i class="fas fa-trash-alt"></i></button>
                       </div>
+                      @endif
                     </td>
                   </tr>
                   @endforeach
