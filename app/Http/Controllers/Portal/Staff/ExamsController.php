@@ -379,8 +379,19 @@ class ExamsController extends Controller
     // DELETE
     public function deleteScheduleAfterRelease(Request $request)
     {
-        //
+        // Validate schedule id
+        $schedule_id_validator = Validator::make($request->all(), [
+            'schedule_id' => ['required', 'integer', 'exists:exam_schedules,id'],
+        ]);
 
+        // Check validator fails
+        if($schedule_id_validator->fails()):
+            return response()->json(['status'=>'errors']);
+        else:
+            if(Schedule::destroy($request->schedule_id)):
+                return response()->json(['status'=>'success']);
+            endif;
+        endif;
     }
     // /DELETE
     // /SCHEDULE(After release)
