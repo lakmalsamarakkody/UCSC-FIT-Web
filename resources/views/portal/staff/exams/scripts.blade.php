@@ -58,8 +58,10 @@
           targets: 7,
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">'+
+            '@if(Auth::user()->role->name == "Co-Ordinator")'+
             '<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" id="btnApproveSchedule-'+data+'" onclick="approve_schedule('+data+');"><i class="fas fa-file-signature"></i></button>'+
             '<button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-placement="bottom" title="Request Approval" id="btnRequestApprovalSchedule-'+data+'" onclick="request_schedule_approval('+data+');"><i class="fas fa-share-square"></i></button>'+
+            '@endif'+
             '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" id="btnReleaseSchedule-'+data+'" onclick="relase_individual_schedule('+data+');" ><i class="fas fa-hand-point-right"></i></button>'+
             '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit" id="btnEditSchedule-'+data+'" onclick="edit_schedule_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>'+
             '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteExamSchedule-'+data+'" onclick="delete_before_release('+data+');"><i class="fas fa-trash-alt"></i></button>'+
@@ -529,6 +531,30 @@
       })
       .then((result) => {
         if(result.isConfirmed) {
+
+          // Remove previous validation error messages
+          $('.form-control').removeClass('is-invalid');
+          $('.invalid-feedback').html('');
+          $('.invalid-feedback').hide();
+          // Form Payload
+          var formData = new FormData($('#formPostponeSchedule')[0]);
+
+          // Postpone exam controller
+          $.ajax({
+            headers: {'X-CSRF-TOKEN': $('#meta[name="csrf-token"]').attr('content')},
+            url: "{{ url('/portal/staff/exams/schedule/postpone') }}",
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function() {$('#btnPostponeExam').attr('disabeld', 'disables');},
+            success: function(data){
+              console.log('Success in postpone exam ajax.');
+              $('#btnPostponeExam').removeAttr('disabled', 'disabled');
+              if(data['errors'])
+            }
+          });
+
           SwalDoneSuccess.fire({
             title: "Postponed!",
             text: "Exam postponed.",
