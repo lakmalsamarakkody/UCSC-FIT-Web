@@ -67,7 +67,7 @@ class ExamsController extends Controller
             ->make(true);
         }
     }
-    // SCHEDULES TABLE(BEFORE RELEASE)
+    // /SCHEDULES TABLE(BEFORE RELEASE)
 
     // SCHEDULES TABLE(AFTER RELEASE)
     public function getSchedulesAfterRelease(Request $request)
@@ -135,7 +135,7 @@ class ExamsController extends Controller
     }
     // /EXAMS TABLE(HELD)
 
-    // SCHEDULE
+    // SCHEDULE(Before release)
     // CREATE
     public function createExamSchedule(Request $request)
     {
@@ -177,7 +177,7 @@ class ExamsController extends Controller
         endif;
         return response()->json(['status'=>'error']);
     }
-    // CREATE
+    // /CREATE
 
     // EDIT
     // Load schedule details to modal
@@ -234,12 +234,12 @@ class ExamsController extends Controller
     // DELETE
     public function deleteExamSchedule(Request $request)
     {
-        //Validate schedule id
+        // Validate schedule id
         $schedule_id_validator = Validator::make($request->all(), [
             'schedule_id' => ['required', 'integer', 'exists:App\Models\Exam\Schedule,id'],
         ]);
 
-        //Check validator fails
+        // Check validator fails
         if($schedule_id_validator->fails()):
             return response()->json(['status'=>'errors']);
         else:
@@ -251,6 +251,7 @@ class ExamsController extends Controller
             
     }
     // /DELETE
+    // /SCHEDULE(Before release)
 
     // REQUEST APPROVAL
     public function requestScheduleApproval(Request $request)
@@ -260,7 +261,7 @@ class ExamsController extends Controller
             'schedule_id' => ['required', 'integer', 'exists:App\Models\Exam\Schedule,id'],
         ]);
 
-        //Check validator fails
+        // Check validator fails
         if($schedule_id_validator->fails()):
             return response()->json(['status'=>'errors']);
         else:
@@ -278,7 +279,7 @@ class ExamsController extends Controller
     }
     // /REQUEST APPROVAL
 
-    // REQUEST APPROVAL
+    // APPROVE SCHEDULE
     public function approveSchedule(Request $request)
     {
         // Validate schedule id
@@ -286,7 +287,7 @@ class ExamsController extends Controller
             'schedule_id' => ['required', 'integer', 'exists:App\Models\Exam\Schedule,id'],
         ]);
 
-        //Check validator fails
+        // Check validator fails
         if($schedule_id_validator->fails()):
             return response()->json(['status'=>'errors']);
         else:
@@ -297,7 +298,7 @@ class ExamsController extends Controller
             endif;
         endif;
     }
-    // /REQUEST APPROVAL
+    // /APPROVE SCHEDULE
 
     // RELEASE INDIVIDUAL SCHEDULE
     public function releaseIndividualSchedule(Request $request)
@@ -325,17 +326,17 @@ class ExamsController extends Controller
     }
     // /RELEASE INDIVIDUAL SCHEDULE
 
-
+    // SCHEDULE(After release)
     // POSTPONE
     // Load schedule details to modal
     public function postponeScheduleGetDetails(Request $request)
     {
-        //Validate schedule id
+        // Validate schedule id
         $schedule_id_validator = Validator::make($request->all(), [
             'schedule_id' => ['required', 'integer', 'exists:App\Models\Exam\Schedule,id'],
         ]);
 
-        //Check validator fails
+        // Check validator fails
         if($schedule_id_validator->fails()):
             return response()->json(['status'=>'error', 'errors'=>$schedule_id_validator->errors()]);
         else:
@@ -346,7 +347,40 @@ class ExamsController extends Controller
         endif;
         return response()->json(['status'=>'error', 'data'=>$request->all()]);
     }
-    // Load schedule details to modal
+    // /Load schedule details to modal
+
+    // Postpone exam
+    public function postponeExam(Request $request)
+    {
+        // Validate form data
+        $postpone_exam_validator = Validator::make($request->all(), [
+            'postponeExamId'=> ['required', 'integer', 'exists:exam_schedules,id'],
+            'postponeExamDate'=> ['required', 'date', 'after: today'],
+            'postponeExamStartTime'=> ['required'],
+            'postponeExamEndTime'=> ['required'],
+        ]);
+
+        // Check validator fails
+        if($postpone_exam_validator->fails()):
+            return response()->json(['status'=>'error', 'errors'=>$postpone_exam_validator->errors()]);
+        else:
+            if(Schedule::where('id', $request->postponeExamId)->update([
+                'date' => $request->postponeExamDate,
+                'start_time' => $request->postponeExamStartTime,
+                'end_time' => $request->postponeExamEndTime
+            ])):
+            return response()->json(['status'=>'success']);
+            endif;
+        endif;
+    }
+    // /Postpone exam
     // /POSTPONE
-    // /SCHEDULE
+
+    // DELETE
+    public function deleteAfterRelease(Request $request)
+    {
+
+    }
+    // /DELETE
+    // /SCHEDULE(After release)
 }

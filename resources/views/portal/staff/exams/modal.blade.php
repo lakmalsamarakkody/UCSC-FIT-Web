@@ -115,7 +115,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="postpone_exam();">Apply Changes</button>
+                    <button type="button" class="btn btn-outline-primary" id="btnModalPostponeExam" onclick="postpone_exam();">Apply Changes</button>
                 </div>
             </div>
         </div>

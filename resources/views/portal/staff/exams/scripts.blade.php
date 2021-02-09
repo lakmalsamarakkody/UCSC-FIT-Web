@@ -549,18 +549,34 @@
             data: formData,
             processData: false,
             contentType: false,
-            beforeSend: function() {$('#btnPostponeExam').attr('disabeld', 'disables');},
+            beforeSend: function() {$('#btnModalPostponeExam').attr('disabeld', 'disables');},
             success: function(data){
               console.log('Success in postpone exam ajax.');
-              $('#btnPostponeExam').removeAttr('disabled', 'disabled');
+              $('#btnModalPostponeExam').removeAttr('disabled', 'disabled');
+              if(data['errors']) {
+                console.log('Errors in validating postpone data.');
+                $.each(data['errors'], function(key, value){
+                  $('#error-'+key).show();
+                  $('#'+key).addClass('is-invalid');
+                  $('#error-'+key).append('<strong>'+value+'</strong>');
+                });
+              }
+              else if(data['status'] == 'success') {
+                console.log('Success in postpone exam.');
+                SwalDoneSuccess.fire({
+                  title: "Postponed!",
+                  text: "Exam postponed.",
+                })
+                $('#modal-postpone-schedule').modal('hide');
+                afterReleaseTable.draw();
+              }
+            },
+            error: function(err) {
+              console.log('Error in postpone exam ajax.');
+              $('#btnModalPostponeExam').removeAttr('disabled', 'disabled');
+              SwalSystemErrorDanger.fire();
             }
           });
-
-          SwalDoneSuccess.fire({
-            title: "Postponed!",
-            text: "Exam postponed.",
-          })
-          $('#postponeExam').modal('hide')
         }
         else {
           SwalNotificationWarningAutoClose.fire({
