@@ -79,7 +79,10 @@
               <table class="table table-responsive-md">
                 <thead>
                   <tr>
+                    <th>Id</th>
                     <th>Name</th>
+                    <th>Portal</th>
+                    <th>Module</th>
                     <th>Description</th>
                     <th>&nbsp;</th>
                   </tr>
@@ -87,7 +90,10 @@
                 <thead>
                   @foreach ($permissions as $permission)
                   <tr id="tbl-permission-tr-{{$permission->id}}">
+                    <td>{{ $permission->id }}</td>
                     <td>{{ $permission->name }}</td>
+                    <td>{{ $permission->portal }}</td>
+                    <td>{{ $permission->module }}</td>
                     <td>{{ $permission->description }}</td>
                     <td class="text-right">
                       <div class="btn-group">

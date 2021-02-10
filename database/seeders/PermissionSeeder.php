@@ -111,7 +111,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-createSchedule',
                     'portal'=>'staff',
-                    'module'=>'exam',
+                    'module'=>'exams',
                     'description'=>'can create an exam schedule',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'

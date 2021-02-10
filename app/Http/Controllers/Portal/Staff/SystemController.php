@@ -33,7 +33,7 @@ class SystemController extends Controller
   public function index()
   {
     $roles = Role::orderby('name')->get();
-    $permissions = Permission::orderby('name')->get();
+    $permissions = Permission::orderby('id')->get();
     $subjects = Subject::orderby('code')->get();
     $exam_types = Types::orderby('id')->get();
     $phases = Phase::orderby('code')->get();
@@ -139,7 +139,9 @@ class SystemController extends Controller
   {
     //Validate permission form fields
     $permission_validator = Validator::make($request->all(), [
-      'newPermissionName'=> ['required','alpha_space','unique:App\Models\User\Permission,name'],
+      'newPermissionName'=> ['required','alpha_dash','unique:App\Models\User\Permission,name'],
+      'newPortalName'=> ['required', Rule::in(['staff', 'student'])],
+      'newPermissionModule'=>['required', Rule::in(['dashboard', 'students', 'exams', 'results', 'users', 'system', 'website'])],
       'newPermissionDescription'=> ['required'],
     ]);
 
@@ -150,6 +152,8 @@ class SystemController extends Controller
     else:
       $permission = new Permission();
       $permission->name = $request->newPermissionName;
+      $permission->portal = $request->newPortalName;
+      $permission->module = $request->newPermissionModule;
       $permission->description = $request->newPermissionDescription;
       if($permission->save()):
         return response()->json(['status'=>'success', 'permission'=>$permission]);
@@ -181,7 +185,9 @@ class SystemController extends Controller
     //Validating form data
     $edit_permission_validator = Validator::make($request->all(), [
       'permissionID'=>['required', 'integer', 'exists:App\Models\User\Permission,id'],
-      //'permissionName'=>['required', 'alpha_space'],
+      //'permissionName'=>['required', 'alpha_dash'],
+      'portalName'=> ['required', Rule::in(['staff', 'student'])],
+      'permissionModule'=>['required', Rule::in(['dashboard', 'students', 'exams', 'results', 'users', 'system', 'website'])],
       'permissionDescription'=>['required'],
     ]);
 
@@ -191,7 +197,9 @@ class SystemController extends Controller
     else:
       if(Permission::where('id', $request->permissionID)->update([
         //'name' => $request->permissionName,
-        'description' => $request->permissionDescription
+        'portal' => $request->portalName,
+        'module' => $request->permissionModule,
+        'description' => $request->permissionDescription,
       ])):
         return response()->json(['status'=> 'success']);
       endif;

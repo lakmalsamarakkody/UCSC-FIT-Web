@@ -367,6 +367,8 @@
           $('#modal-edit-permission-title').html(data['permission']['name']);
           $('#permissionID').val(data['permission']['id']);
           $('#permissionName').val(data['permission']['name']);
+          $('#portalName').val(data['permission']['portal']);
+          $('#permissionModule').val(data['permission']['module']);
           $('#permissionDescription').val(data['permission']['description']);
           $('#modal-edit-permission').modal('show');
           $('#btnEditPermission-'+permission_id).removeAttr('disabled','disabled');

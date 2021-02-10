@@ -116,6 +116,29 @@
               <span class="invalid-feedback" id="error-newPermissionName" role="alert"></span>
             </div>
             <div class="form-group">
+              <label for="newPortalName">Portal Name</label>
+              <select class="form-control" name="newPortalName" id="newPortalName">
+                <option value="">Select the Portal</option>
+                <option value="staff">Staff</option>
+                <option value="student">Student</option>
+              </select>
+              <span class="invalid-feedback" id="error-newPortalName" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newPermissionModule">Permission Module</label>
+              <select class="form-control" name="newPermissionModule" id="newPermissionModule">
+                <option value="">Select Permission Module</option>
+                <option value="dashboard">Dashboard</option>
+                <option value="students">Students</option>
+                <option value="exams">Exams</option>
+                <option value="results">Results</option>
+                <option value="users">Users</option>
+                <option value="system">System</option>
+                <option value="website">Website</option>
+              </select>
+              <span class="invalid-feedback" id="error-newPermissionModule" role="alert"></span>
+            </div>
+            <div class="form-group">
               <label for="newPermissionDescription">Permission Description</label>
               <input type="text" class="form-control" name="newPermissionDescription" id="newPermissionDescription"/>
               <span class="invalid-feedback" id="error-newPermissionDescription" role="alert"></span>
@@ -149,6 +172,29 @@
               <span class="invalid-feedback" id="error-permissionID" role="alert"></span>
               <input type="text" class="form-control" id="permissionName" name="permissionName" disabled/>
               <span class="invalid-feedback" id="error-permissionName" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="portalName">Portal Name</label>
+              <select class="form-control" name="portalName" id="portalName">
+                <option value="">Select the Portal</option>
+                <option value="staff">Staff</option>
+                <option value="student">Student</option>
+              </select>
+              <span class="invalid-feedback" id="error-portalName" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="permissionModule">Permission Module</label>
+              <select class="form-control" name="permissionModule" id="permissionModule">
+                <option value="">Select Permission Module</option>
+                <option value="dashboard">Dashboard</option>
+                <option value="students">Students</option>
+                <option value="exams">Exams</option>
+                <option value="results">Results</option>
+                <option value="users">Users</option>
+                <option value="system">System</option>
+                <option value="website">Website</option>
+              </select>
+              <span class="invalid-feedback" id="error-permissionModule" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="permissionDescription">Permission Description</label>
