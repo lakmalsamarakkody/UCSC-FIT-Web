@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             StudentExamSeeder::class,
             SlProvinceSeeder::class,
             SlDistrictSeeder::class,
-            SlCitiesSeeder::class,
+            // SlCitiesSeeder::class,
             WorldContinentsTableSeeder::class,
             WorldCountriesTableSeeder::class,
             WorldDivisionsTableSeeder::class,
