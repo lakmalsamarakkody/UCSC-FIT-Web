@@ -109,6 +109,7 @@ Route::post('/portal/staff/exams/schedule/edit',[App\Http\Controllers\Portal\Sta
 Route::post('/portal/staff/exams/schedule/delete',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'deleteExamSchedule']);
 Route::post('/portal/staff/exams/schedule/request/approval',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'requestScheduleApproval']);
 Route::post('/portal/staff/exams/schedule/approve',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'approveSchedule']);
+Route::post('/portal/staff/exams/schedule/decline',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'declineSchedule']);
 Route::post('/portal/staff/exams/schedule/release/individual',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'releaseIndividualSchedule']);
 
 Route::post('/portal/staff/exams/schedule/postpone/details',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'postponeScheduleGetDetails']);

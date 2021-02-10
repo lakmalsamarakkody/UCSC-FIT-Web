@@ -292,13 +292,34 @@ class ExamsController extends Controller
             return response()->json(['status'=>'errors']);
         else:
             if(Schedule::where('id', $request->schedule_id)->update([
-                'schedule_approval' => 'approve'
+                'schedule_approval' => 'approved'
             ])):
             return response()->json(['status'=>'success']);
             endif;
         endif;
     }
     // /APPROVE SCHEDULE
+
+    // DECLINE SCHEDULE
+    public function declineSchedule(Request $request)
+    {
+        // Validate schedule id
+        $schedule_id_validator = Validator::make($request->all(), [
+            'schedule_id' => ['required', 'integer', 'exists:App\Models\Exam\Schedule,id'],
+        ]);
+
+        // Check validator fails
+        if($schedule_id_validator->fails()):
+            return response()->json(['status'=>'errors']);
+        else:
+            if(Schedule::where('id', $request->schedule_id)->update([
+                'schedule_approval' => 'declined'
+            ])):
+            return response()->json(['status'=>'success']);
+            endif;
+        endif;
+    }
+    // /DECLINE SCHEDULE
 
     // RELEASE INDIVIDUAL SCHEDULE
     public function releaseIndividualSchedule(Request $request)

@@ -24,6 +24,14 @@ const SwalQuestionDanger = Swal.mixin({
   confirmButtonColor: color_danger,
   showCancelButton: true,
   cancelButtonColor: color_primary,
+  allowOutsideClick: false,
+})
+const SwalQuestionDangerAutoClose = Swal.mixin({
+  icon: 'question',
+  iconColor: color_danger,
+  confirmButtonColor: color_danger,
+  showCancelButton: true,
+  cancelButtonColor: color_primary,
   timer: 5000,
   timerProgressBar: true,
   allowOutsideClick: false,
