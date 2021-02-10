@@ -32,11 +32,11 @@ class SystemController extends Controller
   
   public function index()
   {
-    $roles = Role::orderby('name')->get();
+    $roles = Role::orderby('id')->get();
     $permissions = Permission::orderby('id')->get();
     $subjects = Subject::orderby('code')->get();
     $exam_types = Types::orderby('id')->get();
-    $phases = Phase::orderby('code')->get();
+    $phases = Phase::orderby('id')->get();
     $payment_methods = Method::orderby('id')->get();
     $payment_types = Type::orderby('id')->get();
     return view('portal/staff/system',compact('roles','permissions','subjects','exam_types','payment_methods', 'payment_types', 'phases'));

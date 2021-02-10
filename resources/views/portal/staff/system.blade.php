@@ -40,6 +40,7 @@
               <table class="table table-responsive-md">
                 <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Role Name</th>
                     <th>&nbsp;</th>
                   </tr>
@@ -47,6 +48,7 @@
                 <thead>
                   @foreach ($roles as $role)
                   <tr id="tbl-userRole-tr-{{$role->id}}">
+                    <td>{{ $role->id }}</td>
                     <td>{{ $role->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
@@ -79,7 +81,7 @@
               <table class="table table-responsive-md">
                 <thead>
                   <tr>
-                    <th>Id</th>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>Portal</th>
                     <th>Module</th>
@@ -124,6 +126,7 @@
               <table class="table table-responsive-md">
                 <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Code</th>
                     <th>Name</th>
                     <th>&nbsp;</th>
@@ -132,6 +135,7 @@
                 <thead>
                   @foreach ($subjects as $subject)
                   <tr id="tbl-subject-tr-{{$subject->id}}">
+                    <td>{{ $subject->id }}</td>
                     <td><b>FIT{{ $subject->code }}</b></td>
                     <td>{{ $subject->name }}</td>
                     <td class="text-right">
@@ -160,6 +164,7 @@
               <table class="table table-responsive-md">
                 <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Type Name</th>
                     <th>&nbsp;</th>
                   </tr>
@@ -167,6 +172,7 @@
                 <thead>
                   @foreach ($exam_types as $type)
                   <tr id="tbl-examType-tr-{{$type->id}}">
+                    <td>{{ $type->id }}</td>
                     <td>{{ $type->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
@@ -194,6 +200,7 @@
               <table class="table table-responsive-md">
                 <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Code</th>
                     <th>Name</th>
                     <th>Description</th>
@@ -203,6 +210,7 @@
                 <thead>
                   @foreach ($phases as $phase)
                   <tr id="tbl-studentPhase-tr-{{$phase->id}}">
+                    <td>{{ $phase->id }}</td>
                     <td>{{ $phase->code }}</td>
                     <td>{{ $phase->name }}</td>
                     <td>{{ $phase->description }}</td>
@@ -232,6 +240,7 @@
               <table class="table table-responsive-md">
                 <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Method Name</th>
                     <th>&nbsp;</th>
                   </tr>
@@ -239,6 +248,7 @@
                 <thead>
                   @foreach ($payment_methods as $method)
                   <tr id="tbl-paymentMethod-tr-{{$method->id}}">
+                    <td>{{ $method->id }}</td>
                     <td>{{ $method->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
@@ -266,6 +276,7 @@
               <table class="table table-responsive-md">
                 <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Type Name</th>
                     <th>&nbsp;</th>
                   </tr>
@@ -273,6 +284,7 @@
                 <thead>
                   @foreach ($payment_types as $type)
                   <tr id="tbl-paymentType-tr-{{$type->id}}">
+                    <th>{{ $type->id }}</th>
                     <td>{{ $type->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
