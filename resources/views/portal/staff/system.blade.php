@@ -31,6 +31,7 @@
     <div class="row">
 
       <!-- USER ROLE -->
+      @if(Auth::user()->hasPermission('staff-system-role'))
       <div class="col-xl-5 col-lg-12">
         <div class="card">
           <div class="card-header">USER ROLE</div>
@@ -49,9 +50,9 @@
                     <td>{{ $role->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        @if(Auth::user()->hasPermission('system-role-view'))<button type="button" class="btn btn-outline-success" id="btnViewUserRole-{{$role->id}}" onclick="view_role_modal_invoke({{$role->id}});"><i class="fas fa-eye"></i> <span id="spinnerBtnViewUserRole-{{$role->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>@endif
-                        @if(Auth::user()->hasPermission('system-role-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditUserRole-{{$role->id}}" onclick="edit_role_modal_invoke({{$role->id}});"><i class="fas fa-edit"></i> <span id="spinnerBtnEditUserRole-{{$role->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>@endif
-                        @if(Auth::user()->hasPermission('system-role-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteUserRole-{{$role->id}}" onclick="delete_role({{$role->id}});"><i class="fas fa-trash-alt"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-role-view'))<button type="button" class="btn btn-outline-success" id="btnViewUserRole-{{$role->id}}" onclick="view_role_modal_invoke({{$role->id}});"><i class="fas fa-eye"></i> <span id="spinnerBtnViewUserRole-{{$role->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-role-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditUserRole-{{$role->id}}" onclick="edit_role_modal_invoke({{$role->id}});"><i class="fas fa-edit"></i> <span id="spinnerBtnEditUserRole-{{$role->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-role-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteUserRole-{{$role->id}}" onclick="delete_role({{$role->id}});"><i class="fas fa-trash-alt"></i></button>@endif
                       </div>
                     </td>
                   </tr>
@@ -60,12 +61,16 @@
               </table>
             </div>
           </div>
+          @if(Auth::user()->hasPermission('staff-system-role-add'))
           <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-role"><i class="fas fa-plus"></i></button></div>
+          @endif
         </div>
       </div>
+      @endif
       <!-- /USER ROLE -->
 
       <!-- PERMISSION -->
+      @if(Auth::user()->hasPermission('staff-system-permission'))
       <div class="col-xl-7 col-lg-12">
         <div class="card">
           <div class="card-header">PERMISSIONS</div>
@@ -86,8 +91,8 @@
                     <td>{{ $permission->description }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" id="btnEditPermission-{{$permission->id}}" onclick="edit_permission_modal_invoke({{ $permission->id }});"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" id="btnDeletePermission-{{$permission->id}}" onclick="delete_permission({{ $permission->id }});"><i class="fas fa-trash-alt"></i></button>
+                        @if(Auth::user()->hasPermission('staff-system-permission-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditPermission-{{$permission->id}}" onclick="edit_permission_modal_invoke({{ $permission->id }});"><i class="fas fa-edit"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-permission-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeletePermission-{{$permission->id}}" onclick="delete_permission({{ $permission->id }});"><i class="fas fa-trash-alt"></i></button>@endif
                       </div>
                     </td>
                   </tr>
@@ -96,9 +101,12 @@
               </table>
             </div>
           </div>
+          @if(Auth::user()->hasPermission('staff-system-permission-add'))
           <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-permission"><i class="fas fa-plus"></i></button></div>
+          @endif
         </div>
       </div>
+      @endif
       <!-- /PERMISSION -->
 
       <!-- SUBJECT -->

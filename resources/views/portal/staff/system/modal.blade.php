@@ -147,7 +147,7 @@
               <label for="permissionName">Permission Name</label>
               <input type="hidden" class="form-control" id="permissionID" name="permissionID" />
               <span class="invalid-feedback" id="error-permissionID" role="alert"></span>
-              <input type="text" class="form-control" id="permissionName" name="permissionName" />
+              <input type="text" class="form-control" id="permissionName" name="permissionName" disabled/>
               <span class="invalid-feedback" id="error-permissionName" role="alert"></span>
             </div>
             <div class="form-group">
