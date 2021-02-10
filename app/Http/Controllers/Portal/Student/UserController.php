@@ -27,10 +27,10 @@ class UserController extends Controller
             return view('website/error');
         else:
             $email_token = Email_Token::where('email', $email)->get()->first();
-            if(is_Null($email_token['token'])):
+            if(is_Null($email_token)):
                 return abort(403);
             else:
-                if($token==$email_token['token']):
+                if($token==$email_token->token):
                     return view('portal/student/guest', compact('email'));
                 else:
                     return abort(403);
