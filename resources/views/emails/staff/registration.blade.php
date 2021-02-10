@@ -1,9 +1,9 @@
 @component('mail::message')
 <div style="background-color:#473dd4; width: 100%; padding: 25px;">
 
-<h1 style="text-align: center; color: #fff;">Register to FIT Staff Portal</h1>
+<h1 style="text-align: center; color: #fff;">Register to FIT Portal</h1>
 
-<p style="text-align: center; color: #fff;">Your All set! <br> Now you can complete your staff registration for the FIT Portal by login in to your account by clicking below.</p> 
+<p style="text-align: center; color: #fff;">Your All set! <br> Now you can complete your registration for the FIT Portal by login in to your account by clicking below.</p>
 
 
 <table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
@@ -41,7 +41,7 @@
 Coordinator (External Degrees Centre),<br>
 University of Colombo School of Computing, <br>
 #35, Reid Avenue, Colombo 07, Sri Lanka
-</h5> 
+</h5>
 </div>
 
 @endcomponent
