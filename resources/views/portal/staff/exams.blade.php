@@ -44,6 +44,7 @@
           <div class="card">
             <div class="card-header">Create Exam Schedule</div>
             <div class="card-body">
+              @if(Auth::user()->hasPermission('staff-exam-createSchedule'))
               <form action="" method="POST" id="formCreateSchedule">
                 <div class="form-row align-items-center px-4">
                   <div class="form-group col-xl-2 col-lg-4">
@@ -100,8 +101,10 @@
                   </div>
                 </div>
               </form>
+              @endif
+              <div class="card-header text-muted">Drafted Exam Schedules</div>
 
-              <div class="col-12 mt-5">
+              <div class="col-12 mt-3">
                 <table class="table schedules-before-release-yajradt">
                   <thead class="text-center">
                     <tr>

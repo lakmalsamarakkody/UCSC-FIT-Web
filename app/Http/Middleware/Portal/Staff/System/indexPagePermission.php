@@ -20,7 +20,7 @@ class indexPagePermission
         if(Auth::user()->hasPermission('staff-system')):
             return $next($request);
         else:
-            return redirect('/login');
+            return redirect('/portal/staff');
         endif;
     }
 }

@@ -181,7 +181,7 @@ class SystemController extends Controller
     //Validating form data
     $edit_permission_validator = Validator::make($request->all(), [
       'permissionID'=>['required', 'integer', 'exists:App\Models\User\Permission,id'],
-      'permissionName'=>['required', 'alpha_space'],
+      //'permissionName'=>['required', 'alpha_space'],
       'permissionDescription'=>['required'],
     ]);
 
@@ -190,7 +190,7 @@ class SystemController extends Controller
       return response()->json(['status'=>'error', 'errors'=>$edit_permission_validator->errors()]);
     else:
       if(Permission::where('id', $request->permissionID)->update([
-        'name' => $request->permissionName,
+        //'name' => $request->permissionName,
         'description' => $request->permissionDescription
       ])):
         return response()->json(['status'=> 'success']);

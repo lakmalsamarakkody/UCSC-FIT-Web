@@ -82,6 +82,15 @@ class PermissionSeeder extends Seeder
                 ],
 
                 [
+                    'name'=>'staff-system-permission-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can edit a permission description',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
                     'name'=>'staff-system-permission-edit',
                     'portal'=>'staff',
                     'module'=>'system',
@@ -95,6 +104,15 @@ class PermissionSeeder extends Seeder
                     'portal'=>'staff',
                     'module'=>'system',
                     'description'=>'can delete a permission',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-createSchedule',
+                    'portal'=>'staff',
+                    'module'=>'exam',
+                    'description'=>'can create an exam schedule',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],

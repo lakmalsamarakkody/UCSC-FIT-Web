@@ -211,8 +211,8 @@
             $("#spinnerBtnEditUserRolePermissions").addClass('d-none');
             $('#btnEditUserRolePermissions').removeAttr('disabled', 'disabled');
             if(data['status'] == 'success'){
-              SwalDoneSuccess.fire({title: 'Updated!',text: 'User role has been updated.',});
-              $('#modal-edit-role').modal('hide');
+              SwalDoneSuccess.fire({title: 'Updated!',text: 'User role has been updated.',})
+              .then((result) => {if (result.isConfirmed) {location.reload()}});
             }
           },
           error: function(err){
