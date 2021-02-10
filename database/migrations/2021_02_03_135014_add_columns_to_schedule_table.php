@@ -14,8 +14,9 @@ class AddColumnsToScheduleTable extends Migration
     public function up()
     {
         Schema::table('exam_schedules', function (Blueprint $table) {
-            $table->string('schedule_approval')->nullable()->after('result_released');
+            $table->string('schedule_approval')->nullable()->after('end_time');
             $table->boolean('schedule_release')->default(false)->after('schedule_approval');
+            $table->boolean('schedule_declined')->default(false)->after('schedule_release');
         });
     }
 
@@ -29,6 +30,7 @@ class AddColumnsToScheduleTable extends Migration
         Schema::table('exam_schedules', function (Blueprint $table) {
             $table->dropColumn('schedule_release');
             $table->dropColumn('schedule_approval');
+            $table->dropColumn('schedule_declined');
         });
     }
 }
