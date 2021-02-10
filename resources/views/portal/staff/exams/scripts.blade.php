@@ -58,7 +58,7 @@
           targets: 7,
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">';
-            if(row['schedule_approval']== null or row['schedule_approval']== 'declined'){
+            if(row['schedule_approval']== null || row['schedule_approval']== 'declined'){
                 btnGroup = btnGroup + '<button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-placement="bottom" title="Request Approval" id="btnRequestApprovalSchedule-'+data+'" onclick="request_schedule_approval('+data+');"><i class="fas fa-file-export"></i></button>';
             }
             else if(row['schedule_approval'] == 'requested'){
