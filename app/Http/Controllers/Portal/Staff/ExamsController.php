@@ -149,7 +149,7 @@ class ExamsController extends Controller
         ]);
 
        $exists_schedule = Schedule::where('subject_id', $request->scheduleSubject)->where('exam_type_id', $request->scheduleExamType)
-       ->where('date',$request->scheduleDate)->first();
+       ->where('date',$request->scheduleDate)->where('start_time', $request->scheduleStartTime)->first();
         //Check if the exact schedule is in the table
         if($exists_schedule != null):
             $exists_schedule_validator = Validator::make($request->all(), [
