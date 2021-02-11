@@ -79,7 +79,7 @@ class ExamsController extends Controller
                 'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
-            ])->where('schedule_approval', 'approve')->where('schedule_release', true);
+            ])->where('schedule_approval', 'approved')->where('schedule_release', true);
             // if(Auth::user()->role->name == 'MA'):
             //     $data = $data->where('schedule_approval', 'approve')->where('schedule_release', true);
             // elseif(Auth::user()->role->name == 'Co-Ordinator'):
@@ -334,7 +334,7 @@ class ExamsController extends Controller
             return response()->json(['status'=>'errors']);
         else:
             $schedule = Schedule::where('id',$request->schedule_id)->first();
-            if($schedule->schedule_approval != 'approve'):
+            if($schedule->schedule_approval != 'approved'):
                 return response()->json(['status'=>'decline']);
             else:
                 if(Schedule::where('id', $request->schedule_id)->update([
