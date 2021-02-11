@@ -57,11 +57,18 @@
         {
           targets: 7,
           render: function(data, type, row) {
-            var btnGroup = '<div class="btn-group">'+
-            '<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" id="btnApproveSchedule-'+data+'" onclick="approve_schedule('+data+');"><i class="fas fa-file-signature"></i></button>'+
-            '<button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-placement="bottom" title="Request Approval" id="btnRequestApprovalSchedule-'+data+'" onclick="request_schedule_approval('+data+');"><i class="fas fa-share-square"></i></button>'+
-            '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" id="btnReleaseSchedule-'+data+'" onclick="relase_individual_schedule('+data+');" ><i class="fas fa-hand-point-right"></i></button>'+
-            '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit" id="btnEditSchedule-'+data+'" onclick="edit_schedule_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>'+
+            var btnGroup = '<div class="btn-group">';
+            if(row['schedule_approval']== null || row['schedule_approval']== 'declined'){
+                btnGroup = btnGroup + '<button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-placement="bottom" title="Request Approval" id="btnRequestApprovalSchedule-'+data+'" onclick="request_schedule_approval('+data+');"><i class="fas fa-file-export"></i></button>';
+            }
+            else if(row['schedule_approval'] == 'requested'){
+                btnGroup = btnGroup + '<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" id="btnApproveSchedule-'+data+'" onclick="approve_schedule('+data+');"><i class="fas fa-check-circle"></i></button>'
+                + '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Decline" id="btnDeclineSchedule-'+data+'" onclick="decline_schedule('+data+');"><i class="fas fa-times-circle"></i></button>';
+            }
+            else if(row['schedule_approval']== 'approved'){
+                btnGroup = btnGroup + '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" id="btnReleaseSchedule-'+data+'" onclick="relase_individual_schedule('+data+');" ><i class="fas fa-hand-point-right"></i></button>';
+            }
+            btnGroup = btnGroup + '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit" id="btnEditSchedule-'+data+'" onclick="edit_schedule_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>'+
             '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteExamSchedule-'+data+'" onclick="delete_before_release('+data+');"><i class="fas fa-trash-alt"></i></button>'+
             '</div>';
             return btnGroup;
@@ -130,14 +137,14 @@
             '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteAfterRelease-'+data+'" onclick="delete_after_release('+data+');"><i class="fas fa-trash-alt"></i></button>'+
             '</div>';
             return btnGroup;
-            
+
           }
         }
       ]
     });
     // /After Release table
     // /TABLES
-    
+
     // UPCOMING EXAMS(before release)
     // Create schedule
     create_schedule = () => {
@@ -409,6 +416,7 @@
                   text: 'Scheduled exam has been approved.',
                 })
                 beforeReleaseTable.draw();
+                afterReleaseTable.draw();
               }
             },
             error: function(err){
@@ -427,6 +435,63 @@
       })
     }
     // /Approve schedule
+
+    // Decline schedule
+    decline_schedule = (schedule_id) => {
+      SwalQuestionDangerAutoClose.fire({
+        title: "Are you sure ?",
+        text: "You wont be able to revert this!",
+        confirmButtonText: "Yes, Decline!",
+      })
+      .then((result) => {
+        if(result.isConfirmed){
+          //Form payload
+          var formData = new FormData();
+          formData.append('schedule_id', schedule_id);
+
+          // Decline Schedule controller
+          $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url: "{{ url('/portal/staff/exams/schedule/decline') }}",
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function() {$('#btnDeclineSchedule-'+schedule_id).attr('disabled', 'disabled');},
+            success: function(data) {
+              console.log('Success in decline schedule ajax.');
+              $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+              if(data['status'] == 'errors') {
+                SwalNotificationWarningAutoClose.fire({
+                  title: 'Error!',
+                  text: 'The id of the schedule is not found.',
+                })
+              }
+              else if(data['status'] == 'success') {
+                SwalDoneSuccess.fire({
+                  title: 'Declined!',
+                  text: 'Scheduled exam has been Declined.',
+                })
+                beforeReleaseTable.draw();
+                afterReleaseTable.draw();
+              }
+            },
+            error: function(err){
+              console.log('Error in Decline schedule ajax.');
+              $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+              SwalSystemErrorDanger.fire();
+            }
+          });
+        }
+        else{
+          SwalNotificationWarningAutoClose.fire({
+            title: 'Cancelled!',
+            text: 'Scheduled exam has not been Declined.',
+          })
+        }
+      })
+    }
+    // /Decline schedule
     // /UPCOMING EXAMS(before release)
 
     // RELEASE SCHEDULES

@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'revalidate' => \App\Http\Middleware\RevalidateBackHistory::class,
         'staff.auth' => \App\Http\Middleware\Portal\Staff\StaffAuthorization::class,
+        'staff.system' => \App\Http\Middleware\Portal\Staff\System\indexPagePermission::class,
         'student.registration.check' => \App\Http\Middleware\Portal\Student\Registration\RegistrationCheck::class,
         'student.auth' => \App\Http\Middleware\Portal\Student\StudentAuthorization::class,
         'student.submit.check' => \App\Http\Middleware\Portal\Student\Registration\ApplicationSubmitCheck::class,

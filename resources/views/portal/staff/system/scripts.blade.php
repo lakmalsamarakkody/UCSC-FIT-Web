@@ -211,8 +211,8 @@
             $("#spinnerBtnEditUserRolePermissions").addClass('d-none');
             $('#btnEditUserRolePermissions').removeAttr('disabled', 'disabled');
             if(data['status'] == 'success'){
-              SwalDoneSuccess.fire({title: 'Updated!',text: 'User role has been updated.',});
-              $('#modal-edit-role').modal('hide');
+              SwalDoneSuccess.fire({title: 'Updated!',text: 'User role has been updated.',})
+              .then((result) => {if (result.isConfirmed) {location.reload()}});
             }
           },
           error: function(err){
@@ -367,6 +367,8 @@
           $('#modal-edit-permission-title').html(data['permission']['name']);
           $('#permissionID').val(data['permission']['id']);
           $('#permissionName').val(data['permission']['name']);
+          $('#portalName').val(data['permission']['portal']);
+          $('#permissionModule').val(data['permission']['module']);
           $('#permissionDescription').val(data['permission']['description']);
           $('#modal-edit-permission').modal('show');
           $('#btnEditPermission-'+permission_id).removeAttr('disabled','disabled');

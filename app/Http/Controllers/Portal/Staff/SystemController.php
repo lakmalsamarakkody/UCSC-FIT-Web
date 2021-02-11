@@ -27,15 +27,16 @@ class SystemController extends Controller
     $this->middleware('auth');
     $this->middleware('revalidate');
     $this->middleware('staff.auth');
+    $this->middleware('staff.system');
   }
   
   public function index()
   {
-    $roles = Role::orderby('name')->get();
-    $permissions = Permission::orderby('name')->get();
+    $roles = Role::orderby('id')->get();
+    $permissions = Permission::orderby('id')->get();
     $subjects = Subject::orderby('code')->get();
     $exam_types = Types::orderby('id')->get();
-    $phases = Phase::orderby('code')->get();
+    $phases = Phase::orderby('id')->get();
     $payment_methods = Method::orderby('id')->get();
     $payment_types = Type::orderby('id')->get();
     return view('portal/staff/system',compact('roles','permissions','subjects','exam_types','payment_methods', 'payment_types', 'phases'));
@@ -138,7 +139,9 @@ class SystemController extends Controller
   {
     //Validate permission form fields
     $permission_validator = Validator::make($request->all(), [
-      'newPermissionName'=> ['required','alpha_space','unique:App\Models\User\Permission,name'],
+      'newPermissionName'=> ['required','alpha_dash','unique:App\Models\User\Permission,name'],
+      'newPortalName'=> ['required', Rule::in(['staff', 'student'])],
+      'newPermissionModule'=>['required', Rule::in(['dashboard', 'students', 'exams', 'results', 'users', 'system', 'website'])],
       'newPermissionDescription'=> ['required'],
     ]);
 
@@ -149,6 +152,8 @@ class SystemController extends Controller
     else:
       $permission = new Permission();
       $permission->name = $request->newPermissionName;
+      $permission->portal = $request->newPortalName;
+      $permission->module = $request->newPermissionModule;
       $permission->description = $request->newPermissionDescription;
       if($permission->save()):
         return response()->json(['status'=>'success', 'permission'=>$permission]);
@@ -180,7 +185,9 @@ class SystemController extends Controller
     //Validating form data
     $edit_permission_validator = Validator::make($request->all(), [
       'permissionID'=>['required', 'integer', 'exists:App\Models\User\Permission,id'],
-      'permissionName'=>['required', 'alpha_space'],
+      //'permissionName'=>['required', 'alpha_dash'],
+      'portalName'=> ['required', Rule::in(['staff', 'student'])],
+      'permissionModule'=>['required', Rule::in(['dashboard', 'students', 'exams', 'results', 'users', 'system', 'website'])],
       'permissionDescription'=>['required'],
     ]);
 
@@ -189,8 +196,10 @@ class SystemController extends Controller
       return response()->json(['status'=>'error', 'errors'=>$edit_permission_validator->errors()]);
     else:
       if(Permission::where('id', $request->permissionID)->update([
-        'name' => $request->permissionName,
-        'description' => $request->permissionDescription
+        //'name' => $request->permissionName,
+        'portal' => $request->portalName,
+        'module' => $request->permissionModule,
+        'description' => $request->permissionDescription,
       ])):
         return response()->json(['status'=> 'success']);
       endif;

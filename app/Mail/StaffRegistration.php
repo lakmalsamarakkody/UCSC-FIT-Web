@@ -31,6 +31,6 @@ class StaffRegistration extends Mailable
      */
     public function build()
     {
-        return $this->subject('FIT Staff Registration Link')->markdown('emails.staff.registration');
+        return $this->subject('FIT Registration Link')->markdown('emails.staff.registration');
     }
 }
