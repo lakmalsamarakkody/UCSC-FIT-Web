@@ -12,14 +12,14 @@
   <link rel="icon" type="image/png" href="{{ asset('img/logo/fav.png') }}">
 
   <title>FIT -Portal | {{ $title ?? '' }}</title>
-  
+
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- STYLES -->
     <!-- BOOTSTRAP -->      <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- FONT AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/all.css') }}">
     <!-- LINE AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/line-awesome/css/line-awesome.css') }}">
-    <!-- ANIMATE -->        <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}"> 
+    <!-- ANIMATE -->        <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}">
     <!-- DROPZONE -->       <link rel="stylesheet" href="{{ asset('lib/dropzone/drop-zone.css') }}">
 
     <!-- DATATABLE  -->
@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="{{ asset('css/portal/student/information.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/student/exams.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/student/results.css') }}">
-    <!-- /PAGES --> 
+    <!-- /PAGES -->
   <!-- /STYLES -->
 
   <!-- SCRIPTS -->
@@ -43,7 +43,7 @@
     <!-- SWEET ALERT 2 -->
     <script src="{{ asset('lib/sweetalert2/sweetalert2.all.js') }}"></script>
     <!-- /SWEET ALERT 2 -->
-    
+
     <!-- DATATABLE SCRIPTS -->
     <script src="{{ asset('lib/jquery/jquery.validate.js') }}"></script>
     <script src="{{ asset('lib/datatables/js/jquery.dataTables.min.js') }}"></script>
@@ -54,7 +54,7 @@
     <script src="{{ asset('js/sweetalert.js') }}"></script>
 
     {{-- CUSTOM --}}
-    <script type="text/javascript"> 
+    <script type="text/javascript">
       function display_c(){
         var refresh=1000; // Refresh rate in milli seconds
         mytime=setTimeout('display_ct()',refresh)
@@ -93,7 +93,7 @@
               <div class="img mt-3 px-4">
                 <a class="float-left" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
                 <a class="float-right" href="/"><img class="mb-3" src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px;"/></a>
-              </div>              
+              </div>
             </div>
 
             <!-- USER DETAILS SECTION -->
@@ -107,7 +107,7 @@
             </div>
             <!-- /USER DETAILS SECTION -->
 
-            <hr width="90%"/> 
+            <hr width="90%"/>
 
             <!-- MENU SECTION -->
             <div class="nav-menu w-100">
@@ -121,13 +121,13 @@
 
                 <div class="logout-menu w-100 text-center " style="display:flex; align-items:flex-end;">
                   <div class="py-3 justify-content-center align-content-center" style="position: absolute; bottom: 0; left: 0; width: 100%;">
-                    
-                    <a  title="Logout" data-tooltip="tooltip"  data-placement="bottom"  class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+
+                    {{-- <a  title="Logout" data-tooltip="tooltip"  data-placement="bottom"  class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                       <i class="logout fa fa-power-off"></i>
-                    </a>
+                    </a> --}}
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                   </div>
-                  
+
                 </div>
 
             </div>
@@ -149,22 +149,23 @@
                   <h4 class=" text-left p-0 m-0"><a href="">FIT | UCSC <br> <small>Student Portal</small></a> </h5>
                 </div>
 
-                <div class="col-6 text-center"> 
+                <div class="col-6 text-center">
                   <span id="ct" class="navbar-text text-white"></span>
                     {{-- <a class=" mr-3" href="/"><img class="mb-3" src="{{ url('img/logo/fit-nav.png') }}" alt="" title="" style="width: 50px;"/></a>
-                  
-           
+
+
                   <a class="navbar-brand p-0 m-0" href="{{ url('/') }}">
                     <p class="m-0">Foundation of Information Technology<br>
                     <small>University of Colombo School of Computing</small> </p>
-                    
+
                   </a>
-                  
+
                     <a class=" mt-0 ml-3" href="/"><img class="mb-3" src="{{ url('img/logo/invert-ucsc.png') }}" alt="" title="" style="width: 45px;"/></a>
                   --}}
                 </div>
-                <div class="col-3 text-right"> 
-                  <a href="{{ route('student.information') }}" title="Settings" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg nav-item"><i class="fa fa-cog"></i></a>     
+                <div class="col-3 text-right">
+                  <a href="{{ route('student.information') }}" title="Settings" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg nav-item"><i class="fa fa-cog"></i></a>
+                  <button title="Logout" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg  pr-5 nav-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></button>
                 </div>
 
               </div>
@@ -198,7 +199,7 @@
             </main>
 
 
-            
+
           </div>
         </div>
         <!-- PAGE AREA -->
@@ -207,7 +208,7 @@
         <div class="col-12 mt-5 foot" style="bottom: 0;">
           <hr class="bg-primary" width="100%"/>
           <div class="row">
-            
+
           <div class=" w-100 text-right pb-2 pr-3" >
             Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" > UCSC</a> </strong>. All Rights Reserved |
             Powered by <strong><a target="_blank" href="http://www.e-learning.lk/">e-Learning Center - UCSC </a> </strong>
