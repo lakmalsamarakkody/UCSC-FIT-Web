@@ -10,7 +10,7 @@
     });
 
 </script>
-    <!-- BREACRUMB -->
+    {{-- BREACRUMB --}}
     <section class="col-sm-12 mb-3">
         <div class="row">
            
@@ -23,14 +23,14 @@
 
         </div>
     </section>
-    <!-- /BREACRUMB -->
+    {{-- /BREACRUMB --}}
 
-    <!-- CONTENT -->
+    {{-- CONTENT --}}
     <div class="col-12 staff-exams">
       <div class="row">
 
         {{-- EXAM LIST --}}
-        <div class="col-lg-3 col-md-6 col-12">
+        <div class="col-lg-3 col-md-6 col-12 mb-5">
           <a href="{{ url('/portal/staff/exams/list') }}" style="text-decoration: none">
             <div class="card">
               <div class="card-header bg-primary text-center py-4 text-white">Exam List</div>
@@ -39,12 +39,12 @@
         </div>
         {{-- /EXAM LIST --}}
 
-        <!-- CREATE EXAM SCHEDULE -->
-        <div class="col-12 mb-5 mt-4">
+        {{-- CREATE EXAM SCHEDULE --}}
+        @if(Auth::user()->hasPermission('staff-exam-createSchedule'))
+        <div class="col-12 mb-5">
           <div class="card">
             <div class="card-header">Create Exam Schedule</div>
             <div class="card-body">
-              @if(Auth::user()->hasPermission('staff-exam-createSchedule'))
               <form action="" method="POST" id="formCreateSchedule">
                 <div class="form-row align-items-center px-4">
                   <div class="form-group col-xl-2 col-lg-4">
@@ -101,62 +101,68 @@
                   </div>
                 </div>
               </form>
-              @endif
-              <div class="card-header text-muted">Drafted Exam Schedules</div>
+            </div>
+          </div>
+        </div>
+        @endif
+        {{-- /CREATE EXAM SCHEDULE --}}
 
-              <div class="col-12 mt-3">
-                <table class="table schedules-before-release-yajradt">
-                  <thead class="text-center">
-                    <tr>
-                      <th>Exam</th>
-                      <th>Subject Code</th>
-                      <th>Subject Name</th>
-                      <th>Exam Type</th>
-                      <th>Date</th>
-                      <th>Start Time</th>
-                      <th>End Time</th>
-                      <th>&nbsp;</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-center" id="shedulesBeforeReleaseTblBody">
-                    {{-- @foreach ($upcoming_schedules as $schedule)
-                    <tr id="tbl-examSchedule-tr-{{$schedule->id}}">
-                      <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
-                      <td>FIT {{ $schedule->subject->code }}</td>
-                      <td>{{ $schedule->subject->name }}</td>
-                      <td>{{ $schedule->type->name }}</td>
-                      <td>{{ $schedule->date }}</td>
-                      <td>{{ $schedule->start_time }}</td>
-                      <td>{{ $schedule->end_time }}</td>
-                      <td>
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" onclick="approve_schedule()"><i class="fas fa-file-signature"></i></button>
-                          <button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Request Approval" onclick="request_schedule_approval()"><i class="fas fa-share-square"></i></button>
-                          <button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" onclick="relase_individual_schedule()" ><i class="fas fa-hand-point-right"></i></button>
-                          <button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit" id="btnEditSchedule-{{$schedule->id}}" onclick="edit_schedule_modal_invoke({{$schedule->id}});"><i class="fas fa-edit"></i></button>
-                          <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteExamSchedule-{{$schedule->id}}" onclick="delete_before_release({{$schedule->id}})"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-                    @endforeach --}}
-                  </tbody>
-                </table>
-                {{-- <div class="pt-4 float-right">
-                  {{ $upcoming_schedules->withQueryString()->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }}
-                </div> --}}
-                <div class="text-center">
-                  <button type="button" class="btn btn-outline-primary" id="btnReleaseAllSchedules" onclick="release_schedules()">RELEASE SELECTED SCHEDULES<span id="spinnerBtnReleaseSchedules" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-                </div>
+        {{-- DRAFTED EXAM SCHEDULES --}}
+        <div class="col-12 mb-5">
+          <div class="card">
+            <div class="card-header">Drafted Exam Schedules</div>
+            <div class="card-body">
+              <table class="table schedules-before-release-yajradt">
+                <thead class="text-center">
+                  <tr>
+                    <th>Exam</th>
+                    <th>Subject Code</th>
+                    <th>Subject Name</th>
+                    <th>Exam Type</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center" id="shedulesBeforeReleaseTblBody">
+                  {{-- @foreach ($upcoming_schedules as $schedule)
+                  <tr id="tbl-examSchedule-tr-{{$schedule->id}}">
+                    <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
+                    <td>FIT {{ $schedule->subject->code }}</td>
+                    <td>{{ $schedule->subject->name }}</td>
+                    <td>{{ $schedule->type->name }}</td>
+                    <td>{{ $schedule->date }}</td>
+                    <td>{{ $schedule->start_time }}</td>
+                    <td>{{ $schedule->end_time }}</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" onclick="approve_schedule()"><i class="fas fa-file-signature"></i></button>
+                        <button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Request Approval" onclick="request_schedule_approval()"><i class="fas fa-share-square"></i></button>
+                        <button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" onclick="relase_individual_schedule()" ><i class="fas fa-hand-point-right"></i></button>
+                        <button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit" id="btnEditSchedule-{{$schedule->id}}" onclick="edit_schedule_modal_invoke({{$schedule->id}});"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteExamSchedule-{{$schedule->id}}" onclick="delete_before_release({{$schedule->id}})"><i class="fas fa-trash-alt"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  @endforeach --}}
+                </tbody>
+              </table>
+              {{-- <div class="pt-4 float-right">
+                {{ $upcoming_schedules->withQueryString()->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }}
+              </div> --}}
+              <div class="text-center">
+                <button type="button" class="btn btn-outline-primary" id="btnReleaseAllSchedules" onclick="release_schedules()">RELEASE SELECTED SCHEDULES<span id="spinnerBtnReleaseSchedules" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
               </div>
             </div>
           </div>
         </div>
-        <!-- /CREATE EXAM SCHEDULE -->
+        {{-- DRAFTED EXAM SCHEDULES --}}
 
-        <!-- EXAM SCHEDULE TABLE -->
-        <div class="col-12 md-5">
+        {{-- SCHEDULED EXAM TABLE --}}
+        <div class="col-12 mb-5">
           <div class="card">
-            <div class="card-header">Exam Schedules</div>
+            <div class="card-header">Scheduled Exams</div>
             <div class="card-body">
               <table class="table schedules-after-release-yajradt">
                 <thead class="text-center">
@@ -179,14 +185,14 @@
             </div>
           </div>
         </div>
-        <!-- /EXAM SCHEDULE TABLE-->
+        {{-- /SCHEDULED EXAM TABLE --}}
 
-        <!-- EXAMS HELD -->
-        <div class="col-12 mt-5">
+        {{-- EXAMS HELD --}}
+        <div class="col-12">
           <div class="card">
             <div class="card-header">Exams Held</div>
             <div class="card-body">
-              <!-- SEARCH -->
+              {{-- SEARCH --}}
               <form>
                 <div class="form-row mb-5">
                   <div class="form-group col-xl-2 col-lg-4">
@@ -235,10 +241,10 @@
                   </div>
                 </div>
               </form>
-              <!-- /SEARCH -->
+              {{-- /SEARCH --}}
               
-              <!-- HELD EXAM TABLE -->
-              <table class="table mb-4 held-exam-schedules-yajradt">
+              {{-- HELD EXAM TABLE --}}
+              <table class="table held-exam-schedules-yajradt">
                 <thead class="text-center">
                   <tr>
                     <th>Exam</th>
@@ -254,21 +260,18 @@
                   
                 </tbody>
               </table>
-              <!-- /HELD EXAM TABLE -->
+              {{-- /HELD EXAM TABLE --}}
 
+            </div>
           </div>
-
-          </div>
-          
         </div>
-        <!-- /EXAMS HELD -->
+        {{-- /EXAMS HELD --}}
 
         @include('portal.staff.exams.modal')
 
       </div>
     </div>
-
-    <!-- /CONTENT -->
+    {{-- /CONTENT --}}
 
     @include('portal.staff.exams.scripts')
 
