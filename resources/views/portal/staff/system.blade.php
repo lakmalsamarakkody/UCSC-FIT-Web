@@ -118,6 +118,7 @@
       <!-- /PERMISSION -->
 
       <!-- SUBJECT -->
+      @if(Auth::user()->hasPermission('staff-system-subject'))
       <div class="col-xl-6 col-lg-12 mt-xl-5">
         <div class="card">
           <div class="card-header">SUBJECTS</div>
@@ -140,8 +141,8 @@
                     <td>{{ $subject->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" id="btnEditSubject-{{$subject->id}}" onclick="edit_subject_modal_invoke({{$subject->id}});"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" id="btnDeleteSubject-{{$subject->id}}" onclick="delete_subject({{$subject->id}});"><i class="fas fa-trash-alt"></i></button>
+                        @if(Auth::user()->hasPermission('staff-system-subject-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditSubject-{{$subject->id}}" onclick="edit_subject_modal_invoke({{$subject->id}});"><i class="fas fa-edit"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-subject-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteSubject-{{$subject->id}}" onclick="delete_subject({{$subject->id}});"><i class="fas fa-trash-alt"></i></button>@endif
                       </div>
                     </td>
                   </tr>
@@ -150,12 +151,16 @@
               </table>
             </div>
           </div>
+          @if(Auth::user()->hasPermission('staff-system-subject-add'))
           <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-subject"><i class="fas fa-plus"></i></button></div>
+          @endif
         </div>
       </div>
+      @endif
       <!-- /SUBJECT -->
 
       <!-- EXAM TYPE -->
+      @if(Auth::user()->hasPermission('staff-system-examType'))
       <div class="col-xl-6 col-lg-12 mt-xl-5">
         <div class="card">
           <div class="card-header">EXAM TYPES</div>
@@ -176,8 +181,8 @@
                     <td>{{ $type->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" id="bntEditExamType-{{$type->id}}" onclick="edit_exam_type_modal_invoke({{$type->id}});"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" id="btnDeleteExamType-{{$type->id}}" onclick="delete_exam_type({{$type->id}});"><i class="fas fa-trash-alt"></i></button>
+                        @if(Auth::user()->hasPermission('staff-system-examType-edit'))<button type="button" class="btn btn-outline-warning" id="bntEditExamType-{{$type->id}}" onclick="edit_exam_type_modal_invoke({{$type->id}});"><i class="fas fa-edit"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-examType-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteExamType-{{$type->id}}" onclick="delete_exam_type({{$type->id}});"><i class="fas fa-trash-alt"></i></button>@endif
                       </div>
                     </td>
                   </tr>
@@ -186,12 +191,16 @@
               </table>
             </div>
           </div>
+          @if(Auth::user()->hasPermission('staff-system-examType-add'))
           <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-exam-type"><i class="fas fa-plus"></i></button></div>
+          @endif
         </div>
       </div>
+      @endif
       <!-- /EXAM TYPE -->
 
       <!-- STUDENT PHASES -->
+      @if(Auth::user()->hasPermission('staff-system-studentPhase'))
       <div class="col-xl-5 col-lg-12 mt-xl-5">
         <div class="card">
           <div class="card-header">STUDENT PHASES</div>
@@ -216,8 +225,8 @@
                     <td>{{ $phase->description }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" id="btnEditStudentPhase-{{$phase->id}}" onclick="edit_student_phase_modal_invoke({{$phase->id}});"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" id="btnDeleteStudentPhase-{{$phase->id}}" onclick="delete_student_phase({{$phase->id}});"><i class="fas fa-trash-alt"></i></button>
+                        @if(Auth::user()->hasPermission('staff-system-studentPhase-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditStudentPhase-{{$phase->id}}" onclick="edit_student_phase_modal_invoke({{$phase->id}});"><i class="fas fa-edit"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-studentPhase-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteStudentPhase-{{$phase->id}}" onclick="delete_student_phase({{$phase->id}});"><i class="fas fa-trash-alt"></i></button>@endif
                       </div>
                     </td>
                   </tr>
@@ -226,12 +235,16 @@
               </table>
             </div>
           </div>
+          @if(Auth::user()->hasPermission('staff-system-studentPhase-add'))
           <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-student-phase"><i class="fas fa-plus"></i></button></div>
+          @endif
         </div>
       </div>
+      @endif
       <!-- /STUDENT PHASES -->
 
       <!-- PAYMENT METHODS -->
+      @if(Auth::user()->hasPermission('staff-system-paymentMethod'))
       <div class="col-xl-6 col-lg-12 mt-xl-5">
         <div class="card">
           <div class="card-header">PAYMENT METHODS</div>
@@ -252,8 +265,8 @@
                     <td>{{ $method->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" id="btnEditPaymentMethod-{{$method->id}}" onclick="edit_payment_method_modal_invoke({{$method->id}})"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" id="btnDeletePaymentMethod-{{$method->id}}" onclick="delete_payment_method({{$method->id}});"><i class="fas fa-trash-alt"></i></button>
+                        @if(Auth::user()->hasPermission('staff-system-paymentMethod-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditPaymentMethod-{{$method->id}}" onclick="edit_payment_method_modal_invoke({{$method->id}})"><i class="fas fa-edit"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-paymentMethod-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeletePaymentMethod-{{$method->id}}" onclick="delete_payment_method({{$method->id}});"><i class="fas fa-trash-alt"></i></button>@endif
                       </div>
                     </td>
                   </tr>
@@ -262,12 +275,16 @@
               </table>
             </div>
           </div>
+          @if(Auth::user()->hasPermission('staff-system-paymentMethod-add'))
           <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-payment-method"><i class="fas fa-plus"></i></button></div>
+          @endif
         </div>
       </div>
+      @endif
       <!-- /PAYMENT METHODS -->
 
       <!-- PAYMENT TYPES -->
+      @if(Auth::user()->hasPermission('staff-system-paymentType'))
       <div class="col-xl-6 col-lg-12 mt-xl-5">
         <div class="card">
           <div class="card-header">PAYMENT TYPES</div>
@@ -288,8 +305,8 @@
                     <td>{{ $type->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" id="btnEditPaymentType-{{$type->id}}" onclick="edit_payment_type_modal_invoke({{$type->id}});"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" id="btnDeletePaymentType-{{$type->id}}" onclick="delete_payment_type({{$type->id}});"><i class="fas fa-trash-alt"></i></button>
+                        @if(Auth::user()->hasPermission('staff-system-paymentType-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditPaymentType-{{$type->id}}" onclick="edit_payment_type_modal_invoke({{$type->id}});"><i class="fas fa-edit"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-paymentType-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeletePaymentType-{{$type->id}}" onclick="delete_payment_type({{$type->id}});"><i class="fas fa-trash-alt"></i></button>@endif
                       </div>
                     </td>
                   </tr>
@@ -298,9 +315,12 @@
               </table>
             </div>
           </div>
+          @if(Auth::user()->hasPermission('staff-system-paymentType-add'))
           <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-payment-type"><i class="fas fa-plus"></i></button></div>
+          @endif
         </div>
       </div>
+      @endif
       <!-- /PAYMENT TYPES -->
 
       @include('portal.staff.system.modal')
