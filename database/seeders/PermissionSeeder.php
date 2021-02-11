@@ -22,7 +22,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'can add a user role',
+                    'description'=>'can access to system page',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -104,6 +104,186 @@ class PermissionSeeder extends Seeder
                     'portal'=>'staff',
                     'module'=>'system',
                     'description'=>'can delete a permission',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-subject',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can view subjects',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-subject-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can add a subject',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-subject-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can edit subject details',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-subject-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can delete a subject',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-examType',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can view exam types',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-examType-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can add an exam type',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-examType-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can edit exam type details',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-examType-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can delete an exam type',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-studentPhase',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can view student phases',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-studentPhase-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can add a student phase',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-studentPhase-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can edit student phase details',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-studentPhase-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can delete a student phase',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-paymentMethod',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can view payment methods',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-paymentMethod-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can add a payment method',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-paymentMethod-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can edit payment method details',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-paymentMethod-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can delete a payment method',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-paymentType',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can view payment types',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-paymentType-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can add a payment type',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-paymentType-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can edit payment type details',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-system-paymentType-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'can delete a payment type',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],

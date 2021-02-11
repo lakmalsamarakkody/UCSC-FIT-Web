@@ -156,6 +156,7 @@
         $('#permissionListEdit').html("");
         if(data['status'] == 'success'){
           $('#roleNameEdit').val(data['role']['name']);
+          $('#modal-edit-role-title').html(data['role']['name']);
           let status = "";
           $.each(data['arrayPermissions'], function( index, value ) {
             if(value['permission_status'] == true){
