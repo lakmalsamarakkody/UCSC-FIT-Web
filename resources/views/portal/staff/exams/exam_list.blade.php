@@ -85,7 +85,7 @@
         <!-- EXAM TABLE -->
         <div class="col-12 md-5">
           <div class="card">
-            <div class="card-header">Exam List</div>
+            <div class="card-header">Exams</div>
             <div class="card-body">
               <table class="table yajra-datatable tableExam">
                 <thead class="text-center">
