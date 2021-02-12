@@ -1,5 +1,5 @@
 <script type="text/javascript">
-
+let permissionTable = null;
 $(function(){
     //PERMISSIONS TABLE
     var permissionTable = $('.permissions-yajradt').DataTable({
@@ -50,6 +50,7 @@ $(function(){
         }
       ]
     });
+    return permissionTable;
     // /PERMISSIONS TABLE
   });
 
@@ -525,7 +526,7 @@ $(function(){
           success: function(data){
             console.log('Success in delete permission ajax.');
             //remove delete data included row
-            $('#tbl-permission-tr-'+permission_id).remove();
+            permissionTable.draw();
             SwalDoneSuccess.fire({
               title: 'Deleted!',
               text: 'Permission has been deleted.',
