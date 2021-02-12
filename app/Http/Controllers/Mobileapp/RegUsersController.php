@@ -38,19 +38,20 @@ class RegUsersController extends Controller
 
     }
     function activeStudents(){
-        $data=DB::table('students')
+        $data=DB::table('student_registrations')
 
-        ->where('students.reg_year',idate('Y'))
+        
         ->orderBy('updated_at', 'desc')
+        ->join('students','student_registrations.student_id',"=",'students.id')
         ->select(
-            'students.reg_year',
+            'student_registrations.status',
             'students.first_name',
-            'students.updated_at'
+            'student_registrations.updated_at'
 
         );
         $users=DB::table('students')
         ->join('users','students.user_id',"=",'users.id')
-        ->where('students.reg_year',idate('Y'))
+        
         ->orderBy('updated_at', 'desc')
         ->select(
             'students.reg_year',
@@ -64,8 +65,9 @@ class RegUsersController extends Controller
 
       "yearReg"=>$data->count(),
       "Pendiig"=>$users->count()-$users->where('users.status',1)->count(),
-      "active"=>$users->where('users.status',1)->count(),
-      "updateDate"=>$users->select('users.updated_at')->first(),
+      "active"=>$data->where('student_registrations.status',1)->count(),
+      "accActive"=>$users->where('users.status',1)->count(),
+      "updateDate"=>$users->select('students.updated_at')->first(),
 
 
  ];
