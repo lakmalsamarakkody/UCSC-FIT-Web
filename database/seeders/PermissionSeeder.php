@@ -31,7 +31,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-role',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'can add a user role',
+                    'description'=>'can view user roles',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -40,7 +40,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-role-add',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'can add a user role',
+                    'description'=>'can add an user role',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -67,7 +67,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-role-delete',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'can delete a user role',
+                    'description'=>'can delete an user role',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -76,7 +76,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-permission',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'can edit a permission description',
+                    'description'=>'can view permissions',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -85,7 +85,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-permission-add',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'can edit a permission description',
+                    'description'=>'can add a permission',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -94,7 +94,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-permission-edit',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'can edit a permission description',
+                    'description'=>'can edit permission details',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -289,10 +289,109 @@ class PermissionSeeder extends Seeder
                 ],
 
                 [
-                    'name'=>'staff-exam-createSchedule',
+                    'name'=>'staff-exam',
                     'portal'=>'staff',
                     'module'=>'exams',
-                    'description'=>'can create an exam schedule',
+                    'description'=>'can access to staff exam page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-schedule-add',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'can add an exam schedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-schedule-edit',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'can edit a drafted exam schedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-schedule-delete-beforeRelease',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'can delete a drafted exam schedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-schedule-request',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'can request for exam schedule approval',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-schedule-approve',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'can approve an exam schedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-schedule-decline',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'can decline the approval of a exam schedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-schedule-decline-message',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'can view the exam schedule decline message',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-schedule-release',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'can release an exam schedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-schedule-allRelease',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'can release all approved exam schedules',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-schedule-postpone',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'can postpone a scheduled exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-schedule-delete-afterRelease',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'can delete a scheduled exam',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],

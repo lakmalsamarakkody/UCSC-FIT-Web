@@ -17,6 +17,7 @@ use App\Models\User\Role\hasPermission;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Unique;
+use Yajra\DataTables\Facades\DataTables;
 
 use function GuzzleHttp\Promise\all;
 
@@ -134,6 +135,19 @@ class SystemController extends Controller
   // /USER ROLE
 
   // PERMISSION
+  // PERMISSION TABLE
+  public function getPermissions(Request $request)
+  {
+    if($request->ajax()) {
+      $data = Permission::get();
+      
+      return DataTables::of($data)
+      ->rawColumns(['action'])
+      ->make(true);
+    }
+  }
+  // /PERMISSION TABLE
+
   // CREATE FUNCTION
   public function createPermission(Request $request)
   {
