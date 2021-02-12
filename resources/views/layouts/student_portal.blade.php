@@ -164,7 +164,7 @@
                   --}}
                 </div>
                 <div class="col-3 text-right">
-                  <a href="{{ route('student.information') }}" title="Settings" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg nav-item"><i class="fa fa-cog"></i></a>
+                  <button onclick="location.replace('{{ route('student.information') }}')" title="Settings" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg nav-item"><i class="fa fa-cog"></i></button>
                   <button title="Logout" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg  pr-5 nav-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></button>
                 </div>
 
