@@ -172,7 +172,7 @@
                   --}}
                 </div>
                 <div class="col-lg-3 p-2 my-2  text-right">
-                  <a class="btn btn-link btn-lg  nav-item" href="{{ route('staff.information') }}"><i class="fa fa-cog"></i></a>
+                  <button class="btn btn-link btn-lg  nav-item" onclick="location.replace('{{ route('staff.information') }}')"><i class="fa fa-cog"></i></a>
                   <button title="Logout" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg  pr-5 nav-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></button>
                 </div>
 
