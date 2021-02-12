@@ -30,29 +30,25 @@ $(function(){
           data: 'description',
           name: 'description'
         },
-        // {
-        //   data: 'id',
-        //   name: 'id'
-        //   orderable: false,
-        //   searchable: false
-        // },
+        {
+          data: 'id',
+          name: 'id',
+          orderable: false,
+          searchable: false
+        },
+      ],
+      columnDefs: [
+        {
+          targets: 5,
+          render: function(data, type, row) {
+            var btnGroup = '<div class="btn-group">';
+              btnGroup = btnGroup + '@if(Auth::user()->hasPermission("staff-system-permission-edit"))<button type="button" class="btn btn-outline-warning" id="btnEditPermission-'+data+'" onclick="edit_permission_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>@endif';
+              btnGroup = btnGroup + '@if(Auth::user()->hasPermission("staff-system-permission-delete"))<button type="button" class="btn btn-outline-danger" id="btnDeletePermission-'+data+'" onclick="delete_permission('+data+');"><i class="fas fa-trash-alt"></i></button>@endif';
+              btnGroup = btnGroup + '</div>';
+              return btnGroup;
+          }
+        }
       ]
-      // columnDefs: [
-      //   {
-      //     targets: 5,
-      //     render: function(data, type, row) {
-      //       var btnGroup = '<div class="btn-group">';
-      //       if(Auth::user()->hasPermission('staff-system-permission-edit')) {
-      //         btnGroup = btnGroup + '<button type="button" class="btn btn-outline-warning" id="btnEditPermission-'+data+'" onclick="edit_permission_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>';
-      //       }
-      //       if(Auth::user()->hasPermission('staff-system-permission-delete')) {
-      //         btnGroup = btnGroup + '<button type="button" class="btn btn-outline-danger" id="btnDeletePermission-'+data+'" onclick="delete_permission('+data+');"><i class="fas fa-trash-alt"></i></button>';
-      //       }
-      //       btnGroup = btnGroup + '</div>';
-      //       return btnGroup;
-      //     }
-      //   }
-      // ]
     });
     // /PERMISSIONS TABLE
   });

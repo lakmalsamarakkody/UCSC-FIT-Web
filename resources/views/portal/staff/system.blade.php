@@ -36,7 +36,7 @@
           <div class="card-header">PERMISSIONS</div>
           <div class="card-body">
             <div class="card-text">
-              <table class="table permissions-yajradt">
+              <table class="table table-responsive-md permissions-yajradt">
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -44,7 +44,7 @@
                     <th>Portal</th>
                     <th>Module</th>
                     <th>Description</th>
-                    {{-- <th>&nbsp;</th> --}}
+                    <th>&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody id="permissionsTblBody">
@@ -79,7 +79,7 @@
 
       <!-- USER ROLE -->
       @if(Auth::user()->hasPermission('staff-system-role'))
-      <div class="col-xl-5 col-lg-12">
+      <div class="col-xl-5 col-lg-12 mt-xl-5">
         <div class="card">
           <div class="card-header">USER ROLE</div>
           <div class="card-body">
