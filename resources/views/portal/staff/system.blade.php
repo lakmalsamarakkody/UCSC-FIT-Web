@@ -29,6 +29,53 @@
   <!-- CONTENT -->
   <div class="col-md-12 system">
     <div class="row">
+      <!-- PERMISSION -->
+      @if(Auth::user()->hasPermission('staff-system-permission'))
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">PERMISSIONS</div>
+          <div class="card-body">
+            <div class="card-text">
+              <table class="table permissions-yajradt">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Portal</th>
+                    <th>Module</th>
+                    <th>Description</th>
+                    {{-- <th>&nbsp;</th> --}}
+                  </tr>
+                </thead>
+                <tbody id="permissionsTblBody">
+
+                </tbody>
+                {{-- @foreach ($permissions as $permission)
+                <tr id="tbl-permission-tr-{{$permission->id}}">
+                  <td>{{ $permission->id }}</td>
+                  <td>{{ $permission->name }}</td>
+                  <td>{{ $permission->portal }}</td>
+                  <td>{{ $permission->module }}</td>
+                  <td>{{ $permission->description }}</td>
+                  <td class="text-right">
+                    <div class="btn-group">
+                      @if(Auth::user()->hasPermission('staff-system-permission-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditPermission-{{$permission->id}}" onclick="edit_permission_modal_invoke({{ $permission->id }});"><i class="fas fa-edit"></i></button>@endif
+                      @if(Auth::user()->hasPermission('staff-system-permission-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeletePermission-{{$permission->id}}" onclick="delete_permission({{ $permission->id }});"><i class="fas fa-trash-alt"></i></button>@endif
+                    </div>
+                  </td>
+                </tr>
+                @endforeach --}}
+                {{-- </thead> --}}
+              </table>
+            </div>
+          </div>
+          @if(Auth::user()->hasPermission('staff-system-permission-add'))
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-permission"><i class="fas fa-plus"></i></button></div>
+          @endif
+        </div>
+      </div>
+      @endif
+      <!-- /PERMISSION -->
 
       <!-- USER ROLE -->
       @if(Auth::user()->hasPermission('staff-system-role'))
@@ -70,52 +117,6 @@
       </div>
       @endif
       <!-- /USER ROLE -->
-
-      <!-- PERMISSION -->
-      @if(Auth::user()->hasPermission('staff-system-permission'))
-      <div class="col-xl-7 col-lg-12">
-        <div class="card">
-          <div class="card-header">PERMISSIONS</div>
-          <div class="card-body">
-            <div class="card-text">
-              <table class="table table-responsive-md">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Portal</th>
-                    <th>Module</th>
-                    <th>Description</th>
-                    <th>&nbsp;</th>
-                  </tr>
-                </thead>
-                <thead>
-                  @foreach ($permissions as $permission)
-                  <tr id="tbl-permission-tr-{{$permission->id}}">
-                    <td>{{ $permission->id }}</td>
-                    <td>{{ $permission->name }}</td>
-                    <td>{{ $permission->portal }}</td>
-                    <td>{{ $permission->module }}</td>
-                    <td>{{ $permission->description }}</td>
-                    <td class="text-right">
-                      <div class="btn-group">
-                        @if(Auth::user()->hasPermission('staff-system-permission-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditPermission-{{$permission->id}}" onclick="edit_permission_modal_invoke({{ $permission->id }});"><i class="fas fa-edit"></i></button>@endif
-                        @if(Auth::user()->hasPermission('staff-system-permission-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeletePermission-{{$permission->id}}" onclick="delete_permission({{ $permission->id }});"><i class="fas fa-trash-alt"></i></button>@endif
-                      </div>
-                    </td>
-                  </tr>
-                  @endforeach
-                </thead>
-              </table>
-            </div>
-          </div>
-          @if(Auth::user()->hasPermission('staff-system-permission-add'))
-          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-permission"><i class="fas fa-plus"></i></button></div>
-          @endif
-        </div>
-      </div>
-      @endif
-      <!-- /PERMISSION -->
 
       <!-- SUBJECT -->
       @if(Auth::user()->hasPermission('staff-system-subject'))
