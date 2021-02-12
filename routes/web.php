@@ -145,7 +145,7 @@ Route::post('/portal/staff/system/viewUserRoleGetDetails', [App\Http\Controllers
 Route::post('/portal/staff/system/editUserRolePermissions', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editUserRolePermissions']);
 Route::post('/portal/staff/system/deleteUserRole', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteUserRole']);
 
-Route::post('/portal/staff/system/table/permissions', [App\Http\Controllers\Portal\Staff\SystemController::class, 'getPermissions'])->name('permissions.table');
+Route::get('/portal/staff/system/table/permissions', [App\Http\Controllers\Portal\Staff\SystemController::class, 'getPermissions'])->name('permissions.table');
 Route::post('/portal/staff/system/createPermission', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createPermission']);
 Route::post('/portal/staff/system/editPermissionGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editPermissionGetDetails']);
 Route::post('/portal/staff/system/editPermission', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editPermission']);
