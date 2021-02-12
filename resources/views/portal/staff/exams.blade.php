@@ -113,7 +113,7 @@
             <div class="card-header">Drafted Exam Schedules</div>
             <div class="card-body">
               <table class="table schedules-before-release-yajradt">
-                <thead class="text-center">
+                <thead>
                   <tr>
                     <th>Exam</th>
                     <th>Subject Code</th>
@@ -125,7 +125,7 @@
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
-                <tbody class="text-center" id="shedulesBeforeReleaseTblBody">
+                <tbody id="shedulesBeforeReleaseTblBody">
                   {{-- @foreach ($upcoming_schedules as $schedule)
                   <tr id="tbl-examSchedule-tr-{{$schedule->id}}">
                     <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
@@ -165,7 +165,7 @@
             <div class="card-header">Scheduled Exams</div>
             <div class="card-body">
               <table class="table schedules-after-release-yajradt">
-                <thead class="text-center">
+                <thead>
                   <tr>
                     <th>Exam</th>
                     <th>Subject Code</th>
@@ -177,7 +177,7 @@
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
-                <tbody class="text-center" id="shedulesAfterReleaseTblBody">
+                <tbody id="shedulesAfterReleaseTblBody">
                   
                 </tbody>
               </table>
@@ -245,7 +245,7 @@
               
               {{-- HELD EXAM TABLE --}}
               <table class="table held-exam-schedules-yajradt">
-                <thead class="text-center">
+                <thead>
                   <tr>
                     <th>Exam</th>
                     <th>Subject Code</th>
@@ -256,7 +256,7 @@
                     <th>Ended Time</th>
                   </tr>
                 </thead>
-                <tbody class="text-center" id="heldScheduleTblBody">
+                <tbody id="heldScheduleTblBody">
                   
                 </tbody>
               </table>

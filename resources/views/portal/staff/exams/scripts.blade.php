@@ -58,14 +58,14 @@
           targets: 7,
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">';
-            if(row['schedule_approval']== null || row['schedule_approval']== 'declined'){
+            if( row['schedule_approval'] == null || row['schedule_approval'] == 'declined' ){
                 btnGroup = btnGroup + '<button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-placement="bottom" title="Request Approval" id="btnRequestApprovalSchedule-'+data+'" onclick="request_schedule_approval('+data+');"><i class="fas fa-file-export"></i></button>';
             }
-            else if(row['schedule_approval'] == 'requested'){
+            else if( row['schedule_approval'] == 'requested' ){
                 btnGroup = btnGroup + '<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" id="btnApproveSchedule-'+data+'" onclick="approve_schedule('+data+');"><i class="fas fa-check-circle"></i></button>'
                 + '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Decline" id="btnDeclineSchedule-'+data+'" onclick="decline_schedule('+data+');"><i class="fas fa-times-circle"></i></button>';
             }
-            else if(row['schedule_approval']== 'approved'){
+            else if( row['schedule_approval'] == 'approved' ){
                 btnGroup = btnGroup + '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" id="btnReleaseSchedule-'+data+'" onclick="relase_individual_schedule('+data+');" ><i class="fas fa-hand-point-right"></i></button>';
             }
             btnGroup = btnGroup + '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit" id="btnEditSchedule-'+data+'" onclick="edit_schedule_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>'+

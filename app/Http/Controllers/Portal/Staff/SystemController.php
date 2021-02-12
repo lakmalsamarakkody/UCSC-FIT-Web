@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Unique;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 use function GuzzleHttp\Promise\all;
 
@@ -42,97 +43,6 @@ class SystemController extends Controller
     $payment_types = Type::orderby('id')->get();
     return view('portal/staff/system',compact('roles','permissions','subjects','exam_types','payment_methods', 'payment_types', 'phases'));
   }
-
-  // USER ROLE
-  // CREATE FUNCTION
-  public function createUserRole(Request $request)
-  {
-    // Validate role form fields
-    $user_role_validator = Validator::make($request->all(), [
-      'newRoleName' => ['required','alpha_space','unique:App\Models\User\Role,name'],
-      'newRoleDescription' => ['nullable'],
-    ]);
-    //Check validation errors
-    if($user_role_validator->fails()):
-      return response()->json(['errors'=>$user_role_validator->errors()]);
-    //Otherwise, Store data to the table
-    else:
-      $role = new Role();
-      $role->name = $request->newRoleName;
-      $role->description = $request->newRoleDescription;
-      if($role->save()):
-        return response()->json(['status'=>'success', 'role'=>$role]);
-      endif;
-    endif;
-    return response()->json(['status'=>'error']);
-  }
-  // /CREATE FUNCTION
-
-  // VIEW FUNCTION
-  public function viewUserRoleGetDetails(Request $request)
-  {
-    $arrayPermissions = array();
-    $permissions = Permission::get();
-    $role = Role::find($request->role_id);
-    foreach($permissions as $permission):
-      $hasPermission = $role->hasPermission()->where('permission_id', $permission->id)->first();
-      if($hasPermission != NULL):
-        $currentPermission = array(array('permission_id' => $permission->id, 'permission_name'=> $permission->name, 'permission_status'=>true));
-      else:
-        $currentPermission = array(array('permission_id' => $permission->id, 'permission_name'=> $permission->name, 'permission_status'=>false));
-      endif;
-      $arrayPermissions = array_merge($arrayPermissions, $currentPermission);
-    endforeach;
-    return response()->json(['status'=>'success', 'role'=>$role, 'arrayPermissions'=>$arrayPermissions]);
-  }
-  // /VIEW FUNCTION
-
-  // EDIT FUNCTION
-  public function editUserRolePermissions(Request $request){
-    $role = Role::where('id',$request->role_id)->first();
-
-    //DELETE ALL CURRENT PERMISSIONS
-    hasPermission::where('role_id', $role->id)->forceDelete();
-
-    //UPDATE ROLE NAME
-    $role->update(['name'=>$request->role_name]);
-
-    // PERMISSION SAVE
-    // LOOP HAS BEEND TERMINATED BEFORE LAST 2 ELEMENTS BECAUSE ROLE_ID AND ROLE_NAME COMES ALONG WITH PERMISSION LIST
-    // so used array count and break foreach before last 2 elements
-    $count = count($request->all());
-    $currentCount = 0;
-    foreach($request->all() as $permission):
-      hasPermission::create(['role_id'=>$role->id, 'permission_id'=>$permission]);
-      $currentCount = $currentCount+1;
-      if($count == $currentCount+2) break;
-    endforeach;
-    // /PERMISSION SAVE 
-
-    return response()->json(['status'=>'success', 'request'=>$request->all()]);
-  }
-  // /EDIT FUNCTION
-
-
-  // DELETE FUNCTION
-  public function deleteUserRole(Request $request)
-  {
-    // VALIDATE ROLE ID
-    $roleID_validator = Validator::make($request->all(), [
-      'role_id' => ['required','integer','exists:App\Models\User\Role,id'],
-    ]);
-
-    // CHECK VALIDATOR FAILS
-    if($roleID_validator->fails()):
-      return response()->json(['status'=>'error', 'errors'=>$roleID_validator->errors()]);
-    else:
-      Role::destroy($request->role_id);
-      return response()->json(['status'=>'success']);
-    endif;
-    return response()->json(['status'=>'error', 'data'=>$request->all()]);
-  }
-  // /DELETE FUNCTION
-  // /USER ROLE
 
   // PERMISSION
   // PERMISSION TABLE
@@ -240,6 +150,97 @@ class SystemController extends Controller
   }
   // /DELETE FUNCTION
   // /PERMISSION
+
+  // USER ROLE
+  // CREATE FUNCTION
+  public function createUserRole(Request $request)
+  {
+    // Validate role form fields
+    $user_role_validator = Validator::make($request->all(), [
+      'newRoleName' => ['required','alpha_space','unique:App\Models\User\Role,name'],
+      'newRoleDescription' => ['nullable'],
+    ]);
+    //Check validation errors
+    if($user_role_validator->fails()):
+      return response()->json(['errors'=>$user_role_validator->errors()]);
+    //Otherwise, Store data to the table
+    else:
+      $role = new Role();
+      $role->name = $request->newRoleName;
+      $role->description = $request->newRoleDescription;
+      if($role->save()):
+        return response()->json(['status'=>'success', 'role'=>$role]);
+      endif;
+    endif;
+    return response()->json(['status'=>'error']);
+  }
+  // /CREATE FUNCTION
+
+  // VIEW FUNCTION
+  public function viewUserRoleGetDetails(Request $request)
+  {
+    $arrayPermissions = array();
+    $permissions = Permission::get();
+    $role = Role::find($request->role_id);
+    foreach($permissions as $permission):
+      $hasPermission = $role->hasPermission()->where('permission_id', $permission->id)->first();
+      if($hasPermission != NULL):
+        $currentPermission = array(array('permission_id' => $permission->id, 'permission_name'=> $permission->name, 'permission_status'=>true));
+      else:
+        $currentPermission = array(array('permission_id' => $permission->id, 'permission_name'=> $permission->name, 'permission_status'=>false));
+      endif;
+      $arrayPermissions = array_merge($arrayPermissions, $currentPermission);
+    endforeach;
+    return response()->json(['status'=>'success', 'role'=>$role, 'arrayPermissions'=>$arrayPermissions]);
+  }
+  // /VIEW FUNCTION
+
+  // EDIT FUNCTION
+  public function editUserRolePermissions(Request $request){
+    $role = Role::where('id',$request->role_id)->first();
+
+    //DELETE ALL CURRENT PERMISSIONS
+    hasPermission::where('role_id', $role->id)->forceDelete();
+
+    //UPDATE ROLE NAME
+    $role->update(['name'=>$request->role_name]);
+
+    // PERMISSION SAVE
+    // LOOP HAS BEEND TERMINATED BEFORE LAST 2 ELEMENTS BECAUSE ROLE_ID AND ROLE_NAME COMES ALONG WITH PERMISSION LIST
+    // so used array count and break foreach before last 2 elements
+    $count = count($request->all());
+    $currentCount = 0;
+    foreach($request->all() as $permission):
+      hasPermission::create(['role_id'=>$role->id, 'permission_id'=>$permission]);
+      $currentCount = $currentCount+1;
+      if($count == $currentCount+2) break;
+    endforeach;
+    // /PERMISSION SAVE 
+
+    return response()->json(['status'=>'success', 'request'=>$request->all()]);
+  }
+  // /EDIT FUNCTION
+
+
+  // DELETE FUNCTION
+  public function deleteUserRole(Request $request)
+  {
+    // VALIDATE ROLE ID
+    $roleID_validator = Validator::make($request->all(), [
+      'role_id' => ['required','integer','exists:App\Models\User\Role,id'],
+    ]);
+
+    // CHECK VALIDATOR FAILS
+    if($roleID_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$roleID_validator->errors()]);
+    else:
+      Role::destroy($request->role_id);
+      return response()->json(['status'=>'success']);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+  }
+  // /DELETE FUNCTION
+  // /USER ROLE
 
   // SUBJECT
   // CREATE FUNCTION

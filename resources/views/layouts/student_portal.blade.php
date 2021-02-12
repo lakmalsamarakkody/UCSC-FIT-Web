@@ -112,7 +112,9 @@
             <!-- MENU SECTION -->
             <div class="nav-menu w-100">
               <ul>
+                @if ( Auth::user()->student->reg_no == null )
                 <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
+                @endif
                 <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
                 <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
                 <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>
@@ -164,7 +166,7 @@
                   --}}
                 </div>
                 <div class="col-3 text-right">
-                  <a href="{{ route('student.information') }}" title="Settings" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg nav-item"><i class="fa fa-cog"></i></a>
+                  <button onclick="location.replace('{{ route('student.information') }}')" title="Settings" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg nav-item"><i class="fa fa-cog"></i></button>
                   <button title="Logout" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg  pr-5 nav-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></button>
                 </div>
 
@@ -179,7 +181,10 @@
                 <div class="col-6 text-right align-self-center"><i class="fa fa-bars fa-2x" data-toggle="collapse" data-target="#collapseMobileNav" aria-expanded="false"></i></div>
                 <div class="col-12 mt-2 px-0 collapse border-top border-darken-1" id="collapseMobileNav">
                   <ul>
-                    <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
+                      @if ( Auth::user()->student->reg_no == null )
+                      <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
+
+                      @endif
                     <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
                     <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
                     <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>

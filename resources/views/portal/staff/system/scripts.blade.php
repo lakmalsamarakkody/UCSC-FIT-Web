@@ -1,11 +1,14 @@
 <script type="text/javascript">
 
-$(function(){
-    //PERMISSIONS TABLE
-    var permissionTable = $('.permissions-yajradt').DataTable({
+let permissionTable = null;
+
+  // PERMISSION
+  $(function(){
+    // PERMISSIONS TABLE
+    permissionTable = $('.permissions-yajradt').DataTable({
       processing: true,
       searching: true,
-      serverSide: false,
+      serverSide: true,
       ajax: {
         url: "{{ route('permissions.table') }}",
       },
@@ -30,32 +33,239 @@ $(function(){
           data: 'description',
           name: 'description'
         },
-        // {
-        //   data: 'id',
-        //   name: 'id'
-        //   orderable: false,
-        //   searchable: false
-        // },
+        {
+          data: 'id',
+          name: 'id',
+          orderable: false,
+          searchable: false
+        },
+      ],
+      columnDefs: [
+        {
+          targets: 5,
+          render: function(data, type, row) {
+            var btnGroup = '<div class="btn-group">';
+              btnGroup = btnGroup + '@if(Auth::user()->hasPermission("staff-system-permission-edit"))<button type="button" class="btn btn-outline-warning" id="btnEditPermission-'+data+'" onclick="edit_permission_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>@endif';
+              btnGroup = btnGroup + '@if(Auth::user()->hasPermission("staff-system-permission-delete"))<button type="button" class="btn btn-outline-danger" id="btnDeletePermission-'+data+'" onclick="delete_permission('+data+');"><i class="fas fa-trash-alt"></i></button>@endif';
+              btnGroup = btnGroup + '</div>';
+              return btnGroup;
+          }
+        }
       ]
-      // columnDefs: [
-      //   {
-      //     targets: 5,
-      //     render: function(data, type, row) {
-      //       var btnGroup = '<div class="btn-group">';
-      //       if(Auth::user()->hasPermission('staff-system-permission-edit')) {
-      //         btnGroup = btnGroup + '<button type="button" class="btn btn-outline-warning" id="btnEditPermission-'+data+'" onclick="edit_permission_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>';
-      //       }
-      //       if(Auth::user()->hasPermission('staff-system-permission-delete')) {
-      //         btnGroup = btnGroup + '<button type="button" class="btn btn-outline-danger" id="btnDeletePermission-'+data+'" onclick="delete_permission('+data+');"><i class="fas fa-trash-alt"></i></button>';
-      //       }
-      //       btnGroup = btnGroup + '</div>';
-      //       return btnGroup;
-      //     }
-      //   }
-      // ]
     });
     // /PERMISSIONS TABLE
   });
+
+  // CREATE
+  create_permission = () => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Create!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+
+        //Form Data
+        var formData = new FormData($('#formCreatePermission')[0]);
+        //Validate information
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/createPermission') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreatePermission').attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in create permission ajax.');
+            $('#btnCreatePermission').removeAttr('disabled','disabled');
+            if(data['errors']){
+              console.log('Errors on validation data.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Create permission success.');
+              SwalDoneSuccess.fire({
+                title: 'Created!',
+                text: 'Permission created.',
+              })
+              $('#modal-create-permission').modal('hide');
+              permissionTable.draw();
+            }
+          },
+          error: function(err){
+            $('#btnCreatePermission').removeAttr('disabled','disabled');
+            console.log('Error in create permission ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Permission has not been created.',
+        })
+      }
+    })
+  }
+  // /CREATE
+
+  // EDIT
+  // Fill modal with relevant data
+  edit_permission_modal_invoke = (permission_id) =>{
+    //Payload
+    var formData = new FormData();
+    formData.append('permission_id',permission_id);
+
+    //Edit permission get detials
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/system/editPermissionGetDetails') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){$('#btnEditPermission-'+permission_id).attr('disabled','disabled');},
+      success: function(data){
+        console.log('Success in edit permission get detials ajax.');
+        if(data['status'] == 'success'){
+          $('#modal-edit-permission-title').html(data['permission']['name']);
+          $('#permissionID').val(data['permission']['id']);
+          $('#permissionName').val(data['permission']['name']);
+          $('#portalName').val(data['permission']['portal']);
+          $('#permissionModule').val(data['permission']['module']);
+          $('#permissionDescription').val(data['permission']['description']);
+          $('#modal-edit-permission').modal('show');
+          $('#btnEditPermission-'+permission_id).removeAttr('disabled','disabled');
+        }
+      },
+      error: function(err){
+        console.log('Error in edit permission get details ajax.');
+        $('#btnEditPermission-'+permission_id).removeAttr('disabled','disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+  // /Fill modal with relevant data
+
+  edit_permission = () => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Update!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Form payload
+        var formData = new FormData($('#formEditPermission')[0]);
+
+        //Edit permission
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/editPermission') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnModalEditPermission').attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in edit permission ajax.');
+            $('#btnModalEditPermission').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating data.');
+              $.each(data['errors'], function(key,value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Edit permission is success.');
+              SwalDoneSuccess.fire({
+                title: 'Updated!',
+                text: 'Permission has been updated.',
+              })
+              $('#modal-edit-permission').modal('hide')
+              permissionTable.draw();
+            }
+          },
+          error: function(err){
+            console.log('Error in edit permission ajax.');
+            $('#btnModalEditPermission').removeAttr('disabled','disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Permission has not been updated.',
+        })
+      }
+    })
+  }
+  // /EDIT
+
+  // DELETE
+  delete_permission = (permission_id) => {
+    SwalQuestionDanger.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, delete it!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Payload
+        var formData = new FormData();
+        formData.append('permission_id',permission_id);
+
+        //Delete permission controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/deletePermission') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeletePermission-'+permission_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in delete permission ajax.');
+            //remove delete data included row
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Permission has been deleted.',
+            })
+            permissionTable.draw();
+          },
+          error: function(err){
+            console.log('Error in delete permission ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Permission has not been deleted.',
+        })
+      }
+    })
+  }
+  // /DELETE
+// /PERMISSION
 
 // USER ROLE
   // ROLE NAME EDITABILITY
@@ -339,218 +549,6 @@ $(function(){
   }
   // /DELETE
 // /USER ROLE
-
-// PERMISSION
-  // CREATE
-  create_permission = () => {
-    SwalQuestionSuccessAutoClose.fire({
-    title: "Are you sure?",
-    text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, Create!',
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-        //Remove previous validation error messages
-        $('.form-control').removeClass('is-invalid');
-        $('.invalid-feedback').html('');
-        $('.invalid-feedback').hide();
-
-        //Form Data
-        var formData = new FormData($('#formCreatePermission')[0]);
-        //Validate information
-        $.ajax({
-          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url: "{{ url('/portal/staff/system/createPermission') }}",
-          type: 'post',
-          data: formData,
-          processData: false,
-          contentType: false,
-          beforeSend: function(){$('#btnCreatePermission').attr('disabled','disabled');},
-          success: function(data){
-            console.log('Success in create permission ajax.');
-            $('#btnCreatePermission').removeAttr('disabled','disabled');
-            if(data['errors']){
-              console.log('Errors on validation data.');
-              $.each(data['errors'], function(key, value){
-                $('#error-'+key).show();
-                $('#'+key).addClass('is-invalid');
-                $('#error-'+key).append('<strong>'+value+'</strong>');
-              });
-            }
-            else if(data['status'] == 'success'){
-              console.log('Create permission success.');
-              SwalDoneSuccess.fire({
-                title: 'Created!',
-                text: 'Permission created.',
-              })
-              $('#modal-create-permission').modal('hide');
-              location.reload();
-            }
-          },
-          error: function(err){
-            $('#btnCreatePermission').removeAttr('disabled','disabled');
-            console.log('Error in create permission ajax.');
-            SwalSystemErrorDanger.fire();
-          }
-        });
-      }
-      else{
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Permission has not been created.',
-        })
-      }
-    })
-  }
-  // /CREATE
-
-  // EDIT
-  // Fill modal with relevant data
-  edit_permission_modal_invoke = (permission_id) =>{
-    //Payload
-    var formData = new FormData();
-    formData.append('permission_id',permission_id);
-
-    //Edit permission get detials
-    $.ajax({
-      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-      url: "{{ url('/portal/staff/system/editPermissionGetDetails') }}",
-      type: 'post',
-      data: formData,
-      processData: false,
-      contentType: false,
-      beforeSend: function(){$('#btnEditPermission-'+permission_id).attr('disabled','disabled');},
-      success: function(data){
-        console.log('Success in edit permission get detials ajax.');
-        if(data['status'] == 'success'){
-          $('#modal-edit-permission-title').html(data['permission']['name']);
-          $('#permissionID').val(data['permission']['id']);
-          $('#permissionName').val(data['permission']['name']);
-          $('#portalName').val(data['permission']['portal']);
-          $('#permissionModule').val(data['permission']['module']);
-          $('#permissionDescription').val(data['permission']['description']);
-          $('#modal-edit-permission').modal('show');
-          $('#btnEditPermission-'+permission_id).removeAttr('disabled','disabled');
-        }
-      },
-      error: function(err){
-        console.log('Error in edit permission get details ajax.');
-        $('#btnEditPermission-'+permission_id).removeAttr('disabled','disabled');
-        SwalSystemErrorDanger.fire();
-      }
-    });
-  }
-  // /Fill modal with relevant data
-
-  edit_permission = () => {
-    SwalQuestionSuccessAutoClose.fire({
-    title: "Are you sure?",
-    text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, Update!',
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-        //Remove previous validation error messages
-        $('.form-control').removeClass('is-invalid');
-        $('.invalid-feedback').html('');
-        $('.invalid-feedback').hide();
-        //Form payload
-        var formData = new FormData($('#formEditPermission')[0]);
-
-        //Edit permission
-        $.ajax({
-          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url: "{{ url('/portal/staff/system/editPermission') }}",
-          type: 'post',
-          data: formData,
-          processData: false,
-          contentType: false,
-          beforeSend: function(){$('#btnModalEditPermission').attr('disabled', 'disabled');},
-          success: function(data){
-            console.log('Success in edit permission ajax.');
-            $('#btnModalEditPermission').removeAttr('disabled', 'disabled');
-            if(data['errors']){
-              console.log('Errors in validating data.');
-              $.each(data['errors'], function(key,value){
-                $('#error-'+key).show();
-                $('#'+key).addClass('is-invalid');
-                $('#error-'+key).append('<strong>'+value+'</strong>');
-              });
-            }
-            else if(data['status'] == 'success'){
-              console.log('Edit permission is success.');
-              SwalDoneSuccess.fire({
-                title: 'Updated!',
-                text: 'Permission has been updated.',
-              })
-              $('#modal-edit-permission').modal('hide')
-              location.reload();
-            }
-          },
-          error: function(err){
-            console.log('Error in edit permission ajax.');
-            $('#btnModalEditPermission').removeAttr('disabled','disabled');
-            SwalSystemErrorDanger.fire();
-          }
-        });
-      }
-      else{
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Permission has not been updated.',
-        })
-      }
-    })
-  }
-  // /EDIT
-
-  // DELETE
-  delete_permission = (permission_id) => {
-    SwalQuestionDanger.fire({
-    title: "Are you sure?",
-    text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, delete it!',
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-        //Payload
-        var formData = new FormData();
-        formData.append('permission_id',permission_id);
-
-        //Delete permission controller
-        $.ajax({
-          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url: "{{ url('/portal/staff/system/deletePermission') }}",
-          type: 'post',
-          data: formData,
-          processData: false,
-          contentType: false,
-          beforeSend: function(){$('#btnDeletePermission-'+permission_id).attr('disabled','disabled');},
-          success: function(data){
-            console.log('Success in delete permission ajax.');
-            //remove delete data included row
-            $('#tbl-permission-tr-'+permission_id).remove();
-            SwalDoneSuccess.fire({
-              title: 'Deleted!',
-              text: 'Permission has been deleted.',
-            })
-          },
-          error: function(err){
-            console.log('Error in delete permission ajax.');
-            SwalSystemErrorDanger.fire();
-          }
-        });
-      }
-      else{
-        SwalNotificationWarningAutoClose.fire({
-          title: 'Cancelled!',
-          text: 'Permission has not been deleted.',
-        })
-      }
-    })
-  }
-  // /DELETE
-// /PERMISSION
 
 // SUBJECT
   // CREATE
