@@ -51,19 +51,19 @@
                   <div class="form-group col-xl-4 col-lg-6">
                     <label for="examMonth">Month</label>
                     <select name="examMonth" id="examMonth" class="form-control">
-                      <option value="Default" selected disabled>Select Month</option>
-                      <option value="01">January</option>
-                      <option value="02">February</option>
-                      <option value="03">March</option>
-                      <option value="04">April</option>
-                      <option value="05">May</option>
-                      <option value="06">June</option>
-                      <option value="07">July</option>
-                      <option value="08">August</option>
-                      <option value="09">September</option>
-                      <option value="10">October</option>
-                      <option value="11">November</option>
-                      <option value="12">December</option>
+                      <option value="" selected disabled>Select Month</option>
+                      <option value=01>January</option>
+                      <option value=02>February</option>
+                      <option value=03>March</option>
+                      <option value=04>April</option>
+                      <option value=05>May</option>
+                      <option value=06>June</option>
+                      <option value=07>July</option>
+                      <option value=08>August</option>
+                      <option value=09>September</option>
+                      <option value=10>October</option>
+                      <option value=11>November</option>
+                      <option value=12>December</option>
                     </select>
                     <span class="invalid-feedback" id="error-examMonth" role="alert"></span>
                   </div>
