@@ -28,10 +28,12 @@ class ExamsController extends Controller
     public function index()
     {
         $today = Carbon::today();
+        // var_dump($today->month);
+        // exit;
         $exam_schedules=Schedule::where('date', '<', $today)->orderBy('date','desc');
         $subjects=Subject::orderBy('id')->get();
         $exam_types=Types::orderBy('id')->get();
-        $schedule_exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->monthName)->orderBy('year', 'asc')->get();
+        $schedule_exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $search_exams = Exam::where('year', '<=', $today->year)->orderBy('year','desc')->get();
         $years = Exam::select('year')->where('year', '<=', $today->year)->orderBy('year','asc')->distinct()->get();
         $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->get();
@@ -313,8 +315,7 @@ class ExamsController extends Controller
             return response()->json(['status'=>'errors']);
         else:
             if(Schedule::where('id', $request->schedule_id)->update([
-                'schedule_approval' => 'declined',
-                'declined_message' => $request->message,
+                'schedule_approval' => 'declined'
             ])):
             return response()->json(['status'=>'success']);
             endif;

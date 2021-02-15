@@ -52,9 +52,9 @@
                   <div class="form-group col-xl-2 col-lg-4">
                     <label for="scheduleExam">Exam</label>
                     <select name="scheduleExam" id="scheduleExam" class="form-control">
-                      <option value="" selected>Select Exam</option>
+                      <option value="" selected hidden disabled>Select Exam</option>
                       @foreach ($schedule_exams as $exam)
-                          <option value="{{$exam->id}}">{{$exam->month}} {{$exam->year}}</option>
+                          <option value="{{$exam->id}}">{{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}} {{$exam->year}}</option>
                       @endforeach
                     </select>
                     <span class="invalid-feedback" id="error-scheduleExam" role="alert"></span>
