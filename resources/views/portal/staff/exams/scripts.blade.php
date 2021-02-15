@@ -59,6 +59,16 @@
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">';
             if( row['schedule_approval'] == null || row['schedule_approval'] == 'declined' ){
+                if(row['schedule_approval'] == 'declined' && row['declined_message'] == null) {
+                  @if(Auth::user()->hasPermission('staff-exam-schedule-decline-message'))
+                  btnGroup = btnGroup + '<i data-tooltip="tooltip" data-placement="bottom" title="Approval Declined" class="fas fa-exclamation"></i>';
+                  @endif
+                }
+                else if(row['schedule_approval'] == 'declined' && row['declined_message'] != null) {
+                  @if(Auth::user()->hasPermission('staff-exam-schedule-decline-message'))
+                  btnGroup = btnGroup + '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Approval Declined Message" id="btnViewDeclinedMessage-'+data+'" onclick="view_schedule_declined_message('+data+');"><i class="fas fa-envelope-open-text"></i></button>';
+                  @endif
+                }
                 @if(Auth::user()->hasPermission('staff-exam-schedule-request') )
                 btnGroup = btnGroup + '<button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-placement="bottom" title="Request Approval" id="btnRequestApprovalSchedule-'+data+'" onclick="request_schedule_approval('+data+');"><i class="fas fa-file-export"></i></button>';
                 @endif
@@ -451,50 +461,67 @@
 
     // Decline schedule
     decline_schedule = (schedule_id) => {
-      SwalQuestionDangerAutoClose.fire({
+      SwalQuestionDanger.fire({
         title: "Are you sure ?",
-        text: "You wont be able to revert this!",
+        text: "The schedule will be declined",
         confirmButtonText: "Yes, Decline!",
       })
       .then((result) => {
-        if(result.isConfirmed){
-          //Form payload
-          var formData = new FormData();
-          formData.append('schedule_id', schedule_id);
-
-          // Decline Schedule controller
-          $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            url: "{{ url('/portal/staff/exams/schedule/decline') }}",
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function() {$('#btnDeclineSchedule-'+schedule_id).attr('disabled', 'disabled');},
-            success: function(data) {
-              console.log('Success in decline schedule ajax.');
-              $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-              if(data['status'] == 'errors') {
-                SwalNotificationWarningAutoClose.fire({
+        if (result.isConfirmed) {
+          SwalQuestionDanger.fire({
+            title: "Reason to Decline ?",
+            input: 'textarea',
+            inputLabel: 'Message',
+            inputPlaceholder: 'Type your message here...',
+            inputAttributes: {'aria-label': 'Type your message here'},
+            timer: false,
+            showCancelButton: true,
+            confirmButtonText: "Decline!",
+          })
+          .then((result) => {
+            // Alert(result value)
+            $.ajax({
+              headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+              url: "{{ route('schedule.decline') }}",
+              type: 'post',
+              data: {'message': result.value, 'schedule_id': schedule_id},
+              beforeSend: function() {
+                $('#btnDeclineSchedule-'+schedule_id).attr('disabled', 'disabled');
+                $('body').addClass('freeze');
+                Swal.showLoading();
+              },
+              success: function(data) {
+                console.log('Success in decline schedule ajax.');
+                $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+                $('body').removeClass('freeze');
+                Swal.hideLoading();
+                if(data['status'] == 'errors') {
+                  console.log('Errors in validating schedule id.');
+                  SwalNotificationWarningAutoClose.fire({
                   title: 'Error!',
                   text: 'The id of the schedule is not found.',
-                })
+                  })
+                }
+                else if(data['status'] == 'success') {
+                  console.log('Success in decline schedule.');
+                  SwalDoneSuccess.fire({
+                    title: 'Declined!',
+                    text: 'Scheduled exam has been Declined.',
+                  })
+                  .then((result) => {
+                    if(result.isConfirmed) {
+                      beforeReleaseTable.draw();
+                    }
+                  });
+                }
+              },
+              error: function(err){
+                console.log('Error in Decline schedule ajax.');
+                $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+                SwalSystemErrorDanger.fire();
               }
-              else if(data['status'] == 'success') {
-                SwalDoneSuccess.fire({
-                  title: 'Declined!',
-                  text: 'Scheduled exam has been Declined.',
-                })
-                beforeReleaseTable.draw();
-                afterReleaseTable.draw();
-              }
-            },
-            error: function(err){
-              console.log('Error in Decline schedule ajax.');
-              $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-              SwalSystemErrorDanger.fire();
-            }
-          });
+            });
+          })
         }
         else{
           SwalNotificationWarningAutoClose.fire({

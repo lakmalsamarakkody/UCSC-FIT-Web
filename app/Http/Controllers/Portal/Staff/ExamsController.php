@@ -313,7 +313,8 @@ class ExamsController extends Controller
             return response()->json(['status'=>'errors']);
         else:
             if(Schedule::where('id', $request->schedule_id)->update([
-                'schedule_approval' => 'declined'
+                'schedule_approval' => 'declined',
+                'declined_message' => $request->message,
             ])):
             return response()->json(['status'=>'success']);
             endif;

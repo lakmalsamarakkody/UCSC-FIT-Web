@@ -66,4 +66,13 @@ class StduentDetailsController extends Controller
        return Student::where('full_name','LIKE',"%{$name}%")->get();
    }
 }
+   function searchStudentsbyRegNo($regNo=''){
+    if($regNo==''){
+        return Student::all();
+       }
+       else{
+       return Student::where('reg_no','LIKE',"%{$regNo}%")->get();
+   }
+   }
 }
+ 
