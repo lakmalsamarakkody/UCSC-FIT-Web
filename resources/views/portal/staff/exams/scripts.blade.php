@@ -59,6 +59,16 @@
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">';
             if( row['schedule_approval'] == null || row['schedule_approval'] == 'declined' ){
+                if(row['schedule_approval'] == 'declined' && row['declined_message'] == null) {
+                  @if(Auth::user()->hasPermission('staff-exam-schedule-decline-message'))
+                  btnGroup = btnGroup + '<i data-tooltip="tooltip" data-placement="bottom" title="Approval Declined" class="fas fa-exclamation"></i>';
+                  @endif
+                }
+                else if(row['schedule_approval'] == 'declined' && row['declined_message'] != null) {
+                  @if(Auth::user()->hasPermission('staff-exam-schedule-decline-message'))
+                  btnGroup = btnGroup + '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Approval Declined Message" id="btnViewDeclinedMessage-'+data+'" onclick="view_schedule_declined_message('+data+');"><i class="fas fa-envelope-open-text"></i></button>';
+                  @endif
+                }
                 @if(Auth::user()->hasPermission('staff-exam-schedule-request') )
                 btnGroup = btnGroup + '<button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-placement="bottom" title="Request Approval" id="btnRequestApprovalSchedule-'+data+'" onclick="request_schedule_approval('+data+');"><i class="fas fa-file-export"></i></button>';
                 @endif
