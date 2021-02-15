@@ -53,9 +53,11 @@ class MobileLogin extends Controller
         $roletype=Role::where('id',$user->role_id)->select(
              'name'
         )->first();
-        $pro=Storage::url('portal/avatar/'.$user->id.'/'.$user->profile_pic);
+      
+            $pro=Storage::url('portal/avatar/'.$user->id.'/'.$user->profile_pic);
+        
         Arr::add($user,'rolename',$roletype->name);
-        Arr::add($user,'profile',asset($pro));
+        Arr::add($user,'profile',$user->profile_pic!=null ?asset($pro):'');
         if($user->rolename=="Co-Ordinator" || $user->rolename=="Director" ||$user->rolename=="Super Administrator"){
             $token = $user->createToken('user-token',[$user->rolename])->plainTextToken;
         Arr::add($user,'token',$token);

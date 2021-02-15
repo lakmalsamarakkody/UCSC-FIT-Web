@@ -63,7 +63,7 @@ class StduentDetailsController extends Controller
         return Student::all();
        }
        else{
-       return Student::where('first_name','LIKE',"%{$name}%")->get();
+       return Student::where('full_name','LIKE',"%{$name}%")->get();
    }
 }
 }

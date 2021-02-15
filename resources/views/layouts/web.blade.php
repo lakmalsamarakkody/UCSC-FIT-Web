@@ -144,7 +144,7 @@
                         Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" class="white"> UCSC</a> </strong>. All Rights Reserved 
                     </div>
                     <div class="col-12 credits">
-                        Powered by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Center- UCSC </a> </strong>
+                        Powered by <strong><a target="_blank" href="http://www.e-learning.lk/" class="white">e-Learning Centre - UCSC </a> </strong>
                     </div>
                 </div>
             </div>

@@ -118,7 +118,7 @@
             <div class="form-group">
               <label for="newPortalName">Portal Name</label>
               <select class="form-control" name="newPortalName" id="newPortalName">
-                <option value="">Select the Portal</option>
+                <option value="" selected disabled hidden>Select the Portal</option>
                 <option value="staff">Staff</option>
                 <option value="student">Student</option>
               </select>
@@ -127,7 +127,7 @@
             <div class="form-group">
               <label for="newPermissionModule">Permission Module</label>
               <select class="form-control" name="newPermissionModule" id="newPermissionModule">
-                <option value="">Select Permission Module</option>
+                <option value="" selected disabled hidden>Select Permission Module</option>
                 <option value="dashboard">Dashboard</option>
                 <option value="students">Students</option>
                 <option value="exams">Exams</option>
@@ -176,7 +176,7 @@
             <div class="form-group">
               <label for="portalName">Portal Name</label>
               <select class="form-control" name="portalName" id="portalName">
-                <option value="">Select the Portal</option>
+                <option value="" disabled>Select the Portal</option>
                 <option value="staff">Staff</option>
                 <option value="student">Student</option>
               </select>
@@ -185,7 +185,7 @@
             <div class="form-group">
               <label for="permissionModule">Permission Module</label>
               <select class="form-control" name="permissionModule" id="permissionModule">
-                <option value="">Select Permission Module</option>
+                <option value="" disabled>Select Permission Module</option>
                 <option value="dashboard">Dashboard</option>
                 <option value="students">Students</option>
                 <option value="exams">Exams</option>
