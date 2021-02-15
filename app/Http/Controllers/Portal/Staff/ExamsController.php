@@ -31,7 +31,7 @@ class ExamsController extends Controller
         $exam_schedules=Schedule::where('date', '<', $today)->orderBy('date','desc');
         $subjects=Subject::orderBy('id')->get();
         $exam_types=Types::orderBy('id')->get();
-        $schedule_exams = Exam::where('year', '>=', $today->year)->orderBy('year', 'asc')->get();
+        $schedule_exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->monthName)->orderBy('year', 'asc')->get();
         $search_exams = Exam::where('year', '<=', $today->year)->orderBy('year','desc')->get();
         $years = Exam::select('year')->where('year', '<=', $today->year)->orderBy('year','asc')->distinct()->get();
         $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->get();

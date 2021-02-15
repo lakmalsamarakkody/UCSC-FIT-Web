@@ -24,7 +24,7 @@ class ExamListController extends Controller
         //Validate form data
         $exam_validator = Validator::make($request->all(), [
             'examYear'=>['required', 'integer'],
-            'examMonth'=>['required', 'alpha', Rule::in(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])],
+            'examMonth'=>['required', 'integer'],
         ]);
 
         $exists_exam = Exam::where('year',$request->examYear)->where('month', $request->examMonth);
