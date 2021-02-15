@@ -101,7 +101,7 @@
                   @foreach ($exams as $exam)
                   <tr id="tbl-exam-tr-{{$exam->id}}">
                     <td>{{ $exam->year }}</td>
-                    <td>{{ $exam->month }}</td>
+                    <td>{{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}}</td>
                     <td>
                       <div class="btn-group">
                         @if(Auth::user()->hasPermission('staff-exam-examList-viewResults'))<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button>@endif
