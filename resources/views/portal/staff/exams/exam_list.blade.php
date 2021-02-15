@@ -32,6 +32,7 @@
       <div class="row">
 
         <!-- CREATE EXAM -->
+        @if(Auth::user()->hasPermission('staff-exam-examList-add'))
         <div class="col-12 mb-5">
           <div class="card">
             <div class="card-header">Create Exam</div>
@@ -79,6 +80,7 @@
             </div>
           </div>
         </div>
+        @endif
         <!-- /CREATE EXAM -->
 
 
@@ -102,8 +104,8 @@
                     <td>{{ $exam->month }}</td>
                     <td>
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button>
-                        <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete Exam" id="btnDeleteExam-{{$exam->id}}" onclick="onclick_delete_exam({{$exam->id}});"><i class="fas fa-trash-alt"></i></button>
+                        @if(Auth::user()->hasPermission('staff-exam-examList-viewResults'))<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-exam-examList-delete'))<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete Exam" id="btnDeleteExam-{{$exam->id}}" onclick="onclick_delete_exam({{$exam->id}});"><i class="fas fa-trash-alt"></i></button>@endif
                       </div>
                     </td>
                   </tr>

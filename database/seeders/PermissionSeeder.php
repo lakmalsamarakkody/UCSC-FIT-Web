@@ -395,6 +395,42 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+
+                [
+                    'name'=>'staff-exam-examList',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can access to exam list page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-examList-add',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can add a exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-examList-viewResults',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can view results of a exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+
+                [
+                    'name'=>'staff-exam-examList-delete',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can delete a exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
             )
         );
 

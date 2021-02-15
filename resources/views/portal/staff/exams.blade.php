@@ -30,6 +30,7 @@
       <div class="row">
 
         {{-- EXAM LIST --}}
+        @if(Auth::user()->hasPermission('staff-exam-examList'))
         <div class="col-lg-3 col-md-6 col-12 mb-5">
           <a href="{{ url('/portal/staff/exams/list') }}" style="text-decoration: none">
             <div class="card">
@@ -37,6 +38,7 @@
             </div>
           </a>
         </div>
+        @endif
         {{-- /EXAM LIST --}}
 
         {{-- CREATE EXAM SCHEDULE --}}
