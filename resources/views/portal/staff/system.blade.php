@@ -31,7 +31,7 @@
     <div class="row">
       <!-- PERMISSION -->
       @if(Auth::user()->hasPermission('staff-system-permission'))
-      <div class="col-12">
+      <div class="col-12 mt-xl-5">
         <div class="card">
           <div class="card-header">PERMISSIONS</div>
           <div class="card-body">
@@ -50,22 +50,6 @@
                 <tbody id="permissionsTblBody">
 
                 </tbody>
-                {{-- @foreach ($permissions as $permission)
-                <tr id="tbl-permission-tr-{{$permission->id}}">
-                  <td>{{ $permission->id }}</td>
-                  <td>{{ $permission->name }}</td>
-                  <td>{{ $permission->portal }}</td>
-                  <td>{{ $permission->module }}</td>
-                  <td>{{ $permission->description }}</td>
-                  <td class="text-right">
-                    <div class="btn-group">
-                      @if(Auth::user()->hasPermission('staff-system-permission-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditPermission-{{$permission->id}}" onclick="edit_permission_modal_invoke({{ $permission->id }});"><i class="fas fa-edit"></i></button>@endif
-                      @if(Auth::user()->hasPermission('staff-system-permission-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeletePermission-{{$permission->id}}" onclick="delete_permission({{ $permission->id }});"><i class="fas fa-trash-alt"></i></button>@endif
-                    </div>
-                  </td>
-                </tr>
-                @endforeach --}}
-                {{-- </thead> --}}
               </table>
             </div>
           </div>
@@ -79,7 +63,7 @@
 
       <!-- USER ROLE -->
       @if(Auth::user()->hasPermission('staff-system-role'))
-      <div class="col-xl-5 col-lg-12 mt-xl-5">
+      <div class="col-xl-6 col-lg-12 mt-xl-5">
         <div class="card">
           <div class="card-header">USER ROLE</div>
           <div class="card-body">
@@ -202,7 +186,7 @@
 
       <!-- STUDENT PHASES -->
       @if(Auth::user()->hasPermission('staff-system-studentPhase'))
-      <div class="col-xl-5 col-lg-12 mt-xl-5">
+      <div class="col-xl-6 col-lg-12 mt-xl-5">
         <div class="card">
           <div class="card-header">STUDENT PHASES</div>
           <div class="card-body">

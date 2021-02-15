@@ -30,6 +30,7 @@
       <div class="row">
 
         {{-- EXAM LIST --}}
+        @if(Auth::user()->hasPermission('staff-exam-examList'))
         <div class="col-lg-3 col-md-6 col-12 mb-5">
           <a href="{{ url('/portal/staff/exams/list') }}" style="text-decoration: none">
             <div class="card">
@@ -37,10 +38,11 @@
             </div>
           </a>
         </div>
+        @endif
         {{-- /EXAM LIST --}}
 
         {{-- CREATE EXAM SCHEDULE --}}
-        @if(Auth::user()->hasPermission('staff-exam-createSchedule'))
+        @if(Auth::user()->hasPermission('staff-exam-schedule-add'))
         <div class="col-12 mb-5">
           <div class="card">
             <div class="card-header">Create Exam Schedule</div>
@@ -152,7 +154,7 @@
                 {{ $upcoming_schedules->withQueryString()->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }}
               </div> --}}
               <div class="text-center">
-                <button type="button" class="btn btn-outline-primary" id="btnReleaseAllSchedules" onclick="release_schedules()">RELEASE SELECTED SCHEDULES<span id="spinnerBtnReleaseSchedules" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                @if(Auth::user()->hasPermission("staff-exam-schedule-allRelease"))<button type="button" class="btn btn-outline-primary" id="btnReleaseAllSchedules" onclick="release_schedules()">RELEASE ALL APPROVED SCHEDULES<span id="spinnerBtnReleaseSchedules" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>@endif
               </div>
             </div>
           </div>
