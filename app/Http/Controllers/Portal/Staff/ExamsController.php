@@ -324,8 +324,8 @@ class ExamsController extends Controller
     }
     // /DECLINE SCHEDULE
 
-    // GET DECLINE MESSAGE
-    public function getScheduleDeclineMessage(Request $request)
+    // GET SCHEDULE DECLINED MESSAGE
+    public function getScheduleDeclinedMessage(Request $request)
     {
         // Validate schedule id
         $schedule_id_validator = Validator::make($request->all(), [
@@ -342,7 +342,7 @@ class ExamsController extends Controller
         endif;
         return response()->json(['status'=>'error', 'data'=>$request->all()]);
     }
-    // /GET DECLINE MESSAGE
+    // /GET SCHEDULE DECLINED MESSAGE
 
     // RELEASE INDIVIDUAL SCHEDULE
     public function releaseIndividualSchedule(Request $request)
