@@ -73,7 +73,7 @@
     </div>
     <!-- /EDIT -->
 
-    {{-- APPROVAL DECLINED MESSAGE --}}
+    {{-- SCHEDULE DECLINED MESSAGE --}}
     <div class="modal fade" id="modal-schedule-declined-message" data-backdrop="static" tabindex="-1" aria-labelledby="modal-schedule-declined-message-title" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -96,7 +96,7 @@
             </div>
         </div>
     </div>
-    {{-- /APPROVAL DECLINED MESSAGE --}}
+    {{-- /SCHEDULE DECLINED MESSAGE --}}
 
 <!-- /CREATE SCHEDULE -->
 
