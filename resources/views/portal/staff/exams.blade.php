@@ -48,7 +48,7 @@
             <div class="card-header">Create Exam Schedule</div>
             <div class="card-body">
               <form action="" method="POST" id="formCreateSchedule">
-                <div class="form-row align-items-center px-4">
+                <div class="form-row align-items-center">
                   <div class="form-group col-xl-2 col-lg-4">
                     <label for="scheduleExam">Exam</label>
                     <select name="scheduleExam" id="scheduleExam" class="form-control">
@@ -96,8 +96,9 @@
                   <div class="form-group col-xl-1 col-lg-12 text-center">
                     <label for="btnCreateSchedule">&nbsp;</label>
                     <button type="button" class="btn btn-outline-primary form-control" onclick="create_schedule();" id="btnCreateSchedule" name="btnCreateSchedule"><i class="fas fa-plus"></i></button>
+                    <span class="invalid-feedback" role="alert">test</span>
                   </div>
-                  <div class="form-group col-xl-12 col-lg-12 text-center">
+                  <div class="form-group col-12 text-center">
                     <input type="hidden" id="schedule" name="schedule" class="form-control">
                     <span class="invalid-feedback" id="error-schedule" role="alert"></span>
                   </div>

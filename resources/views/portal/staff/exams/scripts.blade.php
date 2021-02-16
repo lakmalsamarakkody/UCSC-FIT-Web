@@ -264,7 +264,7 @@ let heldExamTable = null;
             if(data['errors']){
               console.log('Errors in validate schedule data.');
               $.each(data['errors'], function(key, value){
-                $('#error-'+key).show();
+                $('.invalid-feedback').show();
                 $('#'+key).addClass('is-invalid');
                 $('#error-'+key).append('<strong>'+value+'</strong>');
               });
@@ -278,6 +278,12 @@ let heldExamTable = null;
               .then((result) => {
                 if(result.isConfirmed) {beforeReleaseTable.draw();}
               });
+            }
+            else if(data['status'] == 'error'){
+              SwalSystemErrorDanger.fire({
+                title: "Error",
+                text: data['msg'],
+              })
             }
           },
           error: function(err){

@@ -52,7 +52,7 @@ class ExamsController extends Controller
                 'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
-            ])->where('schedule_release', false);
+            ])->where('schedule_release', false)->orderBy('date', 'desc')->orderBy('start_time', 'desc');
             // if(Auth::user()->role->name == 'Co-Ordinator'):
             //     $data = $data->where('schedule_approval', 'requested')->where('schedule_release', false);
             // elseif(Auth::user()->role->name == 'MA'):
@@ -149,22 +149,17 @@ class ExamsController extends Controller
             'scheduleDate' => ['required', 'date', 'after:today'],
             'scheduleStartTime' => ['required'],
         ]);
-
-       $exists_schedule = Schedule::where('subject_id', $request->scheduleSubject)->where('exam_type_id', $request->scheduleExamType)
-       ->where('date',$request->scheduleDate)->where('start_time', $request->scheduleStartTime)->first();
-        //Check if the exact schedule is in the table
-        if($exists_schedule != null):
-            $exists_schedule_validator = Validator::make($request->all(), [
-                'schedule' => ['multicolumn_unique'],
-            ]);
-        endif;
     
-        //Check validation errors
+    //     //Check validation errors
         if($exam_schedule_validator->fails()):
             return response()->json(['errors'=>$exam_schedule_validator->errors()]);
-        elseif(isset($exists_schedule_validator) && $exists_schedule_validator->fails()):
-            return response()->json(['errors'=>$exists_schedule_validator->errors()]);
         else:
+            //Check if the exact schedule is in the table
+            $exists_schedule = Schedule::where('subject_id', $request->scheduleSubject)->where('exam_type_id', $request->scheduleExamType)->where('date',$request->scheduleDate)->where('end_time', '>', $request->scheduleStartTime)->first();
+            if($exists_schedule != null):
+                return response()->json(['status'=>'error', 'msg'=>'Exam schedule already exists.']);
+            endif;
+
             $exam_schedule = new Schedule();
             $exam_schedule->exam_id = $request->scheduleExam;
             $exam_schedule->subject_id = $request->scheduleSubject;
@@ -177,7 +172,7 @@ class ExamsController extends Controller
                 return response()->json(['status'=>'success', 'exam_schedule'=>$exam_schedule]);
             endif;
         endif;
-        return response()->json(['status'=>'error']);
+        return response()->json(['status'=>'error', 'msg'=>'Exam schedule creation process failed.']);
     }
     // /CREATE
 

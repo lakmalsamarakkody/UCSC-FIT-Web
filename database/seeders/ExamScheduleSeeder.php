@@ -19,6 +19,9 @@ class ExamScheduleSeeder extends Seeder
 
     public function run()
     {
+      DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+      DB::table('exam_schedules')->truncate();
+
       $faker=\Faker\Factory::create();
       $exam_ids=Exam::all();
       foreach ($exam_ids as $exam_id):                     
@@ -40,7 +43,7 @@ class ExamScheduleSeeder extends Seeder
                   'exam_id' => $exam_id->id,
                   'subject_id' =>$Sid,
                   'exam_type_id' => $Etid,
-                  'date' => $faker->dateTimeBetween($exam_id->year .'-'. $exam_id->month.'-01', '2021-12-31'),
+                  'date' => $faker->dateTimeBetween($exam_id->year .'-'. $exam_id->month.'-01', $exam_id->year .'-'. $exam_id->month.'-28'),
                   'start_time' => $faker->time($format = 'H:i'),
                   'end_time' => Carbon::now()->addHours(rand(1,8)),
                   'created_at' => '2020-11-27 17:36:23',
@@ -50,5 +53,6 @@ class ExamScheduleSeeder extends Seeder
           );
         endfor;
       endforeach;
+      DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

@@ -73,7 +73,7 @@
                   </div>
                   <div class="form-group col-xl-12 col-lg-12 text-center">
                     <input type="hidden" id="exam" name="exam" class="form-control" />
-                    <span class="invalid-feedback" id="error-exam" role="alert"></span>
+                    <span class="alert alert-danger invalid-feedback" id="error-exam" role="alert"></span>
                   </div>
                 </div>
               </form>
