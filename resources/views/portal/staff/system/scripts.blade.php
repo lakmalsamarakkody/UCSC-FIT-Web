@@ -98,8 +98,12 @@ let permissionTable = null;
                 title: 'Created!',
                 text: 'Permission created.',
               })
-              $('#modal-create-permission').modal('hide');
-              permissionTable.draw();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-create-permission').modal('hide');
+                  permissionTable.draw();
+                }
+              });
             }
           },
           error: function(err){
@@ -198,8 +202,12 @@ let permissionTable = null;
                 title: 'Updated!',
                 text: 'Permission has been updated.',
               })
-              $('#modal-edit-permission').modal('hide')
-              permissionTable.draw();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-edit-permission').modal('hide');
+                  permissionTable.draw();
+                }
+              });
             }
           },
           error: function(err){
@@ -248,7 +256,9 @@ let permissionTable = null;
               title: 'Deleted!',
               text: 'Permission has been deleted.',
             })
-            permissionTable.draw();
+            .then((result) => {
+                if(result.isConfirmed) {permissionTable.draw();}
+            });
           },
           error: function(err){
             console.log('Error in delete permission ajax.');
@@ -376,9 +386,13 @@ let permissionTable = null;
               SwalDoneSuccess.fire({
                 title: 'Created!',
                 text: 'User role created.',
-                })
-                $('#modal-create-role').modal('hide')
-                location.reload();
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-create-role').modal('hide');
+                  location.reload();
+                }
+              });
             }
           },
           error: function(err){
@@ -527,11 +541,12 @@ let permissionTable = null;
           beforeSend: function(){$('#btnDeleteUserRole-'+role_id).attr('disabled','disabled');},
           success: function(data){
             console.log('success : delete user role ajax');
-            $('#tbl-userRole-tr-'+role_id).remove();
             SwalDoneSuccess.fire({
               title: 'Deleted!',
               text: 'User role has been deleted.',
             })
+            .then((result) => {
+              if(result.isConfirmed) {$('#tbl-userRole-tr-'+role_id).remove();}});
           },
           error: function(err){
             console.log('error : delete user role ajax');
@@ -593,8 +608,12 @@ let permissionTable = null;
                 title: 'Created!',
                 text: 'Subject created.',
               })
-              $('#modal-create-subject').modal('hide');
-              location.reload();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-create-subject').modal('hide');
+                  location.reload();
+                }
+              });
             }
           },
           error: function(err){
@@ -692,8 +711,12 @@ let permissionTable = null;
                 title: 'Updated!',
                 text: 'Subject has been updated.',
               })
-              $('#modal-edit-subject').modal('hide')
-              location.reload();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-edit-subject').modal('hide');
+                  location.reload();
+                }
+              });
             }
           },
           error: function(err){
@@ -737,11 +760,11 @@ let permissionTable = null;
           beforeSend: function(){$('#btnDeleteSubject-'+subject_id).attr('disabled','disabled');},
           success: function(data){
             console.log('Success in delete subject ajax.');
-            $('#tbl-subject-tr-'+subject_id).remove();
             SwalDoneSuccess.fire({
               title: 'Deleted!',
               text: 'Subject has been deleted.',
             })
+            .then((result) => {if(result.isConfirmed) {$('#tbl-subject-tr-'+subject_id).remove();}});
           },
           error: function(err){
             console.log('Error in delete subjecr ajax.');
@@ -803,9 +826,13 @@ let permissionTable = null;
               title: 'Created!',
               text: 'Exam Type created.',
               })
-              $('#modal-create-exam-type').modal('hide')
-              location.reload();
-              }
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-create-exam-type').modal('hide');
+                  location.reload();
+                }
+              });
+            }
           },
           error: function(err){
             $('#btnCreateExamType').removeAttr('disabled', 'disabled');
@@ -901,8 +928,12 @@ let permissionTable = null;
                 title: 'Updated!',
                 text: 'Exam type has been updated.',
               })
-              $('#modal-edit-exam-type').modal('hide')
-              location.reload();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-edit-exam-type').modal('hide');
+                  location.reload();
+                }
+              });
             }
           },
           error: function(err){
@@ -946,11 +977,13 @@ let permissionTable = null;
           beforeSend: function(){$('#btnDeleteExamType-'+exam_type_id).attr('disabled','disabled');},
           success: function(data){
             console.log('Success in delete exam type ajax.');
-            $('#tbl-examType-tr-'+exam_type_id).remove();
             SwalDoneSuccess.fire({
               title: 'Deleted!',
               text: 'Exam type has been deleted.',
             })
+            .then((result) => {
+              if(result.isConfirmed) {$('#tbl-examType-tr-'+exam_type_id).remove();}
+            });
           },
           error: function(err){
             console.log('Error in delete exam type ajax.');
@@ -1015,8 +1048,12 @@ let permissionTable = null;
                 title: 'Created!',
                 text: 'Student Phase created.',
               })
-              $('#modal-create-student-phase').modal('hide')
-              location.reload();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-create-student-phase').modal('hide');
+                  location.reload();
+                }
+              });
             }
           },
           error: function(err){
@@ -1115,8 +1152,12 @@ let permissionTable = null;
                 title: 'Updated!',
                 text: 'Student phase has been updated.',
               })
-              $('#modal-edit-student-phase').modal('hide')
-              location.reload();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-edit-student-phase').modal('hide');
+                  location.reload();
+                }
+              });
             }
           },
           error: function(err){
@@ -1160,11 +1201,13 @@ let permissionTable = null;
           beforeSend: function(){$('#btnDeleteStudentPhase-'+phase_id).attr('disabled','disabled');},
           success: function(data){
             console.log('Success in delete student phase ajax.');
-            $('#tbl-studentPhase-tr-'+phase_id).remove();
             SwalDoneSuccess.fire({
               title: 'Deleted!',
               text: 'Student phase has been deleted.',
             })
+            .then((result) => {
+                if(result.isConfirmed) {$('#tbl-studentPhase-tr-'+phase_id).remove();}
+            });
           },
           error: function(err){
             console.log('Error in delete student phase ajax.');
@@ -1229,9 +1272,13 @@ let permissionTable = null;
               SwalDoneSuccess.fire({
                 title: 'Created!',
                 text: 'Payment method created.',
-                })
-                $('#modal-create-payment-method').modal('hide')
-                location.reload();
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-create-payment-method').modal('hide');
+                  location.reload();
+                }
+              });
             }
           },
           error: function(err){
@@ -1328,8 +1375,12 @@ let permissionTable = null;
                 title: 'Updated!',
                 text: 'Payment method has been updated.',
               })
-              $('#modal-edit-payment-method').modal('hide')
-              location.reload();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-edit-payment-method').modal('hide');
+                  location.reload();
+                }
+              });
             }
           },
           error: function(err){
@@ -1374,11 +1425,13 @@ let permissionTable = null;
           beforeSend: function(){$('#btnDeletePaymentMethod-'+payment_method_id).attr('disabled','disabled');},
           success: function(data){
             console.log('Success : delete payment method ajax.');
-            $('#tbl-paymentMethod-tr-'+payment_method_id).remove();
             SwalDoneSuccess.fire({
               title: 'Deleted!',
               text: 'Payment method has been deleted.',
             })
+            .then((result) => {
+              if(result.isConfirmed) {$('#tbl-paymentMethod-tr-'+payment_method_id).remove();}
+            });
           },
           error: function(err){
             console.log('Error : delete payment method ajax.');
@@ -1443,9 +1496,13 @@ let permissionTable = null;
               SwalDoneSuccess.fire({
                 title: 'Created!',
                 text: 'Payment type created.',
-                })
-                $('#modal-create-payment-type').modal('hide')
-                location.reload();
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-create-payment-type').modal('hide');
+                  location.reload();
+                }
+              }); 
             }
           },
           error: function(err){
@@ -1542,8 +1599,12 @@ let permissionTable = null;
                 title: 'Updated!',
                 text: 'Payment type has been updated.',
               })
-              $('#modal-edit-payment-type').modal('hide')
-              location.reload();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-edit-payment-type').modal('hide');
+                  location.reload();
+                }
+              });
             }
           },
           error: function(err){
@@ -1588,11 +1649,13 @@ let permissionTable = null;
           beforeSend: function(){$('#btnDeletePaymentType-'+payment_type_id).attr('disabled','disabled');},
           success: function(data){
             console.log('Success : delete payment type ajax');
-            $('#tbl-paymentType-tr-'+payment_type_id).remove();
             SwalDoneSuccess.fire({
               title: 'Deleted!',
               text: 'Payment type has been deleted.',
             })
+            .then((result) => {
+              if(result.isConfirmed) {$('#tbl-paymentType-tr-'+payment_type_id).remove();}
+            }); 
           },
           error: function(err){
             console.log('Error : delete payment type ajax');
