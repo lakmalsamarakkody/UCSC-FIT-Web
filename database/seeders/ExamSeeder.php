@@ -20,22 +20,24 @@ class ExamSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('exams')->truncate();
 
-      $faker=\Faker\Factory::create();
-      for($i=0;$i<20;$i++):
-        $year=$faker->numberBetween($min = 2019, $max = 2021);
-        DB::table('exams')->insert(
-            array (
-                [
-                    'year'=>$year,
-                    'month'=>$faker->numberBetween($min = 1, $max = 12),
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ]
-                
-            )
-        );
-      endfor;
+        //$faker=\Faker\Factory::create();
+        for($i=2019;$i<2022;$i++):
+        $year=$i;
+            for($j=1;$j<=12;$j++){
+                $month=$j;
+                DB::table('exams')->insert(
+                    array (
+                        [
+                            'year'=>$year,
+                            'month'=>$month,
+                            'created_at'=> '2020-11-25 10:13:53',
+                            'updated_at'=> '2020-11-25 10:13:53'
+                        ]
+                    )
+                );
+            }
+        endfor;
 
-      DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
