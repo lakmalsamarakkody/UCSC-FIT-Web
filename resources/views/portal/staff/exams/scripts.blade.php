@@ -275,7 +275,9 @@ let heldExamTable = null;
                 title: "Created!",
                 text: "Exam schedule created.",
               })
-              beforeReleaseTable.draw();
+              .then((result) => {
+                if(result.isConfirmed) {beforeReleaseTable.draw();}
+              });
             }
           },
           error: function(err){
@@ -375,8 +377,12 @@ let heldExamTable = null;
                 title: "Updated!",
                 text: "Exam schedule updated.",
               })
-              $('#modal-edit-schedule').modal('hide');
-              beforeReleaseTable.draw();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-edit-schedule').modal('hide');
+                  beforeReleaseTable.draw();
+                }
+              });
             }
           },
           error: function(err){
@@ -420,11 +426,15 @@ let heldExamTable = null;
           beforeSend: function(){$('#btnDeleteExamSchedule-'+schedule_id).attr('disabled', 'disabled');},
           success: function(data){
             console.log('Success in delete exam schedule ajax.');
-            beforeReleaseTable.draw();
             SwalDoneSuccess.fire({
               title: 'Deleted!',
               text: 'Scheduled exam has been deleted.',
             })
+            .then((result) => {
+                if(result.isConfirmed) {
+                  beforeReleaseTable.draw();
+                }
+              });
           },
           error: function(err){
             console.log('Error in delete exam schedule ajax.');
@@ -469,8 +479,8 @@ let heldExamTable = null;
             $('#btnRequestApprovalSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
             if(data['status'] == 'errors') {
               SwalNotificationWarningAutoClose.fire({
-                title: 'Error!',
-                text: 'The id of the schedule is not found.',
+                title: 'Failed!',
+                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
               })
             }
             else if(data['status'] == 'requested'){
@@ -484,7 +494,9 @@ let heldExamTable = null;
                 title: 'Approval requested!',
                 text: 'Schedule approval request has been sent to Coordinator.',
               })
-              beforeReleaseTable.draw();
+              .then((result) => {
+                if(result.isConfirmed) {beforeReleaseTable.draw();}
+              });
             }
           },
           error: function(err){
@@ -531,8 +543,8 @@ let heldExamTable = null;
             $('#btnApproveSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
             if(data['status'] == 'errors') {
               SwalNotificationWarningAutoClose.fire({
-                title: 'Error!',
-                text: 'The id of the schedule is not found.',
+                title: 'Failed!',
+                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
               })
             }
             else if(data['status'] == 'success') {
@@ -540,8 +552,9 @@ let heldExamTable = null;
                 title: 'Approved!',
                 text: 'Scheduled exam has been approved.',
               })
-              beforeReleaseTable.draw();
-              afterReleaseTable.draw();
+              .then((result) => {
+                if(result.isConfirmed) {beforeReleaseTable.draw();}
+              });
             }
           },
           error: function(err){
@@ -663,7 +676,7 @@ let heldExamTable = null;
           $('#btnViewDeclinedMessage-'+schedule_id).removeAttr('disabled', 'disabled');
           SwalNotificationWarningAutoClose.fire({
                 title: 'Failed!',
-                text: 'The id of the schedule not found. Please Contact Administrator: admin@fit.bit.lk',
+                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
           })
         }
       },
@@ -706,8 +719,8 @@ let heldExamTable = null;
             $('#btnReleaseSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
             if(data['status'] == 'errors') {
               SwalNotificationWarningAutoClose.fire({
-                title: 'Error!',
-                text: 'The id of the schedule is not found.',
+                title: 'Failed!',
+                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
               })
             }
             else if(data['status'] == 'decline') {
@@ -721,8 +734,12 @@ let heldExamTable = null;
                 title: 'Released!',
                 text: 'Exam schedule released.',
               })
-              beforeReleaseTable.draw();
-              afterReleaseTable.draw();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  beforeReleaseTable.draw();
+                  afterReleaseTable.draw();
+                }
+              });
             }
           },
           error: function(err) {
@@ -847,8 +864,12 @@ let heldExamTable = null;
                 title: "Postponed!",
                 text: "Exam postponed.",
               })
-              $('#modal-postpone-schedule').modal('hide');
-              afterReleaseTable.draw();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-postpone-schedule').modal('hide');
+                  afterReleaseTable.draw();
+                }
+              });
             }
           },
           error: function(err) {
@@ -899,13 +920,17 @@ let heldExamTable = null;
                 title: 'Deleted!',
                 text: 'Exam schedule has been deleted.',
               })
-              afterReleaseTable.draw();
+              .then((result) => {
+                if(result.isConfirmed) {
+                  afterReleaseTable.draw();
+                }
+              });
             }
             else if(data['status'] == 'errors') {
               console.log('Validation errors in delete schedule.');
               SwalNotificationWarningAutoClose.fire({
-                title: 'Error!',
-                text: 'The id of the schedule not found.',
+                title: 'Failed!',
+                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
               })
             }
           },
