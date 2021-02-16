@@ -315,13 +315,34 @@ class ExamsController extends Controller
             return response()->json(['status'=>'errors']);
         else:
             if(Schedule::where('id', $request->schedule_id)->update([
-                'schedule_approval' => 'declined'
+                'schedule_approval' => 'declined',
+                'declined_message' => $request->message,
             ])):
             return response()->json(['status'=>'success']);
             endif;
         endif;
     }
     // /DECLINE SCHEDULE
+
+    // GET SCHEDULE DECLINED MESSAGE
+    public function getScheduleDeclinedMessage(Request $request)
+    {
+        // Validate schedule id
+        $schedule_id_validator = Validator::make($request->all(), [
+            'schedule_id' => ['required', 'integer', 'exists:App\Models\Exam\Schedule,id'],
+        ]);
+
+        // Check validator fails
+        if($schedule_id_validator->fails()):
+            return response()->json(['status'=>'errors']);
+        else:
+            if($schedule = Schedule::find($request->schedule_id)):
+                return response()->json(['status'=>'success', 'schedule'=>$schedule]);
+            endif;
+        endif;
+        return response()->json(['status'=>'error', 'data'=>$request->all()]);
+    }
+    // /GET SCHEDULE DECLINED MESSAGE
 
     // RELEASE INDIVIDUAL SCHEDULE
     public function releaseIndividualSchedule(Request $request)

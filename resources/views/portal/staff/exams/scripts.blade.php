@@ -1,10 +1,13 @@
 <script type="text/javascript">
 
-  $(function(){
+let beforeReleaseTable = null;
+let afterReleaseTable = null;
+let heldExamTable = null;
 
+  $(function(){
     // TABLES
     // Before Release table
-    var beforeReleaseTable = $('.schedules-before-release-yajradt').DataTable({
+    beforeReleaseTable = $('.schedules-before-release-yajradt').DataTable({
       processing: true,
       serverSide: true,
       searching: false,
@@ -102,7 +105,7 @@
     // /Before Release table
 
     // After Release table
-    var afterReleaseTable = $('.schedules-after-release-yajradt').DataTable({
+    afterReleaseTable = $('.schedules-after-release-yajradt').DataTable({
       processing: true,
       serverSide: true,
       searching: false,
@@ -166,592 +169,9 @@
       ]
     });
     // /After Release table
-    // /TABLES
 
-    // UPCOMING EXAMS(before release)
-    // Create schedule
-    create_schedule = () => {
-      SwalQuestionSuccessAutoClose.fire({
-        title: "Are you sure ?",
-        text: "Exam schedule will be create.",
-        confirmButtonText: "Yes, Create!",
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          //Remove previous validation error messages
-          $('.form-control').removeClass('is-invalid');
-          $('.invalid-feedback').html('');
-          $('.invalid-feedback').hide();
-          //Form payload
-          var formData = new FormData($('#formCreateSchedule')[0]);
-
-          //Create schedule controller
-          $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            url: "{{ url('/portal/staff/exams/schedule/create') }}",
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function(){$('#btnCreateSchedule').attr('disabled', 'disabled');},
-            success: function(data){
-              console.log('Success in create schedule ajax.');
-              $('#btnCreateSchedule').removeAttr('disabled', 'disabled');
-              if(data['errors']){
-                console.log('Errors in validate schedule data.');
-                $.each(data['errors'], function(key, value){
-                  $('#error-'+key).show();
-                  $('#'+key).addClass('is-invalid');
-                  $('#error-'+key).append('<strong>'+value+'</strong>');
-                });
-              }
-              else if(data['status'] == 'success'){
-                console.log('Create exam schedule success.');
-                SwalDoneSuccess.fire({
-                  title: "Created!",
-                  text: "Exam schedule created.",
-                })
-                beforeReleaseTable.draw();
-              }
-            },
-            error: function(err){
-              console.log('Errors in create exam schedule ajax.');
-              $('#btnCreateSchedule').removeAttr('disabled', 'disabled');
-              SwalSystemErrorDanger.fire();
-            }
-          });
-        }
-        else{
-          SwalNotificationWarningAutoClose.fire({
-            title: "Cancelled!",
-            text: "Exam schedule has not been created.",
-          })
-        }
-      })
-    }
-    // /Create schedule
-
-    // Edit(before release)
-    edit_schedule = () => {
-      SwalQuestionSuccessAutoClose.fire({
-        title: "Are you sure ?",
-        text: "Exam schedule will be update.",
-        confirmButtonText: "Yes, Update!",
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          // Remove previous validation error messages
-          $('.form-control').removeClass('is-invalid');
-          $('.invalid-feedback').html('');
-          $('.invalid-feedback').hide();
-          // Form payload
-          var formData = new FormData($('#formEditSchedule')[0]);
-
-          // Edit exam schedule controller
-          $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            url: "{{ url('/portal/staff/exams/schedule/edit') }}",
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function(){$('#btnModalEditSchedule').attr('disabled', 'disabled');},
-            success: function(data){
-              console.log('Success in edit exam schedule ajax.');
-              $('#btnModalEditSchedule').removeAttr('disabled', 'disabled');
-              if(data['errors']){
-                console.log('Errors in validating edit schedule data.');
-                $.each(data['errors'], function(key, value){
-                  $('#error-'+key).show();
-                  $('#'+key).addClass('is-invalid');
-                  $('#error-'+key).append('<strong>'+value+'</strong>');
-                });
-              }
-              else if(data['status'] == 'success'){
-                console.log('Success in edit exam schedule.');
-                SwalDoneSuccess.fire({
-                  title: "Updated!",
-                  text: "Exam schedule updated.",
-                })
-                $('#modal-edit-schedule').modal('hide');
-                beforeReleaseTable.draw();
-              }
-            },
-            error: function(err){
-              console.log('Error in edit exam schedule ajax.')
-              $('#btnModalEditSchedule').removeAttr('disabled', 'disabled');
-              SwalSystemErrorDanger.fire();
-            }
-          });
-        }
-        else{
-          SwalNotificationWarningAutoClose.fire({
-            title: "Cancelled!",
-            text: "Exam schedule has not been updated.",
-          })
-        }
-      })
-    }
-    // /Edit(before release)
-
-    // Delete(before release)
-    delete_before_release = (schedule_id) => {
-      SwalQuestionDanger.fire({
-      title: "Are you sure?",
-      text: "You wont be able to revert this!",
-      confirmButtonText: 'Yes, Delete it!',
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          //Form payload
-          var formData = new FormData();
-          formData.append('schedule_id', schedule_id);
-
-          //Delete exam schedule controller
-          $.ajax({
-            headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
-            url: "{{ url('/portal/staff/exams/schedule/delete') }}",
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function(){$('#btnDeleteExamSchedule-'+schedule_id).attr('disabled', 'disabled');},
-            success: function(data){
-              console.log('Success in delete exam schedule ajax.');
-              beforeReleaseTable.draw();
-              SwalDoneSuccess.fire({
-                title: 'Deleted!',
-                text: 'Scheduled exam has been deleted.',
-              })
-            },
-            error: function(err){
-              console.log('Error in delete exam schedule ajax.');
-              SwalSystemErrorDanger.fire();
-            }
-          });
-        }
-        else{
-          SwalNotificationWarningAutoClose.fire({
-            title: 'Cancelled!',
-            text: 'Scheduled exam has not been deleted.',
-          })
-        }
-      })
-    }
-    // /Delete(before release)
-
-    // Request schedule approval
-    request_schedule_approval = (schedule_id) => {
-      SwalQuestionSuccessAutoClose.fire({
-        title: "Are you sure ?",
-        text: "You wont be able to revert this!",
-        confirmButtonText: "Yes, Send Request!",
-      })
-      .then((result) => {
-        if(result.isConfirmed){
-          //Form payload
-          var formData = new FormData();
-          formData.append('schedule_id', schedule_id);
-
-          // Request schedule approval controller
-          $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            url: "{{ url('/portal/staff/exams/schedule/request/approval') }}",
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function() {$('#btnRequestApprovalSchedule-'+schedule_id).attr('disabled', 'disabled');},
-            success: function(data) {
-              console.log('Success in request schedule approval ajax.');
-              $('#btnRequestApprovalSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-              if(data['status'] == 'errors') {
-                SwalNotificationWarningAutoClose.fire({
-                  title: 'Error!',
-                  text: 'The id of the schedule is not found.',
-                })
-              }
-              else if(data['status'] == 'requested'){
-                SwalNotificationWarningAutoClose.fire({
-                  title: 'Declined!',
-                  text: 'The schedule has been already requested for approval.',
-                })
-              }
-              else if(data['status'] == 'success') {
-                SwalDoneSuccess.fire({
-                  title: 'Approval requested!',
-                  text: 'Schedule approval request has been sent to Coordinator.',
-                })
-                beforeReleaseTable.draw();
-              }
-            },
-            error: function(err){
-              console.log('Error in request schedule approval ajax.');
-              $('#btnRequestApprovalSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-              SwalSystemErrorDanger.fire();
-            }
-          });
-        }
-        else{
-          SwalNotificationWarningAutoClose.fire({
-            title: 'Cancelled!',
-            text: 'Schedule approval request has not been sent.',
-          })
-        }
-      })
-    }
-    // /Request schedule approval
-
-    // Approve schedule
-    approve_schedule = (schedule_id) => {
-      SwalQuestionSuccessAutoClose.fire({
-        title: "Are you sure ?",
-        text: "You wont be able to revert this!",
-        confirmButtonText: "Yes, Approve!",
-      })
-      .then((result) => {
-        if(result.isConfirmed){
-          //Form payload
-          var formData = new FormData();
-          formData.append('schedule_id', schedule_id);
-
-          // Approve Schedule controller
-          $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            url: "{{ url('/portal/staff/exams/schedule/approve') }}",
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function() {$('#btnApproveSchedule-'+schedule_id).attr('disabled', 'disabled');},
-            success: function(data) {
-              console.log('Success in approve schedule ajax.');
-              $('#btnApproveSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-              if(data['status'] == 'errors') {
-                SwalNotificationWarningAutoClose.fire({
-                  title: 'Error!',
-                  text: 'The id of the schedule is not found.',
-                })
-              }
-              else if(data['status'] == 'success') {
-                SwalDoneSuccess.fire({
-                  title: 'Approved!',
-                  text: 'Scheduled exam has been approved.',
-                })
-                beforeReleaseTable.draw();
-                afterReleaseTable.draw();
-              }
-            },
-            error: function(err){
-              console.log('Error in approve schedule ajax.');
-              $('#btnApproveSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-              SwalSystemErrorDanger.fire();
-            }
-          });
-        }
-        else{
-          SwalNotificationWarningAutoClose.fire({
-            title: 'Cancelled!',
-            text: 'Scheduled exam has not been approved.',
-          })
-        }
-      })
-    }
-    // /Approve schedule
-
-    // Decline schedule
-    decline_schedule = (schedule_id) => {
-      SwalQuestionDanger.fire({
-        title: "Are you sure ?",
-        text: "The schedule will be declined",
-        confirmButtonText: "Yes, Decline!",
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          SwalQuestionDanger.fire({
-            title: "Reason to Decline ?",
-            input: 'textarea',
-            inputLabel: 'Message',
-            inputPlaceholder: 'Type your message here...',
-            inputAttributes: {'aria-label': 'Type your message here'},
-            timer: false,
-            showCancelButton: true,
-            confirmButtonText: "Decline!",
-          })
-          .then((result) => {
-            // Alert(result value)
-            $.ajax({
-              headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
-              url: "{{ route('schedule.decline') }}",
-              type: 'post',
-              data: {'message': result.value, 'schedule_id': schedule_id},
-              beforeSend: function() {
-                $('#btnDeclineSchedule-'+schedule_id).attr('disabled', 'disabled');
-                $('body').addClass('freeze');
-                Swal.showLoading();
-              },
-              success: function(data) {
-                console.log('Success in decline schedule ajax.');
-                $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-                $('body').removeClass('freeze');
-                Swal.hideLoading();
-                if(data['status'] == 'errors') {
-                  console.log('Errors in validating schedule id.');
-                  SwalNotificationWarningAutoClose.fire({
-                  title: 'Error!',
-                  text: 'The id of the schedule is not found.',
-                  })
-                }
-                else if(data['status'] == 'success') {
-                  console.log('Success in decline schedule.');
-                  SwalDoneSuccess.fire({
-                    title: 'Declined!',
-                    text: 'Scheduled exam has been Declined.',
-                  })
-                  .then((result) => {
-                    if(result.isConfirmed) {
-                      beforeReleaseTable.draw();
-                    }
-                  });
-                }
-              },
-              error: function(err){
-                console.log('Error in Decline schedule ajax.');
-                $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-                SwalSystemErrorDanger.fire();
-              }
-            });
-          })
-        }
-        else{
-          SwalNotificationWarningAutoClose.fire({
-            title: 'Cancelled!',
-            text: 'Scheduled exam has not been Declined.',
-          })
-        }
-      })
-    }
-    // /Decline schedule
-    // /UPCOMING EXAMS(before release)
-
-    // RELEASE SCHEDULES
-    // Release individual exam schedule
-    relase_individual_schedule = (schedule_id) => {
-      SwalQuestionSuccessAutoClose.fire ({
-        title: "Are you sure ?",
-        text: "You wont be able to revert this!",
-        confirmButtonText: "Yes, Release!",
-      })
-      .then((result) => {
-        if(result.isConfirmed){
-
-          // Form payload
-          var formData = new FormData();
-          formData.append('schedule_id', schedule_id);
-
-          // Release individual schedule controller
-          $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            url: "{{ url('/portal/staff/exams/schedule/release/individual') }}",
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function() {$('#btnReleaseSchedule-'+schedule_id).attr('disabled', 'disabled');},
-            success: function(data) {
-              console.log('Success in release individual schedule ajax.');
-              $('#btnReleaseSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-              if(data['status'] == 'errors') {
-                SwalNotificationWarningAutoClose.fire({
-                  title: 'Error!',
-                  text: 'The id of the schedule is not found.',
-                })
-              }
-              else if(data['status'] == 'decline') {
-                SwalNotificationWarningAutoClose.fire({
-                  title: 'Decline!',
-                  text: 'The schedule not yet approved by the Coordinator.',
-                })
-              }
-              else if(data['status'] == 'success') {
-                SwalDoneSuccess.fire({
-                  title: 'Released!',
-                  text: 'Exam schedule released.',
-                })
-                beforeReleaseTable.draw();
-                afterReleaseTable.draw();
-              }
-            },
-            error: function(err) {
-              console.log('Error in release individule schedule ajax.');
-              $('#btnReleaseSchedule-', schedule_id).removeAttr('disabled', 'disabled');
-              SwalSystemErrorDanger.fire();
-            }
-          });
-        }
-        else{
-          SwalNotificationWarningAutoClose.fire({
-            title: 'Cancelled!',
-            text: 'Exam schedule has not been released.',
-          })
-        }
-      })
-    }
-    // /Release individual exam schedule
-
-    // Release all schedules
-    release_schedules = () => {
-      SwalQuestionSuccessAutoClose.fire({
-        title: "Are you sure ?",
-        text: "You wont be able to revert this!",
-        confirmButtonText: "Yes, Release!",
-      })
-      .then((result) => {
-        if(result.isConfirmed){
-          SwalDoneSuccess.fire({
-            title: 'Released!',
-            text: 'Exam schedule released.',
-          })
-        }
-        else{
-          SwalNotificationWarningAutoClose.fire({
-            title: 'Cancelled!',
-            text: 'Exam schedule has not been released.',
-          })
-        }
-      })
-    }
-    // /Release all schedules
-    // /RELEASE SCHEDULES
-
-    // UPCOMING EXAMS(after release)
-    // Postpone(after release)
-    postpone_exam = () => {
-      SwalQuestionSuccessAutoClose.fire({
-        title: "Are you sure ?",
-        text: "Exam will be postpone.",
-        confirmButtonText: "Yes, Postpone!",
-      })
-      .then((result) => {
-        if(result.isConfirmed) {
-
-          // Remove previous validation error messages
-          $('.form-control').removeClass('is-invalid');
-          $('.invalid-feedback').html('');
-          $('.invalid-feedback').hide();
-          // Form Payload
-          var formData = new FormData($('#formPostponeSchedule')[0]);
-
-          // Postpone exam controller
-          $.ajax({
-            headers: {'X-CSRF-TOKEN': $('#meta[name="csrf-token"]').attr('content')},
-            url: "{{ url('/portal/staff/exams/schedule/postpone') }}",
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function() {$('#btnModalPostponeExam').attr('disabeld', 'disables');},
-            success: function(data){
-              console.log('Success in postpone exam ajax.');
-              $('#btnModalPostponeExam').removeAttr('disabled', 'disabled');
-              if(data['errors']) {
-                console.log('Errors in validating postpone data.');
-                $.each(data['errors'], function(key, value){
-                  $('#error-'+key).show();
-                  $('#'+key).addClass('is-invalid');
-                  $('#error-'+key).append('<strong>'+value+'</strong>');
-                });
-              }
-              else if(data['status'] == 'success') {
-                console.log('Success in postpone exam.');
-                SwalDoneSuccess.fire({
-                  title: "Postponed!",
-                  text: "Exam postponed.",
-                })
-                $('#modal-postpone-schedule').modal('hide');
-                afterReleaseTable.draw();
-              }
-            },
-            error: function(err) {
-              console.log('Error in postpone exam ajax.');
-              $('#btnModalPostponeExam').removeAttr('disabled', 'disabled');
-              SwalSystemErrorDanger.fire();
-            }
-          });
-        }
-        else {
-          SwalNotificationWarningAutoClose.fire({
-            title: "Cancelled!",
-            text: "Exam has not been postponed.",
-          })
-        }
-      })
-    }
-    // /Postpone(after release)
-
-    // Delete(after release)
-    delete_after_release = (schedule_id) => {
-      SwalQuestionDanger.fire({
-        title: "Are you sure ?",
-        text: "You wont be able to revert this!",
-        confirmButtonText: 'Yes, Delete!',
-      })
-      .then((result) => {
-        if(result.isConfirmed) {
-          // Form Payload
-          var formData = new FormData();
-          formData.append('schedule_id', schedule_id);
-
-          // Delete schedule after release controller
-          $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            url: "{{ url('/portal/staff/exams/schedule/delete/after/release') }}",
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function() {$('btnDeleteAfterRelease-'+schedule_id).attr('disabled', 'disabled');},
-            success: function(data) {
-              console.log('Success in delete schedule after rlease ajax.');
-              $('btnDeleteAfterRelease-'+schedule_id).removeAttr('disabled', 'disabled');
-              if(data['status'] == 'success') {
-                console.log('Success in delete schedule after release.');
-                SwalDoneSuccess.fire({
-                  title: 'Deleted!',
-                  text: 'Exam schedule has been deleted.',
-                })
-                afterReleaseTable.draw();
-              }
-              else if(data['status'] == 'errors') {
-                console.log('Validation errors in delete schedule.');
-                SwalNotificationWarningAutoClose.fire({
-                  title: 'Error!',
-                  text: 'The id of the schedule not found.',
-                })
-              }
-            },
-            error: function(err) {
-              console.log('Error in delete schedule after release ajax.');
-              $('#btnDeleteAfterRelease-'+schedule_id).removeAttr('disabled', 'disabeld');
-              SwalSystemErrorDanger.fire();
-            }
-          });
-        }
-        else{
-          SwalNotificationWarningAutoClose.fire({
-            title: 'Cancelled!',
-            text: 'Exam schedule has not been deleted.',
-          })
-        }
-      })
-    }
-    // Delete(after release)
-    // /UPCOMING EXAMS(after release)
-  });
-
-  // HELD EXAMS
-  $(function() {
-    var heldTable = $('.held-exam-schedules-yajradt').DataTable({
+    // Held Exams table
+    heldExamTable = $('.held-exam-schedules-yajradt').DataTable({
       searching: false,
       processing: true,
       serverSide: true,
@@ -806,10 +226,76 @@
     });
 
     searchHeldExams = () => {
-      heldTable.draw();
+      heldExamTable.draw();
     }
+    // /Held exams table 
+    // /TABLES
   });
-  // /HELD EXAMS
+
+  // UPCOMING EXAMS(BEFORE RELEASE)
+  // CREATE SCHEDULE
+  create_schedule = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "Exam schedule will be create.",
+      confirmButtonText: "Yes, Create!",
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Form payload
+        var formData = new FormData($('#formCreateSchedule')[0]);
+
+        //Create schedule controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/create') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreateSchedule').attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in create schedule ajax.');
+            $('#btnCreateSchedule').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validate schedule data.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Create exam schedule success.');
+              SwalDoneSuccess.fire({
+                title: "Created!",
+                text: "Exam schedule created.",
+              })
+              .then((result) => {
+                if(result.isConfirmed) {beforeReleaseTable.draw();}
+              });
+            }
+          },
+          error: function(err){
+            console.log('Errors in create exam schedule ajax.');
+            $('#btnCreateSchedule').removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Exam schedule has not been created.",
+        })
+      }
+    })
+  }
+  // /CREATE SCHEDULE
 
   // FILL EDIT MODAL WITH RELEVANT DATA
   edit_schedule_modal_invoke = (schedule_id) => {
@@ -849,6 +335,456 @@
   }
   // /FILL EDIT MODAL WITH RELEVANT DATA
 
+  // EDIT(BEFORE RELEASE)
+  edit_schedule = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "Exam schedule will be update.",
+      confirmButtonText: "Yes, Update!",
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        // Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        // Form payload
+        var formData = new FormData($('#formEditSchedule')[0]);
+
+        // Edit exam schedule controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/edit') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnModalEditSchedule').attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in edit exam schedule ajax.');
+            $('#btnModalEditSchedule').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating edit schedule data.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in edit exam schedule.');
+              SwalDoneSuccess.fire({
+                title: "Updated!",
+                text: "Exam schedule updated.",
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-edit-schedule').modal('hide');
+                  beforeReleaseTable.draw();
+                }
+              });
+            }
+          },
+          error: function(err){
+            console.log('Error in edit exam schedule ajax.')
+            $('#btnModalEditSchedule').removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Exam schedule has not been updated.",
+        })
+      }
+    })
+  }
+  // /EDIT(BEFORE RELEASE)
+
+  // DELETE(BEFORE RELEASE)
+  delete_before_release = (schedule_id) => {
+    SwalQuestionDanger.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Delete it!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Form payload
+        var formData = new FormData();
+        formData.append('schedule_id', schedule_id);
+
+        //Delete exam schedule controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/delete') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteExamSchedule-'+schedule_id).attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in delete exam schedule ajax.');
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Scheduled exam has been deleted.',
+            })
+            .then((result) => {
+                if(result.isConfirmed) {
+                  beforeReleaseTable.draw();
+                }
+              });
+          },
+          error: function(err){
+            console.log('Error in delete exam schedule ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Scheduled exam has not been deleted.',
+        })
+      }
+    })
+  }
+  // /DELETE(BEFORE RELEASE)
+
+  // REQUEST SCHEDULE APPROVAL
+  request_schedule_approval = (schedule_id) => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "You wont be able to revert this!",
+      confirmButtonText: "Yes, Send Request!",
+    })
+    .then((result) => {
+      if(result.isConfirmed){
+        //Form payload
+        var formData = new FormData();
+        formData.append('schedule_id', schedule_id);
+
+        // Request schedule approval controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/request/approval') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function() {$('#btnRequestApprovalSchedule-'+schedule_id).attr('disabled', 'disabled');},
+          success: function(data) {
+            console.log('Success in request schedule approval ajax.');
+            $('#btnRequestApprovalSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+            if(data['status'] == 'errors') {
+              SwalNotificationWarningAutoClose.fire({
+                title: 'Failed!',
+                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
+              })
+            }
+            else if(data['status'] == 'requested'){
+              SwalNotificationWarningAutoClose.fire({
+                title: 'Declined!',
+                text: 'The schedule has been already requested for approval.',
+              })
+            }
+            else if(data['status'] == 'success') {
+              SwalDoneSuccess.fire({
+                title: 'Approval requested!',
+                text: 'Schedule approval request has been sent to Coordinator.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {beforeReleaseTable.draw();}
+              });
+            }
+          },
+          error: function(err){
+            console.log('Error in request schedule approval ajax.');
+            $('#btnRequestApprovalSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Schedule approval request has not been sent.',
+        })
+      }
+    })
+  }
+  // /REQUEST SCHEDULE APPROVAL
+
+  // APPROVE SCHEDULE
+  approve_schedule = (schedule_id) => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "You wont be able to revert this!",
+      confirmButtonText: "Yes, Approve!",
+    })
+    .then((result) => {
+      if(result.isConfirmed){
+        //Form payload
+        var formData = new FormData();
+        formData.append('schedule_id', schedule_id);
+
+        // Approve Schedule controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/approve') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function() {$('#btnApproveSchedule-'+schedule_id).attr('disabled', 'disabled');},
+          success: function(data) {
+            console.log('Success in approve schedule ajax.');
+            $('#btnApproveSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+            if(data['status'] == 'errors') {
+              SwalNotificationWarningAutoClose.fire({
+                title: 'Failed!',
+                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
+              })
+            }
+            else if(data['status'] == 'success') {
+              SwalDoneSuccess.fire({
+                title: 'Approved!',
+                text: 'Scheduled exam has been approved.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {beforeReleaseTable.draw();}
+              });
+            }
+          },
+          error: function(err){
+            console.log('Error in approve schedule ajax.');
+            $('#btnApproveSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Scheduled exam has not been approved.',
+        })
+      }
+    })
+  }
+  // /APPROVE SCHEDULE
+
+  // DECLINE SCHEDULE
+  decline_schedule = (schedule_id) => {
+    SwalQuestionDanger.fire({
+      title: "Are you sure ?",
+      text: "The schedule will be declined",
+      confirmButtonText: "Yes, Decline!",
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalQuestionDanger.fire({
+          title: "Reason to Decline ?",
+          input: 'textarea',
+          inputLabel: 'Message',
+          inputPlaceholder: 'Type your message here...',
+          inputAttributes: {'aria-label': 'Type your message here'},
+          timer: false,
+          showCancelButton: true,
+          confirmButtonText: "Decline!",
+        })
+        .then((result) => {
+          // Alert(result value)
+          $.ajax({
+            headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+            url: "{{ route('schedule.decline') }}",
+            type: 'post',
+            data: {'message': result.value, 'schedule_id': schedule_id},
+            beforeSend: function() {
+              $('#btnDeclineSchedule-'+schedule_id).attr('disabled', 'disabled');
+              $('body').addClass('freeze');
+              Swal.showLoading();
+            },
+            success: function(data) {
+              console.log('Success in decline schedule ajax.');
+              $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+              $('body').removeClass('freeze');
+              Swal.hideLoading();
+              if(data['status'] == 'errors') {
+                console.log('Errors in validating schedule id.');
+                SwalNotificationWarningAutoClose.fire({
+                title: 'Error!',
+                text: 'The id of the schedule is not found.',
+                })
+              }
+              else if(data['status'] == 'success') {
+                console.log('Success in decline schedule.');
+                SwalDoneSuccess.fire({
+                  title: 'Declined!',
+                  text: 'Scheduled exam has been Declined.',
+                })
+                .then((result) => {
+                  if(result.isConfirmed) {
+                    beforeReleaseTable.draw();
+                  }
+                });
+              }
+            },
+            error: function(err){
+              console.log('Error in Decline schedule ajax.');
+              $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+              SwalSystemErrorDanger.fire();
+            }
+          });
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Scheduled exam has not been Declined.',
+        })
+      }
+    })
+  }
+  // /DECLINE SCHEDULE
+
+  // FILL SCHEDULE DECLINED MESSAGE MODAL WITH RELEVANT DATA
+  view_schedule_declined_message = (schedule_id) => {
+    //Form payload
+    var formData = new FormData();
+    formData.append('schedule_id', schedule_id);
+
+    //Get Schedule decline message controller
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ route('schedule.decline.message') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function() {$('#btnViewDeclinedMessage-'+schedule_id).attr('disabled', 'disabled');},
+      success: function(data) {
+        console.log('Success in get get schedule decline message ajax.');
+        if(data['status'] == 'success') {
+          console.log('Success in get schedule decline message.');
+          $('#scheduleDeclineMessage').val(data['schedule']['declined_message']);
+          $('#modal-schedule-declined-message').modal('show');
+          $('#btnViewDeclinedMessage-'+schedule_id).removeAttr('disabled', 'disabled');
+        }
+        else if(data['status'] == 'errors') {
+          console.log('Error in validate schedule id.');
+          $('#btnViewDeclinedMessage-'+schedule_id).removeAttr('disabled', 'disabled');
+          SwalNotificationWarningAutoClose.fire({
+                title: 'Failed!',
+                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
+          })
+        }
+      },
+      error: function(err) {
+        console.log('Error in get schedule decline message ajax.');
+        $('#btnViewDeclinedMessage-'+schedule_id).removeAttr('disabled', 'disabled');
+        SwalSystemErrorDanger.fire();
+      },
+    });
+  }
+  // /FILL SCHEDULE DECLINE MESSAGE MODAL WITH RELEVANT DATA
+  // /UPCOMING EXAMS(BEFORE RELEASE)
+
+  // RELEASE SCHEDULES
+  // RELEASE INDIVIDUAL EXAM SCHEDULE
+  relase_individual_schedule = (schedule_id) => {
+    SwalQuestionSuccessAutoClose.fire ({
+      title: "Are you sure ?",
+      text: "You wont be able to revert this!",
+      confirmButtonText: "Yes, Release!",
+    })
+    .then((result) => {
+      if(result.isConfirmed){
+
+        // Form payload
+        var formData = new FormData();
+        formData.append('schedule_id', schedule_id);
+
+        // Release individual schedule controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/release/individual') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function() {$('#btnReleaseSchedule-'+schedule_id).attr('disabled', 'disabled');},
+          success: function(data) {
+            console.log('Success in release individual schedule ajax.');
+            $('#btnReleaseSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+            if(data['status'] == 'errors') {
+              SwalNotificationWarningAutoClose.fire({
+                title: 'Failed!',
+                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
+              })
+            }
+            else if(data['status'] == 'decline') {
+              SwalNotificationWarningAutoClose.fire({
+                title: 'Decline!',
+                text: 'The schedule not yet approved by the Coordinator.',
+              })
+            }
+            else if(data['status'] == 'success') {
+              SwalDoneSuccess.fire({
+                title: 'Released!',
+                text: 'Exam schedule released.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  beforeReleaseTable.draw();
+                  afterReleaseTable.draw();
+                }
+              });
+            }
+          },
+          error: function(err) {
+            console.log('Error in release individule schedule ajax.');
+            $('#btnReleaseSchedule-', schedule_id).removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Exam schedule has not been released.',
+        })
+      }
+    })
+  }
+  // /RELEASE INDIVIDUAL EXAM SCHEDULE
+
+  // RELEASE ALL SCHEDULES
+  release_schedules = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "You wont be able to revert this!",
+      confirmButtonText: "Yes, Release!",
+    })
+    .then((result) => {
+      if(result.isConfirmed){
+        SwalDoneSuccess.fire({
+          title: 'Released!',
+          text: 'Exam schedule released.',
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Exam schedule has not been released.',
+        })
+      }
+    })
+  }
+  // /RELEASE ALL SCHEDULES
+  // /RELEASE SCHEDULES
+
+  // UPCOMING EXAMS(AFTER RELEASE)
   // FILL POSTPONE MODAL WITH RELEVANT DATA
   postpone_exam_modal_invoke = (schedule_id) => {
     // Form payload
@@ -883,5 +819,137 @@
       }
     });
   }
-  // FILL POSTPONE MODAL WITH RELEVANT DATA
+  // /FILL POSTPONE MODAL WITH RELEVANT DATA
+
+  // POSTPONE(AFTER RELEASE)
+  postpone_exam = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure ?",
+      text: "Exam will be postpone.",
+      confirmButtonText: "Yes, Postpone!",
+    })
+    .then((result) => {
+      if(result.isConfirmed) {
+
+        // Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        // Form Payload
+        var formData = new FormData($('#formPostponeSchedule')[0]);
+
+        // Postpone exam controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('#meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/postpone') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function() {$('#btnModalPostponeExam').attr('disabeld', 'disables');},
+          success: function(data){
+            console.log('Success in postpone exam ajax.');
+            $('#btnModalPostponeExam').removeAttr('disabled', 'disabled');
+            if(data['errors']) {
+              console.log('Errors in validating postpone data.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success') {
+              console.log('Success in postpone exam.');
+              SwalDoneSuccess.fire({
+                title: "Postponed!",
+                text: "Exam postponed.",
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-postpone-schedule').modal('hide');
+                  afterReleaseTable.draw();
+                }
+              });
+            }
+          },
+          error: function(err) {
+            console.log('Error in postpone exam ajax.');
+            $('#btnModalPostponeExam').removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Exam has not been postponed.",
+        })
+      }
+    })
+  }
+  // /POSTPONE(AFTER RELEASE)
+
+  // DELETE(AFTER RELEASE)
+  delete_after_release = (schedule_id) => {
+    SwalQuestionDanger.fire({
+      title: "Are you sure ?",
+      text: "You wont be able to revert this!",
+      confirmButtonText: 'Yes, Delete!',
+    })
+    .then((result) => {
+      if(result.isConfirmed) {
+        // Form Payload
+        var formData = new FormData();
+        formData.append('schedule_id', schedule_id);
+
+        // Delete schedule after release controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/exams/schedule/delete/after/release') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function() {$('btnDeleteAfterRelease-'+schedule_id).attr('disabled', 'disabled');},
+          success: function(data) {
+            console.log('Success in delete schedule after rlease ajax.');
+            $('btnDeleteAfterRelease-'+schedule_id).removeAttr('disabled', 'disabled');
+            if(data['status'] == 'success') {
+              console.log('Success in delete schedule after release.');
+              SwalDoneSuccess.fire({
+                title: 'Deleted!',
+                text: 'Exam schedule has been deleted.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  afterReleaseTable.draw();
+                }
+              });
+            }
+            else if(data['status'] == 'errors') {
+              console.log('Validation errors in delete schedule.');
+              SwalNotificationWarningAutoClose.fire({
+                title: 'Failed!',
+                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
+              })
+            }
+          },
+          error: function(err) {
+            console.log('Error in delete schedule after release ajax.');
+            $('#btnDeleteAfterRelease-'+schedule_id).removeAttr('disabled', 'disabeld');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Exam schedule has not been deleted.',
+        })
+      }
+    })
+  }
+  // DELETE(AFTER RELEASE)
+  // /UPCOMING EXAMS(AFTER RELEASE)
+
 </script>
