@@ -29,6 +29,7 @@ class SubjectController extends Controller
     //->join('student_exams','exam_schedules.id',"=",'student_exams.exam_schedule_id')
     // ->join('students','student_exams.student_id',"=",'students.id')
      ->join('exams','exam_schedules.exam_id',"=",'exams.id')
+     ->join('exam_types',"exam_schedules.exam_type_id","=",'exam_types.id')
     ->where('subjects.id',$id)
     ->where('exams.year',$year)
      ->where('exams.month',$month)
@@ -40,7 +41,8 @@ class SubjectController extends Controller
         'exam_schedules.date',  
          'exams.year',
          'exams.month',
-         'exam_schedules.id'
+         'exam_schedules.id',
+         'exam_types.name'
     )->get();
    $idcount=$sheduleIds->count();
    for ($i=0; $i<$idcount; $i++) { 
@@ -69,6 +71,7 @@ class SubjectController extends Controller
        array(
     
         "Shedule ID"=>$sheduleIds[$i]->id,
+        "typeName"=>$sheduleIds[$i]->name,
          "NotAB"=>$data->where('student_exams.status','OK')->count(),
          "RegStu"=>$data->count(),
 
