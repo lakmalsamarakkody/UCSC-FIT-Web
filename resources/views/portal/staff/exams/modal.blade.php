@@ -6,7 +6,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modal-edit-schedule-title">Edit Exam Schedule</h5>
-                    <button type="butoon" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -73,6 +73,31 @@
     </div>
     <!-- /EDIT -->
 
+    {{-- APPROVAL DECLINED MESSAGE --}}
+    <div class="modal fade" id="modal-schedule-declined-message" data-backdrop="static" tabindex="-1" aria-labelledby="modal-schedule-declined-message-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 Schedule class="modal-title" id="modal-schedule-declined-message-title">Schedule Declined Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row align-items-center">
+                        <div class="form-group col-12">
+                            <textarea class="form-control" name="scheduleDeclineMessage" id="scheduleDeclineMessage" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- /APPROVAL DECLINED MESSAGE --}}
+
 <!-- /CREATE SCHEDULE -->
 
 
@@ -120,8 +145,6 @@
             </div>
         </div>
     </div>
-
-
     <!-- /POSTPONE -->
 
 <!-- /SCHEDULE TABLE -->

@@ -532,6 +532,45 @@
       })
     }
     // /Decline schedule
+
+    view_schedule_declined_message = (schedule_id) => {
+      //Form payload
+      var formData = new FormData();
+      formData.append('schedule_id', schedule_id);
+
+      //Get Schedule decline message controller
+      $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url: "{{ route('schedule.decline.message') }}",
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        beforeSend: function() {$('#btnViewDeclinedMessage-'+schedule_id).attr('disabled', 'disabled');},
+        success: function(data) {
+          console.log('Success in get get schedule decline message ajax.');
+          if(data['status'] == 'success') {
+            console.log('Success in get schedule decline message.');
+            $('#scheduleDeclineMessage').val(data['schedule']['declined_message']);
+            $('#modal-schedule-declined-message').modal('show');
+            $('#btnViewDeclinedMessage-'+schedule_id).removeAttr('disabled', 'disabled');
+          }
+          else if(data['status'] == 'errors') {
+            console.log('Error in validate schedule id.');
+            $('#btnViewDeclinedMessage-'+schedule_id).removeAttr('disabled', 'disabled');
+            SwalNotificationWarningAutoClose.fire({
+                  title: 'Failed!',
+                  text: 'The id of the schedule not found. Please Contact Administrator: admin@fit.bit.lk',
+            })
+          }
+        },
+        error: function(err) {
+          console.log('Error in get schedule decline message ajax.');
+          $('#btnViewDeclinedMessage-'+schedule_id).removeAttr('disabled', 'disabled');
+          SwalSystemErrorDanger.fire();
+        },
+      });
+    }
     // /UPCOMING EXAMS(before release)
 
     // RELEASE SCHEDULES
