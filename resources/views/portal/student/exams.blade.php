@@ -19,38 +19,48 @@
           <div class="card">
             <div class="card-header">Apply for Exams</div>
             <div class="card-body">
-              <small>Please choose the exam details and check...</small>
-              <form action="" id="formApplyExam">
-                <div class="form-row align-items-center">
-                  @foreach ($exams_to_apply as $exam_apply)
-                  <div class="form-group col-8">
-                    <div class="form-checkbox">
-                      <input type="checkbox" id="applyExam-{{$exam_apply->id}}" class="form-control" />
-                      <label for="applyExam-{{$exam_apply->id}}">{{ $exam_apply->subject->name }} ({{ $exam_apply->examType->name}})</label>
-                    </div>
-                  </div>
-                  {{-- <div class="form-group col-xl-4 col-md-12">
-                    <label for="applySubject"></label>
-                    <span id="applySubject" class="form-control">ICT Application</span>
-                  </div>
-                  <div class="form-group col-xl-3 col-md-12">
-                    <label for="applyExamType"></label>
-                    <select name="applyExamType" id="applyExamType" class="form-control">
-                      <option value="1">E-Test</option>
-                    </select>
-                  </div> --}}
-                  <div class="form-group col-4">
-                    <label for="applyExam-{{$exam_apply->id}}"></label>
-                    <select name="applyExam-{{$exam_apply->id}}" id="applyExam-{{$exam_apply->id}}" class="form-control">
-                      <option value="" selected hidden disabled>Select Requested Exam</option>
-                      @foreach ($exams as $exam)
-                          <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
+              <div class="card w-100 shadow-none border border-secondary">
+                <div class="card-body">
+                  <small class="mb-4">*Please check the exams you want to apply and select the requested month for each.</small>
+                  <form action="" id="formApplyExam">
+                    <div class="form-row align-items-center">
+                      @foreach ($exams_to_apply as $exam_apply)
+                      <div class="col-8">
+                        <div class="form-check">
+                          <input type="checkbox" id="applyExam-{{$exam_apply->id}}" class=" form-check-input" />
+                          <label class="form-check-label" for="applyExam-{{$exam_apply->id}}">{{ $exam_apply->subject->name }} ({{ $exam_apply->examType->name}})</label>
+                        </div>
+                      </div>
+                      {{-- <div class="form-group col-xl-4 col-md-12">
+                        <label for="applySubject"></label>
+                        <span id="applySubject" class="form-control">ICT Application</span>
+                      </div>
+                      <div class="form-group col-xl-3 col-md-12">
+                        <label for="applyExamType"></label>
+                        <select name="applyExamType" id="applyExamType" class="form-control">
+                          <option value="1">E-Test</option>
+                        </select>
+                      </div> --}}
+                      <div class="form-group col-4">
+                        <label for="applyExam-{{$exam_apply->id}}"></label>
+                        <select name="applyExam-{{$exam_apply->id}}" id="applyExam-{{$exam_apply->id}}" class="form-control">
+                          <option value="" selected hidden disabled>Select Requested Month</option>
+                          @foreach ($exams as $exam)
+                              <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <span class="border-bottom"></span>
                       @endforeach
-                    </select>
-                  </div>
-                  @endforeach
+                    </div>
+                  </form>
                 </div>
-              </form>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="text-center">
+                <button type="button" class="btn btn-outline-primary" id="btnApplyExams" onclick="apply_for_exams()">APPLY FOR SELECTED EXAMS<span id="spinnerBtnApplyExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+              </div>
             </div>
           </div>
         </div>
