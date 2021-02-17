@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Portal\Student;
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Models\Exam\Schedule;
-use App\Models\Exam\Types;
+use App\Models\Support\Fee;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ExamsController extends Controller
 {
@@ -31,14 +32,15 @@ class ExamsController extends Controller
   public function index()
   {
     $today = Carbon::today();
-    $exams=Schedule::orderby('date')->take(6)->get();
-    $exam_types = Types::orderBy('id')->get();
-    $exam = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->get();
+
+    $schedule=Schedule::orderby('date')->take(6)->get();
+    $exams_to_apply = Fee::where('purpose', 'exam')->get();
+    $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->get();
     
     return view('portal/student/exams',[
-      'exams' => $exams,
-      'exam_types' => $exam_types,
-      'exam' =>$exam
+      'schedule' => $schedule,
+      'exams' =>$exams,
+      'exams_to_apply' => $exams_to_apply
     ]);
   }
 }

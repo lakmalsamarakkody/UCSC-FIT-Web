@@ -22,12 +22,14 @@
               <small>Please choose the exam details and check...</small>
               <form action="" id="formApplyExam">
                 <div class="form-row align-items-center">
-                  <div class="form-group col-1">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" id="id">
+                  @foreach ($exams_to_apply as $exam_apply)
+                  <div class="form-group col-8">
+                    <div class="form-checkbox">
+                      <input type="checkbox" id="applyExam-{{$exam_apply->id}}" class="form-control" />
+                      <label for="applyExam-{{$exam_apply->id}}">{{ $exam_apply->subject->name }} ({{ $exam_apply->examType->name}})</label>
                     </div>
                   </div>
-                  <div class="form-group col-xl-4 col-md-12">
+                  {{-- <div class="form-group col-xl-4 col-md-12">
                     <label for="applySubject"></label>
                     <span id="applySubject" class="form-control">ICT Application</span>
                   </div>
@@ -36,16 +38,17 @@
                     <select name="applyExamType" id="applyExamType" class="form-control">
                       <option value="1">E-Test</option>
                     </select>
-                  </div>
-                  <div class="form-group col-xl-4 col-md-12">
-                    <label for="applyExam"></label>
-                    <select name="applyExam" id="applyExam" class="form-control">
+                  </div> --}}
+                  <div class="form-group col-4">
+                    <label for="applyExam-{{$exam_apply->id}}"></label>
+                    <select name="applyExam-{{$exam_apply->id}}" id="applyExam-{{$exam_apply->id}}" class="form-control">
                       <option value="" selected hidden disabled>Select Requested Exam</option>
-                      @foreach ($exam as $exam)
+                      @foreach ($exams as $exam)
                           <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
                       @endforeach
                     </select>
                   </div>
+                  @endforeach
                 </div>
               </form>
             </div>
@@ -65,7 +68,7 @@
                   {{-- <pre>
                     {{$exams}}
                   </pre> --}}
-                  @foreach ($exams as $exam)
+                  @foreach ($schedule as $exam)
                   <div class="accordion" id="accordion_{{$exam->exam_id}}">
                     <div class="card mb-4 shadow-sm">
                       <div class="card-header text-secondary" id="heading_{{$exam->exam_id}}">
@@ -110,7 +113,7 @@
                   {{-- <pre>
                     {{$exams}}
                   </pre> --}}
-                  @foreach ($exams as $exam)
+                  @foreach ($schedule as $exam)
                   <div class="accordion" id="accordion_{{$exam->exam_id}}">
                     <div class="card mb-4 shadow-sm">
                       <div class="card-header text-secondary" id="heading_{{$exam->exam_id}}">
@@ -152,7 +155,7 @@
               <h5>2020 November</h5>
 
               <ul class="list-group list-group-flush">
-                @foreach ($exams as $exam)
+                @foreach ($schedule as $exam)
                 <li class="list-group-item">
                   <div class="row">
                     <div class="col-12 col-md-4">FIT {{ $exam->subject->code }}</div>
