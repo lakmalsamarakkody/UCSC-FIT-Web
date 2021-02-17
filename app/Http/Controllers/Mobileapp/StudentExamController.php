@@ -28,7 +28,8 @@ class StudentExamController extends Controller
            'subjects.code',
            'subjects.name',
            'exams.year',
-           'exams.month'
+           'exams.month',
+           'exam_schedules.schedule_release'
            )
        ->get()];
     }
