@@ -16,8 +16,8 @@ let heldExamTable = null;
       },
       columns: [
         {
-          data: 'exam',
-          name: 'exam'
+          data: 'month',
+          name: 'month',
         },
         {
           data: 'subject_code',
@@ -51,6 +51,13 @@ let heldExamTable = null;
         },
       ],
       columnDefs: [
+        {
+          targets: 0,
+          render: function(data, type, row) {
+            var exam = row['month'] + " " + row['year'];
+            return exam;
+          }
+        },
         {
           targets: 1,
           render: function(data, type, row) {
@@ -114,8 +121,8 @@ let heldExamTable = null;
       },
       columns: [
         {
-          data: 'exam',
-          name: 'exam'
+          data: 'month',
+          name: 'month'
         },
         {
           data: 'subject_code',
@@ -149,6 +156,13 @@ let heldExamTable = null;
         },
       ],
       columnDefs: [
+        {
+          targets: 0,
+          render: function(data, type, row) {
+            var exam = row['month'] + " " + row['year'];
+            return exam;
+          }
+        },
         {
           targets: 1,
           render: function(data, type, row) {
@@ -187,8 +201,8 @@ let heldExamTable = null;
       },
       columns: [
         {
-          data: 'exam',
-          name: 'exam'
+          data: 'month',
+          name: 'month'
         },
         {
           data: 'subject_code',
@@ -216,6 +230,13 @@ let heldExamTable = null;
         },
       ],
       columnDefs: [
+        {
+          targets: 0,
+          render: function(data, type, row) {
+            var exam = row['month'] + " " + row['year'];
+            return exam;
+          }
+        },
         {
           targets: 1,
           render : function(data, type, row) {
@@ -389,6 +410,12 @@ let heldExamTable = null;
                   beforeReleaseTable.draw();
                 }
               });
+            }
+            else if(data['status'] == 'error'){
+              SwalSystemErrorDanger.fire({
+                title: "Error",
+                text: data['msg'],
+              })
             }
           },
           error: function(err){
@@ -876,6 +903,12 @@ let heldExamTable = null;
                   afterReleaseTable.draw();
                 }
               });
+            }
+            else if(data['status'] == 'error'){
+              SwalSystemErrorDanger.fire({
+                title: "Error",
+                text: data['msg'],
+              })
             }
           },
           error: function(err) {

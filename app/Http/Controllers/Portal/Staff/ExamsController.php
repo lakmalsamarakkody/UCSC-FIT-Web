@@ -48,7 +48,9 @@ class ExamsController extends Controller
         $today = Carbon::today();
         if($request->ajax()) {
             $data = Schedule::where('date', '>=' , $today)->addSelect([
-                'exam' => Exam::select(DB::raw("CONCAT(month,' ', year) AS examname"))->whereColumn('exam_id', 'exams.id'),
+                //'exam' => Exam::select(DB::raw("CONCAT(month,' ', year) AS examname"))->whereColumn('exam_id', 'exams.id'),
+                'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
+                'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
                 'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
@@ -77,7 +79,9 @@ class ExamsController extends Controller
         $today = Carbon::today();
         if($request->ajax()) {
             $data = Schedule::where('date', '>=' , $today)->addSelect([
-                'exam' => Exam::select(DB::raw("CONCAT(month, ' ', year) AS examname"))->whereColumn('exam_id', 'exams.id'),
+                //'exam' => Exam::select(DB::raw("CONCAT(month, ' ', year) AS examname"))->whereColumn('exam_id', 'exams.id'),
+                'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
+                'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
                 'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
@@ -102,7 +106,9 @@ class ExamsController extends Controller
         $today = Carbon::today();
         if ($request->ajax()):
             $data = Schedule::where('date', '<=', $today)->addSelect([
-                'exam' => Exam::select(DB::raw("CONCAT(month, ' ', year) AS examname"))->whereColumn('exam_id','exams.id'),
+                //'exam' => Exam::select(DB::raw("CONCAT(month, ' ', year) AS examname"))->whereColumn('exam_id','exams.id'),
+                'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
+                'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
                 'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
                 'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')]);
@@ -150,12 +156,12 @@ class ExamsController extends Controller
             'scheduleStartTime' => ['required'],
         ]);
     
-    //     //Check validation errors
+        //Check validation errors
         if($exam_schedule_validator->fails()):
             return response()->json(['errors'=>$exam_schedule_validator->errors()]);
         else:
             //Check if the exact schedule is in the table
-            $exists_schedule = Schedule::where('subject_id', $request->scheduleSubject)->where('exam_type_id', $request->scheduleExamType)->where('date',$request->scheduleDate)->where('end_time', '>', $request->scheduleStartTime)->first();
+            $exists_schedule = Schedule::where('date',$request->scheduleDate)->where('end_time', '>', $request->scheduleStartTime)->first();
             if($exists_schedule != null):
                 return response()->json(['status'=>'error', 'msg'=>'Exam schedule already exists.']);
             endif;
@@ -166,7 +172,7 @@ class ExamsController extends Controller
             $exam_schedule->exam_type_id = $request->scheduleExamType;
             $exam_schedule->date = $request->scheduleDate;
             $exam_schedule->start_time = $request->scheduleStartTime;
-            $exam_schedule->end_time = Carbon::parse($request->scheduleStartTime)->addHours('2');
+            $exam_schedule->end_time = Carbon::parse($request->scheduleStartTime)->addHours('2')->addMinutes('30');
             //Check if data save to db
             if($exam_schedule->save()):
                 return response()->json(['status'=>'success', 'exam_schedule'=>$exam_schedule]);
@@ -214,6 +220,12 @@ class ExamsController extends Controller
         if($edit_schedule_validator->fails()):
             return response()->json(['status'=>'error', 'errors'=>$edit_schedule_validator->errors()]);
         else:
+            //Check if the exact schedule is in the table
+            $exists_schedule = Schedule::where('date',$request->editScheduleExamDate)->where('end_time', '>', $request->editScheduleStartTime)->first();
+            if($exists_schedule != null):
+                return response()->json(['status'=>'error', 'msg'=>'Another schedule already exists in this time period.']);
+            endif;
+
             if(Schedule::where('id',$request->editScheduleId)->update([
                 'exam_id' => $request->editScheduleExam,
                 'subject_id' => $request->editScheduleSubject,
@@ -403,6 +415,11 @@ class ExamsController extends Controller
         if($postpone_exam_validator->fails()):
             return response()->json(['status'=>'error', 'errors'=>$postpone_exam_validator->errors()]);
         else:
+            $exists_schedule = Schedule::where('date',$request->postponeExamDate)->where('end_time', '>', $request->postponeExamStartTime)->first();
+            if($exists_schedule != null):
+                return response()->json(['status'=>'error', 'msg'=>'Another schedule already exists in this time period.']);
+            endif;
+            
             if(Schedule::where('id', $request->postponeExamId)->update([
                 'date' => $request->postponeExamDate,
                 'start_time' => $request->postponeExamStartTime,
