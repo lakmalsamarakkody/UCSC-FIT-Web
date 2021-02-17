@@ -228,7 +228,7 @@ let heldExamTable = null;
     searchHeldExams = () => {
       heldExamTable.draw();
     }
-    // /Held exams table 
+    // /Held exams table
     // /TABLES
   });
 
