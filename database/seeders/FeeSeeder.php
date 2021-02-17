@@ -15,8 +15,8 @@ class FeeSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-    DB::table('fees')->truncate();
-    DB::table('fees')->insert(
+        DB::table('fees')->truncate();
+        DB::table('fees')->insert(
             array(
                 ['purpose'=> 'registration',
                 'subject_id'=> NULL,
@@ -56,7 +56,7 @@ class FeeSeeder extends Seeder
                 'updated_at'=> '2020-11-25 10:13:53'],
             )
         );
-        
-DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
