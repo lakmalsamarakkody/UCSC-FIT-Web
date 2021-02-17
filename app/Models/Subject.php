@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Exam\Duration;
 use App\Models\Exam\Schedule;
 use App\Models\Support\Fee;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,13 +23,17 @@ class Subject extends Model
         'code',
         'name'
     ];
-    
-    public function schedule(){        
+
+    public function schedule(){
         return $this->hasMany(Schedule::class, 'subject_id', 'id');
     }
 
-    public function fee(){        
+    public function fee(){
         return $this->hasMany(Fee::class, 'subject_id', 'id');
     }
 
+    public function duration()
+    {
+        return $this->hasMany(Duration::class, 'subject_id', 'id');
+    }
 }

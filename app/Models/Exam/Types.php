@@ -11,7 +11,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Types extends Model
 {
     protected $table='exam_types';
-    
+
     use SoftDeletes;
     use HasFactory;
     use LogsActivity;
@@ -27,5 +27,10 @@ class Types extends Model
     public function fee()
     {
         return $this->hasMany(Fee::class, 'exam_type_id', 'id');
+    }
+
+    public function duration()
+    {
+        return $this->hasMany(Duration::class, 'exam_type_id', 'id');
     }
 }
