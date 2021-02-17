@@ -14,6 +14,44 @@
     <!-- CONTENT -->
     <div class="col-lg-12 student-exams min-vh-100">
       <div class="row">
+        {{-- APPLY FOR EXAMS --}}
+        <div class="col-12 mt-4 px-0">
+          <div class="card">
+            <div class="card-header">Apply for Exams</div>
+            <div class="card-body">
+              <small>Please choose the exam details and check...</small>
+              <form action="" id="formApplyExam">
+                <div class="form-row align-items-center">
+                  <div class="form-group col-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" id="id">
+                    </div>
+                  </div>
+                  <div class="form-group col-xl-4 col-md-12">
+                    <label for="applySubject"></label>
+                    <span id="applySubject" class="form-control">ICT Application</span>
+                  </div>
+                  <div class="form-group col-xl-3 col-md-12">
+                    <label for="applyExamType"></label>
+                    <select name="applyExamType" id="applyExamType" class="form-control">
+                      <option value="1">E-Test</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-xl-4 col-md-12">
+                    <label for="applyExam"></label>
+                    <select name="applyExam" id="applyExam" class="form-control">
+                      <option value="" selected hidden disabled>Select Requested Exam</option>
+                      @foreach ($exam as $exam)
+                          <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        {{-- /APPLY FOR EXAMS --}}
 
         <!-- UPCOMING EXAM SCHEDULE -->
         <div class="col-12 mt-4 px-0">
