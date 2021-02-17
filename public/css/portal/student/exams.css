@@ -28,3 +28,8 @@
   font-weight: normal;
 } */
 /* /accordion */
+
+.student-exams .card .card-body small {
+  color: var(--sub-text-color);
+  font-size: 0.9rem;
+}
