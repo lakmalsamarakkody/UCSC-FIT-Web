@@ -219,12 +219,16 @@ Route::post('/portal/student/information/update/contact-details', [App\Http\Cont
 Route::post('/portal/student/information/update/employment-details', [App\Http\Controllers\Portal\Student\InformationController::class, 'updateEmploymentDetails']);
 Route::post('/portal/student/information/update/get-states', [App\Http\Controllers\Portal\Student\InformationController::class, 'getStates']);
 Route::post('/portal/student/information/update/get-cities', [App\Http\Controllers\Portal\Student\InformationController::class, 'getCities']);
-
 // /INFROMATION PAGE
 
+// EXAM PAGE
 Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsController::class,'index'])->name('student.exam');
+Route::post('/portal/student/exams/apply',[App\Http\Controllers\Portal\Student\ExamsController::class,'applyForExams'])->name('student.exam.apply');
+// /EXAM PAGE
 
+// RESULT PAGE
 Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\ResultsController::class,'index'])->name('student.results');
+// /RESULT PAGE
 
 // PAYMENT PAGE
 Route::get('/portal/student/payment/registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'registration'])->name('payment.registration');
