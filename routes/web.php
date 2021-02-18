@@ -112,6 +112,7 @@ Route::post('/portal/staff/exams/schedule/approve',[App\Http\Controllers\Portal\
 Route::post('/portal/staff/exams/schedule/decline',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'declineSchedule'])->name('schedule.decline');
 Route::post('/portal/staff/exams/schedule/decline/message',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'getScheduleDeclinedMessage'])->name('schedule.decline.message');
 Route::post('/portal/staff/exams/schedule/release/individual',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'releaseIndividualSchedule']);
+Route::post('/portal/staff/exams/schedule/release/all',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'releaseAllSchedules'])->name('schedule.release.all');
 
 Route::post('/portal/staff/exams/schedule/postpone/details',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'postponeScheduleGetDetails']);
 Route::post('/portal/staff/exams/schedule/postpone',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'postponeExam']);
