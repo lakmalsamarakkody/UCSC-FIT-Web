@@ -221,10 +221,10 @@ Route::post('/portal/student/information/update/get-states', [App\Http\Controlle
 Route::post('/portal/student/information/update/get-cities', [App\Http\Controllers\Portal\Student\InformationController::class, 'getCities']);
 // /INFROMATION PAGE
 
-// EXAM PAGE
+// EXAMS PAGES
 Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsController::class,'index'])->name('student.exam');
 Route::post('/portal/student/exams/apply',[App\Http\Controllers\Portal\Student\ExamsController::class,'applyForExams'])->name('student.exam.apply');
-// /EXAM PAGE
+// /EXAMS PAGE
 
 // RESULT PAGE
 Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\ResultsController::class,'index'])->name('student.results');
