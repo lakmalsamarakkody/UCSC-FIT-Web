@@ -796,20 +796,52 @@ let heldExamTable = null;
   release_schedules = () => {
     SwalQuestionSuccessAutoClose.fire({
       title: "Are you sure ?",
-      text: "You wont be able to revert this!",
+      text: "All approved schedules will be released!",
       confirmButtonText: "Yes, Release!",
     })
     .then((result) => {
       if(result.isConfirmed){
-        SwalDoneSuccess.fire({
-          title: 'Released!',
-          text: 'Exam schedule released.',
-        })
+
+        // Release all schedules controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ route('schedule.release.all') }}",
+          type: 'post',
+          processData: false,
+          contentType: false,
+          beforeSend: function() {
+            $('#btnReleaseAllSchedules').attr('disabled', 'disabled');
+            $('#spinnerBtnReleaseSchedules').removeClass('d-none');
+            },
+          success: function(data) {
+            console.log('Success in release all schedules ajax.');
+            $('#btnReleaseAllSchedules').removeAttr('disabled', 'disabled');
+            $('#spinnerBtnReleaseSchedules').addClass('d-none');
+            if(data['status'] == 'success') {
+              SwalDoneSuccess.fire({
+                title: 'Released!',
+                text: 'Exam schedules have been released.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  beforeReleaseTable.draw();
+                  afterReleaseTable.draw();
+                }
+              });
+            }
+          },
+          error: function(err) {
+            console.log('Error in release all schedules ajax.');
+            $('#btnReleaseAllSchedules').removeAttr('disabled', 'disabled');
+            $('#spinnerBtnReleaseSchedules').addClass('d-none');
+            SwalSystemErrorDanger.fire();
+          },
+        });
       }
       else{
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Exam schedule has not been released.',
+          text: 'Exam schedules have not been released.',
         })
       }
     })

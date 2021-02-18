@@ -377,6 +377,20 @@ class ExamsController extends Controller
     }
     // /RELEASE INDIVIDUAL SCHEDULE
 
+    // RELEASE ALL APPROVED SCHEDULES
+    public function releaseAllSchedules(Request $request)
+    {
+        if($request->ajax()) {
+            $today = Carbon::today();
+            $approved_schedules = Schedule::where('date', '>=', $today)->where('schedule_approval', 'approved')->where('schedule_release', false)->get();
+            foreach($approved_schedules as $schedule):
+                Schedule::where('id',$schedule->id)->update(['schedule_release'=> true]);
+            endforeach;
+            return response()->json(['status' => 'success']);
+        }
+    }
+    // /RELEASE ALL APPROVED SCHEDULES
+
     // SCHEDULE(After release)
     // POSTPONE
     // Load schedule details to modal
