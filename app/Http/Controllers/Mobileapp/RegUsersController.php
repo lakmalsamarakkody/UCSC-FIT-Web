@@ -36,7 +36,7 @@ class RegUsersController extends Controller
                   'students.reg_year',
                   'students.id',
                   'students.first_name',
-                  'students.updated_at',
+                  'student_registrations.updated_at',
                   'student_registrations.registered_at',
                 
               );
