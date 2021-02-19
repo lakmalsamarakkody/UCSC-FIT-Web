@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Subject;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 class SubjectController extends Controller
 {
    function subjectDetails(){
@@ -13,15 +14,16 @@ class SubjectController extends Controller
    }
 
    function subjectresult($id,$year=0,$month=''){
+    $now = Carbon::now();
     $ar=array();
        if($year==0){
 
-           $year=idate('Y');
+           $year=$now->year;
 
 
        }
        if($month==''){
-        $month=date("F", mktime(0, 0, 0, 0, 10));
+        $month=$now->month;
         echo $month;
        }
    $sheduleIds=DB::table('exam_schedules')
