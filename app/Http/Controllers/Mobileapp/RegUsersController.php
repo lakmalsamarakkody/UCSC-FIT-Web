@@ -10,33 +10,48 @@ use Hamcrest\Core\HasToString;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Illuminate\Support\Facades\DB;
 use function PHPSTORM_META\type;
+use Carbon\Carbon;
 
 class RegUsersController extends Controller
 {
-    function countRegUser(){
+ 
+    function countRegUser($year=0,$month=''){
+        $now = Carbon::now();
+        if($year==0){
+
+            $year=$now->year;
+ 
+ 
+        }
+        if($month==''){
+          
+            $month= $now->month;
+        }
         $data=DB::table('students')
-              ->where('students.reg_year',idate('Y'))
+               ->join('student_registrations','students.id',"=",'student_registrations.student_id')
+              ->whereYear('student_registrations.registered_at', $year)
+              ->whereMonth('student_registrations.registered_at', $month)
               ->orderBy('updated_at', 'desc')
               ->select(
                   'students.reg_year',
+                  'students.id',
                   'students.first_name',
-                  'students.updated_at'
-
+                  'students.updated_at',
+                  'student_registrations.registered_at',
+                
               );
-
-
-       return [
+       
+       return 
+       [
             "yearReg"=>$data->count(),
-            'Data'=>$data->first(),
-
+            'Data'=>$data->first()
        ];
 
 
-
-
-
-
     }
+
+
+
     function activeStudents(){
         $data=DB::table('student_registrations')
 
