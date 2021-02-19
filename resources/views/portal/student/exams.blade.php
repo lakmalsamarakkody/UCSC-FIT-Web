@@ -35,11 +35,11 @@
                       <tbody id="shedulesBeforeReleaseTblBody">
                         @foreach ($exams_to_apply as $exam_apply)
                         <tr>
-                          <td><input type="checkbox" id="applyExam" name="applyExam" class="Check" value="{{$exam_apply->id}}" /></td>
-                          <td><input type="text" id="applySubject" name="applySubject" value="{{ $exam_apply->subject->name }}" class="applySubject form-control" readonly /></td>
-                          <td><input type="text" id="applySubject" name="applySubject" value="{{ $exam_apply->examType->name }}" class="applyExamType form-control" readonly /></td>
-                          <td><select name="applyMonth" id="applyMonth" class="requestedExamMonth form-control">
-                            <option value="" selected hidden disabled>Select Requested Month</option>
+                          <td><input type="checkbox" name="applyExamCheck[]" class="apply-exam-check" value="{{$exam_apply->id}}" /></td>
+                          <td><input type="text" name="applySubject[]" value="{{ $exam_apply->subject_id }}" class="apply-subject" hidden />{{ $exam_apply->subject->name }}</td>
+                          <td><input type="text" name="applyExamType[]" value="{{ $exam_apply->exam_type_id }}" class="apply-exam-type form-control" hidden />{{ $exam_apply->examType->name }}</td>
+                          <td><select name="requestedExam" class="requested-exam form-control">
+                            <option value="" selected hidden disabled>Select Requested Exam</option>
                             @foreach ($exams as $exam)
                                 <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
                             @endforeach

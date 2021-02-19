@@ -7,6 +7,7 @@ use App\Models\Exam;
 use App\Models\Exam\Schedule;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
+use App\Models\Student\hasExam;
 use App\Models\Support\Fee;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
@@ -51,11 +52,29 @@ class ExamsController extends Controller
 
   public function applyForExams(Request $request)
   {
+    $checked_exam_array = $request->applyExamCheck;
+    foreach($request->applySubject as $key=>$value):
+      if(in_array($request->applySubject[$key], $checked_exam_array)):
+        $applied_exam = new hasExam();
+        $applied_exam->exam_schedule_id = 1;
+        $applied_exam->student_id = $request->student_id;
+        $applied_exam->subject_id = $request->applySubject[$key];
+        $applied_exam->exam_type_id = $request->applyExamType[$key];
+        $applied_exam->requested_exam_id = $request->requestedExam[$key];
+        $applied_exam->payment_id = 1;
+        $applied_exam->save();
+      endif;
+    endforeach;
+    return response()->json(['status'=>'success']);
+
+
     // Validate form data
-    $apply_exam_validator = Validator::make($request->all(), [
+    // $apply_exam_validator = Validator::make($request->all(), [
       
 
-    ]);
-    return response()->json(['success']);
+    // ]);
+    // return response()->json(['success']);
+
+    // dd($request->all());
   }
 }
