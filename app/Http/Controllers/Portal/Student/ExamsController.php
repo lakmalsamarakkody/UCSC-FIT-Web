@@ -56,9 +56,11 @@ class ExamsController extends Controller
     foreach($request->applySubject as $key=>$value):
       if(in_array($request->applySubject[$key], $checked_exam_array)):
         $applied_exam = new hasExam();
+        $subject = Fee::where('id',$request->applySubject[$key])->first();
+        
         $applied_exam->exam_schedule_id = 1;
         $applied_exam->student_id = $request->student_id;
-        $applied_exam->subject_id = $request->applySubject[$key];
+        $applied_exam->subject_id = $subject->subject_id;
         $applied_exam->exam_type_id = $request->applyExamType[$key];
         $applied_exam->requested_exam_id = $request->requestedExam[$key];
         $applied_exam->payment_id = 1;
@@ -66,14 +68,6 @@ class ExamsController extends Controller
       endif;
     endforeach;
     return response()->json(['status'=>'success']);
-
-
-    // Validate form data
-    // $apply_exam_validator = Validator::make($request->all(), [
-      
-
-    // ]);
-    // return response()->json(['success']);
 
     // dd($request->all());
   }
