@@ -30,7 +30,7 @@ Route::post("login",[MobileLogin::class, 'login']);
 Route::group(['middleware'=>['auth:sanctum']],function(){
 
     Route::post("logout",[MobileLogin::class, 'logout']);
-    Route::get("reguserCount",[RegUsersController::class,'countRegUser']);
+    Route::get("reguserCount/{year?}/{month?}",[RegUsersController::class,'countRegUser']);
     Route::get("active",[RegUsersController::class,'activeStudents']);
     Route::get('examSchedule',[StudentExamController::class,'examSchedule']);
     Route::get('currentExam',[StudentExamController::class,'currentExam']);
