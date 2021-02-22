@@ -40,6 +40,7 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
     Route::get('searchStudentsbyRegNo/{regNo?}',[StduentDetailsController::class,'searchStudentsbyRegNo']);
     Route::get('subjectDetails',[SubjectController::class,'subjectDetails']);
     Route::get('subjectresult/{id}/{year?}/{month?}',[SubjectController::class,'subjectresult']);
+    Route::get('fetchscheduleIds/{id}/{year?}/{month?}',[SubjectController::class,'fetchscheduleIds']);
     Route::get('resultoverview/{year?}',[ResultOverviewController::class,'resultoverview']);
 
 
