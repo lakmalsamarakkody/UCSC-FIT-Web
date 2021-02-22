@@ -24,7 +24,7 @@ class SubjectController extends Controller
        }
        if($month==''){
         $month=$now->month;
-        echo $month;
+       
        }
    $sheduleIds=DB::table('exam_schedules')
     ->join('subjects','exam_schedules.subject_id',"=",'subjects.id')
@@ -98,4 +98,36 @@ class SubjectController extends Controller
 
 
 }
+          function fetchscheduleIds($id,$year=0,$month=''){
+
+            $now = Carbon::now();
+            $ar=array();
+               if($year==0){
+        
+                   $year=$now->year;
+        
+        
+               }
+               if($month==''){
+                $month=$now->month;
+              
+               }
+           $sheduleIds=DB::table('exam_schedules')
+            ->join('subjects','exam_schedules.subject_id',"=",'subjects.id')
+             ->join('exams','exam_schedules.exam_id',"=",'exams.id')
+             ->join('exam_types',"exam_schedules.exam_type_id","=",'exam_types.id')
+            ->where('subjects.id',$id)
+            ->where('exams.year',$year)
+             ->where('exams.month',$month)
+            ->select(
+                'subjects.name',
+                'subjects.code',
+                'exam_schedules.date',  
+                 'exams.year',
+                 'exams.month',
+                 'exam_schedules.id',
+                 'exam_types.name'
+            )->get();
+            return $sheduleIds;
+          }
 }
