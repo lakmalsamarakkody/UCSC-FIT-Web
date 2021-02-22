@@ -13,9 +13,43 @@
 
     <!-- CONTENT -->
     <div class="col-lg-12 payment min-vh-100">
-      <div class="row row-cols-1 row-cols-md-2">
+      {{-- PAYMENT DETAILS --}}
+      <div class="row row-cols-1">
+        <div class="col mb-3">
+          <div class="card w-100 h-100">
+            <div class="card-header">Exam fees for Applied Subjects</div>
+            <div  class="card-body">
+              <div class="col-12">
+                <div class="row">
+                  @foreach ($exam_details as $exam)
+                    <div class="col-lg-3 col-6"><b>Subject Code</b></div>
+                    <div class="col-lg-3 col-6">FIT</div>
+  
+                    <div class="col-lg-3 col-6"><b>Subject Name</b></div>
+                    <div class="col-lg-3 col-6">Subject</div>
+  
+                    <div class="col-lg-3 col-6"><b>Exam Type</b></div>
+                    <div class="col-lg-3 col-6">E-test</div>
+  
+                    <div class="col-lg-3 col-6"><b>Exam Fee</b></div>
+                    <div class="col-lg-3 col-6">2800LKR</div>
+  
+                    <hr width="100%"/>
+                  @endforeach
 
-        {{-- PAYMENT DETAILS --}}
+                  <div class="col-12 text-center" style="color: var(--color-secondary); font-size: 1.1rem;">
+                    <b>Sum of Exam fees to pay:</b> 5400LKR
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{-- PAYMENT DETAILS --}}
+
+      <div class="row row-cols-1 row-cols-md-2">
+        {{-- /PAYMENT DETAILS --}}
         <div class="col mb-3">
           <div class="card w-100 h-100" >
             <div class="card-header">Payment Details</div>

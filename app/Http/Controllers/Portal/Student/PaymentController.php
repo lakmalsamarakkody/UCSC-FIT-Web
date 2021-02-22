@@ -8,6 +8,7 @@ use App\Models\Student\Payment;
 use App\Models\Support\Bank;
 use App\Models\Support\Fee;
 use Illuminate\Http\Request;
+use App\Models\Student\hasExam;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -34,7 +35,14 @@ class PaymentController extends Controller
    */
   public function exam()
   {
-    return view('portal/student/payment/exam');
+    $student = Student::where('user_id',Auth::user()->id)->first();
+    $exam_details = hasExam::where('student_id', $student->id)->where('mark', null)->where('result', 0)->get();
+    
+    
+    return view('portal/student/payment/exam', [
+      'student'=> $student,
+      'exam_details'=>$exam_details,
+    ]);
   }  
   public function registration()
   {

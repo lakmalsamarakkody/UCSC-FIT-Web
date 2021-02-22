@@ -83,7 +83,7 @@ apply_for_exams = (student_id) => {
                         })
                         .then((result) => {
                             if(result.isConfirmed) {
-                                location.reload();
+                                window.open("{{ url('/portal/student/payment/exam') }}", '_self');
                             }
                         });
                     }
