@@ -9,7 +9,12 @@ apply_for_exams = (student_id) => {
     })
     .then((result) => {
         if(result.isConfirmed) {
-            // Form payload
+            // Remove previous validation error messages
+            // $('.form-control').removeClass('is-invalid');
+            // $('.invalid-feedback').html('');
+            // $('.invalid-feedback').hide();
+
+            // Construct arrays of checked exams
             const applyExamCheck = [];
             const applySubject = [];
             const applyExamType = [];
@@ -55,7 +60,22 @@ apply_for_exams = (student_id) => {
                     console.log('Success in apply for exams ajax.');
                     $('#btnApplyForExams').removeAttr('disabled', 'disabled');
                     $('#spinnerBtnApplyForExams').addClass('d-none');
-                    if(data['status'] == 'success') {
+                    // if(data['errors']) {
+                    //     console.log('Errors in validating data.');
+                    //     $.each(data['errors'], function(key, value) {
+                    //         $('#error-'+key).show();
+                    //         $('#'+key).addClass('is-invalid');
+                    //         $('#error-'+key).append('<strong>'+value+'</strong>');
+                    //     });
+                    // }
+                    if(data['status'] == 'unselected') {
+                        console.log('Exams have not been selected.');
+                        SwalNotificationWarningAutoClose.fire({
+                            title: 'Unselected!',
+                            text: 'You did not select any exam.',
+                        })
+                    }
+                    else if(data['status'] == 'success') {
                         console.log('Succee in apply for exam.');
                         SwalDoneSuccess.fire({
                             title: 'Success!',
@@ -78,8 +98,8 @@ apply_for_exams = (student_id) => {
         }
         else{
             SwalNotificationWarningAutoClose.fire({
-            title: 'Cancelled!',
-            text: 'Selected exams have not been applied.',
+                title: 'Cancelled!',
+                text: 'Selected exams have not been applied.',
             })
         }
     });

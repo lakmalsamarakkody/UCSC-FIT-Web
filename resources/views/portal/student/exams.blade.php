@@ -38,12 +38,15 @@
                           <td><input type="checkbox" name="applyExamCheck[]" class="apply-exam-check" value="{{$exam_apply->id}}" /></td>
                           <td><input type="text" name="applySubject[]" value="{{ $exam_apply->id }}" class="apply-subject" hidden />{{ $exam_apply->subject->name }}</td>
                           <td><input type="text" name="applyExamType[]" value="{{ $exam_apply->exam_type_id }}" class="apply-exam-type form-control" hidden />{{ $exam_apply->examType->name }}</td>
-                          <td><select name="requestedExam" class="requested-exam form-control">
+                          <td>
+                            <select name="requestedExam" class="requested-exam form-control">
                             <option value="" selected hidden disabled>Select Requested Exam</option>
                             @foreach ($exams as $exam)
                                 <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
                             @endforeach
-                          </select></td>
+                          </select>
+                          <span class="invalid-feedback" id="error-requestedExam" role="alert"></span>
+                        </td>
                         </tr>
                         @endforeach
                       </tbody>
@@ -103,7 +106,7 @@
                   {{-- <pre>
                     {{$exams}}
                   </pre> --}}
-                  @foreach ($schedule as $exam)
+                  @foreach ($schedules as $exam)
                   <div class="accordion" id="accordion_{{$exam->exam_id}}">
                     <div class="card mb-4 shadow-sm">
                       <div class="card-header text-secondary" id="heading_{{$exam->exam_id}}">
@@ -148,7 +151,7 @@
                   {{-- <pre>
                     {{$exams}}
                   </pre> --}}
-                  @foreach ($schedule as $exam)
+                  @foreach ($schedules as $exam)
                   <div class="accordion" id="accordion_{{$exam->exam_id}}">
                     <div class="card mb-4 shadow-sm">
                       <div class="card-header text-secondary" id="heading_{{$exam->exam_id}}">
@@ -190,7 +193,7 @@
               <h5>2020 November</h5>
 
               <ul class="list-group list-group-flush">
-                @foreach ($schedule as $exam)
+                @foreach ($schedules as $exam)
                 <li class="list-group-item">
                   <div class="row">
                     <div class="col-12 col-md-4">FIT {{ $exam->subject->code }}</div>

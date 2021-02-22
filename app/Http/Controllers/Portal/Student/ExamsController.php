@@ -37,13 +37,13 @@ class ExamsController extends Controller
   {
     $today = Carbon::today();
 
-    $schedule=Schedule::orderby('date')->take(6)->get();
+    $schedules=Schedule::orderby('date')->take(6)->get();
     $exams_to_apply = Fee::where('purpose', 'exam')->get();
     $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->get();
     $student = Student::where('user_id',Auth::user()->id)->first();
     
     return view('portal/student/exams',[
-      'schedule' => $schedule,
+      'schedules' => $schedules,
       'exams' =>$exams,
       'exams_to_apply' => $exams_to_apply,
       'student' => $student
@@ -53,21 +53,28 @@ class ExamsController extends Controller
   public function applyForExams(Request $request)
   {
     $checked_exam_array = $request->applyExamCheck;
-    foreach($request->applySubject as $key=>$value):
-      if(in_array($request->applySubject[$key], $checked_exam_array)):
-        $applied_exam = new hasExam();
-        $subject = Fee::where('id',$request->applySubject[$key])->first();
-        
-        $applied_exam->exam_schedule_id = 1;
-        $applied_exam->student_id = $request->student_id;
-        $applied_exam->subject_id = $subject->subject_id;
-        $applied_exam->exam_type_id = $request->applyExamType[$key];
-        $applied_exam->requested_exam_id = $request->requestedExam[$key];
-        $applied_exam->payment_id = 1;
-        $applied_exam->save();
-      endif;
-    endforeach;
-    return response()->json(['status'=>'success']);
+    
+    // Check if exams are selected
+    if($checked_exam_array == null):
+      return response()->json(['status'=>'unselected']);
+    
+    else:
+      foreach($request->applySubject as $key=>$value):
+        if(in_array($request->applySubject[$key], $checked_exam_array)):
+          $applied_exam = new hasExam();
+          $subject = Fee::where('id',$request->applySubject[$key])->first();
+
+          $applied_exam->exam_schedule_id = 1;
+          $applied_exam->student_id = $request->student_id;
+          $applied_exam->subject_id = $subject->subject_id;
+          $applied_exam->exam_type_id = $request->applyExamType[$key];
+          $applied_exam->requested_exam_id = $request->requestedExam[$key];
+          $applied_exam->payment_id = 1;
+          $applied_exam->save();
+        endif;
+      endforeach;
+      return response()->json(['status'=>'success']);
+    endif;
 
     // dd($request->all());
   }
