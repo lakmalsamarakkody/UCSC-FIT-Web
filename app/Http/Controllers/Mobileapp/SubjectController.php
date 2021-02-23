@@ -76,8 +76,9 @@ class SubjectController extends Controller
     
         "Shedule ID"=>$data->first()->id,
         "typeName"=>$data->first()->name,
+        "RegStu"=>$data->count(),
          "NotAB"=>$data->where('student_exams.status','OK')->count(),
-         "RegStu"=>$data->count(),
+        
 
          "Pass"=>$data->where('student_exams.result','>',0)->orderBy('exams.month')->count(),
          "fail"=>$data->where('student_exams.result','<',1)->count(),
