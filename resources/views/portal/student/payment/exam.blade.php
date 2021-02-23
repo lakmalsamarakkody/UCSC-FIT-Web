@@ -22,22 +22,22 @@
               <div class="col-12">
                 <div class="row">
                   @foreach ($exam_details as $exam)
-                    <div class="col-lg-3 col-6"><b>Subject Code</b></div>
+                    <div class="col-lg-3 col-6 div-title">Subject Code:</div>
                     <div class="col-lg-3 col-6">FIT</div>
   
-                    <div class="col-lg-3 col-6"><b>Subject Name</b></div>
+                    <div class="col-lg-3 col-6 div-title">Subject Name:</div>
                     <div class="col-lg-3 col-6">Subject</div>
   
-                    <div class="col-lg-3 col-6"><b>Exam Type</b></div>
+                    <div class="col-lg-3 col-6 div-title">Exam Type:</div>
                     <div class="col-lg-3 col-6">E-test</div>
   
-                    <div class="col-lg-3 col-6"><b>Exam Fee</b></div>
+                    <div class="col-lg-3 col-6 div-title">Exam Fee:</div>
                     <div class="col-lg-3 col-6">2800LKR</div>
   
                     <hr width="100%"/>
                   @endforeach
 
-                  <div class="col-12 text-center" style="color: var(--color-secondary); font-size: 1.1rem;">
+                  <div class="col-12 text-center" id="div-total-fees">
                     <b>Sum of Exam fees to pay:</b> 5400LKR
                   </div>
                 </div>

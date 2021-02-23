@@ -29,7 +29,7 @@
                           <th></th>
                           <th>Subject Name</th>
                           <th>Exam Type</th>
-                          <th>Requested Month</th>
+                          <th>Requested Exam Month</th>
                         </tr>
                       </thead>
                       <tbody id="shedulesBeforeReleaseTblBody">

@@ -36,7 +36,7 @@ class PaymentController extends Controller
   public function exam()
   {
     $student = Student::where('user_id',Auth::user()->id)->first();
-    $exam_details = hasExam::where('student_id', $student->id)->where('mark', null)->where('result', 0)->get();
+    $exam_details = hasExam::where('student_id', $student->id)->where('mark', null)->where('result', 0)->take(5)->get();
     
     
     return view('portal/student/payment/exam', [

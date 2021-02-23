@@ -33,3 +33,15 @@
   color: var(--sub-text-color);
   font-size: 0.9rem;
 }
+
+/* Exam payment */
+.payment .card .card-body .div-title {
+  color: var(--main-text-color);
+  font-size: 0.9rem;
+}
+
+.payment .card .card-body #div-total-fees {
+  color: var(--color-secondary);
+   font-size: 1.1rem;
+}
+/* /Exam payment */
