@@ -45,7 +45,7 @@ class StudentExamController extends Controller
         ->select('exam_schedules.id')
         ->take(1)->get();
 
-
+             // echo $scheId[0]->id;
 
         $data=DB::table('exam_schedules')
         ->join('subjects','exam_schedules.subject_id',"=",'subjects.id')
@@ -69,15 +69,18 @@ class StudentExamController extends Controller
         array_push
         ($ar,
            array(
-             "NotAB"=>$data->where('student_exams.status','OK')->count(),
+               
              "RegStu"=>$data->count(),
+             "NotAB"=>$data->where('student_exams.status','OK')->count(),
              "details"=>$data->select
              ('subjects.name',
              'subjects.code',
              'subjects.id',
              'exams.year',
              'exam_schedules.date',
-             'student_exams.updated_at')->first(),
+             'student_exams.updated_at')
+             ->orderBy('student_exams.updated_at')
+             ->first(),
 
 
            )
