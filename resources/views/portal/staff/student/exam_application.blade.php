@@ -51,7 +51,7 @@
                     <td>2021/12/23</td>
                     <td>
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Applicant Details" data-toggle="modal" data-target="#modal-view-exam-applicant"><i class="fas fa-user">View</i></button>
+                        <button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Applicant Details" data-toggle="modal" data-target="#modal-view-exam-application"><i class="fas fa-user">View</i></button>
                       </div>
                     </td>
                   </tr>

@@ -30,7 +30,7 @@
       <div class="row">
 
         <h5 class="col-12 title font-weight-bold px-0">REGISTRATIONS</h5>
-        <!-- SUMMARY CARDS -->
+        <!-- SUMMARY CARDS(REGISTRATION) -->
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="{{ route('student.application') }}">
             <div class="card card-dash shadow green-none bg-primary" style="max-width: 18rem;">
@@ -102,14 +102,15 @@
             </div>
           </a>
         </div>
-        <!-- SUMMARY CARDS -->
-
+        <!-- /SUMMARY CARDS(REGISTRATION) -->
       </div>
+
+      {{-- SUMMARY CARDS(EXAMS) --}}
       <div class="row">
         <h5 class="col-12 title font-weight-bold mt-5 px-0">EXAMS</h5>
 
         <div class="col-xl-2 col-lg-4 p-1">
-          <a class="" href="{{ route('students') }}">
+          <a class="" href="{{ route('student.application.exams') }}">
             <div class="card card-dash shadow black-none bg-success" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $totalRegistered }}</div>
@@ -144,6 +145,7 @@
           </a>
         </div>
       </div>
+      {{-- /SUMMARY CARDS(EXAMS) --}}
       
       <div class="row mt-3">        
         <div class="col-lg-6 col-md-12 px-1">

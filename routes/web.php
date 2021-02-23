@@ -95,7 +95,7 @@ Route::post('/portal/staff/student/application/registerStudent', [App\Http\Contr
 Route::get('/portal/staff/student/registered', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'registered'])->name('student.application.registered');
 
 // EXAM CARDS
-Route::get('/portal/staff/student/exams/application', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'index'])->name('student.exams');
+Route::get('/portal/staff/student/exams/application', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'index'])->name('student.application.exams');
 // /HOME PAGE
 
 // EXAMS PAGE
