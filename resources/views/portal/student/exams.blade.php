@@ -23,34 +23,37 @@
                 <div class="card-body">
                   <small class="mb-4">*Please check the exams you want to apply and select the requested month for each.</small>
                   <form action="" id="formApplyExam">
-                    <table class="table mt-4">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>Subject Name</th>
-                          <th>Exam Type</th>
-                          <th>Requested Exam Month</th>
-                        </tr>
-                      </thead>
-                      <tbody id="shedulesBeforeReleaseTblBody">
-                        @foreach ($exams_to_apply as $exam_apply)
-                        <tr>
-                          <td><input type="checkbox" name="applyExamCheck[]" class="apply-exam-check" value="{{$exam_apply->id}}" /></td>
-                          <td><input type="text" name="applySubject[]" value="{{ $exam_apply->id }}" class="apply-subject" hidden />{{ $exam_apply->subject->name }}</td>
-                          <td><input type="text" name="applyExamType[]" value="{{ $exam_apply->exam_type_id }}" class="apply-exam-type form-control" hidden />{{ $exam_apply->examType->name }}</td>
-                          <td>
-                            <select name="requestedExam" class="requested-exam form-control">
-                            <option value="" selected hidden disabled>Select Requested Exam</option>
-                            @foreach ($exams as $exam)
-                                <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
-                            @endforeach
-                          </select>
-                          <span class="invalid-feedback" id="error-requestedExam" role="alert"></span>
-                        </td>
-                        </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
+                    <div class="table-responsive-lg mt-4">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th>Subject Name</th>
+                            <th>Exam Type</th>
+                            <th>Requested Exam Month</th>
+                          </tr>
+                        </thead>
+                        <tbody id="shedulesBeforeReleaseTblBody">
+                          @foreach ($exams_to_apply as $exam_apply)
+                          <tr>
+                            <td><input type="checkbox" name="applyExamCheck[]" class="apply-exam-check" value="{{$exam_apply->id}}" /></td>
+                            <td><input type="text" name="applySubject[]" value="{{ $exam_apply->id }}" class="apply-subject" hidden />{{ $exam_apply->subject->name }}</td>
+                            <td><input type="text" name="applyExamType[]" value="{{ $exam_apply->exam_type_id }}" class="apply-exam-type form-control" hidden />{{ $exam_apply->examType->name }}</td>
+                            <td>
+                              <select name="requestedExam" class="requested-exam form-control">
+                              <option value="" selected hidden disabled>Select Requested Exam</option>
+                              @foreach ($exams as $exam)
+                                  <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
+                              @endforeach
+                            </select>
+                            <span class="invalid-feedback" id="error-requestedExam" role="alert"></span>
+                          </td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                    
                     {{-- <div class="form-row align-items-center"> --}}
                       {{-- @foreach ($exams_to_apply as $exam_apply)
                       <div class="col-1">

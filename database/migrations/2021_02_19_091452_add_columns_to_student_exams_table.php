@@ -17,6 +17,7 @@ class AddColumnsToStudentExamsTable extends Migration
             $table->integer('subject_id')->after('student_id');
             $table->integer('exam_type_id')->after('subject_id');
             $table->integer('requested_exam_id')->after('exam_type_id');
+            $table->text('declined_message')->nullable()->after('requested_exam_id');
         });
     }
 
@@ -31,6 +32,7 @@ class AddColumnsToStudentExamsTable extends Migration
             $table->dropColumn('subject_id');
             $table->dropColumn('exam_type_id');
             $table->dropColumn('requested_exam_id');
+            $table->dropColumn('declined_message');
         });
     }
 }

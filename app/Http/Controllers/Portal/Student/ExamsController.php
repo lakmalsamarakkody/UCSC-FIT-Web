@@ -64,12 +64,10 @@ class ExamsController extends Controller
           $applied_exam = new hasExam();
           $subject = Fee::where('id',$request->applySubject[$key])->first();
 
-          $applied_exam->exam_schedule_id = 1;
           $applied_exam->student_id = $request->student_id;
           $applied_exam->subject_id = $subject->subject_id;
           $applied_exam->exam_type_id = $request->applyExamType[$key];
           $applied_exam->requested_exam_id = $request->requestedExam[$key];
-          $applied_exam->payment_id = 1;
           $applied_exam->save();
         endif;
       endforeach;
