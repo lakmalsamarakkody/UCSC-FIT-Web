@@ -21,23 +21,23 @@
             <div class="card-body">
               <div class="card w-100 shadow-none border border-secondary">
                 <div class="card-body">
-                  <small class="mb-4">*Please check the exams you want to apply and select the requested month for each.</small>
+                  <small class="mb-4">*Please select the exams you want to apply(using checkboxes in left side) and select the requested month for each exam you select.</small>
                   <form action="" id="formApplyExam">
-                    <div class="table-responsive-lg mt-4">
+                    <div class="table-responsive mt-4">
                       <table class="table table-hover">
                         <thead>
                           <tr>
                             <th></th>
-                            <th>Subject Name</th>
+                            <th>Subject</th>
                             <th>Exam Type</th>
                             <th>Requested Exam Month</th>
                           </tr>
                         </thead>
-                        <tbody id="shedulesBeforeReleaseTblBody">
+                        <tbody>
                           @foreach ($exams_to_apply as $exam_apply)
                           <tr>
                             <td><input type="checkbox" name="applyExamCheck[]" class="apply-exam-check" value="{{$exam_apply->id}}" /></td>
-                            <td><input type="text" name="applySubject[]" value="{{ $exam_apply->id }}" class="apply-subject" hidden />{{ $exam_apply->subject->name }}</td>
+                            <td><input type="text" name="applySubject[]" value="{{ $exam_apply->id }}" class="apply-subject" hidden />FIT {{ $exam_apply->subject->code}} - {{ $exam_apply->subject->name }}</td>
                             <td><input type="text" name="applyExamType[]" value="{{ $exam_apply->exam_type_id }}" class="apply-exam-type form-control" hidden />{{ $exam_apply->examType->name }}</td>
                             <td>
                               <select name="requestedExam" class="requested-exam form-control">
@@ -97,79 +97,33 @@
         </div>
         {{-- /APPLY FOR EXAMS --}}
 
-        <!-- UPCOMING EXAM SCHEDULE -->
-        <div class="col-12 mt-4 px-0">
-          <div class="card">
-            <div class="card-header">Upcoming Schedules</div>
-            <div class="card-body">
-
-              <div class="card w-100 shadow-none border border-secondary">
-                <div class="card-header text-primary">2020 December</div>
-                <div class="card-body">
-                  {{-- <pre>
-                    {{$exams}}
-                  </pre> --}}
-                  @foreach ($schedules as $exam)
-                  <div class="accordion" id="accordion_{{$exam->exam_id}}">
-                    <div class="card mb-4 shadow-sm">
-                      <div class="card-header text-secondary" id="heading_{{$exam->exam_id}}">
-                        FIT {{ $exam->subject->code }} - {{ $exam->subject->name }} ({{ $exam->type->exam_type }})
-                        <div class="btn-group float-right">
-                          <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#collapse_{{$exam->exam_id}}" aria-expanded="true" aria-controls="collapse_{{$exam->exam_id}}"><i class="far fa-eye"></i> View</button>
-                        </div>
-                      </div>
-                  
-                      <div id="collapse_{{$exam->exam_id}}" class="collapse" aria-labelledby="heading_{{$exam->exam_id}}" data-parent="#accordion_{{$exam->exam_id}}">
-                        <div class="card-body text-md-center border-top border-secondary">
-                          <div class="row">
-                            <div class="col-12 col-md-4"> Date : {{ $exam->date }}</div>
-                            <div class="col-12 col-md-4"> Start Time : {{ $exam->start_time }}</div>
-                            <div class="col-12 col-md-4"> End Time : {{ $exam->end_time }}</div>
-                            <div class="col-12 offset-md-4 col-md-4 my-3">
-                              <button type="button" class="btn btn-outline-primary w-100" data-tooltip="tooltip" data-placement="bottom" title="Apply Exam" onclick="window.open('/portal/student/payment')"><i class="far fa-hand-point-right"></i> Apply</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  @endforeach
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <!-- /UPCOMING EXAM SCHEDULE-->
-
         <!-- APPLIED EXAMS TABLE -->
-        <div class="col-12 mt-4 px-0">
+        {{-- <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">Applied Exams</div>
             <div class="card-body">
 
               <div class="card w-100 shadow-none border border-secondary">
                 <div class="card-header text-primary">2020 December</div>
-                <div class="card-body">
+                <div class="card-body"> --}}
                   {{-- <pre>
                     {{$exams}}
                   </pre> --}}
-                  @foreach ($schedules as $exam)
-                  <div class="accordion" id="accordion_{{$exam->exam_id}}">
+                  {{-- @foreach ($applied_exams as $applied_exam) --}}
+                  {{-- Replace with relevant data after make the relationships --}}
+                  {{-- <div class="accordion" id="accordion_{{$applied_exam->id}}">
                     <div class="card mb-4 shadow-sm">
-                      <div class="card-header text-secondary" id="heading_{{$exam->exam_id}}">
-                        FIT {{ $exam->subject->code }} - {{ $exam->subject->name }} ({{ $exam->type->exam_type }})
+                      <div class="card-header text-secondary" id="heading_{{$applied_exam->id}}">
+                        FIT {{ $applied_exam->subject_id }} - {{ $applied_exam->subject_id }} ({{ $applied_exam->exam_type_id }})
                         <div class="btn-group float-right">
-                          <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#collapse_{{$exam->exam_id}}" aria-expanded="true" aria-controls="collapse_{{$exam->exam_id}}"><i class="far fa-eye"></i> View</button>
+                          <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#collapse_{{$applied_exam->id}}" aria-expanded="true" aria-controls="collapse_{{$applied_exam->id}}"><i class="far fa-eye"></i> View</button>
                         </div>
                       </div>
                   
-                      <div id="collapse_{{$exam->exam_id}}" class="collapse" aria-labelledby="heading_{{$exam->exam_id}}" data-parent="#accordion_{{$exam->exam_id}}">
+                      <div id="collapse_{{$applied_exam->id}}" class="collapse" aria-labelledby="heading_{{$applied_exam->id}}" data-parent="#accordion_{{$applied_exam->id}}">
                         <div class="card-body text-md-center border-top border-secondary">
                           <div class="row">
-                            <div class="col-12 col-md-4"> Date : {{ $exam->date }}</div>
-                            <div class="col-12 col-md-4"> Start Time : {{ $exam->start_time }}</div>
-                            <div class="col-12 col-md-4"> End Time : {{ $exam->end_time }}</div>
+                            <div class="col-12 col-md-4"> Exam Requested In: {{ $applied_exam->requested_exam_id }}</div>
                             <div class="col-12 offset-md-4 col-md-4 my-3">
                               <button type="button" class="btn btn-outline-danger w-100" data-tooltip="tooltip" data-placement="bottom" title="Cancel Exam"><i class="fas fa-times"></i> Cancel</button>
                             </div>
@@ -184,36 +138,126 @@
 
             </div>
           </div>
+        </div> --}}
+
+        <div class="col-12 mt-4 px-0">
+          <div class="card">
+            <div class="card-header">Applied Exams</div>
+            <div class="card-body">
+              <div class="card w-100 shadow-none border border-secondary">
+                <div class="card-body">
+                  <div class="table-responsive-md mt-4">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Subject Code</th>
+                          <th>Subject Name</th>
+                          <th>Exam Type</th>
+                          <th>Requested Exam On</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach ($applied_exams as $applied_exam)
+                        <tr>
+                          <td>{{$applied_exam->subject_id}}</td>
+                          <td>{{$applied_exam->subject_id}}</td>
+                          <td>{{$applied_exam->exam_type_id}}</td>
+                          <td>{{$applied_exam->requested_exam_id}}</td>
+                          {{-- <td>FIT 103</td>
+                          <td>ICT Applications</td>
+                          <td>Practical</td>
+                          <td>April 2021</td> --}}
+                          <td>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Cancel Exam"><i class="fas fa-times"></i> Cancel</button>
+                            </div>
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- /APPLIED EXAMS TABLE-->
 
-        <!-- FACED EXAMS TABLE -->
+        <!-- SCHEDULED EXAMS -->
         <div class="col-12 mt-4 px-0">
           <div class="card">
-            <div class="card-header">Faced Exams</div>
+            <div class="card-header">Scheduled Exams</div>
             <div class="card-body">
 
-              <h5>2020 November</h5>
-
-              <ul class="list-group list-group-flush">
-                @foreach ($schedules as $exam)
-                <li class="list-group-item">
-                  <div class="row">
-                    <div class="col-12 col-md-4">FIT {{ $exam->subject->code }}</div>
-                    <div class="col-12 col-md-4">{{ $exam->subject->name }} ({{ $exam->type->exam_type }})</div>
-                    <div class="col-12 col-md-4 text-md-right">
-                      <button type="button" class="btn btn-outline-danger w-100" data-tooltip="tooltip" data-placement="bottom" title="Upload Medical"><i class="fas fa-file-medical"></i> Upload medical</button>
+              <div class="card w-100 shadow-none border border-secondary">
+                <div class="card-header text-primary">2020 December</div>
+                <div class="card-body">
+                  {{-- <pre>
+                    {{$exams}}
+                  </pre> --}}
+                  @foreach ($scheduled_exams as $exam)
+                  <div class="accordion" id="accordion_{{$exam->id}}">
+                    <div class="card mb-4 shadow-sm">
+                      <div class="card-header text-secondary" id="heading_{{$exam->id}}">
+                        FIT {{ $exam->schedule->subject->code }} - {{ $exam->schedule->subject->name }} ({{ $exam->schedule->type->name }})
+                        <div class="btn-group float-right">
+                          <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}"><i class="far fa-eye"></i> View</button>
+                        </div>
+                      </div>
+                  
+                      <div id="collapse_{{$exam->id}}" class="collapse" aria-labelledby="heading_{{$exam->id}}" data-parent="#accordion_{{$exam->id}}">
+                        <div class="card-body text-md-center border-top border-secondary">
+                          <div class="row">
+                            <div class="col-12 col-md-4"> Date : {{ $exam->schedule->date }}</div>
+                            <div class="col-12 col-md-4"> Start Time : {{ $exam->schedule->start_time }}</div>
+                            <div class="col-12 col-md-4"> End Time : {{ $exam->schedule->end_time }}</div>
+                            {{-- <div class="col-12 offset-md-4 col-md-4 my-3">
+                              <button type="button" class="btn btn-outline-primary w-100" data-tooltip="tooltip" data-placement="bottom" title="Apply Exam" onclick="window.open('/portal/student/payment')"><i class="far fa-hand-point-right"></i> Apply</button>
+                            </div> --}}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  
-                </li>
-                @endforeach
-              </ul>
+                  @endforeach
+                </div>
+              </div>
 
             </div>
           </div>
         </div>
-        <!-- /FACED EXAMS TABLE-->
+        <!-- /SCHEDULED EXAMS-->
+
+        <!-- ABSENT EXAMS TABLE -->
+        <div class="col-12 mt-4 px-0">
+          <div class="card">
+            <div class="card-header">Absent Exams</div>
+            <div class="card-body">
+              <div class="card w-100 shadow-none border border-secondary">
+                <div class="card-header text-primary">2020 December</div>
+                <ul class="list-group list-group-flush">
+                  @foreach ($absent_exams as $exam)
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-12 col-md-3">FIT {{ $exam->schedule->subject->code }}</div>
+                      <div class="col-12 col-md-3">{{ $exam->schedule->subject->name }} ({{ $exam->schedule->type->name }})</div>
+                      <div class="col-12 col-md-3">{{$exam->schedule->date}}</div>
+                      <div class="col-12 col-md-3 text-md-right">
+                        <button type="button" class="btn btn-outline-danger w-100" data-tooltip="tooltip" data-placement="bottom" title="Upload Medical"><i class="fas fa-file-medical"></i> Upload medical</button>
+                      </div>
+                    </div>
+                    
+                  </li>
+                  @endforeach
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /ABSENT EXAMS TABLE-->
 
       </div>
     </div>

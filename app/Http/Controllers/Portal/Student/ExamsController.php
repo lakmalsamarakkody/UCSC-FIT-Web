@@ -37,16 +37,22 @@ class ExamsController extends Controller
   {
     $today = Carbon::today();
 
-    $schedules=Schedule::orderby('date')->take(6)->get();
+    // $schedules=Schedule::orderby('date')->take(6)->get();
     $exams_to_apply = Fee::where('purpose', 'exam')->get();
     $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->get();
     $student = Student::where('user_id',Auth::user()->id)->first();
+    $applied_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->get();
+    $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=' , null)->get();
+    $absent_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('status', 'AB' )->get();
     
     return view('portal/student/exams',[
-      'schedules' => $schedules,
+      // 'schedules' => $schedules,
       'exams' =>$exams,
       'exams_to_apply' => $exams_to_apply,
-      'student' => $student
+      'student' => $student,
+      'applied_exams' => $applied_exams,
+      'scheduled_exams' => $scheduled_exams,
+      'absent_exams' => $absent_exams
     ]);
   }
 
