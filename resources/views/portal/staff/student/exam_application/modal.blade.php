@@ -87,10 +87,11 @@
                                                                     <td>{{ $exam->subject_id }}</td>
                                                                     <td>{{ $exam->exam_type_id }}</td>
                                                                     <td>{{ $exam->requested_exam_id }}</td>
-                                                                    <td>{{ \Carbon\Carbon::createFromDate($exam->schedule->exam->year, $exam->schedule->exam->month)->monthName }} {{ $exam->schedule->exam->year }}</td>
+                                                                    {{-- <td>{{ \Carbon\Carbon::createFromDate($exam->schedule->exam->year, $exam->schedule->exam->month)->monthName }} {{ $exam->schedule->exam->year }}</td> --}}
+                                                                    <td>@if($exam->exam_schedule_id == null)Not yet scheduled @else {{ $exam->schedule->date }}@endif</td>
                                                                     <td>
                                                                         <div class="btn-group">
-                                                                            <button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i></button>
+                                                                            <button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam-{{$exam->id}}" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i></button>
                                                                             <button type="button" class="btn btn-outline-warning" id="btnDeclineAppliedExam" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Decline Exam"><i class="fas fa-times-circle"></i></button>
                                                                         </div>
                                                                     </td>
