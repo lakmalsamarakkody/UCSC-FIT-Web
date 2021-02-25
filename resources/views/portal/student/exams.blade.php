@@ -23,7 +23,7 @@
                 <div class="card-body">
                   <small class="mb-4">*Please select the exams you want to apply(using checkboxes in left side) and select the requested month for each exam you select.</small>
                   <form action="" id="formApplyExam">
-                    <div class="table-responsive mt-4">
+                    <div class="table-responsive-md mt-4">
                       <table class="table table-hover">
                         <thead>
                           <tr>
@@ -45,9 +45,9 @@
                               @foreach ($exams as $exam)
                                   <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
                               @endforeach
-                            </select>
-                            <span class="invalid-feedback" id="error-requestedExam" role="alert"></span>
-                          </td>
+                              </select>
+                              <span class="invalid-feedback" id="error-requestedExam" role="alert"></span>
+                            </td>
                           </tr>
                           @endforeach
                         </tbody>
@@ -146,7 +146,7 @@
             <div class="card-body">
               <div class="card w-100 shadow-none border border-secondary">
                 <div class="card-body">
-                  <div class="table-responsive-md mt-4">
+                  <div class="table-responsive-sm mt-4">
                     <table class="table">
                       <thead>
                         <tr>
@@ -160,10 +160,10 @@
                       <tbody>
                         @foreach ($applied_exams as $applied_exam)
                         <tr>
-                          <td>{{$applied_exam->subject_id}}</td>
-                          <td>{{$applied_exam->subject_id}}</td>
-                          <td>{{$applied_exam->exam_type_id}}</td>
-                          <td>{{$applied_exam->requested_exam_id}}</td>
+                          <td>FIT {{$applied_exam->subject->code}}</td>
+                          <td>{{$applied_exam->subject->name}}</td>
+                          <td>{{$applied_exam->type->name}}</td>
+                          <td>{{ \Carbon\Carbon::createFromDate($applied_exam->exam->year, $applied_exam->exam->month)->monthName}} {{ $applied_exam->exam->year }}</td>
                           {{-- <td>FIT 103</td>
                           <td>ICT Applications</td>
                           <td>Practical</td>
@@ -202,7 +202,7 @@
                   <div class="accordion" id="accordion_{{$exam->id}}">
                     <div class="card mb-4 shadow-sm">
                       <div class="card-header text-secondary" id="heading_{{$exam->id}}">
-                        FIT {{ $exam->schedule->subject->code }} - {{ $exam->schedule->subject->name }} ({{ $exam->schedule->type->name }})
+                        FIT {{ $exam->subject->code }} - {{ $exam->subject->name }} ({{ $exam->type->name }})
                         <div class="btn-group float-right">
                           <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}"><i class="far fa-eye"></i> View</button>
                         </div>
@@ -242,8 +242,8 @@
                   @foreach ($absent_exams as $exam)
                   <li class="list-group-item">
                     <div class="row">
-                      <div class="col-12 col-md-3">FIT {{ $exam->schedule->subject->code }}</div>
-                      <div class="col-12 col-md-3">{{ $exam->schedule->subject->name }} ({{ $exam->schedule->type->name }})</div>
+                      <div class="col-12 col-md-3">FIT {{ $exam->subject->code }}</div>
+                      <div class="col-12 col-md-3">{{ $exam->subject->name }} ({{ $exam->type->name }})</div>
                       <div class="col-12 col-md-3">{{$exam->schedule->date}}</div>
                       <div class="col-12 col-md-3 text-md-right">
                         <button type="button" class="btn btn-outline-danger w-100" data-tooltip="tooltip" data-placement="bottom" title="Upload Medical"><i class="fas fa-file-medical"></i> Upload medical</button>
