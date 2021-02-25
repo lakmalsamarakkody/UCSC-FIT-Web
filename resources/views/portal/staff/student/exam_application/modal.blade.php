@@ -76,28 +76,29 @@
                                                                     <th>Subject Name</th>
                                                                     <th>Exam Type</th>
                                                                     <th>Requested Exam</th>
-                                                                    <th>Scheduled Exam</th>
+                                                                    <th>Scheduled Date</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
-                                                                @foreach ($applied_exams as $exam)
-                                                                <tr>
-                                                                    <td>{{ $exam->subject_id }}</td>
-                                                                    <td>{{ $exam->subject_id }}</td>
-                                                                    <td>{{ $exam->exam_type_id }}</td>
-                                                                    <td>{{ $exam->requested_exam_id }}</td>
-                                                                    {{-- <td>{{ \Carbon\Carbon::createFromDate($exam->schedule->exam->year, $exam->schedule->exam->month)->monthName }} {{ $exam->schedule->exam->year }}</td> --}}
-                                                                    <td>@if($exam->exam_schedule_id == null)Not yet scheduled @else {{ $exam->schedule->date }}@endif</td>
-                                                                    <td>
+                                                            {{-- <tbody> --}}
+                                                                {{-- @foreach ($student_applied_exams as $exam) --}}
+                                                                {{-- <tr>
+                                                                    <td><span id="spanSubjectCode"></span></td>
+                                                                    <td><span id="spabSubjectName"></span></td>
+                                                                    <td><span id="spanExamType"></span></td>
+                                                                    <td><span id="spanRequestedExan"></span></td>
+                                                                    <td><span id="spanScheduledDate"></span></td> --}}
+                                                                    {{-- <td>{{ \Carbon\Carbon::createFromDate($exam->exam->year, $exam->exam->month)->monthName }} {{ $exam->exam->year }}</td> 
+                                                                    <td>@if($exam->exam_schedule_id == null)Not yet scheduled @else {{ $exam->schedule->date }}@endif</td> --}}
+                                                                    {{-- <td>
                                                                         <div class="btn-group">
-                                                                            <button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam-{{$exam->id}}" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i></button>
-                                                                            <button type="button" class="btn btn-outline-warning" id="btnDeclineAppliedExam" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Decline Exam"><i class="fas fa-times-circle"></i></button>
+                                                                            <button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam-" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i></button>
+                                                                            <button type="button" class="btn btn-outline-warning" id="btnDeclineAppliedExam-" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Decline Exam"><i class="fas fa-times-circle"></i></button>
                                                                         </div>
                                                                     </td>
-                                                                </tr>
-                                                                @endforeach
-                                                            </tbody>
+                                                                </tr> --}}
+                                                                {{-- @endforeach --}}
+                                                            {{-- </tbody> --}}
                                                         </table>
                                                     </div>
                                                 </div>
