@@ -130,4 +130,9 @@ class Student extends Model
     {
         return $this->belongsTo(WorldCountry::class, 'permanent_country_id');
     } 
+    
+    public function current_registration()
+    {
+        return $this->hasOne(Registration::class, 'student_id', 'id')->latest();
+    }
 }
