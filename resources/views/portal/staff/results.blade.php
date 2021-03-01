@@ -91,7 +91,7 @@
             <div class="card-body">
               <div class="col-lg-12">
                 @foreach($exams as $exam)
-                <div class="card my-2">
+                <div class="card my-1">
                   <div class="card-header">
                     <div class="row">
                       <div class="col-sm-8">
