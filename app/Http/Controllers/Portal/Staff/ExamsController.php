@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
+use App\Models\Exam\Duration;
 use App\Models\Exam\Schedule;
 use App\Models\Subject;
 use App\Models\Exam\Types;
@@ -172,7 +173,18 @@ class ExamsController extends Controller
             $exam_schedule->exam_type_id = $request->scheduleExamType;
             $exam_schedule->date = $request->scheduleDate;
             $exam_schedule->start_time = $request->scheduleStartTime;
-            $exam_schedule->end_time = Carbon::parse($request->scheduleStartTime)->addHours('2')->addMinutes('30');
+
+            //SET EXAM END TIME
+            $examDuration = Duration::where('subject_id', $request->scheduleSubject)->where('exam_type_id', $request->scheduleExamType)->first();
+            if($examDuration != NULL):
+                $examDurationHours = $examDuration->hours;
+                $examDurationMinutes = $examDuration->minutes;
+            else:
+                $examDurationHours = '2';
+                $examDurationMinutes = '0';
+            endif;
+            $exam_schedule->end_time = Carbon::parse($request->scheduleStartTime)->addHours($examDurationHours)->addMinutes($examDurationMinutes);
+
             //Check if data save to db
             if($exam_schedule->save()):
                 return response()->json(['status'=>'success', 'exam_schedule'=>$exam_schedule]);

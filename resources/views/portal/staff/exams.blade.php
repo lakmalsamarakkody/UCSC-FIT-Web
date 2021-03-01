@@ -53,9 +53,11 @@
                     <label for="scheduleExam">Exam</label>
                     <select name="scheduleExam" id="scheduleExam" class="form-control">
                       <option value="" selected hidden disabled>Select Exam</option>
-                      @foreach ($schedule_exams as $exam)
-                          <option value="{{$exam->id}}">{{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}} {{$exam->year}}</option>
-                      @endforeach
+                      @forelse ($schedule_exams as $exam)
+                        <option value="{{$exam->id}}">{{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}} {{$exam->year}}</option>
+                      @empty
+                        <option disabled>No upcoming exam</option>
+                      @endforelse
                     </select>
                     <span class="invalid-feedback" id="error-scheduleExam" role="alert"></span>
                   </div>
