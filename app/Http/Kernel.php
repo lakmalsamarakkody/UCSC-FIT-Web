@@ -73,6 +73,7 @@ class Kernel extends HttpKernel
         'student.submit.check' => \App\Http\Middleware\Portal\Student\Registration\ApplicationSubmitCheck::class,
         'student.payment' => \App\Http\Middleware\Portal\Student\Payment\ViewPaymentPage::class,
         'student.payment.submit.check' => \App\Http\Middleware\Portal\Student\Payment\PaymentSubmitCheck::class,
-        'student.info.view' => \App\Http\Middleware\Portal\Student\ViewInformation::class
+        'student.info.view' => \App\Http\Middleware\Portal\Student\ViewInformation::class,
+        'active.registration' => \App\Http\Middleware\Portal\Student\Registration\ActiveRegistrationCheck::class
     ];
 }
