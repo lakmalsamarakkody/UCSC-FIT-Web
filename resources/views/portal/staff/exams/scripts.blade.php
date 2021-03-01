@@ -46,6 +46,7 @@ let heldExamTable = null;
         {
           data: 'id',
           name: 'id',
+          className: "text-right",
           orderable: false,
           searchable: false
         },
@@ -71,30 +72,30 @@ let heldExamTable = null;
             if( row['schedule_approval'] == null || row['schedule_approval'] == 'declined' ){
                 if(row['schedule_approval'] == 'declined' && row['declined_message'] == null) {
                   @if(Auth::user()->hasPermission('staff-exam-schedule-decline-message'))
-                  btnGroup = btnGroup + '<i data-tooltip="tooltip" data-placement="bottom" title="Approval Declined" class="fas fa-exclamation"></i>';
+                  btnGroup = btnGroup + '<button type="button" class="btn btn-danger" data-tooltip="tooltip" data-placement="bottom" title="Approval Declined"> <i class="fas fa-exclamation-circle"></i></button>';
                   @endif
                 }
                 else if(row['schedule_approval'] == 'declined' && row['declined_message'] != null) {
                   @if(Auth::user()->hasPermission('staff-exam-schedule-decline-message'))
-                  btnGroup = btnGroup + '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Approval Declined Message" id="btnViewDeclinedMessage-'+data+'" onclick="view_schedule_declined_message('+data+');"><i class="fas fa-envelope-open-text"></i></button>';
+                  btnGroup = btnGroup + '<button type="button" class="btn btn-danger" data-tooltip="tooltip" data-placement="bottom" title="Approval Declined Message" id="btnViewDeclinedMessage-'+data+'" onclick="view_schedule_declined_message('+data+');"><i class="fas fa-exclamation-circle"></i> <i class="fas fa-envelope"></i></button>';
                   @endif
                 }
                 @if(Auth::user()->hasPermission('staff-exam-schedule-request') )
-                btnGroup = btnGroup + '<button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-placement="bottom" title="Request Approval" id="btnRequestApprovalSchedule-'+data+'" onclick="request_schedule_approval('+data+');"><i class="fas fa-file-export"></i></button>';
+                btnGroup = btnGroup + '<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Request Approval" id="btnRequestApprovalSchedule-'+data+'" onclick="request_schedule_approval('+data+');"><i class="fas fa-file-export"></i></button>';
                 @endif
             }
             else if( row['schedule_approval'] == 'requested' ){
                 @if(Auth::user()->hasPermission('staff-exam-schedule-approve') )
-                btnGroup = btnGroup + '<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" id="btnApproveSchedule-'+data+'" onclick="approve_schedule('+data+');"><i class="fas fa-check-circle"></i></button>';
+                btnGroup = btnGroup + '<button type="button" class="btn btn-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" id="btnApproveSchedule-'+data+'" onclick="approve_schedule('+data+');"><i class="fas fa-check-circle"></i></button>';
                 @endif
                 @if(Auth::user()->hasPermission('staff-exam-schedule-decline') )
-                btnGroup = btnGroup + '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Decline" id="btnDeclineSchedule-'+data+'" onclick="decline_schedule('+data+');"><i class="fas fa-times-circle"></i></button>';
+                btnGroup = btnGroup + '<button type="button" class="btn btn-danger" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Decline" id="btnDeclineSchedule-'+data+'" onclick="decline_schedule('+data+');"><i class="fas fa-times-circle"></i></button>';
                 @endif
 
             }
             else if( row['schedule_approval'] == 'approved' ){
                 @if(Auth::user()->hasPermission('staff-exam-schedule-release') )
-                btnGroup = btnGroup + '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" id="btnReleaseSchedule-'+data+'" onclick="relase_individual_schedule('+data+');" ><i class="fas fa-share-square"></i></button>';
+                btnGroup = btnGroup + '<button type="button" class="btn btn-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" id="btnReleaseSchedule-'+data+'" onclick="relase_individual_schedule('+data+');" ><i class="fas fa-share-square"></i></button>';
                 @endif
             }
             @if(Auth::user()->hasPermission("staff-exam-schedule-edit"))
@@ -700,16 +701,20 @@ let heldExamTable = null;
         console.log('Success in get get schedule decline message ajax.');
         if(data['status'] == 'success') {
           console.log('Success in get schedule decline message.');
-          $('#scheduleDeclineMessage').val(data['schedule']['declined_message']);
-          $('#modal-schedule-declined-message').modal('show');
+          //$('#scheduleDeclineMessage').html(data['schedule']['declined_message']);
+          //$('#modal-schedule-declined-message').modal('show');
+          SwalErrorDanger.fire({
+            title: 'Declined Message',
+            text: data['schedule']['declined_message'],
+          })
           $('#btnViewDeclinedMessage-'+schedule_id).removeAttr('disabled', 'disabled');
         }
         else if(data['status'] == 'errors') {
           console.log('Error in validate schedule id.');
           $('#btnViewDeclinedMessage-'+schedule_id).removeAttr('disabled', 'disabled');
           SwalNotificationWarningAutoClose.fire({
-                title: 'Failed!',
-                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
+            title: 'Failed!',
+            text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
           })
         }
       },
