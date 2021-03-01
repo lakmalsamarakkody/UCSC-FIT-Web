@@ -36,7 +36,7 @@ class ExamsController extends Controller
         $exam_types=Types::orderBy('id')->get();
         $schedule_exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $search_exams = Exam::where('year', '<=', $today->year)->orderBy('year','desc')->get();
-        $years = Exam::select('year')->where('year', '<=', $today->year)->orderBy('year','asc')->distinct()->get();
+        $years = Exam::select('year')->where('year', '<=', $today->year)->orderBy('year','desc')->distinct()->get();
         $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->get();
         //$released_upcoming_scheduless = Schedule::where('date', '>=', $today)->orderBy('date', 'asc')->paginate(5,['*'],'released_schedule');
 
@@ -418,8 +418,12 @@ class ExamsController extends Controller
             return response()->json(['status'=>'error', 'errors'=>$schedule_id_validator->errors()]);
         else:
             if($schedule = Schedule::find($request->schedule_id)):
-                $subject = $schedule->subject->name;
-                return response()->json(['status'=> 'success', 'schedule'=> $schedule, 'subject'=> $subject]);
+                $Exam = $schedule->exam->year." ". Carbon::createFromDate($schedule->exam->year,$schedule->exam->month)->monthName;
+                $subjectCode = $schedule->subject->code;
+                $subjectName = $schedule->subject->name;
+                $examType = $schedule->type->name;
+                $title = $Exam." / ".$subjectName." (FIT-".$subjectCode.") / ".$examType;
+                return response()->json(['status'=> 'success', 'schedule'=> $schedule, 'title'=> $title]);
             endif;
         endif;
         return response()->json(['status'=>'error', 'data'=>$request->all()]);

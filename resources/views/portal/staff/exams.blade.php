@@ -214,7 +214,7 @@
                     <select name="searchExam" id="searchExam" class="form-control">
                       <option value="" selected>Select Exam</option>
                       @foreach ($search_exams as $exam)   
-                        <option value="{{$exam->id}}">{{$exam->month}} {{$exam->year}}</option>
+                        <option value="{{$exam->id}}">{{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}} {{$exam->year}}</option>
                       @endforeach
                     </select>
                   </div>

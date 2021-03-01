@@ -873,7 +873,7 @@ let heldExamTable = null;
       success: function(data) {
         console.log('Success in postpone schedule get details ajax.');
         if(data['status'] == 'success') {
-          $('#modal-postpone-schedule-title').html(data['subject']);
+          $('#modal-postpone-schedule-title').html(data['title']);
           $('#postponeExamId').val(data['schedule']['id']);
           $('#postponeExamDate').val(data['schedule']['date']);
           $('#postponeExamStartTime').val(data['schedule']['start_time']);

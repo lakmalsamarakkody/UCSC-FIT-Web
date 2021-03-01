@@ -101,12 +101,13 @@
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-postpone-schedule-title">Postpone Exam</h5>
+                    <h5 class="modal-title">Postpone Exam</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <h5 class="card-header p-0" id="modal-postpone-schedule-title"></h5><br/>
                     <form id="formPostponeSchedule">
                         <div class="form-row align-items-center">
                             <div class="form-group col-4">
