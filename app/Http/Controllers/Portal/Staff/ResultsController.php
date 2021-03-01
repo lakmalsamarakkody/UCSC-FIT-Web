@@ -21,7 +21,7 @@ class ResultsController extends Controller
     
     public function index()
     {
-        $exams = Exam::latest();
+        $exams = Exam::orderBy('year', 'desc')->orderBy('month', 'desc')->latest();
         $exams = $exams->paginate(10);
         $years = Exam::select('year')->groupBy('year')->get();
         $months = Exam::select('month')->groupBy('month')->get();

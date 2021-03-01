@@ -61,18 +61,18 @@
                     <div class="form-group col">
                       <select id="month" name="month" class="form-control ">
                         <option selected>Month</option>
-                        <option value="january">January</option>
-                        <option value="february">February</option>
-                        <option value="march">January</option>
-                        <option value="april">January</option>
-                        <option value="may">January</option>
-                        <option value="june">January</option>
-                        <option value="july">January</option>
-                        <option value="august">January</option>
-                        <option value="september">January</option>
-                        <option value="october">January</option>
-                        <option value="november">January</option>
-                        <option value="december">January</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
                       </select>
                     </div>
                     <div class="form-group col-lg-1"></div>
@@ -92,11 +92,10 @@
               <div class="col-lg-12">
                 @foreach($exams as $exam)
                 <div class="card my-2">
-                  <div class="card-header align-middle">
+                  <div class="card-header">
                     <div class="row">
                       <div class="col-sm-8">
-  
-                        <h3 class="mb-0">{{ $exam->year }}&nbsp; {{ $exam->month }}</h5> 
+                        <h4>{{ $exam->year }} {{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}}</h4> 
                       </div>
                       <div class="col-sm-4">
                         <a class="btn btn-outline-success w-100 text-center" href="{{ url('/portal/staff/result/view/') }}/{{ $exam->id }}" target="_blank">
@@ -105,7 +104,6 @@
                         </a>
                       </div>
                     </div>
-
                   </div>
                 </div>
 
