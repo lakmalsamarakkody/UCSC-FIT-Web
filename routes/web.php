@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::post('logout',[App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');
-
+Route::get('logout',[App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');
 /*
 |--------------------------------------------------------------------------
 | WEBSITE ROUTES

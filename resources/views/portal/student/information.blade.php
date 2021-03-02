@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 mt-5 d-none heading">
+    <div class="col-12 mt-5 mb-4 d-none heading">
         <div class="row">
             <div class="col-2"><img src="{{ asset('img/logo/ucsc.png') }}" class="img-fluid" width="37%"></div>
             <div class="col-8">
