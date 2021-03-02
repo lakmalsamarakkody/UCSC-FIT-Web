@@ -106,10 +106,10 @@ class ExamsController extends Controller
     {
         $today = Carbon::today();
         if ($request->ajax()):
-            $data = Schedule::where('date', '<=', $today)->addSelect([
+            $data = Schedule::where('date', '<', $today)->addSelect([
                 //'exam' => Exam::select(DB::raw("CONCAT(month, ' ', year) AS examname"))->whereColumn('exam_id','exams.id'),
-                'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
                 'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
+                'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
                 'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
                 'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')]);
@@ -132,11 +132,8 @@ class ExamsController extends Controller
                 if($request->type != null):
                     $data = $data->where('exam_type_id', $request->type);
                 endif;
-                $data = $data->get();
-            else:
-                // $data = $data->orderByRaw('DATE_FORMAT(date, "%y-%m-%d")', 'asc')->take(15)->get();
-                $data = $data->get();
             endif;
+            $data = $data->get();
             return DataTables::of($data)
             ->rawColumns(['action'])
             ->make(true);

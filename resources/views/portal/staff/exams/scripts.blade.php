@@ -55,7 +55,7 @@ let heldExamTable = null;
         {
           targets: 0,
           render: function(data, type, row) {
-            var exam = row['month'] + " " + row['year'];
+            var exam = row['year']  + " " + row['month'] ;
             return exam;
           }
         },
@@ -97,10 +97,15 @@ let heldExamTable = null;
                 @if(Auth::user()->hasPermission('staff-exam-schedule-release') )
                 btnGroup = btnGroup + '<button type="button" class="btn btn-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" id="btnReleaseSchedule-'+data+'" onclick="relase_individual_schedule('+data+');" ><i class="fas fa-share-square"></i></button>';
                 @endif
+                @if(Auth::user()->hasPermission('staff-exam-schedule-decline') )
+                btnGroup = btnGroup + '<button type="button" class="btn btn-danger" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Decline" id="btnDeclineSchedule-'+data+'" onclick="decline_schedule('+data+');"><i class="fas fa-times-circle"></i></button>';
+                @endif
             }
-            @if(Auth::user()->hasPermission("staff-exam-schedule-edit"))
-            btnGroup = btnGroup + '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit" id="btnEditSchedule-'+data+'" onclick="edit_schedule_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>';
-            @endif
+            if( row['schedule_approval'] != 'approved' ){
+              @if(Auth::user()->hasPermission("staff-exam-schedule-edit"))
+              btnGroup = btnGroup + '<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit" id="btnEditSchedule-'+data+'" onclick="edit_schedule_modal_invoke('+data+');"><i class="fas fa-edit"></i></button>';
+              @endif
+            }
             @if(Auth::user()->hasPermission("staff-exam-schedule-delete-beforeRelease"))
             btnGroup = btnGroup + '<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteExamSchedule-'+data+'" onclick="delete_before_release('+data+');"><i class="fas fa-trash-alt"></i></button>';
             @endif
@@ -160,7 +165,7 @@ let heldExamTable = null;
         {
           targets: 0,
           render: function(data, type, row) {
-            var exam = row['month'] + " " + row['year'];
+            var exam = row['year'] + " " + row['month'];
             return exam;
           }
         },
@@ -190,6 +195,7 @@ let heldExamTable = null;
       searching: false,
       processing: true,
       serverSide: true,
+      order:[4, "desc"],
       ajax: {
         url: "{{ url('/portal/staff/exams/schedules/held') }}",
         data: function(d) {
@@ -234,7 +240,7 @@ let heldExamTable = null;
         {
           targets: 0,
           render: function(data, type, row) {
-            var exam = row['month'] + " " + row['year'];
+            var exam = row['year'] + " " + row['month'];
             return exam;
           }
         },
