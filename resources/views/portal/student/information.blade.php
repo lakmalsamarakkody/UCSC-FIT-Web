@@ -35,10 +35,10 @@
         <div class="row">
             <div class="col-2"><img src="{{ asset('img/logo/ucsc.png') }}" class="img-fluid" width="37%"></div>
             <div class="col-8">
-                <p class="text-center">
+                <h5 class="text-center font-weight-bold">
                     Application for Foundation of Information Technology <br>
                     <small>University of Colombo School of Computing</small> 
-                </p>
+                </h5>
             </div>
             <div class="col-2 text-right align-middle"><img src="{{ asset('img/logo/fit-nav.png') }}" class="img-fluid" width="50%"> </div>
         </div>
