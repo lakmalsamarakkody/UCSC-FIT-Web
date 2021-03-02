@@ -17,6 +17,8 @@ view_modal_applicant = (registration_id) => {
     beforeSend: function(){
       $('#btnViewModalApplicant-'+registration_id).attr('disabled','disabled');
       $('#spinnerBtnViewModalApplicant-'+registration_id).removeClass('d-none');
+      $('#payment-tab').addClass('d-none');
+      $('#documents-tab').addClass('d-none');
     },
     success: function(data){
       console.log('Success in invoke applicant modal get detials ajax.');
@@ -88,6 +90,7 @@ view_modal_applicant = (registration_id) => {
 
         // PAYMENT
         if(data['payment'] != null){
+          $('#payment-tab').removeClass('d-none');
           $('#spanPaymentDate').html(data['payment']['details']['paid_date']);
           $('#spanPaymentBank').html(data['payment']['bank']['name']);
           $('#spanPaymentBankBranch').html(data['payment']['bankBranch']['name']);
@@ -117,6 +120,7 @@ view_modal_applicant = (registration_id) => {
 
         //DOCUMENTS
         if(data['documents'] != null){
+          $('#documents-tab').removeClass('d-none');
           $('#imgBirthFront').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['bcFront']+')');
           $('#imgBirthBack').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['bcBack']+')');
           $('#imgIdFront').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['idFront']+')');
