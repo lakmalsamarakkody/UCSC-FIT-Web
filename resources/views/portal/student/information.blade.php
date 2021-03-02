@@ -22,6 +22,7 @@
     </div>
     {{-- /REGISTRATION PENDING --}}
     @endif
+
     @if( $student != NULL )
     <div class="col-12">
         <div class="row justify-content-end">
@@ -30,12 +31,16 @@
             </div>
         </div>
     </div>
-    <div class="col-12 mt-5  d-none heading">
-        <div class="row justify-content-center">
-            <h1 class="text-center">
-                Application for Foundation of Information Technology <br>
-                <small>University of Colombo School of Computing</small> 
-            </h1>   
+    <div class="col-12 mt-5 d-none heading">
+        <div class="row">
+            <div class="col-2"><img src="{{ asset('img/logo/ucsc.png') }}" class="img-fluid" width="37%"></div>
+            <div class="col-8">
+                <p class="text-center">
+                    Application for Foundation of Information Technology <br>
+                    <small>University of Colombo School of Computing</small> 
+                </p>
+            </div>
+            <div class="col-2 text-right align-middle"><img src="{{ asset('img/logo/fit-nav.png') }}" class="img-fluid" width="50%"> </div>
         </div>
     </div>
     <!-- CONTENT -->
@@ -76,7 +81,7 @@
                                     </tr>
                                     <tr>
                                         <th>Gender:</th>
-                                        <td>@if($student->gender == 'Male')<i class="fa fa-lg fa-male"></i>@elseif($student->gender == 'Female')<i class="fa fa-lg fa-female"></i>@endif</td>
+                                        <td>@if($student->gender == 'Male')<i class="fa fa-lg fa-male"></i> Male @elseif($student->gender == 'Female')<i class="fa fa-lg fa-female"></i>Female @endif</td>
                                     </tr>
                                     <tr>
                                         <th>Date of Birth:</th>
@@ -241,9 +246,9 @@
                 </div>
                 @endif
 
-                <hr>
-                <p class="">This is an system generated application</p>
-                <div class="card mt-3" id="account">
+                <hr id="hrSettings" class="my-5">
+                <p id="applicationGeneratorFooter" class="d-none">This is a system generated application. ({{ now() }})</p>
+                <div class="card" id="account">
                     <div class="card-header">
                         Account Settings
                     </div>

@@ -14,6 +14,8 @@ print_window = () => {
   $('#account').addClass('d-none');
   $('.mobile-nav').addClass('d-none');
   $('.heading').removeClass('d-none');
+  $('#hrSettings').removeClass('my-5');
+  $('#applicationGeneratorFooter').removeClass('d-none');
   $('.foot').addClass('d-none');
   $('.page-area').addClass('ml-5');
 
