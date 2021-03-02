@@ -20,28 +20,34 @@
             },
             success: function(data) {
                 console.log('Success in get applicant exam details ajax');
-                
-                var appliedExams = '';
-                $.each(data['student_applied_exams'], function(key, value) {
-                    appliedExams += '<tr>';
-                    appliedExams += '<td>'+value.subject_id+'</td>';
-                    appliedExams += '<td>'+value.subject_id+'</td>';
-                    appliedExams += '<td>'+value.exam_type_id+'</td>';
-                    appliedExams += '<td>'+value.requested_exam_id+'</td>';
-                    appliedExams += '<td>'+value.exam_schedule_id+'</td>';
-                    appliedExams += '<td>'+
-                    '<div class="btn-group">'+
-                    '<button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam-'+value.id+'" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i></button>'+
-                    '<button type="button" class="btn btn-outline-warning" id="btnDeclineAppliedExam-'+value.id+'" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Decline Exam"><i class="fas fa-times-circle"></i></button>'+
-                    '</div>'+
-                    '</td>'
-                    appliedExams += '</tr>';
-                });
-                $('#tblExams').append(appliedExams);
-                
+                if(data['status'] == 'success'){
+                    $('.trAppliedExams').remove();
+                    var appliedExams = '';
+                    $.each(data['student_applied_exams'], function(key, value) {
+                        appliedExams += '<tr class="trAppliedExams">';
+                        appliedExams += '<td>FIT '+ value.subject_code+'</td>';
+                        appliedExams += '<td>'+value.subject_name+'</td>';
+                        appliedExams += '<td>'+value.exam_type+'</td>';
+                        appliedExams += '<td>'+value.requested_month +' ' + value.requested_year+'</td>';
+                        appliedExams += '<td>'+value.schedule+'</td>';
+                        appliedExams += '<td>'+
+                        '<div class="btn-group">'+
+                        '<button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam-'+value.id+'" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i></button>'+
+                        '<button type="button" class="btn btn-outline-warning" id="btnDeclineAppliedExam-'+value.id+'" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Decline Exam"><i class="fas fa-times-circle"></i></button>'+
+                        '</div>'+
+                        '</td></tr>';
+                    });
+                    $('#tblExams').append(appliedExams);
+                    $('#btnViewModalAppliedExams-'+student_id).removeAttr('disabled', 'disabled');
+                    $('#spinnerBtnViewModalAppliedExams-'+student_id).removeAttr('disabled', 'disabled');
+                    $('#modal-view-exam-application').modal('show');
+                }
+            },
+            error: function(err) {
+                console.log('Error in get applicant exam details ajax.');
                 $('#btnViewModalAppliedExams-'+student_id).removeAttr('disabled', 'disabled');
                 $('#spinnerBtnViewModalAppliedExams-'+student_id).removeAttr('disabled', 'disabled');
-                $('#modal-view-exam-application').modal('show');
+                SwalSystemErrorDanger.fire();
             }
         });
     }
