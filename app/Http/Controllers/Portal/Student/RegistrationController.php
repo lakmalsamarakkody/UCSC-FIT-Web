@@ -155,20 +155,20 @@ class RegistrationController extends Controller
     if($request->uniqueType == 'nic'):
       if(strlen($request->unique_id)>10):
         $uniqueID_validator =  Validator::make($request->all(), [
-          'unique_id' => ['nullable', 'numeric', 'digits:12'],
+          'unique_id' => ['nullable', 'numeric', 'digits:12', 'unique:App\Models\Student,nic_new'],
         ]);
       else:
         $uniqueID_validator =  Validator::make($request->all(), [
-          'unique_id' => ['nullable', 'alpha_num', 'min:10', 'regex:/^([0-9]{9}[x|X|v|V])$/'],
+          'unique_id' => ['nullable', 'alpha_num', 'min:10', 'regex:/^([0-9]{9}[x|X|v|V])$/', 'unique:App\Models\Student,nic_old'],
         ]);
       endif;
     elseif($request->uniqueType == 'postal'):
       $uniqueID_validator =  Validator::make($request->all(), [
-        'unique_id' => ['nullable', 'alpha_num', 'size:9'],
+        'unique_id' => ['nullable', 'alpha_num', 'size:9', 'unique:App\Models\Student,postal'],
       ]);
     else:
       $uniqueID_validator =  Validator::make($request->all(), [
-        'unique_id' => ['nullable', 'alpha_num'],
+        'unique_id' => ['nullable', 'alpha_num', 'unique:App\Models\Student,passport'],
       ]);
     endif;
 
