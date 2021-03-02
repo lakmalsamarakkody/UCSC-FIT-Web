@@ -77,6 +77,7 @@ Route::post('/portal/staff/student/profile/reactivate/account',[App\Http\Control
 
 // EXAM APPLICATION
 Route::post('/portal/staff/student/exams/application/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getApplicantExamDetails'])->name('student.application.exams.details');
+Route::post('/portal/staff/student/exams/application/schedule/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getAppliedSubjectScheduleDetails'])->name('student.application.exams.schedule.details');
 // /STUDENT PAGE
 
 // HOME PAGE

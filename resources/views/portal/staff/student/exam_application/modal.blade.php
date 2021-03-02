@@ -77,6 +77,7 @@
                                                                     <th>Exam Type</th>
                                                                     <th>Requested Exam</th>
                                                                     <th>Scheduled Date</th>
+                                                                    <th>Scheduled Time</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
@@ -109,7 +110,7 @@
                             </div>
                             <div class="mt-4 col-12 text-center">
                                 <div id="divBtnApproveAppliedExams" class="btn-group col-xl-3 col-lg-6">
-                                    <button type="button" class="btn btn-success form-control" id="btnApproveAppliedExams">Send Schedules to Student<span id="spinnerBtnApproveAppliedExam" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                    <button type="button" class="btn btn-success form-control" id="btnApproveAppliedExams">Schedules Approved<span id="spinnerBtnApproveAppliedExam" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                                 <div id="divBtnDeclineAppliedExams" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-exams-message" id="btnDeclineAppliedExams" data-toggle="modal">Decline Applied Exams<span id="spinnerBtnDeclineAppliedExam" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
@@ -206,3 +207,48 @@
 
 </div>
 <!-- /VIEW EXAM APPLICATION DETAILS -->
+
+<!-- SCHEDULE APPLIED EXAM-->
+<div class="modal fade" id="modal-schedule-applied-exam" data-backdrop="static" tabindex="-1" aria-labelledby="modal-schedule-applied-exam-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Schedule Exam</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="card-header p-0" id="modal-schedule-applied-exam-title"></h5><br/>
+                <form id="formScheduleAppliedExam">
+                    <div class="form-row align-items-center">
+                        <div class="form-group col-6">
+                            <label for="scheduleExamDate">Date</label>
+                            <input type="hidden" class="form-control" id="scheduleExamId" name="scheduleExamId" />
+                            <span class="invalid-feedback" id="error-scheduleExamId" role="alert"></span>
+                            <select name="scheduleExamDate" id="scheduleExamDate" class="form-control">
+                                <option value="" hidden selected>Please Select a Exam Date</option>
+                            </select>
+                            <span class="invalid-feedback" id="error-scheduleExamDate" role="alert"></span>
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="scheduleExamStartTime">Start Time</label>
+                            <div><span id="spanStartTime">10:00PM</span></div>
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="scheduleExamEndTime">End Time</label>
+                            <div><span id="spanEndTime">12:00 PM</span></div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+                <button type="button" class="btn btn-outline-primary" id="btnModalScheduleAppliedExam" onclick="schedule_applied_exam();">Schedule</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /SCHEDULE APPLIED EXAM-->
