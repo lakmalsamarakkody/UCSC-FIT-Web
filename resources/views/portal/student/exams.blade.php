@@ -21,7 +21,7 @@
             <div class="card-body">
               <div class="card w-100 shadow-none border border-secondary">
                 <div class="card-body">
-                  <small class="mb-4">*Please select the exams you want to apply(using checkboxes in left side) and select the requested month for each exam you select.</small>
+                  <small class="mb-4">*Please select the exams you want to apply(using checkboxes in left side) and select the prefered month for each exam you select.</small>
                   <form action="" id="formApplyExam">
                     <div class="table-responsive-md mt-4">
                       <table class="table table-hover">
