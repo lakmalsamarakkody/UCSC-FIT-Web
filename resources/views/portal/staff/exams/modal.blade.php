@@ -20,7 +20,7 @@
                             <select name="editScheduleExam" id="editScheduleExam" class="form-control">
                                 <option value="" selected>Select Exam</option>
                                 @foreach ($schedule_exams as $exam)
-                                    <option value="{{$exam->id}}">{{$exam->month}} {{$exam->year}}</option>
+                                    <option value="{{$exam->id}}">{{$exam->year}} {{\Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}}</option>
                                 @endforeach
                             </select>
                             <span class="invalid-feedback" id="error-editScheduleExam" role="alert"></span>
