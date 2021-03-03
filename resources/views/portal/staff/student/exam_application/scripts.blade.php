@@ -75,8 +75,34 @@
             beforeSend: function() {$('#btnScheduleAppliedExam-'+applied_exam_id).attr('disabled', 'disabled');},
             success: function(data) {
                 console.log('Success in get applied subject schedule details ajax.');
-                $('#modal-schedule-applied-exam').modal('show');
+                if(data['status'] == 'success') {
+                    $('#spanSubject').html('FIT ' + data['applied_exam']['subject_code'] + ' - ' + data['applied_exam']['subject_name']);
+                    $('#spanExamType').html(data['applied_exam']['exam_type']);
+                    $('#spanRequestedExam').html(data['applied_exam']['requested_month'] + ' ' + data['applied_exam']['requested_year']);
+                    //Create exams schedules table related with applied exam
+                    $('.trSchedule').remove();
+                    var schedule = '';
+                    $.each(data['schedules'], function(key, value) {
+                        schedule += '<tr class="trSchedule">';
+                        schedule += '<td>'+ value.subject_name+'</td>';
+                        schedule += '<td>'+ value.date+'</td>';
+                        schedule += '<td>'+value.start_time+'</td>';
+                        schedule += '<td>'+value.end_time+'</td>';
+                        schedule += '<td>'+
+                        '<div class="btn-group">'+
+                        '<button type="button" class="btn btn-outline-primary" id="btnSetExamSchedule-'+value.id+'" onclick="set_schedule('+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule</button>'+
+                        '</div>'+
+                        '</td></tr>';
+                    });
+                    $('#tblSchedulesForAppliedExam').append(schedule);
+                    $('#btnScheduleAppliedExam-'+applied_exam_id).removeAttr('disabled', 'disabled');
+                    $('#modal-schedule-applied-exam').modal('show');
+                }
+            },
+            error: function(err) {
+                console.log('Error in get applied subject schedule details ajax.');
                 $('#btnScheduleAppliedExam-'+applied_exam_id).removeAttr('disabled', 'disabled');
+                SwalSystemErrorDanger.fire();
             }
         });
     }

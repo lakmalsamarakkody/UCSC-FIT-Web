@@ -210,17 +210,59 @@
 
 <!-- SCHEDULE APPLIED EXAM-->
 <div class="modal fade" id="modal-schedule-applied-exam" data-backdrop="static" tabindex="-1" aria-labelledby="modal-schedule-applied-exam-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Schedule Exam</h5>
+                <h5 class="modal-title">Schedule the Exam</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h5 class="card-header p-0" id="modal-schedule-applied-exam-title"></h5><br/>
-                <form id="formScheduleAppliedExam">
+                <div class="col-lg-12 scheduleExam">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-5">
+                                <div class="card-body">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Subject: </th>
+                                            <td><span id="spanSubject"></span></td>
+                                        </tr>
+                                            <th>Exam Type: </th>
+                                            <td><span id="spanExamType"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Requested Exam On: </th>
+                                            <td><span id="spanRequestedExam"></span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">Schedules for applied exam</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12 order-md-1 order-2">
+                                            <table id="tblSchedulesForAppliedExam" class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Subject</th>
+                                                        <th>Date</th>
+                                                        <th>Start Time</th>
+                                                        <th>End Time</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- <form id="formScheduleAppliedExam">
                     <div class="form-row align-items-center">
                         <div class="form-group col-6">
                             <label for="scheduleExamDate">Date</label>
@@ -241,7 +283,7 @@
                         </div>
 
                     </div>
-                </form>
+                </form> --}}
 
             </div>
             <div class="modal-footer">

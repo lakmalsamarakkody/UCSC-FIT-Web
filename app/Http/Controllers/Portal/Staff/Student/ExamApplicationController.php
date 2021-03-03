@@ -49,6 +49,17 @@ class ExamApplicationController extends Controller
 
     public function getAppliedSubjectScheduleDetails(Request $request)
     {
-        return response()->json(['success']);
+        $today = Carbon::today();
+        $applied_exam = hasExam::where('id',$request->applied_exam_id)->addSelect([
+            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
+            'requested_month'=> Exam::select(DB::raw("MONTHNAME(CONCAT(year, '-',month, '-01')) as monthname"))->whereColumn('requested_exam_id', 'exams.id'),
+            'requested_year'=> Exam::select('year')->whereColumn('requested_exam_id', 'exams.id'),
+        ])->first();
+        $schedules = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->addSelect([
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+        ])->get();
+        return response()->json(['status'=>'success', 'schedules'=>$schedules, 'applied_exam'=>$applied_exam]);
     }
 }
