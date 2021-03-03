@@ -19,78 +19,79 @@
           <div class="card">
             <div class="card-header">Apply for Exams</div>
             <div class="card-body">
-              <div class="card w-100 shadow-none border border-secondary">
-                <div class="card-body">
-                  <small class="mb-4">*Please select the exams you want to apply(using checkboxes in left side) and select the prefered month for each exam you select.</small>
-                  <form action="" id="formApplyExam">
-                    <div class="table-responsive-md mt-4">
-                      <table class="table table-hover">
-                        <thead>
-                          <tr>
-                            <th></th>
-                            <th>Subject</th>
-                            <th>Exam Type</th>
-                            <th>Requested Exam Month</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          @foreach ($exams_to_apply as $exam_apply)
-                          <tr>
-                            <td><input type="checkbox" name="applyExamCheck[]" class="apply-exam-check" value="{{$exam_apply->id}}" /></td>
-                            <td><input type="text" name="applySubject[]" value="{{ $exam_apply->id }}" class="apply-subject" hidden />FIT {{ $exam_apply->subject->code}} - {{ $exam_apply->subject->name }}</td>
-                            <td><input type="text" name="applyExamType[]" value="{{ $exam_apply->exam_type_id }}" class="apply-exam-type form-control" hidden />{{ $exam_apply->examType->name }}</td>
-                            <td>
-                              <select name="requestedExam" class="requested-exam form-control">
-                              <option value="" selected hidden disabled>Select Requested Exam</option>
-                              @foreach ($exams as $exam)
-                                  <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
-                              @endforeach
-                              </select>
-                              <span class="invalid-feedback" id="error-requestedExam" role="alert"></span>
-                            </td>
-                          </tr>
-                          @endforeach
-                        </tbody>
-                      </table>
-                    </div>
-                    
-                    {{-- <div class="form-row align-items-center"> --}}
-                      {{-- @foreach ($exams_to_apply as $exam_apply)
-                      <div class="col-1">
-                        <div class="form-check">
-                          <input type="checkbox" id="applyExam" name="applyExam" class=" form-check-input" />
-                          <label class="form-check-label" for="applyExam-{{$exam_apply->id}}">{{ $exam_apply->subject->name }} ({{ $exam_apply->examType->name}})</label>
-                        </div>
-                      </div> --}}
-                      {{-- <div class="form-group col-xl-4 col-md-12">
-                        <label for="applySubject"></label>
-                        <span id="applySubject" class="form-control">ICT Application</span>
-                      </div>
-                      <div class="form-group col-xl-3 col-md-12">
-                        <label for="applyExamType"></label>
-                        <select name="applyExamType" id="applyExamType" class="form-control">
-                          <option value="1">E-Test</option>
-                        </select>
-                      </div> --}}
-                      {{-- <div class="form-group col-4">
-                        <label for="applyMonth-{{$exam_apply->id}}"></label>
-                        <select name="applyMonth" id="applyMonth-{{$exam_apply->id}}" class="form-control">
-                          <option value="" selected hidden disabled>Select Requested Month</option>
+              <small class="mb-4">*Please select the exams you want to apply(using checkboxes in left side) and select the prefered month for each exam you select.</small>
+              <form action="" id="formApplyExam">
+                <div class="table-responsive-md mt-4">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Subject</th>
+                        <th>Exam Type</th>
+                        <th>Requested Exam Month</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($exams_to_apply as $exam_apply)
+                      {{-- {{ App\Models\Student\hasExam::where('student_id', Auth::user()->student->id)->where('subject_id', $exam_apply->subject_id)->where('exam_type_id', $exam_apply->exam_type_id)->get() }} --}}
+                      @if(App\Models\Student\hasExam::where('student_id', Auth::user()->student->id)->where('subject_id', $exam_apply->subject_id)->where('exam_type_id', $exam_apply->exam_type_id)->get() != NULL)
+                      <tr>
+                        <td><input type="checkbox" name="{{$exam_apply->id}}" class="apply-exam-check" value="1" /></td>
+                        <td>FIT {{ $exam_apply->subject->code}} - {{ $exam_apply->subject->name }}</td>
+                        <td>{{ $exam_apply->examType->name }}</td>
+                        <td>
+                          <select name="{{$exam_apply->id}}-requestedExam" class="requested-exam form-control">
+                          <option value="" selected hidden disabled>Select Requested Exam</option>
                           @foreach ($exams as $exam)
                               <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
                           @endforeach
-                        </select>
-                      </div>
-                      <span class="border-bottom"></span>
-                      @endforeach --}}
-                    {{-- </div> --}}
-                  </form>
+                          </select>
+                          <span class="invalid-feedback" id="error-requestedExam" role="alert"></span>
+                        </td>
+                      </tr>
+                      @else
+                        
+                      @endif
+                      @endforeach
+                    </tbody>
+                  </table>
                 </div>
-              </div>
+                
+                {{-- <div class="form-row align-items-center"> --}}
+                  {{-- @foreach ($exams_to_apply as $exam_apply)
+                  <div class="col-1">
+                    <div class="form-check">
+                      <input type="checkbox" id="applyExam" name="applyExam" class=" form-check-input" />
+                      <label class="form-check-label" for="applyExam-{{$exam_apply->id}}">{{ $exam_apply->subject->name }} ({{ $exam_apply->examType->name}})</label>
+                    </div>
+                  </div> --}}
+                  {{-- <div class="form-group col-xl-4 col-md-12">
+                    <label for="applySubject"></label>
+                    <span id="applySubject" class="form-control">ICT Application</span>
+                  </div>
+                  <div class="form-group col-xl-3 col-md-12">
+                    <label for="applyExamType"></label>
+                    <select name="applyExamType" id="applyExamType" class="form-control">
+                      <option value="1">E-Test</option>
+                    </select>
+                  </div> --}}
+                  {{-- <div class="form-group col-4">
+                    <label for="applyMonth-{{$exam_apply->id}}"></label>
+                    <select name="applyMonth" id="applyMonth-{{$exam_apply->id}}" class="form-control">
+                      <option value="" selected hidden disabled>Select Requested Month</option>
+                      @foreach ($exams as $exam)
+                          <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <span class="border-bottom"></span>
+                  @endforeach --}}
+                {{-- </div> --}}
+              </form>
             </div>
-            <div class="card-footer">
+            <div class="card-footer mb-3">
               <div class="text-center">
-                <button type="button" class="btn btn-outline-primary" id="btnApplyForExams" onclick="apply_for_exams({{$student->id}})">APPLY FOR SELECTED EXAMS<span id="spinnerBtnApplyForExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-outline-primary" id="btnApplyForExams" onclick="apply_for_exams()">APPLY FOR SELECTED EXAMS<span id="spinnerBtnApplyForExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
               </div>
             </div>
           </div>
@@ -139,48 +140,87 @@
             </div>
           </div>
         </div> --}}
+                
+        <!-- SELECTED EXAMS TABLE-->
+        <div class="col-12 mt-4 px-0">
+          <div class="card">
+            <div class="card-header">Selected Exams</div>
+            <div class="card-body">
+                <div class="table-responsive-sm mt-4">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Subject Code</th>
+                        <th>Subject Name</th>
+                        <th>Exam Type</th>
+                        <th>Requested Exam On</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($applied_exams as $applied_exam)
+                      <tr>
+                        <td>FIT {{$applied_exam->subject->code}}</td>
+                        <td>{{$applied_exam->subject->name}}</td>
+                        <td>{{$applied_exam->type->name}}</td>
+                        <td>{{ \Carbon\Carbon::createFromDate($applied_exam->exam->year, $applied_exam->exam->month)->monthName}} {{ $applied_exam->exam->year }}</td>
+                        {{-- <td>FIT 103</td>
+                        <td>ICT Applications</td>
+                        <td>Practical</td>
+                        <td>April 2021</td> --}}
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Cancel Exam"><i class="fas fa-times"></i> Cancel</button>
+                          </div>
+                        </td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+            </div>            
+            <div class="card-footer mb-3">
+              <div class="text-center">
+                <button type="button" class="btn btn-outline-success" id="btnApplyForExams" onclick="apply_for_exams({{$student->id}})"><i class="fa fa-dollar-sign"></i> EXAM PAYMENT<span id="spinnerBtnApplyForExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /SELECTED EXAMS TABLE-->
 
+
+        <!-- APPLIED EXAMS TABLE-->
         <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">Applied Exams</div>
             <div class="card-body">
-              <div class="card w-100 shadow-none border border-secondary">
-                <div class="card-body">
-                  <div class="table-responsive-sm mt-4">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>Subject Code</th>
-                          <th>Subject Name</th>
-                          <th>Exam Type</th>
-                          <th>Requested Exam On</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @foreach ($applied_exams as $applied_exam)
-                        <tr>
-                          <td>FIT {{$applied_exam->subject->code}}</td>
-                          <td>{{$applied_exam->subject->name}}</td>
-                          <td>{{$applied_exam->type->name}}</td>
-                          <td>{{ \Carbon\Carbon::createFromDate($applied_exam->exam->year, $applied_exam->exam->month)->monthName}} {{ $applied_exam->exam->year }}</td>
-                          {{-- <td>FIT 103</td>
-                          <td>ICT Applications</td>
-                          <td>Practical</td>
-                          <td>April 2021</td> --}}
-                          <td>
-                            <div class="btn-group">
-                              <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Cancel Exam"><i class="fas fa-times"></i> Cancel</button>
-                            </div>
-                          </td>
-                        </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
-                  </div>
-
-                </div>
+              <div class="table-responsive-sm mt-4">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Subject Code</th>
+                      <th>Subject Name</th>
+                      <th>Exam Type</th>
+                      <th>Requested Exam On</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($applied_exams as $applied_exam)
+                    <tr>
+                      <td>FIT {{$applied_exam->subject->code}}</td>
+                      <td>{{$applied_exam->subject->name}}</td>
+                      <td>{{$applied_exam->type->name}}</td>
+                      <td>{{ \Carbon\Carbon::createFromDate($applied_exam->exam->year, $applied_exam->exam->month)->monthName}} {{ $applied_exam->exam->year }}</td>
+                      {{-- <td>FIT 103</td>
+                      <td>ICT Applications</td>
+                      <td>Practical</td>
+                      <td>April 2021</td> --}}
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
               </div>
+
             </div>
           </div>
         </div>
