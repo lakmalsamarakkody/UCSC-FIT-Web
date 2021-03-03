@@ -21,17 +21,20 @@ class ExamApplicationController extends Controller
 {
     public function index()
     {
-        // $today = Carbon::today();
+        $today = Carbon::today();
         $exam_applicants = hasExam::get()->unique('student_id');
+        $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('status', 'AB')->get();
         return view('portal/staff/student/exam_application', [
             'exam_applicants' => $exam_applicants,
-            'applied_exams' => $applied_exams
+            'applied_exams' => $applied_exams,
+            'exams' => $exams
         ]);
     }
 
     public function getApplicantExamDetails(Request $request)
     {
+        $student = Student::where('id',$request->student_id)->first();
         $student_applied_exams = hasExam::where('student_id',$request->student_id)->where('exam_schedule_id', null)->where('status', 'AB')->addSelect([
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
@@ -41,9 +44,9 @@ class ExamApplicationController extends Controller
             'schedule_date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'start_time'=>Schedule::select('start_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'end_time'=>Schedule::select('end_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
-        ])->get();
+        ])->take(5)->get();
         $submitted_date = hasExam::select('updated_at')->where('student_id', $request->student_id)->latest()->first();
-        return response()->json(['status'=>'success', 'student_applied_exams'=>$student_applied_exams, 'submitted_date'=>$submitted_date]); 
+        return response()->json(['status'=>'success', 'student_applied_exams'=>$student_applied_exams, 'submitted_date'=>$submitted_date, 'student'=>$student]); 
         // dd($request->all());
     }
 

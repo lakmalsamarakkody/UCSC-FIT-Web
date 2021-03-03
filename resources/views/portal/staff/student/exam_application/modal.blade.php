@@ -24,6 +24,14 @@
                                         <th>Type: </th>
                                         <td>Exam</td>
                                     </tr>
+                                    <tr>
+                                        <th>Student Name: </th>
+                                        <td><span id="spanStudentName"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Registration Number: </th>
+                                        <td><span id="spanRegNumber"></span></td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
@@ -69,7 +77,7 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-12 order-md-1 order-2">
-                                                        <table id="tblExams" class="table">
+                                                        <table id="tblExams" class="table table-responsive-md">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Subject Code</th>
@@ -173,6 +181,10 @@
                                                         <td><span id="spanSubjectName"></span></td>
                                                     </tr>
                                                     <tr>
+                                                        <th>Exam Type: </th>
+                                                        <td><span id="spanExamType"></span></td>
+                                                    </tr>
+                                                    <tr>
                                                         <th>Exam Held Date: </th>
                                                         <td><span id="spanExamHeldDate"></span></td>
                                                     </tr>
@@ -223,14 +235,15 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card mb-5">
+                                <div class="card-header">Applied Exam Details</div>
                                 <div class="card-body">
                                     <table class="table">
                                         <tr>
                                             <th>Subject: </th>
-                                            <td><span id="spanSubject"></span></td>
+                                            <td><span id="spanAppliedSubject"></span></td>
                                         </tr>
                                             <th>Exam Type: </th>
-                                            <td><span id="spanExamType"></span></td>
+                                            <td><span id="spanAppliedExamType"></span></td>
                                         </tr>
                                         <tr>
                                             <th>Requested Exam On: </th>
@@ -243,7 +256,18 @@
                                 <div class="card-header">Schedules for applied exam</div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-12 order-md-1 order-2">
+                                        <div class="form-group col-6">
+                                            <select name="searchExam" id="searchExam" class="form-control">
+                                            <option value="" selected hidden>Select Exam</option>
+                                            @foreach ($exams as $exam)
+                                                <option value="{{$exam->id}}">{{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}} {{$exam->year}} </option>
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <button type="button" class="btn btn-outline-primary form-control" onclick="search_by_exam();" id="btnSearchByExam" name="btnSearchByExam"><i class="fa fa-search"></i>Search</button>
+                                        </div>
+                                        <div class="col-md-12 order-md-1 order-2 mt-5">
                                             <table id="tblSchedulesForAppliedExam" class="table">
                                                 <thead>
                                                     <tr>
@@ -287,8 +311,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-                <button type="button" class="btn btn-outline-primary" id="btnModalScheduleAppliedExam" onclick="schedule_applied_exam();">Schedule</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Schedule Later</button>
             </div>
         </div>
     </div>
