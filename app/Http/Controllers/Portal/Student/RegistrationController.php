@@ -152,23 +152,25 @@ class RegistrationController extends Controller
     ]);
 
     //CHECK UNIQUE TYPE AND VALIDATE UNIQUE ID
+    $studentID = Auth::user()->student;
+    ($studentID !== NULL)? $studentID = $studentID->id : $studentID = NULL;
     if($request->uniqueType == 'nic'):
       if(strlen($request->unique_id)>10):
         $uniqueID_validator =  Validator::make($request->all(), [
-          'unique_id' => ['nullable', 'numeric', 'digits:12'],
+          'unique_id' => ['nullable', 'numeric', 'digits:12', 'unique:App\Models\Student,nic_new,'.$studentID],
         ]);
       else:
         $uniqueID_validator =  Validator::make($request->all(), [
-          'unique_id' => ['nullable', 'alpha_num', 'min:10', 'regex:/^([0-9]{9}[x|X|v|V])$/'],
+          'unique_id' => ['nullable', 'alpha_num', 'min:10', 'regex:/^([0-9]{9}[x|X|v|V])$/', 'unique:App\Models\Student,nic_old,'.$studentID],
         ]);
       endif;
     elseif($request->uniqueType == 'postal'):
       $uniqueID_validator =  Validator::make($request->all(), [
-        'unique_id' => ['nullable', 'alpha_num', 'size:9'],
+        'unique_id' => ['nullable', 'alpha_num', 'size:9', 'unique:App\Models\Student,postal,'.$studentID],
       ]);
     else:
       $uniqueID_validator =  Validator::make($request->all(), [
-        'unique_id' => ['nullable', 'alpha_num'],
+        'unique_id' => ['nullable', 'alpha_num', 'unique:App\Models\Student,passport,'.$studentID],
       ]);
     endif;
 
@@ -303,8 +305,13 @@ class RegistrationController extends Controller
         $student->designation = NULL;
       endif;
 
-      //CREATE STUDENT RECORD
+      //UPDATE STUDENT RECORD
       $student->save();
+
+      //UPDATE USERNAME 
+      $user_rec = User::where('id', $user->id)->first();
+      $user_rec->name = $request->firstName;
+      $user_rec->save();
 
       return response()->json(['status'=>'success', 'student'=>$student]);
 
