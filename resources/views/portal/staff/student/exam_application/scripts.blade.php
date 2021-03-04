@@ -35,14 +35,14 @@
                         appliedExams += '<td>'+value.subject_name +'</td>';
                         appliedExams += '<td>'+value.exam_type +'</td>';
                         appliedExams += '<td>'+value.requested_month +' ' + value.requested_year+'</td>';
-                        appliedExams += '<td>'+value.schedule_date +'</td>';
-                        appliedExams += '<td>'+value.start_time+ ' - ' + value.end_time +'</td>';
-                        // if(value.requested_month == 'April') {
-                        //     appliedExams += '<td>'+'2021-04-26'+'</td>';
-                        // }
-                        // else {
-                        //     appliedExams += '<td>'+'2021-09-18'+'</td>';
-                        // }
+                        //appliedExams += '<td>'+value.schedule_date +'</td>';
+                        //appliedExams += '<td>'+value.start_time+ ' - ' + value.end_time +'</td>';
+                        if(value.requested_month == 'April') {
+                            appliedExams += '<td>'+'2021-04-26'+'</td>';
+                        }
+                        else {
+                            appliedExams += '<td>'+'2021-09-18'+'</td>';
+                        }
                         appliedExams += '<td>'+'10:00AM-12:00PM'+'</td>';
                         appliedExams += '<td>'+
                         '<div class="btn-group">'+
