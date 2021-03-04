@@ -31,7 +31,7 @@ class ExamApplicationController extends Controller
             'exams' => $exams
         ]);
     }
-
+    // GET DETAILS FOR MODAL LOAD
     public function getApplicantExamDetails(Request $request)
     {
         $student = Student::where('id',$request->student_id)->first();
@@ -65,4 +65,16 @@ class ExamApplicationController extends Controller
         ])->get();
         return response()->json(['status'=>'success', 'schedules'=>$schedules, 'applied_exam'=>$applied_exam]);
     }
+    public function searchSchedulesByExam(Request $request)
+    {
+        // $today = Carbon::today();
+        // $applied_exam = hasExam::where('id',$request->applied_exam_id)->first();
+        // $serched_schedules = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->where('exam_id',$request->exam_id)->addSelect([
+        //     'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+        // ])->get();
+        // return response()->json(['status'=> 'success', 'serched_schedules'=>$serched_schedules]);
+
+        dd($request->all());
+    }
+    // /GET DETAILS FOR MODALS LOAD
 }
