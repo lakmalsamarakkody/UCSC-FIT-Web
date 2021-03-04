@@ -10,7 +10,17 @@
     });
 
 </script>
+    <div class="col-6">
+        <h4 class="alert-heading">Payment: Exam</h4>
+        
 
+    </div>
+    <div class="col-6">
+        <h4 class="alert-heading text-right">Registration Number: {{ Auth::user()->student->reg_no }}</h4>
+        
+        <h5 class="alert-heading text-right">Registration expires on: {{ Auth::user()->student->current_registration->registration_expire_at }}</h5>                
+        
+    </div>
     <!-- CONTENT -->
     <div class="col-lg-12 payment min-vh-100">
       {{-- PAYMENT DETAILS --}}
@@ -23,22 +33,22 @@
                 <div class="row">
                   @foreach ($exam_details as $exam)
                     <div class="col-lg-3 col-6 div-title">Subject Code:</div>
-                    <div class="col-lg-3 col-6">FIT</div>
+                    <div class="col-lg-3 col-6">FIT {{ $exam->subject->code }}</div>
   
                     <div class="col-lg-3 col-6 div-title">Subject Name:</div>
-                    <div class="col-lg-3 col-6">Subject</div>
+                    <div class="col-lg-3 col-6">{{ $exam->subject->name }}</div>
   
                     <div class="col-lg-3 col-6 div-title">Exam Type:</div>
-                    <div class="col-lg-3 col-6">E-test</div>
+                    <div class="col-lg-3 col-6">{{ $exam->type->name }}</div>
   
                     <div class="col-lg-3 col-6 div-title">Exam Fee:</div>
-                    <div class="col-lg-3 col-6">2800LKR</div>
+                    <div class="col-lg-3 col-6">{{ \App\Models\Support\Fee::select('amount')->where('subject_id', $exam->subject->id)->where('exam_type_id', $exam->type->id)->first()->amount }}</div>
   
                     <hr width="100%"/>
                   @endforeach
 
                   <div class="col-12 text-center" id="div-total-fees">
-                    <b>Sum of Exam fees to pay:</b> 5400LKR
+                    <b>Sum of Exam fees to pay:</b> {{ $total_amount }}LKR
                   </div>
                 </div>
               </div>
@@ -48,96 +58,7 @@
       </div>
       {{-- PAYMENT DETAILS --}}
 
-      <div class="row row-cols-1 row-cols-md-2">
-        {{-- /PAYMENT DETAILS --}}
-        <div class="col mb-3">
-          <div class="card w-100 h-100" >
-            <div class="card-header">Payment Details</div>
-            <div class="card-body">
-              <div class="col-12">
-                <div class="row">
-  
-                  {{-- PAYMENT TYPE --}}
-                   <div class="col-md-4">Payment Type :</div>
-                  <div class="col-md-8">Exam</div>
-                  {{-- /PAYMENT TYPE --}}
-  
-                  <hr width="100%"/>
-  
-                  {{-- REGISTRATION YEAR --}}
-                  <div class="col-md-4">Registration Year :</div>
-                  <div class="col-md-8">2021</div>
-                  {{-- /REGISTRATION YEAR --}}
-  
-                  <hr width="100%"/>
-  
-                  {{-- EXAM --}}
-                  <div class="col-md-4">Exam :</div>
-                  <div class="col-md-8">2020 December</div>
-                  {{-- /EXAM --}}
-  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-         {{-- /PAYMENT DETAILS --}}
 
-         {{-- SUBJECT DETAILS --}}
-          <div class="col mb-3">        
-            <div class="card w-100 h-100" >
-              <div class="card-header">Subject Details</div>
-              <div class="card-body">
-
-                <div class="col-12">
-                  <div class="row">
-                    {{-- SUBJECTS --}}
-                    {{-- 103 --}}
-                    <div class="col-sm-6 col-lg-5"><span>FIT 103 : <br><small>ICT Applications</small> </span></div>
-                    <div class="col-sm-6 col-lg-7">
-                      <div class="form-check mr-5">
-                        <input type="checkbox" name="payment_type" class="form-check-input" value="registration"/>
-                        <label class="form-check-label" for="FieldsetCheck">E-Test</label>
-                      </div>
-                      <div class="form-check">
-                        <input type="checkbox" name="payment_type" class="form-check-input" value="exam"/>
-                        <label class="form-check-label" for="FieldsetCheck">Practical</label>
-                      </div>
-                    </div>
-                    {{-- /103 --}}
-                    <hr width="100%"/>
-                    {{-- 203 --}}
-                    <div class="col-sm-6 col-lg-5"><span>FIT 203 : <br><small>English for ICT</small> </span></div>
-                    <div class="col-sm-6 col-lg-7">
-                      <div class="form-check mr-5">
-                        <input type="checkbox" name="payment_type" class="form-check-input" value="registration"/>
-                        <label class="form-check-label" for="FieldsetCheck">E-Test</label>
-                      </div>
-                      <div class="form-check">
-                        <input type="checkbox" name="payment_type" class="form-check-input" value="exam"/>
-                        <label class="form-check-label" for="FieldsetCheck">Practical</label>
-                      </div>
-                    </div>
-                    {{-- /203 --}}
-                    <hr width="100%"/>
-                    {{-- 303 --}}
-                    <div class="col-sm-6 col-lg-5"><span>FIT 303 : <br><small>Mathematics for ICT</small> </span></div>
-                    <div class="col-sm-6 col-lg-7">
-                      <div class="form-check mr-5">
-                        <input type="checkbox" name="payment_type" class="form-check-input" value="registration"/>
-                        <label class="form-check-label" for="FieldsetCheck">E-Test</label>
-                      </div>
-                    </div>
-                    {{-- /303 --}}
-                    {{-- /SUBJECT --}}    
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-         {{-- /SUBJECT DETAILS --}}
-      </div>
       <div class="row row-cols-1">
          {{-- PAYMENT --}}
         <div class="col">
