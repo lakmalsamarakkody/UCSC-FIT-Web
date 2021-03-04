@@ -33,17 +33,7 @@ class PaymentController extends Controller
    *
    * @return \Illuminate\Contracts\Support\Renderable
    */
-  public function exam()
-  {
-    $student = Student::where('user_id',Auth::user()->id)->first();
-    $exam_details = hasExam::where('student_id', $student->id)->where('mark', null)->where('result', 0)->take(5)->get();
-    
-    
-    return view('portal/student/payment/exam', [
-      'student'=> $student,
-      'exam_details'=>$exam_details,
-    ]);
-  }  
+
   public function registration()
   {
     $student = Auth::user()->student;
@@ -105,20 +95,5 @@ class PaymentController extends Controller
     return response()->json(['error'=>'error']);
   }
 
-  public function saveExamPayment(Request $request)
-  {
-    $validator = Validator::make($request->all(), 
-      [     
-          'paidBank'=> ['required'],
-          'paidBankCode'=>['required'],
-          'paidDate'=>['required', ],
-          'paidAmount'=>['required', 'numeric']
-      ]
-    );
-    if($validator->fails()):
-      return response()->json(['errors'=>$validator->errors()]);
-    else:
 
-    endif;
-  }
 }
