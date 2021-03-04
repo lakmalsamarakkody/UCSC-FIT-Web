@@ -91,7 +91,7 @@
             </div>
             <div class="card-footer mb-3">
               <div class="text-center">
-                <button type="button" class="btn btn-outline-primary" id="btnApplyForExams" onclick="apply_for_exams()">APPLY FOR SELECTED EXAMS<span id="spinnerBtnApplyForExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-outline-primary" id="btnApplyForExams" onclick="select_exams()">SELECT EXAMS<span id="spinnerBtnApplyForExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
               </div>
             </div>
           </div>
@@ -158,19 +158,19 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($applied_exams as $applied_exam)
+                      @foreach ($selected_exams as $selected_exam)
                       <tr>
-                        <td>FIT {{$applied_exam->subject->code}}</td>
-                        <td>{{$applied_exam->subject->name}}</td>
-                        <td>{{$applied_exam->type->name}}</td>
-                        <td>{{ \Carbon\Carbon::createFromDate($applied_exam->exam->year, $applied_exam->exam->month)->monthName}} {{ $applied_exam->exam->year }}</td>
+                        <td>FIT {{$selected_exam->subject->code}}</td>
+                        <td>{{$selected_exam->subject->name}}</td>
+                        <td>{{$selected_exam->type->name}}</td>
+                        <td>{{ \Carbon\Carbon::createFromDate($selected_exam->exam->year, $selected_exam->exam->month)->monthName}} {{ $selected_exam->exam->year }}</td>
                         {{-- <td>FIT 103</td>
                         <td>ICT Applications</td>
                         <td>Practical</td>
                         <td>April 2021</td> --}}
                         <td>
                           <div class="btn-group">
-                            <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Cancel Exam"><i class="fas fa-times"></i> Cancel</button>
+                            <button onclick="cancel_selection({{ $selected_exam->id }})" type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Cancel Exam"><i class="fas fa-times"></i> Delete</button>
                           </div>
                         </td>
                       </tr>
@@ -181,7 +181,7 @@
             </div>            
             <div class="card-footer mb-3">
               <div class="text-center">
-                <button type="button" class="btn btn-outline-success" id="btnApplyForExams" onclick="apply_for_exams({{$student->id}})"><i class="fa fa-dollar-sign"></i> EXAM PAYMENT<span id="spinnerBtnApplyForExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-outline-success" id="btnApplyForExams" onclick="apply_for_exams()"><i class="fa fa-dollar-sign"></i> EXAM PAYMENT<span id="spinnerBtnApplyForExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
               </div>
             </div>
           </div>
