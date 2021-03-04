@@ -88,6 +88,7 @@
             success: function(data) {
                 console.log('Success in get applied subject schedules details ajax.');
                 if(data['status'] == 'success') {
+                    $('#spanId').html(data['applied_exam']['id']);
                     $('#spanAppliedSubject').html('FIT ' + data['applied_exam']['subject_code'] + ' - ' + data['applied_exam']['subject_name']);
                     $('#spanAppliedExamType').html(data['applied_exam']['exam_type']);
                     $('#spanRequestedExam').html(data['applied_exam']['requested_month'] + ' ' + data['applied_exam']['requested_year']);
@@ -101,7 +102,7 @@
                                                     '</select>'+
                                                 '</div>'+
                                                 '<div class="form-group col-xl-6 col-12">'+
-                                                    '<button type="button" class="btn btn-outline-primary form-control" onclick="search_schedules_by_exam('+$('#searchExam').val()+','+applied_exam_id+');" id="btnSearchByExam"><i class="fa fa-search"></i>Search<span id="spinnerBtnSearchByExam" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
+                                                    '<button type="button" class="btn btn-outline-primary form-control" onclick="search_schedules_by_exam('+applied_exam_id+');" id="btnSearchByExam"><i class="fa fa-search"></i>Search<span id="spinnerBtnSearchByExam" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
                                                 '</div>'+
                                             '</div>');
                     //Create exams schedules table related with applied exam
@@ -133,12 +134,12 @@
     // /INVOKE SCHEDULE EXAMS MODAL
 
     // SERACH SCHEDULES BY EXAM
-    search_schedules_by_exam = (exam_id, applied_exam_id) => {
+    search_schedules_by_exam = (applied_exam_id) => {
 
         $('.trSchedule').remove();
         // Form Payload
         var formData = new FormData();
-        formData.append('exam_id', exam_id);
+        formData.append('exam_id', $('#searchExam').val());
         formData.append('applied_exam_id', applied_exam_id);
 
         // Get applied subject schedule details
@@ -158,20 +159,20 @@
                 if(data['status'] == 'success') {
                     console.log('Success in search schedules by exam.');
                     //Create exams schedules table related with applied exam
-                    // var schedule = '';
-                    // $.each(data['serched_schedules'], function(key, value) {
-                    //     schedule += '<tr class="trSchedule">';
-                    //     schedule += '<td>'+ value.subject_name+'</td>';
-                    //     schedule += '<td>'+ value.date+'</td>';
-                    //     schedule += '<td>'+value.start_time+'</td>';
-                    //     schedule += '<td>'+value.end_time+'</td>';
-                    //     schedule += '<td>'+
-                    //     '<div class="btn-group">'+
-                    //     '<button type="button" class="btn btn-outline-primary" id="btnSetExamSchedule-'+value.id+'" onclick="set_schedule('+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule<span id="spinnerBtnSetExamSchedule-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
-                    //     '</div>'+
-                    //     '</td></tr>';
-                    // });
-                    //$('#tblSchedulesForAppliedExam').append(schedule);
+                    var schedule = '';
+                    $.each(data['serched_schedules'], function(key, value) {
+                        schedule += '<tr class="trSchedule">';
+                        schedule += '<td>'+ value.subject_name+'</td>';
+                        schedule += '<td>'+ value.date+'</td>';
+                        schedule += '<td>'+value.start_time+'</td>';
+                        schedule += '<td>'+value.end_time+'</td>';
+                        schedule += '<td>'+
+                        '<div class="btn-group">'+
+                        '<button type="button" class="btn btn-outline-primary" id="btnSetExamSchedule-'+value.id+'" onclick="set_schedule('+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule<span id="spinnerBtnSetExamSchedule-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
+                        '</div>'+
+                        '</td></tr>';
+                    });
+                    $('#tblSchedulesForAppliedExam').append(schedule);
                     $('#btnSearchByExam').removeAttr('disabled', 'disabled');
                     $('#spinnerBtnSearchByExam').addClass('d-none');
                     // $('#modal-schedule-applied-exam').modal('show');

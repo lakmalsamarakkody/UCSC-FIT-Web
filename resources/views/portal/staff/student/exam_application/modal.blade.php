@@ -267,7 +267,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-xl-6 col-12">
-                                                    <button type="button" class="btn btn-outline-primary form-control" onclick="search_schedules_by_exam({{$exam->id}});" id="btnSearchByExam"><i class="fa fa-search"></i>Search<span id="spinnerBtnSearchByExam" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                                                    <button type="button" class="btn btn-outline-primary form-control" onclick="search_schedules_by_exam();" id="btnSearchByExam"><i class="fa fa-search"></i>Search<span id="spinnerBtnSearchByExam" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                                                 </div>
                                             </div> --}}
                                         </div>
