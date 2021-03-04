@@ -43,7 +43,8 @@ class ExamsController extends Controller
     $exams_to_apply = Fee::where('purpose', 'exam')->get();
     $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->get();
     $student = Student::where('user_id',Auth::user()->id)->first();
-    $applied_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->get();
+    $selected_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', null)->get();
+    $applied_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', '!=', null)->get();
     $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=' , null)->get();
     $absent_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('status', 'AB' )->get();
     
@@ -52,13 +53,14 @@ class ExamsController extends Controller
       'exams' =>$exams,
       'exams_to_apply' => $exams_to_apply,
       'student' => $student,
+      'selected_exams' => $selected_exams,
       'applied_exams' => $applied_exams,
       'scheduled_exams' => $scheduled_exams,
       'absent_exams' => $absent_exams
     ]);
   }
 
-  public function applyForExams(Request $request)
+  public function selectStudentExams(Request $request)
   {
     // $checked_exam_array = $request->applyExamCheck;
     $exams_to_apply = Fee::where('purpose', 'exam')->get();
@@ -78,22 +80,29 @@ class ExamsController extends Controller
           if ( $request->$requested_month ) :
             // echo $request->$requested_month;
   
-            $similar = hasExam::where( 'student_id', $student_id )
+            $similar_exam = hasExam::where( 'student_id', $student_id )
                               ->where( 'subject_id', $exam_to_apply->subject_id )
                               ->where( 'exam_type_id', $exam_to_apply->exam_type_id )
                               ->where( 'requested_exam_id', $request->$requested_month )
-                              ->get(); 
+                              ->first(); 
+
+            $same_exam = hasExam::where( 'student_id', $student_id )
+                                ->where( 'subject_id', $exam_to_apply->subject_id )
+                                ->where( 'exam_type_id', $exam_to_apply->exam_type_id )
+                                ->where( 'exam_schedule_id', null )
+                                ->where( 'mark', null )
+                                ->first(); 
   
-            $passed = hasExam::where( 'student_id', $student_id )
+            $passed_exam = hasExam::where( 'student_id', $student_id )
                               ->where( 'subject_id', $exam_to_apply->subject_id )
                               ->where( 'exam_type_id', $exam_to_apply->exam_type_id )
                               ->where( 'result', 1 )
-                              ->get(); 
-  
-            if( $similar != Null ):
+                              ->first(); 
+            // echo $similar;
+            if( $similar_exam != Null || $same_exam != Null ):
               return response()->json(['status'=>'exist']);
             else:
-              if( $passed != Null ):
+              if( $passed_exam != Null ):
                 return response()->json(['status'=>'passed']);
               else:
                 $applied_exam = new hasExam();
@@ -112,9 +121,6 @@ class ExamsController extends Controller
             return response()->json(['status'=>'nomonth']);
           endif;
         else:
-          if( $request->$requested_month ):
-            return response()->json(['status'=>'hasonlymonth']);
-          endif;
         endif;
       endforeach;
       return response()->json(['status'=>'success']);
@@ -142,5 +148,46 @@ class ExamsController extends Controller
     // endif;
 
     // dd($request->all());
+  }
+
+  public function deleteStudentExams(Request $request)
+  {
+    if(hasExam::where('id', $request->student_exam_id)->forceDelete()):
+      return response()->json(['status'=>'success']);
+    endif;
+    return response()->json(['status'=>'error']);
+  }
+
+  public function examPayment()
+  {
+    $student = Auth::user()->student;
+    $selected_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', null)->get();
+    $total_amount = null;
+    foreach ($selected_exams as $selected_exam) {
+      $total_amount = $total_amount+Fee::select('amount')->where('subject_id', $selected_exam->subject->id)->where('exam_type_id', $selected_exam->type->id)->first()->amount;
+    }
+    
+    return view('portal/student/payment/exam', [
+      'student'=> $student,
+      'exam_details'=>$selected_exams,
+      'total_amount'=>$total_amount,
+    ]);
+  } 
+  
+  public function saveExamPayment(Request $request)
+  {
+    $validator = Validator::make($request->all(), 
+      [     
+          'paidBank'=> ['required'],
+          'paidBankCode'=>['required'],
+          'paidDate'=>['required', ],
+          'paidAmount'=>['required', 'numeric']
+      ]
+    );
+    if($validator->fails()):
+      return response()->json(['errors'=>$validator->errors()]);
+    else:
+
+    endif;
   }
 }
