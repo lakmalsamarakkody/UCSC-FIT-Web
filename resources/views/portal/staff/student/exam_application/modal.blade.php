@@ -118,7 +118,7 @@
                             </div>
                             <div class="mt-4 col-12 text-center">
                                 <div id="divBtnApproveAppliedExams" class="btn-group col-xl-3 col-lg-6">
-                                    <button type="button" class="btn btn-success form-control" id="btnApproveAppliedExams">Schedules Approved<span id="spinnerBtnApproveAppliedExam" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                    <button type="button" class="btn btn-success form-control" id="btnApproveAppliedExams">Approve Schedules<span id="spinnerBtnApproveAppliedExam" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                                 <div id="divBtnDeclineAppliedExams" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-exams-message" id="btnDeclineAppliedExams" data-toggle="modal">Decline Applied Exams<span id="spinnerBtnDeclineAppliedExam" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
@@ -253,7 +253,7 @@
                                 </div>
                             </div>
                             <div class="card">
-                                <div class="card-header">Schedules for applied exam</div>
+                                <div class="card-header">Schedules for Applied Exam</div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div id="divSearchSchedules" class="col-12">
