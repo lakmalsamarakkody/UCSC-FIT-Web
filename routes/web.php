@@ -228,7 +228,10 @@ Route::post('/portal/student/information/update/get-cities', [App\Http\Controlle
 
 // EXAMS PAGES
 Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsController::class,'index'])->name('student.exam');
-Route::post('/portal/student/exams/apply',[App\Http\Controllers\Portal\Student\ExamsController::class,'applyForExams'])->name('student.exam.apply');
+Route::post('/portal/student/exams/select',[App\Http\Controllers\Portal\Student\ExamsController::class,'selectStudentExams'])->name('student.exam.select');
+Route::post('/portal/student/exams/delete',[App\Http\Controllers\Portal\Student\ExamsController::class,'deleteStudentExams'])->name('student.exam.delete');
+Route::get('/portal/student/exam/payment',[App\Http\Controllers\Portal\Student\ExamsController::class,'examPayment'])->name('payment.exam');
+Route::post('/portal/student/exam/payment',[App\Http\Controllers\Portal\Student\ExamsController::class,'saveExamPayment'])->name('payment.exam.save');
 // /EXAMS PAGE
 
 // RESULT PAGE
@@ -238,8 +241,6 @@ Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\Result
 // PAYMENT PAGE
 Route::get('/portal/student/payment/registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'registration'])->name('payment.registration');
 Route::post('/portal/student/payment/registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'saveRegPayment']);
-Route::get('/portal/student/payment/exam',[App\Http\Controllers\Portal\Student\PaymentController::class,'exam'])->name('payment.exam');
-Route::post('/portal/student/payment/exam',[App\Http\Controllers\Portal\Student\PaymentController::class,'saveExamPayment']);
 // /PAYMENT PAGE
 
 // DOCUMENT PAGE
