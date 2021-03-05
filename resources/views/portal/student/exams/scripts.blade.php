@@ -8,16 +8,16 @@ select_exams = () => {
     // $('.invalid-feedback').hide();
 
     // Construct arrays of checked exams
-    // const applyExamCheck = [];
+    const applyExamCheck = [];
     // const applySubject = [];
     // const applyExamType = [];
     // const requestedExam = [];
 
-    // $('.apply-exam-check').each(function() {
-    //     if($(this).is(":checked")) {
-    //         applyExamCheck.push($(this).val());
-    //     }
-    // });
+    $('.apply-exam-check').each(function() {
+        if($(this).is(":checked")) {
+            applyExamCheck.push($(this).val());
+        }
+    });
 
     // $('.apply-subject').each(function() {
     //     applySubject.push($(this).val());
@@ -32,6 +32,7 @@ select_exams = () => {
     // });
     // FORM PAYLOAD
     var formData = new FormData($("#formApplyExam")[0]);
+    formData.append('applyExamCheck', applyExamCheck);
     // Apply for exams controller
 
     $.ajax({
