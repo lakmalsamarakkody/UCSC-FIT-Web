@@ -30,15 +30,21 @@
   <div class="col-lg-12 users">
     <div class="row">
 
+      {{-- BUTTON GROUP --}}
+      <div class="w-100 mb-4 mx-3">
+        <button type="button" class="btn btn-lg btn-primary col-lg-3 col-md-4 col-12 py-4" data-toggle="modal" data-target="#newUserModal" style="text-decoration: none"><i class="fa fa-user-plus mr-3"></i> New User</button>
+        <<button type="button" class="btn btn-lg btn-warning col-lg-3 col-md-4 col-12 py-4"><i class="fa fa-user-shield mr-3"></i> User Permissions</button>
+      </div>
+      {{-- /BUTTON GROUP --}}
 
       {{-- NEW USER --}}
-      <div class="col-lg-3 col-md-6 col-12 mb-4">
+      {{-- <div class="col-lg-3 col-md-6 col-12 mb-4">
         <button class="btn w-100 p-0" data-toggle="modal" data-target="#newUserModal" style="text-decoration: none">
           <div class="card">
             <div class="card-header bg-primary text-center py-4 text-white">New User</div>
           </div>
         </button>
-      </div>
+      </div> --}}
       {{-- /NEW USER --}}
 
       <!-- SEARCH -->

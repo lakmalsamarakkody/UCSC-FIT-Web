@@ -102,6 +102,7 @@ a, a:hover {
   border-color: var(--color-warning);
 }
 .btn.btn-warning:hover{
+  font-weight: bold;
   background-color: var(--color-warning-dark);
   border-color: var(--color-warning-dark);
 }
