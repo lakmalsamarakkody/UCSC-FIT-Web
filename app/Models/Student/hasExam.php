@@ -23,6 +23,10 @@ class hasExam extends Model
 
     protected $table='student_exams';
 
+    protected $fillable = [
+        'payment_id'
+    ];
+
     public function student(){
         /**
          * The attributes that are assignable.

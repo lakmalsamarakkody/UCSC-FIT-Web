@@ -8,6 +8,9 @@ use App\Models\Exam\Schedule;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
 use App\Models\Student\hasExam;
+use App\Models\Student\Payment;
+use App\Models\Student\Payment\Type;
+use App\Models\Support\Bank;
 use App\Models\Support\Fee;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
@@ -62,12 +65,12 @@ class ExamsController extends Controller
 
   public function selectStudentExams(Request $request)
   {
-    // $checked_exam_array = $request->applyExamCheck;
+    $checked_exam_array = $request->applyExamCheck;
     $exams_to_apply = Fee::where('purpose', 'exam')->get();
     $student_id = Auth::user()->student->id;
     // echo $exams_to_apply;
 
-    if ( $request->all() == NULL ):
+    if ( $checked_exam_array == NULL ):
       return response()->json(['status'=>'unselected']);
     else:
       foreach ($exams_to_apply as $exam_to_apply) :
@@ -121,6 +124,9 @@ class ExamsController extends Controller
             return response()->json(['status'=>'nomonth']);
           endif;
         else:
+          if( $request->$requested_month ):
+            continue;
+          endif;
         endif;
       endforeach;
       return response()->json(['status'=>'success']);
@@ -163,31 +169,75 @@ class ExamsController extends Controller
     $student = Auth::user()->student;
     $selected_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', null)->get();
     $total_amount = null;
+    if(count($selected_exams)<1):
+      return redirect()->route('student.exam');
+    endif;
     foreach ($selected_exams as $selected_exam) {
       $total_amount = $total_amount+Fee::select('amount')->where('subject_id', $selected_exam->subject->id)->where('exam_type_id', $selected_exam->type->id)->first()->amount;
     }
     
-    return view('portal/student/payment/exam', [
-      'student'=> $student,
-      'exam_details'=>$selected_exams,
-      'total_amount'=>$total_amount,
-    ]);
+    $banks = Bank::orderBy('name')->get();
+    return view('portal/student/payment/exam', compact('student', 'selected_exams', 'total_amount', 'banks'));
   } 
   
   public function saveExamPayment(Request $request)
   {
     $validator = Validator::make($request->all(), 
       [     
-          'paidBank'=> ['required'],
-          'paidBankCode'=>['required'],
-          'paidDate'=>['required', ],
-          'paidAmount'=>['required', 'numeric']
+        'paidBank'=> ['required', 'numeric', 'exists:App\Models\Support\Bank,id', 'size:1'],
+        'paidBankBranch'=>['required', 'numeric', 'exists:App\Models\Support\BankBranch,id'],
+        'paidDate'=>['required', 'before_or_equal:today'],
+        'paidAmount'=>['required', 'numeric'],
+        'bankSlip'=>['required', 'image']
       ]
     );
+    $student = Auth::user()->student;
+    $selected_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', null)->get();
+    $total_amount = null;
+    foreach ($selected_exams as $selected_exam) {
+      $total_amount = $total_amount+Fee::select('amount')->where('subject_id', $selected_exam->subject->id)->where('exam_type_id', $selected_exam->type->id)->first()->amount;
+    }
+
+    if ( $request->paidAmount != $total_amount ) {
+      $validator->errors()->add(
+        'paidAmount', 'Invalid amount'
+      );
+      return response()->json(['errors'=>$validator->errors()]);
+    }
+
     if($validator->fails()):
       return response()->json(['errors'=>$validator->errors()]);
     else:
+      $payment = new Payment();
+      $payment->method_id = 2;      
+      $payment->type_id = 2;
+      $payment->student_id = $student->id;
+      $payment->amount = $request->paidAmount;
+      $payment->bank_id = $request->paidBank;
+      $payment->bank_branch_id = $request->paidBankBranch;
+      $payment->paid_date = $request->paidDate;
 
+      $file_ext = $request->file('bankSlip')->getClientOriginalExtension();
+      $file_name = $student->id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
+
+      $payment->image = $file_name;
+
+      if($path = $request->file('bankSlip')->storeAs('public/payments/exam/'.$student->id,$file_name)):
+        if($payment->save()):
+
+          foreach ($selected_exams as $selected_exam) {
+            $student_exam = hasExam::find($selected_exam->id);
+            $student_exam->update([              
+              'payment_id' => $payment->id
+            ]);
+
+          }
+
+          return response()->json(['success'=>'success']);
+        endif;
+
+      endif;
     endif;
+    return response()->json(['error'=>'error']);
   }
 }
