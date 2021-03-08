@@ -36,7 +36,9 @@ class ExamApplicationController extends Controller
     public function getApplicantExamDetails(Request $request)
     {
         $student = Student::where('id',$request->student_id)->first();
-        $student_applied_exams = hasExam::where('student_id',$request->student_id)->where('status', 'AB')->addSelect([
+        $student_applied_exams = hasExam::where('student_id',$request->student_id)->where('status', 'ab')->orWhere(function($query) {
+            $query->where('status', 'scheduled');
+        })->addSelect([
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
@@ -47,8 +49,7 @@ class ExamApplicationController extends Controller
             'end_time'=>Schedule::select('end_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
         ])->take(5)->get();
         $submitted_date = hasExam::select('updated_at')->where('student_id', $request->student_id)->latest()->first();
-        return response()->json(['status'=>'success', 'student_applied_exams'=>$student_applied_exams, 'submitted_date'=>$submitted_date, 'student'=>$student]); 
-        // dd($request->all());
+        return response()->json(['status'=>'success', 'student_applied_exams'=>$student_applied_exams, 'submitted_date'=>$submitted_date, 'student'=>$student]);
     }
     // /LOAD EXAM APPLICATION VIEW MODAL
 
@@ -79,8 +80,6 @@ class ExamApplicationController extends Controller
             'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
         ])->get();
         return response()->json(['status'=> 'success', 'searched_schedules'=>$searched_schedules, 'applied_exam'=> $applied_exam]);
-
-        // dd($request->all());
     }
     // SEARCH THE SCHEDULES BY EXAM
     // /GET DETAILS FOR MODALS LOAD
@@ -90,13 +89,31 @@ class ExamApplicationController extends Controller
     {
         if(hasExam::where('id', $request->applied_exam_id)->update([
             'exam_schedule_id'=> $request->schedule_id,
-            'status'=> 'Scheduled'
+            'status'=> 'scheduled'
         ])):
         return response()->json(['status'=>'success']);
         else:
             return response()->json(['status'=>'error']);
         endif;
-        //dd($request->all());
     }
     // /SCHEDULE APPLIED EXAM
+
+    // APPROVE SCHEDULED EXAMS
+    public function approveScheduledExams(Request $request)
+    {
+        $student = Student::where('reg_no', $request->student_regno)->first();
+        $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('status', 'scheduled')->get();
+        if($scheduled_exams == null):
+            return response()->json(['status'=>'none_scheduled']);
+        else:
+            foreach($scheduled_exams as $exam):
+                hasExam::where('id', $exam->id)->update(['status'=>'approved']);
+            endforeach;
+            return response()->json(['status'=>'success']);
+        endif;
+        //dd($request->all());
+    }
+    // APPROVE SCHEDULED EXAMS
+
+
 }

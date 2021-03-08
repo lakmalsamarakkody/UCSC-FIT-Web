@@ -117,8 +117,8 @@
                                 </div>
                             </div>
                             <div class="mt-4 col-12 text-center">
-                                <div id="divBtnApproveAppliedExams" class="btn-group col-xl-3 col-lg-6">
-                                    <button type="button" class="btn btn-success form-control" id="btnApproveAppliedExams">Approve Schedules<span id="spinnerBtnApproveAppliedExam" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                <div id="divBtnAssignAppliedExams" class="btn-group col-xl-3 col-lg-6">
+                                    <button type="button" class="btn btn-success form-control" id="btnAssignScheduledExams" onclick="assign_scheduled_exams();">Approve Schedules<span id="spinnerBtnAssignScheduledExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                                 <div id="divBtnDeclineAppliedExams" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-exams-message" id="btnDeclineAppliedExams" data-toggle="modal">Decline Applied Exams<span id="spinnerBtnDeclineAppliedExam" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>

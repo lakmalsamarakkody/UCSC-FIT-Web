@@ -35,19 +35,18 @@
                         appliedExams += '<td>'+value.subject_name +'</td>';
                         appliedExams += '<td>'+value.exam_type +'</td>';
                         appliedExams += '<td>'+value.requested_month +' ' + value.requested_year+'</td>';
-                        //appliedExams += '<td>'+value.schedule_date +'</td>';
-                        //appliedExams += '<td>'+value.start_time+ ' - ' + value.end_time +'</td>';
-                        if(value.requested_month == 'April') {
-                            appliedExams += '<td>'+'2021-04-26'+'</td>';
+                        if(value.schedule_date != null) {
+                            appliedExams += '<td>'+value.schedule_date +'</td>';
+                            appliedExams += '<td>'+value.start_time+ ' - ' + value.end_time +'</td>';
                         }
                         else {
-                            appliedExams += '<td>'+'2021-09-18'+'</td>';
+                            appliedExams += '<td>Not Scheduled</td>';
+                            appliedExams += '<td>Not Scheduled</td>';
                         }
-                        appliedExams += '<td>'+'10:00AM-12:00PM'+'</td>';
+                        
                         appliedExams += '<td>'+
                         '<div class="btn-group">'+
                         '<button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam-'+value.id+'" onclick="invoke_modal_schedule_exam('+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i><span id="spinnerBtnScheduleAppliedExam-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
-                        '<button type="button" class="btn btn-outline-warning" id="btnDeclineAppliedExam-'+value.id+'" data-tooltip="tooltip" data-placement="bottom" title="Decline Exam"><i class="fas fa-times-circle"></i></button>'+
                         '</div>'+
                         '</td></tr>';
                     });
@@ -251,4 +250,69 @@
         });
     }
     // /SCHEDULE APPLIED EXAM
+
+    // APPROVE SCHEDULES
+    assign_scheduled_exams = () => {
+        SwalQuestionSuccessAutoClose.fire({
+            title: "Are you sure ?",
+            text: "Schedules will be sent to the student!",
+            confirmButtonText: "Yes, Approve!",
+            })
+            .then((result) => {
+            if(result.isConfirmed){
+                //Form Payload
+                var formData = new FormData();
+                formData.append('student_regno', $('#spanRegNumber').html());
+
+                // Approve scheduled exams controller
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    url: "{{ route('student.application.exams.approve.schedules') }}",
+                    type: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function() {
+                        $('#btnAssignScheduledExams').attr('disabled', 'disabled');
+                        $('#spinnerBtnAssignScheduledExams').removeClass('d-none');
+                    },
+                    success: function(data) {
+                        console.log('Success in approve scheduled exams ajax.');
+                        $('#btnAssignScheduledExams').removeAttr('disabled', 'disabled');
+                        $('#spinnerBtnAssignScheduledExams').addClass('d-none');
+                        if(data['status'] == 'success') {
+                            SwalDoneSuccess.fire({
+                                title: 'Released!',
+                                text: 'Exam schedules have been sent to student.',
+                            })
+                            .then((result) => {
+                                if(result.isConfirmed) {
+                                    $('#modal-view-exam-application').modal('hide');
+                                }
+                            });
+                        }
+                        else if(data['status'] == 'none_scheduled') {
+                            SwalNotificationWarningAutoClose.fire({
+                                title: 'None scheduled!',
+                                text: 'There are no scheduled exams. Please schedule the exams first',
+                            })
+                        }
+                    },
+                    error: function(err) {
+                        console.log('Errors in approve scheduled exams ajax.');
+                        $('#btnAssignScheduledExams').removeAttr('disabled', 'disabled');
+                        $('#spinnerBtnAssignScheduledExams').addClass('d-none');
+                        SwalSystemErrorDanger.fire();
+                    },
+                });
+            }
+            else{
+                SwalNotificationWarningAutoClose.fire({
+                    title: 'Cancelled!',
+                    text: 'Scheduled exams have not been approved.',
+                })
+            }
+        })
+    }
+    // /APPROVE SCHEDULES
 </script>
