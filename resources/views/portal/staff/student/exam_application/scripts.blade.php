@@ -115,7 +115,7 @@
                         schedule += '<td>'+value.end_time+'</td>';
                         schedule += '<td>'+
                         '<div class="btn-group">'+
-                        '<button type="button" class="btn btn-outline-primary" id="btnSetExamSchedule-'+value.id+'" onclick="set_schedule('+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule<span id="spinnerBtnSetExamSchedule-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
+                        '<button type="button" class="btn btn-outline-primary" id="btnModalSetExamSchedule-'+value.id+'" onclick="schedule_applied_exam('+applied_exam_id+','+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule<span id="spinnerBtnModalSetExamSchedule-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
                         '</div>'+
                         '</td></tr>';
                     });
@@ -160,7 +160,7 @@
                     console.log('Success in search schedules by exam.');
                     //Create exams schedules table related with applied exam
                     var schedule = '';
-                    $.each(data['serched_schedules'], function(key, value) {
+                    $.each(data['searched_schedules'], function(key, value) {
                         schedule += '<tr class="trSchedule">';
                         schedule += '<td>'+ value.subject_name+'</td>';
                         schedule += '<td>'+ value.date+'</td>';
@@ -168,7 +168,7 @@
                         schedule += '<td>'+value.end_time+'</td>';
                         schedule += '<td>'+
                         '<div class="btn-group">'+
-                        '<button type="button" class="btn btn-outline-primary" id="btnSetExamSchedule-'+value.id+'" onclick="set_schedule('+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule<span id="spinnerBtnSetExamSchedule-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
+                        '<button type="button" class="btn btn-outline-primary" id="btnModalSetExamSchedule-'+value.id+'" onclick="schedule_applied_exam('+applied_exam_id+','+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule<span id="spinnerBtnModalSetExamSchedule-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
                         '</div>'+
                         '</td></tr>';
                     });
@@ -187,4 +187,68 @@
         });
     }
     // SERACH SCHEDULES BY EXAM
+
+    // SCHEDULE APPLIED EXAM
+    schedule_applied_exam = (applied_exam_id, schedule_id) => {
+        SwalQuestionSuccessAutoClose.fire({
+            title: "Are you sure ?",
+            text: "Exam will be scheduled.",
+            confirmButtonText: "Yes, Schedule!",
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                // Form payload
+                var formData = new FormData();
+                formData.append('applied_exam_id', applied_exam_id);
+                formData.append('schedule_id', schedule_id);
+
+                // Edit exam schedule controller
+                $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url: "{{ route('student.application.exams.schedule.exam') }}",
+                type: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function(){
+                    $('#btnModalSetExamSchedule-'+schedule_id).attr('disabled', 'disabled');
+                    $('#spinnerBtnModalSetExamSchedule-'+schedule_id).removeClass('d-none');
+                },
+                success: function(data){
+                    console.log('Success in schedule applied exam ajax.');
+                    $('#btnModalSetExamSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+                    $('#spinnerBtnModalSetExamSchedule-'+schedule_id).addClass('d-none');
+                    if(data['status'] == 'success'){
+                        console.log('Success in schedule applied exam.');
+                        SwalDoneSuccess.fire({
+                            title: "Scheduled!",
+                            text: "Exam has been scheduled.",
+                        })
+                        .then((result) => {
+                            if(result.isConfirmed) {
+                                $('#modal-schedule-applied-exam').modal('hide');
+                            }
+                        });                         
+                    }
+                    else if(data['status'] == 'error'){
+                        SwalSystemErrorDanger.fire();
+                    }
+                },
+                error: function(err){
+                    console.log('Error in schedule applied exam ajax.')
+                    $('#btnModalSetExamSchedule-'+schedule_id).attr('disabled', 'disabled');
+                    $('#spinnerBtnModalSetExamSchedule-'+schedule_id).addClass('d-none');
+                    SwalSystemErrorDanger.fire();
+                }
+            });
+        }
+        else{
+            SwalNotificationWarningAutoClose.fire({
+                title: "Cancelled!",
+                text: "Exam has not been scheduled.",
+            })
+        }
+        });
+    }
+    // /SCHEDULE APPLIED EXAM
 </script>

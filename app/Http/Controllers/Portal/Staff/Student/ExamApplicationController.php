@@ -36,7 +36,7 @@ class ExamApplicationController extends Controller
     public function getApplicantExamDetails(Request $request)
     {
         $student = Student::where('id',$request->student_id)->first();
-        $student_applied_exams = hasExam::where('student_id',$request->student_id)->where('exam_schedule_id', null)->where('status', 'AB')->addSelect([
+        $student_applied_exams = hasExam::where('student_id',$request->student_id)->where('status', 'AB')->addSelect([
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
@@ -75,13 +75,28 @@ class ExamApplicationController extends Controller
     {
         $today = Carbon::today();
         $applied_exam = hasExam::where('id',$request->applied_exam_id)->first();
-        $serched_schedules = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->where('exam_id',$request->exam_id)->addSelect([
+        $searched_schedules = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->where('exam_id',$request->exam_id)->addSelect([
             'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
         ])->get();
-        return response()->json(['status'=> 'success', 'serched_schedules'=>$serched_schedules]);
+        return response()->json(['status'=> 'success', 'searched_schedules'=>$searched_schedules, 'applied_exam'=> $applied_exam]);
 
         // dd($request->all());
     }
     // SEARCH THE SCHEDULES BY EXAM
     // /GET DETAILS FOR MODALS LOAD
+
+    // SCHEDULE APPLIED EXAM
+    public function scheduleAppliedExam(Request $request)
+    {
+        if(hasExam::where('id', $request->applied_exam_id)->update([
+            'exam_schedule_id'=> $request->schedule_id,
+            'status'=> 'Scheduled'
+        ])):
+        return response()->json(['status'=>'success']);
+        else:
+            return response()->json(['status'=>'error']);
+        endif;
+        //dd($request->all());
+    }
+    // /SCHEDULE APPLIED EXAM
 }
