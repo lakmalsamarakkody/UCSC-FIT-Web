@@ -4,3 +4,16 @@
     margin-top: 2rem;
   }
 }
+
+.system .modal .modal-content .modal-body i{
+  padding-right: 0.5rem;
+  vertical-align: middle;
+}
+.system .modal .modal-content .modal-body i.fa-check{
+  color: var(--color-success);
+}
+.system .modal .modal-content .modal-body i.fa-times{
+  color: var(--color-danger);
+  padding-right: 0.7rem;
+
+}

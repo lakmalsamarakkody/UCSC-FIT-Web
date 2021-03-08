@@ -158,18 +158,6 @@ a, a:hover {
 .modal .modal-content .modal-body{
   padding: 2rem 4rem 4rem 4rem;
 }
-.modal .modal-content .modal-body i{
-  padding-right: 0.5rem;
-  vertical-align: middle;
-}
-.modal .modal-content .modal-body i.fa-check{
-  color: var(--color-success);
-}
-.modal .modal-content .modal-body i.fa-times{
-  color: var(--color-danger);
-  padding-right: 0.7rem;
-
-}
 .modal .modal-content .modal-body input{
   vertical-align: middle;
 }
