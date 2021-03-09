@@ -77,7 +77,7 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-12 order-md-1 order-2">
-                                                        <table id="tblExams" class="table table-responsive-md">
+                                                        <table class="tbl-applied-exams table table-responsive-md">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Subject Code</th>
@@ -86,7 +86,7 @@
                                                                     <th>Requested Exam</th>
                                                                     <th>Scheduled Date</th>
                                                                     <th>Scheduled Time</th>
-                                                                    <th></th>
+                                                                    <th>&nbsp;</th>
                                                                 </tr>
                                                             </thead>
                                                             {{-- <tbody> --}}
