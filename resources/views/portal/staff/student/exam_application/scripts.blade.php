@@ -1,6 +1,94 @@
 <script type="text/javascript">
 
     // INVOKE APPLIED EXAMS MODAL
+    let appliedExamTable = null;
+    applied_exam_table = (student_id) => {
+        appliedExamTable = $('.tbl-applied-exams').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: false,
+            ajax: {
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
+                url: "{{ route('student.application.exams.details.table') }}",
+                type: 'post',
+                data: {'student_id': student_id},
+            },
+            columns: [
+                {
+                    data: 'subject_code',
+                    name: 'subject_code'
+                },
+                {
+                    data: 'subject_name',
+                    name: 'subject_name'
+                },
+                {
+                    data: 'exam_type',
+                    name: 'exam_type'
+                },
+                {
+                    data: 'requested_exam',
+                    name: 'requested_exam'
+                },
+                {
+                    data: 'schedule_date',
+                    name: 'schedule_date'
+                },
+                {
+                    data: 'schedule_time',
+                    name: 'schedule_time'
+                },
+                {
+                    data: 'id',
+                    name: 'id',
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+            columnDefs: [
+                {
+                    targets: 0,
+                    render: function(data, type, row) {
+                        return 'FIT ' + data;
+                    }
+                },
+                {
+                    targets: 4,
+                    render: function(data, type, row) {
+                        if(data == null) {
+                            return 'Not Scheduled'
+                        }
+                        else {
+                            return data;
+                        }
+                    }
+                },
+                {
+                    targets: 5,
+                    render: function(data, type, row) {
+                        if(data == null) {
+                            return 'Not Scheduled'
+                        }
+                        else {
+                            return row['start_time'] + ' - ' + row['end_time'];
+                        }
+                    }
+                },
+                {
+                    targets: 6,
+                    render: function(data, type, row) {
+                        var btnGroup = '<div class="btn-group">'+
+                            '<button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam-'+data+'" onclick="invoke_modal_schedule_exam('+data+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i><span id="spinnerBtnScheduleAppliedExam-'+data+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
+                            '</div>';
+                            return btnGroup;
+                    }
+                },
+
+            ]
+        });
+    }
+
     view_modal_applied_exams = (student_id) => {
         // Payload
         var formData = new FormData();
@@ -21,36 +109,37 @@
             success: function(data) {
                 console.log('Success in get applicant exam details ajax');
                 if(data['status'] == 'success'){
+
                     var date = new Date(data['submitted_date']['updated_at']);
                     $('#spanSubmittedOn').html(date.toLocaleDateString());
                     $('#spanStudentName').html(data['student']['initials'] + ' ' +data['student']['last_name']);
                     $('#spanRegNumber').html(data['student']['reg_no']);
-
+                    applied_exam_table(student_id);
                     //Create applied exam table
-                    $('.trAppliedExams').remove();
-                    var appliedExams = '';
-                    $.each(data['student_applied_exams'], function(key, value) {
-                        appliedExams += '<tr class="trAppliedExams">';
-                        appliedExams += '<td>FIT '+ value.subject_code +'</td>';
-                        appliedExams += '<td>'+value.subject_name +'</td>';
-                        appliedExams += '<td>'+value.exam_type +'</td>';
-                        appliedExams += '<td>'+value.requested_month +' ' + value.requested_year+'</td>';
-                        if(value.schedule_date != null) {
-                            appliedExams += '<td>'+value.schedule_date +'</td>';
-                            appliedExams += '<td>'+value.start_time+ ' - ' + value.end_time +'</td>';
-                        }
-                        else {
-                            appliedExams += '<td>Not Scheduled</td>';
-                            appliedExams += '<td>Not Scheduled</td>';
-                        }
+                    // $('.trAppliedExams').remove();
+                    // var appliedExams = '';
+                    // $.each(data['student_applied_exams'], function(key, value) {
+                    //     appliedExams += '<tr class="trAppliedExams">';
+                    //     appliedExams += '<td>FIT '+ value.subject_code +'</td>';
+                    //     appliedExams += '<td>'+value.subject_name +'</td>';
+                    //     appliedExams += '<td>'+value.exam_type +'</td>';
+                    //     appliedExams += '<td>'+value.requested_month +' ' + value.requested_year+'</td>';
+                    //     if(value.schedule_date != null) {
+                    //         appliedExams += '<td>'+value.schedule_date +'</td>';
+                    //         appliedExams += '<td>'+value.start_time+ ' - ' + value.end_time +'</td>';
+                    //     }
+                    //     else {
+                    //         appliedExams += '<td>Not Scheduled</td>';
+                    //         appliedExams += '<td>Not Scheduled</td>';
+                    //     }
                         
-                        appliedExams += '<td>'+
-                        '<div class="btn-group">'+
-                        '<button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam-'+value.id+'" onclick="invoke_modal_schedule_exam('+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i><span id="spinnerBtnScheduleAppliedExam-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
-                        '</div>'+
-                        '</td></tr>';
-                    });
-                    $('#tblExams').append(appliedExams);
+                    //     appliedExams += '<td>'+
+                    //     '<div class="btn-group">'+
+                    //     '<button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam-'+value.id+'" onclick="invoke_modal_schedule_exam('+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i><span id="spinnerBtnScheduleAppliedExam-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
+                    //     '</div>'+
+                    //     '</td></tr>';
+                    // });
+                    // $('#tblExams').append(appliedExams);
                     $('#btnViewModalAppliedExams-'+student_id).removeAttr('disabled', 'disabled');
                     $('#spinnerBtnViewModalAppliedExams-'+student_id).addClass('d-none');
                     $('#modal-view-exam-application').modal('show');
@@ -225,6 +314,7 @@
                         })
                         .then((result) => {
                             if(result.isConfirmed) {
+                                appliedExamTable.draw();
                                 $('#modal-schedule-applied-exam').modal('hide');
                             }
                         });                         
@@ -281,20 +371,23 @@
                         $('#btnAssignScheduledExams').removeAttr('disabled', 'disabled');
                         $('#spinnerBtnAssignScheduledExams').addClass('d-none');
                         if(data['status'] == 'success') {
+                            console.log('Success in approve scheduled exams.');
                             SwalDoneSuccess.fire({
                                 title: 'Released!',
                                 text: 'Exam schedules have been sent to student.',
                             })
                             .then((result) => {
                                 if(result.isConfirmed) {
-                                    $('#modal-view-exam-application').modal('hide');
+                                    // $('#modal-view-exam-application').modal('hide');
+                                    appliedExamTable.draw();
                                 }
                             });
                         }
-                        else if(data['status'] == 'none_scheduled') {
-                            SwalNotificationWarningAutoClose.fire({
-                                title: 'None scheduled!',
-                                text: 'There are no scheduled exams. Please schedule the exams first',
+                        else if(data['status'] == 'error') {
+                            console.log('Error in approve scheduled exams.');
+                            SwalSystemErrorDanger.fire({
+                                title: "Error",
+                                text: data['msg'],
                             })
                         }
                     },

@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="viewExamApplication"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="location.reload();">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -43,9 +43,9 @@
                     <div class="card-header pb-0">Approval Status</div>
                     <div class="card-body pb-0 text-main-theme">                        
                         <div class="row">
-                            <div class="col-lg-4">Details : <i id="iconDetailStatus" class="fas"></i> <span id="spanDetailStatus"></span></div>
-                            <div class="col-lg-4">Payment : <i id="iconPaymentStatus" class="fas"></i> <span id="spanPaymentStatus"></span></div>
-                            <div class="col-lg-4">Documents : <i id="iconDocumentsStatus" class="fas"></i> <span id="spanDocumentsStatus"></span></div>
+                            <div class="col-lg-6">Details : <i id="iconDetailStatus" class="fas"></i> <span id="spanDetailStatus"></span></div>
+                            <div class="col-lg-6">Payment : <i id="iconPaymentStatus" class="fas"></i> <span id="spanPaymentStatus"></span></div>
+                            {{-- <div class="col-lg-4">Documents : <i id="iconDocumentsStatus" class="fas"></i> <span id="spanDocumentsStatus"></span></div> --}}
                         </div>
                     </div>
                 </div>
@@ -61,9 +61,9 @@
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="payment-tab" data-toggle="tab" href="#payment" role="tab" aria-controls="payment" aria-selected="false">Payment</a>
                         </li>
-                        <li class="nav-item" role="presentation">
+                        {{-- <li class="nav-item" role="presentation">
                             <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents</a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <div class="tab-content pt-3" id="myTabContent">
                         <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
@@ -77,7 +77,7 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-12 order-md-1 order-2">
-                                                        <table id="tblExams" class="table table-responsive-md">
+                                                        <table class="tbl-applied-exams table table-responsive-md">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Subject Code</th>
@@ -86,7 +86,7 @@
                                                                     <th>Requested Exam</th>
                                                                     <th>Scheduled Date</th>
                                                                     <th>Scheduled Time</th>
-                                                                    <th></th>
+                                                                    <th>&nbsp;</th>
                                                                 </tr>
                                                             </thead>
                                                             {{-- <tbody> --}}
@@ -163,7 +163,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+                        {{-- <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
                             <div class="col-12 mt-3">
                                 <div class="card">
                                     <div class="card-header">Medicals</div>
@@ -207,7 +207,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
