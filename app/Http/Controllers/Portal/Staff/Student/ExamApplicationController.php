@@ -65,13 +65,17 @@ class ExamApplicationController extends Controller
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
-            'requested_exam'=> Exam::select(DB::raw("MONTHNAME(CONCAT(year, '-',month, '-01')) as monthname"))->whereColumn('requested_exam_id', 'exams.id'),
-            // 'requested_year'=> Exam::select('year')->whereColumn('requested_exam_id', 'exams.id'),
+            'requested_month'=> Exam::select(DB::raw("MONTHNAME(CONCAT(year, '-',month, '-01')) as monthname"))->whereColumn('requested_exam_id', 'exams.id'),
+            'requested_year'=> Exam::select('year')->whereColumn('requested_exam_id', 'exams.id'),
             'schedule_date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
+            'schedule_time'=> Schedule::select(DB::raw('CONCAT(start_time, end_time) as time'))->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'start_time'=>Schedule::select('start_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'end_time'=>Schedule::select('end_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
         ]);
         return DataTables::of($data)
+        ->addColumn('requested_exam', function($row) {
+            return $row->requested_year.' '.$row->requested_month;
+        })
         ->rawColumns(['action'])
         ->make(true);
     }

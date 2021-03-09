@@ -35,15 +35,15 @@
                     name: 'schedule_date'
                 },
                 {
-                    data: 'start_time',
-                    name: 'start_time'
+                    data: 'schedule_time',
+                    name: 'schedule_time'
                 },
                 {
                     data: 'id',
                     name: 'id',
-                    // className: "text-right",
-                    // orderable: false,
-                    // searchable: false
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false
                 },
             ],
             columnDefs: [
@@ -53,13 +53,37 @@
                         return 'FIT ' + data;
                     }
                 },
-                // {
-                //     targets: 3,
-                //     render: function(data, type, row) {
-                //         var exam = row['year']  + " " + row['month'] ;
-                //         return exam;
-                //     }
-                // },
+                {
+                    targets: 4,
+                    render: function(data, type, row) {
+                        if(data == null) {
+                            return 'Not Scheduled'
+                        }
+                        else {
+                            return data;
+                        }
+                    }
+                },
+                {
+                    targets: 5,
+                    render: function(data, type, row) {
+                        if(data == null) {
+                            return 'Not Scheduled'
+                        }
+                        else {
+                            return row['start_time'] + ' - ' + row['end_time'];
+                        }
+                    }
+                },
+                {
+                    targets: 6,
+                    render: function(data, type, row) {
+                        var btnGroup = '<div class="btn-group">'+
+                            '<button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam-'+data+'" onclick="invoke_modal_schedule_exam('+data+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i><span id="spinnerBtnScheduleAppliedExam-'+data+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
+                            '</div>';
+                            return btnGroup;
+                    }
+                },
 
             ]
         });
@@ -290,6 +314,7 @@
                         })
                         .then((result) => {
                             if(result.isConfirmed) {
+                                appliedExamTable.draw();
                                 $('#modal-schedule-applied-exam').modal('hide');
                             }
                         });                         
