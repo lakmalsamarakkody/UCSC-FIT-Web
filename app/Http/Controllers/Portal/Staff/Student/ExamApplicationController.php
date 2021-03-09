@@ -18,6 +18,8 @@ use App\Models\Exam\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isEmpty;
+
 class ExamApplicationController extends Controller
 {
     public function index()
@@ -131,8 +133,8 @@ class ExamApplicationController extends Controller
     {
         $student = Student::where('reg_no', $request->student_regno)->first();
         $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('status', 'scheduled')->get();
-        if($scheduled_exams == null):
-            return response()->json(['status'=>'none_scheduled']);
+        if($scheduled_exams->isEmpty()):
+            return response()->json(['status'=>'error', 'msg'=>'There is no scheduled exams.']);
         else:
             foreach($scheduled_exams as $exam):
                 hasExam::where('id', $exam->id)->update(['status'=>'approved']);

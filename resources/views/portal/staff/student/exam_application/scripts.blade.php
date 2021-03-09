@@ -371,6 +371,7 @@
                         $('#btnAssignScheduledExams').removeAttr('disabled', 'disabled');
                         $('#spinnerBtnAssignScheduledExams').addClass('d-none');
                         if(data['status'] == 'success') {
+                            console.log('Success in approve scheduled exams.');
                             SwalDoneSuccess.fire({
                                 title: 'Released!',
                                 text: 'Exam schedules have been sent to student.',
@@ -382,10 +383,11 @@
                                 }
                             });
                         }
-                        else if(data['status'] == 'none_scheduled') {
-                            SwalNotificationWarningAutoClose.fire({
-                                title: 'None scheduled!',
-                                text: 'There are no scheduled exams. Please schedule the exams first',
+                        else if(data['status'] == 'error') {
+                            console.log('Error in approve scheduled exams.');
+                            SwalSystemErrorDanger.fire({
+                                title: "Error",
+                                text: data['msg'],
                             })
                         }
                     },
