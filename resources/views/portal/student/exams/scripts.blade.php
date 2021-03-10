@@ -209,4 +209,138 @@ apply_for_exams = () => {
 }
 // /CANCEL SELECTION
 
+upload_medical = (id) => {
+    $('.form-control').removeClass('is-invalid');
+    $('.invalid-feedback').html('');
+    $('.invalid-feedback').hide();
+    // FORM PAYLOAD
+    var formData = new FormData($("#"+id+"-medicalUploadform")[0]);
+    formData.append('id', id);
+
+
+    SwalQuestionSuccessAutoClose.fire({
+        title: 'Are you sure?',
+        text: 'Medical will be uploaded',
+        confirmButtonText: 'Yes, Upload!',
+    })
+    .then((result) => {
+        if(result.isConfirmed) {
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="x-csrf-token"]').attr('content')},
+                url: "{{ route('student.exam.medical.upload') }}",
+                type: 'post',
+                data: formData, 
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    $('.btn').attr('disabled', 'disabled');        
+                    $("#"+id+"-spinnermedicalUpload").removeClass('d-none');
+                },
+                success: function(data) {
+
+                    console.log('Success in upload medical ajax.');
+                    $('.btn').removeAttr('disabled', 'disabled');
+                    $("#"+id+"-spinnermedicalUpload").addClass('d-none');
+
+                    if(data['errors']){
+                        $.each(data['errors'], function(key, value){
+                            $("#"+id+"-error-"+key).show();
+                            $("#"+id+"-"+key).addClass('is-invalid');
+                            $("#"+id+"-error-"+key).append('<strong>'+value+'</strong>')
+                        });
+                    }else if(data['status'] == 'success') {
+                        console.log('Success in delete exam.');
+                        SwalDoneSuccess.fire({
+                            title: 'Success!',
+                            text: 'Medical have been uploaded',
+                        })
+                        .then((result) => {
+                            if(result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    }else{
+                        console.log('Error in upload medical.');
+                        SwalSystemErrorDanger.fire();
+                    }
+                },
+                error: function(err) {
+                    console.log('Error in upload medical ajax.');
+                    $('.btn').removeAttr('disabled', 'disabled');
+                    $("#"+id+"-spinnermedicalUpload").addClass('d-none');
+                    SwalSystemErrorDanger.fire();
+                }
+            });
+        }
+        else{
+            SwalNotificationWarningAutoClose.fire({
+                title: 'Cancelled!',
+                text: 'Medicals did not upload',
+            })
+        }
+    });
+}
+
+
+// DELETE MEDICAL
+delete_medical = (id) => {
+
+    SwalQuestionDangerAutoClose.fire({
+        title: 'Are you sure?',
+        text: 'Uploaded Medical will be deleted.',
+        confirmButtonText: 'Yes, Delete!',
+    })
+    .then((result) => {
+        if(result.isConfirmed) {
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="x-csrf-token"]').attr('content')},
+                url: "{{ route('student.exam.medical.delete') }}",
+                type: 'post',
+                data:  
+                {
+                    'id' : id
+                },
+                beforeSend: function() {
+                    $('.btn').attr('disabled', 'disabled');
+                },
+                success: function(data) {
+                    console.log('Success in delete medical ajax.');
+                    $('.btn').removeAttr('disabled', 'disabled');
+
+                    if(data['status'] == 'success') {
+                        console.log('Success in delete medical.');
+                        SwalDoneSuccess.fire({
+                            title: 'Success!',
+                            text: 'Medical have been deleted.',
+                        })
+                        .then((result) => {
+                            if(result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    }else{
+                        console.log('Error in delete medical.');
+                        SwalSystemErrorDanger.fire();
+                    }
+                },
+                error: function(err) {
+                    console.log('Error in delete medical ajax.');
+                    $('.btn').removeAttr('disabled', 'disabled');
+                    SwalSystemErrorDanger.fire();
+                }
+            });
+
+
+
+        }
+        else{
+            SwalNotificationWarningAutoClose.fire({
+                title: 'Cancelled!',
+                text: 'Selected exams have not been deleted.',
+            })
+        }
+    });
+}
+// /DELETE MEDICAL
+
 </script>

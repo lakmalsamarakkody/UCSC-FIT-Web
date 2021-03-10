@@ -2,7 +2,7 @@
 
 @section('content')
 
-<script type="text/javascript">
+<script type="text/JavaScript">
 
     // ACTIVE NAVIGATION ENTRY
     $(document).ready(function ($) {
@@ -19,7 +19,7 @@
           <div class="card">
             <div class="card-header">Apply for Exams</div>
             <div class="card-body">
-              <small class="mb-4">*Please select the exams you want to apply(using checkboxes in left side) and select the prefered month for each exam you select.</small>
+              <small class="mb-4">*Please select the exams you want to apply(using checkboxes in left side) and select the preferred month for each exam you select.</small>
               <form action="" id="formApplyExam">
                 <div class="table-responsive-md mt-4">
                   <table class="table table-hover">
@@ -230,15 +230,13 @@
         <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">Scheduled Exams</div>
+            
             <div class="card-body">
-
-              <div class="card w-100 shadow-none border border-secondary">
-                <div class="card-header text-primary">2020 December</div>
-                <div class="card-body">
-                  {{-- <pre>
-                    {{$exams}}
-                  </pre> --}}
-                  @foreach ($scheduled_exams as $exam)
+              {{-- <pre>
+                {{$exams}}
+              </pre> --}}
+              @foreach ($scheduled_exams as $exam)
+                @if($exam->schedule->date > date('Y-m-d'))
                   <div class="accordion" id="accordion_{{$exam->id}}">
                     <div class="card mb-4 shadow-sm">
                       <div class="card-header text-secondary" id="heading_{{$exam->id}}">
@@ -262,11 +260,12 @@
                       </div>
                     </div>
                   </div>
-                  @endforeach
-                </div>
-              </div>
-
+                  
+                @endif
+              @endforeach
             </div>
+                
+
           </div>
         </div>
         <!-- /SCHEDULED EXAMS-->
@@ -274,26 +273,140 @@
         <!-- ABSENT EXAMS TABLE -->
         <div class="col-12 mt-4 px-0">
           <div class="card">
-            <div class="card-header">Absent Exams</div>
+            <div class="card-header">Held Exams</div>
             <div class="card-body">
-              <div class="card w-100 shadow-none border border-secondary">
-                <div class="card-header text-primary">2020 December</div>
-                <ul class="list-group list-group-flush">
-                  @foreach ($absent_exams as $exam)
-                  <li class="list-group-item">
-                    <div class="row">
-                      <div class="col-12 col-md-3">FIT {{ $exam->subject->code }}</div>
-                      <div class="col-12 col-md-3">{{ $exam->subject->name }} ({{ $exam->type->name }})</div>
-                      <div class="col-12 col-md-3">{{$exam->schedule->date}}</div>
-                      <div class="col-12 col-md-3 text-md-right">
-                        <button type="button" class="btn btn-outline-danger w-100" data-tooltip="tooltip" data-placement="bottom" title="Upload Medical"><i class="fas fa-file-medical"></i> Upload medical</button>
+              @foreach ($absent_exams as $exam)
+                @if($exam->schedule->date <= date('Y-m-d'))
+                  <div class="accordion" id="accordion_{{$exam->id}}">
+                    <div class="card mb-4 shadow-sm">
+                      <div class="card-header text-secondary" id="heading_{{$exam->id}}">
+                        <div class="row">
+                          <div class="col-2 col-md-3 text-center pt-2">FIT {{ $exam->subject->code }}</div>
+                          <div class="col-6 col-md-3 text-center pt-2">{{ $exam->subject->name }} ({{ $exam->type->name }})</div>
+                          <div class="col-4 col-md-3 text-center pt-2">{{$exam->schedule->date}}</div>
+                          @if( $exam->medical_status=='Pending' )
+                            <div class="col-12 col-md-3 text-md-right">
+                              <button type="button" class="btn btn-outline-warning w-100" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}">Medical Approval Pending</button>
+                            </div>
+                          @elseif( $exam->medical_status=='Approved' )
+                            <div class="col-12 col-md-3 text-md-right">
+                              <button type="button" class="btn btn-outline-success w-100" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}">Medical Approved</button>
+                            </div>
+                          @elseif( $exam->medical_status=='Declined' )
+                            <div class="col-12 col-md-3 text-md-right">
+                              <button type="button" class="btn btn-outline-danger w-100" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}">Medical Declined</button>
+                            </div>
+                          @else
+                            <div class="col-12 col-md-3 text-md-right">
+                              <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}"><i class="fas fa-file-medical"></i> Upload medical</button>
+                            </div>                            
+                          @endif
+                        </div>
+                      </div>
+                  
+                      <div id="collapse_{{$exam->id}}" class="collapse" aria-labelledby="heading_{{$exam->id}}" data-parent="#accordion_{{$exam->id}}">
+                        <div class="card-body text-md-center border-top border-secondary">
+                          <div class="row">
+                            <!-- <div class="col-12 col-md-4"> Date : {{ $exam->schedule->date }}</div>
+                            <div class="col-12 col-md-4"> Start Time : {{ $exam->schedule->start_time }}</div>
+                            <div class="col-12 col-md-4"> End Time : {{ $exam->schedule->end_time }}</div> -->
+                            @if( $exam->medical_status=='Pending' )
+
+                              <div class="col-12">
+                                <div class="alert alert-light" role="alert">
+                                  {{ $exam->medical_reason }}
+                                </div>
+                                <div onclick="window.open('{{ asset('storage/medicals/'.$exam->student_id.'/'.$exam->medical_image)}}')" class="drop-zone" style="background: url({{ asset('storage/medicals/'.$exam->student_id.'/'.$exam->medical_image)}}) no-repeat center; background-size: cover; cursor: pointer;">
+                                </div>
+                              </div>
+                              <div class="col-12 mt-2">
+                                <button class="btn btn-outline-danger w-100" onclick="delete_medical({{ $exam->id }})">
+                                  <i class="fa fa-trash"></i>
+                                  Delete
+                                </button>
+                              </div> 
+
+
+                            @elseif( $exam->medical_status=='Approved' )
+
+                              <div class="col-12">
+                                <div class="alert alert-success" role="alert">
+                                  <h4 class="alert-heading">Medical Approved</h4>
+                                  <p>Your exam will be re-scheduled and will be notified</p>
+                                  <hr>
+                                  <p class="mb-0">If not notified in two weeks, call e-Learning Center, UCSC for inquiries</p>
+                                </div>
+                              </div>
+
+
+                            @elseif( $exam->medical_status=='Declined' )    
+                            
+                              <div class="col-12">
+                                <div class="alert alert-danger" role="alert">
+                                  <h4 class="alert-heading">Medical Decline</h4>
+                                  <p>You may have to re-apply for the exams</p>
+                                  <hr>
+                                  <p class="mb-0">Call e-Learning Center, UCSC for inquiries</p>
+                                </div>
+                              </div>
+
+                            @else
+                              <div class="col-12">
+                                <form id="{{$exam->id}}-medicalUploadform">
+                                  <div class="form-group ">
+                                    <label for="inputPaidAmount" class="col-12 col-form-label">Reason</label>
+                                    <div class="col-12">
+                                      <input type="text" class="form-control" id="{{ $exam->id }}-reason" name="reason">
+                                      <span class="invalid-feedback" id="{{ $exam->id }}-error-reason" role="alert"></span>
+                                    </div>
+                                  </div>
+                                  <div class="form-group mx-2">
+                                    <span id="InputMedicalHelp" class="form-text text-muted">Upload your scanned medical here in JPEG/ PNG file format</span>
+                                    <div class="drop-zone">
+                                      <span class="drop-zone__prompt">Scanned Medical <br><small>Drop image File here or click to upload</small> </span>
+                                      <input type="file" name="medical" id="{{ $exam->id }}-medical" class="drop-zone__input form-control"/>
+                                    </div>
+                                    <span class="invalid-feedback" id="{{ $exam->id }}-error-medical" role="alert"></span>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="col-12">
+                                <button class="btn btn-outline-primary w-100" onclick="upload_medical({{ $exam->id }})">
+                                  Upload
+                                  <span id="{{$exam->id}}-spinnermedicalUpload" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
+                                </button>
+                              </div>                              
+                            @endif
+                            {{-- <div class="col-12 offset-md-4 col-md-4 my-3">
+                              <button type="button" class="btn btn-outline-primary w-100" data-tooltip="tooltip" data-placement="bottom" title="Apply Exam" onclick="window.open('/portal/student/payment')"><i class="far fa-hand-point-right"></i> Apply</button>
+                            </div> --}}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    
-                  </li>
+                  </div>
+                  
+                @endif
+              @endforeach
+
+
+                {{-- <ul class="list-group list-group-flush">
+                  @foreach ($absent_exams as $exam)
+                    @if($exam->schedule->date <= date('Y-m-d'))
+                      <li class="list-group-item">
+                        <div class="row">
+                          <div class="col-12 col-md-3">FIT {{ $exam->subject->code }}</div>
+                          <div class="col-12 col-md-3">{{ $exam->subject->name }} ({{ $exam->type->name }})</div>
+                          <div class="col-12 col-md-3">{{$exam->schedule->date}}</div>
+                          <div class="col-12 col-md-3 text-md-right">
+                            <button type="button" class="btn btn-outline-danger w-100"><i class="fas fa-file-medical"></i> Upload medical</button>
+                          </div>
+                        </div>
+                        
+                      </li>
+                    @endif
                   @endforeach
-                </ul>
-              </div>
+                </ul> --}}
             </div>
           </div>
         </div>
