@@ -53,7 +53,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-website',
                     'portal'=>'staff',
-                    'module'=>'wesite',
+                    'module'=>'website',
                     'description'=>'Can view website module',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
