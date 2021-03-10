@@ -17,7 +17,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb ">
               <li class="breadcrumb-item"><a href="{{ url('/portal/staff/') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Students</li>
+              <li class="breadcrumb-item active" aria-current="page">Website</li>
             </ol>
           </nav>
 
@@ -27,7 +27,7 @@
 
 
     <!-- CONTENT -->
-    <div class="col-lg-12 student">
+    <div class="col-lg-12 website">
       <div class="row">
         
         <div class="col-lg-12">
