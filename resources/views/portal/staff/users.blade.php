@@ -3,19 +3,17 @@
 @section('content')
 
 <script type="text/javascript">
-
     // ACTIVE NAVIGATION ENTRY
     $(document).ready(function ($) {
         $('#users').addClass("active");
     });
-
 </script>
   <!-- BREACRUMB -->
   <section class="col-sm-12 mb-3">
       <div class="row">
           
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb ">
+          <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/portal/staff/') }}">Dashboard</a></li>
             <li class="breadcrumb-item active" aria-current="page">Users</li>
           </ol>
@@ -27,7 +25,7 @@
 
 
   <!-- CONTENT -->
-  <div class="col-lg-12 users">
+  <div class="col-lg-12 users min-vh-100">
     <div class="row">
 
       {{-- BUTTON GROUP --}}

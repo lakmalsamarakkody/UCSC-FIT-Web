@@ -19,41 +19,45 @@ class PermissionSeeder extends Seeder
     DB::table('permissions')->insert(
             array (
                 [
-                    'name'=>'staff-system-permission',
-                    'portal'=>'staff',
-                    'module'=>'system',
-                    'description'=>'Can view permissions',
+                    'name'=>'student-dashboard',
+                    'portal'=>'student',
+                    'module'=>'dashboard',
+                    'description'=>'Can view dashboard module',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
-                    'name'=>'staff-system-permission-add',
-                    'portal'=>'staff',
-                    'module'=>'system',
-                    'description'=>'Can add a permission',
+                    'name'=>'student-information',
+                    'portal'=>'student',
+                    'module'=>'information',
+                    'description'=>'Can view information module',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
-                    'name'=>'staff-system-permission-edit',
-                    'portal'=>'staff',
-                    'module'=>'system',
-                    'description'=>'Can edit permission details',
+                    'name'=>'student-exam',
+                    'portal'=>'student',
+                    'module'=>'exam',
+                    'description'=>'Can view exam module',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
-                    'name'=>'staff-system-permission-delete',
-                    'portal'=>'staff',
-                    'module'=>'system',
-                    'description'=>'Can delete a permission',
+                    'name'=>'student-result',
+                    'portal'=>'student',
+                    'module'=>'result',
+                    'description'=>'Can view result module',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
+                [
+                    'name'=>'staff-website',
+                    'portal'=>'staff',
+                    'module'=>'wesite',
+                    'description'=>'Can view website module',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
                 [
                     'name'=>'staff-system',
                     'portal'=>'staff',
@@ -62,7 +66,38 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
+                [
+                    'name'=>'staff-system-permission',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can view permissions',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-permission-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can add a permission',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-permission-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can edit permission details',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-permission-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can delete a permission',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
                 [
                     'name'=>'staff-system-role',
                     'portal'=>'staff',
@@ -71,7 +106,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-role-add',
                     'portal'=>'staff',
@@ -80,7 +114,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-role-view',
                     'portal'=>'staff',
@@ -89,7 +122,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-role-edit',
                     'portal'=>'staff',
@@ -98,7 +130,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-role-delete',
                     'portal'=>'staff',
@@ -107,7 +138,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-subject',
                     'portal'=>'staff',
@@ -116,7 +146,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-subject-add',
                     'portal'=>'staff',
@@ -125,7 +154,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-subject-edit',
                     'portal'=>'staff',
@@ -134,7 +162,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-subject-delete',
                     'portal'=>'staff',
@@ -143,7 +170,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-examType',
                     'portal'=>'staff',
@@ -152,7 +178,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-examType-add',
                     'portal'=>'staff',
@@ -161,7 +186,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-examType-edit',
                     'portal'=>'staff',
@@ -170,7 +194,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-examType-delete',
                     'portal'=>'staff',
@@ -179,7 +202,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-studentPhase',
                     'portal'=>'staff',
@@ -188,7 +210,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-studentPhase-add',
                     'portal'=>'staff',
@@ -197,7 +218,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-studentPhase-edit',
                     'portal'=>'staff',
@@ -206,7 +226,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-studentPhase-delete',
                     'portal'=>'staff',
@@ -215,7 +234,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-paymentMethod',
                     'portal'=>'staff',
@@ -224,7 +242,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-paymentMethod-add',
                     'portal'=>'staff',
@@ -233,7 +250,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-paymentMethod-edit',
                     'portal'=>'staff',
@@ -242,7 +258,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-paymentMethod-delete',
                     'portal'=>'staff',
@@ -251,7 +266,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-paymentType',
                     'portal'=>'staff',
@@ -260,7 +274,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-paymentType-add',
                     'portal'=>'staff',
@@ -269,7 +282,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-paymentType-edit',
                     'portal'=>'staff',
@@ -278,7 +290,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-system-paymentType-delete',
                     'portal'=>'staff',
@@ -287,7 +298,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam',
                     'portal'=>'staff',
@@ -296,7 +306,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-schedule-add',
                     'portal'=>'staff',
@@ -305,7 +314,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-schedule-edit',
                     'portal'=>'staff',
@@ -314,7 +322,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-schedule-delete-beforeRelease',
                     'portal'=>'staff',
@@ -323,7 +330,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-schedule-request',
                     'portal'=>'staff',
@@ -332,7 +338,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-schedule-approve',
                     'portal'=>'staff',
@@ -341,7 +346,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-schedule-decline',
                     'portal'=>'staff',
@@ -350,7 +354,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-schedule-decline-message',
                     'portal'=>'staff',
@@ -359,7 +362,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-schedule-release',
                     'portal'=>'staff',
@@ -368,7 +370,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-schedule-allRelease',
                     'portal'=>'staff',
@@ -377,7 +378,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-schedule-postpone',
                     'portal'=>'staff',
@@ -386,7 +386,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-schedule-delete-afterRelease',
                     'portal'=>'staff',
@@ -395,7 +394,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-examList',
                     'portal'=>'staff',
@@ -404,7 +402,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-examList-add',
                     'portal'=>'staff',
@@ -413,7 +410,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-examList-viewResults',
                     'portal'=>'staff',
@@ -422,7 +418,6 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-
                 [
                     'name'=>'staff-exam-examList-delete',
                     'portal'=>'staff',
