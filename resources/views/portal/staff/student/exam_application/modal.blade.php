@@ -120,9 +120,9 @@
                                 <div id="divBtnAssignAppliedExams" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-success form-control" id="btnAssignScheduledExams" onclick="assign_scheduled_exams();">Approve Schedules<span id="spinnerBtnAssignScheduledExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
-                                <div id="divBtnDeclineAppliedExams" class="btn-group col-xl-3 col-lg-6">
+                                {{-- <div id="divBtnDeclineAppliedExams" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-exams-message" id="btnDeclineAppliedExams" data-toggle="modal">Decline Applied Exams<span id="spinnerBtnDeclineAppliedExam" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -159,6 +159,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 col-12 text-center">
+                                <div id="divBtnApprovePayment" class="btn-group col-xl-3 col-lg-6">
+                                    <button type="button" class="btn btn-success form-control" id="btnApprovePayment" onclick="approve_exam_payment();">Approve Payment<span id="spinnerBtnApprovePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                </div>
+                                <div id="divBtnDeclinePayment" class="btn-group col-xl-3 col-lg-6">
+                                    <button type="button" class="btn btn-warning form-control" id="btnDeclinePayment" onclick="decline_exam_payment();" data-toggle="modal">Decline Payment<span id="spinnerBtnDeclinePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </div>

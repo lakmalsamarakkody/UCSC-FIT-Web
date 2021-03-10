@@ -2,7 +2,7 @@
 
     // INVOKE APPLIED EXAMS MODAL
     let appliedExamTable = null;
-    applied_exam_table = (student_id) => {
+    applied_exam_table = (payment_id) => {
         appliedExamTable = $('.tbl-applied-exams').DataTable({
             processing: true,
             serverSide: true,
@@ -11,7 +11,7 @@
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
                 url: "{{ route('student.application.exams.details.table') }}",
                 type: 'post',
-                data: {'student_id': student_id},
+                data: {'payment_id': payment_id},
             },
             columns: [
                 {
@@ -89,10 +89,10 @@
         });
     }
 
-    view_modal_applied_exams = (student_id) => {
+    view_modal_applied_exams = (payment_id) => {
         // Payload
         var formData = new FormData();
-        formData.append('student_id', student_id);
+        formData.append('payment_id', payment_id);
 
         // Get student applied exam details
         $.ajax({
@@ -103,8 +103,8 @@
             processData: false,
             contentType: false,
             beforeSend: function() {
-                $('#btnViewModalAppliedExams-'+student_id).attr('disabled', 'disabled');
-                $('#spinnerBtnViewModalAppliedExams-'+student_id).removeClass('d-none');
+                $('#btnViewModalAppliedExams-'+payment_id).attr('disabled', 'disabled');
+                $('#spinnerBtnViewModalAppliedExams-'+payment_id).removeClass('d-none');
             },
             success: function(data) {
                 console.log('Success in get applicant exam details ajax');
@@ -114,7 +114,7 @@
                     $('#spanSubmittedOn').html(date.toLocaleDateString());
                     $('#spanStudentName').html(data['student']['initials'] + ' ' +data['student']['last_name']);
                     $('#spanRegNumber').html(data['student']['reg_no']);
-                    applied_exam_table(student_id);
+                    applied_exam_table(payment_id);
                     //Create applied exam table
                     // $('.trAppliedExams').remove();
                     // var appliedExams = '';
@@ -140,15 +140,15 @@
                     //     '</td></tr>';
                     // });
                     // $('#tblExams').append(appliedExams);
-                    $('#btnViewModalAppliedExams-'+student_id).removeAttr('disabled', 'disabled');
-                    $('#spinnerBtnViewModalAppliedExams-'+student_id).addClass('d-none');
+                    $('#btnViewModalAppliedExams-'+payment_id).removeAttr('disabled', 'disabled');
+                    $('#spinnerBtnViewModalAppliedExams-'+payment_id).addClass('d-none');
                     $('#modal-view-exam-application').modal('show');
                 }
             },
             error: function(err) {
                 console.log('Error in get applicant exam details ajax.');
-                $('#btnViewModalAppliedExams-'+student_id).removeAttr('disabled', 'disabled');
-                $('#spinnerBtnViewModalAppliedExams-'+student_id).addClass('d-none');
+                $('#btnViewModalAppliedExams-'+payment_id).removeAttr('disabled', 'disabled');
+                $('#spinnerBtnViewModalAppliedExams-'+payment_id).addClass('d-none');
                 SwalSystemErrorDanger.fire();
             }
         });

@@ -25,7 +25,7 @@ class ExamApplicationController extends Controller
     public function index()
     {
         $today = Carbon::today();
-        $exam_applicants = hasExam::get()->unique('student_id');
+        $exam_applicants = hasExam::get()->where('payment_id', '!=', null)->unique('payment_id');
         $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('status', 'AB')->get();
         return view('portal/staff/student/exam_application', [
@@ -39,8 +39,9 @@ class ExamApplicationController extends Controller
     public function getApplicantExamDetails(Request $request)
     {
         $today = Carbon::today();
-        $student = Student::where('id',$request->student_id)->first();
-        $student_applied_exams = hasExam::where('student_id',$request->student_id)->where('status', 'ab')->orWhere(function($query) {
+        $payment = Payment::where('id',$request->payment_id)->first();
+        $student = Student::where('id', $payment->student_id)->first();
+        $student_applied_exams = hasExam::where('payment_id', '!=', null)->where('payment_id',$request->payment_id)->where('status', 'ab')->orWhere(function($query) {
             $query->where('status', 'scheduled');
         })->addSelect([
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
@@ -52,7 +53,7 @@ class ExamApplicationController extends Controller
             // 'start_time'=>Schedule::select('start_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             // 'end_time'=>Schedule::select('end_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
         ])->get();
-        $submitted_date = hasExam::select('updated_at')->where('student_id', $request->student_id)->latest()->first();
+        $submitted_date = Payment::select('updated_at')->where('id', $request->payment_id)->latest()->first();
         return response()->json(['status'=>'success', 'student_applied_exams'=>$student_applied_exams, 'submitted_date'=>$submitted_date, 'student'=>$student]);
     }
     // /LOAD EXAM APPLICATION VIEW MODAL
@@ -61,7 +62,8 @@ class ExamApplicationController extends Controller
     public function appliedExamsTable(Request $request)
     {
         $today = Carbon::today();
-        $data = hasExam::where('student_id',$request->student_id)->where('status', 'ab')->orWhere(function($query) {
+        $payment = Payment::where('id', $request->payment_id)->first();
+        $data = hasExam::where('payment_id', '!=', null)->where('payment_id',$request->payment_id)->where('status', 'ab')->orWhere(function($query) {
             $query->where('status', 'scheduled');
         })->addSelect([
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
