@@ -43,7 +43,7 @@ class ExamScheduleSeeder extends Seeder
                   'exam_id' => $exam_id->id,
                   'subject_id' =>$Sid,
                   'exam_type_id' => $Etid,
-                  'date' => $faker->dateTimeBetween($exam_id->year .'-'. $exam_id->month.'-01', '2021-12-28'),
+                  'date' => $faker->dateTimeBetween($exam_id->year .'-'. $exam_id->month.'-01', '2022-12-31'),
                   'start_time' => $faker->time($format = 'H:i'),
                   'end_time' => Carbon::now()->addHours(rand(1,8)),
                   'created_at' => '2020-11-27 17:36:23',

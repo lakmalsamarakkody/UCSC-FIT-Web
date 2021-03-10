@@ -21,7 +21,7 @@ class ExamSeeder extends Seeder
         DB::table('exams')->truncate();
 
         //$faker=\Faker\Factory::create();
-        for($i=2018;$i<=2020;$i++):
+        for($i=2019;$i<=2022;$i++):
         $year=$i;
             for($j=1;$j<=12;$j++){
                 $month=$j;
