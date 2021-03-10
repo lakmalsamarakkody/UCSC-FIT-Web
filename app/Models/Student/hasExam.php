@@ -24,7 +24,8 @@ class hasExam extends Model
     protected $table='student_exams';
 
     protected $fillable = [
-        'payment_id'
+        'payment_id',
+        'payment_status',
     ];
 
     public function student(){

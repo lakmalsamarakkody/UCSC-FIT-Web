@@ -21,6 +21,10 @@ class Payment extends Model
     protected static $logAttributes = ['*'];
     protected static $logName = 'payment';
 
+    protected $fillable = [
+        'status',
+    ];
+
     public function type()
     {
         return $this->belongsTo(Type::class, 'type_id', 'id');
