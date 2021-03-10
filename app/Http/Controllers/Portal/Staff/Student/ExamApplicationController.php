@@ -88,6 +88,29 @@ class ExamApplicationController extends Controller
     }
     // /APPLIED EXAMS TABLE
 
+    // APPROVE PAYMENT
+    public function approveExamPayment(Request $request)
+    {
+        $applied_exams = hasExam::where('payment_id', '!=', null)->where('payment_id', $request->payment_id)->get();
+        $payment = Payment::where('id', $request->payment_id)->first();
+        if($payment->update(['status'=>'Approved'])):
+            foreach($applied_exams as $exam):
+                $exam->update(['payment_status'=>'Approved']);
+            endforeach;
+            return response()->json(['status'=>'success']);
+        endif;
+        return response()->json(['status'=>'error']);
+    }
+    // /APPROVE PAYMENT
+
+    // DECLINE PAYMENT
+    public function declineExamPayment(Request $request)
+    {
+        
+    }
+
+    // /DECLINE PAYMENT
+
     // LOAD SCHEDULE THE EXAM MODAL
     public function getAppliedSubjectScheduleDetails(Request $request)
     {
@@ -124,7 +147,7 @@ class ExamApplicationController extends Controller
     {
         if(hasExam::where('id', $request->applied_exam_id)->update([
             'exam_schedule_id'=> $request->schedule_id,
-            'status'=> 'scheduled'
+            'status'=> 'Scheduled'
         ])):
         return response()->json(['status'=>'success']);
         else:
@@ -137,12 +160,12 @@ class ExamApplicationController extends Controller
     public function approveScheduledExams(Request $request)
     {
         $student = Student::where('reg_no', $request->student_regno)->first();
-        $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('status', 'scheduled')->get();
+        $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('status', 'Scheduled')->get();
         if($scheduled_exams->isEmpty()):
             return response()->json(['status'=>'error', 'msg'=>'There is no scheduled exams.']);
         else:
             foreach($scheduled_exams as $exam):
-                hasExam::where('id', $exam->id)->update(['status'=>'approved']);
+                hasExam::where('id', $exam->id)->update(['status'=>'Approved']);
             endforeach;
             return response()->json(['status'=>'success']);
         endif;

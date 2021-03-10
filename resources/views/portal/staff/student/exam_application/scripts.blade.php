@@ -119,6 +119,7 @@
 
                     // Payment Tab
                     if(data['payment'] != null) {
+                        $('#paymentId').val(data['payment']['id']);
                         $('#spanPaymentDate').html(data['payment']['paid_date']);
                         $('#spanPaymentBank').html(data['payment']['bank']);
                         $('#spanPaymentBankBranch').html(data['payment']['bank_branch']);
@@ -167,6 +168,76 @@
         });
     }
     // /INVOKE APPLIED EXAMS MODAL
+
+    // APPROVE PAYMENT
+    approve_exam_payment = () => {
+        SwalQuestionWarningAutoClose.fire({
+            title: "Are you sure?",
+            text: "You wont be able to revert this!",
+            confirmButtonText: 'Yes, Approve!',
+        })
+        .then((result) => {
+            if(result.isConfirmed) {
+
+            // Form Payload
+            var formData = new FormData();
+            formData.append('payment_id', $('#paymentId').val());
+
+            // Approve exam payment controller
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url: "{{ route('student.application.exams.payment.approve') }}",
+                type: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,           
+                beforeSend: function(){
+                    $("#spinnerBtnApproveExamPayment").removeClass('d-none');
+                    $('#btnApproveExamPayment').attr('disabled','disabled');    
+                },
+                success: function(data){
+                    console.log('Approve payment ajax success');
+                    $("#spinnerBtnApproveExamPayment").addClass('d-none');
+                    $('#btnApproveExamPayment').removeAttr('disabled');
+                    if (data['status'] == 'success'){
+                        SwalDoneSuccess.fire({
+                            title: 'Approved!',
+                            text: 'Payment approved successfully',
+                        }).then((result) => {
+                            if(result.isConfirmed) {
+                                location.reload()
+                            }
+                        });
+                    }
+                    else {
+                        SwalSystemErrorDanger.fire({
+                            title: 'Payment Approve Process Failed!',
+                        })
+                    }
+                },
+                error: function(err) {
+                    console.log('Approve exam payment ajax error');
+                    $("#spinnerBtnApproveExamPayment").addClass('d-none');
+                    $('#btnApproveExamPayment').removeAttr('disabled');
+                    SwalSystemErrorDanger.fire({
+                        title: 'Payment Approve Process Failed!',
+                    })
+                }
+            });
+            }
+            else {
+            SwalNotificationWarningAutoClose.fire({
+                title: 'Aborted!',
+                text: 'Payment approval process aborted.',
+            })
+            }
+        })
+    }
+    // /APPROVE PAYMENT
+
+    // DECLINE PAYMENT
+    // /DECLINE PAYMENT
+
 
     // INVOKE SCHEDULE EXAMS MODAL
     invoke_modal_schedule_exam = (applied_exam_id) => {

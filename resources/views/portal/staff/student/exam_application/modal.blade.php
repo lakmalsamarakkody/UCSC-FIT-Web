@@ -133,6 +133,7 @@
                                     <div class="card-body">                        
                                         <div class="row">
                                             <div class="col-12 order-md-1 order-2">
+                                                <input type="hidden" value="" id="paymentId" class="form-control"/>
                                                 <table class="table text-left">
                                                     <tr>
                                                         <th>Date: </th>
@@ -163,10 +164,10 @@
                             </div>
                             <div class="mt-4 col-12 text-center">
                                 <div id="divBtnApprovePayment" class="btn-group col-xl-3 col-lg-6">
-                                    <button type="button" class="btn btn-success form-control" id="btnApprovePayment" onclick="approve_exam_payment();">Approve Payment<span id="spinnerBtnApprovePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                    <button type="button" class="btn btn-success form-control" id="btnApproveExamPayment" onclick="approve_exam_payment();">Approve Payment<span id="spinnerBtnApproveExamPayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                                 <div id="divBtnDeclinePayment" class="btn-group col-xl-3 col-lg-6">
-                                    <button type="button" class="btn btn-warning form-control" id="btnDeclinePayment" onclick="decline_exam_payment();" data-toggle="modal">Decline Payment<span id="spinnerBtnDeclinePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                    <button type="button" class="btn btn-warning form-control" id="btnDeclineExamPayment" onclick="decline_exam_payment();" data-toggle="modal">Decline Payment<span id="spinnerBtnDeclineExamPayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </div>
