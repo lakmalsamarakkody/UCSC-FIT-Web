@@ -12,9 +12,11 @@ use App\Models\Student\Payment;
 use App\Models\Student\Payment\Type;
 use App\Models\Support\Bank;
 use App\Models\Support\Fee;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use phpDocumentor\Reflection\Types\Null_;
 
@@ -101,8 +103,15 @@ class ExamsController extends Controller
                               ->where( 'exam_type_id', $exam_to_apply->exam_type_id )
                               ->where( 'result', 1 )
                               ->first(); 
+
+            $scheduled_exam = hasExam::where( 'student_id', $student_id )
+                                    ->where( 'subject_id', $exam_to_apply->subject_id )
+                                    ->where( 'exam_type_id', $exam_to_apply->exam_type_id )
+                                    ->whereHas('schedule', function($query) {
+                                      $query->where('date', '>=', date('Y-m-d'));
+                                    })->get();
             // echo $similar;
-            if( $similar_exam != Null || $same_exam != Null ):
+            if( $similar_exam != Null || $same_exam != Null || $scheduled_exam != Null ):
               return response()->json(['status'=>'exist']);
             else:
               if( $passed_exam != Null ):
@@ -226,7 +235,7 @@ class ExamsController extends Controller
         if($payment->save()):
 
           foreach ($selected_exams as $selected_exam) {
-            $student_exam = hasExam::find($selected_exam->id);
+            $student_exam = hasExam::where('id',$selected_exam->id);
             $student_exam->update([              
               'payment_id' => $payment->id
             ]);
@@ -237,6 +246,53 @@ class ExamsController extends Controller
         endif;
 
       endif;
+    endif;
+    return response()->json(['error'=>'error']);
+  }
+
+  public function uploadExamMedical(Request $request)
+  {
+    $validator = Validator::make($request->all(), 
+      [     
+          'reason'=> ['required'],
+          'medical'=> ['required', 'image']
+      ]
+    );
+
+    if($validator->fails()):
+      return response()->json(['errors'=>$validator->errors()]);
+    else:
+      // echo $request->id;
+      $student_id = Auth::user()->student->id;
+
+      $medical_ext = $request->file('medical')->getClientOriginalExtension();
+      $medical_name = $student_id.'_medical_'.date('Y-m-d').'_'.time().'.'. $medical_ext;
+      
+
+      $student_exam = hasExam::where('id',$request->id);
+
+      if( $student_exam->update([  'medical_reason' => $request->reason, 'medical_image' => $medical_name, 'medical_status' => 'Pending' ]) && $path = $request->file('medical')->storeAs('public/medicals/'.$student_id, $medical_name) ):     
+
+        return response()->json(['status'=>'success']);
+
+      endif;
+
+    endif;
+    return response()->json(['error'=>'error']);
+
+  }
+
+  public function deleteExamMedical(Request $request)
+  {
+    $student_id = Auth::user()->student->id;
+    $student_exam = hasExam::where('id',$request->id);
+
+    $medical_image = ($student_exam->first())->medical_image;
+
+    if( $student_exam->update([  'medical_reason' => Null, 'medical_image' => Null, 'medical_status' => Null ]) && Storage::delete('public/medicals/'.$student_id.'/'.$medical_image) ):     
+
+      return response()->json(['status'=>'success']);
+
     endif;
     return response()->json(['error'=>'error']);
   }

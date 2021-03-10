@@ -222,14 +222,14 @@ Route::post('/portal/student/registration/getstates',[App\Http\Controllers\Porta
 Route::post('/portal/student/registration/getcities',[App\Http\Controllers\Portal\Student\RegistrationController::class,'getCities']);
 // /REGISTRATION PAGE
 
-// INFROMATION PAGE
+// INFORMATION PAGE
 Route::get('/portal/student/information', [App\Http\Controllers\Portal\Student\InformationController::class, 'index'])->name('student.information');
 Route::post('/portal/student/information/update/qualification', [App\Http\Controllers\Portal\Student\InformationController::class, 'updateQualification'])->name('update.qualification');
 Route::post('/portal/student/information/update/contact-details', [App\Http\Controllers\Portal\Student\InformationController::class, 'updateContactDetails']);
 Route::post('/portal/student/information/update/employment-details', [App\Http\Controllers\Portal\Student\InformationController::class, 'updateEmploymentDetails']);
 Route::post('/portal/student/information/update/get-states', [App\Http\Controllers\Portal\Student\InformationController::class, 'getStates']);
 Route::post('/portal/student/information/update/get-cities', [App\Http\Controllers\Portal\Student\InformationController::class, 'getCities']);
-// /INFROMATION PAGE
+// /INFORMATION PAGE
 
 // EXAMS PAGES
 Route::get('/portal/student/exams',[App\Http\Controllers\Portal\Student\ExamsController::class,'index'])->name('student.exam');
@@ -238,6 +238,7 @@ Route::post('/portal/student/exams/delete',[App\Http\Controllers\Portal\Student\
 Route::get('/portal/student/exam/payment',[App\Http\Controllers\Portal\Student\ExamsController::class,'examPayment'])->name('payment.exam');
 Route::post('/portal/student/exam/payment',[App\Http\Controllers\Portal\Student\ExamsController::class,'saveExamPayment'])->name('payment.exam.save');
 Route::post('/portal/student/exam/medical/upload',[App\Http\Controllers\Portal\Student\ExamsController::class,'uploadExamMedical'])->name('student.exam.medical.upload');
+Route::post('/portal/student/exam/medical/delete',[App\Http\Controllers\Portal\Student\ExamsController::class,'deleteExamMedical'])->name('student.exam.medical.delete');
 // /EXAMS PAGE
 
 // RESULT PAGE
