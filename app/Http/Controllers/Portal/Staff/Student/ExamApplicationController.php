@@ -18,12 +18,14 @@ use App\Models\Exam\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isEmpty;
+
 class ExamApplicationController extends Controller
 {
     public function index()
     {
         $today = Carbon::today();
-        $exam_applicants = hasExam::get()->unique('student_id');
+        $exam_applicants = hasExam::get()->where('payment_id', '!=', null)->unique('payment_id');
         $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('status', 'AB')->get();
         return view('portal/staff/student/exam_application', [
@@ -37,8 +39,13 @@ class ExamApplicationController extends Controller
     public function getApplicantExamDetails(Request $request)
     {
         $today = Carbon::today();
-        $student = Student::where('id',$request->student_id)->first();
-        $student_applied_exams = hasExam::where('student_id',$request->student_id)->where('status', 'ab')->orWhere(function($query) {
+        $payment = Payment::where('id',$request->payment_id)->addSelect([
+            'bank'=> Bank::select('name')->whereColumn('bank_id', 'banks.id'),
+            'bank_branch'=> BankBranch::select('name')->whereColumn('bank_branch_id', 'bank_branches.id'),
+            'bank_branch_code'=> BankBranch::select('code')->whereColumn('bank_branch_id', 'bank_branches.id'),
+        ])->first();
+        $student = Student::where('id', $payment->student_id)->first();
+        $student_applied_exams = hasExam::where('payment_id', '!=', null)->where('payment_id',$request->payment_id)->where('status', 'ab')->orWhere(function($query) {
             $query->where('status', 'scheduled');
         })->addSelect([
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
@@ -50,8 +57,8 @@ class ExamApplicationController extends Controller
             // 'start_time'=>Schedule::select('start_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             // 'end_time'=>Schedule::select('end_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
         ])->get();
-        $submitted_date = hasExam::select('updated_at')->where('student_id', $request->student_id)->latest()->first();
-        return response()->json(['status'=>'success', 'student_applied_exams'=>$student_applied_exams, 'submitted_date'=>$submitted_date, 'student'=>$student]);
+        $submitted_date = Payment::select('updated_at')->where('id', $request->payment_id)->latest()->first();
+        return response()->json(['status'=>'success', 'student_applied_exams'=>$student_applied_exams, 'submitted_date'=>$submitted_date, 'student'=>$student, 'payment'=>$payment]);
     }
     // /LOAD EXAM APPLICATION VIEW MODAL
 
@@ -59,19 +66,23 @@ class ExamApplicationController extends Controller
     public function appliedExamsTable(Request $request)
     {
         $today = Carbon::today();
-        $data = hasExam::where('student_id',$request->student_id)->where('status', 'ab')->orWhere(function($query) {
+        $data = hasExam::where('payment_id', '!=', null)->where('payment_id',$request->payment_id)->where('status', 'ab')->orWhere(function($query) {
             $query->where('status', 'scheduled');
         })->addSelect([
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
-            'requested_exam'=> Exam::select(DB::raw("MONTHNAME(CONCAT(year, '-',month, '-01')) as monthname"))->whereColumn('requested_exam_id', 'exams.id'),
-            // 'requested_year'=> Exam::select('year')->whereColumn('requested_exam_id', 'exams.id'),
+            'requested_month'=> Exam::select(DB::raw("MONTHNAME(CONCAT(year, '-',month, '-01')) as monthname"))->whereColumn('requested_exam_id', 'exams.id'),
+            'requested_year'=> Exam::select('year')->whereColumn('requested_exam_id', 'exams.id'),
             'schedule_date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
+            'schedule_time'=> Schedule::select(DB::raw('CONCAT(start_time, end_time) as time'))->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'start_time'=>Schedule::select('start_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'end_time'=>Schedule::select('end_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
         ]);
         return DataTables::of($data)
+        ->addColumn('requested_exam', function($row) {
+            return $row->requested_year.' '.$row->requested_month;
+        })
         ->rawColumns(['action'])
         ->make(true);
     }
@@ -127,8 +138,8 @@ class ExamApplicationController extends Controller
     {
         $student = Student::where('reg_no', $request->student_regno)->first();
         $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('status', 'scheduled')->get();
-        if($scheduled_exams == null):
-            return response()->json(['status'=>'none_scheduled']);
+        if($scheduled_exams->isEmpty()):
+            return response()->json(['status'=>'error', 'msg'=>'There is no scheduled exams.']);
         else:
             foreach($scheduled_exams as $exam):
                 hasExam::where('id', $exam->id)->update(['status'=>'approved']);

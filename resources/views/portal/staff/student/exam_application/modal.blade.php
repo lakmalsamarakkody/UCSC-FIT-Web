@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="viewExamApplication"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="location.reload();">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -120,9 +120,9 @@
                                 <div id="divBtnAssignAppliedExams" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-success form-control" id="btnAssignScheduledExams" onclick="assign_scheduled_exams();">Approve Schedules<span id="spinnerBtnAssignScheduledExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
-                                <div id="divBtnDeclineAppliedExams" class="btn-group col-xl-3 col-lg-6">
+                                {{-- <div id="divBtnDeclineAppliedExams" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-exams-message" id="btnDeclineAppliedExams" data-toggle="modal">Decline Applied Exams<span id="spinnerBtnDeclineAppliedExam" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -155,10 +155,18 @@
                                                         <td>Rs.<span id="spanPaymentAmount"></span></td>
                                                     </tr>
                                                 </table>
-                                                <div name="imgPaymentBankSlip" id="imgPaymentBankSlip" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
+                                                <div id="imgExamPaymentBankSlip" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 col-12 text-center">
+                                <div id="divBtnApprovePayment" class="btn-group col-xl-3 col-lg-6">
+                                    <button type="button" class="btn btn-success form-control" id="btnApprovePayment" onclick="approve_exam_payment();">Approve Payment<span id="spinnerBtnApprovePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                </div>
+                                <div id="divBtnDeclinePayment" class="btn-group col-xl-3 col-lg-6">
+                                    <button type="button" class="btn btn-warning form-control" id="btnDeclinePayment" onclick="decline_exam_payment();" data-toggle="modal">Decline Payment<span id="spinnerBtnDeclinePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </div>

@@ -52,7 +52,7 @@
                       <td>{{ $applicant->updated_at->isoFormat('YYYY-MM-DD') }}</td>
                       <td>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $applicant->student_id }}" data-tooltip="tooltip" data-placement="bottom" title="View Applied Exam Details" onclick="view_modal_applied_exams({{$applicant->student_id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->student_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                          <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                         </div>
                       </td>
                     </tr>
