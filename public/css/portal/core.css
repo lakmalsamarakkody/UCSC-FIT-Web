@@ -64,6 +64,10 @@ a, a:hover {
   background-color:var(--main-theme-color);
 }
 
+.bg-main-primary{
+  background-color:var(--color-primary);
+}
+
 .bg-main-warning{
   background-color:var(--color-warning-dark);
 }
@@ -239,8 +243,6 @@ a, a:hover {
 /* /SIDE BAR */
 
 /* NAV BAR */
-
-
 .nav-bar{
   background-color: var(--nav-bg-color) !important;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
@@ -300,6 +302,20 @@ a, a:hover {
   text-decoration: none;
 }
 /* /MOBILE NAV BAR */
+
+/* BREADCRUMB */
+ol.breadcrumb li.breadcrumb-item a{
+  color: var(--sub-text-color);
+  font-weight: bolder;
+}
+ol.breadcrumb li.breadcrumb-item a:hover{
+  color:#1d68a7;
+}
+
+/* ol.breadcrumb li.breadcrumb-item{
+  font-size: larger;
+} */
+/* /BREADCRUMB */
 
 /* PAGE AREA */
 .page-area{
