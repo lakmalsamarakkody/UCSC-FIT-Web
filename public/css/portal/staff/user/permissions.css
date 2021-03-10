@@ -1,0 +1,15 @@
+.userPermissions .accordian#permissionModulesAccordian .card{
+  box-shadow: 0rem 0rem 0.3rem 0rem rgb(0 0 0 / 15%)
+}
+
+.userPermissions .accordian#permissionModulesAccordian .card .card-header:hover{
+  background-color: var(--main-theme-color);
+}
+
+.userPermissions .accordian#permissionModulesAccordian .card .card-header button:hover{
+  color: var(--white) !important;
+}
+
+.userPermissions .accordian#permissionModulesAccordian .card .card-header button:focus{
+  box-shadow: none;
+}
