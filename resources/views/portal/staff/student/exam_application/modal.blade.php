@@ -155,7 +155,7 @@
                                                         <td>Rs.<span id="spanPaymentAmount"></span></td>
                                                     </tr>
                                                 </table>
-                                                <div name="imgPaymentBankSlip" id="imgPaymentBankSlip" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
+                                                <div id="imgExamPaymentBankSlip" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
                                             </div>
                                         </div>
                                     </div>

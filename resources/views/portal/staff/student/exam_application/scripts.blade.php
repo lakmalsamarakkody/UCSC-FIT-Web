@@ -110,11 +110,24 @@
                 console.log('Success in get applicant exam details ajax');
                 if(data['status'] == 'success'){
 
+                    // Details Tab
                     var date = new Date(data['submitted_date']['updated_at']);
                     $('#spanSubmittedOn').html(date.toLocaleDateString());
                     $('#spanStudentName').html(data['student']['initials'] + ' ' +data['student']['last_name']);
                     $('#spanRegNumber').html(data['student']['reg_no']);
                     applied_exam_table(payment_id);
+
+                    // Payment Tab
+                    if(data['payment'] != null) {
+                        $('#spanPaymentDate').html(data['payment']['paid_date']);
+                        $('#spanPaymentBank').html(data['payment']['bank']);
+                        $('#spanPaymentBankBranch').html(data['payment']['bank_branch']);
+                        $('#spanPaymentBankBranchCode').html(data['payment']['bank_branch_code']);
+                        $('#spanPaymentAmount').html(data['payment']['amount']);
+                        $('#imgExamPaymentBankSlip').attr('style', 'background: url(/storage/payments/exam/'+data['student']['id']+'/'+data['payment']['image']+')');
+                        $('#imgExamPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/exam/'+data['student']['id']+'/'+data['payment']['image']+'")');
+                    }
+                    
                     //Create applied exam table
                     // $('.trAppliedExams').remove();
                     // var appliedExams = '';

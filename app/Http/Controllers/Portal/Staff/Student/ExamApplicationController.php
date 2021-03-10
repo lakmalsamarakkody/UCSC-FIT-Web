@@ -39,7 +39,11 @@ class ExamApplicationController extends Controller
     public function getApplicantExamDetails(Request $request)
     {
         $today = Carbon::today();
-        $payment = Payment::where('id',$request->payment_id)->first();
+        $payment = Payment::where('id',$request->payment_id)->addSelect([
+            'bank'=> Bank::select('name')->whereColumn('bank_id', 'banks.id'),
+            'bank_branch'=> BankBranch::select('name')->whereColumn('bank_branch_id', 'bank_branches.id'),
+            'bank_branch_code'=> BankBranch::select('code')->whereColumn('bank_branch_id', 'bank_branches.id'),
+        ])->first();
         $student = Student::where('id', $payment->student_id)->first();
         $student_applied_exams = hasExam::where('payment_id', '!=', null)->where('payment_id',$request->payment_id)->where('status', 'ab')->orWhere(function($query) {
             $query->where('status', 'scheduled');
@@ -54,7 +58,7 @@ class ExamApplicationController extends Controller
             // 'end_time'=>Schedule::select('end_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
         ])->get();
         $submitted_date = Payment::select('updated_at')->where('id', $request->payment_id)->latest()->first();
-        return response()->json(['status'=>'success', 'student_applied_exams'=>$student_applied_exams, 'submitted_date'=>$submitted_date, 'student'=>$student]);
+        return response()->json(['status'=>'success', 'student_applied_exams'=>$student_applied_exams, 'submitted_date'=>$submitted_date, 'student'=>$student, 'payment'=>$payment]);
     }
     // /LOAD EXAM APPLICATION VIEW MODAL
 
@@ -62,7 +66,6 @@ class ExamApplicationController extends Controller
     public function appliedExamsTable(Request $request)
     {
         $today = Carbon::today();
-        $payment = Payment::where('id', $request->payment_id)->first();
         $data = hasExam::where('payment_id', '!=', null)->where('payment_id',$request->payment_id)->where('status', 'ab')->orWhere(function($query) {
             $query->where('status', 'scheduled');
         })->addSelect([
