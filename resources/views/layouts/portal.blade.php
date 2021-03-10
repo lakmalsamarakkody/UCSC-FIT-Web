@@ -31,9 +31,12 @@
     <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/staff/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/staff/exams.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/staff/system.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/staff/student.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/staff/student/application.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/staff/student/applications.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/staff/system.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/staff/user.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/staff/user/permissions.css') }}">
+
     <!-- /PAGES -->
   <!-- /STYLES -->
 
@@ -116,8 +119,10 @@
                 <li id="exams"><a href="{{ route('exams') }}">Exams</a></li>
                 <li id="results"><a href="{{ route('results') }}">Results</a></li>
                 <li id="users"><a href="{{ route('users') }}">Users</a></li>
-                @if(Auth::user()->role->name == 'Super Administrator')
+                @if(Auth::user()->hasPermission('staff-system'))
                   <li id="system"><a href="{{ route('system') }}">System</a></li>
+                @endif
+                @if(Auth::user()->hasPermission('staff-website'))
                   <li id="website"><a href="{{ route('staff.website') }}">Website</a></li>
                 @endif
 
@@ -199,7 +204,7 @@
           <hr class="bg-primary" width="100%"/>
           <div class="row">
 
-          <div class=" w-100 text-right pb-2 pr-3" >
+          <div class=" w-100 text-right pb-2 pr-3 font-weight-bold">
             Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" > UCSC</a> </strong>. All Rights Reserved |
             Powered by <strong><a target="_blank" href="http://www.e-learning.lk/">e-Learning Center - UCSC </a> </strong>
           </div>
