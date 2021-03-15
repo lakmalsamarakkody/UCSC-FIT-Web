@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="viewExamApplication"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="location.reload();">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -280,9 +280,9 @@
                                                 </div>
                                             </div> --}}
                                         </div>
-                                        
+                                        {{-- id="tblSchedulesForAppliedExam" --}}
                                         <div class="col-md-12 order-md-1 order-2 mt-5">
-                                            <table id="tblSchedulesForAppliedExam" class="table">
+                                            <table class="table tbl-schedules-for-applied-exam">
                                                 <thead>
                                                     <tr>
                                                         <th>Subject</th>

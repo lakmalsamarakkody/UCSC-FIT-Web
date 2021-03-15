@@ -3,6 +3,7 @@
     // INVOKE APPLIED EXAMS MODAL
     let appliedExamTable = null;
     applied_exam_table = (payment_id) => {
+        $('.tbl-applied-exams').DataTable().clear().destroy();
         appliedExamTable = $('.tbl-applied-exams').DataTable({
             processing: true,
             serverSide: true,
@@ -111,7 +112,7 @@
                 if(data['status'] == 'success'){
 
                     // Details Tab
-                    var date = new Date(data['submitted_date']['updated_at']);
+                    var date = new Date(data['submitted_date']['created_at']);
                     $('#spanSubmittedOn').html(date.toLocaleDateString());
                     $('#spanStudentName').html(data['student']['initials'] + ' ' +data['student']['last_name']);
                     $('#spanRegNumber').html(data['student']['reg_no']);
@@ -272,17 +273,15 @@
                             beforeSend: function() {
                                 $("#spinnerBtnDeclineExamPayment").removeClass('d-none');
                                 $('#btnDeclineExamPayment').attr('disabled', 'disabled');
-                                // $('body').addClass('freeze');
                                 Swal.showLoading();
                             },
                             success: function(data) {
                                 console.log('Success in decline exam payment ajax.');
                                 $("#spinnerBtnDeclineExamPayment").addClass('d-none');
                                 $('#btnDeclineExamPayment').removeAttr('disabled', 'disabled');
-                                // $('body').removeClass('freeze');
                                 Swal.hideLoading();
-                                if(data['status'] == 'errors') {
-                                    console.log('Errors in validating payment id.');
+                                if(data['status'] == 'error') {
+                                    console.log('Errors in decline exam payment.');
                                     SwalSystemErrorDanger.fire({
                                         title: 'Decline Failed!',
                                         text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
@@ -305,7 +304,6 @@
                                 console.log('Error in decline exam payment ajax.');
                                 $("#spinnerBtnDeclineExamPayment").addClass('d-none');
                                 $('#btnDeclineExamPayment').removeAttr('disabled', 'disabled');
-                                // $('body').removeClass('freeze');
                                 SwalSystemErrorDanger.fire();
                             }
                         });
@@ -329,10 +327,63 @@
     // /DECLINE PAYMENT
 
     // INVOKE SCHEDULE EXAMS MODAL
+    let schedulesForAppliedExam = null;
+    schedules_for_exam_table = (applied_exam_id) => {
+        $('.tbl-schedules-for-applied-exam').DataTable().clear().destroy();
+        schedulesForAppliedExam = $('.tbl-schedules-for-applied-exam').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: false,
+            ajax: {
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
+                url: "{{ route('student.application.exams.schedules.table') }}",
+                type: 'post',
+                data: {'applied_exam_id': applied_exam_id},
+            },
+            columns: [
+                {
+                    data: 'subject_name',
+                    name: 'subject_name'
+                },
+                {
+                    data: 'date',
+                    name: 'date'
+                },
+                {
+                    data: 'start_time',
+                    name: 'start_time'
+                },
+                {
+                    data: 'end_time',
+                    name: 'end_time'
+                },
+                {
+                    data: 'id',
+                    name: 'id',
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+            columnDefs: [
+                {
+                    targets: 4,
+                    render: function(data, type, row) {
+                        var btnGroup = '<div class="btn-group">'+
+                        '<button type="button" class="btn btn-outline-primary" id="btnModalSetExamSchedule-'+data+'" onclick="schedule_applied_exam('+applied_exam_id+','+data+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule<span id="spinnerBtnModalSetExamSchedule-'+data+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
+                        '</div>';
+                            return btnGroup;
+                    }
+                },
+            ]
+        });
+    }
+
     invoke_modal_schedule_exam = (applied_exam_id) => {
 
         $('#divSearchSchedules').html('');
-        $('.trSchedule').remove();
+        // $('.trSchedule').remove();
+
         // Form Payload
         var formData = new FormData();
         formData.append('applied_exam_id', applied_exam_id);
@@ -367,20 +418,21 @@
                                                 '</div>'+
                                             '</div>');
                     //Create exams schedules table related with applied exam
-                    var schedule = '';
-                    $.each(data['schedules'], function(key, value) {
-                        schedule += '<tr class="trSchedule">';
-                        schedule += '<td>'+ value.subject_name+'</td>';
-                        schedule += '<td>'+ value.date+'</td>';
-                        schedule += '<td>'+value.start_time+'</td>';
-                        schedule += '<td>'+value.end_time+'</td>';
-                        schedule += '<td>'+
-                        '<div class="btn-group">'+
-                        '<button type="button" class="btn btn-outline-primary" id="btnModalSetExamSchedule-'+value.id+'" onclick="schedule_applied_exam('+applied_exam_id+','+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule<span id="spinnerBtnModalSetExamSchedule-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
-                        '</div>'+
-                        '</td></tr>';
-                    });
-                    $('#tblSchedulesForAppliedExam').append(schedule);
+                    // var schedule = '';
+                    // $.each(data['schedules'], function(key, value) {
+                    //     schedule += '<tr class="trSchedule">';
+                    //     schedule += '<td>'+ value.subject_name+'</td>';
+                    //     schedule += '<td>'+ value.date+'</td>';
+                    //     schedule += '<td>'+value.start_time+'</td>';
+                    //     schedule += '<td>'+value.end_time+'</td>';
+                    //     schedule += '<td>'+
+                    //     '<div class="btn-group">'+
+                    //     '<button type="button" class="btn btn-outline-primary" id="btnModalSetExamSchedule-'+value.id+'" onclick="schedule_applied_exam('+applied_exam_id+','+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule<span id="spinnerBtnModalSetExamSchedule-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
+                    //     '</div>'+
+                    //     '</td></tr>';
+                    // });
+                    //$('#tblSchedulesForAppliedExam').append(schedule);
+                    schedules_for_exam_table(applied_exam_id);
                     $('#btnScheduleAppliedExam-'+applied_exam_id).removeAttr('disabled', 'disabled');
                     $('#modal-schedule-applied-exam').modal('show');
                 }
