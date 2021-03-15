@@ -280,9 +280,9 @@
                                                 </div>
                                             </div> --}}
                                         </div>
-                                        
+                                        {{-- id="tblSchedulesForAppliedExam" --}}
                                         <div class="col-md-12 order-md-1 order-2 mt-5">
-                                            <table id="tblSchedulesForAppliedExam" class="table">
+                                            <table class="table tbl-schedules-for-applied-exam">
                                                 <thead>
                                                     <tr>
                                                         <th>Subject</th>

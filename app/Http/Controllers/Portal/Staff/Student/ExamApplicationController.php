@@ -130,12 +130,26 @@ class ExamApplicationController extends Controller
             'requested_month'=> Exam::select(DB::raw("MONTHNAME(CONCAT(year, '-',month, '-01')) as monthname"))->whereColumn('requested_exam_id', 'exams.id'),
             'requested_year'=> Exam::select('year')->whereColumn('requested_exam_id', 'exams.id'),
         ])->first();
-        $schedules = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->addSelect([
-            'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
-        ])->get();
-        return response()->json(['status'=>'success', 'schedules'=>$schedules, 'applied_exam'=>$applied_exam]);
+        // $schedules = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->addSelect([
+        //     'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+        // ])->get();
+        return response()->json(['status'=>'success', 'applied_exam'=>$applied_exam]);
     }
     // /LOAD SCHEDULE THE EXAM MODAL
+    
+    // SCHEDULES FOR APPLIED EXAM TABLE
+    public function schedulesForExamTable(Request $request)
+    {
+        $today = Carbon::today();
+        $applied_exam = hasExam::where('id',$request->applied_exam_id)->first();
+        $data = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->addSelect([
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+        ]);
+        return DataTables::of($data)
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+    // SCHEDULES FOR APPLIED EXAM TABLE
 
     // SEARCH THE SCHEDULES BY EXAM
     public function searchSchedulesByExam(Request $request)
