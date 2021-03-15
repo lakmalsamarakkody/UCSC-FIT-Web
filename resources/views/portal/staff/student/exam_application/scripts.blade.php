@@ -111,7 +111,7 @@
                 if(data['status'] == 'success'){
 
                     // Details Tab
-                    var date = new Date(data['submitted_date']['updated_at']);
+                    var date = new Date(data['submitted_date']['created_at']);
                     $('#spanSubmittedOn').html(date.toLocaleDateString());
                     $('#spanStudentName').html(data['student']['initials'] + ' ' +data['student']['last_name']);
                     $('#spanRegNumber').html(data['student']['reg_no']);
