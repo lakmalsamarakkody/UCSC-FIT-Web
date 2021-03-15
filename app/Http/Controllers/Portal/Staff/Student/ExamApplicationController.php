@@ -107,24 +107,15 @@ class ExamApplicationController extends Controller
     // DECLINE PAYMENT
     public function declineExamPayment(Request $request)
     {
-        // Validate payment id
-        $payment_id_validator = Validator::make($request->all(), [
-            'payment_id' => ['required', 'integer', 'exists:App\Models\Student\Payment,id'],
-        ]);
-
-        // Check validator fails
-        if($payment_id_validator->fails()):
-            return response()->json(['status'=>'errors']);
-        else:
-            $applied_exams = hasExam::where('payment_id', '!=', null)->where('payment_id', $request->payment_id)->get();
-            $payment = Payment::where('id', $request->payment_id)->first();
-            if($payment->update(['status'=>'Declined'])):
-                foreach($applied_exams as $exam):
-                    $exam->update(['payment_status'=>'Declined', 'declined_message'=>$request->message]);
-                endforeach;
-                return response()->json(['status'=>'success']);
-            endif;
+        $applied_exams = hasExam::where('payment_id', '!=', null)->where('payment_id', $request->payment_id)->get();
+        $payment = Payment::where('id', $request->payment_id)->first();
+        if($payment->update(['status'=>'Declined'])):
+            foreach($applied_exams as $exam):
+                $exam->update(['payment_status'=>'Declined', 'declined_message'=>$request->message]);
+            endforeach;
+            return response()->json(['status'=>'success']);
         endif;
+        return response()->json(['status'=>'error']);
     }
     // /DECLINE PAYMENT
 

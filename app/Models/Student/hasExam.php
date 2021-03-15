@@ -26,6 +26,7 @@ class hasExam extends Model
     protected $fillable = [
         'payment_id',
         'payment_status',
+        'declined_message',
     ];
 
     public function student(){

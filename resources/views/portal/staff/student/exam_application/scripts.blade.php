@@ -272,17 +272,15 @@
                             beforeSend: function() {
                                 $("#spinnerBtnDeclineExamPayment").removeClass('d-none');
                                 $('#btnDeclineExamPayment').attr('disabled', 'disabled');
-                                // $('body').addClass('freeze');
                                 Swal.showLoading();
                             },
                             success: function(data) {
                                 console.log('Success in decline exam payment ajax.');
                                 $("#spinnerBtnDeclineExamPayment").addClass('d-none');
                                 $('#btnDeclineExamPayment').removeAttr('disabled', 'disabled');
-                                // $('body').removeClass('freeze');
                                 Swal.hideLoading();
-                                if(data['status'] == 'errors') {
-                                    console.log('Errors in validating payment id.');
+                                if(data['status'] == 'error') {
+                                    console.log('Errors in decline exam payment.');
                                     SwalSystemErrorDanger.fire({
                                         title: 'Decline Failed!',
                                         text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
@@ -305,7 +303,6 @@
                                 console.log('Error in decline exam payment ajax.');
                                 $("#spinnerBtnDeclineExamPayment").addClass('d-none');
                                 $('#btnDeclineExamPayment').removeAttr('disabled', 'disabled');
-                                // $('body').removeClass('freeze');
                                 SwalSystemErrorDanger.fire();
                             }
                         });
