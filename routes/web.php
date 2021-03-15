@@ -149,6 +149,7 @@ Route::post('/portal/staff/user/profile/reactivate/account',[App\Http\Controller
 Route::post('/portal/staff/user/create/user',[App\Http\Controllers\Portal\Staff\UsersController::class, 'createUser'])->name('add.new.user');
 // PERMISSIONS
 Route::get('/portal/staff/user/permissions',[App\Http\Controllers\Portal\Staff\User\PermissionController::class, 'index'])->name('user.permissions');
+Route::post('/portal/staff/user/permission/change',[App\Http\Controllers\Portal\Staff\User\PermissionController::class, 'permissionStatusChanger'])->name('user.permission.change');
 // /USER PAGE
 
 // SYSTEM PAGE
