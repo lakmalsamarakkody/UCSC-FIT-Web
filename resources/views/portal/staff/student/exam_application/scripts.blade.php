@@ -244,23 +244,31 @@
         })
         .then((result) => {
             if (result.isConfirmed) {
+                $(document).off('focusin.modal');
                 SwalQuestionDanger.fire({
                     title: "Reason to Decline ?",
                     input: 'textarea',
                     inputLabel: 'Message',
                     inputPlaceholder: 'Type your message here...',
-                    inputAttributes: {'aria-label': 'Type your message here'},
+                    inputAttributes: {
+                        'aria-label': 'Type your message here'
+                    },
+                    inputValidator: (value) => {
+                        if (!value) {
+                        return 'You need to write something!'
+                        }
+                    },
                     timer: false,
                     showCancelButton: true,
                     confirmButtonText: "Decline!",
                 })
-                .then((result) => {
-                    if(result.isConfirmed) {
+                .then((result1) => {
+                    if(result1.isConfirmed) {
                         $.ajax({
                             headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
                             url: "{{ route('student.application.exams.payment.decline') }}",
                             type: 'post',
-                            data: {'message': result.value, 'payment_id': $('#paymentId').val()},
+                            data: {'message': result1.value, 'payment_id': $('#paymentId').val()},
                             beforeSend: function() {
                                 $("#spinnerBtnDeclineExamPayment").removeClass('d-none');
                                 $('#btnDeclineExamPayment').attr('disabled', 'disabled');
