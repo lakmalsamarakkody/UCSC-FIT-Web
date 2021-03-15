@@ -3,12 +3,12 @@
 }
 
 .userPermissions .accordian#permissionModulesAccordian .card .card-header:hover{
-  background-color: var(--main-theme-color);
+  background-color: var(--sub-bg-color);
 }
 
-.userPermissions .accordian#permissionModulesAccordian .card .card-header button:hover{
+/* .userPermissions .accordian#permissionModulesAccordian .card .card-header button:hover{
   color: var(--white) !important;
-}
+} */
 
 .userPermissions .accordian#permissionModulesAccordian .card .card-header button:focus{
   box-shadow: none;
