@@ -3,6 +3,7 @@
     // INVOKE APPLIED EXAMS MODAL
     let appliedExamTable = null;
     applied_exam_table = (payment_id) => {
+        $('.tbl-applied-exams').DataTable().clear().destroy();
         appliedExamTable = $('.tbl-applied-exams').DataTable({
             processing: true,
             serverSide: true,
@@ -381,7 +382,8 @@
     invoke_modal_schedule_exam = (applied_exam_id) => {
 
         $('#divSearchSchedules').html('');
-        $('.trSchedule').remove();
+        // $('.trSchedule').remove();
+
         // Form Payload
         var formData = new FormData();
         formData.append('applied_exam_id', applied_exam_id);

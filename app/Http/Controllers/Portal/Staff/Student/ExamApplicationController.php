@@ -46,8 +46,8 @@ class ExamApplicationController extends Controller
             'bank_branch_code'=> BankBranch::select('code')->whereColumn('bank_branch_id', 'bank_branches.id'),
         ])->first();
         $student = Student::where('id', $payment->student_id)->first();
-        $student_applied_exams = hasExam::where('payment_id', '!=', null)->where('payment_id',$request->payment_id)->where('status', 'AB')->orWhere(function($query) {
-            $query->where('status', 'Scheduled');
+        $student_applied_exams = hasExam::where('payment_id', '!=', null)->where('payment_id',$request->payment_id)->where(function($query) {
+            $query->where('status', 'Scheduled')->orWhere('status', 'AB');
         })->addSelect([
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
@@ -67,8 +67,8 @@ class ExamApplicationController extends Controller
     public function appliedExamsTable(Request $request)
     {
         $today = Carbon::today();
-        $data = hasExam::where('payment_id', '!=', null)->where('payment_id',$request->payment_id)->where('status', 'AB')->orWhere(function($query) {
-            $query->where('status', 'Scheduled');
+        $data = hasExam::where('payment_id', '!=', null)->where('payment_id',$request->payment_id)->where(function($query) {
+            $query->where('status', 'Scheduled')->orWhere('status', 'AB');
         })->addSelect([
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
@@ -169,7 +169,7 @@ class ExamApplicationController extends Controller
     {
         if(hasExam::where('id', $request->applied_exam_id)->update([
             'exam_schedule_id'=> $request->schedule_id,
-            'status'=> 'Scheduled'
+            'status'=> 'Scheduled',
         ])):
         return response()->json(['status'=>'success']);
         else:
