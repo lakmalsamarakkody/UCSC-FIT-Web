@@ -633,49 +633,57 @@ let heldExamTable = null;
           showCancelButton: true,
           confirmButtonText: "Decline!",
         })
-        .then((result) => {
-          // Alert(result value)
-          $.ajax({
-            headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
-            url: "{{ route('schedule.decline') }}",
-            type: 'post',
-            data: {'message': result.value, 'schedule_id': schedule_id},
-            beforeSend: function() {
-              $('#btnDeclineSchedule-'+schedule_id).attr('disabled', 'disabled');
-              $('body').addClass('freeze');
-              Swal.showLoading();
-            },
-            success: function(data) {
-              console.log('Success in decline schedule ajax.');
-              $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-              $('body').removeClass('freeze');
-              Swal.hideLoading();
-              if(data['status'] == 'errors') {
-                console.log('Errors in validating schedule id.');
-                SwalNotificationWarningAutoClose.fire({
-                title: 'Error!',
-                text: 'The id of the schedule is not found.',
-                })
+        .then((result1) => {
+          if(result1.isConfirmed) {
+            // Alert(result value)
+            $.ajax({
+              headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+              url: "{{ route('schedule.decline') }}",
+              type: 'post',
+              data: {'message': result1.value, 'schedule_id': schedule_id},
+              beforeSend: function() {
+                $('#btnDeclineSchedule-'+schedule_id).attr('disabled', 'disabled');
+                $('body').addClass('freeze');
+                Swal.showLoading();
+              },
+              success: function(data) {
+                console.log('Success in decline schedule ajax.');
+                $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+                $('body').removeClass('freeze');
+                Swal.hideLoading();
+                if(data['status'] == 'errors') {
+                  console.log('Errors in validating schedule id.');
+                  SwalNotificationWarningAutoClose.fire({
+                  title: 'Error!',
+                  text: 'The id of the schedule is not found.',
+                  })
+                }
+                else if(data['status'] == 'success') {
+                  console.log('Success in decline schedule.');
+                  SwalDoneSuccess.fire({
+                    title: 'Declined!',
+                    text: 'Scheduled exam has been Declined.',
+                  })
+                  .then((result) => {
+                    if(result.isConfirmed) {
+                      beforeReleaseTable.draw();
+                    }
+                  });
+                }
+              },
+              error: function(err){
+                console.log('Error in Decline schedule ajax.');
+                $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
+                SwalSystemErrorDanger.fire();
               }
-              else if(data['status'] == 'success') {
-                console.log('Success in decline schedule.');
-                SwalDoneSuccess.fire({
-                  title: 'Declined!',
-                  text: 'Scheduled exam has been Declined.',
-                })
-                .then((result) => {
-                  if(result.isConfirmed) {
-                    beforeReleaseTable.draw();
-                  }
-                });
-              }
-            },
-            error: function(err){
-              console.log('Error in Decline schedule ajax.');
-              $('#btnDeclineSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
-              SwalSystemErrorDanger.fire();
-            }
-          });
+            });
+          }
+          else{
+            SwalNotificationWarningAutoClose.fire({
+              title: 'Cancelled!',
+              text: 'Scheduled exam has not been Declined....',
+            })
+          }
         })
       }
       else{
