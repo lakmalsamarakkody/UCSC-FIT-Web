@@ -681,7 +681,7 @@ let heldExamTable = null;
           else{
             SwalNotificationWarningAutoClose.fire({
               title: 'Cancelled!',
-              text: 'Scheduled exam has not been Declined....',
+              text: 'Scheduled exam has not been Declined.',
             })
           }
         })
