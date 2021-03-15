@@ -13,6 +13,7 @@ use App\Models\Exam\Types;
 use App\Models\Subject;
 use App\Models\Exam;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Exam\Schedule;
 use Illuminate\Http\Request;
@@ -106,9 +107,25 @@ class ExamApplicationController extends Controller
     // DECLINE PAYMENT
     public function declineExamPayment(Request $request)
     {
-        
-    }
+        // Validate payment id
+        $payment_id_validator = Validator::make($request->all(), [
+            'payment_id' => ['required', 'integer', 'exists:App\Models\Student\Payment,id'],
+        ]);
 
+        // Check validator fails
+        if($payment_id_validator->fails()):
+            return response()->json(['status'=>'errors']);
+        else:
+            $applied_exams = hasExam::where('payment_id', '!=', null)->where('payment_id', $request->payment_id)->get();
+            $payment = Payment::where('id', $request->payment_id)->first();
+            if($payment->update(['status'=>'Declined'])):
+                foreach($applied_exams as $exam):
+                    $exam->update(['payment_status'=>'Declined', 'declined_message'=>$request->message]);
+                endforeach;
+                return response()->json(['status'=>'success']);
+            endif;
+        endif;
+    }
     // /DECLINE PAYMENT
 
     // LOAD SCHEDULE THE EXAM MODAL

@@ -236,8 +236,89 @@
     // /APPROVE PAYMENT
 
     // DECLINE PAYMENT
+    decline_exam_payment = () => {
+        SwalQuestionDanger.fire({
+            title: "Are you sure ?",
+            text: "The exam payment will be declined",
+            confirmButtonText: "Yes, Decline!",
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                SwalQuestionDanger.fire({
+                    title: "Reason to Decline ?",
+                    input: 'textarea',
+                    inputLabel: 'Message',
+                    inputPlaceholder: 'Type your message here...',
+                    inputAttributes: {'aria-label': 'Type your message here'},
+                    timer: false,
+                    showCancelButton: true,
+                    confirmButtonText: "Decline!",
+                })
+                .then((result) => {
+                    if(result.isConfirmed) {
+                        $.ajax({
+                            headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+                            url: "{{ route('student.application.exams.payment.decline') }}",
+                            type: 'post',
+                            data: {'message': result.value, 'payment_id': $('#paymentId').val()},
+                            beforeSend: function() {
+                                $("#spinnerBtnDeclineExamPayment").removeClass('d-none');
+                                $('#btnDeclineExamPayment').attr('disabled', 'disabled');
+                                // $('body').addClass('freeze');
+                                Swal.showLoading();
+                            },
+                            success: function(data) {
+                                console.log('Success in decline exam payment ajax.');
+                                $("#spinnerBtnDeclineExamPayment").addClass('d-none');
+                                $('#btnDeclineExamPayment').removeAttr('disabled', 'disabled');
+                                // $('body').removeClass('freeze');
+                                Swal.hideLoading();
+                                if(data['status'] == 'errors') {
+                                    console.log('Errors in validating payment id.');
+                                    SwalSystemErrorDanger.fire({
+                                        title: 'Decline Failed!',
+                                        text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                                    })
+                                }
+                                else if(data['status'] == 'success') {
+                                    console.log('Success in decline exam payment.');
+                                    SwalDoneSuccess.fire({
+                                        title: 'Declined!',
+                                        text: 'Exam payment has been Declined.',
+                                    })
+                                    // .then((result) => {
+                                    //     if(result.isConfirmed) {
+                                            
+                                    //     }
+                                    // });
+                                }
+                            },
+                            error: function(err){
+                                console.log('Error in decline exam payment ajax.');
+                                $("#spinnerBtnDeclineExamPayment").addClass('d-none');
+                                $('#btnDeclineExamPayment').removeAttr('disabled', 'disabled');
+                                // $('body').removeClass('freeze');
+                                SwalSystemErrorDanger.fire();
+                            }
+                        });
+                    }
+                    else {
+                        SwalNotificationWarningAutoClose.fire({
+                            title: 'Cancelled!',
+                            text: 'Exam payment has not been Declined.',
+                        })
+                    }
+                })
+            }
+            else {
+                SwalNotificationWarningAutoClose.fire({
+                    title: 'Cancelled!',
+                    text: 'Exam payment has not been Declined.',
+                })
+            }
+        })
+    }
     // /DECLINE PAYMENT
-
 
     // INVOKE SCHEDULE EXAMS MODAL
     invoke_modal_schedule_exam = (applied_exam_id) => {
