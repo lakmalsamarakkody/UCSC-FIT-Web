@@ -133,11 +133,15 @@ Route::post('/portal/staff/exams/schedule/delete/after/release',[App\Http\Contro
 // EXAM LIST PAGE
 Route::get('/portal/staff/exams/list', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class, 'index']);
 Route::post('/portal/staff/exams/list/create', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class, 'createExam']);
+Route::get('/portal/staff/exams/exams/list', [App\Http\Controllers\Portal\Staff\ExamListController::class, 'getExamList'])->name('exam.exam.list');
 Route::post('/portal/staff/exams/list/delete', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class , 'deleteExam']);
 // /EXAM LIST PAGE
 
+// RESULTS PAGE
 Route::get('/portal/staff/results', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'index'])->name('results');
+Route::get('/portal/staff/results/exams', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'getExamList'])->name('results.exam.list');
 Route::get('/portal/staff/result/view/{id}', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'viewResults'])->where('id', '[0-9]+')->name('results.view');
+// /RESULTS PAGE
 
 // USER PAGE
 Route::get('/portal/staff/users', [App\Http\Controllers\Portal\Staff\UsersController::class, 'index'])->name('users');

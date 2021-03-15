@@ -40,17 +40,9 @@
               SwalDoneSuccess.fire({
                 title: "Created!",
                 text: "Exam created.",
-              })
-              location.reload();
-              /*
-              var newData = '<tr>';
-              newData += '<td>'+data['exam']['year']+'</td>'+'<td>'+data['exam']['month']+'</td>'+'<td><div class="btn-group">'
-                        +'<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button>'
-                        +'<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Delete Exam"><i class="fas fa-trash-alt"></i></button>'
-                      +'</div></td></tr>';
-              $('#tbodyExam').prepend(newData);
-              $('#examYear').val('Default').attr('selected','selected');
-              $('#examMonth').val('Default').attr('selected', 'selected'); */
+              }).then((result1) => {
+                      reload();
+                    })
             }
           },
           error: function(err){
@@ -99,6 +91,8 @@
                     SwalDoneSuccess.fire({
                         title: 'Deleted!',
                         text: 'Exam has been deleted.',
+                    }).then((result1) => {
+                      reload();
                     })
                 },
                 error: function(err){
@@ -116,4 +110,56 @@
       })
   }
   // /DELETE
+
+    $(function () {
+      
+        var table = $('.yajra-datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url:"{{ route('results.exam.list') }}",
+                data : function (d) {
+                    d.year = $('#year').val();
+                    d.month = $('#month').val();
+                }
+            },
+            columns: [
+                {
+                    data: 'year', 
+                    name: 'year'
+                },
+                {
+                    data: 'month', 
+                    name: 'month'
+                },
+                {
+                    data: 'id', 
+                    name: 'id', 
+                    orderable: false, 
+                    searchable: false
+                },
+            ],
+            columnDefs: [
+                {
+                    targets: 2,
+                    render: function ( data, type, row ) {
+                        var buttons = '@if(Auth::user()->hasPermission("staff-exam-examList-viewResults"))<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button>@endif'+
+                                      '@if(Auth::user()->hasPermission("staff-exam-examList-delete"))<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete Exam" id="btnDeleteExam-'+data+'" onclick="onclick_delete_exam('+data+');"><i class="fas fa-trash-alt"></i></button>@endif'
+                        
+                        return buttons;
+                    }
+
+                }
+            ]   
+        });
+
+
+        
+        reload = () => {
+            table.draw();
+
+        }
+    
+
+  });
 </script>

@@ -52,7 +52,7 @@
                     <div class="form-group col-lg-1"></div>
                     <div class="form-group col">
                       <select id="year" name="year" class="form-control ">
-                        <option selected>Year</option>
+                        <option selected value="">Year</option>
                         @foreach($years as $year)                          
                         <option value="{{ $year->year }}">{{ $year->year }}</option>
                         @endforeach
@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group col">
                       <select id="month" name="month" class="form-control ">
-                        <option selected>Month</option>
+                        <option selected value="">Month</option>
                         <option value="1">January</option>
                         <option value="2">February</option>
                         <option value="3">March</option>
@@ -89,7 +89,12 @@
               Results
             </div>
             <div class="card-body">
-              <div class="col-lg-12">
+              <table class="table yajra-datatable">
+                <tbody class="text-center">
+                </tbody>
+              </table>
+
+              {{-- <div class="col-lg-12">
                 @foreach($exams as $exam)
                 <div class="card my-1">
                   <div class="card-header">
@@ -112,7 +117,7 @@
                 <div class="pt-4 float-right">
                   {{ $exams->links( "pagination::bootstrap-4") }}
                 </div>
-              </div>
+              </div> --}}
               
             </div>
           </div>
