@@ -59,6 +59,62 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
+                    'name'=>'staff-student-exam-application',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can access to exam application page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-exam-application-view',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can view exam applications',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-exam-application-payment-approve',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can approve an exam payment',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-exam-application-payment-decline',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can decline an exam payment',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-exam-application-viewSchedules',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can view schedules for applied exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-exam-application-scheduleExam',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can schedule an applied exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-exam-application-approveSchedules',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can approve scheduled exams',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
                     'name'=>'staff-system',
                     'portal'=>'staff',
                     'module'=>'system',
