@@ -117,9 +117,11 @@
                                 </div>
                             </div>
                             <div class="mt-4 col-12 text-center">
+                                @if(Auth::user()->hasPermission('staff-student-exam-application-approveSchedules'))
                                 <div id="divBtnAssignAppliedExams" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-success form-control" id="btnAssignScheduledExams" onclick="assign_scheduled_exams();">Approve Schedules<span id="spinnerBtnAssignScheduledExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
+                                @endif
                                 {{-- <div id="divBtnDeclineAppliedExams" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-exams-message" id="btnDeclineAppliedExams" data-toggle="modal">Decline Applied Exams<span id="spinnerBtnDeclineAppliedExam" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div> --}}
@@ -163,12 +165,16 @@
                                 </div>
                             </div>
                             <div class="mt-4 col-12 text-center">
+                                @if(Auth::user()->hasPermission('staff-student-exam-application-payment-approve'))
                                 <div id="divBtnApprovePayment" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-success form-control" id="btnApproveExamPayment" onclick="approve_exam_payment();">Approve Payment<span id="spinnerBtnApproveExamPayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
+                                @endif
+                                @if(Auth::user()->hasPermission('staff-student-exam-application-payment-decline'))
                                 <div id="divBtnDeclinePayment" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-warning form-control" id="btnDeclineExamPayment" onclick="decline_exam_payment();">Decline Payment<span id="spinnerBtnDeclineExamPayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
+                                @endif
                             </div>
                         </div>
 
