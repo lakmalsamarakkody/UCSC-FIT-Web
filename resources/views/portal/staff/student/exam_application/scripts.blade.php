@@ -80,11 +80,13 @@
                     targets: 6,
                     render: function(data, type, row) {
                         var btnGroup = '<div class="btn-group">';
+                        if(row['payment_status'] == 'Approved') {
                             @if(Auth::user()->hasPermission('staff-student-exam-application-viewSchedules'))
                             btnGroup = btnGroup + '<button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam-'+data+'" onclick="invoke_modal_schedule_exam('+data+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i><span id="spinnerBtnScheduleAppliedExam-'+data+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>';
                             @endif
-                            btnGroup = btnGroup +'</div>';
-                            return btnGroup;
+                        }
+                        btnGroup = btnGroup +'</div>';
+                        return btnGroup;
                     }
                 },
 
@@ -588,7 +590,7 @@
             if(result.isConfirmed){
                 //Form Payload
                 var formData = new FormData();
-                formData.append('student_regno', $('#spanRegNumber').html());
+                formData.append('payment_id', $('#paymentId').val());
 
                 // Approve scheduled exams controller
                 $.ajax({

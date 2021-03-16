@@ -26,7 +26,7 @@ class ExamApplicationController extends Controller
     public function index()
     {
         $today = Carbon::today();
-        $exam_applicants = hasExam::get()->where('payment_id', '!=', null)->unique('payment_id');
+        $exam_applicants = hasExam::get()->where('payment_id', '!=', null)->where('status', '!=', 'Approved')->unique('payment_id');
         $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('status', 'AB')->get();
         return view('portal/staff/student/exam_application', [
@@ -187,8 +187,7 @@ class ExamApplicationController extends Controller
     // APPROVE SCHEDULED EXAMS
     public function approveScheduledExams(Request $request)
     {
-        $student = Student::where('reg_no', $request->student_regno)->first();
-        $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('status', 'Scheduled')->get();
+        $scheduled_exams = hasExam::where('payment_id', $request->payment_id)->where('exam_schedule_id', '!=', null)->where('status', 'Scheduled')->get();
         if($scheduled_exams->isEmpty()):
             return response()->json(['status'=>'error', 'msg'=>'There are no scheduled exams.']);
         else:
