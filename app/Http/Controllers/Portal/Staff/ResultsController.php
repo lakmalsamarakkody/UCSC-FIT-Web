@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Student_Exam;
 use App\Models\Exam;
 use App\Models\Exam\Schedule;
+use App\Models\Student\hasExam;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,13 +56,21 @@ class ResultsController extends Controller
     public function viewResults($id)
     {
         $schedules=Schedule::where('exam_id',$id)->get();
-        $results = array();
+
+        
+        $schedule_ids = array();
         foreach($schedules as $schedule){
-            $results[]=Student_Exam::where('exam_schedule_id',$schedule->id);
+            $schedule_ids [] = $schedule->id;
         }
-        $results = collect($results);
-        $results=$results->groupBy('student_id');
-        Log::debug($results);
-        return view('portal/staff/result/view', compact('results'));
+        // $results = hasExam::whereIn('exam_schedule_id',$schedule_ids)->groupBy('student_id')->dd();
+        $students = hasExam::whereIn('exam_schedule_id',$schedule_ids)->distinct()->select('student_id')->get();
+        // $results = collect($results);
+        // $results=$results->groupBy('student_id');
+        // Log::debug($results);
+        // foreach($results as $result){
+        //     echo $result;
+        // }
+        // echo $results;
+        return view('portal/staff/result/view', compact('students', 'schedule_ids'));
     }
 }

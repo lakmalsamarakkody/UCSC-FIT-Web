@@ -98,22 +98,110 @@
                   </tr>
                 </thead>
                 <tbody class="text-center">
-                @foreach($results as $result)
+                @foreach($students as $student)                  
                     <tr>
-                      <td>{{ $result}}</td>
-                      <td> </td>
-                      <td>75</td>
-                      <td><i class="fa fa-check"></i></td>
-                      <td>45</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>35</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>35</td>
-                      <td><i class="fa fa-times"></i></td>
-                      <td>75</td>
-                      <td><i class="fa fa-check"></i></td>
+                      <td>{{ $student->student->reg_no }}</td>
+                      <td>{{ $student->student->full_name }}</td>
+
+                      {{-- FIT103 E-Test --}}
+                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->get('mark'))
+                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('mark')['mark'] }}</td>
+                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first()['result']==1)
+                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first()['status'] == 'P')
+                        <td><i class="fa fa-check"></i></td>
+                        @elseif(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first()['status'] == 'F')
+                        <td><i class="fa fa-times"></i></td>  
+                        @else
+                        <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first()['status'] }}</td>
+                        @endif
+                       @else
+                      <td></td> 
+                       @endif
+                      @else
+                      <td></td>  
+                      <td></td>  
+                      @endif
+
+                      {{-- FIT103 Practical --}}
+                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->get('mark'))
+                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('mark')['mark'] }}</td>
+                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['result']==1)
+                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['status'] == 'P')
+                        <td><i class="fa fa-check"></i></td>
+                        @elseif(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['status'] == 'F')
+                        <td><i class="fa fa-times"></i></td>  
+                        @else
+                        <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['status'] }}</td>
+                        @endif
+                       @else
+                      <td></td> 
+                       @endif
+                      @else
+                      <td></td>  
+                      <td></td>  
+                      @endif
+
+                      {{-- FIT203 E-Test --}}
+                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->get('mark'))
+                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('mark')['mark'] }}</td>
+                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first()['result']==1)
+                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first()['status'] == 'P')
+                        <td><i class="fa fa-check"></i></td>
+                        @elseif(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first()['status'] == 'F')
+                        <td><i class="fa fa-times"></i></td>  
+                        @else
+                        <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first()['status'] }}</td>
+                        @endif
+                       @else
+                      <td></td> 
+                       @endif
+                      @else
+                      <td></td>  
+                      <td></td>  
+                      @endif
+
+                      {{-- FIT203 Practical --}}
+                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->get('mark'))
+                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('mark')['mark'] }}</td>
+                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first()['result']==1)
+                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first()['status'] == 'P')
+                        <td><i class="fa fa-check"></i></td>
+                        @elseif(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first()['status'] == 'F')
+                        <td><i class="fa fa-times"></i></td>  
+                        @else
+                        <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first()['status'] }}</td>
+                        @endif
+                       @else
+                      <td></td> 
+                       @endif
+                      @else
+                      <td></td>  
+                      <td></td>  
+                      @endif
+                      
+
+                      {{-- FIT303 E-Test --}}
+                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->get('mark'))
+                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('mark')['mark'] }}</td>
+                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['result']==1)
+                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['status'] == 'P')
+                        <td><i class="fa fa-check"></i></td>
+                        @elseif(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['status'] == 'F')
+                        <td><i class="fa fa-times"></i></td>  
+                        @else
+                        <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 2)->first()['status'] }}</td>
+                        @endif
+                       @else
+                      <td></td> 
+                       @endif
+                      @else
+                      <td></td>  
+                      <td></td>  
+                      @endif
+                                            
+                                            
                       <td><button data-toggle="modal" data-target="#exampleModal" title="View Profile" data-tooltip="tooltip" data-placement="bottom"  type="button" class="btn btn-outline-warning"><i class="fas fa-share"></i></button></td>
-                    </tr>                  
+                    </tr>                                  
                 @endforeach
                 </tbody>
               </table>
@@ -130,3 +218,4 @@
 
 
 @endsection
+@include('portal.staff.result.view.scripts')
