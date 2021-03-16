@@ -334,11 +334,15 @@
             processing: true,
             serverSide: true,
             searching: false,
+            order: [1, "asc"],
             ajax: {
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
                 url: "{{ route('student.application.exams.schedules.table') }}",
                 type: 'post',
-                data: {'applied_exam_id': applied_exam_id},
+                data: function(d) {
+                    d.exam = $('#searchExam').val();
+                    d.applied_exam_id = applied_exam_id;
+                },
             },
             columns: [
                 {
@@ -378,6 +382,9 @@
             ]
         });
     }
+    search_schedules_by_exam = (applied_exam_id) => {
+            schedulesForAppliedExam.draw();
+    }
 
     invoke_modal_schedule_exam = (applied_exam_id) => {
 
@@ -406,17 +413,17 @@
                     $('#spanRequestedExam').html(data['applied_exam']['requested_month'] + ' ' + data['applied_exam']['requested_year']);
                     $('#divSearchSchedules').append('<div class="row">'+
                                                 '<div class="form-group col-xl-6 col-12">'+
-                                                    '<select name="searchExam" id="searchExam" class="form-control">'+
-                                                    '<option value="" selected hidden>Select Exam</option>'+
+                                                    '<select name="searchExam" id="searchExam" class="form-control" onchange="search_schedules_by_exam('+applied_exam_id+');">'+
+                                                    '<option value="" selected>Please Select Exam</option>'+
                                                     '@foreach ($exams as $exam)'+
                                                         '<option value="{{$exam->id}}">{{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}} {{$exam->year}} </option>'+
                                                     '@endforeach'+
                                                     '</select>'+
                                                 '</div>'+
-                                                '<div class="form-group col-xl-6 col-12">'+
-                                                    '<button type="button" class="btn btn-outline-primary form-control" onclick="search_schedules_by_exam('+applied_exam_id+');" id="btnSearchByExam"><i class="fa fa-search"></i>Search<span id="spinnerBtnSearchByExam" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
-                                                '</div>'+
                                             '</div>');
+                                            // '<div class="form-group col-xl-6 col-12">'+
+                                            //         '<button type="button" class="btn btn-outline-primary form-control" onclick="search_schedules_by_exam('+applied_exam_id+');" id="btnSearchByExam"><i class="fa fa-search"></i>Search<span id="spinnerBtnSearchByExam" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
+                                            //     '</div>'
                     //Create exams schedules table related with applied exam
                     // var schedule = '';
                     // $.each(data['schedules'], function(key, value) {
@@ -447,58 +454,58 @@
     // /INVOKE SCHEDULE EXAMS MODAL
 
     // SERACH SCHEDULES BY EXAM
-    search_schedules_by_exam = (applied_exam_id) => {
+    // search_schedules_by_exam = (applied_exam_id) => {
 
-        $('.trSchedule').remove();
-        // Form Payload
-        var formData = new FormData();
-        formData.append('exam_id', $('#searchExam').val());
-        formData.append('applied_exam_id', applied_exam_id);
+    //     $('.trSchedule').remove();
+    //     // Form Payload
+    //     var formData = new FormData();
+    //     formData.append('exam_id', $('#searchExam').val());
+    //     formData.append('applied_exam_id', applied_exam_id);
 
-        // Get applied subject schedule details
-        $.ajax({
-            headers: {'X-CSRF-TOKEN' : $('meta[name="x-csrf-token"]').attr('content')},
-            url: "{{ route('student.application.exams.schedules.search') }}",
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function() {
-                $('#btnSearchByExam').attr('disabled', 'disabled');
-                $('#spinnerBtnSearchByExam').removeClass('d-none');
-                },
-            success: function(data) {
-                console.log('Success in search schedules by exam ajax.');
-                if(data['status'] == 'success') {
-                    console.log('Success in search schedules by exam.');
-                    //Create exams schedules table related with applied exam
-                    var schedule = '';
-                    $.each(data['searched_schedules'], function(key, value) {
-                        schedule += '<tr class="trSchedule">';
-                        schedule += '<td>'+ value.subject_name+'</td>';
-                        schedule += '<td>'+ value.date+'</td>';
-                        schedule += '<td>'+value.start_time+'</td>';
-                        schedule += '<td>'+value.end_time+'</td>';
-                        schedule += '<td>'+
-                        '<div class="btn-group">'+
-                        '<button type="button" class="btn btn-outline-primary" id="btnModalSetExamSchedule-'+value.id+'" onclick="schedule_applied_exam('+applied_exam_id+','+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule<span id="spinnerBtnModalSetExamSchedule-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
-                        '</div>'+
-                        '</td></tr>';
-                    });
-                    $('#tblSchedulesForAppliedExam').append(schedule);
-                    $('#btnSearchByExam').removeAttr('disabled', 'disabled');
-                    $('#spinnerBtnSearchByExam').addClass('d-none');
-                    // $('#modal-schedule-applied-exam').modal('show');
-                }
-            },
-            error: function(err) {
-                console.log('Error in search schedules by exam ajax.');
-                $('#btnSearchByExam').removeAttr('disabled', 'disabled');
-                $('#spinnerBtnSearchByExam').addClass('d-none');
-                SwalSystemErrorDanger.fire();
-            }
-        });
-    }
+    //     // Get applied subject schedule details
+    //     $.ajax({
+    //         headers: {'X-CSRF-TOKEN' : $('meta[name="x-csrf-token"]').attr('content')},
+    //         type: 'post',
+    //         data: formData,
+    //         processData: false,
+    //         contentType: false,
+    //         beforeSend: function() {
+    //             $('#btnSearchByExam').attr('disabled', 'disabled');
+    //             $('#spinnerBtnSearchByExam').removeClass('d-none');
+    //             },
+    //         success: function(data) {
+    //             console.log('Success in search schedules by exam ajax.');
+    //             if(data['status'] == 'success') {
+    //                 console.log('Success in search schedules by exam.');
+    //                 //Create exams schedules table related with applied exam
+    //                 // var schedule = '';
+    //                 // $.each(data['searched_schedules'], function(key, value) {
+    //                 //     schedule += '<tr class="trSchedule">';
+    //                 //     schedule += '<td>'+ value.subject_name+'</td>';
+    //                 //     schedule += '<td>'+ value.date+'</td>';
+    //                 //     schedule += '<td>'+value.start_time+'</td>';
+    //                 //     schedule += '<td>'+value.end_time+'</td>';
+    //                 //     schedule += '<td>'+
+    //                 //     '<div class="btn-group">'+
+    //                 //     '<button type="button" class="btn btn-outline-primary" id="btnModalSetExamSchedule-'+value.id+'" onclick="schedule_applied_exam('+applied_exam_id+','+value.id+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule<span id="spinnerBtnModalSetExamSchedule-'+value.id+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
+    //                 //     '</div>'+
+    //                 //     '</td></tr>';
+    //                 // });
+    //                 // $('#tblSchedulesForAppliedExam').append(schedule);
+    //                 schedulesForAppliedExam.draw();
+    //                 $('#btnSearchByExam').removeAttr('disabled', 'disabled');
+    //                 $('#spinnerBtnSearchByExam').addClass('d-none');
+    //                 // $('#modal-schedule-applied-exam').modal('show');
+    //             }
+    //         },
+    //         error: function(err) {
+    //             console.log('Error in search schedules by exam ajax.');
+    //             $('#btnSearchByExam').removeAttr('disabled', 'disabled');
+    //             $('#spinnerBtnSearchByExam').addClass('d-none');
+    //             SwalSystemErrorDanger.fire();
+    //         }
+    //     });
+    // }
     // SERACH SCHEDULES BY EXAM
 
     // SCHEDULE APPLIED EXAM

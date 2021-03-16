@@ -167,7 +167,7 @@
                                     <button type="button" class="btn btn-success form-control" id="btnApproveExamPayment" onclick="approve_exam_payment();">Approve Payment<span id="spinnerBtnApproveExamPayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                                 <div id="divBtnDeclinePayment" class="btn-group col-xl-3 col-lg-6">
-                                    <button type="button" class="btn btn-warning form-control" id="btnDeclineExamPayment" onclick="decline_exam_payment();" data-toggle="modal">Decline Payment<span id="spinnerBtnDeclineExamPayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                    <button type="button" class="btn btn-warning form-control" id="btnDeclineExamPayment" onclick="decline_exam_payment();">Decline Payment<span id="spinnerBtnDeclineExamPayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </div>
