@@ -53,7 +53,7 @@
                       <td>
                         {{-- @if(Auth::user()->hasPermission('staff-student-exam-application-view')) --}}
                         <div class="btn-group">
-                          <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-" onclick="view_modal_applied_exams()"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedExams-" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                          <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-" data-toggle="modal" data-target="#modal-medical"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedExams-" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                         </div>
                         {{-- @endif --}}
                       </td>
