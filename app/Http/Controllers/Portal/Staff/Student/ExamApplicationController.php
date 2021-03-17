@@ -200,5 +200,11 @@ class ExamApplicationController extends Controller
     }
     // APPROVE SCHEDULED EXAMS
 
-
+    // MEDICALS
+    public function reviewMedicals()
+    {
+        $medical_submitters = hasExam::where('medical_status', null)->get();
+        return view('portal/staff/student/medical', compact('medical_submitters'));
+    }
+    // /MEDICALS
 }

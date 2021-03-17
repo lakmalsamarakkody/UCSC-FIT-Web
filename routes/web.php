@@ -85,6 +85,9 @@ Route::post('/portal/staff/student/exams/application/schedules/table', [App\Http
 // Route::post('/portal/staff/student/exams/application/schedules/search', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'searchSchedulesByExam'])->name('student.application.exams.schedules.search');
 Route::post('/portal/staff/student/exams/application/schedule/exam', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'scheduleAppliedExam'])->name('student.application.exams.schedule.exam');
 Route::post('/portal/staff/student/exams/application/schedules/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveScheduledExams'])->name('student.application.exams.approve.schedules');
+
+// EXAM MEDICAL
+
 // /STUDENT PAGE
 
 // HOME PAGE
@@ -107,6 +110,7 @@ Route::get('/portal/staff/student/registered', [App\Http\Controllers\Portal\Staf
 
 // EXAM CARDS
 Route::get('/portal/staff/student/exams/application', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'index'])->name('student.application.exams');
+Route::get('/portal/staff/student/exams/medical', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'reviewMedicals'])->name('student.exams.medical');
 // /HOME PAGE
 
 // EXAMS PAGE
