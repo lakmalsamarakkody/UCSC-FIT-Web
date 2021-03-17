@@ -110,6 +110,9 @@
             beforeSend: function() {
                 $('#btnViewModalAppliedExams-'+payment_id).attr('disabled', 'disabled');
                 $('#spinnerBtnViewModalAppliedExams-'+payment_id).removeClass('d-none');
+                $('#payment-tab').addClass('d-none');
+                $('#divBtnAssignAppliedExams').addClass('d-none');
+
             },
             success: function(data) {
                 console.log('Success in get applicant exam details ajax');
@@ -124,6 +127,7 @@
 
                     // Payment Tab
                     if(data['payment'] != null) {
+                        $('#payment-tab').removeClass('d-none');
                         $('#paymentId').val(data['payment']['id']);
                         $('#spanPaymentDate').html(data['payment']['paid_date']);
                         $('#spanPaymentBank').html(data['payment']['bank']);
@@ -132,6 +136,22 @@
                         $('#spanPaymentAmount').html(data['payment']['amount']);
                         $('#imgExamPaymentBankSlip').attr('style', 'background: url(/storage/payments/exam/'+data['student']['id']+'/'+data['payment']['image']+')');
                         $('#imgExamPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/exam/'+data['student']['id']+'/'+data['payment']['image']+'")');
+
+                        // Buttons
+                        if(data['payment']['status'] == 'Approved'){
+                            $('#iconPaymentStatus').addClass('fa-check-circle text-success');
+                            $('#divBtnApprovePayment').addClass('d-none');
+                            $('#divBtnDeclinePayment').addClass('d-none');
+                            $('#divBtnAssignAppliedExams').removeClass('d-none');
+                        }
+                        else if(data['payment']['status'] == 'Declined'){
+                            $('#iconPaymentStatus').addClass('fa-times-circle text-danger');
+                            $('#divBtnApprovePayment').addClass('d-none');
+                            $('#divBtnDeclinePayment').addClass('d-none');
+                        }
+                        else{
+                            $('#iconPaymentStatus').addClass('fa-exclamation-triangle text-main-theme-warning');
+                        }
                     }
                     
                     //Create applied exam table

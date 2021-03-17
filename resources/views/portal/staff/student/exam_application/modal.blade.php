@@ -43,7 +43,6 @@
                     <div class="card-header pb-0">Approval Status</div>
                     <div class="card-body pb-0 text-main-theme">                        
                         <div class="row">
-                            <div class="col-lg-6">Details : <i id="iconDetailStatus" class="fas"></i> <span id="spanDetailStatus"></span></div>
                             <div class="col-lg-6">Payment : <i id="iconPaymentStatus" class="fas"></i> <span id="spanPaymentStatus"></span></div>
                             {{-- <div class="col-lg-4">Documents : <i id="iconDocumentsStatus" class="fas"></i> <span id="spanDocumentsStatus"></span></div> --}}
                         </div>
