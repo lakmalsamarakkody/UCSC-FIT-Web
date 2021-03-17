@@ -113,7 +113,7 @@
           <a class="" href="{{ route('student.application.exams') }}">
             <div class="card card-dash shadow black-none bg-success" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
-                <div class="card-title text-center m-0">{{ $totalRegistered }}</div>
+                <div class="card-title text-center m-0">{{ $examApplicationCount }}</div>
               </div>
               <div class="card-header bg-transparent text-center p-0"><h1>Review  <br/>Exams </h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
@@ -125,7 +125,7 @@
           <a class="" href="{{ route('student.exams.medical') }}">
             <div class="card card-dash shadow black-none bg-success" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
-                <div class="card-title text-center m-0">{{ $totalRegistered }}</div>
+                <div class="card-title text-center m-0">{{ $medicalCount }}</div>
               </div>
               <div class="card-header bg-transparent text-center p-0"><h1>Review  <br/>Medicals </h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
