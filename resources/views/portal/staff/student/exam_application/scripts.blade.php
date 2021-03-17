@@ -95,6 +95,11 @@
     }
 
     view_modal_applied_exams = (payment_id) => {
+
+        // Reomve pament status icon
+        $('#iconPaymentStatus').removeClass('fa-check-circle text-success');
+        $('#iconPaymentStatus').removeClass('fa-times-circle text-danger');
+        $('#iconPaymentStatus').removeClass('fa-exclamation-triangle text-main-theme-warning');
         // Payload
         var formData = new FormData();
         formData.append('payment_id', payment_id);
@@ -112,7 +117,6 @@
                 $('#spinnerBtnViewModalAppliedExams-'+payment_id).removeClass('d-none');
                 $('#payment-tab').addClass('d-none');
                 $('#divBtnAssignAppliedExams').addClass('d-none');
-
             },
             success: function(data) {
                 console.log('Success in get applicant exam details ajax');
@@ -150,6 +154,9 @@
                             $('#divBtnDeclinePayment').addClass('d-none');
                         }
                         else{
+                            $('#iconPaymentStatus').removeClass('d-none');
+                            $('#divBtnApprovePayment').removeClass('d-none');
+                            $('#divBtnDeclinePayment').removeClass('d-none');
                             $('#iconPaymentStatus').addClass('fa-exclamation-triangle text-main-theme-warning');
                         }
                     }
@@ -230,7 +237,7 @@
                             text: 'Payment approved successfully',
                         }).then((result) => {
                             if(result.isConfirmed) {
-                                location.reload()
+                                location.reload();
                             }
                         });
                     }
@@ -317,11 +324,11 @@
                                         title: 'Declined!',
                                         text: 'Exam payment has been Declined.',
                                     })
-                                    // .then((result) => {
-                                    //     if(result.isConfirmed) {
-                                            
-                                    //     }
-                                    // });
+                                    .then((result) => {
+                                        if(result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    });
                                 }
                             },
                             error: function(err){
