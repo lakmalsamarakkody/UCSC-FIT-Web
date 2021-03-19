@@ -32,15 +32,15 @@ class AddColumnsToStudentExamsTable extends Migration
      */
     public function down()
     {
-        Schema::table('student_exams', function (Blueprint $table) {
-            $table->dropColumn('subject_id');
-            $table->dropColumn('exam_type_id');
-            $table->dropColumn('requested_exam_id');
-            $table->dropColumn('payment_status');
-            $table->dropColumn('declined_message');
-            $table->dropColumn('medical_reason');
-            $table->dropColumn('medical_image');
-            $table->dropColumn('medical_status');
-        });
+        // Schema::table('student_exams', function (Blueprint $table) {
+        //     $table->dropColumn('subject_id');
+        //     $table->dropColumn('exam_type_id');
+        //     $table->dropColumn('requested_exam_id');
+        //     $table->dropColumn('payment_status');
+        //     $table->dropColumn('declined_message');
+        //     $table->dropColumn('medical_reason');
+        //     $table->dropColumn('medical_image');
+        //     $table->dropColumn('medical_status');
+        // });
     }
 }
