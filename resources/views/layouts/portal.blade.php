@@ -29,6 +29,7 @@
 
     <!-- PAGES -->
     <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/checkbox-toggle.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/staff/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/staff/exams.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/staff/student.css') }}">
@@ -42,10 +43,7 @@
 
   <!-- SCRIPTS -->
     <script src="{{ asset('js/app.js') }}" differ></script>
-
-    <!-- SWEET ALERT 2 -->
-    <script src="{{ asset('lib/sweetalert2/sweetalert2.all.js') }}"></script>
-    <!-- /SWEET ALERT 2 -->
+    <!-- SWEET ALERT 2 -->  <script src="{{ asset('lib/sweetalert2/sweetalert2.all.js') }}"></script>
 
     <!-- DATATABLE SCRIPTS -->
     <script src="{{ asset('lib/jquery/jquery.validate.js') }}"></script>

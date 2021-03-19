@@ -5,8 +5,14 @@ namespace App\Http\Controllers\Portal\Staff\User;
 use App\Http\Controllers\Controller;
 use App\Models\User\Permission;
 use App\Models\User\Role;
+use App\Models\User\Role\hasPermission;
+use Hamcrest\Core\IsNot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use function PHPUnit\Framework\isEmpty;
+use function PHPUnit\Framework\isNull;
+use function PHPUnit\Framework\isTrue;
 
 class PermissionController extends Controller
 {
@@ -41,5 +47,27 @@ class PermissionController extends Controller
         //RETURN
         $request->flash();
         return view('portal/staff/user/permissions', compact('roles', 'portal', 'modules', 'selectedUserRole'))  ;
+    }
+
+    public function permissionStatusChanger(Request $request){
+        //SET PERMISSION TO A ROLE
+        if($request->permissionStatus == 'true'):
+            //CHECK IS EXIST PERMISSION
+            if(isNull(hasPermission::where('role_id',$request->roleID)->where('permission_id', $request->permissionID)->first())):
+                hasPermission::create([
+                    'role_id' => $request->roleID,
+                    'permission_id' => $request->permissionID
+                ]);
+            endif;
+
+        //REMOVE PERMISSION FROM A ROLE
+        else:
+            //CHECK IS EXIST PERMISSION
+            if(hasPermission::where('role_id',$request->roleID)->where('permission_id', $request->permissionID)->first()):
+                hasPermission::where('role_id', $request->roleID)->where('permission_id', $request->permissionID)->forceDelete();
+            endif;
+        endif;
+        return response()->json(['status'=>'success']);
+
     }
 }
