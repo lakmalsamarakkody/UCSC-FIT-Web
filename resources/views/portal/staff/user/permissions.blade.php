@@ -76,14 +76,16 @@
                       <div class="col-12">
                         <div class="row">
                           @foreach (App\Models\User\Permission::where('portal', $portal)->where('module', $module->module)->get() as $permission)
-                          <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                          <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group form-check">
                               <div class="row">
-                                <label class="switch col-3">
-                                  <input type="checkbox" id="inputCheck{{ $permission->id }}" class="form-check-input" name="{{ $permission->id }}" value="{{ $permission->id }}" onclick="permissionStatusChanger({{ $permission->id }})" @if(App\Models\User\Role\hasPermission::where('role_id', $selectedUserRole)->where('permission_id', $permission->id)->first()) checked @endif/>
+                                <label class="form-check-label font-weight-bold">{{ $permission->description }}</label>
+                                <hr class="mt-0 mb-1 p-0 w-100"/>
+                                <label class="switch">
+                                  <input type="checkbox" id="inputCheck{{ $permission->id }}" class="form-check-input primary" name="{{ $permission->id }}" value="{{ $permission->id }}" onclick="permissionStatusChanger({{ $permission->id }})" @if(App\Models\User\Role\hasPermission::where('role_id', $selectedUserRole)->where('permission_id', $permission->id)->first()) checked @endif/>
                                   <span class="slider round"></span>
                                 </label>
-                                <label class="form-check-label col-6">{{ $permission->id }} {{ $permission->name }} </label>
+                                <small class="form-text text-muted ml-2 pt-1">{{ $permission->name }}</small>
                               </div>
                             </div>
                           </div>
