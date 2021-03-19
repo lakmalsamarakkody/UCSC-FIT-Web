@@ -17,7 +17,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb ">
               <li class="breadcrumb-item"><a href="{{ url('/portal/staff/') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Exam Applications</li>
+              <li class="breadcrumb-item active" aria-current="page">Medicals</li>
             </ol>
           </nav>
 
@@ -27,13 +27,13 @@
 
     <!-- CONTENT -->
     
-    <div class="col-12 exam-application">
+    <div class="col-12 medical">
       <div class="row">
           
         <!-- APPLICATIONS LIST -->
         <div class="col-12 md-5">
           <div class="card">
-            <div class="card-header">Exam Applicants</div>
+            <div class="card-header">Medical Submitted Students</div>
             <div class="card-body">
               <table class="table yajra-datatable">
                 <thead>
@@ -45,17 +45,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($exam_applicants as $applicant)
+                  @foreach ($medical_submitters as $student)
                     <tr>
-                      <td>{{ $applicant->student->reg_no }}</td>
-                      <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
-                      <td>{{ $applicant->created_at->isoFormat('YYYY-MM-DD') }}</td>
+                      <td>{{ $student->student->reg_no }}</td>
+                      <td>{{ $student->student->initials }} {{ $student->student->last_name }}</td>
+                      <td>{{ $student->created_at->isoFormat('YYYY-MM-DD') }}</td>
                       <td>
-                        @if(Auth::user()->hasPermission('staff-student-exam-application-view'))
+                        {{-- @if(Auth::user()->hasPermission('staff-student-exam-application-view')) --}}
                         <div class="btn-group">
-                          <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                          <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-" data-toggle="modal" data-target="#modal-medical"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedExams-" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                         </div>
-                        @endif
+                        {{-- @endif --}}
                       </td>
                     </tr>
                   @endforeach
@@ -68,8 +68,8 @@
         <!-- /APPLICATIONS LIST -->
 
       </div>
-      @include('portal.staff.student.exam_application.modal')
-      @include('portal.staff.student.exam_application.scripts')
+      @include('portal.staff.student.medical.modal')
+      @include('portal.staff.student.medical.scripts')
     </div>
     <!-- /CONTENT -->
 

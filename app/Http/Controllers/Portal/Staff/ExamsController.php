@@ -478,4 +478,26 @@ class ExamsController extends Controller
     }
     // /DELETE
     // /SCHEDULE(After release)
+
+    public function getExamList(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Exam::orderby('id', 'asc');
+
+            if($request->year!=null){
+                $data = $data->where('year', $request->year);
+            }            
+            if($request->month!=null){
+                $data = $data->where('month', $request->month);
+            }
+            $data = $data->get();
+            return DataTables::of($data)
+            ->editColumn('month', function ($data) {
+                return $data->month ? with(Carbon::createFromDate($data->year,$data->month)->monthName) : '';
+            })
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+    }
 }

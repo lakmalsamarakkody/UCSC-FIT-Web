@@ -81,9 +81,13 @@ Route::post('/portal/staff/student/exams/application/details/table', [App\Http\C
 Route::post('/portal/staff/student/exams/application/payment/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveExamPayment'])->name('student.application.exams.payment.approve');
 Route::post('/portal/staff/student/exams/application/payment/decline', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineExamPayment'])->name('student.application.exams.payment.decline');
 Route::post('/portal/staff/student/exams/application/schedules/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getAppliedSubjectScheduleDetails'])->name('student.application.exams.schedules.details');
-Route::post('/portal/staff/student/exams/application/schedules/search', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'searchSchedulesByExam'])->name('student.application.exams.schedules.search');
+Route::post('/portal/staff/student/exams/application/schedules/table', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'schedulesForExamTable'])->name('student.application.exams.schedules.table');
+// Route::post('/portal/staff/student/exams/application/schedules/search', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'searchSchedulesByExam'])->name('student.application.exams.schedules.search');
 Route::post('/portal/staff/student/exams/application/schedule/exam', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'scheduleAppliedExam'])->name('student.application.exams.schedule.exam');
 Route::post('/portal/staff/student/exams/application/schedules/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveScheduledExams'])->name('student.application.exams.approve.schedules');
+
+// EXAM MEDICAL
+
 // /STUDENT PAGE
 
 // HOME PAGE
@@ -106,6 +110,7 @@ Route::get('/portal/staff/student/registered', [App\Http\Controllers\Portal\Staf
 
 // EXAM CARDS
 Route::get('/portal/staff/student/exams/application', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'index'])->name('student.application.exams');
+Route::get('/portal/staff/student/exams/medical', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'reviewMedicals'])->name('student.exams.medical');
 // /HOME PAGE
 
 // EXAMS PAGE
@@ -133,11 +138,15 @@ Route::post('/portal/staff/exams/schedule/delete/after/release',[App\Http\Contro
 // EXAM LIST PAGE
 Route::get('/portal/staff/exams/list', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class, 'index']);
 Route::post('/portal/staff/exams/list/create', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class, 'createExam']);
+Route::get('/portal/staff/exams/exams/list', [App\Http\Controllers\Portal\Staff\ExamListController::class, 'getExamList'])->name('exam.exam.list');
 Route::post('/portal/staff/exams/list/delete', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class , 'deleteExam']);
 // /EXAM LIST PAGE
 
+// RESULTS PAGE
 Route::get('/portal/staff/results', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'index'])->name('results');
+Route::get('/portal/staff/results/exams', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'getExamList'])->name('results.exam.list');
 Route::get('/portal/staff/result/view/{id}', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'viewResults'])->where('id', '[0-9]+')->name('results.view');
+// /RESULTS PAGE
 
 // USER PAGE
 Route::get('/portal/staff/users', [App\Http\Controllers\Portal\Staff\UsersController::class, 'index'])->name('users');

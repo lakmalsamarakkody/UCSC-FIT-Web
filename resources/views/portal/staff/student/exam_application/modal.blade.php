@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="viewExamApplication"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="location.reload();">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -43,7 +43,6 @@
                     <div class="card-header pb-0">Approval Status</div>
                     <div class="card-body pb-0 text-main-theme">                        
                         <div class="row">
-                            <div class="col-lg-6">Details : <i id="iconDetailStatus" class="fas"></i> <span id="spanDetailStatus"></span></div>
                             <div class="col-lg-6">Payment : <i id="iconPaymentStatus" class="fas"></i> <span id="spanPaymentStatus"></span></div>
                             {{-- <div class="col-lg-4">Documents : <i id="iconDocumentsStatus" class="fas"></i> <span id="spanDocumentsStatus"></span></div> --}}
                         </div>
@@ -117,9 +116,11 @@
                                 </div>
                             </div>
                             <div class="mt-4 col-12 text-center">
+                                @if(Auth::user()->hasPermission('staff-student-exam-application-approveSchedules'))
                                 <div id="divBtnAssignAppliedExams" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-success form-control" id="btnAssignScheduledExams" onclick="assign_scheduled_exams();">Approve Schedules<span id="spinnerBtnAssignScheduledExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
+                                @endif
                                 {{-- <div id="divBtnDeclineAppliedExams" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-exams-message" id="btnDeclineAppliedExams" data-toggle="modal">Decline Applied Exams<span id="spinnerBtnDeclineAppliedExam" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div> --}}
@@ -163,12 +164,16 @@
                                 </div>
                             </div>
                             <div class="mt-4 col-12 text-center">
+                                @if(Auth::user()->hasPermission('staff-student-exam-application-payment-approve'))
                                 <div id="divBtnApprovePayment" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-success form-control" id="btnApproveExamPayment" onclick="approve_exam_payment();">Approve Payment<span id="spinnerBtnApproveExamPayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
+                                @endif
+                                @if(Auth::user()->hasPermission('staff-student-exam-application-payment-decline'))
                                 <div id="divBtnDeclinePayment" class="btn-group col-xl-3 col-lg-6">
-                                    <button type="button" class="btn btn-warning form-control" id="btnDeclineExamPayment" onclick="decline_exam_payment();" data-toggle="modal">Decline Payment<span id="spinnerBtnDeclineExamPayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                    <button type="button" class="btn btn-warning form-control" id="btnDeclineExamPayment" onclick="decline_exam_payment();">Decline Payment<span id="spinnerBtnDeclineExamPayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
+                                @endif
                             </div>
                         </div>
 
@@ -280,9 +285,9 @@
                                                 </div>
                                             </div> --}}
                                         </div>
-                                        
+                                        {{-- id="tblSchedulesForAppliedExam" --}}
                                         <div class="col-md-12 order-md-1 order-2 mt-5">
-                                            <table id="tblSchedulesForAppliedExam" class="table">
+                                            <table class="table tbl-schedules-for-applied-exam">
                                                 <thead>
                                                     <tr>
                                                         <th>Subject</th>

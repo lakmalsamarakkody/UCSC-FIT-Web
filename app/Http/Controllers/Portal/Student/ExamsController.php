@@ -109,8 +109,11 @@ class ExamsController extends Controller
                                     ->where( 'exam_type_id', $exam_to_apply->exam_type_id )
                                     ->whereHas('schedule', function($query) {
                                       $query->where('date', '>=', date('Y-m-d'));
-                                    })->get();
-            // echo $similar;
+                                    })->first();
+            // echo $scheduled_exam;
+            // echo $same_exam;
+            // echo $similar_exam;
+
             if( $similar_exam != Null || $same_exam != Null || $scheduled_exam != Null ):
               return response()->json(['status'=>'exist']);
             else:
