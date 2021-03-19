@@ -29,6 +29,7 @@
 
     <!-- PAGES -->
     <link rel="stylesheet" href="{{ asset('css/portal/core.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/checkbox-toggle.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/staff/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/staff/exams.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal/staff/student.css') }}">

@@ -78,7 +78,10 @@
                           @foreach (App\Models\User\Permission::where('portal', $portal)->where('module', $module->module)->get() as $permission)
                           <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="form-group form-check">
-                              <input type="checkbox" class="form-check-input" value="{{ $permission->name }}" @if(App\Models\User\Role\hasPermission::where('role_id', $selectedUserRole)->where('permission_id', $permission->id)->first()) checked @endif/>
+                              <label class="switch">
+                                <input type="checkbox" id="inputCheck{{ $permission->id }}" class="form-check-input" name="{{ $permission->id }}" value="{{ $permission->id }}" onclick="permissionStatusChanger({{ $permission->id }})" @if(App\Models\User\Role\hasPermission::where('role_id', $selectedUserRole)->where('permission_id', $permission->id)->first()) checked @endif/>
+                                <span class="slider round"></span>
+                              </label>
                               <label class="form-check-label">{{ $permission->id }} {{ $permission->name }} </label>
                             </div>
                           </div>
