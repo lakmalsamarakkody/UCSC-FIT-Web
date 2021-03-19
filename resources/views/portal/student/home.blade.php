@@ -17,97 +17,135 @@
     <div class="col-lg-12 dashboard">
         <div class="row justify-content-center">
             @if($student->reg_no == NULL)
-            {{-- REGISTRATION  PENDING --}}
-            <div class="col-12 px-0">
-                <div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading"><i class="far fa-check-circle"></i> Complete Your Registration! </h4>
-                    <p>Complete your registration to continue FIT. If your having any issues with the registration, please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
-                    <hr>
-                    <a href="{{ route('student.registration') }}" class="px-0 btn btn-link ">Click here to Complete Registration</a>
+                {{-- REGISTRATION  PENDING --}}
+                <div class="col-12 px-0">
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading"><i class="far fa-check-circle"></i> Complete Your Registration! </h4>
+                        <p>Complete your registration to continue FIT. If your having any issues with the registration, please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+                        <hr>
+                        <a href="{{ route('student.registration') }}" class="px-0 btn btn-link ">Click here to Complete Registration</a>
+                    </div>
                 </div>
-            </div>
-            {{-- /REGISTRATION PENDING --}}
+                {{-- /REGISTRATION PENDING --}}
+
+                <!-- SUMMARY CARDS -->
+                @if($registration->application_submit)        
+                <div class="col-lg-4  p-1 w-100">        
+                        <div class="card card-dash shadow red-none @if($registration->application_status == null) yellow @elseif($registration->application_status == 'Approved') green @else red @endif" style="">
+                        
+                            <div class="card-header bg-transparent text-white"><h1>Application <br> Status</h1></div>
+                            <div class="card-body p-0 my-0 ">
+                            <div class="card-title text-right ">
+                                <span class="badge shadow badge-pill @if($registration->application_status == null) badge-warning @elseif($registration->application_status == 'Approved') badge-success @else 'badge-danger' @endif  mr-3">{{ $registration->application_status ?? 'Pending' }}</span></div>
+                            </div>
+                        </div>
+                </div>
+                @else
+                <div class="col-lg-4  p-1 w-100">        
+                    <a class="" href="{{ route('student.registration') }}">
+                        <div class="card card-dash shadow red-none bg-danger" style="">
+                        
+                            <div class="card-header bg-transparent text-center text-white p-0 py-5"><h3>Submit Application</h1></div>
+                            <div class="card-body p-0 my-0 ">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endif
+
+                @if($registration->payment_id )        
+                <div class="col-lg-4  p-1 w-100">        
+                        <div class="card card-dash shadow red-none @if($registration->payment_status == null) yellow @elseif($registration->payment_status == 'Approved') green @else red @endif" style="">
+                        
+                            <div class="card-header bg-transparent text-white"><h1>Payments <br> Status</h1></div>
+                            <div class="card-body p-0 my-0 ">
+                            <div class="card-title text-right ">
+                                <span class="badge shadow badge-pill @if($registration->payment_status == null) badge-warning @elseif($registration->payment_status == 'Approved') badge-success @else 'badge-danger' @endif  mr-3">{{ $registration->payment_status ?? 'Pending' }}</span></div>
+                            </div>
+                        </div>
+                </div>
+                @else
+                <div class="col-lg-4  p-1 w-100">        
+                    <a class="" href="{{ route('payment.registration') }}">
+                        <div class="card card-dash shadow red-none bg-danger" style="">
+                        
+                            <div class="card-header bg-transparent text-center text-white p-0 py-5"><h3>Complete  your Payment</h1></div>
+                            <div class="card-body p-0 my-0 ">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endif
+
+                @if($registration->document_submit )        
+                <div class="col-lg-4  p-1 w-100">        
+                        <div class="card card-dash shadow red-none @if($registration->document_status == null) yellow @elseif($registration->document_status == 'Approved') green @else red @endif" style="">
+                        
+                            <div class="card-header bg-transparent text-white"><h1>Document <br> Status</h1></div>
+                            <div class="card-body p-0 my-0 ">
+                            <div class="card-title text-right ">
+                                <span class="badge shadow badge-pill @if($registration->document_status == null) badge-warning @elseif($registration->document_status == 'Approved') badge-success @else 'badge-danger' @endif  mr-3">{{ $registration->document_status ?? 'Pending' }}</span></div>
+                            </div>
+                        </div>
+                </div>
+                @else
+                <div class="col-lg-4  p-1 w-100">        
+                    <a class="" href="{{ route('document.registration') }}">
+                        <div class="card card-dash shadow red-none bg-danger" style="">
+                        
+                            <div class="card-header bg-transparent text-center text-white p-0 py-5"><h3>Submit Documents</h1></div>
+                            <div class="card-body p-0 my-0 ">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endif
+
+
+
             @else
-            <div class="col-12 px-0">
-                <h4 class="alert-heading text-right">Registration Number: {{ $student->reg_no }}</h4>
-                
-                <h5 class="alert-heading text-right">Registration expires on: {{ $registration->registration_expire_at }}</h5>                
-                <hr>
-            </div>
+                <div class="col-12 px-0">
+                    <h4 class="alert-heading text-right">Registration Number: {{ $student->reg_no }}</h4>
+                    
+                    <h5 class="alert-heading text-right">Registration expires on: {{ $registration->registration_expire_at }}</h5>                
+                    <hr>
+                </div>
             @endif
 
-        <!-- SUMMARY CARDS -->
-        @if($registration->application_submit)        
-        <div class="col-lg-4  p-1 w-100">        
-                <div class="card card-dash shadow red-none @if($registration->application_status == null) yellow @elseif($registration->application_status == 'Approved') green @else red @endif" style="">
-                
-                    <div class="card-header bg-transparent text-white"><h1>Application <br> Status</h1></div>
-                    <div class="card-body p-0 my-0 ">
-                    <div class="card-title text-right ">
-                        <span class="badge shadow badge-pill @if($registration->application_status == null) badge-warning @elseif($registration->application_status == 'Approved') badge-success @else 'badge-danger' @endif  mr-3">{{ $registration->application_status ?? 'Pending' }}</span></div>
-                    </div>
+          <div class="col">
+            <h5 class="col-12 title font-weight-bold mt-5 px-0">Announcements</h5>
+              <div class="card" >
+                <div class="card-body px-4">
+                  <ul class="mt-5 mr-5">
+                      @foreach($announcements as $announcement)
+                        @if($announcement->created_at >= \Carbon\Carbon::today()->subDays(30))  
+                            <li>
+                                <p>
+                                    <a class="" href="{{ route('web.announcement', $announcement->id) }}"><strong>{{ $announcement->title }}</strong></a><br>
+                                    <span class="float-right pr-4 mb-3"><small>{{ \Carbon\Carbon::parse($announcement->created_at)->format('M d Y') }}</small></span> 
+                                </p>
+                                <hr class=" mt-5" color="grey">
+                            </li>
+                        @else
+                            <li>
+                                <p class="">
+                                    <a class="text-dark" href="{{ route('web.announcement', $announcement->id) }}">{{ $announcement->title }}</a><br>
+                                    <span class="float-right pr-4"><small>{{ \Carbon\Carbon::parse($announcement->created_at)->format('M d Y') }}</small></span> 
+                                </p>
+                                <hr class=" mt-5" color="grey">
+                            </li>
+                        @endif 
+                      @endforeach
+                    </ul>
+                      
                 </div>
-        </div>
-        @else
-        <div class="col-lg-4  p-1 w-100">        
-            <a class="" href="{{ route('student.registration') }}">
-                <div class="card card-dash shadow red-none bg-danger" style="">
                 
-                    <div class="card-header bg-transparent text-center text-white p-0 py-5"><h3>Submit Application</h1></div>
-                    <div class="card-body p-0 my-0 ">
-                    </div>
+                <div class="card-footer text-right mr-5">
+                  <p><a href="{{ url('/announcements') }}">View All Announcements</a></p>   
                 </div>
-            </a>
-        </div>
-        @endif
-
-        @if($registration->payment_id )        
-        <div class="col-lg-4  p-1 w-100">        
-                <div class="card card-dash shadow red-none @if($registration->payment_status == null) yellow @elseif($registration->payment_status == 'Approved') green @else red @endif" style="">
-                
-                    <div class="card-header bg-transparent text-white"><h1>Payments <br> Status</h1></div>
-                    <div class="card-body p-0 my-0 ">
-                    <div class="card-title text-right ">
-                        <span class="badge shadow badge-pill @if($registration->payment_status == null) badge-warning @elseif($registration->payment_status == 'Approved') badge-success @else 'badge-danger' @endif  mr-3">{{ $registration->payment_status ?? 'Pending' }}</span></div>
-                    </div>
-                </div>
-        </div>
-        @else
-        <div class="col-lg-4  p-1 w-100">        
-            <a class="" href="{{ route('payment.registration') }}">
-                <div class="card card-dash shadow red-none bg-danger" style="">
-                
-                    <div class="card-header bg-transparent text-center text-white p-0 py-5"><h3>Complete  your Payment</h1></div>
-                    <div class="card-body p-0 my-0 ">
-                    </div>
-                </div>
-            </a>
-        </div>
-        @endif
-
-        @if($registration->document_submit )        
-        <div class="col-lg-4  p-1 w-100">        
-                <div class="card card-dash shadow red-none @if($registration->document_status == null) yellow @elseif($registration->document_status == 'Approved') green @else red @endif" style="">
-                
-                    <div class="card-header bg-transparent text-white"><h1>Document <br> Status</h1></div>
-                    <div class="card-body p-0 my-0 ">
-                    <div class="card-title text-right ">
-                        <span class="badge shadow badge-pill @if($registration->document_status == null) badge-warning @elseif($registration->document_status == 'Approved') badge-success @else 'badge-danger' @endif  mr-3">{{ $registration->document_status ?? 'Pending' }}</span></div>
-                    </div>
-                </div>
-        </div>
-        @else
-        <div class="col-lg-4  p-1 w-100">        
-            <a class="" href="{{ route('document.registration') }}">
-                <div class="card card-dash shadow red-none bg-danger" style="">
-                
-                    <div class="card-header bg-transparent text-center text-white p-0 py-5"><h3>Submit Documents</h1></div>
-                    <div class="card-body p-0 my-0 ">
-                    </div>
-                </div>
-            </a>
-        </div>
-        @endif
+            
+              </div>
+          </div>
 
         <!-- SUMMARY CARDS -->
         {{-- <h5 class="col-12 title font-weight-bold mt-5 px-0">EXAMS</h5>
