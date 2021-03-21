@@ -87,7 +87,7 @@ Route::post('/portal/staff/student/exams/application/schedule/exam', [App\Http\C
 Route::post('/portal/staff/student/exams/application/schedules/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveScheduledExams'])->name('student.application.exams.approve.schedules');
 
 // EXAM MEDICAL
-
+Route::post('/portal/staff/student/exams/medical/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getMedicalDetails'])->name('student.exams.medical.details');
 // /STUDENT PAGE
 
 // HOME PAGE

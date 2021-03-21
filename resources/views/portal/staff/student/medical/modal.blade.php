@@ -42,12 +42,8 @@
                                                     <td><span id="spanSubmittedOn"></span> <small class="text-muted">(MM/DD/YY)</small></td>                                        
                                                 </tr>
                                                 <tr>
-                                                    <th>Subject Code: </th>
-                                                    <td><span id="spanSubjectCode"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Subject Name: </th>
-                                                    <td><span id="spanSubjectName"></span></td>
+                                                    <th>Subject: </th>
+                                                    <td><span id="spanSubject"></span></td>
                                                 </tr>
                                                 <tr>
                                                     <th>Exam Type: </th>

@@ -45,15 +45,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($medical_submitters as $student)
+                  @foreach ($medical_submitters as $medical)
                     <tr>
-                      <td>{{ $student->student->reg_no }}</td>
-                      <td>{{ $student->student->initials }} {{ $student->student->last_name }}</td>
-                      <td>{{ $student->created_at->isoFormat('YYYY-MM-DD') }}</td>
+                      <td>{{ $medical->student->reg_no }}</td>
+                      <td>{{ $medical->student->initials }} {{ $medical->student->last_name }}</td>
+                      <td>{{ $medical->created_at->isoFormat('YYYY-MM-DD') }}</td>
                       <td>
                         {{-- @if(Auth::user()->hasPermission('staff-student-exam-application-view')) --}}
                         <div class="btn-group">
-                          <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-" data-toggle="modal" data-target="#modal-medical"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedExams-" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                          <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedMedical-{{ $medical->id }}" onclick="view_modal_medical({{ $medical->id }});"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedMedical-{{ $medical->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                         </div>
                         {{-- @endif --}}
                       </td>

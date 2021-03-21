@@ -201,10 +201,26 @@ class ExamApplicationController extends Controller
     // APPROVE SCHEDULED EXAMS
 
     // MEDICALS
+    // Review medicals
     public function reviewMedicals()
     {
-        $medical_submitters = hasExam::where('medical_status', null)->get();
+        $medical_submitters = hasExam::where('medical_status', '!=', null)->get();
         return view('portal/staff/student/medical', compact('medical_submitters'));
+    }
+    // /Review medicals
+
+    // Get medicla modal details
+    public function getMedicalDetails(Request $request)
+    {
+        $exam = hasExam::where('id',$request->applied_medical_id)->first();
+        $student = Student::where('id', $exam->student_id)->first();
+        $medical = hasExam::where('id', $request->applied_medical_id)->addSelect([
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
+            'held_date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
+        ])->first();
+        return response()->json(['status'=> 'success', 'student'=> $student, 'medical'=>$medical]);
     }
     // /MEDICALS
 }
