@@ -1,6 +1,6 @@
 <script type="text/javascript">
 
-// INVODE MEDICAL MODAL
+// INVOKE MEDICAL MODAL
 view_modal_medical =(applied_medical_id) => {
 
     // Form Payload
@@ -29,6 +29,7 @@ view_modal_medical =(applied_medical_id) => {
                 // Medical details
                 if(data['medical'] != null) {
                     var date = new Date(data['medical']['updated_at']);
+                    $('#medicalId').val(data['medical']['id']);
                     $('#spanSubmittedOn').html(date.toLocaleDateString());
                     $('#spanSubject').html('FIT ' + data['medical']['subject_code'] + ' - '+ data['medical']['subject_name']);
                     $('#spanExamType').html(data['medical']['exam_type']);
@@ -51,6 +52,72 @@ view_modal_medical =(applied_medical_id) => {
         }
     });
 }
-// INVODE MEDICAL MODAL
+// /INVOKE MEDICAL MODAL
+
+// APPROVE MEDICAL
+approve_medical = () => {
+    SwalQuestionWarningAutoClose.fire({
+        title: "Are you sure?",
+        text: "You wont be able to revert this!",
+        confirmButtonText: 'Yes, Approve!',
+    })
+    .then((result) => {
+        if(result.isConfirmed) {
+
+            // Form Payload
+            var formData = new FormData();
+            formData.append('medical_id', $('#medicalId').val());
+
+            // Approve medical controller
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url: "{{ route('student.exams.medical.approve') }}",
+                type: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,           
+                beforeSend: function(){
+                    $("#spinnerBtnApproveMedical").removeClass('d-none');
+                    $('#btnApproveMedical').attr('disabled','disabled');    
+                },
+                success: function(data){
+                    console.log('Approve medical ajax success.');
+                    $("#spinnerBtnApproveMedical").addClass('d-none');
+                    $('#btnApproveMedical').removeAttr('disabled', 'disabled');
+                    if (data['status'] == 'success'){
+                        SwalDoneSuccess.fire({
+                            title: 'Approved!',
+                            text: 'Medical approved successfully',
+                        }).then((result) => {
+                            if(result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    }
+                    else {
+                        SwalSystemErrorDanger.fire({
+                            title: 'Medical Approve Process Failed!',
+                        })
+                    }
+                },
+                error: function(err) {
+                    console.log('Approve medical ajax error');
+                    $("#spinnerBtnApproveMedical").addClass('d-none');
+                    $('#btnApproveMedical').removeAttr('disabled', 'disabled');
+                    SwalSystemErrorDanger.fire({
+                        title: 'Medical Approve Process Failed!',
+                    })
+                }
+            });
+        }
+        else {
+            SwalNotificationWarningAutoClose.fire({
+                title: 'Aborted!',
+                text: 'Medical approval process aborted.',
+            })
+        }
+    })
+}
+// /APPROVE MEDICAL
 
 </script>

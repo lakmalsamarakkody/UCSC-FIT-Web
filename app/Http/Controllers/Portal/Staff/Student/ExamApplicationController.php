@@ -204,7 +204,7 @@ class ExamApplicationController extends Controller
     // Review medicals
     public function reviewMedicals()
     {
-        $medical_submitters = hasExam::where('medical_status', '!=', null)->get();
+        $medical_submitters = hasExam::where('medical_status', 'Pending')->get();
         return view('portal/staff/student/medical', compact('medical_submitters'));
     }
     // /Review medicals
@@ -222,5 +222,17 @@ class ExamApplicationController extends Controller
         ])->first();
         return response()->json(['status'=> 'success', 'student'=> $student, 'medical'=>$medical]);
     }
+    // Get medicla modal details
+
+    // Approve medial
+    public function approveMedical(Request $request)
+    {
+        $medical = hasExam::where('id', $request->medical_id)->where('medical_status', 'Pending')->first();
+        if($medical->update(['medical_status'=> 'Approved'])):
+            return response()->json(['status'=>'success']);
+        endif;
+        return response()->json(['status'=>'error']);
+    }
+    // Approve medial
     // /MEDICALS
 }

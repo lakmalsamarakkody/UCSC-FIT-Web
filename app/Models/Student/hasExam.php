@@ -27,6 +27,7 @@ class hasExam extends Model
         'payment_id',
         'payment_status',
         'declined_message',
+        'medical_status',
     ];
 
     public function student(){

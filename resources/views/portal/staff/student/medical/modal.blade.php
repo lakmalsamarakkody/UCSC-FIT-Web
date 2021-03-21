@@ -36,6 +36,7 @@
                                 <div class="card-body pb-0">
                                     <div class="row">
                                         <div class="col-md-12 order-md-1 order-2 mt-4">
+                                            <input type="hidden" value="" id="medicalId" class="form-control" readonly/>
                                             <table id="tblMedicals" class="table">
                                                 <tr>
                                                     <th>Submitted on: </th>
@@ -63,10 +64,10 @@
                                             </div>
                                             <div class="mt-4 col-12 text-center mb-4">
                                                 <div id="divBtnApproveMedical" class="btn-group col-xl-3 col-lg-6">
-                                                    <button type="button" class="btn btn-success form-control" id="btnApproveMedical">Approve Medical<span id="spinnerBtnApproveMedical" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                                    <button type="button" class="btn btn-success form-control" id="btnApproveMedical" onclick="approve_medical();">Approve Medical<span id="spinnerBtnApproveMedical" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                                 </div>
                                                 <div id="divBtnDeclineMedical" class="btn-group col-xl-3 col-lg-6">
-                                                    <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-medical-message" id="btnDeclineMedical" data-toggle="modal">Decline Medical<span id="spinnerBtnDeclineMedical" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                                    <button type="button" class="btn btn-warning form-control" id="btnDeclineMedical" onclick="decline_medical();">Decline Medical<span id="spinnerBtnDeclineMedical" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                                 </div>
                                             </div>
                                         </div>
