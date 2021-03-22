@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
 use App\Models\Student\hasExam;
 use App\Models\Student\Payment;
+use App\Models\Student\Medical;
 use App\Models\Student\Payment\Type;
 use App\Models\Support\Bank;
 use App\Models\Support\Fee;
@@ -267,22 +268,26 @@ class ExamsController extends Controller
     else:
       // echo $request->id;
       $student_id = Auth::user()->student->id;
+      $medical = new Medical();
+      $medical->student_exam_id = $request->id;
+      $medical->reason = $request->reason;
+      $medical->status = 'Pending';
 
       $medical_ext = $request->file('medical')->getClientOriginalExtension();
       $medical_name = $student_id.'_medical_'.date('Y-m-d').'_'.time().'.'. $medical_ext;
       
-
-      $student_exam = hasExam::where('id',$request->id);
-
-      if( $student_exam->update([  'medical_reason' => $request->reason, 'medical_image' => $medical_name, 'medical_status' => 'Pending' ]) && $path = $request->file('medical')->storeAs('public/medicals/'.$student_id, $medical_name) ):     
-
-        return response()->json(['status'=>'success']);
-
+      $medical->image = $medical_name;
+      
+      if($path = $request->file('medical')->storeAs('public/medicals/'.$student_id, $medical_name)):
+        if($medical->save()):
+          $student_exam = hasExam::where('id',$request->id);
+          if($student_exam->update(['medical_id'=>$medical->id])):
+            return response()->json(['status'=>'success']);
+          endif;
+        endif;
       endif;
-
     endif;
     return response()->json(['error'=>'error']);
-
   }
 
   public function deleteExamMedical(Request $request)
