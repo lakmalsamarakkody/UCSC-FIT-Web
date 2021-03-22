@@ -26,7 +26,7 @@ class Medical extends Model
     ];
 
     public function student_exam() {
-        return $this->hasMany(hasExam::class, 'student_exam_id', 'id');
+        return $this->belongsTo(hasExam::class, 'student_exam_id', 'id');
     }
 
 }

@@ -45,7 +45,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($medical_submitters as $medical)
+                  @foreach ($medicals as $medical)
                     <tr>
                       <td>{{ $medical->student_exam->student->reg_no }}</td>
                       <td>{{ $medical->student_exam->student->initials }} {{ $medical->student_exam->student->last_name }}</td>
