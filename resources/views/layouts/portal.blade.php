@@ -55,7 +55,7 @@
 
     <script src="{{ asset('js/portal.js') }}"></script>
     <script src="{{ asset('js/sweetalert.js') }}"></script>
-    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
 
     {{-- CUSTOM --}}
     <script type="text/javascript">
