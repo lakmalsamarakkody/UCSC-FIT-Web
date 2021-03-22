@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\Exam\Types;
 use App\Models\Subject;
 use App\Models\Exam;
+use App\Models\Student\Medical;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -72,5 +73,9 @@ class hasExam extends Model
          * connecting model , foreign_key , local_key
          */
         return $this->belongsTo(Exam::class, 'requested_exam_id', 'id');
+    }
+
+    public function medical() {
+        return $this->belongsTo(Medical::class, 'medical_id', 'id');
     }
 }

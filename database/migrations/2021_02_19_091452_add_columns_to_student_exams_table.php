@@ -19,9 +19,7 @@ class AddColumnsToStudentExamsTable extends Migration
             $table->integer('requested_exam_id')->after('exam_type_id');
             $table->string('payment_status')->nullable()->after('payment_id');
             $table->text('declined_message')->nullable()->after('payment_status');
-            $table->string('medical_reason')->nullable()->after('declined_message');
-            $table->string('medical_image')->nullable()->after('medical_reason');
-            $table->string('medical_status')->nullable()->after('medical_image');
+            $table->integer('medical_id')->nullable()->after('declined_message');
         });
     }
 

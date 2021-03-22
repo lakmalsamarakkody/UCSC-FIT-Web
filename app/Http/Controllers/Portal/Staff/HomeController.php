@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Models\Exam\Schedule;
 use App\Models\Student\hasExam;
+use App\Models\Student\Medical;
 use App\Models\Student\Registration;
 use Illuminate\Http\Request;
 
@@ -41,7 +42,7 @@ class HomeController extends Controller
 
       //Exams
       $examApplicationCount = hasExam::get()->where('payment_id', '!=', null)->where('status', '!=', 'Approved')->unique('payment_id')->count();
-      $medicalCount = hasExam::where('medical_status', null)->get()->count();
+      $medicalCount = Medical::where('status', 'Pending')->get()->count();
       // /CARD COUNTS
       
       $upcomingExams=Schedule::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();
