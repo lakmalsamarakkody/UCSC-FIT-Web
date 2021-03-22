@@ -47,8 +47,8 @@
                 <tbody>
                   @foreach ($medical_submitters as $medical)
                     <tr>
-                      <td>{{ $medical->student->reg_no }}</td>
-                      <td>{{ $medical->student->initials }} {{ $medical->student->last_name }}</td>
+                      <td>{{ $medical->student_exam->student->reg_no }}</td>
+                      <td>{{ $medical->student_exam->student->initials }} {{ $medical->student_exam->student->last_name }}</td>
                       <td>{{ $medical->created_at->isoFormat('YYYY-MM-DD') }}</td>
                       <td>
                         {{-- @if(Auth::user()->hasPermission('staff-student-exam-application-view')) --}}
