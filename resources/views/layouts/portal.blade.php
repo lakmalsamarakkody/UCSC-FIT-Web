@@ -21,6 +21,7 @@
     <!-- LINE AWESOME -->   <link rel="stylesheet" href="{{ asset('lib/line-awesome/css/line-awesome.css') }}">
     <!-- ANIMATE -->        <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}">
     <!-- DROPZONE -->       <link rel="stylesheet" href="{{ asset('lib/dropzone/drop-zone.css') }}">
+    {{-- <!-- BTS TOGGLE -->     <link rel="stylesheet" href="{{ asset('lib/bootstrap-toggle/css/bootstrap-toggle.css') }}"> --}}
 
     <!-- DATATABLE  -->
     <link rel="stylesheet" href="{{ asset('lib/datatables/css/dataTables.min.css') }}" >
@@ -44,6 +45,7 @@
   <!-- SCRIPTS -->
     <script src="{{ asset('js/app.js') }}" differ></script>
     <!-- SWEET ALERT 2 -->  <script src="{{ asset('lib/sweetalert2/sweetalert2.all.js') }}"></script>
+    {{-- <!-- BTS TOGGLE -->     <script src="{{ asset('lib/bootstrap-toggle/js/bootstrap-toggle.js') }}"></script> --}}
 
     <!-- DATATABLE SCRIPTS -->
     <script src="{{ asset('lib/jquery/jquery.validate.js') }}"></script>
