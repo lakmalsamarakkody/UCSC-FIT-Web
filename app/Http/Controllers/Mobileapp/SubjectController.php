@@ -13,7 +13,7 @@ class SubjectController extends Controller
     return Subject::all();
    }
 
-   function subjectresult($id,$sheId,$year=0,$month=''){
+   function subjectresult($id,$sheId,$year=0,$month=0){
     $now = Carbon::now();
     $ar=array();
        if($year==0){
@@ -22,7 +22,7 @@ class SubjectController extends Controller
 
 
        }
-       if($month==''){
+       if($month==0){
         $month=$now->month;
        
        }
@@ -100,7 +100,7 @@ class SubjectController extends Controller
 
 
 }
-          function fetchscheduleIds($id,$year=0,$month=''){
+          function fetchscheduleIds($id,$year=0,$month=0){
 
             $now = Carbon::now();
             $ar=array();
@@ -110,7 +110,7 @@ class SubjectController extends Controller
         
         
                }
-               if($month==''){
+               if($month==0){
                 $month=$now->month;
               
                }
