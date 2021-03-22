@@ -20,7 +20,7 @@
                 <div class="col-lg-12 content order-lg-1 order-1">
                     <div class="row justify-content-center">
                         <a class="col-12 btn-link" href="@if($announcement->button_link!=Null){{ route($announcement->button_link) }}@endif"><h3 class="title text-center mt-5">{{ $announcement->button_text }}</h3></a>     
-                        <p class="col-12 text-center">{{ $announcement->description }}</p>                 
+                        <div class="col-lg-12 text-center">{!! $announcement->description !!} </div>               
                         <img class="col-lg-6" src="{{ asset('storage/announcements/'.$announcement->image) }}" width="100%" alt="">
                         <a class="col-12 btn-link" href="@if($announcement->button_link!=Null){{ route($announcement->button_link) }}@endif"><h3 class="title text-center mt-5">{{ $announcement->button_text }}</h3></a>
                     </div>

@@ -1,7 +1,32 @@
 @section('script')
 <script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+    });
+    $(document).off('focusin.modal');
+     CKEDITOR.replace('description', {
+         
+        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+        filebrowserUploadMethod: 'form'
+    });   
+
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {
+    $( document )
+        .off( 'focusin.bs.modal' ) // guard against infinite focus loop
+        .on( 'focusin.bs.modal', $.proxy( function( e ) {
+            if (
+                this.$element[ 0 ] !== e.target && !this.$element.has( e.target ).length
+                // CKEditor compatibility fix start.
+                && !$( e.target ).closest( '.cke_dialog, .cke' ).length
+                // CKEditor compatibility fix end.
+            ) {
+                this.$element.trigger( 'focus' );
+            }
+        }, this ) );
+};
+
     $(function () {
-        
+
         var table = $('.yajra-datatable').DataTable({
             pageLength: 10,
             processing: true,
@@ -98,6 +123,7 @@ width=1200,height=1000,left=100,top=100`;
         });
 
         create_announcement = () => {
+            
             SwalQuestionSuccessAutoClose.fire({
                 title: "Are you sure?",
                 text: "You wont be able to revert this!",
@@ -111,9 +137,10 @@ width=1200,height=1000,left=100,top=100`;
                     $('.invalid-feedback').hide();
                     //Form Payload
                     var formData = new FormData($("#formUserRole")[0]);
+                    var description = CKEDITOR.instances.description.getData();
                     // var formData = new FormData();
                     // //Add data
-                    // formData.append('inputNewRoleName', $('#inputNewRoleName').val())
+                    formData.append('description', description);
                     // formData.append('inputNewRoleDescription', $('#inputNewRoleDescription').val())
 
                     //Validate information

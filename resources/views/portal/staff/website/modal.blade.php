@@ -1,6 +1,6 @@
 <!-- CREATE -->
 <div class="modal fade" id="modal-create-announcement" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+  <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Create Announcement</h5>
@@ -17,18 +17,18 @@
           </div>
           <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" name="description"/>
+            <textarea class="form-control ckeditor" id="description" name="description"></textarea>
             <span class="invalid-feedback" id="error-description" role="alert"></span>
           </div>
-          <div class="form-group pt-3">          
+          {{-- <div class="form-group pt-3">          
             <label for="image">Image</label>
             <div class="drop-zone">
               <span class="drop-zone__prompt">Drop Results File here or click to upload</span>
               <input type="file" name="image" id="image" class="drop-zone__input"/>
             </div>
             <span class="invalid-feedback" id="error-image" role="alert"></span>
-          </div>
-          <div class="form-group">
+          </div> --}}
+          {{-- <div class="form-group">
             <label for="buttonText">Button Text</label>
             <input type="text" class="form-control" id="buttonText" name="buttonText" placeholder="e.g. Click Here"/>
             <span class="invalid-feedback" id="error-buttonText" role="alert"></span>
@@ -43,7 +43,7 @@
               <option value="student.results">Results</option>
             </select>
             <span class="invalid-feedback" id="error-buttonLink" role="alert"></span>
-          </div>  
+          </div>   --}}
         </form>
       </div>
       <div class="modal-footer">
