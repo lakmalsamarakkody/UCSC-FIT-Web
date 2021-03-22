@@ -21,6 +21,7 @@ class CreateMedicalsTable extends Migration
             $table->string('status');
             $table->text('declined_message')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
