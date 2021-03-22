@@ -1,11 +1,11 @@
 <script type="text/javascript">
 
 // INVOKE MEDICAL MODAL
-view_modal_medical =(applied_medical_id) => {
+view_modal_medical =(medical_id) => {
 
     // Form Payload
     var formData = new FormData();
-    formData.append('applied_medical_id', applied_medical_id);
+    formData.append('medical_id', medical_id);
 
     // Get medical details controller
     $.ajax({
@@ -16,8 +16,8 @@ view_modal_medical =(applied_medical_id) => {
         processData: false,
         contentType: false,
         beforeSend: function() {
-            $('#btnViewModalAppliedMedical-'+applied_medical_id).attr('disabled', 'disabled');
-            $('#spinnerBtnViewModalAppliedMedical-'+applied_medical_id).removeClass('d-none');
+            $('#btnViewModalAppliedMedical-'+medical_id).attr('disabled', 'disabled');
+            $('#spinnerBtnViewModalAppliedMedical-'+medical_id).removeClass('d-none');
         },
         success: function(data) {
             console.log('Success in get medical details ajax.');
@@ -27,27 +27,27 @@ view_modal_medical =(applied_medical_id) => {
                 $('#spanRegNumber').html(data['student']['reg_no']);
 
                 // Medical details
-                if(data['medical'] != null) {
-                    var date = new Date(data['medical']['updated_at']);
-                    $('#medicalId').val(data['medical']['id']);
+                if(data['medical'] != null && data['exam'] != null) {
+                    var date = new Date(data['medical']['created_at']);
                     $('#spanSubmittedOn').html(date.toLocaleDateString());
-                    $('#spanSubject').html('FIT ' + data['medical']['subject_code'] + ' - '+ data['medical']['subject_name']);
-                    $('#spanExamType').html(data['medical']['exam_type']);
-                    $('#spanExamHeldDate').html(data['medical']['held_date']);
-                    $('#spanMedicalReason').html(data['medical']['medical_reason']);
-                    $('#imgMedical').attr('style', 'background: url(/storage/medicals/'+data['student']['id']+'/'+data['medical']['medical_image']+')');
-                    $('#imgMedical').attr('onclick', 'window.open("/storage/medicals/'+data['student']['id']+'/'+data['medical']['medical_image']+'")');
+                    $('#medicalId').val(data['medical']['id']);
+                    $('#spanSubject').html('FIT ' + data['exam']['subject_code'] + ' - '+ data['exam']['subject_name']);
+                    $('#spanExamType').html(data['exam']['exam_type']);
+                    $('#spanExamHeldDate').html(data['exam']['held_date']);
+                    $('#spanMedicalReason').html(data['medical']['reason']);
+                    $('#imgMedical').attr('style', 'background: url(/storage/medicals/'+data['student']['id']+'/'+data['medical']['image']+')');
+                    $('#imgMedical').attr('onclick', 'window.open("/storage/medicals/'+data['student']['id']+'/'+data['medical']['image']+'")');
 
-                    $('#btnViewModalAppliedMedical-'+applied_medical_id).removeAttr('disabled', 'disabled');
-                    $('#spinnerBtnViewModalAppliedMedical-'+applied_medical_id).addClass('d-none');
+                    $('#btnViewModalAppliedMedical-'+medical_id).removeAttr('disabled', 'disabled');
+                    $('#spinnerBtnViewModalAppliedMedical-'+medical_id).addClass('d-none');
                     $('#modal-medical').modal('show');
                 }
             }
         },
         error: function(err) {
             console.log('Error in get medical details ajax.');
-            $('#btnViewModalAppliedMedical-'+applied_medical_id).removeAttr('disabled', 'disabled');
-            $('#spinnerBtnViewModalAppliedMedical-'+applied_medical_id).addClass('d-none');
+            $('#btnViewModalAppliedMedical-'+medical_id).removeAttr('disabled', 'disabled');
+            $('#spinnerBtnViewModalAppliedMedical-'+medical_id).addClass('d-none');
             SwalSystemErrorDanger.fire();
         }
     });
@@ -96,7 +96,7 @@ approve_medical = () => {
                     }
                     else {
                         SwalSystemErrorDanger.fire({
-                            title: 'Medical Approve Process Failed!',
+                            title: 'Medical Approval Process Failed!',
                         })
                     }
                 },
@@ -105,7 +105,7 @@ approve_medical = () => {
                     $("#spinnerBtnApproveMedical").addClass('d-none');
                     $('#btnApproveMedical').removeAttr('disabled', 'disabled');
                     SwalSystemErrorDanger.fire({
-                        title: 'Medical Approve Process Failed!',
+                        title: 'Medical Approval Process Failed!',
                     })
                 }
             });
@@ -119,5 +119,95 @@ approve_medical = () => {
     })
 }
 // /APPROVE MEDICAL
+
+// DECLINE MEDICAL
+decline_medical = () => {
+    SwalQuestionDanger.fire({
+        title: "Are you sure ?",
+        text: "The medical will be declined",
+        confirmButtonText: "Yes, Decline!",
+    })
+    .then((result) => {
+        if(result.isConfirmed) {
+            $(document).off('focusin.modal');
+            SwalQuestionDanger.fire({
+                title: "Reason to Deline ?",
+                input: 'textarea',
+                inputLabel: 'Message',
+                inputPlaceholder: 'Type your message here...',
+                inputAttributes: {
+                    'aria-label': 'Type your message here'
+                },
+                inputValidator: (value) => {
+                    if(!value) {
+                        return 'You need to write something!'
+                    }
+                },
+                timer: false,
+                showCancelButton: true,
+                confirmButtonText: "Decline!",
+            })
+            .then((result1) => {
+                if(result1.isConfirmed) {
+                    $.ajax({
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        url: "{{ route('student.exams.medical.decline') }}",
+                        type: 'post',
+                        data: {'message': result1.value, 'medical_id': $('#medicalId').val()},
+                        beforeSend: function() {
+                            $("#spinnerBtnDeclineMedical").removeClass('d-none');
+                            $('#btnDeclineMedical').attr('disabled', 'disabled');
+                            Swal.showLoading();
+                        },
+                        success: function(data) {
+                            console.log('Success in decline medical ajax.');
+                            $("#spinnerBtnDeclineMedical").addClass('d-none');
+                            $('#btnDeclineMedical').removeAttr('disabled', 'disabled');
+                            Swal.hideLoading();
+                            if(data['status'] == 'error') {
+                                console.log('Error in decline medical.');
+                                SwalSystemErrorDanger.fire({
+                                    title: 'Decline Failed!',
+                                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                                })
+                            }
+                            else if(data['status'] == 'success') {
+                                console.log('Success in decline medical.');
+                                SwalDoneSuccess.fire({
+                                    title: 'Declined!',
+                                    text: 'Medical has been Declined.'
+                                })
+                                .then((result2) => {
+                                    if(result2.isConfirmed) {
+                                        location.reload();
+                                    }
+                                });
+                            }
+                        },
+                        error: function(err) {
+                            console.log('Error in decline medical ajax.');
+                            $("#spinnerBtnDeclineMedical").addClass('d-none');
+                            $('#btnDeclineMedical').removeAttr('disabled', 'disabled');
+                            SwalSystemErrorDanger.fire();
+                        }
+                    });
+                }
+                else {
+                    SwalNotificationWarningAutoClose.fire({
+                        title: 'Cancelled!',
+                        text: 'Medical decline process aborted.',
+                    })
+                }
+            });
+        }
+        else {
+            SwalNotificationWarningAutoClose.fire({
+                title: 'Cancelled!',
+                text: 'Medical decline process aborted.',
+            })
+        }
+    });
+}
+// /DECLINE MEDICAL
 
 </script>

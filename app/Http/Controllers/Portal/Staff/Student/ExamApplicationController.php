@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
 use App\Models\Student\Payment;
+use App\Models\Student\Medical;
 use App\Models\Support\Bank;
 use App\Models\Support\BankBranch;
 use App\Models\Student\hasExam;
@@ -119,7 +120,7 @@ class ExamApplicationController extends Controller
     }
     // /DECLINE PAYMENT
 
-    // LOAD SCHEDULE THE EXAM MODAL
+    // LOAD SCHEDULES TO MODAL
     public function getAppliedSubjectScheduleDetails(Request $request)
     {
         $today = Carbon::today();
@@ -135,7 +136,7 @@ class ExamApplicationController extends Controller
         // ])->get();
         return response()->json(['status'=>'success', 'applied_exam'=>$applied_exam]);
     }
-    // /LOAD SCHEDULE THE EXAM MODAL
+    // /LOAD SCHEDULES TO MODAL
     
     // SCHEDULES FOR APPLIED EXAM TABLE
     public function schedulesForExamTable(Request $request)
@@ -201,38 +202,51 @@ class ExamApplicationController extends Controller
     // APPROVE SCHEDULED EXAMS
 
     // MEDICALS
-    // Review medicals
+    // REVIEW MEDICALS
     public function reviewMedicals()
     {
-        $medical_submitters = hasExam::where('medical_status', 'Pending')->get();
-        return view('portal/staff/student/medical', compact('medical_submitters'));
+        $medicals = Medical::where('status', 'Pending')->get();
+        return view('portal/staff/student/medical', [
+            'medicals'=> $medicals
+        ]);
     }
-    // /Review medicals
+    // /REVIEW MEDICALS
 
-    // Get medicla modal details
+    // LOAD MEDICAL MODAL
     public function getMedicalDetails(Request $request)
     {
-        $exam = hasExam::where('id',$request->applied_medical_id)->first();
-        $student = Student::where('id', $exam->student_id)->first();
-        $medical = hasExam::where('id', $request->applied_medical_id)->addSelect([
+        $exam = hasExam::where('medical_id',$request->medical_id)->addSelect([
             'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
             'held_date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
         ])->first();
-        return response()->json(['status'=> 'success', 'student'=> $student, 'medical'=>$medical]);
+        $student = Student::where('id', $exam->student_id)->first();
+        $medical = Medical::where('id', $exam->medical_id)->first();
+        return response()->json(['status'=> 'success', 'student'=> $student, 'exam'=>$exam, 'medical'=>$medical]);
     }
-    // Get medicla modal details
+    // /LOAD MEDICAL MODAL
 
-    // Approve medial
+    // APPROVE MEDICAL
     public function approveMedical(Request $request)
     {
-        $medical = hasExam::where('id', $request->medical_id)->where('medical_status', 'Pending')->first();
-        if($medical->update(['medical_status'=> 'Approved'])):
+        $medical = Medical::where('id', $request->medical_id)->where('status', 'Pending')->first();
+        if($medical->update(['status'=> 'Approved'])):
             return response()->json(['status'=>'success']);
         endif;
         return response()->json(['status'=>'error']);
     }
-    // Approve medial
+    // /APPROVE MEDICAL
+
+    // DECLINE MEDICAL
+    public function declineMedical(Request $request)
+    {
+        $medical = Medical::where('id', $request->medical_id)->where('status', 'Pending')->first();
+        if($medical->update(['status'=> 'Declined', 'declined_message'=>$request->message])):
+            return response()->json(['status'=>'success']);
+        endif;
+        return response()->json(['status'=>'error']);
+    }
+    // /DECLINE MEDICAL
     // /MEDICALS
 }

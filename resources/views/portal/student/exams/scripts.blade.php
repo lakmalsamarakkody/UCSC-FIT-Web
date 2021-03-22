@@ -249,10 +249,10 @@ upload_medical = (id) => {
                             $("#"+id+"-error-"+key).append('<strong>'+value+'</strong>')
                         });
                     }else if(data['status'] == 'success') {
-                        console.log('Success in delete exam.');
+                        console.log('Success in upload medical.');
                         SwalDoneSuccess.fire({
                             title: 'Success!',
-                            text: 'Medical have been uploaded',
+                            text: 'Medical has been uploaded',
                         })
                         .then((result) => {
                             if(result.isConfirmed) {
@@ -275,7 +275,7 @@ upload_medical = (id) => {
         else{
             SwalNotificationWarningAutoClose.fire({
                 title: 'Cancelled!',
-                text: 'Medicals did not upload',
+                text: 'Medical has not been uploaded',
             })
         }
     });

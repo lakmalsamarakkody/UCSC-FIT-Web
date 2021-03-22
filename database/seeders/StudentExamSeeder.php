@@ -32,7 +32,10 @@ class StudentExamSeeder extends Seeder
                     array (
                         [
                         'exam_schedule_id'=>$exam->id,
+                        'subject_id'=>$exam->subject_id,
                         'student_id'=>$student->id,
+                        'exam_type_id'=>$exam->exam_type_id,
+                        'requested_exam_id'=>10,
                         'mark'=>$mark,
                         'result'=>$result,
                         'status'=>'OK',
