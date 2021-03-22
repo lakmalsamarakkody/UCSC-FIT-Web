@@ -24,6 +24,8 @@
     @endif
 
     @if( $student != NULL )
+    {{-- @if($student->current_registration->document_submit == 1 && $student->current_registration->document_status != 'Declined') --}}
+        
     <div class="col-12">
         <div class="row justify-content-end">
             <div class="col-lg-4">
@@ -31,6 +33,7 @@
             </div>
         </div>
     </div>
+    {{-- @endif --}}
     <div class="col-12 mt-5 mb-4 d-none heading">
         <div class="row">
             <div class="col-2"><img src="{{ asset('img/logo/ucsc.png') }}" class="img-fluid" width="37%"></div>
