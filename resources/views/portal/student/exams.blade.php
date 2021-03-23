@@ -277,7 +277,7 @@
             <div class="card-body">
               @foreach ($absent_exams as $exam)
                 {{-- @if($exam->schedule->date <= date('Y-m-d')) --}}
-                  <div class="accordion" id="accordion_{{$exam->id}}">
+                  <div class="accordion" id="accordionAbsent_{{$exam->id}}">
                     <div class="card mb-4 shadow-sm">
                       <div class="card-header text-secondary" id="heading_{{$exam->id}}">
                         <div class="row">
@@ -286,25 +286,25 @@
                           <div class="col-4 col-md-3 text-center pt-2">{{$exam->schedule->date}}</div>
                           @if($exam->medical != null && $exam->medical->status=='Pending' )
                             <div class="col-12 col-md-3 text-md-right">
-                              <button type="button" class="btn btn-outline-warning w-100" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}">Medical Approval Pending</button>
+                              <button type="button" class="btn btn-outline-warning w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Medical Approval Pending</button>
                             </div>
                           @elseif($exam->medical != null &&  $exam->medical->status=='Approved' )
                             <div class="col-12 col-md-3 text-md-right">
-                              <button type="button" class="btn btn-outline-success w-100" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}">Medical Approved</button>
+                              <button type="button" class="btn btn-outline-success w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Medical Approved</button>
                             </div>
                           @elseif($exam->medical != null &&  $exam->medical->status=='Declined' )
                             <div class="col-12 col-md-3 text-md-right">
-                              <button type="button" class="btn btn-outline-danger w-100" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}">Medical Declined</button>
+                              <button type="button" class="btn btn-outline-danger w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Medical Declined</button>
                             </div>
                           @else
                             <div class="col-12 col-md-3 text-md-right">
-                              <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}"><i class="fas fa-file-medical"></i> Upload medical</button>
+                              <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}"><i class="fas fa-file-medical"></i> Upload medical</button>
                             </div>                            
                           @endif
                         </div>
                       </div>
                   
-                      <div id="collapse_{{$exam->id}}" class="collapse" aria-labelledby="heading_{{$exam->id}}" data-parent="#accordion_{{$exam->id}}">
+                      <div id="collapseAbsent_{{$exam->id}}" class="collapse" aria-labelledby="heading_{{$exam->id}}" data-parent="#accordionAbsent_{{$exam->id}}">
                         <div class="card-body text-md-center border-top border-secondary">
                           <div class="row">
                             <!-- <div class="col-12 col-md-4"> Date : {{ $exam->schedule->date }}</div>
@@ -339,11 +339,14 @@
                               </div>
 
 
-                            @elseif($exam->medical != null && $exam->medical_status=='Declined' )    
+                            @elseif($exam->medical != null && $exam->medical->status=='Declined' )    
                             
                               <div class="col-12">
                                 <div class="alert alert-danger" role="alert">
                                   <h4 class="alert-heading">Medical Decline</h4>
+                                  <div class="alert alert-warning" role="alert">
+                                    <b>Reason to Decline: </b>{{ $exam->medical->declined_message }}
+                                  </div>
                                   <p>You may have to re-apply for the exams</p>
                                   <hr>
                                   <p class="mb-0">Call e-Learning Center, UCSC for inquiries</p>
