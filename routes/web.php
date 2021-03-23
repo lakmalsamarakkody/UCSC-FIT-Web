@@ -211,6 +211,7 @@ Route::get('/portal/staff/information', [App\Http\Controllers\Portal\Staff\Infor
 Route::get('/portal/staff/website', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'index'])->name('staff.website');
 Route::get('/portal/staff/website/announcements', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'getAnnouncementList'])->name('staff.website.announcements');
 Route::post('/portal/staff/website/announcements', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'createAnnouncement'])->name('staff.website.announcements.create');
+Route::post('/portal/staff/website/announcements/get/details', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'getDetailsAnnouncement'])->name('staff.website.announcements.edit.get.details');
 Route::post('ckeditor/upload', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'ckeditorUpload'])->name('ckeditor.image-upload');
 // /ANOUNCEMENT PAGE
 
