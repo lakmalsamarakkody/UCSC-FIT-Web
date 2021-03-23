@@ -211,57 +211,57 @@
         .then((result) => {
             if(result.isConfirmed) {
 
-            // Form Payload
-            var formData = new FormData();
-            formData.append('payment_id', $('#paymentId').val());
+                // Form Payload
+                var formData = new FormData();
+                formData.append('payment_id', $('#paymentId').val());
 
-            // Approve exam payment controller
-            $.ajax({
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                url: "{{ route('student.application.exams.payment.approve') }}",
-                type: 'post',
-                data: formData,
-                processData: false,
-                contentType: false,           
-                beforeSend: function(){
-                    $("#spinnerBtnApproveExamPayment").removeClass('d-none');
-                    $('#btnApproveExamPayment').attr('disabled','disabled');    
-                },
-                success: function(data){
-                    console.log('Approve payment ajax success');
-                    $("#spinnerBtnApproveExamPayment").addClass('d-none');
-                    $('#btnApproveExamPayment').removeAttr('disabled');
-                    if (data['status'] == 'success'){
-                        SwalDoneSuccess.fire({
-                            title: 'Approved!',
-                            text: 'Payment approved successfully',
-                        }).then((result) => {
-                            if(result.isConfirmed) {
-                                location.reload();
-                            }
-                        });
-                    }
-                    else {
+                // Approve exam payment controller
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    url: "{{ route('student.application.exams.payment.approve') }}",
+                    type: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,           
+                    beforeSend: function(){
+                        $("#spinnerBtnApproveExamPayment").removeClass('d-none');
+                        $('#btnApproveExamPayment').attr('disabled','disabled');    
+                    },
+                    success: function(data){
+                        console.log('Approve payment ajax success');
+                        $("#spinnerBtnApproveExamPayment").addClass('d-none');
+                        $('#btnApproveExamPayment').removeAttr('disabled');
+                        if (data['status'] == 'success'){
+                            SwalDoneSuccess.fire({
+                                title: 'Approved!',
+                                text: 'Payment approved successfully',
+                            }).then((result) => {
+                                if(result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        }
+                        else {
+                            SwalSystemErrorDanger.fire({
+                                title: 'Payment Approval Process Failed!',
+                            })
+                        }
+                    },
+                    error: function(err) {
+                        console.log('Approve exam payment ajax error');
+                        $("#spinnerBtnApproveExamPayment").addClass('d-none');
+                        $('#btnApproveExamPayment').removeAttr('disabled');
                         SwalSystemErrorDanger.fire({
-                            title: 'Payment Approve Process Failed!',
+                            title: 'Payment Approval Process Failed!',
                         })
                     }
-                },
-                error: function(err) {
-                    console.log('Approve exam payment ajax error');
-                    $("#spinnerBtnApproveExamPayment").addClass('d-none');
-                    $('#btnApproveExamPayment').removeAttr('disabled');
-                    SwalSystemErrorDanger.fire({
-                        title: 'Payment Approve Process Failed!',
-                    })
-                }
-            });
+                });
             }
             else {
-            SwalNotificationWarningAutoClose.fire({
-                title: 'Aborted!',
-                text: 'Payment approval process aborted.',
-            })
+                SwalNotificationWarningAutoClose.fire({
+                    title: 'Cancelled!',
+                    text: 'Payment approval process aborted.',
+                })
             }
         })
     }
