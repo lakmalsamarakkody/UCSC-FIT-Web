@@ -296,6 +296,10 @@
                             <div class="col-12 col-md-3 text-md-right">
                               <button type="button" class="btn btn-outline-danger w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Medical Declined</button>
                             </div>
+                            @elseif($exam->medical != null &&  $exam->medical->status=='Resubmit' )
+                            <div class="col-12 col-md-3 text-md-right">
+                              <button type="button" class="btn btn-outline-secondary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Resubmit Medical</button>
+                            </div>
                           @else
                             <div class="col-12 col-md-3 text-md-right">
                               <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}"><i class="fas fa-file-medical"></i> Upload medical</button>
@@ -344,13 +348,47 @@
                               <div class="col-12">
                                 <div class="alert alert-danger" role="alert">
                                   <h4 class="alert-heading">Medical Decline</h4>
-                                  <div class="alert alert-warning" role="alert">
-                                    <b>Reason to Decline: </b>{{ $exam->medical->declined_message }}
-                                  </div>
                                   <p>You may have to re-apply for the exams</p>
                                   <hr>
                                   <p class="mb-0">Call e-Learning Center, UCSC for inquiries</p>
                                 </div>
+                              </div>
+
+                            @elseif($exam->medical != null && $exam->medical->status=='Resubmit')
+                              <div class="col-12">
+                                <div class="alert alert-info" role="alert">
+                                  {{-- <h4 class="alert-heading">Declined Reason</h4> --}}
+                                  <p><b>Reason of Decline the Medical: </b>{{$exam->medical->declined_message}}}</p>
+                                </div>
+                                {{-- <div class="col-12">
+                                  <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapseMedical_{{$exam->id}}" aria-expanded="true" aria-controls="collapseMedical_{{$exam->id}}">Resubmit Medical</button>
+                                </div> --}}
+                              </div>
+
+                              <div class="col-12 mt-4">
+                                <form id="{{$exam->id}}-medicalUploadform">
+                                  <div class="form-group ">
+                                    <label for="inputPaidAmount" class="col-12 col-form-label">Reason</label>
+                                    <div class="col-12">
+                                      <input type="text" class="form-control" id="{{ $exam->id }}-reason" name="reason" placeholder="Please enter the reason to absent at exam.">
+                                      <span class="invalid-feedback" id="{{ $exam->id }}-error-reason" role="alert"></span>
+                                    </div>
+                                  </div>
+                                  <div class="form-group mx-2">
+                                    <span id="InputMedicalHelp" class="form-text text-muted">Upload your scanned medical here in JPEG/ PNG file format</span>
+                                    <div class="drop-zone">
+                                      <span class="drop-zone__prompt">Scanned Medical <br><small>Drop image File here or click to upload</small> </span>
+                                      <input type="file" name="medical" id="{{ $exam->id }}-medical" class="drop-zone__input form-control"/>
+                                    </div>
+                                    <span class="invalid-feedback" id="{{ $exam->id }}-error-medical" role="alert"></span>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="col-12">
+                                <button class="btn btn-outline-primary w-100" onclick="upload_medical({{ $exam->id }})">
+                                  Upload
+                                  <span id="{{$exam->id}}-spinnermedicalUpload" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
+                                </button>
                               </div>
 
                             @else
