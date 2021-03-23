@@ -90,6 +90,7 @@ Route::post('/portal/staff/student/exams/application/schedules/approve', [App\Ht
 Route::post('/portal/staff/student/exams/medical/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getMedicalDetails'])->name('student.exams.medical.details');
 Route::post('/portal/staff/student/exams/medical/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveMedical'])->name('student.exams.medical.approve');
 Route::post('/portal/staff/student/exams/medical/decline', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineMedical'])->name('student.exams.medical.decline');
+Route::post('/portal/staff/student/exams/medical/decline/resubmit', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineWithEnableResubmition'])->name('student.exams.medical.resubmit.decline');
 // /STUDENT PAGE
 
 // HOME PAGE
