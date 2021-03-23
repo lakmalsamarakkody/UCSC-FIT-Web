@@ -242,11 +242,20 @@ class ExamApplicationController extends Controller
     public function declineMedical(Request $request)
     {
         $medical = Medical::where('id', $request->medical_id)->where('status', 'Pending')->first();
-        if($medical->update(['status'=> 'Declined', 'declined_message'=>$request->message])):
+        if($medical->update(['status'=> 'Declined'])):
             return response()->json(['status'=>'success']);
         endif;
         return response()->json(['status'=>'error']);
     }
     // /DECLINE MEDICAL
+
+    public function declineWithEnableResubmition(Request $request)
+    {
+        $medical = Medical::where('id', $request->medical_id)->where('status', 'Pending')->first();
+        if($medical->update(['status'=> 'Resubmit', 'declined_message'=>$request->message])):
+            return response()->json(['status'=>'success']);
+        endif;
+        return response()->json(['status'=>'error']);
+    }
     // /MEDICALS
 }

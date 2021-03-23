@@ -129,74 +129,46 @@ decline_medical = () => {
     })
     .then((result) => {
         if(result.isConfirmed) {
-            $(document).off('focusin.modal');
-            SwalQuestionDanger.fire({
-                title: "Reason to Deline ?",
-                input: 'textarea',
-                inputLabel: 'Message',
-                inputPlaceholder: 'Type your message here...',
-                inputAttributes: {
-                    'aria-label': 'Type your message here'
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url: "{{ route('student.exams.medical.decline') }}",
+                type: 'post',
+                data: {'medical_id': $('#medicalId').val()},
+                beforeSend: function() {
+                    $("#spinnerBtnDeclineMedical").removeClass('d-none');
+                    $('#btnDeclineMedical').attr('disabled', 'disabled');
+                    Swal.showLoading();
                 },
-                inputValidator: (value) => {
-                    if(!value) {
-                        return 'You need to write something!'
+                success: function(data) {
+                    console.log('Success in decline medical ajax.');
+                    $("#spinnerBtnDeclineMedical").addClass('d-none');
+                    $('#btnDeclineMedical').removeAttr('disabled', 'disabled');
+                    Swal.hideLoading();
+                    if(data['status'] == 'error') {
+                        console.log('Error in decline medical.');
+                        SwalSystemErrorDanger.fire({
+                            title: 'Decline Failed!',
+                            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                        })
+                    }
+                    else if(data['status'] == 'success') {
+                        console.log('Success in decline medical.');
+                        SwalDoneSuccess.fire({
+                            title: 'Declined!',
+                            text: 'Medical has been Declined.'
+                        })
+                        .then((result2) => {
+                            if(result2.isConfirmed) {
+                                location.reload();
+                            }
+                        });
                     }
                 },
-                timer: false,
-                showCancelButton: true,
-                confirmButtonText: "Decline!",
-            })
-            .then((result1) => {
-                if(result1.isConfirmed) {
-                    $.ajax({
-                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                        url: "{{ route('student.exams.medical.decline') }}",
-                        type: 'post',
-                        data: {'message': result1.value, 'medical_id': $('#medicalId').val()},
-                        beforeSend: function() {
-                            $("#spinnerBtnDeclineMedical").removeClass('d-none');
-                            $('#btnDeclineMedical').attr('disabled', 'disabled');
-                            Swal.showLoading();
-                        },
-                        success: function(data) {
-                            console.log('Success in decline medical ajax.');
-                            $("#spinnerBtnDeclineMedical").addClass('d-none');
-                            $('#btnDeclineMedical').removeAttr('disabled', 'disabled');
-                            Swal.hideLoading();
-                            if(data['status'] == 'error') {
-                                console.log('Error in decline medical.');
-                                SwalSystemErrorDanger.fire({
-                                    title: 'Decline Failed!',
-                                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
-                                })
-                            }
-                            else if(data['status'] == 'success') {
-                                console.log('Success in decline medical.');
-                                SwalDoneSuccess.fire({
-                                    title: 'Declined!',
-                                    text: 'Medical has been Declined.'
-                                })
-                                .then((result2) => {
-                                    if(result2.isConfirmed) {
-                                        location.reload();
-                                    }
-                                });
-                            }
-                        },
-                        error: function(err) {
-                            console.log('Error in decline medical ajax.');
-                            $("#spinnerBtnDeclineMedical").addClass('d-none');
-                            $('#btnDeclineMedical').removeAttr('disabled', 'disabled');
-                            SwalSystemErrorDanger.fire();
-                        }
-                    });
-                }
-                else {
-                    SwalNotificationWarningAutoClose.fire({
-                        title: 'Cancelled!',
-                        text: 'Medical decline process aborted.',
-                    })
+                error: function(err) {
+                    console.log('Error in decline medical ajax.');
+                    $("#spinnerBtnDeclineMedical").addClass('d-none');
+                    $('#btnDeclineMedical').removeAttr('disabled', 'disabled');
+                    SwalSystemErrorDanger.fire();
                 }
             });
         }
@@ -210,4 +182,79 @@ decline_medical = () => {
 }
 // /DECLINE MEDICAL
 
+
+// RESUBMITION ENABLE DECLINE
+resubmition_enable_decline = () => {
+    $(document).off('focusin.modal');
+    SwalQuestionDanger.fire({
+        title: "Reason to Decline ?",
+        input: 'textarea',
+        inputLabel: 'Message',
+        inputPlaceholder: 'Type your message here...',
+        inputAttributes: {
+            'aria-label': 'Type your message here'
+        },
+        inputValidator: (value) => {
+            if(!value) {
+                return 'You need to write something!'
+            }
+        },
+        timer: false,
+        showCancelButton: true,
+        confirmButtonText: "Decline!",
+    })
+    .then((result) => {
+        if(result.isConfirmed) {
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url: "{{ route('student.exams.medical.resubmit.decline') }}",
+                type: 'post',
+                data: {'message': result.value, 'medical_id': $('#medicalId').val()},
+                beforeSend: function() {
+                    $("#spinnerBtnDeclineResubmit").removeClass('d-none');
+                    $('#btnDeclineResubmit').attr('disabled', 'disabled');
+                    Swal.showLoading();
+                },
+                success: function(data) {
+                    console.log('Success in decline medical with resubmit ajax.');
+                    $("#spinnerBtnDeclineResubmit").addClass('d-none');
+                    $('#btnDeclineResubmit').removeAttr('disabled', 'disabled');
+                    Swal.hideLoading();
+                    if(data['status'] == 'error') {
+                        console.log('Error in decline medical.');
+                        SwalSystemErrorDanger.fire({
+                            title: 'Decline Failed!',
+                            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                        })
+                    }
+                    else if(data['status'] == 'success') {
+                        console.log('Success in decline medical with resubmit.');
+                        SwalDoneSuccess.fire({
+                            title: 'Declined!',
+                            text: 'Medical has been Declined.'
+                        })
+                        .then((result1) => {
+                            if(result1.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    }
+                },
+                error: function(err) {
+                    console.log('Error in decline medical with resubmit ajax.');
+                    $("#spinnerBtnDeclineResubmit").addClass('d-none');
+                    $('#btnDeclineResubmit').removeAttr('disabled', 'disabled');
+                    SwalSystemErrorDanger.fire();
+                }
+            });
+        }
+        else {
+            SwalNotificationWarningAutoClose.fire({
+                title: 'Cancelled!',
+                text: 'Medical decline process aborted.',
+            })
+        }
+    });
+}
+// /RESUBMITION ENABLE DECLINE
 </script>

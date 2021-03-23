@@ -63,11 +63,14 @@
                                                 <div name="imgMedical" id="imgMedical" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
                                             </div>
                                             <div class="mt-4 col-12 text-center mb-4">
-                                                <div id="divBtnApproveMedical" class="btn-group col-xl-3 col-lg-6">
-                                                    <button type="button" class="btn btn-success form-control" id="btnApproveMedical" onclick="approve_medical();">Approve Medical<span id="spinnerBtnApproveMedical" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                                <div id="divBtnApproveMedical" class="btn-group col-xl-3">
+                                                    <button type="button" class="btn btn-success form-control" id="btnApproveMedical" onclick="approve_medical();">Approve<span id="spinnerBtnApproveMedical" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                                 </div>
-                                                <div id="divBtnDeclineMedical" class="btn-group col-xl-3 col-lg-6">
-                                                    <button type="button" class="btn btn-warning form-control" id="btnDeclineMedical" onclick="decline_medical();">Decline Medical<span id="spinnerBtnDeclineMedical" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                                <div id="divBtnDeclineResubmit" class="btn-group col-xl-4">
+                                                    <button type="button" class="btn btn-primary form-control" id="btnDeclineResubmit" onclick="resubmition_enable_decline();">Resubmition Enable Decline<span id="spinnerBtnDeclineResubmit" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                                </div>
+                                                <div id="divBtnDeclineMedical" class="btn-group col-xl-3">
+                                                    <button type="button" class="btn btn-warning form-control" id="btnDeclineMedical" onclick="decline_medical();">Decline<span id="spinnerBtnDeclineMedical" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                                 </div>
                                             </div>
                                         </div>
