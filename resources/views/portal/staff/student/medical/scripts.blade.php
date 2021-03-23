@@ -183,8 +183,8 @@ decline_medical = () => {
 // /DECLINE MEDICAL
 
 
-// RESUBMITION ENABLE DECLINE
-resubmition_enable_decline = () => {
+// RESUBMISSION ENABLE DECLINE
+resubmission_enable_decline = () => {
     $(document).off('focusin.modal');
     SwalQuestionDanger.fire({
         title: "Reason to Decline ?",
@@ -256,5 +256,5 @@ resubmition_enable_decline = () => {
         }
     });
 }
-// /RESUBMITION ENABLE DECLINE
+// /RESUBMISSION ENABLE DECLINE
 </script>
