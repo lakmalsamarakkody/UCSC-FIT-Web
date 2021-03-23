@@ -35,7 +35,7 @@
             <div class="card-header">
               <div class="row justify-content-between mx-1">
                 Announcements
-                <button data-toggle="modal" data-target="#modal-create-announcement" title="Add Announcement" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-lg btn-outline-primary"><i class="fa fa-plus"></i></button>
+                <button data-toggle="modal" data-target="#modal-create-announcement" title="Add Announcement" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-lg btn-outline-primary" onclick="refresh_modal()"><i class="fa fa-plus"></i></button>
               </div>
             </div>
             <div class="card-body">
@@ -45,9 +45,8 @@
                   <thead class="text-center">
                     <tr>
                       <th>Title</th>
-                      <th>Description</th>
-                      <th>Image</th>
                       <th>Created At</th>
+                      <th>Updated At</th>
                       <th>&nbsp;</th>
                     </tr>
                   </thead>

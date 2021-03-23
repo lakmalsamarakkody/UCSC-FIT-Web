@@ -1,29 +1,13 @@
 @section('script')
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.ckeditor').ckeditor();
-    });
-    $(document).off('focusin.modal');
-     CKEDITOR.replace('description', {
-         
-        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+
+    CKEDITOR.replace('description', {
+        // filebrowserBrowseUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",    
+        filebrowserImageUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
         filebrowserUploadMethod: 'form'
     });   
 
-    $.fn.modal.Constructor.prototype.enforceFocus = function() {
-    $( document )
-        .off( 'focusin.bs.modal' ) // guard against infinite focus loop
-        .on( 'focusin.bs.modal', $.proxy( function( e ) {
-            if (
-                this.$element[ 0 ] !== e.target && !this.$element.has( e.target ).length
-                // CKEditor compatibility fix start.
-                && !$( e.target ).closest( '.cke_dialog, .cke' ).length
-                // CKEditor compatibility fix end.
-            ) {
-                this.$element.trigger( 'focus' );
-            }
-        }, this ) );
-};
+
 
     $(function () {
 
@@ -40,16 +24,12 @@
                     name: 'title'
                 },
                 {
-                    data: 'description', 
-                    name: 'description'
-                },
-                {
-                    data: 'image', 
-                    name: 'image'
-                },
-                {
                     data: 'created_at', 
                     name: 'created_at'
+                },
+                {
+                    data: 'updated_at', 
+                    name: 'updated_at'
                 },
                 {
                     data: 'id', 
@@ -60,22 +40,11 @@
             ],
             columnDefs: [
                 {
-                    targets: 2,
-                    render: function ( data, type, row ) {
-                        if (data != null) {
-                            return data;
-                        } 
-                        else{
-                            return 'No Image';
-                        };
-                    }
-                },
-                {
-                    targets: 4,
+                    targets: 3,
                     render: function ( data, type, row ) {
                         var button_group =  "<div class=\"btn-group\" role=\"group\" aria-label=\"Basic example\">"+
                                             "<button title=\"View Announcement\" data-tooltip=\"tooltip\"  data-placement=\"bottom\" onclick=\"view_announcement("+data+");\" type=\"button\" class=\"btn btn-outline-success\"><i class=\"fas fa-eye\"></i></button>"+
-                                            "<button title=\"Edit Announcement\" data-tooltip=\"tooltip\"  data-placement=\"bottom\" onclick=\"edit_announcement("+data+");\" type=\"button\" class=\"btn btn-outline-warning\"><i class=\"fas fa-edit\"></i></button>"+
+                                            "<button title=\"Edit Announcement\" data-tooltip=\"tooltip\"  data-placement=\"bottom\" onclick=\"edit_announcement_get_details("+data+");\" type=\"button\" class=\"btn btn-outline-warning\"><i class=\"fas fa-edit\"></i></button>"+
                                             "<button title=\"Publish Announcement\" data-tooltip=\"tooltip\"  data-placement=\"bottom\" onclick=\"publish_announcement("+data+");\" type=\"button\" class=\"btn btn-outline-primary\"><i class=\"fas fa-envelope\"></i></button>"+
                                             "</div>"
                         return button_group;
@@ -122,6 +91,13 @@ width=1200,height=1000,left=100,top=100`;
             $(this).prev(".card-header").find(".fa").removeClass("fa-chevron-down").addClass("fa-chevron-right");
         });
 
+        refresh_modal =() => {
+            $('#id').val('')
+            $('#title').val('')
+            CKEDITOR.instances['description'].setData('')            
+            $('#btnCreateAnnouncement').html('Create')
+        }
+
         create_announcement = () => {
             
             SwalQuestionSuccessAutoClose.fire({
@@ -157,7 +133,7 @@ width=1200,height=1000,left=100,top=100`;
                             $('#btnCreateAnnouncement').attr('disabled','disabled');
                         },
                         success: function(data){
-                            console.log('success in create role ajax');
+                            console.log('success in create announcement ajax');
                             $('#btnCreateAnnouncement').removeAttr('disabled','disabled');
                             if(data['errors']){
                             console.log('errors on validating data');
@@ -168,10 +144,20 @@ width=1200,height=1000,left=100,top=100`;
                             });
                             }
                             else if(data['success'] == 'success'){
-                            console.log('create role is success');
+                            console.log('create announcement is success');
                             SwalDoneSuccess.fire({
                                 title: 'Created!',
                                 text: 'Announcement created.',
+                                })
+                                .then((result) => {
+                                location.reload();
+                                })
+                            }                            
+                            else if(data['updated'] == 'success'){
+                            console.log('update announcement is success');
+                            SwalDoneSuccess.fire({
+                                title: 'Updated!',
+                                text: 'Announcement updated.',
                                 })
                                 .then((result) => {
                                 location.reload();
@@ -188,7 +174,7 @@ width=1200,height=1000,left=100,top=100`;
                 else{
                     SwalNotificationWarningAutoClose.fire({
                         title: 'Cancelled!',
-                        text: 'User role creation cancelled.',
+                        text: 'Announcement creation cancelled.',
                     })
                 }
             })
@@ -200,6 +186,36 @@ width=1200,height=1000,left=100,top=100`;
             url = url.replace(':id', id);
             let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=1000,left=100,top=100`;
             window.open(url, 'Announcement', params)
+        }
+
+        edit_announcement_get_details = (id) => {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('staff.website.announcements.edit.get.details') }}",
+                type: 'post',
+                data:{'id':id},
+                beforeSend: function(){
+                    $('.btn').attr('disabled','disabled');
+                },
+                success: function(data){
+                    console.log('success in get details to edit announcement ajax');
+                    $('.btn').removeAttr('disabled','disabled');
+                    $('#id').val(data['id'])
+                    $('#title').val(data['title'])
+                    $('#btnCreateAnnouncement').html('Update')
+                    // $('#description').val(data['description'])
+                    CKEDITOR.instances['description'].setData(data['description'])
+                    $('#modal-create-announcement').modal('show');
+                        
+                },
+                error: function(err){
+                    $('#btnCreateAnnouncement').removeAttr('disabled','disabled');
+                    console.log('error in get details to edit announcement ajax');
+                    SwalSystemErrorDanger.fire();
+                }
+            });
         }
 
     });

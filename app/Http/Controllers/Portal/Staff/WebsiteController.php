@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Portal\Staff;
 use App\Http\Controllers\Controller;
 use App\Models\Anouncements;
 use App\Models\Student;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use phpDocumentor\Reflection\Types\Null_;
@@ -32,6 +33,8 @@ class WebsiteController extends Controller
         if ($request->ajax()) {
             $data = Anouncements::all();
             return DataTables::of($data)
+            ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('Y-m-d H:i:s'); return $formatedDate; })
+            ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->updated_at)->format('Y-m-d H:i:s'); return $formatedDate; })
             ->addIndexColumn()
             ->rawColumns(['action'])
             ->make(true);
@@ -41,75 +44,32 @@ class WebsiteController extends Controller
     {
         $validator = Validator::make($request->all(), 
             [     
-                'title'=> ['required']
+                'title'=> ['required'],
+                'description'=> ['required']
             ]
         );
 
-        if( $request->description == Null ):
-            $validator1 = Validator::make($request->all(), 
-                [     
-                    'image'=> ['required', 'image', 'mimes:jpeg,png']
-                ]
-            );
+ 
+
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()]);
         else:
-            $validator1 = Validator::make($request->all(), 
-                [     
-                    'image'=> ['nullable', 'image', 'mimes:jpeg,png']
-                ]
-            );
-        endif;
 
-        if( $request->image == Null ):
-            $validator2 = Validator::make($request->all(), 
-                [     
-                    'description'=> ['required']
-                ]
-            );
-        else:
-            $validator2 = Validator::make($request->all(), 
-                [     
-                    'description'=> ['nullable']
-                ]
-            );
-        endif; 
+            if($request->id != '' || $request->id != Null):
 
-        if( $request->buttonText == Null ):
-            $validator3 = Validator::make($request->all(), 
-                [     
-                    'buttonLink'=> ['nullable']
-                ]
-            );
-        else:
-            $validator3 = Validator::make($request->all(), 
-                [     
-                    'buttonLink'=> ['required']
-                ]
-            );
-        endif;   
+                if($announcement = Anouncements::where('id', $request->id)->update([ 'title' => $request->title, 'description' => $request->description, ])):                
+                    return response()->json(['updated'=>'success']);
+                endif;
+            else:            
+                $announcement = new Anouncements();
+                $announcement->title = $request->title;
+                $announcement->description = $request->description;
 
-        if($validator->fails() || $validator1->fails() || $validator2->fails() || $validator3->fails()):
-            return response()->json(['errors'=>$validator->errors()->merge($validator1->errors())->merge($validator2->errors())->merge($validator3->errors())]);
-        else:
-            $announcement = new Anouncements();
-            $announcement->title = $request->title;
-            $announcement->description = $request->description;
-            $announcement->button_text = $request->buttonText;
-            $announcement->button_link = $request->buttonLink;
-
-            if($request->image != Null):
-                $image_ext = $request->file('image')->getClientOriginalExtension();
-                $img_name = $request->title.'_announcement_'.date('Y-m-d').'_'.time().'.'. $image_ext;
-                $announcement->image = $img_name;  
-
-                if($path = $request->file('image')->storeAs('public/announcements/', $img_name)):
-                else:                    
-                    return response()->json(['error'=>'error']);
+                if($announcement->save()):                
+                    return response()->json(['success'=>'success']);
                 endif;
             endif;
 
-            if($announcement->save()):                
-                return response()->json(['success'=>'success']);
-            endif;
             
         endif;
         return response()->json(['error'=>'error']);
@@ -119,19 +79,40 @@ class WebsiteController extends Controller
     public function ckeditorUpload(Request $request)
     {
         if($request->hasFile('upload')) {
-            $originName = $request->file('upload')->getClientOriginalName();
-            $fileName = pathinfo($originName, PATHINFO_FILENAME);
-            $extension = $request->file('upload')->getClientOriginalExtension();
-            $fileName = $fileName.'_'.date('Y-m-d').'_'.time().'.'.$extension;
-            $request->file('upload')->storeAs('public/announcements/images', $fileName);
-            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('storage/announcements/images/'.$fileName); 
-            $msg = 'Image successfully uploaded'; 
-            $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-               
-            @header('Content-type: text/html; charset=utf-8'); 
-            echo $response;
+            $validator = Validator::make($request->all(), 
+                [     
+                'upload'=> ['required', 'image']
+                ]
+            );
+            if($validator->fails()):
+                $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+                $url = NULL; 
+                $msg = $validator->errors()->first('upload'); 
+                $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+                
+                @header('Content-type: text/html; charset=utf-8'); 
+                echo $response;
+            else:
+                $originName = $request->file('upload')->getClientOriginalName();
+                $fileName = pathinfo($originName, PATHINFO_FILENAME);
+                $extension = $request->file('upload')->getClientOriginalExtension();
+                $fileName = $fileName.'_'.date('Y-m-d').'_'.time().'.'.$extension;
+                $request->file('upload')->storeAs('public/announcements/images', $fileName);
+                $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+                $url = asset('storage/announcements/images/'.$fileName); 
+                $msg = 'Image successfully uploaded'; 
+                $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+                
+                @header('Content-type: text/html; charset=utf-8'); 
+                echo $response;
+            endif;
         }
+    }
+
+    public function getDetailsAnnouncement(Request $request)
+    {
+        $announcement = Anouncements::find($request->id);
+        return $announcement;
     }
 
 }

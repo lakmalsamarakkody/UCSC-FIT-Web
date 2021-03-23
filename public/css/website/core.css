@@ -149,3 +149,8 @@ html {
   ::-webkit-scrollbar-thumb:hover {
     background: rgb(117, 118, 180); 
   }
+
+  /* announcement image size */
+  #announcementDiscription img{
+    width: 100% !important;
+  }
