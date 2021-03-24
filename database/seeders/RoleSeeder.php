@@ -43,8 +43,8 @@ class RoleSeeder extends Seeder
                 'created_at'=> '2020-11-25 10:13:53',
                 'updated_at'=> '2020-11-25 10:13:53'],
 
-                ['name'=> 'MA',
-                'description'=> 'FIT MA',
+                ['name'=> 'Management Assistant',
+                'description'=> 'FIT Management Assistant',
                 'created_at'=> '2020-11-25 10:13:53',
                 'updated_at'=> '2020-11-25 10:13:53'],
             )

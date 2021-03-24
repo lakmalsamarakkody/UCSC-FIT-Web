@@ -115,6 +115,38 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
+                    'name'=>'staff-student-exam-medical',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can access to medical page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-exam-medical-view',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can view a medical',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-exam-medical-approve',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can approve a medical',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-exam-medical-decline',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can decline a medical',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
                     'name'=>'staff-system',
                     'portal'=>'staff',
                     'module'=>'system',
