@@ -270,12 +270,12 @@
         </div>
         <!-- /SCHEDULED EXAMS-->
 
-        <!-- ABSENT EXAMS TABLE -->
+        <!-- HELD EXAMS TABLE -->
         <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">Held Exams</div>
             <div class="card-body">
-              @foreach ($absent_exams as $exam)
+              @foreach ($held_exams as $exam)
                 {{-- @if($exam->schedule->date <= date('Y-m-d')) --}}
                   <div class="accordion" id="accordionAbsent_{{$exam->id}}">
                     <div class="card mb-4 shadow-sm">

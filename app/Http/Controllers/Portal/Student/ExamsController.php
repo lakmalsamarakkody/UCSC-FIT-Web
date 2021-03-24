@@ -52,7 +52,7 @@ class ExamsController extends Controller
     $selected_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', null)->get();
     $applied_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', '!=', null)->get();
     $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=' , null)->get();
-    $absent_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('status', 'AB' )->get();
+    $held_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->get();
     
     return view('portal/student/exams',[
       // 'schedules' => $schedules,
@@ -62,7 +62,7 @@ class ExamsController extends Controller
       'selected_exams' => $selected_exams,
       'applied_exams' => $applied_exams,
       'scheduled_exams' => $scheduled_exams,
-      'absent_exams' => $absent_exams
+      'held_exams' => $held_exams
     ]);
   }
 
