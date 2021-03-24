@@ -46,6 +46,7 @@
                 </thead>
                 <tbody>
                   @foreach ($exam_applicants as $applicant)
+                  @if($applicant->payment_status != 'Declined')
                     <tr>
                       <td>{{ $applicant->student->reg_no }}</td>
                       <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
@@ -58,6 +59,7 @@
                         @endif
                       </td>
                     </tr>
+                    @endif
                   @endforeach
                 </tbody>
               </table>

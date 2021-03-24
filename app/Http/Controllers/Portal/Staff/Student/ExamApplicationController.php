@@ -27,7 +27,9 @@ class ExamApplicationController extends Controller
     public function index()
     {
         $today = Carbon::today();
-        $exam_applicants = hasExam::get()->where('payment_id', '!=', null)->where('status', '!=', 'Approved')->unique('payment_id');
+        $exam_applicants = hasExam::where('payment_id', '!=', null)->where(function($query) {
+            $query->where('status', 'AB')->orWhere('status', 'Scheduled');
+        })->orderBy('created_at', 'asc')->get()->unique('payment_id');
         $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('status', 'AB')->get();
         return view('portal/staff/student/exam_application', [
@@ -205,7 +207,7 @@ class ExamApplicationController extends Controller
     // REVIEW MEDICALS
     public function reviewMedicals()
     {
-        $medicals = Medical::where('status', 'Pending')->get();
+        $medicals = Medical::where('status', 'Pending')->orderBy('created_at', 'asc')->get();
         return view('portal/staff/student/medical', [
             'medicals'=> $medicals
         ]);
