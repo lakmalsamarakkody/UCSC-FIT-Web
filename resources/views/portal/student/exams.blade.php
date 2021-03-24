@@ -260,7 +260,6 @@
                       </div>
                     </div>
                   </div>
-                  
                 @endif
               @endforeach
             </div>
@@ -276,35 +275,27 @@
             <div class="card-header">Held Exams</div>
             <div class="card-body">
               @foreach ($held_exams as $exam)
-                {{-- @if($exam->schedule->date <= date('Y-m-d')) --}}
+                @if($exam->schedule->date <= date('Y-m-d'))
                   <div class="accordion" id="accordionAbsent_{{$exam->id}}">
                     <div class="card mb-4 shadow-sm">
                       <div class="card-header text-secondary" id="heading_{{$exam->id}}">
                         <div class="row">
                           <div class="col-2 col-md-3 text-center pt-2">FIT {{ $exam->subject->code }}</div>
                           <div class="col-6 col-md-3 text-center pt-2">{{ $exam->subject->name }} ({{ $exam->type->name }})</div>
-                          <div class="col-4 col-md-3 text-center pt-2">{{$exam->schedule->date}}</div>
-                          @if($exam->medical != null && $exam->medical->status=='Pending' )
-                            <div class="col-12 col-md-3 text-md-right">
+                          <div class="col-4 col-md-3 text-center pt-2">{{$exam->schedule->date}} ({{ \Carbon\Carbon::create($exam->schedule->start_time)->isoFormat('hh:mm A')}} - {{ \Carbon\Carbon::create($exam->schedule->end_time)->isoFormat('hh:mm A') }})</div>
+                          <div class="col-12 col-md-3 text-md-right">
+                            @if($exam->medical != null && $exam->medical->status=='Pending' )
                               <button type="button" class="btn btn-outline-warning w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Medical Approval Pending</button>
-                            </div>
-                          @elseif($exam->medical != null &&  $exam->medical->status=='Approved' )
-                            <div class="col-12 col-md-3 text-md-right">
+                            @elseif($exam->medical != null &&  $exam->medical->status=='Approved' )
                               <button type="button" class="btn btn-outline-success w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Medical Approved</button>
-                            </div>
-                          @elseif($exam->medical != null &&  $exam->medical->status=='Declined' )
-                            <div class="col-12 col-md-3 text-md-right">
+                            @elseif($exam->medical != null &&  $exam->medical->status=='Declined' )
                               <button type="button" class="btn btn-outline-danger w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Medical Declined</button>
-                            </div>
-                            @elseif($exam->medical != null &&  $exam->medical->status=='Resubmit' )
-                            <div class="col-12 col-md-3 text-md-right">
+                              @elseif($exam->medical != null &&  $exam->medical->status=='Resubmit' )
                               <button type="button" class="btn btn-outline-secondary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Resubmit Medical</button>
-                            </div>
-                          @else
-                            <div class="col-12 col-md-3 text-md-right">
+                            @elseif(\Carbon\Carbon::now() <= \Carbon\Carbon::create($exam->schedule->date)->addDays(15))
                               <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}"><i class="fas fa-file-medical"></i> Upload medical</button>
-                            </div>                            
-                          @endif
+                            @endif
+                          </div>
                         </div>
                       </div>
                   
@@ -390,7 +381,6 @@
                                   <span id="{{$exam->id}}-spinnermedicalUpload" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
                                 </button>
                               </div>
-
                             @else
                               <div class="col-12">
                                 <form id="{{$exam->id}}-medicalUploadform">
@@ -427,7 +417,7 @@
                     </div>
                   </div>
                   
-                {{-- @endif --}}
+                @endif
               @endforeach
 
 
