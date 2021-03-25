@@ -127,6 +127,13 @@ const SwalNotificationErrorDanger = Swal.mixin({
   showConfirmButton: false,
   toast: true,
   position: 'top-end',
+})
+const SwalNotificationErrorDangerAutoClose = Swal.mixin({
+  icon: 'error',
+  iconColor: color_danger,
+  showConfirmButton: false,
+  toast: true,
+  position: 'top-end',
   timer: 5000,
   timerProgressBar: true,
 })
