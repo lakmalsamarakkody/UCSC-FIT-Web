@@ -76,23 +76,6 @@ Route::get('/portal/staff/student/profile/{id}/',[App\Http\Controllers\Portal\St
 Route::post('/portal/staff/student/profile/update/email/request',[App\Http\Controllers\Portal\Staff\StudentController::class, 'emailUpdateRequest'])->name('update.email.request');
 Route::post('/portal/staff/student/profile/deactivate/account',[App\Http\Controllers\Portal\Staff\StudentController::class, 'deactivateAccount'])->name('deactivate.student');
 Route::post('/portal/staff/student/profile/reactivate/account',[App\Http\Controllers\Portal\Staff\StudentController::class, 'reactivateAccount'])->name('reactivate.student');
-
-// EXAM APPLICATION
-Route::post('/portal/staff/student/exams/application/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getApplicantExamDetails'])->name('student.application.exams.details');
-Route::post('/portal/staff/student/exams/application/details/table', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'appliedExamsTable'])->name('student.application.exams.details.table');
-Route::post('/portal/staff/student/exams/application/payment/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveExamPayment'])->name('student.application.exams.payment.approve');
-Route::post('/portal/staff/student/exams/application/payment/decline', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineExamPayment'])->name('student.application.exams.payment.decline');
-Route::post('/portal/staff/student/exams/application/schedules/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getAppliedSubjectScheduleDetails'])->name('student.application.exams.schedules.details');
-Route::post('/portal/staff/student/exams/application/schedules/table', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'schedulesForExamTable'])->name('student.application.exams.schedules.table');
-// Route::post('/portal/staff/student/exams/application/schedules/search', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'searchSchedulesByExam'])->name('student.application.exams.schedules.search');
-Route::post('/portal/staff/student/exams/application/schedule/exam', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'scheduleAppliedExam'])->name('student.application.exams.schedule.exam');
-Route::post('/portal/staff/student/exams/application/schedules/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveScheduledExams'])->name('student.application.exams.approve.schedules');
-
-// EXAM MEDICAL
-Route::post('/portal/staff/student/exams/medical/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getMedicalDetails'])->name('student.exams.medical.details');
-Route::post('/portal/staff/student/exams/medical/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveMedical'])->name('student.exams.medical.approve');
-Route::post('/portal/staff/student/exams/medical/decline', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineMedical'])->name('student.exams.medical.decline');
-Route::post('/portal/staff/student/exams/medical/decline/resubmit', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineToResubmitMedical'])->name('student.exams.medical.resubmit.decline');
 // /STUDENT PAGE
 
 // HOME PAGE
@@ -112,10 +95,28 @@ Route::post('/portal/staff/student/application/declineDocumentId', [App\Http\Con
 Route::get('/portal/staff/student/application/reviewRegistration', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'reviewRegistration'])->name('student.application.reviewRegistration');
 Route::post('/portal/staff/student/application/registerStudent', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'registerStudent'])->name('student.application.registerStudent');
 Route::get('/portal/staff/student/registered', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'registered'])->name('student.application.registered');
+// /REGISTRATION CARDS
 
 // EXAM CARDS
+// EXAM APPLICATION
 Route::get('/portal/staff/student/exams/application', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'index'])->name('student.application.exams');
+Route::post('/portal/staff/student/exams/application/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getApplicantExamDetails'])->name('student.application.exams.details');
+Route::post('/portal/staff/student/exams/application/details/table', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'appliedExamsTable'])->name('student.application.exams.details.table');
+Route::post('/portal/staff/student/exams/application/payment/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveExamPayment'])->name('student.application.exams.payment.approve');
+Route::post('/portal/staff/student/exams/application/payment/decline', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineExamPayment'])->name('student.application.exams.payment.decline');
+Route::post('/portal/staff/student/exams/application/schedules/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getAppliedSubjectScheduleDetails'])->name('student.application.exams.schedules.details');
+Route::post('/portal/staff/student/exams/application/schedules/table', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'schedulesForExamTable'])->name('student.application.exams.schedules.table');
+// Route::post('/portal/staff/student/exams/application/schedules/search', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'searchSchedulesByExam'])->name('student.application.exams.schedules.search');
+Route::post('/portal/staff/student/exams/application/schedule/exam', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'scheduleAppliedExam'])->name('student.application.exams.schedule.exam');
+Route::post('/portal/staff/student/exams/application/schedules/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveScheduledExams'])->name('student.application.exams.approve.schedules');
+
+// EXAM MEDICAL
 Route::get('/portal/staff/student/exams/medical', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'reviewMedicals'])->name('student.exams.medical');
+Route::post('/portal/staff/student/exams/medical/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getMedicalDetails'])->name('student.exams.medical.details');
+Route::post('/portal/staff/student/exams/medical/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveMedical'])->name('student.exams.medical.approve');
+Route::post('/portal/staff/student/exams/medical/decline', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineMedical'])->name('student.exams.medical.decline');
+Route::post('/portal/staff/student/exams/medical/decline/resubmit', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineToResubmitMedical'])->name('student.exams.medical.resubmit.decline');
+// /EXAM CARDS
 // /HOME PAGE
 
 // EXAMS PAGE
@@ -189,6 +190,8 @@ Route::post('/portal/staff/system/createExamType', [App\Http\Controllers\Portal\
 Route::post('/portal/staff/system/editExamTypeGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editExamTypeGetDetails']);
 Route::post('/portal/staff/system/editExamType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editExamType']);
 Route::post('/portal/staff/system/deleteExamType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteExamType']);
+
+Route::post('/portal/staff/system/editExamDuration', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editExamDuration']);
 
 Route::post('/portal/staff/system/createStudentPhase', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createStudentPhase']);
 Route::post('/portal/staff/system/editStudentPhaseGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editStudentPhaseGetDetails']);
