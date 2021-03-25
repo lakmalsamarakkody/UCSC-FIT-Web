@@ -1,7 +1,9 @@
 <?php
 
+use App\Mail\Announcement;
 use App\Mail\StudentRegistration;
 use App\Mail\Subscribe;
+use App\Models\Anouncements;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -208,13 +210,25 @@ Route::post('/portal/staff/system/deletePaymentType', [App\Http\Controllers\Port
 Route::get('/portal/staff/information', [App\Http\Controllers\Portal\Staff\InformationController::class, 'index'])->name('staff.information');
 // /INFORMATION PAGE
 
-// ANOUNCEMENT PAGE
+// ANNOUNCEMENT PAGE
 Route::get('/portal/staff/website', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'index'])->name('staff.website');
 Route::get('/portal/staff/website/announcements', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'getAnnouncementList'])->name('staff.website.announcements');
 Route::post('/portal/staff/website/announcements', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'createAnnouncement'])->name('staff.website.announcements.create');
 Route::post('/portal/staff/website/announcements/get/details', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'getDetailsAnnouncement'])->name('staff.website.announcements.edit.get.details');
 Route::post('ckeditor/upload', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'ckeditorUpload'])->name('ckeditor.image-upload');
-// /ANOUNCEMENT PAGE
+Route::post('/portal/staff/website/announcements/email', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'emailAnnouncement'])->name('staff.website.announcements.email');
+// Route::get('/email', function() {
+//   $announcement = Anouncements::where('id', 10)->first();
+//   $details = [
+//     'title' => $announcement->title,
+//     'description' => $announcement->description,
+//     'id' => $announcement->id,
+//     'email' => $announcement->id,
+//     'token' => $announcement->id
+//   ];
+//   return new App\Mail\Announcement($details);
+// });
+// /ANNOUNCEMENT PAGE
 
 // GUEST
 Route::get('/guest/{email}/fit/{token}/staff/{role}', [App\Http\Controllers\Portal\Staff\GuestController::class,'setPassword'])->name('email.link.staff');
