@@ -218,6 +218,54 @@ width=1200,height=1000,left=100,top=100`;
             });
         }
 
+        publish_announcement = (id) => {
+            
+            SwalQuestionSuccessAutoClose.fire({
+                title: "Are you sure?",
+                text: "You wont be able to revert this!",
+                confirmButtonText: 'Yes, Create!',
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{ route('staff.website.announcements.email') }}",
+                        type: 'post',
+                        data:{'id':id},
+                        beforeSend: function(){
+                            $('#btnCreateAnnouncement').attr('disabled','disabled');
+                        },
+                        success: function(data){
+                            if(data['status'] == 'success'){
+                                console.log('publish announcement is success');
+                                SwalDoneSuccess.fire({
+                                    title: 'Created!',
+                                    text: 'Announcement created.',
+                                })
+                                .then((result) => {
+                                    location.reload();
+                                })
+                            }else{
+                                console.log('error on publish announcement');
+                            }
+                        },
+                        error: function(err){
+                            $('#btnCreateAnnouncement').removeAttr('disabled','disabled');
+                            console.log('error in publish announcement ajax');
+                            SwalSystemErrorDanger.fire();
+                        }
+                    });
+                }else{
+                    
+                    SwalNotificationWarningAutoClose.fire({
+                        title: 'Cancelled!',
+                        text: 'Announcement publish cancelled.',
+                    })
+                }
+            })
+        }
     });
 </script>
 @endsection

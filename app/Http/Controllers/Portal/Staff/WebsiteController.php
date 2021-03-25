@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Announcement;
+use App\Mail\Subscribe;
 use App\Models\Anouncements;
 use App\Models\Student;
+use App\Models\Subscriber;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use phpDocumentor\Reflection\Types\Null_;
 use Yajra\DataTables\Facades\DataTables;
@@ -115,4 +119,28 @@ class WebsiteController extends Controller
         return $announcement;
     }
 
+    public function emailAnnouncement(Request $request)
+    {
+        $announcement = Anouncements::where('id', $request->id)->first();
+
+        $subscribers = Subscriber::all();
+
+        foreach( $subscribers as $subscriber ):                
+            $details = [
+                'title' => $announcement->title,
+                'description' => $announcement->description,
+                'id' => $announcement->id,
+                'email' => $subscriber->email,
+                'token' => $subscriber->token
+            ];
+            
+            Mail::to($subscriber->email)->later(now()->addSeconds(5), new Announcement($details));
+
+        endforeach;
+
+        return response()->json(['status'=>'success']); 
+
+
+
+    }
 }

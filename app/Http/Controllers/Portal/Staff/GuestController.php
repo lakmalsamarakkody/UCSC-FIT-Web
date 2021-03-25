@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Email_Token;
+use App\Models\Subscriber;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class GuestController extends Controller
 {
@@ -66,6 +68,14 @@ class GuestController extends Controller
             else:
                 if( $email_token['role'] == $request->role && $email_token['email'] == $request->email ):
                     if($user->save()):
+                        $subscriber_check = Subscriber::where( 'email', $email )->first();
+                        if (is_Null($subscriber_check['email'])) {
+                            $token = Str::random(32);
+                            $subscriber = new Subscriber();
+                            $subscriber->email = $email;
+                            $subscriber->token = $token;
+                            $subscriber->save();
+                        }
                         if(Email_Token::where('email', $email)->delete()):
                             return response()->json(['success'=>'success']);
                         endif;

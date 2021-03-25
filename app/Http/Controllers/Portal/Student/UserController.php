@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Portal\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Email_Token;
+use App\Models\Subscriber;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use PharIo\Manifest\Email;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -65,6 +67,14 @@ class UserController extends Controller
             else:
                 if($user->save()):
                     if(Email_Token::where('email', $email)->delete()):
+                        $subscriber_check = Subscriber::where( 'email', $email )->first();
+                        if (is_Null($subscriber_check['email'])) {
+                            $token = Str::random(32);
+                            $subscriber = new Subscriber();
+                            $subscriber->email = $email;
+                            $subscriber->token = $token;
+                            $subscriber->save();
+                        }
                         return response()->json(['success'=>'success']);
                     else:                        
                         return response()->json(['error'=>'error']);
