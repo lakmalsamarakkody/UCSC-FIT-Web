@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
+use App\Models\Exam\Duration;
 use Illuminate\Http\Request;
 use App\Models\User\Role;
 use App\Models\Subject;
@@ -38,10 +39,11 @@ class SystemController extends Controller
     $permissions = Permission::orderby('id')->get();
     $subjects = Subject::orderby('code')->get();
     $exam_types = Types::orderby('id')->get();
+    $exam_durations = Duration::orderby('id')->get();
     $phases = Phase::orderby('id')->get();
     $payment_methods = Method::orderby('id')->get();
     $payment_types = Type::orderby('id')->get();
-    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types','payment_methods', 'payment_types', 'phases'));
+    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types', 'exam_durations','payment_methods', 'payment_types', 'phases'));
   }
 
   // PERMISSION
@@ -412,6 +414,14 @@ class SystemController extends Controller
   }
   // /DELETE FUNCTION
   // /EXAM TYPE
+
+  // EXAM DURATION
+  // EDIT FUNCTIONS
+  public function editExamDuration(Request $request){
+
+  }
+  // /EDIT FUNCTIONS
+  // /EXAM DURATION
 
   // STUDENT PHASE
   // CREATE FUNCTION

@@ -1002,6 +1002,107 @@ let permissionTable = null;
   // /DELETE
 // /EXAM_TYPE
 
+// EXAM_DURATION
+  //EDIT
+  edit_exam_duration_invoke = (exam_duration_id) => {
+    console.log('edit_exam_duration_invoked')
+    $('#tdDuration-'+exam_duration_id).addClass('d-none');
+    $('#tdDurationEdit-'+exam_duration_id).removeClass('d-none');
+    $('#bntEditExamDuration-'+exam_duration_id).addClass('d-none');
+    $('#bntSaveExamDuration-'+exam_duration_id).removeClass('d-none');
+    $('#bntCancelExamDuration-'+exam_duration_id).removeClass('d-none');
+  }
+
+  edit_exam_duration_save = (exam_duration_id) => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Update!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Remove previous validation error messages
+        $('.from-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+
+        //From payload
+        var formData = new FormData();
+        formData.append('exam_duration_id',exam_duration_id);
+        formData.append('exam_duration_hours',$('#inputDurationHours-'+exam_duration_id).val());
+        formData.append('exam_duration_minutes',$('#inputDurationMinutes-'+exam_duration_id).val());
+
+        //Edit exam type
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/editExamDuration') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){
+            $('#bntSaveExamDuration-'+exam_duration_id).attr('disabled', 'disabled');
+            $('#bntCancelExamDuration-'+exam_duration_id).attr('disabled', 'disabled');
+          },
+          success: function(data){
+            console.log('Success in edit exam duration ajax.');
+            $('#bntSaveExamDuration-'+exam_duration_id).removeAttr('disabled', 'disabled');
+            $('#bntCancelExamDuration-'+exam_duration_id).removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating data.');
+              $('small').hide();
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in edit exam duration.')
+              SwalDoneSuccess.fire({
+                title: 'Updated!',
+                text: 'Exam duration has been updated.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-edit-exam-type').modal('hide');
+                  location.reload();
+                }
+              });
+            }
+          },
+          error: function(err){
+            console.log('Error in edit exam duration ajax.');
+            $('#bntSaveExamDuration-'+exam_duration_id).removeAttr('disabled', 'disabled');
+            $('#bntCancelExamDuration-'+exam_duration_id).removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Subject has not been updated.',
+        })
+      }
+    })
+
+    $('#tdDurationEdit-'+exam_duration_id).addClass('d-none');
+    $('#tdDuration-'+exam_duration_id).removeClass('d-none');
+    $('#bntSaveExamDuration-'+exam_duration_id).addClass('d-none');
+    $('#bntEditExamDuration-'+exam_duration_id).removeClass('d-none');
+    $('#bntCancelExamDuration-'+exam_duration_id).addClass('d-none');
+  }
+  edit_exam_duration_cancel = (exam_duration_id) => {
+    $('#tdDurationEdit-'+exam_duration_id).addClass('d-none');
+    $('#tdDuration-'+exam_duration_id).removeClass('d-none');
+    $('#bntSaveExamDuration-'+exam_duration_id).addClass('d-none');
+    $('#bntCancelExamDuration-'+exam_duration_id).addClass('d-none');
+    $('#bntEditExamDuration-'+exam_duration_id).removeClass('d-none');
+  }
+  // /EDIT
+// /EXAM_DURATION
+
 // STUDENT PHASE
   // CREATE
   create_student_phase = () => {
