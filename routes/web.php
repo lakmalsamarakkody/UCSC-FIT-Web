@@ -222,13 +222,36 @@ Route::post('/portal/staff/website/announcements/get/details', [App\Http\Control
 Route::post('ckeditor/upload', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'ckeditorUpload'])->name('ckeditor.image-upload');
 Route::post('/portal/staff/website/announcements/email', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'emailAnnouncement'])->name('staff.website.announcements.email');
 Route::get('/email', function() {
-  $announcement = Anouncements::where('id', 10)->first();
   $details = [
-    'subject' => $announcement->title,
-    'description' => $announcement->description,
-    'id' => $announcement->id,
-    'email' => $announcement->id,
-    'token' => $announcement->id
+    // 'subject' => 'Exam Application Scheduled',
+    // 'title' => 'Exam Application Scheduled',
+    // 'body' => 'Exam Application Scheduled <br><br> Subject: F201 <br> Scheduled Date: 26-05-2021<br> Scheduled Time: 10:30 Am',
+    // 'color' => '#1b672a'
+
+    // 'subject' => 'Exam Payment Declined',
+    // 'title' => 'Exam Payment Declined',
+    // 'body' => 'Exam Payment Declined',
+    // 'color' => '#821919'
+
+    // 'subject' => 'Exam Payment Approved',
+    // 'title' => 'Exam Payment Approved',
+    // 'body' => 'Exam Payment Approved',
+    // 'color' => '#1b672a'
+
+    // 'subject' => 'Registration Successful',
+    // 'title' => 'Registration Successful',
+    // 'body' => 'Registration Successful <br><br> Registration Number: F210326001 <br> Registered Date: 26-03-2021',
+    // 'color' => '#1b672a'
+
+    // 'subject' => 'Registration Payment Declined',
+    // 'title' => 'Registration Payment Declined',
+    // 'body' => 'Registration Payment Declined',
+    // 'color' => '#821919'
+
+    // 'subject' => 'Registration Payment Approved',
+    // 'title' => 'Registration Payment Approved',
+    // 'body' => 'Registration Payment Approved',
+    // 'color' => '#1b672a'
   ];
   return new App\Mail\NotificationEmail($details);
 });
