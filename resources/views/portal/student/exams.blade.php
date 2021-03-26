@@ -202,6 +202,7 @@
                       <th>Subject Name</th>
                       <th>Exam Type</th>
                       <th>Requested Exam On</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -215,6 +216,13 @@
                       <td>ICT Applications</td>
                       <td>Practical</td>
                       <td>April 2021</td> --}}
+                      <td>
+                        @if($applied_exam->payment_status == 'Approved')
+                          <button type="button" class="btn btn-success" data-tooltip="tooltip" data-placement="bottom" title="Approved"><i class="fas fa-check-circle"></i></button>
+                        @elseif ($applied_exam->payment_status == 'Declined')
+                          <button type="button" class="btn btn-danger" data-tooltip="tooltip" data-placement="bottom" title="View Declined Message" id="btnViewDeclinedMessage-{{ $applied_exam->id }}" onclick="view_exam_declined_message({{ $applied_exam->id }});"><i class="fas fa-exclamation-circle"></i> <i class="fas fa-envelope"></i></button>
+                        @endif
+                      </td>
                     </tr>
                     @endforeach
                   </tbody>
@@ -447,4 +455,5 @@
     </div>
     <!-- /CONTENT -->
     @include('portal.student.exams.scripts')
+    @include('portal.student.exams.modal')
 @endsection

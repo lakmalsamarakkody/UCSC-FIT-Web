@@ -10,7 +10,7 @@ class Home extends Controller
 {
     public function index(){
 
-        $anouncements = Anouncements::orderBy('created_at', 'desc')->take(6)->get();
+        $anouncements = Anouncements::orderBy('created_at', 'desc')->where('published',1)->take(6)->get();
 
         return view('website/home', [
             'anouncements'=>$anouncements,

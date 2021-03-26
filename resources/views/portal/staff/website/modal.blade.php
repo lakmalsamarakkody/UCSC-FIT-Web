@@ -3,13 +3,13 @@
   <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Create Announcement</h5>
+        <h5 class="modal-title">Announcement Editor</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form id="formUserRole">
+        <form id="formCreateAnnouncement">
           <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title" name="title"/>

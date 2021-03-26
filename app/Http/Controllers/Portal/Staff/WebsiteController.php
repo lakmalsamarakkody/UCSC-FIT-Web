@@ -37,8 +37,8 @@ class WebsiteController extends Controller
         if ($request->ajax()) {
             $data = Anouncements::all();
             return DataTables::of($data)
-            ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('Y-m-d H:i:s'); return $formatedDate; })
-            ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->updated_at)->format('Y-m-d H:i:s'); return $formatedDate; })
+            ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->isoFormat('Y-MM-DD hh:mm A'); return $formatedDate; })
+            ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->updated_at)->isoFormat('Y-MM-DD hh:mm A'); return $formatedDate; })
             ->addIndexColumn()
             ->rawColumns(['action'])
             ->make(true);
@@ -118,6 +118,30 @@ class WebsiteController extends Controller
         $announcement = Anouncements::find($request->id);
         return $announcement;
     }
+
+    // PUBLISH ANNOUNCEMENT
+    public function publishAnnouncement(Request $request)
+    {
+        $announcement = Anouncements::where('id', $request->id)->first();
+        $announcement->published = 1;
+        if($announcement->save()):
+            return response()->json(['status'=>'success']); 
+        endif;
+        return response()->json(['status'=>'error']); 
+    }
+    // PUBLISH ANNOUNCEMENT
+
+    // UNPUBLISH ANNOUNCEMENT
+    public function unpublishAnnouncement(Request $request)
+    {
+        $announcement = Anouncements::where('id', $request->id)->first();
+        $announcement->published = 0;
+        if($announcement->save()):
+            return response()->json(['status'=>'success']); 
+        endif;
+        return response()->json(['status'=>'error']); 
+    }
+    // UNPUBLISH ANNOUNCEMENT
 
     public function emailAnnouncement(Request $request)
     {

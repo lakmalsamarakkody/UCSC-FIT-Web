@@ -115,16 +115,26 @@
             <!-- MENU SECTION -->
             <div class="nav-menu w-100">
               <ul>
-                <li id="dashboard"><a href="{{ route('home') }}">Dashboard</a></li>
-                <li id="students"><a href="{{ route('students') }}">Students</a></li>
-                <li id="exams"><a href="{{ route('exams') }}">Exams</a></li>
-                <li id="results"><a href="{{ route('results') }}">Results</a></li>
-                <li id="users"><a href="{{ route('users') }}">Users</a></li>
-                @if(Auth::user()->hasPermission('staff-system'))
-                  <li id="system"><a href="{{ route('system') }}">System</a></li>
+                @if(Auth::user()->hasPermission('staff-dashboard'))
+                  <li id="dashboard"><a href="{{ route('home') }}">Dashboard</a></li>
+                @endif
+                @if(Auth::user()->hasPermission('staff-student'))
+                  <li id="students"><a href="{{ route('students') }}">Students</a></li>
+                @endif
+                @if(Auth::user()->hasPermission('staff-exam'))
+                  <li id="exams"><a href="{{ route('exams') }}">Exams</a></li>
+                @endif
+                @if(Auth::user()->hasPermission('staff-result'))
+                  <li id="results"><a href="{{ route('results') }}">Results</a></li>
+                @endif
+                @if(Auth::user()->hasPermission('staff-user'))
+                  <li id="users"><a href="{{ route('users') }}">Users</a></li>
                 @endif
                 @if(Auth::user()->hasPermission('staff-website'))
                   <li id="website"><a href="{{ route('staff.website') }}">Website</a></li>
+                @endif
+                @if(Auth::user()->hasPermission('staff-system'))
+                  <li id="system"><a href="{{ route('system') }}">System</a></li>
                 @endif
 
               </ul>

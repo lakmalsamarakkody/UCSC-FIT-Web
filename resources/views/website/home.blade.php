@@ -33,7 +33,7 @@
                                     <li>
                                         <p class="pr-4">
                                             <a href="{{ route('web.announcement', $anouncement->id) }}"><strong>{{ $anouncement->title }}</strong></a><br>
-                                            <span class="float-right pr-4"><small>{{ \Carbon\Carbon::parse($anouncement->created_at)->format('M d Y') }}</small></span> 
+                                            <span class="float-right pr-4"><small>{{ \Carbon\Carbon::parse($anouncement->created_at)->isoFormat('MMMM DD, Y') }}</small></span> 
                                         </p>
                                         <hr color="grey">
                                     </li>

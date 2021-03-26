@@ -32,6 +32,7 @@
             <link rel="stylesheet" href="{{ asset('css/website/examination.css') }}">
             <link rel="stylesheet" href="{{ asset('css/website/registration.css') }}">
             <link rel="stylesheet" href="{{ asset('css/website/contact-us.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/website/announcements.css') }}">
             <link rel="stylesheet" href="{{ asset('css/website/faq.css') }}">
             <link rel="stylesheet" href="{{ asset('css/website/site-map.css') }}">
         <!-- /STYLES -->
@@ -56,13 +57,13 @@
         <!-- /SCRIPTS -->
     </head>
 
-    <body class="">
+    <body>
     
     <!--==========================
     Header
     ============================-->
     <header id="header">  
-        <div class="col-md-12">
+        <div class="col-md-12 ">
         <div class="row">
             <div class="col-md-1">
                 <div id="logo" class="pull-left">

@@ -117,7 +117,7 @@
                 @endif
                 <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
                 <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
-                    @if ( Auth::user()->student !=Null && Auth::user()->student->current_registration->registration_expire_at !=Null && Auth::user()->student->current_registration->registration_expire_at >= date('Y-m-d') && Auth::user()->student->current_registration->status == 1  )
+                @if ( Auth::user()->student !=Null && Auth::user()->student->current_registration->registration_expire_at !=Null && Auth::user()->student->current_registration->registration_expire_at >= date('Y-m-d') && Auth::user()->student->current_registration->status == 1  )
                   <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>
                 @endif
                 <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
@@ -185,7 +185,6 @@
                   <ul>
                     @if ( Auth::user()->student == null || Auth::user()->student->reg_no == null )
                       <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
-
                     @endif
                     <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
                     <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
