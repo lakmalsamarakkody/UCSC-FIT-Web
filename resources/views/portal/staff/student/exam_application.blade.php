@@ -35,34 +35,36 @@
           <div class="card">
             <div class="card-header">Exam Applicants</div>
             <div class="card-body">
-              <table class="table yajra-datatable">
-                <thead>
-                  <tr>
-                    <th>Registration No</th>
-                    <th>Student Name</th>
-                    <th>Date Applied</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($exam_applicants as $applicant)
-                  @if($applicant->payment_status != 'Declined')
+              @if($exam_applicants->isEmpty())
+                <div class="alert alert-info" role="alert">No results found!</div>
+              @else
+                <table class="table yajra-datatable">
+                  <thead>
                     <tr>
-                      <td>{{ $applicant->student->reg_no }}</td>
-                      <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
-                      <td>{{ $applicant->created_at->isoFormat('YYYY-MM-DD') }}</td>
-                      <td>
-                        @if(Auth::user()->hasPermission('staff-student-exam-application-view'))
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
-                        </div>
-                        @endif
-                      </td>
+                      <th>Registration No</th>
+                      <th>Student Name</th>
+                      <th>Date Applied</th>
+                      <th></th>
                     </tr>
-                    @endif
-                  @endforeach
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                      @foreach ($exam_applicants as $applicant)
+                        <tr>
+                          <td>{{ $applicant->student->reg_no }}</td>
+                          <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
+                          <td>{{ $applicant->created_at->isoFormat('YYYY-MM-DD') }}</td>
+                          <td>
+                            @if(Auth::user()->hasPermission('staff-student-exam-application-view'))
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                            </div>
+                            @endif
+                          </td>
+                        </tr>
+                      @endforeach
+                  </tbody>
+                </table>
+              @endif
 
             </div>
           </div>
