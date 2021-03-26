@@ -209,6 +209,47 @@ apply_for_exams = () => {
 }
 // /CANCEL SELECTION
 
+// EXAM DECLINED MESSAGE MODAL LOAD
+view_exam_declined_message = (id) => {
+
+    // Form payload
+    var formData = new FormData();
+    formData.append('id', id);
+
+    // Get declined message controller
+    $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url: "{{ route('student.exam.declined.message') }}",
+        type:'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        beforeSend: function() {$('#btnViewDeclinedMessage-'+id).attr('disabled', 'disabled')},
+        success: function(data) {
+            console.log('Success in get Exam declined mesasge ajax.');
+            if(data['status'] == 'success') {
+                console.log('Success in get Exam declined mesasge.');
+                $('#btnViewDeclinedMessage-'+id).removeAttr('disabled', 'disabled');
+                if(data['declined_exam'] != null) {
+                    $('#spanExamDeclinedMessage').html(data['declined_exam']['declined_message']);
+                    $('#modal-exam-declined-message').modal('show');
+                }
+            }
+            else if (data['status'] == 'error') {
+                console.log('Error in get Exam declined mesasge.');
+                $('#btnViewDeclinedMessage-'+id).removeAttr('disabled', 'disabled');
+                SwalSystemErrorDanger.fire();
+            }
+        },
+        error: function(err) {
+            console.log('Error in get Exam declined mesasge ajax.');
+            $('#btnViewDeclinedMessage-'+id).removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+        } 
+    })
+}
+// /EXAM DECLINED MESSAGE MODAL LOAD
+
 upload_medical = (id) => {
     $('.form-control').removeClass('is-invalid');
     $('.invalid-feedback').html('');
