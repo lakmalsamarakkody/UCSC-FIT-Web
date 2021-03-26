@@ -51,8 +51,8 @@ class ExamsController extends Controller
     $student = Student::where('user_id',Auth::user()->id)->first();
     $selected_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', null)->get();
     $applied_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', '!=', null)->get();
-    $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=' , null)->get();
-    $held_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->get();
+    $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=' , null)->where('schedule_status', 'Approved')->get();
+    $held_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('schedule_status', 'Approved')->get();
     
     return view('portal/student/exams',[
       // 'schedules' => $schedules,

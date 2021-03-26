@@ -349,7 +349,7 @@
                               <div class="col-12">
                                 <div class="alert alert-info" role="alert">
                                   {{-- <h4 class="alert-heading">Declined Reason</h4> --}}
-                                  <p><b>Reason of Decline the Medical: </b>{{$exam->medical->declined_message}}}</p>
+                                  <p><b>Reason of Decline the Medical: </b>{{$exam->medical->declined_message}}</p>
                                 </div>
                                 {{-- <div class="col-12">
                                   <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapseMedical_{{$exam->id}}" aria-expanded="true" aria-controls="collapseMedical_{{$exam->id}}">Resubmit Medical</button>
