@@ -33,7 +33,8 @@
                 },
                 {
                     data: 'id', 
-                    name: 'id', 
+                    name: 'id',
+                    className: "text-right", 
                     orderable: false, 
                     searchable: false
                 },
@@ -42,11 +43,17 @@
                 {
                     targets: 3,
                     render: function ( data, type, row ) {
-                        var button_group =  "<div class=\"btn-group\" role=\"group\" aria-label=\"Basic example\">"+
-                                            "<button title=\"View Announcement\" data-tooltip=\"tooltip\"  data-placement=\"bottom\" onclick=\"view_announcement("+data+");\" type=\"button\" class=\"btn btn-outline-success\"><i class=\"fas fa-eye\"></i></button>"+
-                                            "<button title=\"Edit Announcement\" data-tooltip=\"tooltip\"  data-placement=\"bottom\" onclick=\"edit_announcement_get_details("+data+");\" type=\"button\" class=\"btn btn-outline-warning\"><i class=\"fas fa-edit\"></i></button>"+
-                                            "<button title=\"Publish Announcement\" data-tooltip=\"tooltip\"  data-placement=\"bottom\" onclick=\"publish_announcement("+data+");\" type=\"button\" class=\"btn btn-outline-primary\"><i class=\"fas fa-envelope\"></i></button>"+
-                                            "</div>"
+                        var button_group =  '<div class="btn-group" role="group" aria-label="Basic example">';
+                        var button_view = '<button title="View Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="view_announcement('+data+');" type="button" class="btn btn-outline-info"><i class="fas fa-eye"></i></button>';
+                        var button_edit = '<button title="Edit Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="edit_announcement_get_details('+data+');" type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>';
+                        var button_publish = '<button title="Publish Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="publish_announcement('+data+');" type="button" class="btn btn-outline-success"><i class="fas fa-bullhorn"></i></button>';
+                        var button_unpublish = '<button title="Unpublish Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="unpublish_announcement('+data+');" type="button" class="btn btn-outline-secondary"><i class="fas fa-bullhorn"></i> <i class="fas fa-ban"></i></button>';
+                        var button_mail = '<button title="Email Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="mail_announcement('+data+');" type="button" class="btn btn-outline-primary"><i class="fas fa-envelope"></i></button>';
+                        var button_delete = '<button title="Delete Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="delete_announcement('+data+');" type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>';
+                        button_group = button_group + button_view + button_edit;
+                        if(row['published'] != 1){button_group = button_group + button_publish}
+                        if(row['published'] == 1){button_group = button_group + button_unpublish + button_mail}
+                        button_group = button_group + button_delete + '</div>';
                         return button_group;
                     }
                 }
@@ -63,15 +70,6 @@
             var id = $(this).closest("tr").find('.id').text();   
                        alert (id);
         });
-
-        view_announcement = (id) => {
-            var url = '{{ route("web.announcement", ":id") }}';
-            url = url.replace(':id', id);
-                    //    alert (id)
-                    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-width=1200,height=1000,left=100,top=100`;
-            window.open( url,'Student_Profile',params)
-        }
         
         $(".collapse.show").each(function(){
         // Add chevron-down icon for collapse element which is open by default
@@ -112,7 +110,7 @@ width=1200,height=1000,left=100,top=100`;
                     $('.invalid-feedback').html('');
                     $('.invalid-feedback').hide();
                     //Form Payload
-                    var formData = new FormData($("#formUserRole")[0]);
+                    var formData = new FormData($("#formCreateAnnouncement")[0]);
                     var description = CKEDITOR.instances.description.getData();
                     // var formData = new FormData();
                     // //Add data
@@ -219,11 +217,111 @@ width=1200,height=1000,left=100,top=100`;
         }
 
         publish_announcement = (id) => {
+            SwalQuestionSuccessAutoClose.fire({
+                title: "Are you sure?",
+                text: "You wont be able to revert this!",
+                confirmButtonText: 'Yes, Publish!',
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{ route('staff.website.announcements.publish') }}",
+                        type: 'post',
+                        data:{'id':id},
+                        beforeSend: function(){
+                            $('.btn').attr('disabled','disabled');
+                        },
+                        success: function(data){
+                            $('.btn').removeAttr('disabled','disabled');
+                            if(data['status'] == 'success'){
+                                console.log('email publish ajax is success');
+                                SwalDoneSuccess.fire({
+                                    title: 'Published!',
+                                    text: 'Announcement published successfully.',
+                                })
+                                .then((result) => {
+                                    location.reload();
+                                })
+                            }else{
+                                console.log('error on publishing email ajax');
+                                SwalSystemErrorDanger.fire();
+                            }
+                        },
+                        error: function(err){
+                            $('.btn').removeAttr('disabled','disabled');
+                            console.log('error in publish announcement ajax');
+                            SwalSystemErrorDanger.fire();
+                        }
+                    });
+                }else{
+                    
+                    SwalNotificationWarningAutoClose.fire({
+                        title: 'Cancelled!',
+                        text: 'Announcement publish process cancelled.',
+                    })
+                }
+            })
+        }
+
+        unpublish_announcement = (id) => {
+            SwalQuestionDangerAutoClose.fire({
+                title: "Are you sure?",
+                text: "You wont be able to revert this!",
+                confirmButtonText: 'Yes, Unpublish!',
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{ route('staff.website.announcements.unpublish') }}",
+                        type: 'post',
+                        data:{'id':id},
+                        beforeSend: function(){
+                            $('.btn').attr('disabled','disabled');
+                        },
+                        success: function(data){
+                            $('.btn').removeAttr('disabled','disabled');
+                            if(data['status'] == 'success'){
+                                console.log('email unpublish ajax is success');
+                                SwalDoneSuccess.fire({
+                                    title: 'Unpublished!',
+                                    text: 'Announcement unpublished successfully.',
+                                })
+                                .then((result) => {
+                                    location.reload();
+                                })
+                            }else{
+                                console.log('error on unpublishing email ajax');
+                                SwalSystemErrorDanger.fire();
+                            }
+                        },
+                        error: function(err){
+                            $('.btn').removeAttr('disabled','disabled');
+                            console.log('error in unpublish announcement ajax');
+                            SwalSystemErrorDanger.fire();
+                        }
+                    });
+                }else{
+                    
+                    SwalNotificationWarningAutoClose.fire({
+                        title: 'Cancelled!',
+                        text: 'Announcement unpublish process cancelled.',
+                    })
+                }
+            })
+        }
+
+        mail_announcement = (id) => {
             
             SwalQuestionSuccessAutoClose.fire({
                 title: "Are you sure?",
                 text: "You wont be able to revert this!",
-                confirmButtonText: 'Yes, Create!',
+                confirmButtonText: 'Yes, Mail All!',
             })
             .then((result) => {
                 if (result.isConfirmed) {
@@ -235,25 +333,26 @@ width=1200,height=1000,left=100,top=100`;
                         type: 'post',
                         data:{'id':id},
                         beforeSend: function(){
-                            $('#btnCreateAnnouncement').attr('disabled','disabled');
+                            $('.btn').attr('disabled','disabled');
                         },
                         success: function(data){
+                            $('.btn').removeAttr('disabled','disabled');
                             if(data['status'] == 'success'){
-                                console.log('publish announcement is success');
+                                console.log('email announcement is success');
                                 SwalDoneSuccess.fire({
                                     title: 'Created!',
-                                    text: 'Announcement created.',
+                                    text: 'Announcement emailed.',
                                 })
                                 .then((result) => {
                                     location.reload();
                                 })
                             }else{
-                                console.log('error on publish announcement');
+                                console.log('error on emailing announcement');
                             }
                         },
                         error: function(err){
-                            $('#btnCreateAnnouncement').removeAttr('disabled','disabled');
-                            console.log('error in publish announcement ajax');
+                            $('.btn').removeAttr('disabled','disabled');
+                            console.log('error in email announcement ajax');
                             SwalSystemErrorDanger.fire();
                         }
                     });
@@ -261,7 +360,7 @@ width=1200,height=1000,left=100,top=100`;
                     
                     SwalNotificationWarningAutoClose.fire({
                         title: 'Cancelled!',
-                        text: 'Announcement publish cancelled.',
+                        text: 'Announcement emailing cancelled.',
                     })
                 }
             })

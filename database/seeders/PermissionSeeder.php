@@ -51,14 +51,6 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-website',
-                    'portal'=>'staff',
-                    'module'=>'website',
-                    'description'=>'Can view website module',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
                     'name'=>'staff-student-exam-application',
                     'portal'=>'staff',
                     'module'=>'student',
@@ -143,6 +135,142 @@ class PermissionSeeder extends Seeder
                     'portal'=>'staff',
                     'module'=>'student',
                     'description'=>'Can decline a medical',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can access to staff exam page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-schedule-add',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can add an exam schedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-schedule-edit',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can edit a drafted exam schedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-schedule-delete-beforeRelease',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can delete a drafted exam schedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-schedule-request',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can request for exam schedule approval',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-schedule-approve',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can approve an exam schedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-schedule-decline',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can decline the approval of a exam schedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-schedule-decline-message',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can view the exam schedule decline message',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-schedule-release',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can release an exam schedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-schedule-allRelease',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can release all approved exam schedules',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-schedule-postpone',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can postpone a scheduled exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-schedule-delete-afterRelease',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can delete a scheduled exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-examList',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can access to exam list page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-examList-add',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can add a exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-examList-viewResults',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can view results of a exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-exam-examList-delete',
+                    'portal'=>'staff',
+                    'module'=>'exams',
+                    'description'=>'Can delete a exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-website',
+                    'portal'=>'staff',
+                    'module'=>'website',
+                    'description'=>'Can view website module',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -415,134 +543,6 @@ class PermissionSeeder extends Seeder
                     'portal'=>'staff',
                     'module'=>'system',
                     'description'=>'Can delete a payment type',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can access to staff exam page',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-schedule-add',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can add an exam schedule',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-schedule-edit',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can edit a drafted exam schedule',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-schedule-delete-beforeRelease',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can delete a drafted exam schedule',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-schedule-request',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can request for exam schedule approval',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-schedule-approve',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can approve an exam schedule',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-schedule-decline',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can decline the approval of a exam schedule',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-schedule-decline-message',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can view the exam schedule decline message',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-schedule-release',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can release an exam schedule',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-schedule-allRelease',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can release all approved exam schedules',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-schedule-postpone',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can postpone a scheduled exam',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-schedule-delete-afterRelease',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can delete a scheduled exam',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-examList',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can access to exam list page',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-examList-add',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can add a exam',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-examList-viewResults',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can view results of a exam',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-exam-examList-delete',
-                    'portal'=>'staff',
-                    'module'=>'exams',
-                    'description'=>'Can delete a exam',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],

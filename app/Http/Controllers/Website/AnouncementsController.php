@@ -10,7 +10,7 @@ class AnouncementsController extends Controller
 {
     public function index(){
 
-        $announcements = Anouncements::orderBy('created_at', 'desc')->get();
+        $announcements = Anouncements::orderBy('created_at', 'desc')->where('published', 1)->get();
         return view('website.announcements', [
             'announcements'=>$announcements,
             'title' => 'Announcements'

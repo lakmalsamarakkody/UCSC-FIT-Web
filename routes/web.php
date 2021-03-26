@@ -221,6 +221,8 @@ Route::post('/portal/staff/website/announcements', [App\Http\Controllers\Portal\
 Route::post('/portal/staff/website/announcements/get/details', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'getDetailsAnnouncement'])->name('staff.website.announcements.edit.get.details');
 Route::post('ckeditor/upload', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'ckeditorUpload'])->name('ckeditor.image-upload');
 Route::post('/portal/staff/website/announcements/email', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'emailAnnouncement'])->name('staff.website.announcements.email');
+Route::post('/portal/staff/website/announcements/publish', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'publishAnnouncement'])->name('staff.website.announcements.publish');
+Route::post('/portal/staff/website/announcements/unpublish', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'unpublishAnnouncement'])->name('staff.website.announcements.unpublish');
 // Route::get('/email', function() {
 //   $announcement = Anouncements::where('id', 10)->first();
 //   $details = [

@@ -45,8 +45,8 @@
                   <thead class="text-center">
                     <tr>
                       <th>Title</th>
-                      <th>Created At</th>
-                      <th>Updated At</th>
+                      <th>Created at</th>
+                      <th>Updated at</th>
                       <th>&nbsp;</th>
                     </tr>
                   </thead>

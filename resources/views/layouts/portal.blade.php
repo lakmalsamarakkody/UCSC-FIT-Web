@@ -120,11 +120,11 @@
                 <li id="exams"><a href="{{ route('exams') }}">Exams</a></li>
                 <li id="results"><a href="{{ route('results') }}">Results</a></li>
                 <li id="users"><a href="{{ route('users') }}">Users</a></li>
-                @if(Auth::user()->hasPermission('staff-system'))
-                  <li id="system"><a href="{{ route('system') }}">System</a></li>
-                @endif
                 @if(Auth::user()->hasPermission('staff-website'))
                   <li id="website"><a href="{{ route('staff.website') }}">Website</a></li>
+                @endif
+                @if(Auth::user()->hasPermission('staff-system'))
+                  <li id="system"><a href="{{ route('system') }}">System</a></li>
                 @endif
 
               </ul>
