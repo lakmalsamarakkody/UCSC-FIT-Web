@@ -291,6 +291,38 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
+                    'name'=>'staff-system-examDuration',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can view exam durations',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-examDuration-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can add exam durations',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-examDuration-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can edit exam durations',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-examDuration-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can delete exam durations',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
                     'name'=>'staff-system-studentPhase',
                     'portal'=>'staff',
                     'module'=>'system',

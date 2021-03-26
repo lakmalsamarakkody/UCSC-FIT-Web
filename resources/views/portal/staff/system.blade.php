@@ -31,7 +31,7 @@
     <div class="row">
       <!-- PERMISSION -->
       @if(Auth::user()->hasPermission('staff-system-permission'))
-      <div class="col-12 mt-xl-5">
+      <div class="col-12 mt-xl-5 h-100">
         <div class="card">
           <div class="card-header">PERMISSIONS</div>
           <div class="card-body">
@@ -64,7 +64,7 @@
       <!-- USER ROLE -->
       @if(Auth::user()->hasPermission('staff-system-role'))
       <div class="col-xl-6 col-lg-12 mt-xl-5">
-        <div class="card">
+        <div class="card h-100">
           <div class="card-header">USER ROLE</div>
           <div class="card-body">
             <div class="card-text">
@@ -76,7 +76,7 @@
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
-                <thead>
+                <tbody>
                   @foreach ($roles as $role)
                   <tr id="tbl-userRole-tr-{{$role->id}}">
                     <td>{{ $role->id }}</td>
@@ -90,7 +90,7 @@
                     </td>
                   </tr>
                   @endforeach
-                </thead>
+                </tbody>
               </table>
             </div>
           </div>
@@ -105,7 +105,7 @@
       <!-- SUBJECT -->
       @if(Auth::user()->hasPermission('staff-system-subject'))
       <div class="col-xl-6 col-lg-12 mt-xl-5">
-        <div class="card">
+        <div class="card h-100">
           <div class="card-header">SUBJECTS</div>
           <div class="card-body">
             <div class="card-text">
@@ -118,7 +118,7 @@
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
-                <thead>
+                <tbody>
                   @foreach ($subjects as $subject)
                   <tr id="tbl-subject-tr-{{$subject->id}}">
                     <td>{{ $subject->id }}</td>
@@ -132,7 +132,7 @@
                     </td>
                   </tr>
                   @endforeach
-                </thead>
+                </tbody>
               </table>
             </div>
           </div>
@@ -147,7 +147,7 @@
       <!-- EXAM TYPE -->
       @if(Auth::user()->hasPermission('staff-system-examType'))
       <div class="col-xl-6 col-lg-12 mt-xl-5">
-        <div class="card">
+        <div class="card h-100">
           <div class="card-header">EXAM TYPES</div>
           <div class="card-body">
             <div class="card-text">
@@ -159,7 +159,7 @@
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
-                <thead>
+                <tbody>
                   @foreach ($exam_types as $type)
                   <tr id="tbl-examType-tr-{{$type->id}}">
                     <td>{{ $type->id }}</td>
@@ -172,7 +172,7 @@
                     </td>
                   </tr>
                   @endforeach
-                </thead>
+                </tbody>
               </table>
             </div>
           </div>
@@ -184,10 +184,63 @@
       @endif
       <!-- /EXAM TYPE -->
 
+      <!-- EXAM DURATION -->
+      @if(Auth::user()->hasPermission('staff-system-examDuration'))
+      <div class="col-xl-6 col-lg-12 mt-xl-5">
+        <div class="card h-100">
+          <div class="card-header">EXAM DURATIONS</div>
+          <div class="card-body">
+            <table class="table table-responsive-md">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Subject</th>
+                  <th>Exam type</th>
+                  <th>Duration</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($exam_durations as $duration)
+                <tr id="tbl-examduration-tr-{{$duration->id}}">
+                  <td>{{ $duration->id }}</td>
+                  <td>{{ $duration->subject->name }}</td>
+                  <td>{{ $duration->examType->name }}</td>
+                  <td id="tdDuration-{{$duration->id}}">
+                    <span id="spanDurationHours-{{$duration->id}}">{{ $duration->hours }}</span> hours 
+                    <span id="spanDurationMinutes-{{$duration->id}}">{{ $duration->minutes }}</span> minutes
+                  </td>
+                  <td id="tdDurationEdit-{{$duration->id}}" class="d-none">
+                    <input type="number" id="inputDurationHours-{{$duration->id}}" class="form-control" value="{{ $duration->hours }}" placeholder="hours" min="0" max="12" />
+                    <small class="form-text text-muted">Hours</small>
+                    <input type="number" id="inputDurationMinutes-{{$duration->id}}" class="form-control" value="{{ $duration->minutes }}" placeholder="minutes" min="0" max="59"/>
+                    <small class="form-text text-muted">Minutes</small>
+                  </td>
+                  <td class="text-right">
+                    {{-- <div class="btn-group"> --}}
+                      @if(Auth::user()->hasPermission('staff-system-examDuration-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditExamDuration-{{$duration->id}}" onclick="edit_exam_duration_invoke({{$duration->id}});"><i class="fas fa-edit"></i></button>@endif
+                      @if(Auth::user()->hasPermission('staff-system-examDuration-edit'))<button type="button" class="btn btn-outline-success d-none" id="btnSaveExamDuration-{{$duration->id}}" onclick="edit_exam_duration_save({{$duration->id}});"><i class="fas fa-save"></i> <span id="spinnerBtnSaveExamDuration-{{$duration->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>@endif
+                      @if(Auth::user()->hasPermission('staff-system-examDuration-edit'))<button type="button" class="btn btn-outline-danger d-none" id="btnCancelExamDuration-{{$duration->id}}" onclick="edit_exam_duration_cancel({{$duration->id}});"><i class="la la-times"></i></button>@endif
+                      {{-- @if(Auth::user()->hasPermission('staff-system-examDuration-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteExamDuration-{{$duration->id}}" onclick="delete_exam_duration({{$duration->id}});"><i class="fas fa-trash-alt"></i></button>@endif --}}
+                    {{-- </div> --}}
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+          {{-- @if(Auth::user()->hasPermission('staff-system-examDuration-add'))
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-exam-duration"><i class="fas fa-plus"></i></button></div>
+          @endif --}}
+        </div>
+      </div>
+      @endif
+      <!-- /EXAM TYPE -->
+
       <!-- STUDENT PHASES -->
       @if(Auth::user()->hasPermission('staff-system-studentPhase'))
       <div class="col-xl-6 col-lg-12 mt-xl-5">
-        <div class="card">
+        <div class="card h-100">
           <div class="card-header">STUDENT PHASES</div>
           <div class="card-body">
             <div class="card-text">
@@ -201,7 +254,7 @@
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
-                <thead>
+                <tbody>
                   @foreach ($phases as $phase)
                   <tr id="tbl-studentPhase-tr-{{$phase->id}}">
                     <td>{{ $phase->id }}</td>
@@ -216,7 +269,7 @@
                     </td>
                   </tr>
                   @endforeach
-                </thead>
+                </tbody>
               </table>
             </div>
           </div>
@@ -231,7 +284,7 @@
       <!-- PAYMENT METHODS -->
       @if(Auth::user()->hasPermission('staff-system-paymentMethod'))
       <div class="col-xl-6 col-lg-12 mt-xl-5">
-        <div class="card">
+        <div class="card h-100">
           <div class="card-header">PAYMENT METHODS</div>
           <div class="card-body">
             <div class="card-text">
@@ -243,7 +296,7 @@
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
-                <thead>
+                <tbody>
                   @foreach ($payment_methods as $method)
                   <tr id="tbl-paymentMethod-tr-{{$method->id}}">
                     <td>{{ $method->id }}</td>
@@ -256,7 +309,7 @@
                     </td>
                   </tr>
                   @endforeach
-                </thead>
+                </tbody>
               </table>
             </div>
           </div>
@@ -271,7 +324,7 @@
       <!-- PAYMENT TYPES -->
       @if(Auth::user()->hasPermission('staff-system-paymentType'))
       <div class="col-xl-6 col-lg-12 mt-xl-5">
-        <div class="card">
+        <div class="card h-100">
           <div class="card-header">PAYMENT TYPES</div>
           <div class="card-body">
             <div class="card-text">
@@ -283,7 +336,7 @@
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
-                <thead>
+                <tbody>
                   @foreach ($payment_types as $type)
                   <tr id="tbl-paymentType-tr-{{$type->id}}">
                     <th>{{ $type->id }}</th>
@@ -296,7 +349,7 @@
                     </td>
                   </tr>
                   @endforeach
-                </thead>
+                </tbody>
               </table>
             </div>
           </div>

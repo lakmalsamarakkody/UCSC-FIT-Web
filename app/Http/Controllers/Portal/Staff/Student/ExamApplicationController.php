@@ -24,12 +24,13 @@ use function PHPUnit\Framework\isEmpty;
 
 class ExamApplicationController extends Controller
 {
-    public function index()
+    // REVIEW EXAM PAYMENTS
+    public function reviewExamPayments()
     {
         $today = Carbon::today();
-        $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', '!=', 'Declined')->where(function($query) {
+        $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', null)->where(function ($query) {
             $query->where('schedule_status', 'Pending')->orWhere('schedule_status', 'Scheduled');
-        })->orderBy('created_at', 'asc')->get()->unique('payment_id');
+          })->orderBy('created_at', 'asc')->get()->unique('payment_id');
         $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('schedule_status', 'Pending')->get();
         return view('portal/staff/student/exam_application', [
@@ -38,7 +39,26 @@ class ExamApplicationController extends Controller
             'exams' => $exams
         ]);
     }
-    // GET DETAILS FOR MODAL LOAD
+    // /REVIEW EXAM PAYMENTS
+
+    // REVIEW EXAM APPLICATIONS
+    public function reviewExamApplications()
+    {
+        $today = Carbon::today();
+        $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where(function ($query) {
+            $query->where('schedule_status', 'Pending')->orWhere('schedule_status', 'Scheduled');
+          })->orderBy('created_at', 'asc')->get()->unique('payment_id');
+        $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
+        $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('schedule_status', 'Pending')->get();
+        return view('portal/staff/student/exam_application', [
+            'exam_applicants' => $exam_applicants,
+            'applied_exams' => $applied_exams,
+            'exams' => $exams
+        ]);
+    }
+    // /REVIEW EXAM APPLICATIONS
+
+    // FUNCTIONS IN EXAM APPLICATION/PAYMENT VIEW MODAL
     // LOAD EXAM APPLICATION VIEW MODAL
     public function getApplicantExamDetails(Request $request)
     {
@@ -202,6 +222,7 @@ class ExamApplicationController extends Controller
         //dd($request->all());
     }
     // APPROVE SCHEDULED EXAMS
+    // /FUNCTIONS IN EXAM APPLICATION/PAYMENT VIEW MODAL
 
     // MEDICALS
     // REVIEW MEDICALS

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Portal\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
+use App\Models\Exam\Duration;
 use Illuminate\Http\Request;
 use App\Models\User\Role;
 use App\Models\Subject;
@@ -38,10 +39,11 @@ class SystemController extends Controller
     $permissions = Permission::orderby('id')->get();
     $subjects = Subject::orderby('code')->get();
     $exam_types = Types::orderby('id')->get();
+    $exam_durations = Duration::orderby('id')->get();
     $phases = Phase::orderby('id')->get();
     $payment_methods = Method::orderby('id')->get();
     $payment_types = Type::orderby('id')->get();
-    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types','payment_methods', 'payment_types', 'phases'));
+    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types', 'exam_durations','payment_methods', 'payment_types', 'phases'));
   }
 
   // PERMISSION
@@ -412,6 +414,38 @@ class SystemController extends Controller
   }
   // /DELETE FUNCTION
   // /EXAM TYPE
+
+  // EXAM DURATION
+  // EDIT FUNCTIONS
+  public function editExamDuration(Request $request){
+
+    //Validate exam duration id
+    $exam_duration_id_validator = Validator::make($request->all(), [
+      'exam_duration_id' => ['required', 'integer', 'exists:App\Models\Exam\Duration,id'],
+      'exam_duration_hours'  => ['required', 'integer', 'max:12', 'min:0'],
+      'exam_duration_minutes'  => ['required', 'integer', 'max:59', 'min:0'],
+    ]);
+
+    //Check validator fails
+    if($exam_duration_id_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$exam_duration_id_validator->errors()]);
+    endif;
+
+    //Update exam duration
+      // Duration::where('id', $request->exam_duration_id)->update([
+      //   'hours' => $request->exam_duration_hours,
+      //   'minutes' => $request->exam_duration_minutes,
+      // ]);
+    $duration = Duration::find($request->exam_duration_id);
+    $duration->hours = $request->exam_duration_hours;
+    $duration->minutes = $request->exam_duration_minutes;
+    if($duration->save()):
+      return response()->json(['status'=>'success', 'hours'=>$request->exam_duration_hours, 'minutes'=>$request->exam_duration_minutes ]);
+    endif;
+    return response()->json(['status'=>'error', 'request'=>$request->all()]);
+  }
+  // /EDIT FUNCTIONS
+  // /EXAM DURATION
 
   // STUDENT PHASE
   // CREATE FUNCTION

@@ -643,8 +643,7 @@
                             })
                             .then((result) => {
                                 if(result.isConfirmed) {
-                                    // $('#modal-view-exam-application').modal('hide');
-                                    appliedExamTable.draw();
+                                    location.reload();
                                 }
                             });
                         }

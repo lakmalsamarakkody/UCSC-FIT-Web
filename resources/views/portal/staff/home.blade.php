@@ -110,12 +110,24 @@
         <h5 class="col-12 title font-weight-bold mt-5 px-0">EXAMS</h5>
 
         <div class="col-xl-2 col-lg-4 p-1">
+          <a class="" href="{{ route('student.application.exams.payments') }}">
+            <div class="card card-dash shadow black-none bg-success" style="max-width: 18rem;">
+              <div class="card-body p-0 my-0 ">
+                <div class="card-title text-center m-0">{{ $examPaymentReviewCount }}</div>
+              </div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Review  <br/> Payments </h1></div>
+              <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="{{ route('student.application.exams') }}">
             <div class="card card-dash shadow black-none bg-success" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
-                <div class="card-title text-center m-0">{{ $examApplicationCount }}</div>
+                <div class="card-title text-center m-0">{{ $revieweExamsToScheduleCount }}</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>Review  <br/>Exams </h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Review  <br/> Applied Exams </h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
@@ -123,23 +135,11 @@
 
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="{{ route('student.exams.medical') }}">
-            <div class="card card-dash shadow black-none bg-success" style="max-width: 18rem;">
-              <div class="card-body p-0 my-0 ">
-                <div class="card-title text-center m-0">{{ $medicalCount }}</div>
-              </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>Review  <br/>Medicals </h1></div>
-              <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-xl-2 col-lg-4 p-1">
-          <a class="" href="{{ route('students') }}">
             <div class="card card-dash shadow black-none bg-main-warning" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
-                <div class="card-title text-center m-0">{{ $totalRegistered }}</div>
+                <div class="card-title text-center m-0">{{ $medicalReviewCount }}</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>Review <br> Payments </h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Review <br> Medicals </h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
