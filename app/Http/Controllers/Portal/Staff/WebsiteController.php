@@ -135,6 +135,7 @@ class WebsiteController extends Controller
             ];
             
             Mail::to($subscriber->email)->later(now()->addSeconds(5), new Announcement($details));
+            sleep(5);
 
         endforeach;
 
