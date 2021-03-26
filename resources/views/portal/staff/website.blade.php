@@ -27,15 +27,18 @@
 
 
     <!-- CONTENT -->
-    <div class="col-lg-12 website">
+    <div class="col-lg-12 min-vh-100 website">
       <div class="row">
         
+        @if(Auth::user()->hasPermission('staff-website-announcement'))
         <div class="col-lg-12">
           <div class="card shadow  mt-3">
             <div class="card-header">
               <div class="row justify-content-between mx-1">
                 Announcements
+                @if(Auth::user()->hasPermission('staff-website-announcement-add'))
                 <button data-toggle="modal" data-target="#modal-create-announcement" title="Add Announcement" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-lg btn-outline-primary" onclick="refresh_modal()"><i class="fa fa-plus"></i></button>
+                @endif
               </div>
             </div>
             <div class="card-body">
@@ -46,7 +49,7 @@
                     <tr>
                       <th>Title</th>
                       <th>Created at</th>
-                      <th>Updated at</th>
+                      <th>Last updated at</th>
                       <th>&nbsp;</th>
                     </tr>
                   </thead>
@@ -57,8 +60,8 @@
 
             </div>
           </div>
-
         </div>
+        @endif
 
       </div>
     </div>

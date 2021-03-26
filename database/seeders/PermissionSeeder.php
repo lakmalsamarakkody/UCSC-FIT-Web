@@ -51,89 +51,105 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-student-exam-application',
+                    'name'=>'staff-dashboard',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can view dashboard module',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student',
                     'portal'=>'staff',
                     'module'=>'student',
+                    'description'=>'Can view student module',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-exam-application',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
                     'description'=>'Can access to exam application page',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-student-exam-application-view',
+                    'name'=>'staff-dashboard-exam-application-view',
                     'portal'=>'staff',
-                    'module'=>'student',
+                    'module'=>'dashboard',
                     'description'=>'Can view exam applications',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-student-exam-application-payment-approve',
+                    'name'=>'staff-dashboard-exam-application-payment-approve',
                     'portal'=>'staff',
-                    'module'=>'student',
+                    'module'=>'dashboard',
                     'description'=>'Can approve an exam payment',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-student-exam-application-payment-decline',
+                    'name'=>'staff-dashboard-exam-application-payment-decline',
                     'portal'=>'staff',
-                    'module'=>'student',
+                    'module'=>'dashboard',
                     'description'=>'Can decline an exam payment',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-student-exam-application-viewSchedules',
+                    'name'=>'staff-dashboard-exam-application-viewSchedules',
                     'portal'=>'staff',
-                    'module'=>'student',
+                    'module'=>'dashboard',
                     'description'=>'Can view schedules for applied exam',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-student-exam-application-scheduleExam',
+                    'name'=>'staff-dashboard-exam-application-scheduleExam',
                     'portal'=>'staff',
-                    'module'=>'student',
+                    'module'=>'dashboard',
                     'description'=>'Can schedule an applied exam',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-student-exam-application-approveSchedules',
+                    'name'=>'staff-dashboard-exam-application-approveSchedules',
                     'portal'=>'staff',
-                    'module'=>'student',
+                    'module'=>'dashboard',
                     'description'=>'Can approve scheduled exams',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-student-exam-medical',
+                    'name'=>'staff-dashboard-exam-medical',
                     'portal'=>'staff',
-                    'module'=>'student',
+                    'module'=>'dashboard',
                     'description'=>'Can access to medical page',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-student-exam-medical-view',
+                    'name'=>'staff-dashboard-exam-medical-view',
                     'portal'=>'staff',
-                    'module'=>'student',
+                    'module'=>'dashboard',
                     'description'=>'Can view a medical',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-student-exam-medical-approve',
+                    'name'=>'staff-dashboard-exam-medical-approve',
                     'portal'=>'staff',
-                    'module'=>'student',
+                    'module'=>'dashboard',
                     'description'=>'Can approve a medical',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-student-exam-medical-decline',
+                    'name'=>'staff-dashboard-exam-medical-decline',
                     'portal'=>'staff',
-                    'module'=>'student',
+                    'module'=>'dashboard',
                     'description'=>'Can decline a medical',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -142,7 +158,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-exam',
                     'portal'=>'staff',
                     'module'=>'exams',
-                    'description'=>'Can access to staff exam page',
+                    'description'=>'Can view exam module',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -267,10 +283,90 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
+                    'name'=>'staff-result',
+                    'portal'=>'staff',
+                    'module'=>'result',
+                    'description'=>'Can view result module',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-user',
+                    'portal'=>'staff',
+                    'module'=>'user',
+                    'description'=>'Can view user module',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
                     'name'=>'staff-website',
                     'portal'=>'staff',
                     'module'=>'website',
                     'description'=>'Can view website module',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-website-announcement',
+                    'portal'=>'staff',
+                    'module'=>'website',
+                    'description'=>'Can view website announcement settings',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-website-announcement-add',
+                    'portal'=>'staff',
+                    'module'=>'website',
+                    'description'=>'Can add a website announcement',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-website-announcement-view',
+                    'portal'=>'staff',
+                    'module'=>'website',
+                    'description'=>'Can view a website announcement',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-website-announcement-edit',
+                    'portal'=>'staff',
+                    'module'=>'website',
+                    'description'=>'Can edit a website announcement',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-website-announcement-publish',
+                    'portal'=>'staff',
+                    'module'=>'website',
+                    'description'=>'Can publish a website announcement',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-website-announcement-unpublish',
+                    'portal'=>'staff',
+                    'module'=>'website',
+                    'description'=>'Can unpublish a website announcement',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-website-announcement-mail',
+                    'portal'=>'staff',
+                    'module'=>'website',
+                    'description'=>'Can mail a website announcement',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-website-announcement-delete',
+                    'portal'=>'staff',
+                    'module'=>'website',
+                    'description'=>'Can delete a website announcement',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],

@@ -11,7 +11,7 @@
 
     $(function () {
 
-        var table = $('.yajra-datatable').DataTable({
+        var announcementTable = $('.yajra-datatable').DataTable({
             pageLength: 10,
             processing: true,
             serverSide: true,
@@ -44,16 +44,16 @@
                     targets: 3,
                     render: function ( data, type, row ) {
                         var button_group =  '<div class="btn-group" role="group" aria-label="Basic example">';
-                        var button_view = '<button title="View Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="view_announcement('+data+');" type="button" class="btn btn-outline-info"><i class="fas fa-eye"></i></button>';
-                        var button_edit = '<button title="Edit Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="edit_announcement_get_details('+data+');" type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>';
-                        var button_publish = '<button title="Publish Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="publish_announcement('+data+');" type="button" class="btn btn-outline-success"><i class="fas fa-bullhorn"></i></button>';
-                        var button_unpublish = '<button title="Unpublish Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="unpublish_announcement('+data+');" type="button" class="btn btn-outline-secondary"><i class="fas fa-bullhorn"></i> <i class="fas fa-ban"></i></button>';
-                        var button_mail = '<button title="Email Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="mail_announcement('+data+');" type="button" class="btn btn-outline-primary"><i class="fas fa-envelope"></i></button>';
-                        var button_delete = '<button title="Delete Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="delete_announcement('+data+');" type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>';
-                        button_group = button_group + button_view + button_edit;
-                        if(row['published'] != 1){button_group = button_group + button_publish}
+                        var button_view = @if(Auth::user()->hasPermission('staff-website-announcement-add'))'<button title="View Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="view_announcement('+data+');" type="button" class="btn btn-outline-info"><i class="fas fa-eye"></i></button>' @else "" @endif;
+                        var button_edit = @if(Auth::user()->hasPermission('staff-website-announcement-edit'))'<button title="Edit Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="edit_announcement_get_details('+data+');" type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i></button>' @else "" @endif;
+                        var button_publish = @if(Auth::user()->hasPermission('staff-website-announcement-publish'))'<button title="Publish Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="publish_announcement('+data+');" type="button" class="btn btn-outline-success"><i class="fas fa-bullhorn"></i></button>' @else "" @endif;
+                        var button_unpublish = @if(Auth::user()->hasPermission('staff-website-announcement-unpublish'))'<button title="Unpublish Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="unpublish_announcement('+data+');" type="button" class="btn btn-outline-secondary"><i class="fas fa-bullhorn"></i> <i class="fas fa-ban"></i></button>' @else "" @endif;
+                        var button_mail = @if(Auth::user()->hasPermission('staff-website-announcement-mail'))'<button title="Email Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="mail_announcement('+data+');" type="button" class="btn btn-outline-primary"><i class="fas fa-envelope"></i></button>' @else "" @endif;
+                        var button_delete = @if(Auth::user()->hasPermission('staff-website-announcement-delete'))'<button title="Delete Announcement" data-tooltip="tooltip"  data-placement="bottom" onclick="delete_announcement('+data+');" type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>' @else "" @endif;
+                        button_group = button_group + button_view;
+                        if(row['published'] != 1){button_group = button_group + button_edit + button_publish + button_delete}
                         if(row['published'] == 1){button_group = button_group + button_unpublish + button_mail}
-                        button_group = button_group + button_delete + '</div>';
+                        button_group = button_group + '</div>';
                         return button_group;
                     }
                 }
@@ -61,14 +61,14 @@
         });
 
         search = () => {
-            table.draw();
+            announcementTable.draw();
 
         }
 
         $(".view-student").on('click',function() {
             // alert ('sdfsd');
             var id = $(this).closest("tr").find('.id').text();   
-                       alert (id);
+            alert (id);
         });
         
         $(".collapse.show").each(function(){
@@ -148,7 +148,9 @@
                                 text: 'Announcement created.',
                                 })
                                 .then((result) => {
-                                location.reload();
+                                $('#modal-create-announcement').modal('hide');
+                                announcementTable.draw();
+                                //location.reload();
                                 })
                             }                            
                             else if(data['updated'] == 'success'){
@@ -243,7 +245,8 @@
                                     text: 'Announcement published successfully.',
                                 })
                                 .then((result) => {
-                                    location.reload();
+                                    announcementTable.draw();
+                                    //location.reload();
                                 })
                             }else{
                                 console.log('error on publishing email ajax');
@@ -293,7 +296,8 @@
                                     text: 'Announcement unpublished successfully.',
                                 })
                                 .then((result) => {
-                                    location.reload();
+                                    announcementTable.draw();
+                                    //location.reload();
                                 })
                             }else{
                                 console.log('error on unpublishing email ajax');
