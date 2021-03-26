@@ -254,6 +254,17 @@ class ExamsController extends Controller
     return response()->json(['error'=>'error']);
   }
 
+  // EXAM DECLINED MESSAGE
+  public function getExamDeclinedMessage(Request $request) 
+  {
+    if($declined_exam = hasExam::where('id', $request->id)->first()):
+      return response()->json(['status'=>'success', 'declined_exam'=>$declined_exam]);
+    else:
+      return response()->json(['status'=>'error']);
+    endif;
+  }
+  // /EXAM DECLINED MESSAGE
+
   public function uploadExamMedical(Request $request)
   {
     $validator = Validator::make($request->all(), 
