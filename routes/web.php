@@ -272,6 +272,7 @@ Route::post('/portal/student/exams/select',[App\Http\Controllers\Portal\Student\
 Route::post('/portal/student/exams/delete',[App\Http\Controllers\Portal\Student\ExamsController::class,'deleteStudentExams'])->name('student.exam.delete');
 Route::get('/portal/student/exam/payment',[App\Http\Controllers\Portal\Student\ExamsController::class,'examPayment'])->name('payment.exam');
 Route::post('/portal/student/exam/payment',[App\Http\Controllers\Portal\Student\ExamsController::class,'saveExamPayment'])->name('payment.exam.save');
+Route::post('/portal/student/exam/declined/message',[App\Http\Controllers\Portal\Student\ExamsController::class,'getExamDeclinedMessage'])->name('student.exam.declined.message');
 Route::post('/portal/student/exam/medical/upload',[App\Http\Controllers\Portal\Student\ExamsController::class,'uploadExamMedical'])->name('student.exam.medical.upload');
 Route::post('/portal/student/exam/medical/delete',[App\Http\Controllers\Portal\Student\ExamsController::class,'deleteExamMedical'])->name('student.exam.medical.delete');
 // /EXAMS PAGE
