@@ -217,17 +217,17 @@ Route::post('/portal/staff/website/announcements', [App\Http\Controllers\Portal\
 Route::post('/portal/staff/website/announcements/get/details', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'getDetailsAnnouncement'])->name('staff.website.announcements.edit.get.details');
 Route::post('ckeditor/upload', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'ckeditorUpload'])->name('ckeditor.image-upload');
 Route::post('/portal/staff/website/announcements/email', [App\Http\Controllers\Portal\Staff\WebsiteController::class, 'emailAnnouncement'])->name('staff.website.announcements.email');
-// Route::get('/email', function() {
-//   $announcement = Anouncements::where('id', 10)->first();
-//   $details = [
-//     'title' => $announcement->title,
-//     'description' => $announcement->description,
-//     'id' => $announcement->id,
-//     'email' => $announcement->id,
-//     'token' => $announcement->id
-//   ];
-//   return new App\Mail\Announcement($details);
-// });
+Route::get('/email', function() {
+  $announcement = Anouncements::where('id', 10)->first();
+  $details = [
+    'subject' => $announcement->title,
+    'description' => $announcement->description,
+    'id' => $announcement->id,
+    'email' => $announcement->id,
+    'token' => $announcement->id
+  ];
+  return new App\Mail\NotificationEmail($details);
+});
 // /ANNOUNCEMENT PAGE
 
 // GUEST
