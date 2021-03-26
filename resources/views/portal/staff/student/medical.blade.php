@@ -35,32 +35,36 @@
           <div class="card">
             <div class="card-header">Medical Submitted Students</div>
             <div class="card-body">
-              <table class="table yajra-datatable">
-                <thead>
-                  <tr>
-                    <th>Registration No</th>
-                    <th>Student Name</th>
-                    <th>Date Applied</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($medicals as $medical)
+              @if($medicals->isEmpty())
+                <div class="alert alert-info" role="alert">No results found!</div>
+              @else
+                <table class="table yajra-datatable">
+                  <thead>
                     <tr>
-                      <td>{{ $medical->student_exam->student->reg_no }}</td>
-                      <td>{{ $medical->student_exam->student->initials }} {{ $medical->student_exam->student->last_name }}</td>
-                      <td>{{ $medical->created_at->isoFormat('YYYY-MM-DD') }}</td>
-                      <td>
-                        @if(Auth::user()->hasPermission('staff-student-exam-medical-view'))
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedMedical-{{ $medical->id }}" onclick="view_modal_medical({{ $medical->id }});"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedMedical-{{ $medical->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
-                        </div>
-                        @endif
-                      </td>
+                      <th>Registration No</th>
+                      <th>Student Name</th>
+                      <th>Date Applied</th>
+                      <th></th>
                     </tr>
-                  @endforeach
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    @foreach ($medicals as $medical)
+                      <tr>
+                        <td>{{ $medical->student_exam->student->reg_no }}</td>
+                        <td>{{ $medical->student_exam->student->initials }} {{ $medical->student_exam->student->last_name }}</td>
+                        <td>{{ $medical->created_at->isoFormat('YYYY-MM-DD') }}</td>
+                        <td>
+                          @if(Auth::user()->hasPermission('staff-student-exam-medical-view'))
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedMedical-{{ $medical->id }}" onclick="view_modal_medical({{ $medical->id }});"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedMedical-{{ $medical->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                          </div>
+                          @endif
+                        </td>
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              @endif
 
             </div>
           </div>
