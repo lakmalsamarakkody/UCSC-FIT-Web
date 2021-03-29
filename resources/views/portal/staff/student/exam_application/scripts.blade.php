@@ -449,7 +449,7 @@
                                                     '<select name="searchExam" id="searchExam" class="form-control" onchange="search_schedules_by_exam('+applied_exam_id+');">'+
                                                     '<option value="" selected>Please Select Exam</option>'+
                                                     '@foreach ($exams as $exam)'+
-                                                        '<option value="{{$exam->id}}">{{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}} {{$exam->year}} </option>'+
+                                                        '<option value="{{$exam->id}}">{{$exam->year}} {{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}}</option>'+
                                                     '@endforeach'+
                                                     '</select>'+
                                                 '</div>'+
