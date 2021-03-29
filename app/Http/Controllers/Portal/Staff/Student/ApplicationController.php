@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Portal\Staff\Student;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotificationEmail;
 use App\Models\Student;
 use App\Models\Student\Document;
 use App\Models\Student\Payment;
@@ -16,6 +17,7 @@ use App\Models\Support\WorldCountry;
 use App\Models\Support\WorldDivision;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {    
@@ -172,6 +174,14 @@ class ApplicationController extends Controller
         $payment = Payment::where('id', $registration->first()->payment_id);
         if($payment->update(['status'=>'Approved'])):
             if($registration->update(['payment_status'=>'Approved'])):
+                $student = Student::where('id', $payment->student_id)->first();
+                $details = [
+                    'subject' => 'Registration Payment Approved',
+                    'title' => 'Registration Payment Approved',
+                    'body' => 'Registration Payment Approved',
+                    'color' => '#1b672a'
+                ];
+                Mail::to($student->user->email)->queue( new NotificationEmail($details) );
                 return response()->json([ 'status'=>'success']);
             endif;
         endif;
@@ -183,6 +193,14 @@ class ApplicationController extends Controller
         $payment = Payment::where('id', $registration->first()->payment_id);
         if($payment->update(['status'=>'Declined'])):
             if($registration->update(['registered_at'=> NULL, 'registration_expire_at'=>NULL, 'payment_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
+                $student = Student::where('id', $payment->student_id)->first();
+                $details = [
+                    'subject' => 'Registration Payment Declined',
+                    'title' => 'Registration Payment Declined',
+                    'body' => 'Registration Payment Declined',
+                    'color' => '#821919'
+                ];
+                Mail::to($student->user->email)->queue( new NotificationEmail($details) );
                 return response()->json([ 'status'=>'success']);
             endif;
         endif;
