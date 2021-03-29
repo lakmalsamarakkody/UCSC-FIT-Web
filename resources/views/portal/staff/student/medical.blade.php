@@ -54,7 +54,7 @@
                         <td>{{ $medical->student_exam->student->initials }} {{ $medical->student_exam->student->last_name }}</td>
                         <td>{{ $medical->created_at->isoFormat('YYYY-MM-DD') }}</td>
                         <td>
-                          @if(Auth::user()->hasPermission('staff-student-exam-medical-view'))
+                          @if(Auth::user()->hasPermission('staff-dashboard-exam-medical-view'))
                           <div class="btn-group">
                             <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedMedical-{{ $medical->id }}" onclick="view_modal_medical({{ $medical->id }});"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedMedical-{{ $medical->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                           </div>

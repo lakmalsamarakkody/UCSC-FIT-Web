@@ -304,11 +304,12 @@ class ExamsController extends Controller
   public function deleteExamMedical(Request $request)
   {
     $student_id = Auth::user()->student->id;
-    $student_exam = hasExam::where('id',$request->id);
+    $student_exam = hasExam::where('id',$request->id)->first();
+    $medical = Medical::where('id', $student_exam->medical_id);
 
-    $medical_image = ($student_exam->first())->medical_image;
+    $medical_image = ($medical->first())->image;
 
-    if( $student_exam->update([  'medical_reason' => Null, 'medical_image' => Null, 'medical_status' => Null ]) && Storage::delete('public/medicals/'.$student_id.'/'.$medical_image) ):     
+    if( $medical->forceDelete() && Storage::delete('public/medicals/'.$student_id.'/'.$medical_image) && $student_exam->update(['medical_id'=>null])):     
 
       return response()->json(['status'=>'success']);
 

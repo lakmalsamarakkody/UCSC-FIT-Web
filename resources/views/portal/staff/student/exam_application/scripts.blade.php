@@ -81,7 +81,7 @@
                     render: function(data, type, row) {
                         var btnGroup = '<div class="btn-group">';
                         if(row['payment_status'] == 'Approved') {
-                            @if(Auth::user()->hasPermission('staff-student-exam-application-viewSchedules'))
+                            @if(Auth::user()->hasPermission('staff-dashboard-exam-application-viewSchedules'))
                             btnGroup = btnGroup + '<button type="button" class="btn btn-outline-primary" id="btnScheduleAppliedExam-'+data+'" onclick="invoke_modal_schedule_exam('+data+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam"><i class="fas fa-calendar-alt"></i><span id="spinnerBtnScheduleAppliedExam-'+data+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>';
                             @endif
                         }
@@ -405,7 +405,7 @@
                     targets: 4,
                     render: function(data, type, row) {
                         var btnGroup = '<div class="btn-group">';
-                        @if(Auth::user()->hasPermission('staff-student-exam-application-scheduleExam'))
+                        @if(Auth::user()->hasPermission('staff-dashboard-exam-application-scheduleExam'))
                         btnGroup = btnGroup + '<button type="button" class="btn btn-outline-primary" id="btnModalSetExamSchedule-'+data+'" onclick="schedule_applied_exam('+applied_exam_id+','+data+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Schedule<span id="spinnerBtnModalSetExamSchedule-'+data+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>';
                         @endif
                         btnGroup = btnGroup +'</div>';
@@ -449,7 +449,7 @@
                                                     '<select name="searchExam" id="searchExam" class="form-control" onchange="search_schedules_by_exam('+applied_exam_id+');">'+
                                                     '<option value="" selected>Please Select Exam</option>'+
                                                     '@foreach ($exams as $exam)'+
-                                                        '<option value="{{$exam->id}}">{{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}} {{$exam->year}} </option>'+
+                                                        '<option value="{{$exam->id}}">{{$exam->year}} {{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}}</option>'+
                                                     '@endforeach'+
                                                     '</select>'+
                                                 '</div>'+

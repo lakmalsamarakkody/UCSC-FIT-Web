@@ -10,12 +10,12 @@
             <div class="modal-body">
                 <div class="col-12 px-0">
                     <div class="alert alert-danger" role="alert">
-                      <h4 class="alert-heading"><i class="fas fa-exclamation-circle"></i>Reason to Decline</h4>
+                      <h4 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Reason to Decline</h4>
                       <p><span name="spanExamDeclinedMessage" id="spanExamDeclinedMessage"></span></p>
                     </div>
                 </div>
                 <div class="alert alert-info" role="alert">
-                    <p class="font-weight-bold mb-0">If you want to re-apply for exams or get more details about the declined issue please contact <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+                    <p class="font-weight-bold mb-0">If you want to re-apply for exams or get more details about the declined issue please contact <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Coordinator (taw@ucsc.cmb.ac.lk)</a></p>
                 </div>
             </div>
         </div>
