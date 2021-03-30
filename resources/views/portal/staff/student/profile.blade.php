@@ -234,28 +234,20 @@
                                   </thead>
                                   <tbody class="text-center">
                                     <tr>
-                                      <td>2017 June</td>
-                                      <td>56</td>
-                                      <td>80</td>
-                                      <td>65</td>
-                                      <td>60</td>
+                                      <td>2021 March</td>
+                                      <td>78</td>
+                                      <td>90</td>
                                       <td>45</td>
+                                      <td>89</td>
+                                      <td>40</td>
                                     </tr>
                                     <tr>
-                                      <td>2017 June</td>
-                                      <td>56</td>
+                                      <td>2021 March</td>
+                                      <td>70</td>
                                       <td>80</td>
-                                      <td>65</td>
-                                      <td>60</td>
-                                      <td>45</td>
-                                    </tr>
-                                    <tr>
-                                      <td>2017 June</td>
-                                      <td>56</td>
-                                      <td>80</td>
-                                      <td>65</td>
-                                      <td>60</td>
-                                      <td>45</td>
+                                      <td>49</td>
+                                      <td>74</td>
+                                      <td>78</td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -265,18 +257,22 @@
                                   <thead class="text-center">
                                     <tr>
                                       <th>Exam</th>
+                                      <th>Held Date</th>
                                       <th>Subject</th>
                                       <th>Exam Type</th>
                                       <th>Medical</th>
                                     </tr>
                                   </thead>
                                   <tbody class="text-center">
-                                    <tr>
-                                      <td>2017 June</td>
-                                      <td>FIT 203</td>
-                                      <td>Practical</td>
-                                      <td><button class="btn btn-sm btn-warning px-32 text-center"><i class="fa fa-eye p-0"></i></button></td>
-                                    </tr>
+                                    @foreach ($medical_submitted_exams as $medical)
+                                      <tr>
+                                        <td>{{ $medical->schedule->exam->year }} {{ \Carbon\Carbon::createFromDate($medical->schedule->exam->year, $medical->schedule->exam->month)->monthName }}</td>
+                                        <td>{{ $medical->schedule->date }}</td>
+                                        <td>FIT {{ $medical->schedule->subject->code}} - {{ $medical->schedule->subject->name }}</td>
+                                        <td>{{ $medical->schedule->type->name }}</td>
+                                        <td><button class="btn btn-sm btn-warning px-32 text-center" data-toggle="modal" data-target="#modal-profile-medical"><i class="fa fa-eye p-0"></i></button></td>
+                                      </tr>
+                                      @endforeach
                                   </tbody>
                                 </table>
                               </div>
@@ -297,5 +293,6 @@
 <div class="mb-5">&nbsp;</div>
 
  @include('portal.staff.student.profile.scripts')
+ @include('portal.staff.student.profile.modal')
 
 @endsection

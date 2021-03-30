@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Mail\ChangeEmail;
 use App\Models\Student;
 use App\Models\Student\Registration;
+use App\Models\Student\hasExam;
+use App\Models\Student\Medical;
+use App\Models\Exam\Schedule;
+use App\Models\Exam\Types;
+use App\Models\Exam;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -97,7 +102,8 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $registration = Registration::where('student_id', $id)->latest()->first();
-        return view('portal/staff/student/profile', compact('student', 'registration'));
+        $medical_submitted_exams = hasExam::where('student_id', $id)->where('medical_id', '!=', null)->get();
+        return view('portal/staff/student/profile', compact('student', 'registration', 'medical_submitted_exams'));
     }
 
         // UPDATE EMAIL
