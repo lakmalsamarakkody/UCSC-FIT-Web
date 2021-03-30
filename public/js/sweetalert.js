@@ -138,3 +138,4 @@ const SwalNotificationErrorDangerAutoClose = Swal.mixin({
   timerProgressBar: true,
 })
 // /SWEETALERT NOTIFICATION
+// /SWEETALERT
