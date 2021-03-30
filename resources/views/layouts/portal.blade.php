@@ -144,6 +144,7 @@
                     <i class="logout fa fa-power-off"></i>
                   </a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                  
                 </div>
               </div> --}}
 
@@ -185,6 +186,7 @@
                 <div class="col-lg-3 p-2 my-2  text-right">
                   <button class="btn btn-link btn-lg  nav-item" onclick="location.replace('{{ route('staff.information') }}')"><i class="fa fa-cog"></i></a>
                   <button title="Logout" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-link btn-lg  pr-5 nav-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></button>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                 </div>
 
 
