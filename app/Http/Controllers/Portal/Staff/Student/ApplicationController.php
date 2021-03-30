@@ -20,7 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
-{    
+{
     public function __construct()
     {
         $this->middleware('auth');
@@ -91,10 +91,10 @@ class ApplicationController extends Controller
             $idBack = NULL;
             if( $id->type == 'NIC'):
                 $idBack = $student->document->where('type', 'NIC')->where('side', 'back')->first()->image;
-            endif;  
+            endif;
             $documents = array('bcFront' => $bcFront, 'bcBack' => $bcBack, 'idFront' => $idFront, 'idBack' => $idBack);
         endif;
-        
+
         //PERMANENT ADDRESS
         $permanentCountry = WorldCountry::where('id',$student->permanent_country_id)->first()->name;
         $permanentState = NULL;
@@ -147,13 +147,21 @@ class ApplicationController extends Controller
         $currentAddressDetails = array('currentCountry'=>$currentCountry, 'currentState'=>$currentState, 'currentCity'=>$currentCity);
         // /CURRENT ADDRESS
         return response()->json(['status'=>'success', 'student'=>$student , 'registration'=>$registration, 'payment'=> $payment, 'documents'=> $documents, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
-        
+
     }
 
     // APPLICATION
     public function approveApplication(Request $request){
         $registration = Registration::where('id', $request->registration_id);
         if($registration->update(['application_status'=> 'Approved'])):
+            $student = Student::where('id', $registration->student_id)->first();
+            $details = [
+                'subject' => 'Registration Details Approved',
+                'title' => 'Registration Details Approved',
+                'body' => "Registration Details Approved! You'll be notified once you are registered.",
+                'color' => '#1b672a'
+            ];
+            Mail::to($student->user->email)->queue( new NotificationEmail($details) );
             return response()->json([ 'status'=>'success']);
         endif;
         return response()->json([ 'status'=>'error']);
@@ -162,6 +170,19 @@ class ApplicationController extends Controller
     public function declineApplication(Request $request){
         $registration = Registration::where('id', $request->registration_id);
         if($registration->update(['registered_at'=> NULL, 'registration_expire_at'=>NULL, 'application_submit'=>0, 'application_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
+            $student = Student::where('id', $registration->student_id)->first();
+            if($request->declined_msg != NULL):
+                $decline_msg = $request->declined_msg;
+            else:
+                $decline_msg = '';
+            endif;
+            $details = [
+                'subject' => 'Registration Details Declined',
+                'title' => 'Registration Details Declined',
+                'body' => $decline_msg,
+                'color' => '#821919'
+            ];
+            Mail::to($student->user->email)->queue( new NotificationEmail($details) );
             return response()->json([ 'status'=>'success']);
         endif;
         return response()->json([ 'status'=>'error']);
@@ -178,7 +199,7 @@ class ApplicationController extends Controller
                 $details = [
                     'subject' => 'Registration Payment Approved',
                     'title' => 'Registration Payment Approved',
-                    'body' => 'Registration Payment Approved',
+                    'body' => "Registration Payment Approved. You'll be notified once you are registered.",
                     'color' => '#1b672a'
                 ];
                 Mail::to($student->user->email)->queue( new NotificationEmail($details) );
@@ -194,10 +215,15 @@ class ApplicationController extends Controller
         if($payment->update(['status'=>'Declined'])):
             if($registration->update(['registered_at'=> NULL, 'registration_expire_at'=>NULL, 'payment_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
                 $student = Student::where('id', $payment->student_id)->first();
+                if($request->declined_msg != NULL):
+                    $decline_msg = $request->declined_msg;
+                else:
+                    $decline_msg = '';
+                endif;
                 $details = [
                     'subject' => 'Registration Payment Declined',
                     'title' => 'Registration Payment Declined',
-                    'body' => 'Registration Payment Declined',
+                    'body' => $decline_msg,
                     'color' => '#821919'
                 ];
                 Mail::to($student->user->email)->queue( new NotificationEmail($details) );
@@ -212,6 +238,14 @@ class ApplicationController extends Controller
     public function approveDocuments(Request $request){
         $registration = Registration::where('id', $request->registration_id);
         if($registration->update(['document_status'=>'Approved'])):
+            $student = Student::where('id', $registration->student_id)->first();
+            $details = [
+                'subject' => 'Registration Documents Approved',
+                'title' => 'Registration Documents Approved',
+                'body' => "Registration Documents Approved! You'll be notified once you are registered.",
+                'color' => '#1b672a'
+            ];
+            Mail::to($student->user->email)->queue( new NotificationEmail($details) );
             return response()->json([ 'status'=>'success']);
         endif;
         return response()->json([ 'status'=>'error']);
@@ -225,6 +259,19 @@ class ApplicationController extends Controller
                 Document::destroy($document->id);
             endforeach;
             if($registration->update(['registered_at'=>NULL, 'registration_expire_at'=>NULL, 'document_submit'=>0, 'document_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
+                $student = Student::where('id', $registration->student_id)->first();
+                if($request->declined_msg != NULL):
+                    $decline_msg = $request->declined_msg;
+                else:
+                    $decline_msg = '';
+                endif;
+                $details = [
+                    'subject' => 'Registration - Birth Certificate Declined',
+                    'title' => 'Registration - Birth Certificate Declined',
+                    'body' => $decline_msg,
+                    'color' => '#821919'
+                ];
+                Mail::to($student->user->email)->queue( new NotificationEmail($details) );
                 return response()->json([ 'status'=>'success']);
             endif;
         endif;
@@ -239,6 +286,19 @@ class ApplicationController extends Controller
                 Document::destroy($document->id);
             endforeach;
             if($registration->update(['registered_at'=>NULL, 'registration_expire_at'=>NULL, 'document_submit'=>0, 'document_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
+                $student = Student::where('id', $registration->student_id)->first();
+                if($request->declined_msg != NULL):
+                    $decline_msg = $request->declined_msg;
+                else:
+                    $decline_msg = '';
+                endif;
+                $details = [
+                    'subject' => 'Registration - Identity Document Declined',
+                    'title' => 'Registration - Identity Document Declined',
+                    'body' => $decline_msg,
+                    'color' => '#821919'
+                ];
+                Mail::to($student->user->email)->queue( new NotificationEmail($details) );
                 return response()->json([ 'status'=>'success']);
             endif;
         endif;
