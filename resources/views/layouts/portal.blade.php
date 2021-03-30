@@ -136,21 +136,16 @@
                 @if(Auth::user()->hasPermission('staff-system'))
                   <li id="system"><a href="{{ route('system') }}">System</a></li>
                 @endif
-
               </ul>
 
-
-
-                <div class="logout-menu w-100 text-center " style="display:flex; align-items:flex-end;">
-                  <div class="py-3 justify-content-center align-content-center" style="position: absolute; bottom: 0; left: 0; width: 100%;">
-
-                    {{-- <a  title="Logout" data-tooltip="tooltip"  data-placement="bottom"  class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                      <i class="logout fa fa-power-off"></i>
-                    </a> --}}
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-                  </div>
-
+              {{-- <div class="logout-menu w-100 text-center " style="display:flex; align-items:flex-end;">
+                <div class="py-3 justify-content-center align-content-center" style="position: absolute; bottom: 0; left: 0; width: 100%;">
+                  <a  title="Logout" data-tooltip="tooltip"  data-placement="bottom"  class="text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="logout fa fa-power-off"></i>
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                 </div>
+              </div> --}}
 
             </div>
             <!-- /MENU SECTION -->
