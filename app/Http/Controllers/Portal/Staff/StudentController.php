@@ -102,8 +102,8 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $registration = Registration::where('student_id', $id)->latest()->first();
-        $medical_submitted_exams = hasExam::where('student_id', $id)->where('medical_id', '!=', null)->get();
-        return view('portal/staff/student/profile', compact('student', 'registration', 'medical_submitted_exams'));
+        $medicals = Medical::where('student_id', $id)->orderBy('created_at','desc')->get();
+        return view('portal/staff/student/profile', compact('student', 'registration', 'medicals'));
     }
 
         // UPDATE EMAIL
@@ -180,4 +180,11 @@ class StudentController extends Controller
             endif;
             return response()->json(['error'=>'error']);
         }
+
+        // MEDICAL MODAL LOAD
+        public function getMedicalDetails(Request $request)
+        {
+            
+        }
+        // /MEDICAL MODAL LOAD
 }

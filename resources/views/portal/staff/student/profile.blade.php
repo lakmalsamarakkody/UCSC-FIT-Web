@@ -264,13 +264,13 @@
                                     </tr>
                                   </thead>
                                   <tbody class="text-center">
-                                    @foreach ($medical_submitted_exams as $medical)
+                                    @foreach ($medicals as $medical)
                                       <tr>
-                                        <td>{{ $medical->schedule->exam->year }} {{ \Carbon\Carbon::createFromDate($medical->schedule->exam->year, $medical->schedule->exam->month)->monthName }}</td>
-                                        <td>{{ $medical->schedule->date }}</td>
-                                        <td>FIT {{ $medical->schedule->subject->code}} - {{ $medical->schedule->subject->name }}</td>
-                                        <td>{{ $medical->schedule->type->name }}</td>
-                                        <td><button class="btn btn-sm btn-warning px-32 text-center" data-toggle="modal" data-target="#modal-profile-medical"><i class="fa fa-eye p-0"></i></button></td>
+                                        <td>{{ $medical->student_exam->schedule->exam->year }} {{ \Carbon\Carbon::createFromDate($medical->student_exam->schedule->exam->year, $medical->student_exam->schedule->exam->month)->monthName }}</td>
+                                        <td>{{ $medical->student_exam->schedule->date }}</td>
+                                        <td>FIT {{ $medical->student_exam->schedule->subject->code}} - {{ $medical->student_exam->schedule->subject->name }}</td>
+                                        <td>{{ $medical->student_exam->schedule->type->name }}</td>
+                                        <td><button class="btn btn-sm btn-warning px-32 text-center" id="modalProfileMedicalId-{{ $medical->id }}" onclick="view_medical({{ $medical->id }});"><i class="fa fa-eye p-0"></i></button></td>
                                       </tr>
                                       @endforeach
                                   </tbody>
