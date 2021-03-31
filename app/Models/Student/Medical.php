@@ -7,6 +7,7 @@ use App\Models\Student\hasExam;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use PhpParser\Node\Expr\FuncCall;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Medical extends Model
@@ -27,6 +28,11 @@ class Medical extends Model
 
     public function student_exam() {
         return $this->belongsTo(hasExam::class, 'student_exam_id', 'id');
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id', 'id');
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Student\Document;
 use App\Models\Student\Flag;
 use App\Models\Student\hasExam;
+use App\Models\Student\Medical;
 use App\Models\Student\Payment;
 use App\Models\Student\Registration;
 use App\Models\Support\SlCity;
@@ -134,5 +135,10 @@ class Student extends Model
     public function current_registration()
     {
         return $this->hasOne(Registration::class, 'student_id', 'id')->latest();
+    }
+
+    public function medical()
+    {
+        return $this->hasMany(Medical::class, 'student_id', 'id');
     }
 }
