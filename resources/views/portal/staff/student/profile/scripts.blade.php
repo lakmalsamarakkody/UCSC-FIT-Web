@@ -297,7 +297,19 @@
             var submittedDate = new Date(data['medical']['created_at']);
             var heldDate = new Date(data['exam']['held_date']);
             $('#spanMedicalSubmittedOn').html(submittedDate.toLocaleDateString());
-            $('#spanMedicalStatus').html(data['medical']['status']);
+            if(data['medical']['status'] == 'Pending') {
+              $('#spanMedicalStatus').html("<h5><span class='badge badge-warning'>"+data['medical']['status']+"</span></h5>");
+            }
+            else if(data['medical']['status'] == 'Approved') {
+              $('#spanMedicalStatus').html("<h5><span class='badge badge-success'>"+data['medical']['status']+"</span></h5>");
+            }
+            else if(data['medical']['status'] == 'Declined') {
+              $('#spanMedicalStatus').html("<h5><span class='badge badge-danger'>"+data['medical']['status']+"</span></h5>");
+            }
+            else {
+              $('#spanMedicalStatus').html("<h5><span class='badge badge-secondary'>"+'Decline to Resubmit'+"</span></h5>");
+            }
+            
             $('#spanMedicalSubject').html('FIT ' + data['exam']['subject_code'] + ' - ' + data['exam']['subject_name']);
             $('#spanMedicalExamType').html(data['exam']['exam_type']);
             $('#spanMedicalExamHeldDate').html(heldDate.toLocaleDateString());

@@ -17,7 +17,6 @@
                                 <div class="card-body pb-0">
                                     <div class="row">
                                         <div class="col-md-12 order-md-1 order-2 mt-4">
-                                            {{-- <input type="hidden" value="" id="medicalId" class="form-control" readonly/> --}}
                                             <table id="tblProfileMedicals" class="table">
                                                 <tr>
                                                     <th>Submitted on: </th>
@@ -25,7 +24,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Medical Status: </th>
-                                                    <td><span id="spanMedicalStatus"></span></td>                                        
+                                                    <td id="spanMedicalStatus"></td>          
                                                 </tr>
                                                 <tr>
                                                     <th>Subject: </th>
@@ -47,23 +46,6 @@
                                             <div class="col-lg-12">
                                                 <div name="imgMedical" id="imgMedical" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
                                             </div>
-                                            {{-- <div class="mt-4 col-12 text-center mb-4">
-                                                @if(Auth::user()->hasPermission('staff-dashboard-exam-medical-approve'))
-                                                <div id="divBtnApproveMedical" class="btn-group col-xl-3 mt-1">
-                                                    <button type="button" class="btn btn-success form-control" id="btnApproveMedical" onclick="approve_medical();">Approve<span id="spinnerBtnApproveMedical" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-                                                </div>
-                                                @endif
-                                                @if(Auth::user()->hasPermission('staff-dashboard-exam-medical-decline'))
-                                                <div id="divBtnDeclineResubmit" class="btn-group col-xl-4 mt-1">
-                                                    <button type="button" class="btn btn-primary form-control" id="btnDeclineResubmit" onclick="resubmission_enable_decline();">Decline to Resubmission<span id="spinnerBtnDeclineResubmit" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-                                                </div>
-                                                @endif
-                                                @if(Auth::user()->hasPermission('staff-dashboard-exam-medical-decline'))
-                                                <div id="divBtnDeclineMedical" class="btn-group col-xl-3 mt-1">
-                                                    <button type="button" class="btn btn-warning form-control" id="btnDeclineMedical" onclick="decline_medical();">Decline<span id="spinnerBtnDeclineMedical" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-                                                </div>
-                                                @endif
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -72,9 +54,9 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            {{-- <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Check Later</button>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
