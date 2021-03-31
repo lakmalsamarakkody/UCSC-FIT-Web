@@ -273,5 +273,48 @@
   $(function(){
     
   });
+
+  // MEDICAL MODAL LOAD
+  view_medical = (medical_id) => {
+
+    var formData = new FormData();
+    formData.append('medical_id', medical_id);
+    
+    // Get Medical Details controller
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ route('profile.medical.details') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function() {$('#modalProfileMedical-'+medical_id).attr('disabled', 'disabled')},
+      success: function(data) {
+        console.log('Success in get medical details ajax.');
+        if(data['status'] == 'success') {
+          if(data['medical'] != null && data['exam'] != null) {
+            var date = new Date(data['medical']['created_at']);
+            $('#spanMedicalSubmittedOn').html(date.toLocaleDateString());
+            $('#spanMedicalStatus').html(data['medical']['status']);
+            $('#spanMedicalSubject').html('FIT ' + data['exam']['subject_code'] + ' - ' + data['exam']['subject_name']);
+            $('#spanMedicalExamType').html(data['exam']['exam_type']);
+            $('#spanMedicalExamHeldDate').html(data['exam']['held_date']);
+            $('#spanMedicalReason').html(data['medical']['reason']);
+            $('#imgMedical').attr('style', 'background: url(/storage/medicals/'+data['student']['id']+'/'+data['medical']['image']+')');
+            $('#imgMedical').attr('onclick', 'window.open("/storage/medicals/'+data['student']['id']+'/'+data['medical']['image']+'")');
+
+            $('#modalProfileMedical-'+medical_id).removeAttr('disabled', 'disabled');
+            $('#modal-profile-medical').modal('show');
+          }
+        }
+      },
+      error: function(err) {
+        console.log('Error in get medical details ajax.');
+        $('#modalProfileMedical-'+medical_id).removeAttr('disabled', 'disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+  // /MEDICAL MODAL LOAD
 </script>
 @endsection

@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\Student\Registration;
 use App\Models\Student\hasExam;
 use App\Models\Student\Medical;
+use App\Models\Subject;
 use App\Models\Exam\Schedule;
 use App\Models\Exam\Types;
 use App\Models\Exam;
@@ -184,7 +185,15 @@ class StudentController extends Controller
         // MEDICAL MODAL LOAD
         public function getMedicalDetails(Request $request)
         {
-            
+            $medical = Medical::where('id', $request->medical_id)->first();
+            $exam = hasExam::where('id',$medical->student_exam_id)->addSelect([
+                'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+                'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+                'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
+                'held_date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id')
+            ])->first();
+            $student = Student::where('id', $medical->student_id)->first();
+            return response()->json(['status'=>'success', 'medical'=>$medical, 'exam'=>$exam, 'student'=>$student]);
         }
         // /MEDICAL MODAL LOAD
 }

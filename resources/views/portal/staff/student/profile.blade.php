@@ -270,7 +270,7 @@
                                         <td>{{ $medical->student_exam->schedule->date }}</td>
                                         <td>FIT {{ $medical->student_exam->schedule->subject->code}} - {{ $medical->student_exam->schedule->subject->name }}</td>
                                         <td>{{ $medical->student_exam->schedule->type->name }}</td>
-                                        <td><button class="btn btn-sm btn-warning px-32 text-center" id="modalProfileMedicalId-{{ $medical->id }}" onclick="view_medical({{ $medical->id }});"><i class="fa fa-eye p-0"></i></button></td>
+                                        <td><button class="btn btn-sm btn-warning px-32 text-center" id="modalProfileMedical-{{ $medical->id }}" onclick="view_medical({{ $medical->id }});"><i class="fa fa-eye p-0"></i></button></td>
                                       </tr>
                                       @endforeach
                                   </tbody>
