@@ -270,7 +270,17 @@
                                         <td>{{ $medical->student_exam->schedule->date }}</td>
                                         <td>FIT {{ $medical->student_exam->schedule->subject->code}} - {{ $medical->student_exam->schedule->subject->name }}</td>
                                         <td>{{ $medical->student_exam->schedule->type->name }}</td>
-                                        <td><button class="btn btn-sm btn-warning px-32 text-center" id="modalProfileMedical-{{ $medical->id }}" onclick="view_medical({{ $medical->id }});"><i class="fa fa-eye p-0"></i></button></td>
+                                        <td>
+                                          @if($medical->status == 'Pending')
+                                            <span class="badge badge-warning">P</span>
+                                          @elseif($medical->status == 'Approved')
+                                            <span class="badge badge-success">A</span>
+                                          @elseif($medical->status == 'Declined')
+                                            <span class="badge badge-danger">D</span>
+                                          @else
+                                            <span class="badge badge-secondary">R</span>
+                                          @endif
+                                          <button class="btn btn-sm btn-warning px-32 text-center" id="modalProfileMedical-{{ $medical->id }}" onclick="view_medical({{ $medical->id }});"><i class="fa fa-eye p-0"></i></button></td>
                                       </tr>
                                       @endforeach
                                   </tbody>

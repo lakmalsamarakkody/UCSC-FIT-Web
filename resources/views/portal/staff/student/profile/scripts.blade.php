@@ -297,6 +297,8 @@
             var submittedDate = new Date(data['medical']['created_at']);
             var heldDate = new Date(data['exam']['held_date']);
             $('#spanMedicalSubmittedOn').html(submittedDate.toLocaleDateString());
+            
+            // Medical Status with badges
             if(data['medical']['status'] == 'Pending') {
               $('#spanMedicalStatus').html("<h5><span class='badge badge-warning'>"+data['medical']['status']+"</span></h5>");
             }
