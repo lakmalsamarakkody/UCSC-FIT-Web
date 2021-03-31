@@ -280,6 +280,7 @@ class ExamsController extends Controller
       // echo $request->id;
       $student_id = Auth::user()->student->id;
       $medical = new Medical();
+      $medical->student_id = $student_id;
       $medical->student_exam_id = $request->id;
       $medical->reason = $request->reason;
       $medical->status = 'Pending';
