@@ -22,18 +22,20 @@ view_modal_medical =(medical_id) => {
         success: function(data) {
             console.log('Success in get medical details ajax.');
             if(data['status'] == 'success') {
+                console.log('Success in get medical details.');
                 //Student Details
                 $('#spanStudentName').html(data['student']['initials'] + ' ' + data['student']['last_name']);
                 $('#spanRegNumber').html(data['student']['reg_no']);
 
                 // Medical details
                 if(data['medical'] != null && data['exam'] != null) {
-                    var date = new Date(data['medical']['created_at']);
-                    $('#spanSubmittedOn').html(date.toLocaleDateString());
+                    var submittedDate = new Date(data['medical']['created_at']);
+                    var heldDate = new Date(data['exam']['held_date']);
+                    $('#spanSubmittedOn').html(submittedDate.toLocaleDateString());
                     $('#medicalId').val(data['medical']['id']);
                     $('#spanSubject').html('FIT ' + data['exam']['subject_code'] + ' - '+ data['exam']['subject_name']);
                     $('#spanExamType').html(data['exam']['exam_type']);
-                    $('#spanExamHeldDate').html(data['exam']['held_date']);
+                    $('#spanExamHeldDate').html(heldDate.toLocaleDateString());
                     $('#spanMedicalReason').html(data['medical']['reason']);
                     $('#imgMedical').attr('style', 'background: url(/storage/medicals/'+data['student']['id']+'/'+data['medical']['image']+')');
                     $('#imgMedical').attr('onclick', 'window.open("/storage/medicals/'+data['student']['id']+'/'+data['medical']['image']+'")');

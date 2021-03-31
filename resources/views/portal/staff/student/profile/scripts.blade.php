@@ -292,13 +292,15 @@
       success: function(data) {
         console.log('Success in get medical details ajax.');
         if(data['status'] == 'success') {
+          console.log('Success in get medical details.');
           if(data['medical'] != null && data['exam'] != null) {
-            var date = new Date(data['medical']['created_at']);
-            $('#spanMedicalSubmittedOn').html(date.toLocaleDateString());
+            var submittedDate = new Date(data['medical']['created_at']);
+            var heldDate = new Date(data['exam']['held_date']);
+            $('#spanMedicalSubmittedOn').html(submittedDate.toLocaleDateString());
             $('#spanMedicalStatus').html(data['medical']['status']);
             $('#spanMedicalSubject').html('FIT ' + data['exam']['subject_code'] + ' - ' + data['exam']['subject_name']);
             $('#spanMedicalExamType').html(data['exam']['exam_type']);
-            $('#spanMedicalExamHeldDate').html(data['exam']['held_date']);
+            $('#spanMedicalExamHeldDate').html(heldDate.toLocaleDateString());
             $('#spanMedicalReason').html(data['medical']['reason']);
             $('#imgMedical').attr('style', 'background: url(/storage/medicals/'+data['student']['id']+'/'+data['medical']['image']+')');
             $('#imgMedical').attr('onclick', 'window.open("/storage/medicals/'+data['student']['id']+'/'+data['medical']['image']+'")');
