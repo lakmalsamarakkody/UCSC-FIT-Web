@@ -53,8 +53,8 @@
                     <label for="scheduleExam">Exam</label>
                     <select name="scheduleExam" id="scheduleExam" class="form-control">
                       <option value="" selected hidden disabled>Select Exam</option>
-                      @forelse ($schedule_exams as $exam)
-                        <option value="{{$exam->id}}">{{$exam->year}} {{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}}</option>
+                      @forelse ($upcoming_exams as $exam)
+                        <option value="{{$exam->id}}">{{$exam->year}} {{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName }}</option>
                       @empty
                         <option disabled>No upcoming exam</option>
                       @endforelse
@@ -131,26 +131,7 @@
                   </tr>
                 </thead>
                 <tbody id="shedulesBeforeReleaseTblBody">
-                  {{-- @foreach ($upcoming_schedules as $schedule)
-                  <tr id="tbl-examSchedule-tr-{{$schedule->id}}">
-                    <td>{{ $schedule->exam->year}}-{{$schedule->exam->month}}</td>
-                    <td>FIT {{ $schedule->subject->code }}</td>
-                    <td>{{ $schedule->subject->name }}</td>
-                    <td>{{ $schedule->type->name }}</td>
-                    <td>{{ $schedule->date }}</td>
-                    <td>{{ $schedule->start_time }}</td>
-                    <td>{{ $schedule->end_time }}</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Approve" onclick="approve_schedule()"><i class="fas fa-file-signature"></i></button>
-                        <button type="button" class="btn btn-outline-info" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Request Approval" onclick="request_schedule_approval()"><i class="fas fa-share-square"></i></button>
-                        <button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="Release" onclick="relase_individual_schedule()" ><i class="fas fa-hand-point-right"></i></button>
-                        <button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Edit" id="btnEditSchedule-{{$schedule->id}}" onclick="edit_schedule_modal_invoke({{$schedule->id}});"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteExamSchedule-{{$schedule->id}}" onclick="delete_before_release({{$schedule->id}})"><i class="fas fa-trash-alt"></i></button>
-                      </div>
-                    </td>
-                  </tr>
-                  @endforeach --}}
+                  
                 </tbody>
               </table>
               {{-- <div class="pt-4 float-right">

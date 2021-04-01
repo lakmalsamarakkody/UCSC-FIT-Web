@@ -34,13 +34,17 @@ class ExamsController extends Controller
         $exam_schedules=Schedule::where('date', '<', $today)->orderBy('date','desc');
         $subjects=Subject::orderBy('id')->get();
         $exam_types=Types::orderBy('id')->get();
-        $schedule_exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
-        $search_exams = Exam::where('year', '<=', $today->year)->orderBy('year','desc')->get();
+
+        $next_years_exams = Exam::where('year', '>', $today->year);
+        $upcoming_exams = Exam::where('year', $today->year)->where('month', '>=', $today->month)->union($next_years_exams)->orderBy('year', 'asc')->orderBy('month', 'asc')->get();
+        $previous_year_exams = Exam::where('year', '<', $today->year);
+        $search_exams = Exam::where('year', $today->year)->where('month', '<=', $today->month)->union($previous_year_exams)->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+
         $years = Exam::select('year')->where('year', '<=', $today->year)->orderBy('year','desc')->distinct()->get();
         $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->get();
         //$released_upcoming_scheduless = Schedule::where('date', '>=', $today)->orderBy('date', 'asc')->paginate(5,['*'],'released_schedule');
 
-        return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'schedule_exams', 'search_exams', 'years', 'upcoming_schedules'));
+        return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'upcoming_exams', 'search_exams', 'years', 'upcoming_schedules'));
     }
 
     // SCHEDULES TABLE(BEFORE RELEASE)
@@ -56,17 +60,7 @@ class ExamsController extends Controller
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
             ])->where('schedule_release', false)->orderBy('date', 'desc')->orderBy('start_time', 'desc');
-            // if(Auth::user()->role->name == 'Co-Ordinator'):
-            //     $data = $data->where('schedule_approval', 'requested')->where('schedule_release', false);
-            // elseif(Auth::user()->role->name == 'MA'):
-            //     $data = $data->where('schedule_approval', null)->where(function ($query){
-            //         $query->where('schedule_release', false);
-            //     })->orWhere('schedule_approval', 'approve')->where(function ($query) {
-            //         $query->where('schedule_release', false);
-            //     });
-            // else:
-            //     $data = $data;
-            // endif;
+            
             return DataTables::of($data)
             ->rawColumns(['action'])
             ->make(true);
