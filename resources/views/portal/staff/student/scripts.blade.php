@@ -82,7 +82,7 @@
                 {
                     targets: 5,
                     render: function ( data, type, row ) {
-                        var button = '<a onclick="view_student('+data+');" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>'
+                        var button = '@if(Auth::user()->hasPermission("staff-student-profile"))<a onclick="view_student('+data+');" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>@endif';
                         return button;
                     }
                 }

@@ -130,18 +130,22 @@
                               <img src="{{ asset('storage/portal/avatar/'.$student->user_id.'/'.$student->user->profile_pic)}}" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
                           </div>
                           <div class="text-center w-100 ">
-                            <button onclick="reset_email()" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Reset Email">
-                              <i class="fa fa-envelope"></i>
-                            </button>
-                            @if($student->user->status==1)
-                            <button onclick="deactivate_acc()" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Deactivate Account">
-                              <i class="fa fa-user-alt-slash"></i>
-                            </button>
-                            @else                     
-                            <button onclick="activate_acc()" class="btn btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Activate Account">
-                              <i class="fa fa-user-alt"></i>
-                            </button>                           
-                            @endif     
+                            @if(Auth::user()->hasPermission('staff-student-profile-email-reset'))
+                              <button onclick="reset_email()" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Reset Email">
+                                <i class="fa fa-envelope"></i>
+                              </button>
+                            @endif
+                            @if(Auth::user()->hasPermission('staff-student-profile-account'))
+                              @if($student->user->status==1)
+                              <button onclick="deactivate_acc()" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Deactivate Account">
+                                <i class="fa fa-user-alt-slash"></i>
+                              </button>
+                              @else                     
+                              <button onclick="activate_acc()" class="btn btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Activate Account">
+                                <i class="fa fa-user-alt"></i>
+                              </button>                           
+                              @endif
+                            @endif  
                           </div>
                           
                               <table class="table table-borderless mt-4">                        
@@ -280,7 +284,10 @@
                                           @else
                                             <span class="badge badge-secondary">R</span>
                                           @endif
-                                          <button class="btn btn-sm btn-warning px-32 text-center" id="modalProfileMedical-{{ $medical->id }}" onclick="view_medical({{ $medical->id }});"><i class="fa fa-eye p-0"></i></button></td>
+                                          @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
+                                            <button class="btn btn-sm btn-warning px-32 text-center" id="modalProfileMedical-{{ $medical->id }}" onclick="view_medical({{ $medical->id }});"><i class="fa fa-eye p-0"></i></button>
+                                          @endif
+                                        </td>
                                       </tr>
                                       @endforeach
                                   </tbody>

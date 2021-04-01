@@ -18,6 +18,7 @@ class PermissionSeeder extends Seeder
     DB::table('permissions')->truncate();
     DB::table('permissions')->insert(
             array (
+                // STUDENT PORTAL
                 [
                     'name'=>'student-dashboard',
                     'portal'=>'student',
@@ -50,19 +51,15 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                // / STUDENT PORTAL
+
+                // STAFF PORTAL
+                // STAFF->DASHBOARD
                 [
                     'name'=>'staff-dashboard',
                     'portal'=>'staff',
                     'module'=>'dashboard',
                     'description'=>'Can view dashboard module',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-student',
-                    'portal'=>'staff',
-                    'module'=>'student',
-                    'description'=>'Can view student module',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -154,6 +151,52 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                // /STAFF->DASHBOARD
+
+                // STAFF->STUDENTS
+                [
+                    'name'=>'staff-student',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can view student module',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-profile',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can view a student profile',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-profile-email-reset',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can reset a student email',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-profile-account',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can activate/deactivate a student account',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-profile-medical-view',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can view a student medical',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                // /STAFF->STUDENTS
+
+                // STAFF->EXAMS
                 [
                     'name'=>'staff-exam',
                     'portal'=>'staff',
@@ -282,6 +325,9 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                // /STAFF->EXAMS
+
+                // STAFF->RESULTS
                 [
                     'name'=>'staff-result',
                     'portal'=>'staff',
@@ -290,6 +336,9 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                // /STAFF->RESULTS
+
+                // STAFF->USERS
                 [
                     'name'=>'staff-user',
                     'portal'=>'staff',
@@ -298,6 +347,9 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                // /STAFF->USERS
+
+                // STAFF->WEBSITE
                 [
                     'name'=>'staff-website',
                     'portal'=>'staff',
@@ -370,6 +422,9 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                // /STAFF->WEBSITE
+
+                // STAFF->SYSTEM
                 [
                     'name'=>'staff-system',
                     'portal'=>'staff',
@@ -642,6 +697,8 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                // /STAFF->SYSTEM
+                // /STAFF PORTAL
             )
         );
 
