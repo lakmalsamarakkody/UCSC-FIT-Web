@@ -292,6 +292,20 @@
                                       @endforeach
                                   </tbody>
                                 </table>
+                                <div class="input-group">
+                                  <div class="col-lg-3 col-5">
+                                    <span class="badge badge-warning">P</span> <b>Pending</b>
+                                  </div>
+                                  <div class="col-lg-3 col-7">
+                                    <span class="badge badge-success">A</span> <b>Approved</b>
+                                  </div>
+                                  <div class="col-lg-3 col-5">
+                                    <span class="badge badge-danger">D</span> <b>Declined</b>
+                                  </div>
+                                  <div class="col-lg-3 col-7">
+                                    <span class="badge badge-secondary">R</span> <b>Declined to Resubmit</b>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
