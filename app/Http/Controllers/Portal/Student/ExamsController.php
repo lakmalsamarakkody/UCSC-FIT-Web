@@ -47,7 +47,8 @@ class ExamsController extends Controller
 
     // $schedules=Schedule::orderby('date')->take(6)->get();
     $exams_to_apply = Fee::where('purpose', 'exam')->get();
-    $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->get();
+    $next_years_exams = Exam::where('year', '>', $today->year);
+    $exams = Exam::where('year', $today->year)->where('month', '>=', $today->month)->union($next_years_exams)->orderBy('year', 'asc')->orderBy('month', 'asc')->get();
     $student = Student::where('user_id',Auth::user()->id)->first();
     $selected_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', null)->get();
     $applied_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', '!=', null)->get();
