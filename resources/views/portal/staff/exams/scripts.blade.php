@@ -297,6 +297,12 @@ let heldExamTable = null;
                 $('#error-'+key).append('<strong>'+value+'</strong>');
               });
             }
+            else if(data['status'] == 'date_error') {
+              SwalSystemErrorDanger.fire({
+                title: "Error",
+                text: data['msg'],
+              })
+            }
             else if(data['status'] == 'success'){
               console.log('Create exam schedule success.');
               SwalDoneSuccess.fire({
