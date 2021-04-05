@@ -154,7 +154,7 @@ class ApplicationController extends Controller
     public function approveApplication(Request $request){
         $registration = Registration::where('id', $request->registration_id);
         if($registration->update(['application_status'=> 'Approved'])):
-            $student = Student::where('id', $registration->student_id)->first();
+            $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
             $details = [
                 'subject' => 'Registration Details Approved',
                 'title' => 'Registration Details Approved',
@@ -170,7 +170,7 @@ class ApplicationController extends Controller
     public function declineApplication(Request $request){
         $registration = Registration::where('id', $request->registration_id);
         if($registration->update(['registered_at'=> NULL, 'registration_expire_at'=>NULL, 'application_submit'=>0, 'application_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
-            $student = Student::where('id', $registration->student_id)->first();
+            $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
             if($request->declined_msg != NULL):
                 $decline_msg = $request->declined_msg;
             else:
@@ -195,7 +195,7 @@ class ApplicationController extends Controller
         $payment = Payment::where('id', $registration->first()->payment_id);
         if($payment->update(['status'=>'Approved'])):
             if($registration->update(['payment_status'=>'Approved'])):
-                $student = Student::where('id', $payment->student_id)->first();
+                $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
                 $details = [
                     'subject' => 'Registration Payment Approved',
                     'title' => 'Registration Payment Approved',
@@ -214,7 +214,7 @@ class ApplicationController extends Controller
         $payment = Payment::where('id', $registration->first()->payment_id);
         if($payment->update(['status'=>'Declined'])):
             if($registration->update(['registered_at'=> NULL, 'registration_expire_at'=>NULL, 'payment_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
-                $student = Student::where('id', $payment->student_id)->first();
+                $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
                 if($request->declined_msg != NULL):
                     $decline_msg = $request->declined_msg;
                 else:
@@ -238,7 +238,7 @@ class ApplicationController extends Controller
     public function approveDocuments(Request $request){
         $registration = Registration::where('id', $request->registration_id);
         if($registration->update(['document_status'=>'Approved'])):
-            $student = Student::where('id', $registration->student_id)->first();
+            $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
             $details = [
                 'subject' => 'Registration Documents Approved',
                 'title' => 'Registration Documents Approved',
@@ -259,7 +259,7 @@ class ApplicationController extends Controller
                 Document::destroy($document->id);
             endforeach;
             if($registration->update(['registered_at'=>NULL, 'registration_expire_at'=>NULL, 'document_submit'=>0, 'document_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
-                $student = Student::where('id', $registration->student_id)->first();
+                $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
                 if($request->declined_msg != NULL):
                     $decline_msg = $request->declined_msg;
                 else:
@@ -286,7 +286,7 @@ class ApplicationController extends Controller
                 Document::destroy($document->id);
             endforeach;
             if($registration->update(['registered_at'=>NULL, 'registration_expire_at'=>NULL, 'document_submit'=>0, 'document_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
-                $student = Student::where('id', $registration->student_id)->first();
+                $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
                 if($request->declined_msg != NULL):
                     $decline_msg = $request->declined_msg;
                 else:
@@ -328,6 +328,14 @@ class ApplicationController extends Controller
             if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.'001', 'reg_year'=> Carbon::now()->year])):
                 // UPDATE REGISTRATION
                 if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
+                    $student = Student::where('id', $registration->student_id)->first();
+                    // $details = [
+                    //     'subject' => 'You Are Registered',
+                    //     'title' => 'You Are Registered',
+                    //     'body' => "<p> Your registration is complete! </p><br><br><h5>Registration Details</h5><br><p>Registration Number:".." </p><br><p> </p><br><p> </p>",
+                    //     'color' => '#1b672a'
+                    // ];
+                    // Mail::to($student->user->email)->queue( new NotificationEmail($details) );
                     return response()->json([ 'status'=>'success']);
                 endif;
             endif;
