@@ -155,7 +155,7 @@ class ExamsController extends Controller
             //Check if the exact schedule is in the table
             $exists_schedule = Schedule::where('date',$request->scheduleDate)->where('end_time', '>', $request->scheduleStartTime)->first();
             if($exists_schedule != null):
-                return response()->json(['status'=>'error', 'msg'=>'Exam schedule already exists.']);
+                return response()->json(['status'=>'exist', 'msg'=>'Exam schedule already exists.']);
             endif;
 
             // Check if the schedule date is in same month as exam
@@ -234,7 +234,15 @@ class ExamsController extends Controller
             //Check if the exact schedule is in the table
             $exists_schedule = Schedule::where('date',$request->editScheduleExamDate)->where('end_time', '>', $request->editScheduleStartTime)->first();
             if($exists_schedule != null):
-                return response()->json(['status'=>'error', 'msg'=>'Another schedule already exists in this time period.']);
+                return response()->json(['status'=>'exist', 'msg'=>'Another schedule already exists in this time period.']);
+            endif;
+
+            // Check if the schedule date is in same month as exam
+            $exam = Exam::where('id', $request->editScheduleExam)->first();
+            $exam_date = Carbon::createFromDate($exam->year,$exam->month,1);
+            $schedule_date = Carbon::createFromDate($request->editScheduleExamDate);
+            if(!$schedule_date->isSameMonth($exam_date)):
+                return response()->json(['status'=>'date_error', 'msg'=>'Exam schedule date not in selected exam month. Please select suitable schedule date.']);
             endif;
 
             if(Schedule::where('id',$request->editScheduleId)->update([
@@ -248,6 +256,7 @@ class ExamsController extends Controller
                 return response()->json(['status'=>'success']);
             endif;
         endif;
+        return response()->json(['status'=>'error', 'msg'=>'Exam schedule updating process failed.']);
     }
     // /EDIT
 

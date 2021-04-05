@@ -297,6 +297,12 @@ let heldExamTable = null;
                 $('#error-'+key).append('<strong>'+value+'</strong>');
               });
             }
+            else if(data['status'] == 'exist') {
+              SwalSystemErrorDanger.fire({
+                title: "Error",
+                text: data['msg'],
+              })
+            }
             else if(data['status'] == 'date_error') {
               SwalSystemErrorDanger.fire({
                 title: "Error",
@@ -410,6 +416,18 @@ let heldExamTable = null;
                 $('#'+key).addClass('is-invalid');
                 $('#error-'+key).append('<strong>'+value+'</strong>');
               });
+            }
+            else if(data['status'] == 'exist') {
+              SwalSystemErrorDanger.fire({
+                title: "Error",
+                text: data['msg'],
+              })
+            }
+            else if(data['status'] == 'date_error') {
+              SwalSystemErrorDanger.fire({
+                title: "Error",
+                text: data['msg'],
+              })
             }
             else if(data['status'] == 'success'){
               console.log('Success in edit exam schedule.');
