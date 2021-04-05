@@ -443,7 +443,7 @@ class ExamsController extends Controller
     {
         // Validate form data
         $postpone_exam_validator = Validator::make($request->all(), [
-            'postponeExamId'=> ['required', 'integer', 'exists:exam_schedules,id'],
+            'postponeExam'=>['required', 'integer', 'exists:exams,id'],
             'postponeExamDate'=> ['required', 'date', 'after: today'],
             'postponeExamStartTime'=> ['required'],
             'postponeExamEndTime'=> ['required'],
@@ -451,14 +451,25 @@ class ExamsController extends Controller
 
         // Check validator fails
         if($postpone_exam_validator->fails()):
-            return response()->json(['status'=>'error', 'errors'=>$postpone_exam_validator->errors()]);
+            return response()->json(['status'=>'errors', 'errors'=>$postpone_exam_validator->errors()]);
         else:
+            // Check if the schedule is already exists
             $exists_schedule = Schedule::where('date',$request->postponeExamDate)->where('end_time', '>', $request->postponeExamStartTime)->first();
             if($exists_schedule != null):
-                return response()->json(['status'=>'error', 'msg'=>'Another schedule already exists in this time period.']);
+                return response()->json(['status'=>'exist', 'msg'=>'Another schedule already exists in this time period.']);
             endif;
+
+            // Check if the schedule date is in same month as exam
+            $exam = Exam::where('id', $request->postponeExam)->first();
+            $exam_date = Carbon::createFromDate($exam->year,$exam->month,1);
+            $schedule_date = Carbon::createFromDate($request->postponeExamDate);
+            if(!$schedule_date->isSameMonth($exam_date)):
+                return response()->json(['status'=>'date_error', 'msg'=>'Exam schedule date not in selected exam month. Please select suitable schedule date.']);
+            endif;
+
             
-            if(Schedule::where('id', $request->postponeExamId)->update([
+            if(Schedule::where('id', $request->postponeScheduleId)->update([
+                'exam_id'=>$request->postponeExam,
                 'date' => $request->postponeExamDate,
                 'start_time' => $request->postponeExamStartTime,
                 'end_time' => $request->postponeExamEndTime

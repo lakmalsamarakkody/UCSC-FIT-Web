@@ -912,7 +912,8 @@ let heldExamTable = null;
         console.log('Success in postpone schedule get details ajax.');
         if(data['status'] == 'success') {
           $('#modal-postpone-schedule-title').html(data['title']);
-          $('#postponeExamId').val(data['schedule']['id']);
+          $('#postponeScheduleId').val(data['schedule']['id']);
+          $('#postponeExam').val(data['schedule']['exam_id']);
           $('#postponeExamDate').val(data['schedule']['date']);
           $('#postponeExamStartTime').val(data['schedule']['start_time']);
           $('#postponeExamEndTime').val(data['schedule']['end_time']);
@@ -966,6 +967,18 @@ let heldExamTable = null;
                 $('#error-'+key).append('<strong>'+value+'</strong>');
               });
             }
+            else if(data['status'] == 'exist'){
+              SwalSystemErrorDanger.fire({
+                title: "Error",
+                text: data['msg'],
+              })
+            }
+            else if(data['status'] == 'date_error'){
+              SwalSystemErrorDanger.fire({
+                title: "Error",
+                text: data['msg'],
+              })
+            }
             else if(data['status'] == 'success') {
               console.log('Success in postpone exam.');
               SwalDoneSuccess.fire({
@@ -978,12 +991,6 @@ let heldExamTable = null;
                   afterReleaseTable.draw();
                 }
               });
-            }
-            else if(data['status'] == 'error'){
-              SwalSystemErrorDanger.fire({
-                title: "Error",
-                text: data['msg'],
-              })
             }
           },
           error: function(err) {

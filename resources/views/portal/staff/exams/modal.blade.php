@@ -110,19 +110,28 @@
                     <h5 class="card-header p-0" id="modal-postpone-schedule-title"></h5><br/>
                     <form id="formPostponeSchedule">
                         <div class="form-row align-items-center">
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-3 col-md-6">
+                                <label for="postponeExam">Exam</label>
+                                <input type="hidden" class="form-control" id="postponeScheduleId" name="postponeScheduleId">
+                                <select name="postponeExam" id="postponeExam" class="form-control">
+                                    <option value="" selected>Select Exam</option>
+                                    @foreach ($upcoming_exams as $exam)
+                                        <option value="{{$exam->id}}">{{$exam->year}} {{\Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}}</option>
+                                    @endforeach
+                                </select>
+                                <span class="invalid-feedback" id="error-postponeExam" role="alert"></span>
+                              </div>
+                            <div class="form-group col-lg-3 col-md-6">
                                 <label for="postponeExamDate">Date</label>
-                                <input type="hidden" class="form-control" id="postponeExamId" name="postponeExamId" />
-                                <span class="invalid-feedback" id="error-postponeExamId" role="alert"></span>
                                 <input type="date" class="form-control" name="postponeExamDate" id="postponeExamDate" />
                                 <span class="invalid-feedback" id="error-postponeExamDate" role="alert"></span>
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-3 col-md-6">
                                 <label for="postponeExamStartTime">Start Time</label>
                                 <input type="time" class="form-control" name="postponeExamStartTime" id="postponeExamStartTime" />
                                 <span class="invalid-feedback" id="error-postponeExamStartTime" role="alert"></span>
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-3 col-md-6">
                                 <label for="postponeExamEndTime">End Time</label>
                                 <input type="time" class="form-control" name="postponeExamEndTime" id="postponeExamEndTime" />
                                 <span class="invalid-feedback" id="error-postponeExamEndTime" role="alert"></span>
