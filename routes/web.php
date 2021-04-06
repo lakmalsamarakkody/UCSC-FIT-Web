@@ -259,6 +259,11 @@ Route::get('/email', function() {
     // 'title' => 'Registration Payment Approved',
     // 'body' => 'Registration Payment Approved',
     // 'color' => '#1b672a'
+
+    // 'subject' => 'You Are Registered',
+    // 'title' => 'You Are Registered',
+    // 'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: F201232001 </p><p style='color: #fff;'>Registered at: 12-01-2021 </p><p style='color: #fff;'> Registration Expires at: 12-01-2022 </p>",
+    // 'color' => '#1b672a'
   ];
   return new App\Mail\NotificationEmail($details);
 });
