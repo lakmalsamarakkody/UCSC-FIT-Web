@@ -58,6 +58,16 @@ class ExamApplicationController extends Controller
     }
     // /REVIEW EXAM APPLICATIONS
 
+    // REVIEW EXAMS TO RESCHEDULE
+    public function reviewExamsToReschedule()
+    {
+        $exams_to_reschedule = Medical::where('status', 'Approved')->get();
+        return view('portal/staff/student/exam_reschedule', [
+            'exams_to_reschedule'=>$exams_to_reschedule
+        ]);
+    }
+    // /REVIEW EXAMS TO RESCHEDULE
+
     // FUNCTIONS IN EXAM APPLICATION/PAYMENT VIEW MODAL
     // LOAD EXAM APPLICATION VIEW MODAL
     public function getApplicantExamDetails(Request $request)
@@ -283,4 +293,9 @@ class ExamApplicationController extends Controller
     }
     // /DECLINE TO RESUBMIT
     // /MEDICALS
+
+    // RESCHEDULE EXAMS
+
+    // /RESCHEDULE EXAMS
+
 }
