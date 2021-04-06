@@ -39,7 +39,7 @@
 
 <div style="padding: 0 25px 0 25px; ">
 <h5>Thank you,<br>
-Coordinator (External Degrees Centre),<br>
+Coordinator (E-Learning Centre),<br>
 University of Colombo School of Computing, <br>
 #35, Reid Avenue, Colombo 07, Sri Lanka
 </h5>
