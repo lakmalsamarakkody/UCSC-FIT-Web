@@ -121,6 +121,7 @@ Route::post('/portal/staff/student/exams/medical/decline/resubmit', [App\Http\Co
 
 // EXAM RESCHEDULE
 Route::get('/portal/staff/student/exams/reschedule', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'reviewExamsToReschedule'])->name('student.exams.reschedule');
+Route::post('/portal/staff/student/exams/reschedule/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getRescheduleExamDetails'])->name('student.exams.reschedule.details');
 
 // /EXAM CARDS
 // /HOME PAGE

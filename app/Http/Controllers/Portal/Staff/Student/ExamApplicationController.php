@@ -24,6 +24,7 @@ use function PHPUnit\Framework\isEmpty;
 
 class ExamApplicationController extends Controller
 {
+    // PAGES FROM HOME PAGE EXAMS CARDS
     // REVIEW EXAM PAYMENTS
     public function reviewExamPayments()
     {
@@ -58,6 +59,16 @@ class ExamApplicationController extends Controller
     }
     // /REVIEW EXAM APPLICATIONS
 
+    // REVIEW MEDICALS
+    public function reviewMedicals()
+    {
+        $medicals = Medical::where('status', 'Pending')->orderBy('created_at', 'asc')->get();
+        return view('portal/staff/student/medical', [
+            'medicals'=> $medicals
+        ]);
+    }
+    // /REVIEW MEDICALS
+
     // REVIEW EXAMS TO RESCHEDULE
     public function reviewExamsToReschedule()
     {
@@ -67,6 +78,7 @@ class ExamApplicationController extends Controller
         ]);
     }
     // /REVIEW EXAMS TO RESCHEDULE
+    // /PAGES FROM HOME PAGE EXAMS CARDS
 
     // FUNCTIONS IN EXAM APPLICATION/PAYMENT VIEW MODAL
     // LOAD EXAM APPLICATION VIEW MODAL
@@ -235,16 +247,6 @@ class ExamApplicationController extends Controller
     // /FUNCTIONS IN EXAM APPLICATION/PAYMENT VIEW MODAL
 
     // MEDICALS
-    // REVIEW MEDICALS
-    public function reviewMedicals()
-    {
-        $medicals = Medical::where('status', 'Pending')->orderBy('created_at', 'asc')->get();
-        return view('portal/staff/student/medical', [
-            'medicals'=> $medicals
-        ]);
-    }
-    // /REVIEW MEDICALS
-
     // LOAD MEDICAL MODAL
     public function getMedicalDetails(Request $request)
     {
@@ -295,7 +297,21 @@ class ExamApplicationController extends Controller
     // /MEDICALS
 
     // RESCHEDULE EXAMS
-
+    // GET DETAILS TO RESCHEDULE MODAL
+    public function getRescheduleExamDetails(Request $request)
+    {
+        $exam = hasExam::where('id', $request->exam_id)->addSelect([
+            'subject_code'=>Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+            'subject_name'=>Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+            'exam_type'=>Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
+            'requested_month'=> Exam::select(DB::raw("MONTHNAME(CONCAT(year, '-',month, '-01')) as monthname"))->whereColumn('requested_exam_id', 'exams.id'),
+            'requested_year'=> Exam::select('year')->whereColumn('requested_exam_id', 'exams.id'),
+            'medical_approved_date'=>Medical::select('updated_at')->whereColumn('medical_id', 'medicals.id')
+        ])->first();
+        $student = Student::where('id', $exam->student_id)->first();
+        return response()->json(['status'=>'success', 'student'=>$student ,'exam'=>$exam]);
+    }
+    // /GET DETAILS TO RESCHEDULE MODAL
     // /RESCHEDULE EXAMS
 
 }

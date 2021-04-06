@@ -57,7 +57,7 @@
                           <td>{{ $exam->updated_at->isoFormat('YYYY-MM-DD') }}</td>
                           <td>
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-primary" id="btnViewModalRescheduleExam-{{ $exam->id }}" onclick="view_modal_reschedule_exam({{$exam->id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalRescheduleExam-{{ $exam->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                              <button type="button" class="btn btn-outline-primary" id="btnViewModalRescheduleExam-{{ $exam->student_exam->id }}" onclick="view_modal_reschedule_exam({{$exam->student_exam->id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalRescheduleExam-{{ $exam->student_exam->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                             </div>
                           </td>
                         </tr>

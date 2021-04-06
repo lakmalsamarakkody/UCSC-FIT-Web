@@ -38,7 +38,7 @@
                                         </tr>
                                         <tr>
                                             <th>Medical Approved Date: </th>
-                                            <td><span id="spanMedicalApprovedDate"></span></td>
+                                            <td><span id="spanMedicalApprovedDate"></span><small class="text-muted"> (MM/DD/YY)</small></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -47,7 +47,7 @@
                                 <div class="card-header">Schedules for Applied Exam</div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-12" id="divSearchSchedules">
+                                        <div class="col-12" id="divRescheduleSearchSchedules">
                                         </div>
                                         <div class="col-md-12 order-md-1 order-2 mt-5">
                                             <table class="table tbl-schedules-for-reschedule-exam">
