@@ -320,6 +320,14 @@ class ApplicationController extends Controller
             if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.$newRegNoSerialCode, 'reg_year'=> Carbon::now()->year])):
                 // UPDATE REGISTRATION
                 if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
+                    $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
+                    $details = [
+                        'subject' => 'You Are Registered',
+                        'title' => 'You Are Registered',
+                        'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>",
+                        'color' => '#1b672a'
+                    ];
+                    Mail::to($student->user->email)->queue( new NotificationEmail($details) );
                     return response()->json([ 'status'=>'success']);
                 endif;
             endif;
@@ -328,14 +336,14 @@ class ApplicationController extends Controller
             if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.'001', 'reg_year'=> Carbon::now()->year])):
                 // UPDATE REGISTRATION
                 if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
-                    $student = Student::where('id', $registration->student_id)->first();
-                    // $details = [
-                    //     'subject' => 'You Are Registered',
-                    //     'title' => 'You Are Registered',
-                    //     'body' => "<p> Your registration is complete! </p><br><br><h5>Registration Details</h5><br><p>Registration Number:".." </p><br><p> </p><br><p> </p>",
-                    //     'color' => '#1b672a'
-                    // ];
-                    // Mail::to($student->user->email)->queue( new NotificationEmail($details) );
+                    $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
+                    $details = [
+                        'subject' => 'You Are Registered',
+                        'title' => 'You Are Registered',
+                        'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>",
+                        'color' => '#1b672a'
+                    ];
+                    Mail::to($student->user->email)->queue( new NotificationEmail($details) );
                     return response()->json([ 'status'=>'success']);
                 endif;
             endif;
