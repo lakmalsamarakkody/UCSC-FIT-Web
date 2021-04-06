@@ -47,7 +47,7 @@
                                 <div class="card-header">Schedules for Applied Exam</div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-12" id="divRescheduleSearchSchedules">
+                                        <div class="col-12" id="divRescheduleSearch">
                                         </div>
                                         <div class="col-md-12 order-md-1 order-2 mt-5">
                                             <table class="table tbl-schedules-for-reschedule-exam">

@@ -72,9 +72,12 @@ class ExamApplicationController extends Controller
     // REVIEW EXAMS TO RESCHEDULE
     public function reviewExamsToReschedule()
     {
+        $today = Carbon::today();
         $exams_to_reschedule = Medical::where('status', 'Approved')->get();
+        $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         return view('portal/staff/student/exam_reschedule', [
-            'exams_to_reschedule'=>$exams_to_reschedule
+            'exams_to_reschedule'=>$exams_to_reschedule,
+            'exams'=>$exams
         ]);
     }
     // /REVIEW EXAMS TO RESCHEDULE
@@ -312,6 +315,27 @@ class ExamApplicationController extends Controller
         return response()->json(['status'=>'success', 'student'=>$student ,'exam'=>$exam]);
     }
     // /GET DETAILS TO RESCHEDULE MODAL
+
+    // SCHEDULES TABLE FOR RESCHEDULE EXAM
+    public function schedulesTableForRescheduleExam(Request $request)
+    {
+        $today = Carbon::today();
+        if($request->ajax()):
+            $applied_exam = hasExam::where('id',$request->exam_id)->first();
+            $data = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->addSelect([
+                'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+                'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
+            ]);
+            if($request->exam != null):
+                $data = $data->where('exam_id', $request->exam);
+            endif;
+            $data = $data->get();
+            return DataTables::of($data)
+            ->rawColumns(['action'])
+            ->make(true);
+        endif;
+    }
+    // /SCHEDULES TABLE FOR RESCHEDULE EXAM
     // /RESCHEDULE EXAMS
 
 }
