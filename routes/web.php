@@ -118,6 +118,10 @@ Route::post('/portal/staff/student/exams/medical/details', [App\Http\Controllers
 Route::post('/portal/staff/student/exams/medical/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveMedical'])->name('student.exams.medical.approve');
 Route::post('/portal/staff/student/exams/medical/decline', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineMedical'])->name('student.exams.medical.decline');
 Route::post('/portal/staff/student/exams/medical/decline/resubmit', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineToResubmitMedical'])->name('student.exams.medical.resubmit.decline');
+
+// EXAM RESCHEDULE
+Route::get('/portal/staff/student/exams/reschedule', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'reviewExamsToReschedule'])->name('student.exams.reschedule');
+
 // /EXAM CARDS
 // /HOME PAGE
 
