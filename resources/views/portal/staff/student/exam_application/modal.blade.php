@@ -44,7 +44,6 @@
                     <div class="card-body pb-0 text-main-theme">                        
                         <div class="row">
                             <div class="col-lg-6">Payment : <i id="iconPaymentStatus" class="fas"></i> <span id="spanPaymentStatus"></span></div>
-                            {{-- <div class="col-lg-4">Documents : <i id="iconDocumentsStatus" class="fas"></i> <span id="spanDocumentsStatus"></span></div> --}}
                         </div>
                     </div>
                 </div>
@@ -60,9 +59,6 @@
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="payment-tab" data-toggle="tab" href="#payment" role="tab" aria-controls="payment" aria-selected="false">Payment</a>
                         </li>
-                        {{-- <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents</a>
-                        </li> --}}
                     </ul>
                     <div class="tab-content pt-3" id="myTabContent">
                         <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
@@ -177,51 +173,6 @@
                             </div>
                         </div>
 
-                        {{-- <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
-                            <div class="col-12 mt-3">
-                                <div class="card">
-                                    <div class="card-header">Medicals</div>
-                                    <div class="card-body">                        
-                                        <div class="row">
-                                            @foreach ($applied_exams as $exam)
-                                            <div class="col-md-12 order-md-1 order-2">
-                                                <table id="tblMedicals" class="table">
-                                                    <tr>
-                                                        <th>Subject Code: </th>
-                                                        <td><span id="spanSubjectCode"></span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Subject Name: </th>
-                                                        <td><span id="spanSubjectName"></span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Exam Type: </th>
-                                                        <td><span id="spanExamType"></span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Exam Held Date: </th>
-                                                        <td><span id="spanExamHeldDate"></span></td>
-                                                    </tr>
-                                                </table>
-                                                <div class="col-lg-12">
-                                                    <div name="imgMedical" id="imgMedical" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
-                                                </div>
-                                                <div class="mt-4 col-12 text-center mb-4">
-                                                    <div id="divBtnApproveMedical" class="btn-group col-xl-3 col-lg-6">
-                                                        <button type="button" class="btn btn-success form-control" id="btnApproveMedical">Approve Medical<span id="spinnerBtnApproveMedical" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-                                                    </div>
-                                                    <div id="divBtnDeclineMedical" class="btn-group col-xl-3 col-lg-6">
-                                                        <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-medical-message" id="btnDeclineMedical" data-toggle="modal">Decline Medical<span id="spinnerBtnDeclineMedical" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-                                                    </div>
-                                                </div>
-                                                <hr width="100%"/>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>

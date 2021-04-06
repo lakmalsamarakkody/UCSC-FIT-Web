@@ -43,6 +43,7 @@
                     <tr>
                       <th>Registration No</th>
                       <th>Student Name</th>
+                      <th>Subject</th>
                       <th>Date Applied</th>
                       <th></th>
                     </tr>
@@ -52,6 +53,7 @@
                       <tr>
                         <td>{{ $medical->student_exam->student->reg_no }}</td>
                         <td>{{ $medical->student_exam->student->initials }} {{ $medical->student_exam->student->last_name }}</td>
+                        <td>{{ $medical->student_exam->subject->name }} ({{ $medical->student_exam->type->name }})</td>
                         <td>{{ $medical->created_at->isoFormat('YYYY-MM-DD') }}</td>
                         <td>
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-medical-view'))
