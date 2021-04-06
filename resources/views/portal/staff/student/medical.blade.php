@@ -30,7 +30,7 @@
     <div class="col-12 medical">
       <div class="row">
           
-        <!-- APPLICATIONS LIST -->
+        <!-- MEDICALS LIST -->
         <div class="col-12 md-5">
           <div class="card">
             <div class="card-header">Medical Submitted Students</div>
@@ -69,7 +69,7 @@
             </div>
           </div>
         </div>
-        <!-- /APPLICATIONS LIST -->
+        <!-- /MEDICALS LIST -->
 
       </div>
       @include('portal.staff.student.medical.modal')

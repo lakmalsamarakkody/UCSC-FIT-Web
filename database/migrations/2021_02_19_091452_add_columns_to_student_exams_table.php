@@ -21,6 +21,7 @@ class AddColumnsToStudentExamsTable extends Migration
             $table->text('declined_message')->nullable()->after('payment_status');
             $table->string('schedule_status')->default('Pending')->after('declined_message');
             $table->integer('medical_id')->nullable()->after('schedule_status');
+            $table->integer('exam_reschedule_id')->nullable()->after('medical_id');
         });
     }
 
@@ -39,6 +40,7 @@ class AddColumnsToStudentExamsTable extends Migration
         //     $table->dropColumn('declined_message');
         //     $table->dropColumn('schedule_status');
         //     $table->dropColumn('medical_id');
+        //     $table->dropColumn('exam_reschedule_id');
         // });
     }
 }

@@ -44,6 +44,7 @@ class HomeController extends Controller
       $examPaymentReviewCount = hasExam::where('payment_id', '!=', null)->where('payment_status', null)->where('schedule_status', 'Pending')->get()->unique('payment_id')->count();
       $revieweExamsToScheduleCount = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where('schedule_status', 'Pending')->get()->unique('payment_id')->count();
       $medicalReviewCount = Medical::where('status', 'Pending')->get()->count();
+      $examToRescheduleCount = Medical::where('status', 'Approved')->get()->count();
       // /CARD COUNTS
       
       $upcomingExams=Schedule::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();
@@ -59,7 +60,8 @@ class HomeController extends Controller
         'heldExams',
         'examPaymentReviewCount',
         'revieweExamsToScheduleCount',
-        'medicalReviewCount'
+        'medicalReviewCount',
+        'examToRescheduleCount'
       ));
     }
 }
