@@ -19,9 +19,11 @@ class RegistrationCheck
     public function handle(Request $request, Closure $next)
     {
         $uid = Auth::user()->id;
-        $student = Student::select('reg_no')->where('user_id', $uid)->first();
-        if(is_null($student) || $student==null || ($student != NULL && $student->reg_no == NULL)):
+        $student = Student::where('user_id', $uid)->first();
+        if(is_null($student) || $student==null || ($student != NULL && $student->last_registration() == NULL)):
             return $next($request);
+        elseif($student != NULL && $student->last_registration()):
+            return redirect('/portal/student/payment/re-registration');
         else:
             return redirect('portal/student/');
         endif;
