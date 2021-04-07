@@ -49,11 +49,15 @@
         <script src="{{ asset('lib/superfish/hoverIntent.js') }}"></script>
         <script src="{{ asset('lib/superfish/superfish.min.js') }}"></script>
         <script src="{{ asset('lib/sweetalert2/sweetalert2.all.js') }}"></script>
+        <script src="{{ asset('js/sweetalert.js') }}"></script>
 
         <!-- Template Main Javascript File -->
         <script src="{{ asset('js/web.js') }}"></script>
+
         <!-- SCRIPTS -->
-        <script src="{{ asset('js/sweetalert.js') }}"></script>
+            {{-- AUTORUN --}}
+            <script src="{{ asset('js/auto-refresh.js') }}"></script>
+            {{-- /AUTORUN --}}
         <!-- /SCRIPTS -->
     </head>
 

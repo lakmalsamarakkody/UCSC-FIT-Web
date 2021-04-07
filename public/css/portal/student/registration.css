@@ -4,9 +4,14 @@
   font-weight: bold;
 }
 
+.student-registration .card .card-body .registration {
+  border: solid 2px var(--main-theme-color);
+  border-radius: 10px;
+  font-weight: bold;
+}
+
 .student-registration .card .card-body .details {
-  border: solid 1px var(--color-secondary);
-  box-shadow: var(--color-secondary);
+  border: solid 2px var(--color-secondary);
   border-radius: 10px;
 }
 

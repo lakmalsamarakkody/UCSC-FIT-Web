@@ -474,13 +474,13 @@
                     <div class="w-full h-1 bg-indigo-light my-3 md:my-6"></div>
 
                     <p class="text-white text-2xl md:text-3xl font-light mb-8 leading-normal">
-                        @yield ('code')
+                        {{-- @yield ('code') - --}}
                         @yield('message')
                     </p>
 
-                    <a href="{{ app('router')->has('home') ? route('home') : url('/') }}">
+                    <a href="{{ app('router')->has('home') ? route('home') : url('/login') }}">
                         <button class="button bg-indigo-light text-white font-bold uppercase tracking-wide py-3 px-6 border-0 rounded-lg">
-                            {{ __('Go Home') }}
+                            {{ __('Login Back') }}
                         </button>
                     </a>   
                     
@@ -490,10 +490,10 @@
                             </button>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                         @endif                 
-                    <div class="text-white text-3xl  my-3">
+                    {{-- <div class="text-white text-3xl  my-3">
                         {{ __('Or Contact Administrator:') }}
                         <a class="text-white" href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a>
-                   </div>
+                   </div> --}}
                 </div>
             </div>
 

@@ -348,7 +348,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="btnDeclineApplicationModal" type="button" class="btn btn-warning">Decline <span id="spinnerBtnDeclineApplication" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                <button id="btnDeclineApplicationModal" type="button" class="btn btn-warning">Decline <span id="spinnerBtnDeclineApplicationModal" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
             </div>
         </div>
     </div>

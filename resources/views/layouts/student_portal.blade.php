@@ -53,33 +53,21 @@
     <script src="{{ asset('js/portal.js') }}"></script>
     <script src="{{ asset('js/sweetalert.js') }}"></script>
 
+    {{-- AUTORUN --}}
+    <script src="{{ asset('js/clock.js') }}"></script>
+    <script src="{{ asset('js/auto-logout.js') }}"></script>
+    {{-- /AUTORUN --}}
+
     {{-- CUSTOM --}}
     <script type="text/javascript">
-      function display_c(){
-        var refresh=1000; // Refresh rate in milli seconds
-        mytime=setTimeout('display_ct()',refresh)
-      }
-      function display_ct() {
-        var dt = new Date()
-        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        // SET LEADING ZEROS
-        if(dt.getHours() < 10){var hours = "0" +dt.getHours()}else{var hours = dt.getHours()}
-        if(dt.getMinutes() < 10){var minutes = "0" + dt.getMinutes()}else{var minutes = dt.getMinutes()}
-        if(dt.getSeconds() < 10){var seconds = "0" + dt.getSeconds()}else{var seconds = dt.getSeconds()}
-        // /SET LEADING ZEROS
-
-        var date = days[dt.getDay()] + " " + dt.getDate() + " " + months[dt.getMonth()] + " " + dt.getFullYear()
-        var time = hours + " : " + minutes + " : " + seconds
-        document.getElementById('ct').innerHTML = date + " - " + time;
-        display_c();
-      }
+    
     </script>
     {{-- /CUSTOM --}}
+
   <!-- /SCRIPTS -->
 </head>
 
-<body onload=display_ct();>
+<body>
 
     <!-- Page container-fluid -->
     <div class="container-fluid">
@@ -112,12 +100,12 @@
             <!-- MENU SECTION -->
             <div class="nav-menu w-100">
               <ul>
-                @if ( Auth::user()->student == null || Auth::user()->student->reg_no == null )
+                @if ( Auth::user()->student == NULL || Auth::user()->student->current_active_registration() == NULL )
                   <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                 @endif
                 <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
                 <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
-                @if ( Auth::user()->student !=Null && Auth::user()->student->current_registration->registration_expire_at !=Null && Auth::user()->student->current_registration->registration_expire_at >= date('Y-m-d') && Auth::user()->student->current_registration->status == 1  )
+                @if ( Auth::user()->student != NULL && Auth::user()->student->current_active_registration())
                   <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>
                   <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
                 @endif
@@ -183,13 +171,13 @@
                 <div class="col-6 text-right align-self-center"><i class="fa fa-bars fa-2x" data-toggle="collapse" data-target="#collapseMobileNav" aria-expanded="false"></i></div>
                 <div class="col-12 mt-2 px-0 collapse border-top border-darken-1" id="collapseMobileNav">
                   <ul>
-                    @if ( Auth::user()->student == null || Auth::user()->student->reg_no == null )
+                    @if ( Auth::user()->student == NULL || Auth::user()->student->current_active_registration() == NULL )
                       <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                     @endif
                     <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
                     <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
                     
-                    @if ( Auth::user()->student !=Null && Auth::user()->student->current_registration->registration_expire_at !=Null && Auth::user()->student->current_registration->registration_expire_at >= date('Y-m-d') && Auth::user()->student->current_registration->status == 1  )
+                    @if ( Auth::user()->student != NULL && Auth::user()->student->current_active_registration() )
                       <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>
                       <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
                     @endif

@@ -5,6 +5,9 @@
 
     // CHECK COUNTRY AND SET STATE OR DISTRICT
     setViewDistrictState();
+
+    //TRIGGER ENROLLMENT
+    $('#enrollment').trigger('change');
     
     //MAKE EDITABLE
     $('input').removeAttr('disabled','disabled');
@@ -180,6 +183,17 @@
     })
   }
   // /EDIT INFORAMTION
+
+  //ONCHANGE ENROLLMENT SET REG NO TEXT FIELD VISIBILITY
+  $('#enrollment').change(function(){
+    if($('#enrollment').val() == 'new'){
+      $('#divinputRegNo').collapse('hide');
+    }
+    else{
+      $('#divinputRegNo').collapse('show');
+    }
+  });
+  //ONCHANGE ENROLLMENT SET REG NO TEXT FIELD VISIBILITY
 
   // ONCHANGE Citizenship GET Countrylist
   onChangeCitizenship = () => {

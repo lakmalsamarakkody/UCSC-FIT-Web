@@ -15,7 +15,7 @@
     <div class="col-lg-12 student-registration min-vh-100">
         <div class="row">
 
-            <div class="col-12 px-0">
+            <div class="col-12 p-0">
 
                 {{-- DECLINED MESAGE IF APPLICATION DECLINED --}}
                 @if($registration != NULL && $registration->application_status == 'Declined')
@@ -28,13 +28,37 @@
                 @endif
                 {{-- /DECLINED MESAGE IF APPLICATION DECLINED --}}
 
-                <div class="card">
-                    <div class="card-header text-center">Register to FIT Programme<br><small style="text-transform: initial;">Please fill all the details correctly</small></div>
+                <div class="card mt-md-2">
+                    <div class="card-header text-center h4 mt-4">Registration application for FIT Programme<br><small style="text-transform: initial;">Please fill all the details correctly</small></div>
                     <div class="card-body">
                         <form id="registerForm" action="{{ url('/portal/student/registration/saveinfo') }}" method="POST">
                         @csrf
+
+                            <!-- REGISTRATION DETAILS -->
+                            <div class="registration px-3 pb-3">
+                                <h6 class="text-left mt-4 mb-4">Registration Details</h6>
+                                {{-- <small>* Please fill your name and birthday as appearing in the Birth Certificate.</small> --}}
+                                <div class="form-row align-item-center mt-2">
+                                    <div class="form-group col-xl-6 col-md-12">
+                                        <label for="selectEnrollment">Enrolling as</label>
+                                        <select name="enrollment" id="enrollment" class="form-control">
+                                            <option disabled hidden selected>Select your enrollment</option>
+                                            <option value="new" @if($student->flag->enrollment == 'new') selected @endif>New Student</option>
+                                            <option value="existing" @if($student->flag->enrollment == 'existing') selected @endif>Existing Student</option>
+                                        </select>
+                                        <span class="invalid-feedback" id="error-enrollment" role="alert"></span>
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-12 collapse" id="divinputRegNo">
+                                        <label for="regNo">Your Registration No</label>
+                                        <input type="text" class="form-control text-capitalize" id="regNo" name="regNo" placeholder="Starts with Capital letter (e.g. F)" @if($student != NULL) value="{{ $student->reg_no }}" @endif/>
+                                        <span class="invalid-feedback" id="error-regNo" role="alert"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /REGISTRATION DETAILS -->
+
                             <!-- PERSONAL DETAILS -->
-                            <div class="details px-3 pb-3">
+                            <div class="details px-3 pb-3 mt-4">
                                 <h6 class="text-left mt-4 mb-4">Personal Details</h6>
                                 <small>* Please fill your name and birthday as appearing in the Birth Certificate.</small>
                                 <div class="form-row align-item-center mt-2">

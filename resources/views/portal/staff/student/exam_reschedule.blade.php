@@ -27,7 +27,7 @@
 
     <!-- CONTENT -->
     
-    <div class="col-12 exam-application">
+    <div class="col-12 exam-reschedule">
       <div class="row">
           
         <!-- APPLICATIONS LIST -->
@@ -56,11 +56,9 @@
                           <td>{{ $exam->student_exam->subject->name }} ({{ $exam->student_exam->type->name }})</td>
                           <td>{{ $exam->updated_at->isoFormat('YYYY-MM-DD') }}</td>
                           <td>
-                            {{-- @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view')) --}}
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $exam->id }}" onclick="view_modal_applied_exams({{$exam->id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedExams-{{ $exam->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                              <button type="button" class="btn btn-outline-primary" id="btnViewModalRescheduleExam-{{ $exam->student_exam->id }}" onclick="view_modal_reschedule_exam({{$exam->student_exam->id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalRescheduleExam-{{ $exam->student_exam->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                             </div>
-                            {{-- @endif --}}
                           </td>
                         </tr>
                       @endforeach
