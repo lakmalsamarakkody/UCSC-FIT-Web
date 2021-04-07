@@ -20,13 +20,11 @@ class ActiveRegistrationCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        // $uid = Auth::user()->id;
-        // $student = Student::where('user_id', $uid)->first();
-        // $registration = Registration::where('student_id', $student->id)->latest()->first();
-        if( Auth::user()->student !=Null && Auth::user()->student->current_registration->registration_expire_at !=Null && Auth::user()->student->current_registration->registration_expire_at >= date('Y-m-d') && Auth::user()->student->current_registration->status == 1  ):
+        $student = Auth::user()->student;
+        if( $student != Null && $student->current_active_registration()):
             return $next($request);
         else:
-            return redirect('/portal/student/');
+            return redirect('/portal/student/registration');
         endif;
     }
 }
