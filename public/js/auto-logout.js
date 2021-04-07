@@ -1,5 +1,5 @@
 //initialize
-var timoutNow = 7210000;
+var timoutNow = 7000000;
 var timeoutTimerID;
 
 //start timer
