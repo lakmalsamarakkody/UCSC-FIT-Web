@@ -100,12 +100,12 @@
             <!-- MENU SECTION -->
             <div class="nav-menu w-100">
               <ul>
-                @if ( Auth::user()->student == null || Auth::user()->student->reg_no == null )
+                @if ( Auth::user()->student == NULL || Auth::user()->student->current_active_registration() == NULL )
                   <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                 @endif
                 <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
                 <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
-                @if ( Auth::user()->student !=Null && Auth::user()->student->current_registration->registration_expire_at !=Null && Auth::user()->student->current_registration->registration_expire_at >= date('Y-m-d') && Auth::user()->student->current_registration->status == 1  )
+                @if ( Auth::user()->student != NULL && Auth::user()->student->current_active_registration())
                   <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>
                   <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
                 @endif
@@ -171,13 +171,13 @@
                 <div class="col-6 text-right align-self-center"><i class="fa fa-bars fa-2x" data-toggle="collapse" data-target="#collapseMobileNav" aria-expanded="false"></i></div>
                 <div class="col-12 mt-2 px-0 collapse border-top border-darken-1" id="collapseMobileNav">
                   <ul>
-                    @if ( Auth::user()->student == null || Auth::user()->student->reg_no == null )
+                    @if ( Auth::user()->student == NULL || Auth::user()->student->current_active_registration() == NULL )
                       <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                     @endif
                     <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
                     <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
                     
-                    @if ( Auth::user()->student !=Null && Auth::user()->student->current_registration->registration_expire_at !=Null && Auth::user()->student->current_registration->registration_expire_at >= date('Y-m-d') && Auth::user()->student->current_registration->status == 1  )
+                    @if ( Auth::user()->student != NULL && Auth::user()->student->current_active_registration() )
                       <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>
                       <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
                     @endif
