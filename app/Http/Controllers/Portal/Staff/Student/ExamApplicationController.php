@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Portal\Staff\Student;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotificationEmail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
 use App\Models\Student\Payment;
@@ -17,8 +18,10 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Exam\Schedule;
+use App\Models\Student\Registration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -131,6 +134,14 @@ class ExamApplicationController extends Controller
             foreach($applied_exams as $exam):
                 $exam->update(['payment_status'=>'Approved']);
             endforeach;
+            $student = Student::where('id', Payment::where('id', $request->payment_id)->first()->student_id)->first();
+            $details = [
+                'subject' => 'Exam Payment Approved',
+                'title' => 'Exam Payment Approved',
+                'body' => 'Exam Payment Approved! <br> You will ne notified when it is scheduled',
+                'color' => '#1b672a'
+            ];
+            Mail::to($student->user->email)->queue( new NotificationEmail($details) );
             return response()->json(['status'=>'success']);
         endif;
         return response()->json(['status'=>'error']);
@@ -146,6 +157,19 @@ class ExamApplicationController extends Controller
             foreach($applied_exams as $exam):
                 $exam->update(['payment_status'=>'Declined', 'declined_message'=>$request->message]);
             endforeach;
+            $student = Student::where('id', Payment::where('id', $request->payment_id)->first()->student_id)->first();
+            if($request->message != NULL):
+                $decline_msg = $request->message;
+            else:
+                $decline_msg = '';
+            endif;
+            $details = [
+                'subject' => 'Exam Payment Declined',
+                'title' => 'Exam Payment Declined',
+                'body' => $decline_msg,
+                'color' => '#821919'
+            ];
+            Mail::to($student->user->email)->queue( new NotificationEmail($details) );
             return response()->json(['status'=>'success']);
         endif;
         return response()->json(['status'=>'error']);
