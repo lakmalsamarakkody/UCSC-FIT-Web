@@ -16,7 +16,7 @@ function resetTimer() {
 
 // Logout the user.
 function IdleTimeout() {
-  document.getElementById('logout-form').submit();
+  window.location.reload();
 }
 
 //timer setup
