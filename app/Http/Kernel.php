@@ -68,12 +68,12 @@ class Kernel extends HttpKernel
         'revalidate' => \App\Http\Middleware\RevalidateBackHistory::class,
         'staff.auth' => \App\Http\Middleware\Portal\Staff\StaffAuthorization::class,
         'staff.system' => \App\Http\Middleware\Portal\Staff\System\indexPagePermission::class,
-        'student.registration.check' => \App\Http\Middleware\Portal\Student\Registration\RegistrationCheck::class,
         'student.auth' => \App\Http\Middleware\Portal\Student\StudentAuthorization::class,
         'student.submit.check' => \App\Http\Middleware\Portal\Student\Registration\ApplicationSubmitCheck::class,
         'student.payment' => \App\Http\Middleware\Portal\Student\Payment\ViewPaymentPage::class,
         'student.payment.submit.check' => \App\Http\Middleware\Portal\Student\Payment\PaymentSubmitCheck::class,
+        'student.registration.check' => \App\Http\Middleware\Portal\Student\Registration\RegistrationCheck::class,
+        'student.registration.active' => \App\Http\Middleware\Portal\Student\Registration\ActiveRegistrationCheck::class,
         'student.info.view' => \App\Http\Middleware\Portal\Student\ViewInformation::class,
-        'active.registration' => \App\Http\Middleware\Portal\Student\Registration\ActiveRegistrationCheck::class
     ];
 }
