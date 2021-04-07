@@ -113,7 +113,9 @@ class RegistrationController extends Controller
   //Validate SaveInfoButton Request
   public function saveInfoValidator(Request $request)
   {
-    $validator = Validator::make($request->all(), [            
+    $validator = Validator::make($request->all(), [   
+      'enrollment' => ['nullable',Rule::in(['new', 'existing'])],
+      'regNo' => ['nullable', 'fit_reg_no'],
       'title' => ['nullable', 'exists:titles,title'],
       'firstName' => ['nullable', 'alpha','min:3'],
       'middleNames' => ['nullable', 'alpha_dash_space'],
@@ -231,6 +233,12 @@ class RegistrationController extends Controller
     if(Student::where('user_id', $user->id)->first()):
       $student = Student::where('user_id',$user->id)->first();
       $student->user_id = $user->id;
+      //save regno only if existing student
+      if($request->enrollment == 'existing'):
+        $student->reg_no = $request->regNo;
+      else:
+        $student->reg_no = NULL;
+      endif;
       $student->title = $request->title;
       $student->first_name = $request->firstName;
       $student->middle_names = $request->middleNames;
@@ -308,6 +316,11 @@ class RegistrationController extends Controller
       //UPDATE STUDENT RECORD
       $student->save();
 
+      // UPDATE STUDENT FLAG RECORD
+      $student->flag()->update([
+        'enrollment' => $request->enrollment,
+      ]);
+
       //UPDATE USERNAME 
       $user_rec = User::where('id', $user->id)->first();
       $user_rec->name = $request->firstName;
@@ -319,6 +332,12 @@ class RegistrationController extends Controller
     else:
       $student = new Student;
       $student->user_id = $user->id;
+      //save regno only if existing student
+      if($request->enrollment == 'existing'):
+        $student->reg_no = $request->regNo;
+      else:
+        $student->reg_no = NULL;
+      endif;
       $student->title = $request->title;
       $student->first_name = $request->firstName;
       $student->middle_names = $request->middleNames;
@@ -383,7 +402,11 @@ class RegistrationController extends Controller
       $student->save();
 
       // CREATE STUDENT FLAG RECORD
-      $student->flag()->create();
+      if($student->flag()->create()):
+        $student->flag()->update([
+          'enrollment' => $request->enrollment,
+        ]);
+      endif;
 
       // CREATE STUDENT REGISTRATION RECORD
       $student->registration()->create();
@@ -408,6 +431,7 @@ class RegistrationController extends Controller
     ]);
 
     $validator = Validator::make($request->all(), [
+      'enrollment' => ['required',Rule::in(['new', 'existing'])],
       'title' => ['required', 'exists:titles,title'],
       'firstName' => ['required', 'alpha','min:3'],
       'lastName' => ['required', 'alpha', 'min:3'],
@@ -426,6 +450,13 @@ class RegistrationController extends Controller
       'telephoneCountryCode' => ['required', 'numeric', 'digits_between:1,5' ],
       'telephone' => ['required', 'numeric', 'digits_between:8,15'],
     ]);
+
+    // CHECK REGISTRATION NUMBER IF ENROLLMENT IS EXISTING STUDENT
+    if($request->enrollment == 'existing'):
+      $enrollment_validator = Validator::make($request->all(), [
+        'regNo' => ['required', 'fit_reg_no'],
+      ]);
+    endif;
 
     //CHECK UNIQUE TYPE AND VALIDATE UNIQUE ID
     if($request->uniqueType == 'nic'):
@@ -459,6 +490,8 @@ class RegistrationController extends Controller
 
     if($validator->fails()):
       return response()->json(['errors'=>$validator->errors()]);
+    elseif(isset($enrollment_validator) && $enrollment_validator->fails()):
+      return response()->json(['errors'=>$enrollment_validator->errors()]);
     elseif(isset($uniqueID_validator) && $uniqueID_validator->fails()):
       return response()->json(['errors'=>$uniqueID_validator->errors()]);
     elseif(isset($current_address_validator) && $current_address_validator->fails()):

@@ -51,7 +51,6 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('fit_reg_no', function($attribute, $value) {
             //Old NIC number format
             return preg_match('/^[F][0-9]{2}(0[1-9]|10|11|12)([0-2][0-9]|30|31)[0-9]{3}$/',$value);
-            //[fF] ([01][0-9] (0[1-9]|10|11|12) | (20(0[1-9]|10) ) ) ([0-2][0-9]|30|31)[0-9]{3};
         });
         // /INPUTS
 
