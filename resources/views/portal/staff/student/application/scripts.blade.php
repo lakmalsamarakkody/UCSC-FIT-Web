@@ -281,12 +281,12 @@ decline_application = (registration_id) => {
         contentType: false,           
         beforeSend: function(){
           // Show loader
-          $("#spinnerBtnDeclineApplication").removeClass('d-none');
+          $("#spinnerBtnDeclineApplicationModal").removeClass('d-none');
           $('#btnDeclineApplication').attr('disabled','disabled');
         },
         success: function(data){
           console.log('Decline Application Ajax Success');
-          $("#spinnerBtnDeclineApplication").addClass('d-none');
+          $("#spinnerBtnDeclineApplicationModal").addClass('d-none');
           $('#btnDeclineApplication').removeAttr('disabled');
           if (data['status'] == 'success'){
             SwalDoneSuccess.fire({
@@ -305,7 +305,7 @@ decline_application = (registration_id) => {
         },
         error: function(err){
           console.log('Decline Application Ajax Error');
-          $("#spinnerBtnDeclineApplication").addClass('d-none');
+          $("#spinnerBtnDeclineApplicationModal").addClass('d-none');
           $('#btnDeclineApplication').removeAttr('disabled');
           SwalSystemErrorDanger.fire({
             title: 'Decline Process Failed!',
