@@ -199,7 +199,7 @@ class ApplicationController extends Controller
                 $details = [
                     'subject' => 'Registration Payment Approved',
                     'title' => 'Registration Payment Approved',
-                    'body' => "Registration Payment Approved. You'll be notified once you are registered.",
+                    'body' => "<p style='text-align: center; color: #fff;'>Registration Payment Approved.</P> <p style='text-align: center; color: #fff;'>Login and Upload the scanned copies of the required documents to complete your registration</P>",
                     'color' => '#1b672a'
                 ];
                 Mail::to($student->user->email)->queue( new NotificationEmail($details) );
