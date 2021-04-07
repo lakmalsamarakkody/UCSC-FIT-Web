@@ -131,10 +131,20 @@ class Student extends Model
     {
         return $this->belongsTo(WorldCountry::class, 'permanent_country_id');
     } 
-    
-    public function current_registration()
+
+    public function registrations()
     {
-        return $this->hasOne(Registration::class, 'student_id', 'id')->latest();
+        return $this->hasMany(Registration::class, 'student_id', 'id')->where('registered_at', '!=', NULL)->orderBy('registered_at', 'desc');
+    }
+
+    public function current_active_registration()
+    {
+        return $this->hasOne(Registration::class, 'student_id', 'id')->where('registered_at', '<=', date('Y-m-d'))->where('registration_expire_at', '>=', date('Y-m-d'))->where('status', 1)->first();
+    }
+
+    public function last_registration()
+    {
+        return $this->hasone(Registration::class, 'student_id', 'id')->where('registered_at', '!=', NULL)->where('registration_expire_at', '<', date('Y-m-d'))->orderBy('registration_expire_at', 'desc')->first();
     }
 
     public function medical()
