@@ -1,5 +1,8 @@
 <script type="text/javascript">
 
+
+// INVOKE RESCHEDULE EXAM MODAL
+// SCHEDULES TABLE
 let schedulesForRescheduleExam = null;
     schedules_for_reschedule_exam = (exam_id) => {
         $('.tbl-schedules-for-reschedule-exam').DataTable().clear().destroy();
@@ -53,7 +56,7 @@ let schedulesForRescheduleExam = null;
                     targets: 4,
                     render: function(data, type, row) {
                         var btnGroup = '<div class="btn-group">'+
-                            '<button type="button" class="btn btn-outline-primary" id="btnModalReschedule-'+data+'" onclick="reschedule_exam('+exam_id+','+data+');" data-tooltip="tooltip"  data-placement="bottom" title="Schedule Exam">Reschedule<span id="spinnerBtnModalReschedule-'+data+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
+                            '<button type="button" class="btn btn-outline-primary" id="btnModalExamReschedule-'+data+'" onclick="reschedule_exam('+exam_id+','+data+');">Reschedule<span id="spinnerBtnModalExamReschedule-'+data+'" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>'+
                             '</div>';
                         return btnGroup;
                     }
@@ -64,7 +67,9 @@ let schedulesForRescheduleExam = null;
     search_schedules_by_exam = (applied_exam_id) => {
             schedulesForRescheduleExam.draw();
     }
-    // INVOKE RESCHEDULE EXAM MODAL
+    // SCHEDULES TABLE
+
+    // EXAM DETAILS
     view_modal_reschedule_exam = (exam_id) => {
         $('#divRescheduleSearch').html('');
 
@@ -121,5 +126,70 @@ let schedulesForRescheduleExam = null;
             }
         });
     }
+    // /EXAM DETAILS
     // /INVOKE RESCHEDULE EXAM MODAL
+
+    // RESCHEDULE EXAM
+    reschedule_exam = (exam_id, schedule_id) => {
+        SwalQuestionSuccessAutoClose.fire({
+            title: "Are you sure ?",
+            text: "Exam will be rescheduled.",
+            confirmButtonText: "Yes, Reschedule!",
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                // Form payload
+                var formData = new FormData();
+                formData.append('exam_id', exam_id);
+                formData.append('schedule_id', schedule_id);
+
+                // Reschedule exam controller
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    url: "{{ route('student.exams.reschedule.exam') }}",
+                    type: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function(){
+                        $('#btnModalExamReschedule-'+schedule_id).attr('disabled', 'disabled');
+                        $('#spinnerBtnModalExamReschedule-'+schedule_id).removeClass('d-none');
+                    },
+                    success: function(data){
+                        console.log('Success in reschedule exam ajax.');
+                        $('#btnModalExamReschedule-'+schedule_id).removeAttr('disabled', 'disabled');
+                        $('#spinnerBtnModalExamReschedule-'+schedule_id).addClass('d-none');
+                        if(data['status'] == 'success'){
+                            console.log('Success in reschedule exam.');
+                            SwalDoneSuccess.fire({
+                                title: "Rescheduled!",
+                                text: "Exam has been rescheduled.",
+                            })
+                            .then((result) => {
+                                if(result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });                         
+                        }
+                        else if(data['status'] == 'error'){
+                            SwalSystemErrorDanger.fire();
+                        }
+                    },
+                    error: function(err){
+                        console.log('Error in reschedule exam ajax.')
+                        $('#btnModalExamReschedule-'+schedule_id).attr('disabled', 'disabled');
+                        $('#spinnerBtnModalExamReschedule-'+schedule_id).addClass('d-none');
+                        SwalSystemErrorDanger.fire();
+                    }
+                });
+            }
+            else{
+                SwalNotificationWarningAutoClose.fire({
+                    title: "Cancelled!",
+                    text: "Exam has not been rescheduled.",
+                })
+            }
+        });
+    }
+    // /RESCHEDULE EXAM
 </script>

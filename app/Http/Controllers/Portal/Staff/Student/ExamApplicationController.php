@@ -360,6 +360,33 @@ class ExamApplicationController extends Controller
         endif;
     }
     // /SCHEDULES TABLE FOR RESCHEDULE EXAM
+
+    // RESCHEDULE
+    public function rescheduleExam(Request $request)
+    {
+        $applied_exam = hasExam::where('id',$request->exam_id)->first();
+        $exam = new hasExam();
+        $exam->exam_schedule_id = $request->schedule_id;
+        $exam->student_id = $applied_exam->student_id;
+        $exam->subject_id = $applied_exam->subject_id;
+        $exam->exam_type_id = $applied_exam->exam_type_id;
+        $exam->requested_exam_id = $applied_exam->requested_exam_id;
+        $exam->payment_id = $applied_exam->payment_id;
+        $exam->payment_status = $applied_exam->payment_status;
+        $exam->schedule_status = 'Approved';
+
+        // Create new student exam
+        if($exam->save()):
+            // Update relevant previous student exam and medical
+            if($applied_exam->update(['schedule_status'=> 'Rescheduled', 'exam_reschedule_id'=> $exam->id]) && Medical::where('id',$applied_exam->medical_id)->first()->update(['status'=> 'Rescheduled'])):
+                return response()->json(['status'=>'success']);
+            else:
+                return response()->json(['status'=>'error']);
+            endif;
+        endif;
+        return response()->json(['status'=>'error']);
+    }
+    // /RESCHEDULE
     // /RESCHEDULE EXAMS
 
 }

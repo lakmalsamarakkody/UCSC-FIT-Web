@@ -30,6 +30,8 @@ class hasExam extends Model
         'declined_message',
         'medical_status',
         'medical_id',
+        'schedule_status',
+        'exam_reschedule_id'
     ];
 
     public function student(){
