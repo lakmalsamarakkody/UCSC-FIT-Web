@@ -111,7 +111,7 @@
 
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="{{ route('student.application.exams.payments') }}">
-            <div class="card card-dash shadow black-none bg-success" style="max-width: 18rem;">
+            <div class="card card-dash shadow yellow-none bg-main-warning" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $examPaymentReviewCount }}</div>
               </div>
@@ -123,7 +123,7 @@
 
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="{{ route('student.application.exams') }}">
-            <div class="card card-dash shadow black-none bg-success" style="max-width: 18rem;">
+            <div class="card card-dash shadow red-none bg-danger" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $revieweExamsToScheduleCount }}</div>
               </div>
@@ -135,7 +135,7 @@
 
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="{{ route('student.exams.medical') }}">
-            <div class="card card-dash shadow black-none bg-main-warning" style="max-width: 18rem;">
+            <div class="card card-dash shadow yellow-none bg-main-warning" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $medicalReviewCount }}</div>
               </div>
@@ -147,11 +147,11 @@
 
         <div class="col-xl-2 col-lg-4 p-1">
           <a class="" href="{{ route('student.exams.reschedule') }}">
-            <div class="card card-dash shadow black-none bg-main-warning" style="max-width: 18rem;">
+            <div class="card card-dash shadow red-none bg-danger" style="max-width: 18rem;">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $examToRescheduleCount }}</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>Assign <br> Exam Reschedules </h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Reschedule <br> Exams </h1></div>
               <div class="card-footer bg-transparent text-right">View <i class="fa fa-arrow-alt-circle-right"></i></div>
             </div>
           </a>
