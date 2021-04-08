@@ -70,7 +70,7 @@
                                                 @endif
                                                 @if(Auth::user()->hasPermission('staff-dashboard-exam-medical-decline'))
                                                 <div id="divBtnDeclineResubmit" class="btn-group col-xl-4 mt-1">
-                                                    <button type="button" class="btn btn-primary form-control" id="btnDeclineResubmit" onclick="resubmission_enable_decline();">Decline to Resubmission<span id="spinnerBtnDeclineResubmit" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                                                    <button type="button" class="btn btn-primary form-control" id="btnDeclineResubmit" onclick="resubmission_enable_decline();">Decline to Resubmit<span id="spinnerBtnDeclineResubmit" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                                 </div>
                                                 @endif
                                                 @if(Auth::user()->hasPermission('staff-dashboard-exam-medical-decline'))
