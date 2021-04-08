@@ -33,8 +33,8 @@
                                             <td><span id="spanRescheduleExamType"></span></td>
                                         </tr>
                                         <tr>
-                                            <th>Earlier Exam Requested On: </th>
-                                            <td><span id="spanEarlierExamRequested"></span></td>
+                                            <th>Earlier Exam Scheduled Date: </th>
+                                            <td><span id="spanEarlierExamScheduledDate"></span><small class="text-muted"> (MM/DD/YY)</small></td>
                                         </tr>
                                         <tr>
                                             <th>Medical Approved Date: </th>

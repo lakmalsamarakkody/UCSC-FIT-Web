@@ -44,7 +44,7 @@
                       <th>Registration No</th>
                       <th>Student Name</th>
                       <th>Subject</th>
-                      <th>Date Applied</th>
+                      <th>Medical Approved Date</th>
                       <th></th>
                     </tr>
                   </thead>

@@ -97,7 +97,8 @@ let schedulesForRescheduleExam = null;
                         $('#spanStudentRegNo').html(data['student']['reg_no']);
                         $('#spanRescheduleSubject').html('FIT ' + data['exam']['subject_code'] + ' - ' + data['exam']['subject_name']);
                         $('#spanRescheduleExamType').html(data['exam']['exam_type']);
-                        $('#spanEarlierExamRequested').html(data['exam']['requested_year'] + ' ' +data['exam']['requested_month']);
+                        let previousScheduledDate = new Date(data['exam']['previous_scheduled_date']);
+                        $('#spanEarlierExamScheduledDate').html(previousScheduledDate.toLocaleDateString());
                         let date = new Date(data['exam']['medical_approved_date']);
                         $('#spanMedicalApprovedDate').html(date.toLocaleDateString());
                         $('#divRescheduleSearch').append('<div class="row">'+

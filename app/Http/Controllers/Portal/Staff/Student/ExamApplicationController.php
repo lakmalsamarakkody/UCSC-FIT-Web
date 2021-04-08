@@ -331,8 +331,7 @@ class ExamApplicationController extends Controller
             'subject_code'=>Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=>Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
             'exam_type'=>Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
-            'requested_month'=> Exam::select(DB::raw("MONTHNAME(CONCAT(year, '-',month, '-01')) as monthname"))->whereColumn('requested_exam_id', 'exams.id'),
-            'requested_year'=> Exam::select('year')->whereColumn('requested_exam_id', 'exams.id'),
+            'previous_scheduled_date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'medical_approved_date'=>Medical::select('updated_at')->whereColumn('medical_id', 'medicals.id')
         ])->first();
         $student = Student::where('id', $exam->student_id)->first();
