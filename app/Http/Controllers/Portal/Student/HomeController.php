@@ -18,7 +18,7 @@ class HomeController extends Controller
         $this->middleware('revalidate');
         $this->middleware('student.auth');
         $this->middleware('student.info.view');
-        $this->middleware('active.registration');
+        $this->middleware('student.registration.active');
     }
 
     /**
