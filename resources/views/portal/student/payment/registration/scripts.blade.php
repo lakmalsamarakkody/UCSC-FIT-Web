@@ -40,7 +40,7 @@
             text: 'You\'ll be notified once reviewed',
           }).then((result) => {
             if(result.isConfirmed) {
-              location.reload()
+              window.location.href = '/portal/student/payment/registration';
             }
           });
         }else if (data['error']){
