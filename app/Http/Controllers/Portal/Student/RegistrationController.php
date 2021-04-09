@@ -53,7 +53,6 @@ class RegistrationController extends Controller
 
       if($student->registration->where('registered_at', NULL)->where('status', '!=', 'Active')->first()):
         $registration = $student->registration->where('registered_at', NULL)->where('status', '!=', 'Active')->first();
-             
       endif;
 
       //GET STATES AND CITIES FOR PERMANENT ADDRESS
