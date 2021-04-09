@@ -22,7 +22,7 @@ class StudentAuthorization
         if($role=='Student'):
             return $next($request);
         else:
-            return redirect('/login');
+            return redirect('/logout');
         endif;
     }
 }
