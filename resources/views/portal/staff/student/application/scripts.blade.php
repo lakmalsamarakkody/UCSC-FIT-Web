@@ -23,11 +23,19 @@ view_modal_applicant = (registration_id) => {
     success: function(data){
       console.log('Success in invoke applicant modal get detials ajax.');
       if(data['status'] == 'success'){
+        if(data['studentFlag']['enrollment'] == 'new'){
+          $('#viewApplicationTitle').html('new student registration');
+        }else{
+          $('#trApplicationRegNo').removeClass('d-none');
+          $('#spanregNo').html(data['student']['reg_no']);
+          $('#viewApplicationTitle').html('existing student enrollment');
+        }
         var date = new Date(data['registration']['created_at']);
         $('#spanSubmittedOn').html(date.toLocaleDateString());
-        $('#spanTitle').html(data['student']['title']);
+        $('#spanEnrollment').html(data['studentFlag']['enrollment']);
 
         //APPLICATION
+        $('#spanTitle').html(data['student']['title']);
         $('#spanFirstName').html(data['student']['first_name']);
         $('#spanMiddleNames').html(data['student']['middle_names']);
         $('#spanInitials').html(data['student']['initials']);
@@ -96,8 +104,14 @@ view_modal_applicant = (registration_id) => {
           $('#spanPaymentBankBranch').html(data['payment']['bankBranch']['name']);
           $('#spanPaymentBankBranchCode').html(data['payment']['bankBranch']['code']);
           $('#spanPaymentAmount').html(data['payment']['details']['amount']);
-          $('#imgPaymentBankSlip').attr('style', 'background: url(/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+')');
-          $('#imgPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+'")');
+          if(data['payment']['details']['image'] == null){
+            $('#imgPaymentBankSlip').html('BANK PAYMENT SLIP NOT FOUND');
+            $('#imgPaymentBankSlip').attr('onclick', 'window.open("/img/portal/staff/payment/notfound.png")');
+          }
+          else{
+            $('#imgPaymentBankSlip').attr('style', 'background: url(/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+')');
+            $('#imgPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+'")');
+          }
           
           //BUTTONS
           if(data['registration']['payment_status'] == 'Approved'){
@@ -663,14 +677,18 @@ decline_documentId = (registration_id, docType) => {
 // /DECLINE DOCUMENT ID
 
 // REGISTER STUDENT
-view_modal_registerStudent = (registration_id,email) => {
-  $('#regStudentEmail').html(email);
+view_modal_registerStudent = (registration_id,email,enrollment,regNo) => {
   $('#btnRegisterStudent').attr('onclick','registerStudent('+registration_id+')');
+  $('#regStudentEmail').html(email);
+  if(enrollment == 'existing'){
+    $('#registerStudentTitle').html('Enroll Existing Student')
+    $('#divRegStudentRegno').removeClass('d-none');
+    $('#regStudentRegno').html(regNo);
+  }
   $('#modal-register-student').modal('show');
 }
 
 registerStudent = (registration_id) => {
-
   SwalQuestionWarningAutoClose.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
