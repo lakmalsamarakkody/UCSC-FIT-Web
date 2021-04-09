@@ -70,22 +70,26 @@
             {{-- /PAYMENT DETAILS --}}
 
             {{-- SUBJECT DETAILS --}}
-              <div class="col mb-3">        
-                <div class="card w-100 h-100" >
-                  <div class="card-header">Registration Details</div>
-                  <div class="card-body">
+            <div class="col mb-3">        
+              <div class="card w-100 h-100" >
+                <div class="card-header">Registration Details</div>
+                <div class="card-body">
 
-                    <div class="col-12">
-                      <div class="row">
-                        <div class="col-md-4">Registration Expires On:</div>
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-md-4">Registration Expires On:</div>
+                      @if($student && $student->flag() && $student->flag->enrollment == 'new' )
                         <div class="col-md-8" >{{now()->isoFormat('MMMM Do')}} {{ now()->year+1 }} (Approximately)</div>
-                      </div>
-    
+                      @else
+                        <div class="col-md-8" >One year after your last registration date</div>
+                      @endif
                     </div>
-
+  
                   </div>
+
                 </div>
               </div>
+            </div>
             {{-- /SUBJECT DETAILS --}}
           </div>
           <div class="row row-cols-1">
@@ -173,7 +177,9 @@
                                   </div>
                                 </div>  
                               </div>
+                              
                               <div class="col-lg-12">
+                                {{-- UPLOAD PAYMENT SLIP --}}
                                 <div class="form-group mx-2">
                                   @if($payment != NULL)
                                     <span id="InputUploadedBankslipHelp" class="form-text text-muted">Uploaded bank slip</span>
@@ -184,7 +190,7 @@
                                       <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
                                     </div>
                                   @else
-                                  <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</span>
+                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</span>
                                     <div class="drop-zone">
                                       <span class="drop-zone__prompt">Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
@@ -192,11 +198,22 @@
                                   @endif
                                   <span class="invalid-feedback" id="error-bankSlip" role="alert"></span>
                                 </div>
+                                {{-- UPLOAD PAYMENT SLIP --}}
+
+                                {{-- SKIP SLIP IF USER IS AN EXISTING STUDENT --}}
+                                @if($student && $student->flag() && $student->flag->enrollment == 'existing' )
+                                <div class="form-group form-check">
+                                  <input type="checkbox" class="form-check-input" id="noPaymentSlip" name="noPaymentSlip"/>
+                                    <label class="form-check-label text-danger font-weight-bold" for="noPaymentSlip">* I do not have payment slip with me.</label>
+                                </div>
+                                @endif
+                                {{-- SKIP SLIP IF USER IS AN EXISTING STUDENT --}}
+
                               </div>
                             </div>
 
+                            {{-- ACTION BUTTONS --}}
                             <div class="form-row justify-content-end">
-
                               <div class="mt-3 col-xl-2 col-md-6 order-sm-1 order-3" id="divResetForm">
                                   <button type="button" class="btn btn-secondary form-control" id="btnResetForm" onclick="reset_form()">Discard</button>
                               </div>
@@ -207,6 +224,7 @@
                                   </button>
                               </div>
                             </div>
+                            {{-- /ACTION BUTTONS --}}
 
                           </form>
                         </div>
