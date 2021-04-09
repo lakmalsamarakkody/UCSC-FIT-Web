@@ -40,19 +40,19 @@
                     <div id="error">
 
                     </div>
-                    <form role="form" class="contactForm">
+                    <form class="contactForm" onsubmit="send_email()">
                         <div class="form-group">
                             <input type="email" class="form-control" name="email" id="email" placeholder="Type Your Email Here"  data-rule="email" data-msg="Please enter a valid email" />
                             <span id="erremail" class="invalid-feedback" role="alert"></span>
                         </div>
+                        <div class="mt-4 text-center">
+                            <button id="submit" type="button" onclick="send_email()">
+                                Sign Up Here
+                                <span id="emailSpinner" class="spinner-border spinner-border-sm mb-2 d-none" role="status" aria-hidden="true"></span>
+                                
+                            </button>
+                        </div>
                     </form>
-                    <div class="mt-4 text-center">
-                        <button id="submit" type="button" onclick="send_email()">
-                            Sign Up Here
-                            <span id="emailSpinner" class="spinner-border spinner-border-sm mb-2 d-none" role="status" aria-hidden="true"></span>
-                            
-                        </button>
-                    </div>
                     
                 </div>
             
