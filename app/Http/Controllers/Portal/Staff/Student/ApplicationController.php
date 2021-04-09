@@ -30,24 +30,24 @@ class ApplicationController extends Controller
     // NEW APPLICANT
     public function Applications()
     {
-        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->where('payment_id', NULL)->get();
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
 
     // NEW APPLICANT PAYMENT
     public function reviewRegPayment(){
         //$registrations = Registration::where('registered_at', NULL)->whereHas('payment', function ($query) {$query->where('status', NULL);})->get();
-        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', NULL)->get();
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', NULL)->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
 
     // NEW APPLICANT DOCUMENTS
     public function reviewRegDocumentsPending(){
-        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '0')->get();
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '0')->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
     public function reviewRegDocuments(){
-        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status', NULL)->get();
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status', NULL)->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
     // /NEW APPLICANT DOCUMENTS
@@ -55,12 +55,12 @@ class ApplicationController extends Controller
     // REGISTRATION
     public function reviewRegistration(){
         $regDate = Carbon::now()->isoFormat('YYYY-MM-DD');
-        $regExpireDate = Carbon::now()->addYear()->isoFormat('YYYY-MM-DD');
-        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status',  'Approved')->get();
+        $regExpireDate = Carbon::now()->addYear()->subDay()->isoFormat('YYYY-MM-DD');
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status',  'Approved')->get();
         return view('portal/staff/student/applications', compact('registrations', 'regDate', 'regExpireDate'));
     }
     public function registered(){
-        $registrations = Registration::where('registered_at', '!=', NULL)->where('application_submit', '1')->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status', 'Approved')->where('status', 1)->get();
+        $registrations = Registration::where('registered_at', '!=', NULL)->where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status', 'Approved')->where('status', 1)->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
     // /REGISTRATION
@@ -72,6 +72,7 @@ class ApplicationController extends Controller
     {
         $registration = Registration::find($request->registration_id);
         $student = Registration::find($request->registration_id)->student;
+        $studentFlag = $student->flag;
         $email = $student->user->email;
         $payment = NULL;
         $documents = NULL;
@@ -146,7 +147,7 @@ class ApplicationController extends Controller
         endif;
         $currentAddressDetails = array('currentCountry'=>$currentCountry, 'currentState'=>$currentState, 'currentCity'=>$currentCity);
         // /CURRENT ADDRESS
-        return response()->json(['status'=>'success', 'student'=>$student , 'registration'=>$registration, 'payment'=> $payment, 'documents'=> $documents, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
+        return response()->json(['status'=>'success', 'student'=>$student, 'registration'=>$registration, 'studentFlag'=>$studentFlag, 'payment'=> $payment, 'documents'=> $documents, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
 
     }
 
@@ -309,45 +310,70 @@ class ApplicationController extends Controller
     // REGISTRATION
     public function registerStudent(Request $request){
         $registration = Registration::where('id', $request->registration_id);
-        $dateFormat = Carbon::now()->isoFormat('YYMMDD');
-        $lastRegNo = Student::where('reg_no', 'like', 'F'.$dateFormat.'%')->orderBy('reg_no', 'desc')->first();
-        if($lastRegNo != NULL):
-            //SETTING REG_NO
-            $lastRegNoSerial = (int)substr($lastRegNo->reg_no, -3);
-            $newRegNoSerial = $lastRegNoSerial+1;
-            $newRegNoSerialCode = str_pad($newRegNoSerial, 3, '0', STR_PAD_LEFT);
-            //SAVE REG NO
-            if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.$newRegNoSerialCode, 'reg_year'=> Carbon::now()->year])):
-                // UPDATE REGISTRATION
-                if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
-                    $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
-                    $details = [
-                        'subject' => 'You Are Registered',
-                        'title' => 'You Are Registered',
-                        'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>",
-                        'color' => '#1b672a'
-                    ];
-                    Mail::to($student->user->email)->queue( new NotificationEmail($details) );
-                    return response()->json([ 'status'=>'success']);
+        $flag = $registration->first()->flag;
+        $student = $registration->first()->student;
+
+        // CHECKING ENROLLMENT
+        if($flag->enrollment == 'new'):
+
+            // REGISTER NEW STUDENT
+            $dateFormat = Carbon::now()->isoFormat('YYMMDD');
+            $lastRegNo = Student::where('reg_no', 'like', 'F'.$dateFormat.'%')->orderBy('reg_no', 'desc')->first();
+            //CHECK ANY STUDENT REGISTERED TODAY
+            if($lastRegNo != NULL):
+                //GENERATE NEXT REG_NO
+                $lastRegNoSerial = (int)substr($lastRegNo->reg_no, -3);
+                $newRegNoSerial = $lastRegNoSerial+1;
+                $newRegNoSerialCode = str_pad($newRegNoSerial, 3, '0', STR_PAD_LEFT);
+                //SAVE REG NO
+                if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.$newRegNoSerialCode, 'reg_year'=> Carbon::now()->year])):
+                    // UPDATE REGISTRATION
+                    if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
+                        $details = [
+                            'subject' => 'You Are Registered',
+                            'title' => 'You Are Registered',
+                            'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>",
+                            'color' => '#1b672a'
+                        ];
+                        Mail::to($student->user->email)->queue( new NotificationEmail($details) );
+                        return response()->json([ 'status'=>'success']);
+                    endif;
+                endif;
+            else:
+                //SAVE REG NO
+                if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.'001', 'reg_year'=> Carbon::now()->year])):
+                    // UPDATE REGISTRATION
+                    if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
+                        $details = [
+                            'subject' => 'You Are Registered',
+                            'title' => 'You Are Registered',
+                            'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>",
+                            'color' => '#1b672a'
+                        ];
+                        Mail::to($student->user->email)->queue( new NotificationEmail($details) );
+                        return response()->json([ 'status'=>'success']);
+                    endif;
                 endif;
             endif;
-        else:
-            //SAVE REG NO
-            if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.'001', 'reg_year'=> Carbon::now()->year])):
-                // UPDATE REGISTRATION
-                if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
-                    $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
-                    $details = [
-                        'subject' => 'You Are Registered',
-                        'title' => 'You Are Registered',
-                        'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>",
-                        'color' => '#1b672a'
-                    ];
-                    Mail::to($student->user->email)->queue( new NotificationEmail($details) );
-                    return response()->json([ 'status'=>'success']);
-                endif;
+            // /REGISTER NEW STUDENT
+        
+        elseif($flag->enrollment == 'existing'):
+
+            // ENROLL EXISTING STUDENT
+            if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
+                $details = [
+                    'subject' => 'You Are Registered',
+                    'title' => 'You Are Registered',
+                    'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>",
+                    'color' => '#1b672a'
+                ];
+                Mail::to($student->user->email)->queue( new NotificationEmail($details) );
+                return response()->json([ 'status'=>'success']);
             endif;
+            // /ENROLL EXISTING STUDENT
+            
         endif;
+
         return response()->json([ 'status'=>'error', 'data'=>$dateFormat]);
     }
     // /REGISTRATION
