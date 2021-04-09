@@ -20,8 +20,9 @@ class ViewPaymentPage
     {
         $uid = Auth::user()->id;
         $student = Student::where('user_id', $uid)->first();
-        if($student != NULL && $student->registration->first()->application_status != 'Declined'):
-            if($student->registration->first()->payment_status != 'Approved'):
+        $registration = $student->registration()->first();
+        if($student != NULL && $registration->application_status != 'Declined'):
+            if($registration->application_status != 'Approved' || $registration->payment_status != 'Approved'):
                 return $next($request);
             else:
                 return redirect('/portal/student/document/registration');
