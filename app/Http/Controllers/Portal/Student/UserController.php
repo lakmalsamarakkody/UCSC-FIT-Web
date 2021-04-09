@@ -61,7 +61,7 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
             $user->role_id = '1';
 
-            $email_token = Email_Token::where('email', $email)->get()->first();
+            $email_token = Email_Token::where('email', $email)->first();
             if(is_Null($email_token['token'])):
                 return abort(403);
             else:
