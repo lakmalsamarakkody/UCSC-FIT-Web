@@ -70,7 +70,7 @@ class Kernel extends HttpKernel
         'staff.system' => \App\Http\Middleware\Portal\Staff\System\indexPagePermission::class,
         'student.auth' => \App\Http\Middleware\Portal\Student\StudentAuthorization::class,
         'student.submit.check' => \App\Http\Middleware\Portal\Student\Registration\ApplicationSubmitCheck::class,
-        'student.payment' => \App\Http\Middleware\Portal\Student\Payment\ViewPaymentPage::class,
+        'student.payment.view' => \App\Http\Middleware\Portal\Student\Payment\ViewPaymentPage::class,
         'student.payment.submit.check' => \App\Http\Middleware\Portal\Student\Payment\PaymentSubmitCheck::class,
         'student.registration.check' => \App\Http\Middleware\Portal\Student\Registration\RegistrationCheck::class,
         'student.registration.active' => \App\Http\Middleware\Portal\Student\Registration\ActiveRegistrationCheck::class,
