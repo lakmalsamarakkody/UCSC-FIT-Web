@@ -25,7 +25,7 @@ class PaymentController extends Controller
     $this->middleware('revalidate');
     $this->middleware('student.auth');
     $this->middleware('student.registration.check');
-    $this->middleware('student.payment');
+    $this->middleware('student.payment.view');
   }
 
   /**
@@ -53,17 +53,29 @@ class PaymentController extends Controller
     $student = Auth::user()->student;
     $registration = $student->registration()->where('registered_at', NULL)->where('status', NULL);
     $reg_fee = Fee::where('purpose', 'registration')->first()->amount;
-    $validator = Validator::make($request->all(), 
+
+    // VALIDATIONS
+    $detailsValidator = Validator::make($request->all(), 
       [     
           'paidBank'=> ['required', 'numeric', 'exists:App\Models\Support\Bank,id', 'size:1'],
           'paidBankBranch'=>['required', 'numeric', 'exists:App\Models\Support\BankBranch,id'],
           'paidDate'=>['required', 'before_or_equal:today'],
           'paidAmount'=>['required', 'numeric', 'size:2750'],
-          'bankSlip'=>['required', 'image']
       ]
     );
-    if($validator->fails()):
-      return response()->json(['errors'=>$validator->errors()]);
+    if(!$request->noPaymentSlip):
+      $bankSlipValidator = Validator::make($request->all(),
+        [
+          'bankSlip'=>['required', 'image']
+        ]
+      );
+    endif;
+    // /VALIDATIONS
+
+    if($detailsValidator->fails()):
+      return response()->json(['errors'=>$detailsValidator->errors()]);
+    elseif(isset($bankSlipValidator) && $bankSlipValidator->fails()):
+      return response()->json(['errors'=>$bankSlipValidator->errors()]);
     else:
       $payment = new Payment();
       $payment->method_id = 2;
@@ -74,26 +86,30 @@ class PaymentController extends Controller
       $payment->bank_branch_id = $request->paidBankBranch;
       $payment->paid_date = $request->paidDate;
 
-      $file_ext = $request->file('bankSlip')->getClientOriginalExtension();
-      $file_name = $student->id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
-
-      $payment->image = $file_name;
-
-      if($path = $request->file('bankSlip')->storeAs('public/payments/registration/'.$student->id,$file_name)):
-        if($payment->save()):
-          $registration->update([
-            'payment_id' => $payment->id,
-            'payment_status' => NULL,
-            'declined_msg' => NULL,
-          ]);
-          return response()->json(['success'=>'success']);
+      // CHECK FOR ENROLLMENT AND SET PAYMENT SLIP
+      if(!$request->noPaymentSlip):
+        $file_ext = $request->file('bankSlip')->getClientOriginalExtension();
+        $file_name = $student->id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
+        $payment->image = $file_name;
+        if(!$request->file('bankSlip')->storeAs('public/payments/registration/'.$student->id,$file_name)):
+          return response()->json(['error'=>'error']);
         endif;
-
+      else:
+        $payment->image = NULL;
       endif;
+      // /CHECK FOR ENROLLMENT AND SET PAYMENT SLIP
 
+      // SAVE PAYMENT
+      if($payment->save()):
+        $registration->update([
+          'payment_id' => $payment->id,
+          'payment_status' => NULL,
+          'declined_msg' => NULL,
+        ]);
+        return response()->json(['success'=>'success']);
+      endif;
+      // /SAVE PAYMENT
     endif;
     return response()->json(['error'=>'error']);
   }
-
-
 }
