@@ -19,8 +19,11 @@ class Flag extends Model
     
     protected $table='student_flags';
 
-    public function student()
-    {
+    public function student(){
         return $this->belongsTo(Student::class, 'student_id', 'id');
+    }
+
+    public function registration(){
+        return $this->hasMany(Registration::class,'student_id','student_id');
     }
 }
