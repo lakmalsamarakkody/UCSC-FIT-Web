@@ -31,7 +31,7 @@
 
         {{-- EXAM LIST --}}
         @if(Auth::user()->hasPermission('staff-exam-examList'))
-        <div class="col-lg-3 col-md-6 col-12 mb-5">
+        <div class="col-md-6 col-12 mb-5">
           <a href="{{ url('/portal/staff/exams/list') }}" style="text-decoration: none">
             <div class="card">
               <div class="card-header bg-primary text-center py-4 text-white">Exam List</div>
@@ -40,6 +40,16 @@
         </div>
         @endif
         {{-- /EXAM LIST --}}
+
+        {{-- ASSIGN EXAMS --}}
+        <div class="col-md-6 col-12 mb-5">
+          <a href="{{ route('exams.assign') }}" style="text-decoration: none">
+            <div class="card">
+              <div class="card-header bg-primary text-center py-4 text-white">Assign Exams</div>
+            </div>
+          </a>
+        </div>
+        {{-- /ASSIGN EXAMS --}}
 
         {{-- CREATE EXAM SCHEDULE --}}
         @if(Auth::user()->hasPermission('staff-exam-schedule-add'))
