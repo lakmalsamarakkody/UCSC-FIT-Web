@@ -28,13 +28,15 @@ class Registration extends Model
         'document_submit',
     ];
 
-    public function student()
-    {
+    public function student(){
         return $this->belongsTo(Student::class, 'student_id', 'id');
     }
 
-    public function payment()
-    {
+    public function payment(){
         return $this->belongsTo(Payment::class, 'payment_id', 'id');
+    }
+
+    public function flag(){
+        return $this->hasOne(Flag::class,'student_id','student_id');
     }
 }
