@@ -1,9 +1,9 @@
 <!-- VIEW APPLICANT DETAILS -->
-<div class="modal fade" id="modal-view-applicant" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="viewApplication" aria-hidden="true">
+<div class="modal fade" id="modal-view-applicant" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="viewApplicationTitle" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="viewApplication"></h5>
+                <h5 class="modal-title text-uppercase font-weight-bold" id="viewApplicationTitle"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -23,6 +23,14 @@
                                     <tr>
                                         <th>Type: </th>
                                         <td>Registration</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Enrollment: </th>
+                                        <td><span id="spanEnrollment" class="text-capitalize"></span></td>
+                                    </tr>
+                                    <tr id="trApplicationRegNo" class="d-none">
+                                        <th>Registration No: </th>
+                                        <td><span id="spanregNo" class="text-capitalize font-weight-bold"></span></td>
                                     </tr>
                                 </table>
                             </div>
@@ -244,7 +252,7 @@
                                                         <td>Rs.<span id="spanPaymentAmount"></span></td>
                                                     </tr>
                                                 </table>
-                                                <div name="imgPaymentBankSlip" id="imgPaymentBankSlip" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
+                                                <div name="imgPaymentBankSlip" id="imgPaymentBankSlip" class="drop-zone text-danger" style="background:no-repeat center; background-size: cover;" ></div>
                                             </div>
                                         </div>
                                     </div>
@@ -431,32 +439,45 @@
 <!-- /DECLINE MESSAGE : Id -->
 
 {{-- REGISTER STUDENT --}}
-<div class="modal fade" id="modal-register-student" tabindex="-1" aria-labelledby="registerStudentLabel" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="modal-register-student" tabindex="-1" aria-labelledby="registerStudentTitle" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="registerStudentLabel">Register Student</h5>
+                <h5 class="modal-title font-weight-bold text-uppercase" id="registerStudentTitle">Register Student</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                {{-- STUDENT NAME --}}
+                {{-- STUDENT EMAIL --}}
                 <div class="form-group">
                     <label for="regStudentEmail" class="col-form-label">Email:</label><br/>
-                    <label name="regStudentEmail" id="regStudentEmail" class="text-info font-weight-bold"></label>
+                    <label name="regStudentEmail" id="regStudentEmail" class="text-dark font-weight-bold"></label>
                 </div>
+                {{-- /STUDENT EMAIL --}}
 
+                {{-- STUDENT REGNO --}}
+                <div id="divRegStudentRegno" class="form-group d-none">
+                    <label for="regStudentRegno" class="col-form-label">Registration No:</label><br/>
+                    <label name="regStudentRegno" id="regStudentRegno" class="text-primary font-weight-bold"></label>
+                </div>
+                {{-- /STUDENT REGNO --}}
+
+                {{-- STUDENT REG DATE --}}
                 <div class="form-group">
                     <label for="regDate" class="col-form-label">Registration Date:</label>
                     <input type="date" class="form-control" name="regDate" id="regDate" value="{{ $regDate ?? NULL }}"/>
                 </div>
+                {{-- /STUDENT REG DATE --}}
 
+                {{-- STUDENT REG EXP DATE --}}
                 <div class="form-group">
                     <label for="regExpireDate" class="col-form-label">Registration Expires On:</label>
                     <input type="date" class="form-control" name="regExpireDate" id="regExpireDate" value="{{ $regExpireDate ?? NULL }}"/>
                 </div>
+                {{-- /STUDENT REG EXP DATE --}}
 
+                {{-- REG STATUS --}}
                 <div class="form-group">
                     <label for="regStatus" class="col-form-label">Status:</label>
                     <select class="form-control" name="regStatus" id="regStatus">
@@ -464,6 +485,7 @@
                         <option value="0">Deactive</option>
                     </select>
                 </div>
+                {{-- /REG STATUS --}}
 
             </div>
             <div class="modal-footer">
