@@ -148,7 +148,6 @@ Route::post('/portal/staff/exams/schedule/postpone/details',[App\Http\Controller
 Route::post('/portal/staff/exams/schedule/postpone',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'postponeExam']);
 Route::post('/portal/staff/exams/schedule/delete/after/release',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'deleteScheduleAfterRelease']);
 //Route::get('/portal/staff/exams/held/search', [App\Http\Controllers\Portal\Staff\ExamsController::class, 'getHeldExams'])->name('exams.held.search');
-// /EXAMS PAGE
 
 // EXAM LIST PAGE
 Route::get('/portal/staff/exams/list', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class, 'index']);
@@ -156,6 +155,12 @@ Route::post('/portal/staff/exams/list/create', [App\Http\Controllers\Portal\Staf
 Route::get('/portal/staff/exams/exams/list', [App\Http\Controllers\Portal\Staff\ExamListController::class, 'getExamList'])->name('exam.exam.list');
 Route::post('/portal/staff/exams/list/delete', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class , 'deleteExam']);
 // /EXAM LIST PAGE
+
+// EXAM ASSIGN PAGE
+Route::get('/portal/staff/exams/assign', [App\Http\Controllers\Portal\Staff\Exams\ExamAssignController::class, 'index'])->name('exams.assign');
+Route::get('/portal/staff/exams/assign/schedules/table', [App\Http\Controllers\Portal\Staff\Exams\ExamAssignController::class, 'getSchedulesToAssign'])->name('exams.assign.schedules.table');
+// /EXAM ASSIGN PAGE
+// /EXAMS PAGE
 
 // RESULTS PAGE
 Route::get('/portal/staff/results', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'index'])->name('results');
