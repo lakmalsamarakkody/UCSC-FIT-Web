@@ -132,7 +132,7 @@ class Student extends Model
         return $this->belongsTo(WorldCountry::class, 'permanent_country_id');
     } 
 
-    public function registrations()
+    public function all_registrations()
     {
         return $this->hasMany(Registration::class, 'student_id', 'id')->where('registered_at', '!=', NULL)->orderBy('registered_at', 'desc');
     }

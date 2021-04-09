@@ -30,10 +30,10 @@ class ExamsController extends Controller
    */
   public function __construct()
   {
-      $this->middleware('auth');
-      $this->middleware('revalidate');
-      $this->middleware('student.auth');
-      $this->middleware('active.registration');
+    $this->middleware('auth');
+    $this->middleware('revalidate');
+    $this->middleware('student.auth');
+    $this->middleware('student.registration.active');
   }
 
   /**

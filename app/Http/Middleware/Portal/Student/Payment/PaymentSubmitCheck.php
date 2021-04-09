@@ -20,10 +20,10 @@ class PaymentSubmitCheck
     {
         $student = Auth::user()->student;
         $registration = $student->registration()->where('registered_at', NULL)->where('status', NULL)->first();
-        if($student != NULL && $registration->payment_id != NULL && $registration->application_status != 'Declined' && $registration->payment_status == 'Approved'):
+        if($student != NULL && $registration!=NULL && $registration->payment_id != NULL && $registration->application_status == 'Approved' && $registration->payment_status == 'Approved'):
             return $next($request);
         else:
-            return redirect('/portal/student/registration');
+            return redirect('/portal/student/');
         endif;
     }
 }
