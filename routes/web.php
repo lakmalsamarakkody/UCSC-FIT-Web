@@ -158,6 +158,7 @@ Route::post('/portal/staff/exams/list/delete', [App\Http\Controllers\Portal\Staf
 
 // EXAM ASSIGN PAGE
 Route::get('/portal/staff/exams/assign', [App\Http\Controllers\Portal\Staff\Exams\ExamAssignController::class, 'index'])->name('exams.assign');
+Route::get('/portal/staff/exams/assign/schedules/table', [App\Http\Controllers\Portal\Staff\Exams\ExamAssignController::class, 'getSchedulesToAssign'])->name('exams.assign.schedules.table');
 // /EXAM ASSIGN PAGE
 // /EXAMS PAGE
 

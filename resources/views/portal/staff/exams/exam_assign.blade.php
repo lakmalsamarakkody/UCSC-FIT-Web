@@ -102,6 +102,7 @@
                             <th>Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody id="assignSchedulesTblBody">
