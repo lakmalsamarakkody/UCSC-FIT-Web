@@ -161,6 +161,7 @@ Route::get('/portal/staff/exams/assign', [App\Http\Controllers\Portal\Staff\Exam
 Route::get('/portal/staff/exams/assign/schedules/table', [App\Http\Controllers\Portal\Staff\Exams\ExamAssignController::class, 'getSchedulesToAssign'])->name('exams.assign.schedules.table');
 Route::post('/portal/staff/exams/assign/schedule/details', [App\Http\Controllers\Portal\Staff\Exams\ExamAssignController::class, 'getExamScheduleDetails'])->name('exams.assign.schedule.details');
 Route::get('/portal/staff/exams/assign/students/table', [App\Http\Controllers\Portal\Staff\Exams\ExamAssignController::class, 'getStudentList'])->name('exams.assign.students.table');
+Route::post('/portal/staff/exams/assign/students', [App\Http\Controllers\Portal\Staff\Exams\ExamAssignController::class, 'assignStudentsForExam'])->name('exams.assign.students');
 // /EXAM ASSIGN PAGE
 // /EXAMS PAGE
 
