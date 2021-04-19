@@ -112,13 +112,6 @@ class ExamsController extends Controller
                                     ->whereHas('schedule', function($query) {
                                       $query->where('date', '>=', date('Y-m-d'));
                                     })->first();
-
-            $scheduled_exam = hasExam::where( 'student_id', $student_id )
-                                    ->where( 'subject_id', $exam_to_apply->subject_id )
-                                    ->where( 'exam_type_id', $exam_to_apply->exam_type_id )
-                                    ->whereHas('schedule', function($query) {
-                                      $query->where('date', '>=', date('Y-m-d'));
-                                    })->first();
             // echo $scheduled_exam;
             // echo $same_exam;
             // echo $similar_exam;
