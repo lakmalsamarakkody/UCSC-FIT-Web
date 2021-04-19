@@ -47,7 +47,7 @@
                                                 </div>
                                                 <input id="searchAll" type="text" class="form-control" placeholder="Enter search details.."/>
                                                 <div class="input-group-append">
-                                                    <button type="button" class="form-control btn btn-primary" onclick="searchStudent();"><i class="fa fa-search"></i>&nbsp;Search</button>
+                                                    <button type="button" class="form-control btn btn-primary" onclick="search_students();"><i class="fa fa-search"></i>&nbsp;Search</button>
                                                 </div>
                                                 </div>
                                             </div>
@@ -56,7 +56,7 @@
                                             <div class="card shadow-none">
                                                 <div class="card-body">
                                                     <div class="form-row">
-                                                        <div class="form-group col">
+                                                        <div class="form-group col-xl-3 col-lg-6 col-12">
                                                             <label for="year">Year</label>
                                                             <select id="year" name="year" class="form-control form-control-sm">
                                                                 <option value="">select here---</option>
@@ -65,17 +65,17 @@
                                                                 @endforeach --}}
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col">
+                                                        <div class="form-group col-xl-3 col-lg-6 col-12">
                                                             <label for="name">Name</label>
                                                             <input type="text" class="form-control form-control-sm" id="name" aria-describedby="nameHelp"/>
                                                             <small id="nameHelp" class="form-text text-muted">Enter Name Here</small>
                                                         </div>
-                                                        <div class="form-group col">
+                                                        <div class="form-group col-xl-3 col-lg-6 col-12">
                                                             <label for="regNo">Reg: No</label>
                                                             <input type="text" class="form-control form-control-sm" id="regNo" aria-describedby="regNoHelp"/>
                                                             <small id="regNoHelp" class="form-text text-muted">Enter Registration Number Here</small>
                                                         </div>
-                                                        <div class="form-group col">
+                                                        <div class="form-group col-xl-3 col-lg-6 col-12">
                                                             <label for="nic">NIC</label>
                                                             <input type="text" class="form-control form-control-sm" id="nic" aria-describedby="nicHelp"/>
                                                             <small id="nicHelp" class="form-text text-muted">Enter NIC Here</small>
@@ -93,7 +93,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-12 order-md-1 order-2">
-                                            <table class="table tbl-assign-student-list">
+                                            <table class="table tbl-assign-students-yajradt">
                                                 <thead>
                                                     <tr>
                                                         <th>Registration No</th>
@@ -103,6 +103,11 @@
                                                     </tr>
                                                 </thead>
                                             </table>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 col-12 text-center">
+                                        <div id="divBtnAssignStudents" class="btn-group col-xl-3 mt-1">
+                                            <button type="button" class="btn btn-success form-control" id="btnAssignStudents" onclick="assign_students();">Assign Selected Students<span id="spinnerBtnAssignStudents" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                         </div>
                                     </div>
                                 </div>
