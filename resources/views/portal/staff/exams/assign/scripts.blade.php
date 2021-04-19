@@ -87,7 +87,63 @@ $(function(){
     // / SCHEDULES TABLE
 });
 
-// STUDENT LIST
+// STUDENT LIST MODAL
+// STUDENT TABLE
+let studentTable =  null;
+draw_student_table = () => {
+    $('.tbl-assign-students-yajradt').DataTable().clear().destroy();
+    studentTable = $('.tbl-assign-students-yajradt').DataTable({
+        processing: true,
+        serverSide: true,
+        searching: false,
+        ajax: {
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url: "{{ route('exams.assign.students.table') }}",
+            data: function(d) {
+                d.year = $('#year').val();
+                d.name = $('#name').val();
+                d.search = $('#searchAll').val();
+                d.regNo = $('#regNo').val();
+                d.nic = $('#nic').val();
+            }
+        },
+        columns: [
+            {
+                data: 'reg_no', 
+                name: 'reg_no'
+            },
+            {
+                data: 'full_name', 
+                name: 'full_name'
+            },
+            {
+                data: 'nic_old', 
+                name: 'nic_old'
+            },
+            {
+                data: 'student_id', 
+                name: 'student_id', 
+                orderable: false, 
+                searchable: false
+            },
+        ],
+        columnDefs: [
+            {
+                targets: 3,
+                render: function(data, type, row) {
+                    var chkBox = '<div class="input-group"><input type="checkbox" class="assign-exam-check" name="'+data+'" /></div>';
+                    return chkBox;
+                }
+            },
+        ]
+    });
+}
+
+search_students = () => {
+    studentTable.draw();
+}
+// /STUDENT TABLE
+
 invoke_assign_students_modal = (schedule_id) => {
 
     // Form Payload
@@ -113,6 +169,7 @@ invoke_assign_students_modal = (schedule_id) => {
                    $('#spanAssignExamDate').html(data['schedule']['date']);
                    $('#spanAssignExamTime').html(data['schedule']['start_time'] + ' - ' + data['schedule']['end_time']);
 
+                   draw_student_table();
                    $('#btnAssignStudents-'+schedule_id).removeAttr('disabled', 'disabled');
                    $('#modal-assign-student-list').modal('show');
                }
@@ -125,5 +182,5 @@ invoke_assign_students_modal = (schedule_id) => {
         }
     });
 }
-// /STUDENT LIST
+// /STUDENT LIST MODAL
 </script>

@@ -7,6 +7,7 @@ use App\Models\Exam;
 use App\Models\Exam\Schedule;
 use App\Models\Subject;
 use App\Models\Exam\Types;
+use App\Models\Student;
 use Illuminate\Support\Carbon;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
@@ -80,6 +81,49 @@ class ExamAssignController extends Controller
         ])->first();
         return response()->json(['status'=>'success', 'schedule'=>$schedule]);
     }
-    // /STUDENT LIST MODAL DETAILS
 
+    // STUDENT LIST
+    public function getStudentList(Request $request)
+    {
+        if($request->ajax()) {
+            $data  = Student::join('student_registrations', 'students.id', '=', 'student_registrations.student_id')->where('status', 1);
+            if($request->name!=null){
+                $data = $data->where('first_name','like', '%'. $request->name.'%')
+                ->orWhere('last_name','like', '%'. $request->name.'%')
+                ->orWhere('full_name','like', '%'. $request->name.'%')
+                ->orWhere('initials','like', '%'. $request->name.'%')
+                ->orWhere('middle_names','like', '%'. $request->name.'%');
+            }
+            if($request->regNo!=null){
+                $data = $data->where('reg_no','like', '%'. $request->regNo.'%');
+            }
+            if($request->year!=null){
+                $data = $data->where('reg_year',$request->year);
+            }
+            if($request->nic!=null){
+                $data = $data->where('nic_old','like','%'. $request->nic.'%')
+                ->orWhere('nic_new','like', '%'. $request->nic.'%')
+                ->orWhere('postal','like', '%'. $request->nic.'%')
+                ->orWhere('Passport','like', '%'. $request->nic.'%');
+            }
+            if($request->search!=null){
+                $data = $data->where('first_name','like', '%'. $request->search.'%')
+                ->orWhere('last_name','like', '%'. $request->search.'%')
+                ->orWhere('full_name','like', '%'. $request->search.'%')
+                ->orWhere('initials','like', '%'. $request->search.'%')
+                ->orWhere('middle_names','like', '%'. $request->search.'%')
+                ->orWhere('reg_year', $request->search)
+                ->orwhere('nic_old','like','%'. $request->search.'%')
+                ->orWhere('nic_new','like', '%'. $request->search.'%')
+                ->orWhere('postal','like', '%'. $request->search.'%')
+                ->orWhere('Passport','like', '%'. $request->search.'%');
+              }
+            $data = $data->get();
+            return DataTables::of($data)
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+    }
+    // /STUDENT LIST
+    // /STUDENT LIST MODAL DETAILS
 }
