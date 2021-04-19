@@ -31,7 +31,7 @@ class ExamAssignController extends Controller
         ]);
     }
 
-    // EXAM SCHEDULE TABLE
+    // EXAM SCHEDULES TABLE
     public function getSchedulesToAssign(Request $request)
     {
         $today = Carbon::today();
@@ -68,5 +68,18 @@ class ExamAssignController extends Controller
             ->make(true);
         endif;
     }
-    // EXAM SCHEDULE TABLE
+    // /EXAM SCHEDULES TABLE
+
+    // STUDENT LIST MODAL DETAILS
+    public function getExamScheduleDetails(Request $request)
+    {
+        $schedule = Schedule::where('id',$request->schedule_id)->addSelect([
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
+        ])->first();
+        return response()->json(['status'=>'success', 'schedule'=>$schedule]);
+    }
+    // /STUDENT LIST MODAL DETAILS
+
 }

@@ -86,4 +86,44 @@ $(function(){
     }
     // / SCHEDULES TABLE
 });
+
+// STUDENT LIST
+invoke_assign_students_modal = (schedule_id) => {
+
+    // Form Payload
+    var formData = new FormData();
+    formData.append('schedule_id', schedule_id);
+
+    // Get exam schedule details controller
+    $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url: "{{ route('exams.assign.schedule.details') }}",
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        beforeSend: function() {$('#btnAssignStudents-'+schedule_id).attr('disabled', 'disabeld');},
+        success: function(data) {
+            console.log('Success in get exam schedule details ajax.');
+           if(data['status'] == 'success') {
+               console.log('Success in get exam schedule details.');
+               if(data['schedule'] != null) {
+                   $('#spanAssignSubject').html('FIT ' + data['schedule']['subject_code'] + ' - ' + data['schedule']['subject_name']);
+                   $('#spanAssignExamType').html(data['schedule']['exam_type']);
+                   $('#spanAssignExamDate').html(data['schedule']['date']);
+                   $('#spanAssignExamTime').html(data['schedule']['start_time'] + ' - ' + data['schedule']['end_time']);
+
+                   $('#btnAssignStudents-'+schedule_id).removeAttr('disabled', 'disabled');
+                   $('#modal-assign-student-list').modal('show');
+               }
+           }
+        },
+        error: function(err) {
+            console.log('Error in get exam schedule details ajax.');
+            $('#btnAssignStudents-'+schedule_id).removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+        }
+    });
+}
+// /STUDENT LIST
 </script>
