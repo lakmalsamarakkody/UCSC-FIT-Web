@@ -134,10 +134,10 @@ class ExamAssignController extends Controller
     public function assignStudentsForExam(Request $request)
     {
         $schedule = Schedule::where('id', $request->schedule_id)->first();
-        $students_array [] = $request->assign_students;
+        $students_array = json_decode($request->assign_students);
         foreach($students_array as $student):
             $exam = hasExam::create([
-                'student_id'=> 76,
+                'student_id'=> $student,
                 'exam_schedule_id'=> $request->schedule_id,
                 'subject_id'=> $schedule->subject_id,
                 'exam_type_id'=> $schedule->exam_type_id,
@@ -147,7 +147,7 @@ class ExamAssignController extends Controller
                 'payment_status'=> 'Approved'
             ]);
         endforeach;
-        return response()->json(['status'=>'success']);
+        return response()->json(['status'=>'success', 'request'=>$students_array]);
         dd($request->all());
     }
     // /ASSIGN STUDENTS FOR THE EXAM

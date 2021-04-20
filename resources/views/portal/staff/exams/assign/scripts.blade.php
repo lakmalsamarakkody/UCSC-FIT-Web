@@ -203,7 +203,7 @@ assign_students = () => {
     .then((result) => {
         if(result.isConfirmed) {
             // Get the selected stundets ids
-            const assignStudents = [];
+            assignStudents = [];
             $('.assign-exam-check').each(function() {
                 if($(this).is(":checked")) {
                     assignStudents.push($(this).val());
@@ -213,7 +213,9 @@ assign_students = () => {
             // Form Payload
             let formData = new FormData();
             formData.append('schedule_id', $('#assignScheduleId').val());
-            formData.append('assign_students', assignStudents);
+            var json_arr = JSON.stringify(assignStudents);
+            formData.append('assign_students', json_arr);
+           
 
             // Assign students for exam controller
             $.ajax({
@@ -229,6 +231,7 @@ assign_students = () => {
                 },
                 success: function(data) {
                     console.log('Success in assign students for exam ajax.');
+                    if( Array.isArray(assignStudents)){console.log('true')}else{console.log('false')}
                     $('#btnAssignStudents').removeAttr('disabled', 'disabled');
                     $('#spinnerBtnAssignStudents').addClass('d-none');
                     if(data['status'] == 'unselected') {
