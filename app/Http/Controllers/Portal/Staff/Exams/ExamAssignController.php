@@ -87,7 +87,8 @@ class ExamAssignController extends Controller
     public function getStudentList(Request $request)
     {
         if($request->ajax()) {
-            $schedule = Schedule::where('id', $request->schedule_id)->first();
+            // $schedule = Schedule::where('id', $request->schedule_id)->first();
+            // $students = hasExam::select('student_id')->where('exam_schedule_id', $request->schedule_id)->get();
             $data  = Student::join('student_registrations', 'students.id', '=', 'student_registrations.student_id')->where('student_registrations.status', 1);
             if($request->name!=null){
                 $data = $data->where('first_name','like', '%'. $request->name.'%')
@@ -106,7 +107,7 @@ class ExamAssignController extends Controller
                 $data = $data->where('nic_old','like','%'. $request->nic.'%')
                 ->orWhere('nic_new','like', '%'. $request->nic.'%')
                 ->orWhere('postal','like', '%'. $request->nic.'%')
-                ->orWhere('Passport','like', '%'. $request->nic.'%');
+                ->orWhere('passport','like', '%'. $request->nic.'%');
             }
             if($request->search!=null){
                 $data = $data->where('first_name','like', '%'. $request->search.'%')
@@ -118,7 +119,7 @@ class ExamAssignController extends Controller
                 ->orwhere('nic_old','like','%'. $request->search.'%')
                 ->orWhere('nic_new','like', '%'. $request->search.'%')
                 ->orWhere('postal','like', '%'. $request->search.'%')
-                ->orWhere('Passport','like', '%'. $request->search.'%');
+                ->orWhere('passport','like', '%'. $request->search.'%');
               }
             $data = $data->get();
             return DataTables::of($data)
@@ -133,18 +134,20 @@ class ExamAssignController extends Controller
     public function assignStudentsForExam(Request $request)
     {
         $schedule = Schedule::where('id', $request->schedule_id)->first();
-        $students_array [] = $request->assign_stundents;
+        $students_array [] = $request->assign_students;
         foreach($students_array as $student):
-            $exam = new hasExam();
-            $exam->student_id = 8;
-            $exam->subject_id = $schedule->subject_id;
-            $exam->exam_type_id = $schedule->exam_type_id;
-            $exam->payment_id = 12;
-            $exam->requested_exam_id = 11;
-            if($exam->save()):
-                return response()->json(['status'=>'success']);
-            endif;
+            $exam = hasExam::create([
+                'student_id'=> 76,
+                'exam_schedule_id'=> $request->schedule_id,
+                'subject_id'=> $schedule->subject_id,
+                'exam_type_id'=> $schedule->exam_type_id,
+                'requested_exam_id'=> 99,
+                'schedule_status'=> 'Approved',
+                'payment_id'=> 100,
+                'payment_status'=> 'Approved'
+            ]);
         endforeach;
+        return response()->json(['status'=>'success']);
         dd($request->all());
     }
     // /ASSIGN STUDENTS FOR THE EXAM

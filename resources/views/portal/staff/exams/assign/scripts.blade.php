@@ -203,17 +203,17 @@ assign_students = () => {
     .then((result) => {
         if(result.isConfirmed) {
             // Get the selected stundets ids
-            const assignStundents = [];
+            const assignStudents = [];
             $('.assign-exam-check').each(function() {
                 if($(this).is(":checked")) {
-                    assignStundents.push($(this).val());
+                    assignStudents.push($(this).val());
                 }
             });
 
             // Form Payload
             let formData = new FormData();
             formData.append('schedule_id', $('#assignScheduleId').val());
-            formData.append('assign_stundents', assignStundents);
+            formData.append('assign_students', assignStudents);
 
             // Assign students for exam controller
             $.ajax({

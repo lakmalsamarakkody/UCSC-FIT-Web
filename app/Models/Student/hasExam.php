@@ -25,6 +25,12 @@ class hasExam extends Model
     protected $table='student_exams';
 
     protected $fillable = [
+        'student_id',
+        'exam_schedule_id',
+        'subject_id',
+        'exam_type_id',
+        'requested_exam_id',
+        'schedule_status',
         'payment_id',
         'payment_status',
         'declined_message',
