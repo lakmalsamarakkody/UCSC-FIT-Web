@@ -231,7 +231,6 @@ assign_students = () => {
                 },
                 success: function(data) {
                     console.log('Success in assign students for exam ajax.');
-                    if( Array.isArray(assignStudents)){console.log('true')}else{console.log('false')}
                     $('#btnAssignStudents').removeAttr('disabled', 'disabled');
                     $('#spinnerBtnAssignStudents').addClass('d-none');
                     if(data['status'] == 'unselected') {
