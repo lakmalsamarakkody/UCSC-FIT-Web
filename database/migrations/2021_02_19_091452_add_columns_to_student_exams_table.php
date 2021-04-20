@@ -16,7 +16,7 @@ class AddColumnsToStudentExamsTable extends Migration
         Schema::table('student_exams', function (Blueprint $table) {
             $table->integer('subject_id')->after('student_id');
             $table->integer('exam_type_id')->after('subject_id');
-            $table->integer('requested_exam_id')->after('exam_type_id');
+            $table->integer('requested_exam_id')->nullable()->after('exam_type_id');
             $table->string('payment_status')->nullable()->after('payment_id');
             $table->text('declined_message')->nullable()->after('payment_status');
             $table->string('schedule_status')->default('Pending')->after('declined_message');
