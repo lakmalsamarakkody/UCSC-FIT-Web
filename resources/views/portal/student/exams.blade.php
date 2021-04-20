@@ -14,6 +14,49 @@
     <!-- CONTENT -->
     <div class="col-lg-12 student-exams min-vh-100">
       <div class="row">
+
+        <!-- SCHEDULED EXAMS -->
+        <div class="col-12 mt-4 px-0">
+          <div class="card">
+            <div class="card-header">Scheduled Exams</div>
+            
+            <div class="card-body">
+              {{-- <pre>
+                {{$exams}}
+              </pre> --}}
+              @foreach ($scheduled_exams as $exam)
+                @if($exam->schedule->date > date('Y-m-d'))
+                  <div class="accordion" id="accordion_{{$exam->id}}">
+                    <div class="card mb-4 shadow-sm">
+                      <div class="card-header text-secondary" id="heading_{{$exam->id}}">
+                        FIT {{ $exam->subject->code }} - {{ $exam->subject->name }} ({{ $exam->type->name }})
+                        <div class="btn-group float-right">
+                          <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}"><i class="far fa-eye"></i> View</button>
+                        </div>
+                      </div>
+                  
+                      <div id="collapse_{{$exam->id}}" class="collapse" aria-labelledby="heading_{{$exam->id}}" data-parent="#accordion_{{$exam->id}}">
+                        <div class="card-body text-md-center border-top border-secondary">
+                          <div class="row">
+                            <div class="col-12 col-md-4"> Date : {{ $exam->schedule->date }}</div>
+                            <div class="col-12 col-md-4"> Start Time : {{ $exam->schedule->start_time }}</div>
+                            <div class="col-12 col-md-4"> End Time : {{ $exam->schedule->end_time }}</div>
+                            {{-- <div class="col-12 offset-md-4 col-md-4 my-3">
+                              <button type="button" class="btn btn-outline-primary w-100" data-tooltip="tooltip" data-placement="bottom" title="Apply Exam" onclick="window.open('/portal/student/payment')"><i class="far fa-hand-point-right"></i> Apply</button>
+                            </div> --}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                @endif
+              @endforeach
+            </div>
+            
+          </div>
+        </div>
+        <!-- /SCHEDULED EXAMS-->
+        
         {{-- APPLY FOR EXAMS --}}
         <div class="col-12 mt-4 px-0">
           <div class="card">
@@ -237,49 +280,6 @@
           </div>
         </div>
         <!-- /APPLIED EXAMS TABLE-->
-
-        <!-- SCHEDULED EXAMS -->
-        <div class="col-12 mt-4 px-0">
-          <div class="card">
-            <div class="card-header">Scheduled Exams</div>
-            
-            <div class="card-body">
-              {{-- <pre>
-                {{$exams}}
-              </pre> --}}
-              @foreach ($scheduled_exams as $exam)
-                @if($exam->schedule->date > date('Y-m-d'))
-                  <div class="accordion" id="accordion_{{$exam->id}}">
-                    <div class="card mb-4 shadow-sm">
-                      <div class="card-header text-secondary" id="heading_{{$exam->id}}">
-                        FIT {{ $exam->subject->code }} - {{ $exam->subject->name }} ({{ $exam->type->name }})
-                        <div class="btn-group float-right">
-                          <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}"><i class="far fa-eye"></i> View</button>
-                        </div>
-                      </div>
-                  
-                      <div id="collapse_{{$exam->id}}" class="collapse" aria-labelledby="heading_{{$exam->id}}" data-parent="#accordion_{{$exam->id}}">
-                        <div class="card-body text-md-center border-top border-secondary">
-                          <div class="row">
-                            <div class="col-12 col-md-4"> Date : {{ $exam->schedule->date }}</div>
-                            <div class="col-12 col-md-4"> Start Time : {{ $exam->schedule->start_time }}</div>
-                            <div class="col-12 col-md-4"> End Time : {{ $exam->schedule->end_time }}</div>
-                            {{-- <div class="col-12 offset-md-4 col-md-4 my-3">
-                              <button type="button" class="btn btn-outline-primary w-100" data-tooltip="tooltip" data-placement="bottom" title="Apply Exam" onclick="window.open('/portal/student/payment')"><i class="far fa-hand-point-right"></i> Apply</button>
-                            </div> --}}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                @endif
-              @endforeach
-            </div>
-                
-
-          </div>
-        </div>
-        <!-- /SCHEDULED EXAMS-->
 
         <!-- HELD EXAMS TABLE -->
         <div class="col-12 mt-4 px-0">
