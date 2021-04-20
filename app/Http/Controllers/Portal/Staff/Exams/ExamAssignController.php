@@ -8,6 +8,7 @@ use App\Models\Exam\Schedule;
 use App\Models\Subject;
 use App\Models\Exam\Types;
 use App\Models\Student;
+use App\Models\Student\hasExam;
 use Illuminate\Support\Carbon;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +38,7 @@ class ExamAssignController extends Controller
     {
         $today = Carbon::today();
         if ($request->ajax()):
-            $data = Schedule::where('date', '>', $today)->addSelect([
+            $data = Schedule::where('date', '>', $today)->where('schedule_release', 1)->addSelect([
                 'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
                 'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
                 'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
@@ -86,7 +87,8 @@ class ExamAssignController extends Controller
     public function getStudentList(Request $request)
     {
         if($request->ajax()) {
-            $data  = Student::join('student_registrations', 'students.id', '=', 'student_registrations.student_id')->where('status', 1);
+            $schedule = Schedule::where('id', $request->schedule_id)->first();
+            $data  = Student::join('student_registrations', 'students.id', '=', 'student_registrations.student_id')->where('student_registrations.status', 1);
             if($request->name!=null){
                 $data = $data->where('first_name','like', '%'. $request->name.'%')
                 ->orWhere('last_name','like', '%'. $request->name.'%')
@@ -126,4 +128,24 @@ class ExamAssignController extends Controller
     }
     // /STUDENT LIST
     // /STUDENT LIST MODAL DETAILS
+
+    // ASSIGN STUDENTS FOR THE EXAM
+    public function assignStudentsForExam(Request $request)
+    {
+        $schedule = Schedule::where('id', $request->schedule_id)->first();
+        $students_array [] = $request->assign_stundents;
+        foreach($students_array as $student):
+            $exam = new hasExam();
+            $exam->student_id = 8;
+            $exam->subject_id = $schedule->subject_id;
+            $exam->exam_type_id = $schedule->exam_type_id;
+            $exam->payment_id = 12;
+            $exam->requested_exam_id = 11;
+            if($exam->save()):
+                return response()->json(['status'=>'success']);
+            endif;
+        endforeach;
+        dd($request->all());
+    }
+    // /ASSIGN STUDENTS FOR THE EXAM
 }

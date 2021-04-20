@@ -15,6 +15,7 @@
                             <div class="card mb-5">
                                 <div class="card-header">Exam Schedule Details</div>
                                 <div class="card-body">
+                                    <input type="hidden" id="assignScheduleId" value="" class="form-control" readonly>
                                     <table class="table">
                                         <tr>
                                             <th>Subject: </th>

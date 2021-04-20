@@ -131,8 +131,8 @@ draw_student_table = () => {
             {
                 targets: 3,
                 render: function(data, type, row) {
-                    var chkBox = '<div class="input-group"><input type="checkbox" class="assign-exam-check" name="'+data+'" /></div>';
-                    return chkBox;
+                    var checkBox = '<div class="input-group"><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></div>';
+                    return checkBox;
                 }
             },
         ]
@@ -145,6 +145,13 @@ search_students = () => {
 // /STUDENT TABLE
 
 invoke_assign_students_modal = (schedule_id) => {
+
+    // Remove previous searches
+    $('#searchAll').val('');
+    // $('#year').val('');
+    $('#name').val('');
+    $('#regNo').val('');
+    $('#nic').val('');
 
     // Form Payload
     var formData = new FormData();
@@ -164,6 +171,7 @@ invoke_assign_students_modal = (schedule_id) => {
            if(data['status'] == 'success') {
                console.log('Success in get exam schedule details.');
                if(data['schedule'] != null) {
+                   $('#assignScheduleId').val(data['schedule']['id']);
                    $('#spanAssignSubject').html('FIT ' + data['schedule']['subject_code'] + ' - ' + data['schedule']['subject_name']);
                    $('#spanAssignExamType').html(data['schedule']['exam_type']);
                    $('#spanAssignExamDate').html(data['schedule']['date']);
@@ -183,4 +191,80 @@ invoke_assign_students_modal = (schedule_id) => {
     });
 }
 // /STUDENT LIST MODAL
+
+// ASSIGN STUDENTS FOR EXAM
+assign_students = () => {
+
+    SwalQuestionSuccessAutoClose.fire({
+        title: 'Are you sure?',
+        text: 'Selected students will assign for the scheduled exam.',
+        confirmButtonText: 'Yes, Assign!',
+    })
+    .then((result) => {
+        if(result.isConfirmed) {
+            // Get the selected stundets ids
+            const assignStundents = [];
+            $('.assign-exam-check').each(function() {
+                if($(this).is(":checked")) {
+                    assignStundents.push($(this).val());
+                }
+            });
+
+            // Form Payload
+            let formData = new FormData();
+            formData.append('schedule_id', $('#assignScheduleId').val());
+            formData.append('assign_stundents', assignStundents);
+
+            // Assign students for exam controller
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="x-csrf-token"]').attr('content')},
+                url: "{{ route('exams.assign.students') }}",
+                type: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#btnAssignStudents').attr('disabled', 'disabled');
+                    $('#spinnerBtnAssignStudents').removeClass('d-none');
+                },
+                success: function(data) {
+                    console.log('Success in assign students for exam ajax.');
+                    $('#btnAssignStudents').removeAttr('disabled', 'disabled');
+                    $('#spinnerBtnAssignStudents').addClass('d-none');
+                    if(data['status'] == 'unselected') {
+                        SwalNotificationWarningAutoClose.fire({
+                            title: 'Unselected!',
+                            text: 'You did not select any students.',
+                        })
+                    }
+                    else if(data['status'] == 'success') {
+                        console.log('Success in assign students for exam.');
+                        SwalDoneSuccess.fire({
+                            title: 'Success!',
+                            text: 'Selected students have assigned for the exam.',
+                        })
+                        .then((result) => {
+                            if(result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    }
+                },
+                error: function(err) {
+                    console.log('Error in assign students for exam ajax.');
+                    $('#btnAssignStudents').removeAttr('disabled', 'disabled');
+                    $('#spinnerBtnAssignStudents').addClass('d-none');
+                    SwalSystemErrorDanger.fire();
+                }
+            });
+        }
+        else {
+            SwalNotificationWarningAutoClose.fire({
+                title: 'Cancelled!',
+                text: 'Selected students have not been assigned.',
+            })
+        }
+    });
+}
+// /ASSIGN STUDENTS FOR EXAM
 </script>
