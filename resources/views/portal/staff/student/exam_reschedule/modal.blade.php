@@ -34,11 +34,11 @@
                                         </tr>
                                         <tr>
                                             <th>Earlier Exam Scheduled Date: </th>
-                                            <td><span id="spanEarlierExamScheduledDate"></span><small class="text-muted"> (MM/DD/YY)</small></td>
+                                            <td><span id="spanEarlierExamScheduledDate"></span><small class="text-muted"> (DD/MM/YY)</small></td>
                                         </tr>
                                         <tr>
                                             <th>Medical Approved Date: </th>
-                                            <td><span id="spanMedicalApprovedDate"></span><small class="text-muted"> (MM/DD/YY)</small></td>
+                                            <td><span id="spanMedicalApprovedDate"></span><small class="text-muted"> (DD/MM/YY)</small></td>
                                         </tr>
                                     </table>
                                 </div>

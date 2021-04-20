@@ -214,12 +214,16 @@
                                 </div>
                             </div>
                             <div class="mt-4 col-12 text-center">
+                                @if(Auth::user()->hasPermission('staff-dashboard-registration-application-approve'))
                                 <div id="divBtnApproveApplication" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-success form-control" id="btnApproveApplication">Approve <span id="spinnerBtnApproveApplication" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
+                                @endif
+                                @if(Auth::user()->hasPermission('staff-dashboard-registration-application-decline'))
                                 <div id="divBtnDeclineApplication" class="btn-group col-xl-3 col-lg-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message-application" id="btnDeclineApplication" data-toggle="modal">Decline <span id="spinnerBtnDeclineApplication" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
+                                @endif
                             </div>
                         </div>
 
@@ -259,12 +263,16 @@
                                 </div>
                             </div>
                             <div class="mt-4 col-12 text-center">
+                                @if(Auth::user()->hasPermission('staff-dashboard-registration-review-payment-approve'))
                                 <div id="divBtnApprovePayment" class="btn-group col-xl-3 col-md-6">
                                     <button type="button" class="btn btn-success form-control" id="btnApprovePayment">Approve <span id="spinnerBtnApprovePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
+                                @endif
+                                @if(Auth::user()->hasPermission('staff-dashboard-registration-review-payment-decline'))
                                 <div id="divBtnDeclinePayment"  class="btn-group col-xl-3 col-md-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message-payment" id="btnDeclinePayment" data-toggle="modal">Decline</button>
                                 </div>
+                                @endif
                             </div>
                         </div>
                         <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
@@ -281,11 +289,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @if(Auth::user()->hasPermission('staff-dashboard-registration-review-documents-decline-birth'))
                                     <div class="card-footer">
                                         <div id="divBtnDeclineDocumentBirth" class="btn-group col-xl-3 col-md-6 col-12 px-0">
                                             <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message-document-birth" id="btnDeclineDocumentBirth" data-toggle="modal">Decline</button>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-12 mt-3">
@@ -313,18 +323,22 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @if(Auth::user()->hasPermission('staff-dashboard-registration-review-documents-decline-id'))
                                     <div class="card-footer">
                                         <div id="divBtnDeclineDocumentId" class="btn-group col-xl-3 col-md-6 col-12 px-0">
                                             <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message-document-Id" id="btnDeclineDocumentId" data-toggle="modal">Decline</button>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
+                            @if(Auth::user()->hasPermission('staff-dashboard-registration-review-documents-approve'))
                             <div class="mt-4 col-12 text-center">
                                 <div id="divBtnApproveDocuments" class="btn-group col-xl-3 col-md-6">
                                     <button type="button" class="btn btn-success form-control" id="btnApproveDocuments">Approve <span id="spinnerBtnApproveDocuments" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>

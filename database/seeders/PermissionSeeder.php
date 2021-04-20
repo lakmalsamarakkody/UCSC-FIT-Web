@@ -44,6 +44,30 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
+                    'name'=>'student-exam-apply-exams',
+                    'portal'=>'student',
+                    'module'=>'exam',
+                    'description'=>'Can apply for exams',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'student-exam-pay-exams',
+                    'portal'=>'student',
+                    'module'=>'exam',
+                    'description'=>'Can pay for applied exams',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'student-exam-medical',
+                    'portal'=>'student',
+                    'module'=>'exam',
+                    'description'=>'Can view medical section in held exams',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
                     'name'=>'student-result',
                     'portal'=>'student',
                     'module'=>'result',
@@ -63,11 +87,149 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                // STAFF->DASHBOARD->REGISTRATIONS
                 [
-                    'name'=>'staff-dashboard-exam-application',
+                    'name'=>'staff-dashboard-registration-application-view',
                     'portal'=>'staff',
                     'module'=>'dashboard',
-                    'description'=>'Can access to exam application page',
+                    'description'=>'Can access to registration application page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-application-approve',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can approve a registration application',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-application-decline',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can decline a registration application',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-review-payment-view',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can access to registration payment review page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-review-payment-approve',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can approve a registration payment',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-review-payment-decline',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can decline a registration payment',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-pending-documents-view',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can access to registration pending documents page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-review-documents-view',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can access to registration review documents page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-review-documents-approve',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can approve registration documents',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-review-documents-decline-birth',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can decline registration birth certificate',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-review-documents-decline-id',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can decline registration identity verification',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-pending-registrations-view',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can access to registration pending registrations page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-pending-registrations-register',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can register a student',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-registration-active-registrations-view',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can access to registration active registrations page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                // STAFF->DASHBOARD->EXAMS
+                [
+                    'name'=>'staff-dashboard-exam-review-payments-view',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can access to exam review payments page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-exam-assign-schedules-view',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can access to exam assign schedules page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-exam-review-medicals-view',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can access to exam review medicals page',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-exam-reschedule-exams-view',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can access to exam reschedule page',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -99,7 +261,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-dashboard-exam-application-viewSchedules',
                     'portal'=>'staff',
                     'module'=>'dashboard',
-                    'description'=>'Can view schedules for applied exam',
+                    'description'=>'Can view schedules of selected exam list',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -107,7 +269,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-dashboard-exam-application-scheduleExam',
                     'portal'=>'staff',
                     'module'=>'dashboard',
-                    'description'=>'Can schedule an applied exam',
+                    'description'=>'Can set a schedule for a applied exam',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -115,20 +277,12 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-dashboard-exam-application-approveSchedules',
                     'portal'=>'staff',
                     'module'=>'dashboard',
-                    'description'=>'Can approve scheduled exams',
+                    'description'=>'Can approve assigned scheduled exams',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-dashboard-exam-medical',
-                    'portal'=>'staff',
-                    'module'=>'dashboard',
-                    'description'=>'Can access to medical page',
-                    'created_at'=> '2020-11-25 10:13:53',
-                    'updated_at'=> '2020-11-25 10:13:53'
-                ],
-                [
-                    'name'=>'staff-dashboard-exam-medical-view',
+                    'name'=>'staff-dashboard-exam-review-medical-view',
                     'portal'=>'staff',
                     'module'=>'dashboard',
                     'description'=>'Can view a medical',
@@ -136,7 +290,7 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-dashboard-exam-medical-approve',
+                    'name'=>'staff-dashboard-exam-review-medical-approve',
                     'portal'=>'staff',
                     'module'=>'dashboard',
                     'description'=>'Can approve a medical',
@@ -144,10 +298,18 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-dashboard-exam-medical-decline',
+                    'name'=>'staff-dashboard-exam-review-medical-decline',
                     'portal'=>'staff',
                     'module'=>'dashboard',
                     'description'=>'Can decline a medical',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-exam-reschedule-view',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can reschedule an exam',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],

@@ -18,7 +18,7 @@
     <div class="col-6">
         <h4 class="alert-heading text-right">Registration Number: {{ Auth::user()->student->reg_no }}</h4>
         
-        <h5 class="alert-heading text-right">Registration expires on: {{ Auth::user()->student->current_registration->registration_expire_at }}</h5>                
+        <h5 class="alert-heading text-right">Registration expires on: {{ Auth::user()->student->current_active_registration()->registration_expire_at }}</h5>                
         
     </div>
     <!-- CONTENT -->

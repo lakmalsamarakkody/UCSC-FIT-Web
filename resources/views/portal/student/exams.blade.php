@@ -89,11 +89,13 @@
                 {{-- </div> --}}
               </form>
             </div>
+            @if(Auth::user()->hasPermission('student-exam-apply-exams'))
             <div class="card-footer mb-3">
               <div class="text-center">
                 <button type="button" class="btn btn-outline-primary" id="btnApplyForExams" onclick="select_exams()">SELECT EXAMS<span id="spinnerBtnApplyForExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
               </div>
             </div>
+            @endif
           </div>
         </div>
         {{-- /APPLY FOR EXAMS --}}
@@ -178,12 +180,14 @@
                     </tbody>
                   </table>
                 </div>
-            </div>            
+            </div>
+            @if(Auth::user()->hasPermission('student-exam-pay-exams'))
             <div class="card-footer mb-3">
               <div class="text-center">
                 <button type="button" class="btn btn-outline-success" id="btnApplyForExams" onclick="apply_for_exams()"><i class="fa fa-dollar-sign"></i> EXAM PAYMENT<span id="spinnerBtnApplyForExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
               </div>
             </div>
+            @endif
           </div>
         </div>
         <!-- /SELECTED EXAMS TABLE-->
@@ -291,6 +295,7 @@
                           <div class="col-2 col-md-3 text-center pt-2">FIT {{ $exam->subject->code }}</div>
                           <div class="col-6 col-md-3 text-center pt-2">{{ $exam->subject->name }} ({{ $exam->type->name }})</div>
                           <div class="col-4 col-md-3 text-center pt-2">{{$exam->schedule->date}} ({{ \Carbon\Carbon::create($exam->schedule->start_time)->isoFormat('hh:mm A')}} - {{ \Carbon\Carbon::create($exam->schedule->end_time)->isoFormat('hh:mm A') }})</div>
+                          @if(Auth::user()->hasPermission('student-exam-medical'))
                           <div class="col-12 col-md-3 text-md-right">
                             @if($exam->medical != null && $exam->medical->status=='Pending' )
                               <button type="button" class="btn btn-outline-warning w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Medical Approval Pending</button>
@@ -304,6 +309,7 @@
                               <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}"><i class="fas fa-file-medical"></i> Upload medical</button>
                             @endif
                           </div>
+                          @endif
                         </div>
                       </div>
                   

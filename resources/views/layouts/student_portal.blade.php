@@ -103,11 +103,19 @@
                 @if ( Auth::user()->student == NULL || Auth::user()->student->current_active_registration() == NULL )
                   <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                 @endif
+                @if(Auth::user()->hasPermission('student-dashboard'))
                 <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
+                @endif
+                @if(Auth::user()->hasPermission('student-information'))
                 <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
+                @endif
                 @if ( Auth::user()->student != NULL && Auth::user()->student->current_active_registration())
+                  @if(Auth::user()->hasPermission('student-exam'))
                   <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>
+                  @endif
+                  @if(Auth::user()->hasPermission('student-result'))
                   <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
+                  @endif
                 @endif
               </ul>
 
@@ -174,12 +182,20 @@
                     @if ( Auth::user()->student == NULL || Auth::user()->student->current_active_registration() == NULL )
                       <li id="registration"><a href="{{ route('student.registration') }}">Registration</a></li>
                     @endif
+                    @if(Auth::user()->hasPermission('student-dashboard'))
                     <li id="home"><a href="{{ route('student.home') }}">Home</a></li>
+                    @endif
+                    @if(Auth::user()->hasPermission('student-information'))
                     <li id="information"><a href="{{ route('student.information') }}">Information</a></li>
+                    @endif
                     
                     @if ( Auth::user()->student != NULL && Auth::user()->student->current_active_registration() )
+                      @if(Auth::user()->hasPermission('student-exam'))
                       <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>
+                      @endif
+                      @if(Auth::user()->hasPermission('student-result'))
                       <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
+                      @endif
                     @endif
                     <li id="logout"><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                   </ul>

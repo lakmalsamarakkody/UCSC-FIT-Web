@@ -27,7 +27,7 @@
 
     <!-- CONTENT -->
     
-    <div class="col-12 exam-application">
+    <div class="col-12 exam-application min-vh-100">
       <div class="row">
           
         <!-- APPLICATIONS LIST -->
@@ -53,13 +53,13 @@
                           <td>{{ $applicant->student->reg_no }}</td>
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
                           <td>{{ $applicant->created_at->isoFormat('YYYY-MM-DD') }}</td>
+                          @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td>
-                            @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                             <div class="btn-group">
                               <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                             </div>
-                            @endif
                           </td>
+                          @endif
                         </tr>
                       @endforeach
                   </tbody>
