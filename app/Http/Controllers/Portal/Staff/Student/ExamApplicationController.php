@@ -215,7 +215,7 @@ class ExamApplicationController extends Controller
         $today = Carbon::today();
         if($request->ajax()):
             $applied_exam = hasExam::where('id',$request->applied_exam_id)->first();
-            $data = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->addSelect([
+            $data = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->where('schedule_release', 1)->addSelect([
                 'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
             ]);
             if($request->exam != null):
@@ -345,7 +345,7 @@ class ExamApplicationController extends Controller
         $today = Carbon::today();
         if($request->ajax()):
             $applied_exam = hasExam::where('id',$request->exam_id)->first();
-            $data = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->addSelect([
+            $data = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->where('schedule_release', 1)->addSelect([
                 'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
             ]);
