@@ -243,7 +243,7 @@ assign_students = () => {
                         console.log('Success in assign students for exam.');
                         SwalDoneSuccess.fire({
                             title: 'Success!',
-                            text: 'Selected students have assigned for the exam.',
+                            text: 'Selected students have been assigned for the exam.',
                         })
                         .then((result) => {
                             if(result.isConfirmed) {

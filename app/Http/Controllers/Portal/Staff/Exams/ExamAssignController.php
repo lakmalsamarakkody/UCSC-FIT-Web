@@ -135,20 +135,21 @@ class ExamAssignController extends Controller
     {
         $schedule = Schedule::where('id', $request->schedule_id)->first();
         $students_array = json_decode($request->assign_students);
-        foreach($students_array as $student):
-            $exam = hasExam::create([
-                'student_id'=> $student,
-                'exam_schedule_id'=> $request->schedule_id,
-                'subject_id'=> $schedule->subject_id,
-                'exam_type_id'=> $schedule->exam_type_id,
-                'requested_exam_id'=> 99,
-                'schedule_status'=> 'Approved',
-                'payment_id'=> 100,
-                'payment_status'=> 'Approved'
-            ]);
-        endforeach;
-        return response()->json(['status'=>'success', 'request'=>$students_array]);
-        dd($request->all());
+        if($students_array == null):
+            return response()->json(['status'=>'unselected']);
+        else:
+            foreach($students_array as $student):
+                $exam = hasExam::create([
+                    'student_id'=> $student,
+                    'exam_schedule_id'=> $request->schedule_id,
+                    'subject_id'=> $schedule->subject_id,
+                    'exam_type_id'=> $schedule->exam_type_id,
+                    'schedule_status'=> 'Approved',
+                    'payment_status'=> 'Approved'
+                ]);
+            endforeach;
+            return response()->json(['status'=>'success']);
+    endif;
     }
     // /ASSIGN STUDENTS FOR THE EXAM
 }
