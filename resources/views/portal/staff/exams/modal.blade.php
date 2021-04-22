@@ -151,3 +151,76 @@
     <!-- /POSTPONE -->
 
 <!-- /SCHEDULE TABLE -->
+
+{{-- ASSIGNED STUDENTS LIST OF AN EXAM --}}
+<div class="modal fade" id="modal-view-schedule-assigned-students" data-bockdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="viewScheduleAssignedStudents" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dailog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewScheduleAssignedStudents">Assigned Students For The Schedule</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12 scheduleAssignedStudents">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-5">
+                                <div class="card-header">Schedule Details</div>
+                                <div class="card-body">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Exam: </th>
+                                            <td><span id="spaneScheduledExam"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Scheduled Date: </th>
+                                            <td><span id="spaneScheduledDate"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Scheduled Time: </th>
+                                            <td><span id="spaneScheduledTime"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Subejct: </th>
+                                            <td><span id="spaneScheduledSubject"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Exam Type: </th>
+                                            <td><span id="spaneScheduledExamType"></span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">Assigned Students</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12 order-md-1 order-2">
+                                            <table class="table tbl-assigned_student-list-yajradt">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Registration No</th>
+                                                        <th>NIC</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div> --}}
+        </div>
+    </div>
+
+</div>
+{{-- /ASSIGNED STUDENTS LIST OF AN EXAM--}}
