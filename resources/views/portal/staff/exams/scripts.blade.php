@@ -11,6 +11,7 @@ let heldExamTable = null;
       processing: true,
       serverSide: true,
       searching: false,
+      order: [4, 'asc'],
       ajax: {
         url: "{{ url('/portal/staff/exams/schedules/before/release') }}",
       },
@@ -179,7 +180,7 @@ let heldExamTable = null;
           targets: 7,
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">'+
-            '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="view_assigned_students('+data+');"><i class="fas fa-address-book"></i></button>'+
+            '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="invoke_modal_assigned_students('+data+');"><i class="fas fa-address-book"></i></button>'+
             '@if(Auth::user()->hasPermission("staff-exam-schedule-postpone"))<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" id="btnPostponeSchedule-'+data+'" onclick="postpone_exam_modal_invoke('+data+');"><i class="fas fa-calendar-plus"></i></button>@endif'+
             '@if(Auth::user()->hasPermission("staff-exam-schedule-delete-afterRelease"))<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteAfterRelease-'+data+'" onclick="delete_after_release('+data+');"><i class="fas fa-trash-alt"></i></button>@endif'+
             '</div>';
@@ -260,7 +261,7 @@ let heldExamTable = null;
         {
           targets: 7,
           render: function(data, type, row) {
-            let btnGroup = '<div class="btn-group"><button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="view_assigned_students('+data+');"><i class="fas fa-address-book"></i></button></div>';
+            let btnGroup = '<div class="btn-group"><button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="invoke_modal_assigned_students('+data+');"><i class="fas fa-address-book"></i></button></div>';
             return btnGroup;
           }
         }
@@ -907,7 +908,80 @@ let heldExamTable = null;
   // /RELEASE SCHEDULES
 
   // VIEW STUDENTS ASSIGNED FOR RELEVANT EXAM
+  let assignedStudentTable = null;
   view_assigned_students = (schedule_id) => {
+
+    $('.tbl-assigned_student-list-yajradt').DataTable().clear().destroy();
+    assignedStudentTable = $('.tbl-assigned_student-list-yajradt').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url: "{{ route('schedule.assigned.students') }}",
+        data: function(d) {
+          d.schedule_id = schedule_id;
+        },
+      },
+      columns: [
+        {
+          data: 'student_name',
+          name: 'student_name'
+        },
+        {
+          data: 'reg_no',
+          name: 'reg_no'
+        },
+        {
+          data: 'nic',
+          name: 'nic'
+        },
+        {
+          data: 'id',
+          name: 'id',
+          orderable: false,
+          searchable: false
+        }
+      ],
+
+      columnDefs: [
+        {
+          targets: 2,
+          render: function(data, type, row) {
+            let nic = null;
+            if(row['nic_old'] != null) {
+              nic = row['nic_old'];
+            }
+            if(row['nic_new'] != null) {
+              nic = row['nic_new'];
+            }
+            if(row['postal'] != null) {
+              nic = row['postal'];
+            }
+            if(row['passport'] != null) {
+              nic = row['passport'];
+            }
+            return nic;
+          }
+        },
+        {
+          targets: 3,
+          render: function(data, type, row) {
+            let today = new Date();
+            let date = today.getFullYear() + '-' +  today.getMonth() + '-' +today.getDate();
+            let time = today.getHours() + ':' +  today.getMinutes() + ':' +today.getSeconds();
+            let btnGroup = '<div class="btn-group">';
+            if(row['schedule_date'] >= date && row['schedule_end_time'] >= time) {
+              btnGroup = btnGroup + '<button type="button" class="btn btn-danger" data-tooltip="tooltip" data-placement="bottom" title="Deschedule Student"><i class="fas fa-user-minus"></i></button>';
+            }
+            btnGroup = btnGroup +'</div>';
+            return btnGroup;
+          }
+        }
+      ]
+    });
+  }
+
+  invoke_modal_assigned_students = (schedule_id) => {
 
     // Form Payload
     let formData = new FormData();
@@ -919,9 +993,9 @@ let heldExamTable = null;
       url: "{{ route('schedule.details') }}",
       type: 'post',
       data: formData,
-      contentType: false,
       processData: false,
-      beforeSend: function() {$('#btnViewAssignedStudents-'+schedule_id).attr('disabled', 'disabled');},
+      contentType: false,
+      beforeSend: function() {$('#btnViewAssignedStudents-'+schedule_id).attr('disabled', 'disabled')},
       success: function(data) {
         console.log('Success in get schedule details ajax.');
         if(data['status'] == 'success') {
@@ -932,6 +1006,7 @@ let heldExamTable = null;
             $('#spaneScheduledTime').html(data['schedule']['start_time'] + ' - ' + data['schedule']['end_time']);
             $('#spaneScheduledSubject').html('FIT ' + data['schedule']['subject_code'] + ' - ' + data['schedule']['subject_name']);
             $('#spaneScheduledExamType').html(data['schedule']['exam_type']);
+            view_assigned_students(schedule_id);
 
             $('#btnViewAssignedStudents-'+schedule_id).removeAttr('disabled', 'disabled');
             $('#modal-view-schedule-assigned-students').modal('show');
