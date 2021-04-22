@@ -145,6 +145,7 @@ Route::post('/portal/staff/exams/schedule/release/individual',[App\Http\Controll
 Route::post('/portal/staff/exams/schedule/release/all',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'releaseAllSchedules'])->name('schedule.release.all');
 
 Route::post('/portal/staff/exams/schedule/details',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'getScheduleDetails'])->name('schedule.details');
+Route::get('/portal/staff/exams/schedule/assigned/students',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'getAssignedStudents'])->name('schedule.assigned.students');
 
 Route::post('/portal/staff/exams/schedule/postpone/details',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'postponeScheduleGetDetails']);
 Route::post('/portal/staff/exams/schedule/postpone',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'postponeExam']);
