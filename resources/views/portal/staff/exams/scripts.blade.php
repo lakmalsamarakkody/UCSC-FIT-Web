@@ -179,6 +179,7 @@ let heldExamTable = null;
           targets: 7,
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">'+
+            '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="view_assigned_students('+data+');"><i class="fas fa-address-book"></i></button>'+
             '@if(Auth::user()->hasPermission("staff-exam-schedule-postpone"))<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" id="btnPostponeSchedule-'+data+'" onclick="postpone_exam_modal_invoke('+data+');"><i class="fas fa-calendar-plus"></i></button>@endif'+
             '@if(Auth::user()->hasPermission("staff-exam-schedule-delete-afterRelease"))<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteAfterRelease-'+data+'" onclick="delete_after_release('+data+');"><i class="fas fa-trash-alt"></i></button>@endif'+
             '</div>';
@@ -235,6 +236,12 @@ let heldExamTable = null;
           data: 'end_time',
           name: 'end_time'
         },
+        {
+          data: 'id',
+          name: 'id',
+          orderable: false,
+          searchable: false
+        },
       ],
       columnDefs: [
         {
@@ -248,6 +255,13 @@ let heldExamTable = null;
           targets: 1,
           render : function(data, type, row) {
             return 'FIT '+data;
+          }
+        },
+        {
+          targets: 7,
+          render: function(data, type, row) {
+            let btnGroup = '<div class="btn-group"><button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="view_assigned_students('+data+');"><i class="fas fa-address-book"></i></button></div>';
+            return btnGroup;
           }
         }
       ]
@@ -891,6 +905,47 @@ let heldExamTable = null;
   }
   // /RELEASE ALL SCHEDULES
   // /RELEASE SCHEDULES
+
+  // VIEW STUDENTS ASSIGNED FOR RELEVANT EXAM
+  view_assigned_students = (schedule_id) => {
+
+    // Form Payload
+    let formData = new FormData();
+    formData.append('schedule_id', schedule_id);
+
+    // Get schedule details
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ route('schedule.details') }}",
+      type: 'post',
+      data: formData,
+      contentType: false,
+      processData: false,
+      beforeSend: function() {$('#btnViewAssignedStudents-'+schedule_id).attr('disabled', 'disabled');},
+      success: function(data) {
+        console.log('Success in get schedule details ajax.');
+        if(data['status'] == 'success') {
+          console.log('Success in get schedule details.');
+          if(data['schedule'] != null) {
+            $('#spaneScheduledExam').html(data['schedule']['year'] + ' ' + data['schedule']['month']);
+            $('#spaneScheduledDate').html(data['schedule']['date']);
+            $('#spaneScheduledTime').html(data['schedule']['start_time'] + ' - ' + data['schedule']['end_time']);
+            $('#spaneScheduledSubject').html('FIT ' + data['schedule']['subject_code'] + ' - ' + data['schedule']['subject_name']);
+            $('#spaneScheduledExamType').html(data['schedule']['exam_type']);
+
+            $('#btnViewAssignedStudents-'+schedule_id).removeAttr('disabled', 'disabled');
+            $('#modal-view-schedule-assigned-students').modal('show');
+          }
+        }
+      },
+      error: function(err) {
+        console.log('Error in get scheudule details ajax.');
+        $('#btnViewAssignedStudents-'+schedule_id).removeAttr('disabled', 'disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+  // /VIEW STUDENTS ASSIGNED FOR RELEVANT EXAM
 
   // UPCOMING EXAMS(AFTER RELEASE)
   // FILL POSTPONE MODAL WITH RELEVANT DATA

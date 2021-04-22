@@ -411,6 +411,20 @@ class ExamsController extends Controller
     }
     // /RELEASE ALL APPROVED SCHEDULES
 
+    // ASSIGNED STUDENT LIST OF AN EXAM
+    public function getScheduleDetails(Request $request)
+    {
+        $schedule = Schedule::where('id', $request->schedule_id)->addSelect([
+                'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
+                'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
+                'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+                'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+                'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
+        ])->first();
+        return response()->json(['status'=>'success', 'schedule'=>$schedule]);
+    }
+    // / ASSIGNED STUDENT LIST OF AN EXAM
+
     // SCHEDULE(After release)
     // POSTPONE
     // Load schedule details to modal

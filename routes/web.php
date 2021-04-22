@@ -144,8 +144,7 @@ Route::post('/portal/staff/exams/schedule/decline/message',[App\Http\Controllers
 Route::post('/portal/staff/exams/schedule/release/individual',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'releaseIndividualSchedule']);
 Route::post('/portal/staff/exams/schedule/release/all',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'releaseAllSchedules'])->name('schedule.release.all');
 
-Route::post('/portal/staff/exams/schedule/release/details',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'getReleasedScheduleDetails'])->name('schedule.release.details');
-Route::post('/portal/staff/exams/schedule/held/details',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'getHeldScheduleDetails'])->name('schedule.held.details');
+Route::post('/portal/staff/exams/schedule/details',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'getScheduleDetails'])->name('schedule.details');
 
 Route::post('/portal/staff/exams/schedule/postpone/details',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'postponeScheduleGetDetails']);
 Route::post('/portal/staff/exams/schedule/postpone',[App\Http\Controllers\Portal\Staff\ExamsController::class, 'postponeExam']);
