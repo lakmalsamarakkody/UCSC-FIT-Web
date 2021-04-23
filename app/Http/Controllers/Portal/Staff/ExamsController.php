@@ -413,7 +413,7 @@ class ExamsController extends Controller
     }
     // /RELEASE ALL APPROVED SCHEDULES
 
-    // ASSIGNED STUDENT LIST OF AN EXAM
+    // ASSIGNED STUDENTS OF A SCHEDULE
     public function getScheduleDetails(Request $request)
     {
         $schedule = Schedule::where('id', $request->schedule_id)->addSelect([
@@ -426,6 +426,7 @@ class ExamsController extends Controller
         return response()->json(['status'=>'success', 'schedule'=>$schedule]);
     }
 
+    // STUDENTS TABLE
     public function getAssignedStudents(Request $request)
     {
         if($request->ajax()):
@@ -436,15 +437,27 @@ class ExamsController extends Controller
                 'nic_new'=> Student::select('nic_new')->whereColumn('student_id', 'students.id'),
                 'postal'=> Student::select('postal')->whereColumn('student_id', 'students.id'),
                 'passport'=> Student::select('passport')->whereColumn('student_id', 'students.id'),
-                'schedule_date' => Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
-                'schedule_end_time'=> Schedule::select('end_time')->whereColumn('exam_schedule_id', 'exam_schedules.id')
+                'schedule_date' => Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id')
             ])->get();
             return DataTables::of($data)
             ->rawColumns(['action'])
             ->make(true);
         endif;
     }
-    // / ASSIGNED STUDENT LIST OF AN EXAM
+    // /STUDENTS TABLE
+
+    // DESCHEDULE STUDENT
+    public function descheduleStudent(Request $request)
+    {
+        $student_exam = hasExam::where('id', $request->id)->first();
+        if($student_exam->update(['exam_schedule_id'=> null, 'schedule_status'=>'Pending'])):
+            return response()->json(['status'=>'success']);
+        endif;
+        return response()->json(['status'=>'errors']);
+
+    }
+    // /DESCHEDULE STUDENT
+    // /ASSIGNED STUDENTS OF A SCHEDULE
 
     // SCHEDULE(After release)
     // POSTPONE

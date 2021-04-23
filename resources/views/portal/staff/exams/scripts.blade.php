@@ -907,7 +907,8 @@ let heldExamTable = null;
   // /RELEASE ALL SCHEDULES
   // /RELEASE SCHEDULES
 
-  // VIEW STUDENTS ASSIGNED FOR RELEVANT EXAM
+  // ASSIGNED STUDENTS OF RELEVANT SCHEDULE
+  // STUDENTS TABLE
   let assignedStudentTable = null;
   view_assigned_students = (schedule_id) => {
 
@@ -967,11 +968,10 @@ let heldExamTable = null;
           targets: 3,
           render: function(data, type, row) {
             let today = new Date();
-            let date = today.getFullYear() + '-' +  today.getMonth() + '-' +today.getDate();
-            let time = today.getHours() + ':' +  today.getMinutes() + ':' +today.getSeconds();
+            let date = today.getFullYear() + '-' +  today.getMonth() + '-' + today.getDate();
             let btnGroup = '<div class="btn-group">';
-            if(row['schedule_date'] >= date && row['schedule_end_time'] >= time) {
-              btnGroup = btnGroup + '<button type="button" class="btn btn-danger" data-tooltip="tooltip" data-placement="bottom" title="Deschedule Student"><i class="fas fa-user-minus"></i></button>';
+            if(row['schedule_date'] >= date) {
+              btnGroup = btnGroup + '<button type="button" class="btn btn-outline-danger" id="btnDescheduleStudent-'+data+'" data-tooltip="tooltip" data-placement="bottom" title="Deschedule Student" onclick="deschedule_student('+data+');"><i class="fas fa-user-minus"></i></button>';
             }
             btnGroup = btnGroup +'</div>';
             return btnGroup;
@@ -980,6 +980,7 @@ let heldExamTable = null;
       ]
     });
   }
+  // /STUDENTS TABLE
 
   invoke_modal_assigned_students = (schedule_id) => {
 
@@ -1020,7 +1021,69 @@ let heldExamTable = null;
       }
     });
   }
-  // /VIEW STUDENTS ASSIGNED FOR RELEVANT EXAM
+
+  // DESCHEDULE STUDENT
+  deschedule_student = (id) => {
+
+    SwalQuestionDangerAutoClose.fire({
+        title: 'Are you sure?',
+        text: 'Student will be descheduled.',
+        confirmButtonText: 'Yes, Deschedule!',
+    })
+    .then((result) => {
+      if(result.isConfirmed) {
+        // Form Payload
+        let formData = new FormData();
+        formData.append('id', id);
+
+        // Deschedule student
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ route('schedule.deschedule.student') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function() {$('#btnDescheduleStudent-'+id).attr('disabled', 'disabled')},
+          success: function(data) {
+            console.log('Success in deschedule student ajax.');
+            $('#btnDescheduleStudent-'+id).removeAttr('disabled', 'disabled');
+            if(data['status'] == 'success') {
+              console.log('Success in deschedule student.');
+              SwalDoneSuccess.fire({
+                  title: 'Success!',
+                  text: 'Student has been descheduled.',
+              })
+              .then((result) => {
+                  if(result.isConfirmed) {
+                      location.reload();
+                  }
+              });
+            }
+            else if(data['status'] == 'errors') {
+              console.log('Errors in deschedule student');
+              SwalSystemErrorDanger.fire();
+            }
+          },
+          error: function(err) {
+            console.log('Errors in deschedule student ajax.');
+            $('#btnDescheduleStudent-'+id).removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+
+        });
+      }
+      else
+      {
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Student has not been descheduled.',
+        })
+      }
+    });
+  }
+  // /DESCHEDULE STUDENT
+  // /ASSIGNED STUDENTS OF RELEVANT SCHEDULE
 
   // UPCOMING EXAMS(AFTER RELEASE)
   // FILL POSTPONE MODAL WITH RELEVANT DATA
