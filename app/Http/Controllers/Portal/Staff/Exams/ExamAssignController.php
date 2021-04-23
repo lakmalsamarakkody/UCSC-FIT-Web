@@ -87,8 +87,9 @@ class ExamAssignController extends Controller
     public function getStudentList(Request $request)
     {
         if($request->ajax()) {
-            // $schedule = Schedule::where('id', $request->schedule_id)->first();
-            // $students = hasExam::select('student_id')->where('exam_schedule_id', $request->schedule_id)->get();
+            // $scheduled_student_ids = hasExam::select('student_id')->where('exam_schedule_id', $request->schedule_id)->get()->toArray();
+            // // $student_ids_array = json_decode($scheduled_student_ids, true);
+            // $data  = Student::join('student_registrations', 'students.id', '=', 'student_registrations.student_id')->where('student_registrations.status', 1)->whereNotIn('students.id', $scheduled_student_ids);
             $data  = Student::join('student_registrations', 'students.id', '=', 'student_registrations.student_id')->where('student_registrations.status', 1);
             if($request->name!=null){
                 $data = $data->where('first_name','like', '%'. $request->name.'%')
