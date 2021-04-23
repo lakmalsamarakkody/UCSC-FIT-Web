@@ -129,6 +129,25 @@ draw_student_table = () => {
         ],
         columnDefs: [
             {
+                targets: 2,
+                render: function(data, type, row) {
+                    var nic = null;
+                    if(row['nic_old'] != null) {
+                        nic = row['nic_old'];
+                    }
+                    if(row['nic_new'] != null) {
+                        nic = row['nic_new'];
+                    }
+                    if(row['postal'] != null) {
+                        nic = row['postal'];
+                    }
+                    if(row['passport'] != null) {
+                        nic = row['passport'];
+                    }
+                    return nic;
+                }
+            },
+            {
                 targets: 3,
                 render: function(data, type, row) {
                     var checkBox = '<div class="input-group"><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></div>';
