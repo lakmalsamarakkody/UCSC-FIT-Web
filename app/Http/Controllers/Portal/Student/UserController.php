@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Validator;
 use PharIo\Manifest\Email;
 use Illuminate\Support\Str;
 
+use function PHPUnit\Framework\isNull;
+
 class UserController extends Controller
 {
     public function setPassword($email, $token)
@@ -67,14 +69,14 @@ class UserController extends Controller
             else:
                 if($user->save()):
                     if(Email_Token::where('email', $email)->delete()):
-                        // $subscriber_check = Subscriber::where( 'email', $email )->first();
-                        // if (is_Null($subscriber_check->email)) {
-                        //     $token = Str::random(32);
-                        //     $subscriber = new Subscriber();
-                        //     $subscriber->email = $email;
-                        //     $subscriber->token = $token;
-                        //     $subscriber->save();
-                        // }
+                        $subscriber_check = Subscriber::where( 'email', $email )->first();
+                        if (isNull($subscriber_check)) {
+                            $token = Str::random(32);
+                            $subscriber = new Subscriber();
+                            $subscriber->email = $email;
+                            $subscriber->token = $token;
+                            $subscriber->save();
+                        }
                         return response()->json(['success'=>'success']);
                     else:                        
                         return response()->json(['error'=>'error']);
