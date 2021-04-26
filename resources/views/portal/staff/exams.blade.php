@@ -26,7 +26,7 @@
     {{-- /BREACRUMB --}}
 
     {{-- CONTENT --}}
-    <div class="col-12 staff-exams">
+    <div class="col-12 staff-exams min-vh-100">
       <div class="row">
 
         {{-- EXAM LIST --}}
@@ -42,6 +42,7 @@
         {{-- /EXAM LIST --}}
 
         {{-- ASSIGN EXAMS --}}
+        @if(Auth::user()->hasPermission('staff-exam-examAssign'))
         <div class="col-md-6 col-12 mb-5">
           <a href="{{ route('exams.assign') }}" style="text-decoration: none">
             <div class="card">
@@ -49,6 +50,7 @@
             </div>
           </a>
         </div>
+        @endif
         {{-- /ASSIGN EXAMS --}}
 
         {{-- CREATE EXAM SCHEDULE --}}
@@ -123,6 +125,7 @@
         {{-- /CREATE EXAM SCHEDULE --}}
 
         {{-- DRAFTED EXAM SCHEDULES --}}
+        @if(Auth::user()->hasPermission('staff-exam-schedule-drafted-view'))
         <div class="col-12 mb-5">
           <div class="card">
             <div class="card-header">Drafted Exam Schedules</div>
@@ -153,9 +156,11 @@
             </div>
           </div>
         </div>
+        @endif
         {{-- DRAFTED EXAM SCHEDULES --}}
 
         {{-- SCHEDULED EXAM TABLE --}}
+        @if(Auth::user()->hasPermission('staff-exam-schedule-scheduled-view'))
         <div class="col-12 mb-5">
           <div class="card">
             <div class="card-header">Scheduled Exams</div>
@@ -181,9 +186,11 @@
             </div>
           </div>
         </div>
+        @endif
         {{-- /SCHEDULED EXAM TABLE --}}
 
         {{-- EXAMS HELD --}}
+        @if(Auth::user()->hasPermission('staff-exam-schedule-held-view'))
         <div class="col-12">
           <div class="card">
             <div class="card-header">Exams Held</div>
@@ -261,6 +268,7 @@
             </div>
           </div>
         </div>
+        @endif
         {{-- /EXAMS HELD --}}
 
         @include('portal.staff.exams.modal')
