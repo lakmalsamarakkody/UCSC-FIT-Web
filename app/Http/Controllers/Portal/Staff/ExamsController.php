@@ -8,6 +8,8 @@ use App\Models\Exam\Duration;
 use App\Models\Exam\Schedule;
 use App\Models\Subject;
 use App\Models\Exam\Types;
+use App\Models\Student;
+use App\Models\Student\hasExam;
 //use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -410,6 +412,52 @@ class ExamsController extends Controller
         }
     }
     // /RELEASE ALL APPROVED SCHEDULES
+
+    // ASSIGNED STUDENTS OF A SCHEDULE
+    public function getScheduleDetails(Request $request)
+    {
+        $schedule = Schedule::where('id', $request->schedule_id)->addSelect([
+                'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
+                'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
+                'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+                'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+                'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
+        ])->first();
+        return response()->json(['status'=>'success', 'schedule'=>$schedule]);
+    }
+
+    // STUDENTS TABLE
+    public function getAssignedStudents(Request $request)
+    {
+        if($request->ajax()):
+            $data = hasExam::where('exam_schedule_id', $request->schedule_id)->addSelect([
+                'student_name'=> Student::select('full_name')->whereColumn('student_id', 'students.id'),
+                'reg_no'=> Student::select('reg_no')->whereColumn('student_id', 'students.id'),
+                'nic_old'=> Student::select('nic_old')->whereColumn('student_id', 'students.id'),
+                'nic_new'=> Student::select('nic_new')->whereColumn('student_id', 'students.id'),
+                'postal'=> Student::select('postal')->whereColumn('student_id', 'students.id'),
+                'passport'=> Student::select('passport')->whereColumn('student_id', 'students.id'),
+                'schedule_date' => Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id')
+            ])->get();
+            return DataTables::of($data)
+            ->rawColumns(['action'])
+            ->make(true);
+        endif;
+    }
+    // /STUDENTS TABLE
+
+    // DESCHEDULE STUDENT
+    public function descheduleStudent(Request $request)
+    {
+        $student_exam = hasExam::where('id', $request->id)->first();
+        if($student_exam->update(['exam_schedule_id'=> null, 'schedule_status'=>'Pending'])):
+            return response()->json(['status'=>'success']);
+        endif;
+        return response()->json(['status'=>'errors']);
+
+    }
+    // /DESCHEDULE STUDENT
+    // /ASSIGNED STUDENTS OF A SCHEDULE
 
     // SCHEDULE(After release)
     // POSTPONE

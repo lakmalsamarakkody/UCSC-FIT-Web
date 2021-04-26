@@ -11,6 +11,7 @@ let heldExamTable = null;
       processing: true,
       serverSide: true,
       searching: false,
+      order: [4, 'asc'],
       ajax: {
         url: "{{ url('/portal/staff/exams/schedules/before/release') }}",
       },
@@ -179,6 +180,7 @@ let heldExamTable = null;
           targets: 7,
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">'+
+            '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="invoke_modal_assigned_students('+data+');"><i class="fas fa-address-book"></i></button>'+
             '@if(Auth::user()->hasPermission("staff-exam-schedule-postpone"))<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" id="btnPostponeSchedule-'+data+'" onclick="postpone_exam_modal_invoke('+data+');"><i class="fas fa-calendar-plus"></i></button>@endif'+
             '@if(Auth::user()->hasPermission("staff-exam-schedule-delete-afterRelease"))<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteAfterRelease-'+data+'" onclick="delete_after_release('+data+');"><i class="fas fa-trash-alt"></i></button>@endif'+
             '</div>';
@@ -235,6 +237,12 @@ let heldExamTable = null;
           data: 'end_time',
           name: 'end_time'
         },
+        {
+          data: 'id',
+          name: 'id',
+          orderable: false,
+          searchable: false
+        },
       ],
       columnDefs: [
         {
@@ -248,6 +256,13 @@ let heldExamTable = null;
           targets: 1,
           render : function(data, type, row) {
             return 'FIT '+data;
+          }
+        },
+        {
+          targets: 7,
+          render: function(data, type, row) {
+            let btnGroup = '<div class="btn-group"><button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="invoke_modal_assigned_students('+data+');"><i class="fas fa-address-book"></i></button></div>';
+            return btnGroup;
           }
         }
       ]
@@ -891,6 +906,184 @@ let heldExamTable = null;
   }
   // /RELEASE ALL SCHEDULES
   // /RELEASE SCHEDULES
+
+  // ASSIGNED STUDENTS OF RELEVANT SCHEDULE
+  // STUDENTS TABLE
+  let assignedStudentTable = null;
+  view_assigned_students = (schedule_id) => {
+
+    $('.tbl-assigned_student-list-yajradt').DataTable().clear().destroy();
+    assignedStudentTable = $('.tbl-assigned_student-list-yajradt').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url: "{{ route('schedule.assigned.students') }}",
+        data: function(d) {
+          d.schedule_id = schedule_id;
+        },
+      },
+      columns: [
+        {
+          data: 'student_name',
+          name: 'student_name'
+        },
+        {
+          data: 'reg_no',
+          name: 'reg_no'
+        },
+        {
+          data: 'nic',
+          name: 'nic'
+        },
+        {
+          data: 'id',
+          name: 'id',
+          orderable: false,
+          searchable: false
+        }
+      ],
+
+      columnDefs: [
+        {
+          targets: 2,
+          render: function(data, type, row) {
+            let nic = null;
+            if(row['nic_old'] != null) {
+              nic = row['nic_old'];
+            }
+            if(row['nic_new'] != null) {
+              nic = row['nic_new'];
+            }
+            if(row['postal'] != null) {
+              nic = row['postal'];
+            }
+            if(row['passport'] != null) {
+              nic = row['passport'];
+            }
+            return nic;
+          }
+        },
+        {
+          targets: 3,
+          render: function(data, type, row) {
+            let today = new Date();
+            let date = today.getFullYear() + '-' +  today.getMonth() + '-' + today.getDate();
+            let btnGroup = '<div class="btn-group">';
+            if(row['schedule_date'] >= date) {
+              btnGroup = btnGroup + '<button type="button" class="btn btn-outline-danger" id="btnDescheduleStudent-'+data+'" data-tooltip="tooltip" data-placement="bottom" title="Deschedule Student" onclick="deschedule_student('+data+');"><i class="fas fa-user-minus"></i></button>';
+            }
+            btnGroup = btnGroup +'</div>';
+            return btnGroup;
+          }
+        }
+      ]
+    });
+  }
+  // /STUDENTS TABLE
+
+  invoke_modal_assigned_students = (schedule_id) => {
+
+    // Form Payload
+    let formData = new FormData();
+    formData.append('schedule_id', schedule_id);
+
+    // Get schedule details
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ route('schedule.details') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function() {$('#btnViewAssignedStudents-'+schedule_id).attr('disabled', 'disabled')},
+      success: function(data) {
+        console.log('Success in get schedule details ajax.');
+        if(data['status'] == 'success') {
+          console.log('Success in get schedule details.');
+          if(data['schedule'] != null) {
+            $('#spaneScheduledExam').html(data['schedule']['year'] + ' ' + data['schedule']['month']);
+            $('#spaneScheduledDate').html(data['schedule']['date']);
+            $('#spaneScheduledTime').html(data['schedule']['start_time'] + ' - ' + data['schedule']['end_time']);
+            $('#spaneScheduledSubject').html('FIT ' + data['schedule']['subject_code'] + ' - ' + data['schedule']['subject_name']);
+            $('#spaneScheduledExamType').html(data['schedule']['exam_type']);
+            view_assigned_students(schedule_id);
+
+            $('#btnViewAssignedStudents-'+schedule_id).removeAttr('disabled', 'disabled');
+            $('#modal-view-schedule-assigned-students').modal('show');
+          }
+        }
+      },
+      error: function(err) {
+        console.log('Error in get scheudule details ajax.');
+        $('#btnViewAssignedStudents-'+schedule_id).removeAttr('disabled', 'disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+
+  // DESCHEDULE STUDENT
+  deschedule_student = (id) => {
+
+    SwalQuestionDangerAutoClose.fire({
+        title: 'Are you sure?',
+        text: 'Student will be descheduled.',
+        confirmButtonText: 'Yes, Deschedule!',
+    })
+    .then((result) => {
+      if(result.isConfirmed) {
+        // Form Payload
+        let formData = new FormData();
+        formData.append('id', id);
+
+        // Deschedule student
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ route('schedule.deschedule.student') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function() {$('#btnDescheduleStudent-'+id).attr('disabled', 'disabled')},
+          success: function(data) {
+            console.log('Success in deschedule student ajax.');
+            $('#btnDescheduleStudent-'+id).removeAttr('disabled', 'disabled');
+            if(data['status'] == 'success') {
+              console.log('Success in deschedule student.');
+              SwalDoneSuccess.fire({
+                  title: 'Success!',
+                  text: 'Student has been descheduled.',
+              })
+              .then((result) => {
+                  if(result.isConfirmed) {
+                      location.reload();
+                  }
+              });
+            }
+            else if(data['status'] == 'errors') {
+              console.log('Errors in deschedule student');
+              SwalSystemErrorDanger.fire();
+            }
+          },
+          error: function(err) {
+            console.log('Errors in deschedule student ajax.');
+            $('#btnDescheduleStudent-'+id).removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+
+        });
+      }
+      else
+      {
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Student has not been descheduled.',
+        })
+      }
+    });
+  }
+  // /DESCHEDULE STUDENT
+  // /ASSIGNED STUDENTS OF RELEVANT SCHEDULE
 
   // UPCOMING EXAMS(AFTER RELEASE)
   // FILL POSTPONE MODAL WITH RELEVANT DATA

@@ -257,6 +257,7 @@
                     <th>Date</th>
                     <th>Started Time</th>
                     <th>Ended Time</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody id="heldScheduleTblBody">
