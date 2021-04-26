@@ -21,9 +21,11 @@
           </nav>
         </div>
     </section>
+
+    <!-- IMPORT RESULTS -->
+    @if(Auth::user()->hasPermission('staff-result-import'))
     <div class="col-sm-2">
       <div class="row">
-        
         <div class="w-100 text-right pr-4">
           <button class="btn w-100 btn-lg btn-info float-right pull-right" data-toggle="modal" data-target="#importResults">
             <i class="fa fa-file-import"></i>
@@ -32,7 +34,8 @@
         </div>
       </div>
     </div>
-    <!-- /BREACRUMB -->
+    @endif
+    <!-- /IMPORT RESULTS -->
 
 
     <!-- CONTENT -->

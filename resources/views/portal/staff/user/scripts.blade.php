@@ -62,7 +62,7 @@
         {
             targets: 4,
             render: function ( data, type, row ) {
-                var button = '<a onclick="view_profile('+data+');" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>'
+                var button = '@if(Auth::user()->hasPermission("staff-user-profile-view"))<a onclick="view_profile('+data+');" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>@endif'
                 return button;
             }
         }

@@ -16,8 +16,8 @@ class RolePermissionSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('role_permissions')->truncate();
 
-        for($i=2; $i<=7; $i++){
-            for($j=1; $j<=100; $j++){
+        for($i=2; $i<=2; $i++){
+            for($j=1; $j<=120; $j++){
                 DB::table('role_permissions')->insert(
                     array (
                         [

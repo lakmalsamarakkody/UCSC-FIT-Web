@@ -40,10 +40,28 @@
               <select name="selectUserRole" id="selectUserRole" class="form-control">
                 <option value="" disabled hidden selected>- SELECT USER ROLE -</option>
                 @foreach ($roles as $role)
-                  @if (old('selectUserRole') == $role->id)
-                    <option value="{{ $role->id}}" selected>{{ $role->name}}</option>
+                  @if( $role->name == 'Super Administrator')
+                    @if(Auth::user()->hasPermission('staff-user-permissions-superadmin'))
+                      @if (old('selectUserRole') == $role->id)
+                        <option value="{{ $role->id}}" selected>{{ $role->name}}</option>
+                      @else
+                        <option value="{{ $role->id}}">{{ $role->name}}</option>
+                      @endif
+                    @endif
+                  @elseif( $role->name == 'Administrator')
+                    @if(Auth::user()->hasPermission('staff-user-permissions-admin'))
+                      @if (old('selectUserRole') == $role->id)
+                        <option value="{{ $role->id}}" selected>{{ $role->name}}</option>
+                      @else
+                        <option value="{{ $role->id}}">{{ $role->name}}</option>
+                      @endif
+                    @endif
                   @else
-                    <option value="{{ $role->id}}">{{ $role->name}}</option>
+                    @if (old('selectUserRole') == $role->id)
+                    <option value="{{ $role->id}}" selected>{{ $role->name}}</option>
+                    @else
+                      <option value="{{ $role->id}}">{{ $role->name}}</option>
+                    @endif
                   @endif
                 @endforeach
               </select>

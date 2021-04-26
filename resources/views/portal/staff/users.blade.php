@@ -30,8 +30,8 @@
 
       {{-- BUTTON GROUP --}}
       <div class="w-100 mb-4 mx-3">
-        <button type="button" class="btn btn-lg btn-primary col-lg-3 col-md-4 col-12 py-4" data-toggle="modal" data-target="#newUserModal" style="text-decoration: none"><i class="fa fa-user-plus mr-3"></i> New User</button>
-        <a href="{{ route('user.permissions') }}"><button type="button" class="btn btn-lg btn-warning col-lg-3 col-md-4 col-12 py-4"><i class="fa fa-user-shield mr-3"></i> User Permissions</button></a>
+        @if(Auth::user()->hasPermission('staff-user-add'))<button type="button" class="btn btn-lg btn-primary col-lg-3 col-md-4 col-12 py-4" data-toggle="modal" data-target="#newUserModal" style="text-decoration: none"><i class="fa fa-user-plus mr-3"></i> New User</button>@endif
+        @if(Auth::user()->hasPermission('staff-user-permissions'))<a href="{{ route('user.permissions') }}"><button type="button" class="btn btn-lg btn-warning col-lg-3 col-md-4 col-12 py-4"><i class="fa fa-user-shield mr-3"></i> User Permissions</button></a>@endif
       </div>
       {{-- /BUTTON GROUP --}}
 

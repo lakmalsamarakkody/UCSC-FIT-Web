@@ -18,7 +18,7 @@
             <ol class="breadcrumb ">
               <li class="breadcrumb-item"><a href="">Dashboard</a></li>
               <li class="breadcrumb-item"><a href="">Users</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Student Profile</li>
+              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
             </ol>
           </nav>
 
@@ -43,7 +43,7 @@
 
             <div class="card   ">
               <div class="card-header">
-                Student Details
+                User Details
               </div>
               <div class="card-body">
                 <div class="row">
@@ -84,17 +84,23 @@
                               <img src="{{ asset('storage/portal/avatar/'.$user->id.'/'.$user->profile_pic)}}" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
                           </div>
                           <div class="text-center w-100 ">
+                            @if(Auth::user()->hasPermission('staff-user-profile-resetEmail'))
                             <button onclick="reset_email()" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Reset Email">
                               <i class="fa fa-envelope"></i>
                             </button>
+                            @endif
                             @if($user->status==1)
-                            <button onclick="deactivate_acc()" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Deactivate Account">
-                              <i class="fa fa-user-alt-slash"></i>
-                            </button>
-                            @else                     
-                            <button onclick="activate_acc()" class="btn btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Activate Account">
-                              <i class="fa fa-user-alt"></i>
-                            </button>                           
+                              @if(Auth::user()->hasPermission('staff-user-profile-deactivate'))
+                              <button onclick="deactivate_acc()" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Deactivate Account">
+                                <i class="fa fa-user-slash"></i>
+                              </button>
+                              @endif
+                            @else   
+                              @if(Auth::user()->hasPermission('staff-user-profile-activate'))                  
+                              <button onclick="activate_acc()" class="btn btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Activate Account">
+                                <i class="fa fa-user-check"></i>
+                              </button>
+                              @endif
                             @endif     
                           </div>                          
                       </div>   

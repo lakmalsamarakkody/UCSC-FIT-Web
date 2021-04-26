@@ -74,6 +74,14 @@ class UserSeeder extends Seeder
                 'status'=> true,
                 'created_at'=> '2020-11-23 10:13:53',
                 'updated_at'=> '2020-11-23 10:13:53'],
+
+                ['name'=> 'admin',
+                'email'=>"admin@ucsc.cmb.ac.lk",
+                'password'=>'$2y$10$chLDig2zqSahPLNRnur.0O3xzyvjlzH54Jwsp.gblzj3Ltp.dfxkG',
+                'role_id'=> '3',
+                'status'=> true,
+                'created_at'=> '2020-11-23 10:13:53',
+                'updated_at'=> '2020-11-23 10:13:53'],
             )
         );
         

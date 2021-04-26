@@ -538,6 +538,14 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                [
+                    'name'=>'staff-result-import',
+                    'portal'=>'staff',
+                    'module'=>'result',
+                    'description'=>'Can import result from VLE exported file',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
                 // /STAFF->RESULTS
 
                 // STAFF->USERS
@@ -546,6 +554,70 @@ class PermissionSeeder extends Seeder
                     'portal'=>'staff',
                     'module'=>'user',
                     'description'=>'Can view user module',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-user-add',
+                    'portal'=>'staff',
+                    'module'=>'user',
+                    'description'=>'Can invite an user',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-user-permissions',
+                    'portal'=>'staff',
+                    'module'=>'user',
+                    'description'=>'Can change user permissions',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-user-permissions-superadmin',
+                    'portal'=>'staff',
+                    'module'=>'user',
+                    'description'=>'Can change super admin permissions',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-user-permissions-admin',
+                    'portal'=>'staff',
+                    'module'=>'user',
+                    'description'=>'Can change admin permissions',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-user-profile-view',
+                    'portal'=>'staff',
+                    'module'=>'user',
+                    'description'=>'Can view user profile',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-user-profile-resetEmail',
+                    'portal'=>'staff',
+                    'module'=>'user',
+                    'description'=>'Can reset user email',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-user-profile-activate',
+                    'portal'=>'staff',
+                    'module'=>'user',
+                    'description'=>'Can activate a user account',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-user-profile-deactivate',
+                    'portal'=>'staff',
+                    'module'=>'user',
+                    'description'=>'Can deactivate a user account',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
