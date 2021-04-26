@@ -33,7 +33,7 @@
           $('#email').val('');
           SwalNotificationSuccessAutoClose.fire({
             title: 'Registration Link Emailed!',
-            text: 'Please Check your Email',
+            text: 'Please Check your inbox',
           })
         }else if (data['error']){
           SwalNotificationWarning.fire({
