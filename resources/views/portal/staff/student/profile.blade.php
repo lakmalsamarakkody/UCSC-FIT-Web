@@ -210,14 +210,20 @@
                       <hr>
                       <div class="row">                        
                           <div class="col-lg-12">
+                            {{-- TAB LIST --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                               <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="result-tab" data-toggle="tab" href="#result" role="tab" aria-controls="result" aria-selected="true">Results</a>
                               </li>
+                              @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
                               <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="medicals-tab" data-toggle="tab" href="#medicals" role="tab" aria-controls="medicals" aria-selected="false">Medicals</a>
                               </li>
+                              @endif
                             </ul>
+                            {{-- /TAB LIST --}}
+
+                            {{-- /RESULT TAB CONTENT --}}
                             <div class="tab-content pt-3" id="myTabContent">
                               <div class="tab-pane fade show active" id="result" role="tabpanel" aria-labelledby="results-tab">
                                 <table class="table table-bordered table-responsive-md">
@@ -256,6 +262,10 @@
                                   </tbody>
                                 </table>
                               </div>
+                              {{-- /RESULT TAB CONTENT --}}
+
+                              {{-- MEDICAL TAB CONTENT --}}
+                              @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
                               <div class="tab-pane fade" id="medicals" role="tabpanel" aria-labelledby="medicals-tab">
                                 <table class="table table-bordered table-responsive-md">
                                   <thead class="text-center">
@@ -307,6 +317,8 @@
                                   </div>
                                 </div>
                               </div>
+                              @endif
+                              {{-- /MEDICAL TAB CONTENT --}}
                             </div>
                           </div>
 
