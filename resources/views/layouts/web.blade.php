@@ -37,6 +37,8 @@
             <link rel="stylesheet" href="{{ asset('css/website/site-map.css') }}">
         <!-- /STYLES -->
 
+        <!-- Template Main Javascript File -->
+        <script src="{{ asset('js/web.js') }}"></script>
         <!-- JavaScript Libraries -->
         
         <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script>
@@ -51,8 +53,6 @@
         <script src="{{ asset('lib/sweetalert2/sweetalert2.all.js') }}"></script>
         <script src="{{ asset('js/sweetalert.js') }}"></script>
 
-        <!-- Template Main Javascript File -->
-        <script src="{{ asset('js/web.js') }}"></script>
 
         <!-- SCRIPTS -->
             {{-- AUTORUN --}}
