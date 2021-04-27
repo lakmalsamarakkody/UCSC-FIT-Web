@@ -53,7 +53,7 @@
                 <div class="card shadow-none">
                   <div class="card-body">
                     <div class="form-row">                    
-                      <div class="form-group col">
+                      <div class="form-group col-xl-2 col-lg-4">
                         <label for="year">Year</label>
                         <select id="year" name="year" class="form-control form-control-sm">
                           <option value="">select here---</option>
@@ -62,22 +62,22 @@
                           @endforeach --}}
                         </select>
                       </div>
-                      <div class="form-group col">
+                      <div class="form-group col-xl-2 col-lg-4">
                         <label for="name">Name</label>
                         <input type="text" class="form-control form-control-sm" id="name" aria-describedby="nameHelp"/>
                         <small id="nameHelp" class="form-text text-muted">Enter Name Here</small>
                       </div>
-                      <div class="form-group col">
-                        <label for="regNo">Registration Number</label>
+                      <div class="form-group col-xl-2 col-lg-4">
+                        <label for="regNo">Reg: Number</label>
                         <input type="text" class="form-control form-control-sm" id="regNo" aria-describedby="regNoHelp"/>
                         <small id="regNoHelp" class="form-text text-muted">Enter Registration Number Here</small>
                       </div>
-                      <div class="form-group col">
+                      <div class="form-group col-xl-2 col-lg-4">
                         <label for="nic">NIC/Postal/Passport</label>
                         <input type="text" class="form-control form-control-sm" id="nic" aria-describedby="nicHelp"/>
                         <small id="nicHelp" class="form-text text-muted">Enter NIC/Postal/Passport Here</small>
                       </div>                  
-                      <div class="form-group col">
+                      <div class="form-group col-xl-2 col-lg-4">
                         <label for="bit">BIT</label>
                         <select id="bit" name="bit" class="form-control form-control-sm">
                           <option value="">select here---</option>
@@ -85,7 +85,7 @@
                           <option value="0">Not-Eligible</option>
                         </select>
                       </div>            
-                      <div class="form-group col">
+                      <div class="form-group col-xl-2 col-lg-4">
                         <label for="fit">FIT Certificate</label>
                         <select id="fit" name="fit" class="form-control form-control-sm">
                           <option value="">select here---</option>
