@@ -106,11 +106,13 @@
                                             </table>
                                         </div>
                                     </div>
+                                    @if(Auth::user()->hasPermission("staff-exam-examAssign-assign"))
                                     <div class="mt-4 col-12 text-center">
                                         <div id="divBtnAssignStudents" class="btn-group col-xl-3 mt-1">
                                             <button type="button" class="btn btn-success form-control" id="btnAssignStudents" onclick="assign_students();">Assign Selected Students<span id="spinnerBtnAssignStudents" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
