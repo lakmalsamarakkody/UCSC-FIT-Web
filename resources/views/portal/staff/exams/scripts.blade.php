@@ -968,9 +968,10 @@ let heldExamTable = null;
           targets: 3,
           render: function(data, type, row) {
             let today = new Date();
-            let date = today.getFullYear() + '-' +  today.getMonth() + '-' + today.getDate();
+            let date = new Date(today.getFullYear(),  today.getMonth(),today.getDate());
+            let scheduleDate = new Date(row['schedule_date']);
             let btnGroup = '<div class="btn-group">';
-            if(row['schedule_date'] >= date) {
+            if(scheduleDate >= date) {
               @if(Auth::user()->hasPermission("staff-exam-schedule-student-deschedule"))
               btnGroup = btnGroup + '<button type="button" class="btn btn-outline-danger" id="btnDescheduleStudent-'+data+'" data-tooltip="tooltip" data-placement="bottom" title="Deschedule Student" onclick="deschedule_student('+data+');"><i class="fas fa-user-minus"></i></button>';
               @endif
