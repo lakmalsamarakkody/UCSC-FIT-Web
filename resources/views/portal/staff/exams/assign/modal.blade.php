@@ -77,9 +77,9 @@
                                                             <small id="regNoHelp" class="form-text text-muted">Enter Registration Number Here</small>
                                                         </div>
                                                         <div class="form-group col-xl-3 col-lg-6 col-12">
-                                                            <label for="nic">NIC</label>
+                                                            <label for="nic">NIC/Postal/Passport</label>
                                                             <input type="text" class="form-control form-control-sm" id="nic" aria-describedby="nicHelp"/>
-                                                            <small id="nicHelp" class="form-text text-muted">Enter NIC Here</small>
+                                                            <small id="nicHelp" class="form-text text-muted">Enter NIC/Postal/Passport Here</small>
                                                         </div>
                                                     </div>
                                                 </div>

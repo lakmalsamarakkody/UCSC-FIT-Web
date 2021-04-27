@@ -73,9 +73,9 @@
                         <small id="regNoHelp" class="form-text text-muted">Enter Registration Number Here</small>
                       </div>
                       <div class="form-group col">
-                        <label for="nic">NIC</label>
+                        <label for="nic">NIC/Postal/Passport</label>
                         <input type="text" class="form-control form-control-sm" id="nic" aria-describedby="nicHelp"/>
-                        <small id="nicHelp" class="form-text text-muted">Enter NIC Here</small>
+                        <small id="nicHelp" class="form-text text-muted">Enter NIC/Postal/Passport Here</small>
                       </div>                  
                       <div class="form-group col">
                         <label for="bit">BIT</label>
@@ -115,7 +115,7 @@
                   <tr>
                     <th>Registration No</th>
                     <th>Name</th>
-                    <th>NIC</th>
+                    <th>NIC/Postal/Passport</th>
                     <th>BIT Eligibility</th>
                     <th>FIT Certificate</th>
                     <th>&nbsp;</th>
