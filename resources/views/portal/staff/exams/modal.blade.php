@@ -203,7 +203,7 @@
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Registration No</th>
-                                                        <th>NIC</th>
+                                                        <th>NIC/Postal/Passport</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>

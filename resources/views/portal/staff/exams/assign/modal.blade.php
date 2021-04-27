@@ -99,7 +99,7 @@
                                                     <tr>
                                                         <th>Registration No</th>
                                                         <th>Name</th>
-                                                        <th>NIC</th>
+                                                        <th>NIC/Postal/Passport</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>

@@ -915,7 +915,7 @@ let heldExamTable = null;
     $('.tbl-assigned_student-list-yajradt').DataTable().clear().destroy();
     assignedStudentTable = $('.tbl-assigned_student-list-yajradt').DataTable({
       processing: true,
-      serverSide: true,
+      serverSide: false,
       ajax: {
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         url: "{{ route('schedule.assigned.students') }}",
