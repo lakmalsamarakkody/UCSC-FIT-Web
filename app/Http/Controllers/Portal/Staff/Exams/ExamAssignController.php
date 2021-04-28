@@ -87,10 +87,18 @@ class ExamAssignController extends Controller
     public function getStudentList(Request $request)
     {
         if($request->ajax()) {
-            // $scheduled_student_ids = hasExam::select('student_id')->where('exam_schedule_id', $request->schedule_id)->get()->toArray();
-            // // $student_ids_array = json_decode($scheduled_student_ids, true);
-            // $data  = Student::join('student_registrations', 'students.id', '=', 'student_registrations.student_id')->where('student_registrations.status', 1)->whereNotIn('students.id', $scheduled_student_ids);
-            $data  = Student::join('student_registrations', 'students.id', '=', 'student_registrations.student_id')->where('student_registrations.status', 1);
+            $scheduled_student_ids = hasExam::select('student_id')->where('exam_schedule_id', $request->schedule_id)->get();
+            $student_ids_array = [];
+
+            foreach($scheduled_student_ids as $scheduled_student_id):
+                array_push($student_ids_array, $scheduled_student_id->student_id);
+            endforeach;
+
+            // $student_ids_array = json_decode($scheduled_student_ids, true);
+            $data  = Student::join('student_registrations', 'students.id', '=', 'student_registrations.student_id')->where('student_registrations.status', 1)->whereNotIn('students.id', $student_ids_array);
+            // $data  = Student::join('student_registrations', 'students.id', '=', 'student_registrations.student_id')->where('student_registrations.status', 1);
+
+
             if($request->name!=null){
                 $data = $data->where('first_name','like', '%'. $request->name.'%')
                 ->orWhere('last_name','like', '%'. $request->name.'%')
@@ -117,7 +125,7 @@ class ExamAssignController extends Controller
                 ->orWhere('initials','like', '%'. $request->search.'%')
                 ->orWhere('middle_names','like', '%'. $request->search.'%')
                 ->orWhere('reg_year', $request->search)
-                ->orwhere('nic_old','like','%'. $request->search.'%')
+                ->orWhere('nic_old','like','%'. $request->search.'%')
                 ->orWhere('nic_new','like', '%'. $request->search.'%')
                 ->orWhere('postal','like', '%'. $request->search.'%')
                 ->orWhere('passport','like', '%'. $request->search.'%');
