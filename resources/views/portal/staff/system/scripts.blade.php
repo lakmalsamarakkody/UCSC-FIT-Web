@@ -316,6 +316,7 @@ let permissionTable = null;
         $('#btnViewUserRole-'+role_id).removeAttr('disabled', 'disabled');
         $('#permissionList').html("");
         if(data['status'] == 'success'){
+          $('#modal-view-role-title').html(data['role']['name']);
           let icon = "";
           $.each(data['arrayPermissions'], function( index, value ) {
             if(value['permission_status'] == true){
