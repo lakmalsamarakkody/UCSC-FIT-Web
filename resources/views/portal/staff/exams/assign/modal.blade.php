@@ -77,9 +77,9 @@
                                                             <small id="regNoHelp" class="form-text text-muted">Enter Registration Number Here</small>
                                                         </div>
                                                         <div class="form-group col-xl-3 col-lg-6 col-12">
-                                                            <label for="nic">NIC</label>
+                                                            <label for="nic">NIC/Postal/Passport</label>
                                                             <input type="text" class="form-control form-control-sm" id="nic" aria-describedby="nicHelp"/>
-                                                            <small id="nicHelp" class="form-text text-muted">Enter NIC Here</small>
+                                                            <small id="nicHelp" class="form-text text-muted">Enter NIC/Postal/Passport Here</small>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -99,18 +99,20 @@
                                                     <tr>
                                                         <th>Registration No</th>
                                                         <th>Name</th>
-                                                        <th>NIC</th>
+                                                        <th>NIC/Postal/Passport</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                             </table>
                                         </div>
                                     </div>
+                                    @if(Auth::user()->hasPermission("staff-exam-examAssign-assign"))
                                     <div class="mt-4 col-12 text-center">
                                         <div id="divBtnAssignStudents" class="btn-group col-xl-3 mt-1">
                                             <button type="button" class="btn btn-success form-control" id="btnAssignStudents" onclick="assign_students();">Assign Selected Students<span id="spinnerBtnAssignStudents" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

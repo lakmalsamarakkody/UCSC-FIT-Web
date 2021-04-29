@@ -37,7 +37,7 @@ class SystemController extends Controller
   {
     $roles = Role::orderby('id')->get();
     $permissions = Permission::orderby('id')->get();
-    $subjects = Subject::orderby('code')->get();
+    $subjects = Subject::orderby('id')->get();
     $exam_types = Types::orderby('id')->get();
     $exam_durations = Duration::orderby('id')->get();
     $phases = Phase::orderby('id')->get();

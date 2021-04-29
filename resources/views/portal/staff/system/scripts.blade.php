@@ -60,7 +60,7 @@ let permissionTable = null;
   create_permission = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "New permission will be created!",
     confirmButtonText: 'Yes, Create!',
     })
     .then((result) => {
@@ -164,7 +164,7 @@ let permissionTable = null;
   edit_permission = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "Permission will be updated!",
     confirmButtonText: 'Yes, Update!',
     })
     .then((result) => {
@@ -232,7 +232,7 @@ let permissionTable = null;
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, delete it!',
+    confirmButtonText: 'Yes, Delete it!',
     })
     .then((result) => {
       if (result.isConfirmed) {
@@ -316,6 +316,7 @@ let permissionTable = null;
         $('#btnViewUserRole-'+role_id).removeAttr('disabled', 'disabled');
         $('#permissionList').html("");
         if(data['status'] == 'success'){
+          $('#modal-view-role-title').html(data['role']['name']);
           let icon = "";
           $.each(data['arrayPermissions'], function( index, value ) {
             if(value['permission_status'] == true){
@@ -342,7 +343,7 @@ let permissionTable = null;
   create_role = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "New user role will be created!",
     confirmButtonText: 'Yes, Create!',
     })
     .then((result) => {
@@ -466,7 +467,7 @@ let permissionTable = null;
   edit_role = (role_id) => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "User role will be updated!",
     confirmButtonText: 'Yes, Update!',
     })
     .then((result) => {
@@ -520,7 +521,7 @@ let permissionTable = null;
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, delete it!',
+    confirmButtonText: 'Yes, Delete it!',
     })
     .then((result) => {
       if (result.isConfirmed) {
@@ -570,7 +571,7 @@ let permissionTable = null;
   create_subject = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "New subject will be created!",
     confirmButtonText: 'Yes, Create!',
     })
     .then((result) => {
@@ -672,7 +673,7 @@ let permissionTable = null;
   edit_subject = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "Subject will be updated!",
     confirmButtonText: 'Yes, Update!',
     })
     .then((result) => {
@@ -741,7 +742,7 @@ let permissionTable = null;
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, delete it!',
+    confirmButtonText: 'Yes, Delete it!',
     })
     .then((result) => {
       if (result.isConfirmed) {
@@ -788,7 +789,7 @@ let permissionTable = null;
   create_exam_type = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "New exam type will be created!",
     confirmButtonText: 'Yes, Create!',
     })
     .then((result) => {
@@ -889,7 +890,7 @@ let permissionTable = null;
   edit_exam_type = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "Exam type will be updated!",
     confirmButtonText: 'Yes, Update!',
     })
     .then((result) => {
@@ -946,7 +947,7 @@ let permissionTable = null;
       else{
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Subject has not been updated.',
+          text: 'Exam type has not been updated.',
         })
       }
     })
@@ -958,7 +959,7 @@ let permissionTable = null;
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, delete it!',
+    confirmButtonText: 'Yes, Delete it!',
     })
     .then((result) => {
       if (result.isConfirmed) {
@@ -1018,7 +1019,7 @@ let permissionTable = null;
   edit_exam_duration_save = (exam_duration_id) => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "Exam duration will be updated!",
     confirmButtonText: 'Yes, Update!',
     })
     .then((result) => {
@@ -1096,7 +1097,7 @@ let permissionTable = null;
       else{
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Subject has not been updated.',
+          text: 'Exam duration has not been updated.',
         })
       }
     })
@@ -1116,7 +1117,7 @@ let permissionTable = null;
   create_student_phase = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "New student phase will be created!",
     confirmButtonText: 'Yes, Create!',
     })
     .then((result) => {
@@ -1222,7 +1223,7 @@ let permissionTable = null;
   edit_student_phase = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "Student phase will be updated!",
     confirmButtonText: 'Yes, Update!',
     })
     .then((result) => {
@@ -1291,7 +1292,7 @@ let permissionTable = null;
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, delete it!',
+    confirmButtonText: 'Yes, Delete it!',
     })
     .then((result) => {
       if (result.isConfirmed) {
@@ -1340,7 +1341,7 @@ let permissionTable = null;
   create_payment_method = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "New payment method will be created!",
     confirmButtonText: 'Yes, Create!',
     })
     .then((result) => {
@@ -1445,7 +1446,7 @@ let permissionTable = null;
   edit_payment_method = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "Payment method will be updated!",
     confirmButtonText: 'Yes, Update!',
     })
     .then((result) => {
@@ -1513,7 +1514,7 @@ let permissionTable = null;
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, delete it!',
+    confirmButtonText: 'Yes, Delete it!',
     })
     .then((result) => {
       if (result.isConfirmed) {
@@ -1564,7 +1565,7 @@ let permissionTable = null;
   create_payment_type = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "New payment type will be created!",
     confirmButtonText: 'Yes, Create!',
     })
     .then((result) => {
@@ -1669,7 +1670,7 @@ let permissionTable = null;
   edit_payment_type = () => {
     SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this!",
+    text: "Payment type will be updated!",
     confirmButtonText: 'Yes, Update!',
     })
     .then((result) => {
@@ -1737,7 +1738,7 @@ let permissionTable = null;
     SwalQuestionDanger.fire({
     title: "Are you sure?",
     text: "You wont be able to revert this!",
-    confirmButtonText: 'Yes, delete it!',
+    confirmButtonText: 'Yes, Delete it!',
     })
     .then((result) => {
       if (result.isConfirmed) {

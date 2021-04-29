@@ -48,6 +48,25 @@
             ],
             columnDefs: [
                 {
+                    targets: 2,
+                    render: function(data, type, row) {
+                        var nic = null;
+                        if(row['nic_old'] != null) {
+                            nic = row['nic_old'];
+                        }
+                        if(row['nic_new'] != null) {
+                            nic = row['nic_new'];
+                        }
+                        if(row['postal'] != null) {
+                            nic = row['postal'];
+                        }
+                        if(row['passport'] != null) {
+                            nic = row['passport'];
+                        }
+                        return nic;
+                    }
+                },
+                {
                     targets: [3,4],
                     render: function ( data, type, row ) {
                         var color = 'dark';

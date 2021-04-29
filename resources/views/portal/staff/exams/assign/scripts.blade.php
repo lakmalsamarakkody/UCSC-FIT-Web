@@ -72,9 +72,9 @@ $(function(){
             {
                 targets: 7,
                 render: function(data, type, row) {
-                    let assignBtn = '<div class="btn-group">'+
+                    let assignBtn = '@if(Auth::user()->hasPermission("staff-exam-examAssign-assign"))<div class="btn-group">'+
                     '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="Assign Students" id="btnAssignStudents-'+data+'" onclick="invoke_assign_students_modal('+data+');">Assign</button>'+
-                    '</div>';
+                    '</div>@endif';
                     return assignBtn;
                 }
             }

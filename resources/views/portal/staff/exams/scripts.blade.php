@@ -180,7 +180,7 @@ let heldExamTable = null;
           targets: 7,
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">'+
-            '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="invoke_modal_assigned_students('+data+');"><i class="fas fa-address-book"></i></button>'+
+            '@if(Auth::user()->hasPermission("staff-exam-schedule-view-students"))<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="invoke_modal_assigned_students('+data+');"><i class="fas fa-address-book"></i></button>@endif'+
             '@if(Auth::user()->hasPermission("staff-exam-schedule-postpone"))<button type="button" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Postpone Exam" id="btnPostponeSchedule-'+data+'" onclick="postpone_exam_modal_invoke('+data+');"><i class="fas fa-calendar-plus"></i></button>@endif'+
             '@if(Auth::user()->hasPermission("staff-exam-schedule-delete-afterRelease"))<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete" id="btnDeleteAfterRelease-'+data+'" onclick="delete_after_release('+data+');"><i class="fas fa-trash-alt"></i></button>@endif'+
             '</div>';
@@ -261,7 +261,7 @@ let heldExamTable = null;
         {
           targets: 7,
           render: function(data, type, row) {
-            let btnGroup = '<div class="btn-group"><button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="invoke_modal_assigned_students('+data+');"><i class="fas fa-address-book"></i></button></div>';
+            let btnGroup = '@if(Auth::user()->hasPermission("staff-exam-schedule-view-students"))<div class="btn-group"><button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="invoke_modal_assigned_students('+data+');"><i class="fas fa-address-book"></i></button></div>@endif';
             return btnGroup;
           }
         }
@@ -915,7 +915,7 @@ let heldExamTable = null;
     $('.tbl-assigned_student-list-yajradt').DataTable().clear().destroy();
     assignedStudentTable = $('.tbl-assigned_student-list-yajradt').DataTable({
       processing: true,
-      serverSide: true,
+      serverSide: false,
       ajax: {
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         url: "{{ route('schedule.assigned.students') }}",
@@ -968,10 +968,13 @@ let heldExamTable = null;
           targets: 3,
           render: function(data, type, row) {
             let today = new Date();
-            let date = today.getFullYear() + '-' +  today.getMonth() + '-' + today.getDate();
+            let date = new Date(today.getFullYear(),  today.getMonth(),today.getDate());
+            let scheduleDate = new Date(row['schedule_date']);
             let btnGroup = '<div class="btn-group">';
-            if(row['schedule_date'] >= date) {
+            if(scheduleDate >= date) {
+              @if(Auth::user()->hasPermission("staff-exam-schedule-student-deschedule"))
               btnGroup = btnGroup + '<button type="button" class="btn btn-outline-danger" id="btnDescheduleStudent-'+data+'" data-tooltip="tooltip" data-placement="bottom" title="Deschedule Student" onclick="deschedule_student('+data+');"><i class="fas fa-user-minus"></i></button>';
+              @endif
             }
             btnGroup = btnGroup +'</div>';
             return btnGroup;
