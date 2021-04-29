@@ -1071,7 +1071,7 @@ let permissionTable = null;
         //Validate information
         $.ajax({
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          url: "{{ route('staff.system.exam.duration.set') }}",
+          url: "{{ route('staff.system.exam.duration.create') }}",
           type: 'post',
           data: formData,
           processData: false,

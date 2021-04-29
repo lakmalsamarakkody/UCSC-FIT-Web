@@ -212,7 +212,7 @@ Route::post('/portal/staff/system/editExamTypeGetDetails', [App\Http\Controllers
 Route::post('/portal/staff/system/editExamType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editExamType']);
 Route::post('/portal/staff/system/deleteExamType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteExamType']);
 
-Route::post('/portal/staff/system/exam/duration/set', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createExamDuration'])->name('staff.system.exam.duration.set');
+Route::post('/portal/staff/system/createExamDuration', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createExamDuration'])->name('staff.system.exam.duration.create');
 Route::post('/portal/staff/system/editExamDuration', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editExamDuration']);
 
 Route::post('/portal/staff/system/createStudentPhase', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createStudentPhase']);
