@@ -56,6 +56,28 @@ let permissionTable = null;
     // /PERMISSIONS TABLE
   });
 
+  // CHANGE MODULES DROPDOWN ACCORDING TO PORTAL
+  onchange_portal = () => {
+    if($('#portalName').val() == 'student') {
+      $('#permissionModule').find('option').remove().end().append('<option value="" hidden selected>Select Permission Module</option>'+
+          '<option value="dashboard">Dashboard</option>'+
+          '<option value="information">Information</option>'+
+          '<option value="exam">Exams</option>'+
+          '<option value="result">Results</option></select>');
+    }
+    else if($('#portalName').val() == 'staff') {
+      $('#permissionModule').find('option').remove().end().append('<option value="" hidden selected>Select Permission Module</option>'+
+          '<option value="dashboard">Dashboard</option>'+
+          '<option value="student">Students</option>'+
+          '<option value="exam">Exams</option>'+
+          '<option value="result">Results</option>'+
+          '<option value="user">Users</option>'+
+          '<option value="system">System</option>'+
+          '<option value="website">Website</option></select>');
+    }
+  }
+  // /CHANGE MODULES DROPDOWN ACCORDING TO PORTAL
+
   // CREATE
   create_permission = () => {
     SwalQuestionSuccessAutoClose.fire({
@@ -146,28 +168,10 @@ let permissionTable = null;
           $('#permissionID').val(data['permission']['id']);
           $('#permissionName').val(data['permission']['name']);
           $('#portalName').val(data['permission']['portal']);
-          if(data['permission']['portal'] == 'student') {
-            $('#permissionModule').find('option').remove().end().append('<option value="" disabled>Select Permission Module</option>'+
-                '<option value="dashboard">Dashboard</option>'+
-                '<option value="information">Information</option>'+
-                '<option value="exam">Exams</option>'+
-                '<option value="result">Results</option></select>');
 
-            $('#permissionModule').val(data['permission']['module']);
-          }
-          else if(data['permission']['portal'] == 'staff') {
-            $('#permissionModule').find('option').remove().end().append('<option value="" disabled>Select Permission Module</option>'+
-                '<option value="dashboard">Dashboard</option>'+
-                '<option value="student">Students</option>'+
-                '<option value="exam">Exams</option>'+
-                '<option value="result">Results</option>'+
-                '<option value="user">Users</option>'+
-                '<option value="system">System</option>'+
-                '<option value="website">Website</option></select>');
+          onchange_portal();
+          $('#permissionModule').val(data['permission']['module']);
 
-            $('#permissionModule').val(data['permission']['module']);
-          }
-          
           $('#permissionDescription').val(data['permission']['description']);
           $('#modal-edit-permission').modal('show');
           $('#btnEditPermission-'+permission_id).removeAttr('disabled','disabled');

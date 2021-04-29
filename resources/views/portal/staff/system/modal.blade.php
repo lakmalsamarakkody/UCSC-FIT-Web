@@ -175,8 +175,8 @@
             </div>
             <div class="form-group">
               <label for="portalName">Portal Name</label>
-              <select class="form-control" name="portalName" id="portalName">
-                <option value="" disabled>Select the Portal</option>
+              <select class="form-control" name="portalName" id="portalName" onchange="onchange_portal();">
+                <option value="" hidden selected>Select the Portal</option>
                 <option value="staff">Staff</option>
                 <option value="student">Student</option>
               </select>
@@ -185,14 +185,7 @@
             <div class="form-group">
               <label for="permissionModule">Permission Module</label>
               <select class="form-control" name="permissionModule" id="permissionModule">
-                {{-- <option value="" disabled>Select Permission Module</option>
-                <option value="dashboard">Dashboard</option>
-                <option value="student">Students</option>
-                <option value="exams">Exams</option>
-                <option value="result">Results</option>
-                <option value="user">Users</option>
-                <option value="system">System</option>
-                <option value="website">Website</option> --}}
+                <option value="" hidden selected>Select Permission Module</option>
               </select>
               <span class="invalid-feedback" id="error-permissionModule" role="alert"></span>
             </div>
