@@ -546,7 +546,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-examAssign-assign',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can assign students for an exam',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
