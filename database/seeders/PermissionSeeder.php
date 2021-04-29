@@ -366,11 +366,11 @@ class PermissionSeeder extends Seeder
                 ],
                 // /STAFF->STUDENTS
 
-                // STAFF->EXAMS
+                // STAFF->EXAM
                 [
                     'name'=>'staff-exam',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can view exam module',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -378,7 +378,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-drafted-view',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can view drafted exam schedule',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -386,7 +386,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-scheduled-view',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can view scheduled exam schedule',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -394,7 +394,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-held-view',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can view held exam schedule',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -402,7 +402,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-add',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can add an exam schedule',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -410,7 +410,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-edit',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can edit a drafted exam schedule',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -418,7 +418,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-delete-beforeRelease',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can delete a drafted exam schedule',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -426,7 +426,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-request',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can request for exam schedule approval',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -434,7 +434,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-approve',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can approve an exam schedule',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -442,7 +442,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-decline',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can decline the approval of a exam schedule',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -450,7 +450,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-decline-message',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can view the exam schedule decline message',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -458,7 +458,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-release',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can release an exam schedule',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -466,7 +466,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-allRelease',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can release all approved exam schedules',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -474,7 +474,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-postpone',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can postpone a scheduled exam',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -482,7 +482,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-delete-afterRelease',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can delete a scheduled exam',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -490,7 +490,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-examList',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can access to exam list page',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -498,7 +498,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-examList-add',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can add an exam to exam list',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -506,7 +506,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-examList-viewResults',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can view results of a exam',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -514,7 +514,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-examList-delete',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can delete a exam',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -522,12 +522,12 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-examAssign',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can access to assign exam page',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
-                // /STAFF->EXAMS
+                // /STAFF->EXAM
 
                 // STAFF->RESULTS
                 [
