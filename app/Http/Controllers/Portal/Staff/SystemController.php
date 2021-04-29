@@ -416,6 +416,40 @@ class SystemController extends Controller
   // /EXAM TYPE
 
   // EXAM DURATION
+  // CREATE FUNCTION
+  public function createExamDuration(Request $request)
+  {
+    //Validate exam duration form fields
+    $exam_duration_validator = Validator::make($request->all(), [
+      'newExamDurationSubject'=> ['required','integer'],
+      'newExamDurationExamType'=> ['required', 'integer'],
+      'newExamDurationHours'=>['required', 'integer', 'max:12', 'min:0'],
+      'newExamDurationMinutes'=> ['required', 'integer', 'max:59', 'min:0'],
+    ]);
+
+    //Check if the selected exam already exists
+    $exists_exam = Duration::where('subject_id',$request->newExamDurationSubject)->where('exam_type_id', $request->newExamDurationExamType)->first();
+
+    //Check validation errors
+    if($exam_duration_validator->fails()):
+      return response()->json(['errors'=>$exam_duration_validator->errors()]);
+    elseif($exists_exam != null):
+      return response()->json(['status'=>'error', 'msg'=>'Selected exam already have a duration.']);
+
+    //Otherwise, Store data to the table
+    else:
+      $duration = new Duration();
+      $duration->subject_id = $request->newExamDurationSubject;
+      $duration->exam_type_id = $request->newExamDurationExamType;
+      $duration->hours = $request->newExamDurationHours;
+      $duration->minutes = $request->newExamDurationMinutes;
+      if($duration->save()):
+        return response()->json(['status'=>'success', 'duration'=>$duration]);
+      endif;
+    endif;
+  }
+  // /CREATE FUNCTION
+
   // EDIT FUNCTIONS
   public function editExamDuration(Request $request){
 

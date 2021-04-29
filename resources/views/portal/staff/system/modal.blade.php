@@ -1,101 +1,3 @@
-{{-- USER ROLE --}}
-
-  <!-- CREATE -->
-  <div class="modal fade" id="modal-create-role" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Create User Role</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="formUserRole">
-            <div class="form-group">
-              <label for="newRoleName">Role Name</label>
-              <input type="text" class="form-control" id="newRoleName" name="newRoleName"/>
-              <span class="invalid-feedback" id="error-newRoleName" role="alert"></span>
-            </div>
-            <div class="form-group">
-              <label for="newRoleDescription">Role Description</label>
-              <input type="text" class="form-control" id="newRoleDescription" name="newRoleDescription"/>
-              <span class="invalid-feedback" id="error-newRoleDescription" role="alert"></span>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" id="btnCreateUserRole" name="btnCreateUserRole" class="btn btn-outline-primary" onclick="create_role()">Create</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--/ CREATE -->
-
-  <!-- VIEW -->
-  <div class="modal fade" id="modal-view-role" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-view-role-title">System Administrator</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h5>Permission List</h5>
-          <div class="container-fluid">
-            <div id="permissionList" class="row">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--/ VIEW -->
-
-  <!-- EDIT -->
-  <div class="modal fade" id="modal-edit-role" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-edit-role-title">Role Title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="formEditRole">
-            <div class="form-group">
-              <label for="roleName">Role Name</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <button class="btn btn-warning" type="button" onclick="InputRoleName_editable();"><i class="fas fa-edit pr-0"></i></button>
-                </div>
-                <input type="text" class="form-control" name="roleNameEdit" id="roleNameEdit" onfocusout="InputRoleName_readonly()" disabled/>
-              </div>
-            </div>
-          
-            <p class="mt-5">Permission List</p>
-
-            <div class="container-fluid">
-              <div class="row" id="permissionListEdit">
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" id="btnEditUserRolePermissions">Update <span id="spinnerBtnEditUserRolePermissions" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--/ EDIT -->
-
-{{-- /USER ROLE --}}
-
 {{-- PERMISSION --}}
 
   <!-- CREATE -->
@@ -199,6 +101,104 @@
   <!--/ EDIT -->
 
 {{-- /PERMISSION --}}
+
+{{-- USER ROLE --}}
+
+  <!-- CREATE -->
+  <div class="modal fade" id="modal-create-role" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create User Role</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formUserRole">
+            <div class="form-group">
+              <label for="newRoleName">Role Name</label>
+              <input type="text" class="form-control" id="newRoleName" name="newRoleName"/>
+              <span class="invalid-feedback" id="error-newRoleName" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newRoleDescription">Role Description</label>
+              <input type="text" class="form-control" id="newRoleDescription" name="newRoleDescription"/>
+              <span class="invalid-feedback" id="error-newRoleDescription" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" id="btnCreateUserRole" name="btnCreateUserRole" class="btn btn-outline-primary" onclick="create_role()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ CREATE -->
+
+  <!-- VIEW -->
+  <div class="modal fade" id="modal-view-role" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-view-role-title">System Administrator</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5>Permission List</h5>
+          <div class="container-fluid">
+            <div id="permissionList" class="row">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ VIEW -->
+
+  <!-- EDIT -->
+  <div class="modal fade" id="modal-edit-role" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-edit-role-title">Role Title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditRole">
+            <div class="form-group">
+              <label for="roleName">Role Name</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <button class="btn btn-warning" type="button" onclick="InputRoleName_editable();"><i class="fas fa-edit pr-0"></i></button>
+                </div>
+                <input type="text" class="form-control" name="roleNameEdit" id="roleNameEdit" onfocusout="InputRoleName_readonly()" disabled/>
+              </div>
+            </div>
+          
+            <p class="mt-5">Permission List</p>
+
+            <div class="container-fluid">
+              <div class="row" id="permissionListEdit">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" id="btnEditUserRolePermissions">Update <span id="spinnerBtnEditUserRolePermissions" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ EDIT -->
+
+{{-- /USER ROLE --}}
 
 {{-- SUBJECTS --}}
   <!-- CREATE -->
@@ -328,6 +328,63 @@
   </div>
   <!--/ EDIT -->
 {{-- /EXAM TYPE --}}
+
+{{-- EXAM DURATION --}}
+  {{-- CREATE --}}
+  <div class="modal fade" id="modal-create-exam-duration" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Set Exam Duration</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formCreateExamDuration">
+            <div class="row">
+              <div class="form-group col-xl-6">
+                <label for="newExamDurationSubject">Subject Name</label>
+                <select class="form-control" name="newExamDurationSubject" id="newExamDurationSubject">
+                  <option value="" selected hidden>Select Subject</option>
+                  @foreach ($subjects as $subject)
+                      <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                  @endforeach
+                </select>
+                <span class="invalid-feedback" id="error-newExamDurationSubject" role="alert"></span>
+              </div>
+              <div class="form-group col-xl-6">
+                <label for="newExamDurationExamType">Exam Type</label>
+                <select class="form-control" name="newExamDurationExamType" id="newExamDurationExamType">
+                  <option value="" selected hidden>Select Exam Type</option>
+                  @foreach ($exam_types as $type)
+                      <option value="{{ $type->id }}">{{ $type->name }}</option>
+                  @endforeach
+                </select>
+                <span class="invalid-feedback" id="error-newExamDurationExamType" role="alert"></span>
+              </div>
+              <div class="form-group col-xl-6">
+                <label for="newExamDurationHours">Duration(Hours)</label>
+                <input type="number" id="newExamDurationHours" class="form-control" placeholder="hours" min="0" max="12" />
+                <span class="invalid-feedback" id="error-newExamDurationHours" role="alert"></span>
+              </div>
+              <div class="form-group col-xl-6">
+                <label for="newExamDurationMinutes">Duration(Minutes)</label>
+                <input type="number" id="newExamDurationMinutes" class="form-control" placeholder="minutes" min="0" max="59" />
+                <span class="invalid-feedback" id="error-newExamDurationMinutes" role="alert"></span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" id="btnCreateExamDuration" class="btn btn-outline-primary" onclick="set_exam_duration();">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- / CREATE --}}
+{{-- / EXAM DURATION --}}
 
 {{-- STUDENT PHASE --}}
   <!-- CREATE -->

@@ -1050,6 +1050,82 @@ let permissionTable = null;
 // /EXAM_TYPE
 
 // EXAM_DURATION
+  // CREATE
+  set_exam_duration = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure?",
+      text: "Duration for the exam will be set.",
+      confirmButtonText: 'Yes, Set Duration!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Payload
+        var formData = new FormData($('#formCreateExamDuration')[0]);
+        formData.append('newExamDurationHours', $('#newExamDurationHours').val());
+        formData.append('newExamDurationMinutes', $('#newExamDurationMinutes').val());
+
+        //Validate information
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ route('staff.system.exam.duration.set') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreateExamDuration').attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in set exam duration ajax.');
+            $('#btnCreateExamDuration').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating data.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'error') {
+              console.log('Exam duration already exist error.');
+              SwalSystemErrorDanger.fire({
+                title: 'Already Exists!',
+                text: data['msg'],
+              })
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in set exam duration.');
+              SwalDoneSuccess.fire({
+                title: 'Set!',
+                text: 'Exam Duration set.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-create-exam-duration').modal('hide');
+                  location.reload();
+                }
+              });
+            }
+          },
+          error: function(err){
+            $('#btnCreateExamDuration').removeAttr('disabled', 'disabled');
+            console.log('Error in set exam duration ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Exam Duration has not been set.',
+        })
+      }
+    })
+  }
+  // / CREATE
+
   //EDIT
   edit_exam_duration_invoke = (exam_duration_id) => {
     console.log('edit_exam_duration_invoked');

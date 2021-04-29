@@ -217,21 +217,21 @@
                     <small class="form-text text-muted">Minutes</small>
                   </td>
                   <td class="text-right">
-                    {{-- <div class="btn-group"> --}}
+                    <div class="btn-group">
                       @if(Auth::user()->hasPermission('staff-system-examDuration-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditExamDuration-{{$duration->id}}" onclick="edit_exam_duration_invoke({{$duration->id}});"><i class="fas fa-edit"></i></button>@endif
                       @if(Auth::user()->hasPermission('staff-system-examDuration-edit'))<button type="button" class="btn btn-outline-success d-none" id="btnSaveExamDuration-{{$duration->id}}" onclick="edit_exam_duration_save({{$duration->id}});"><i class="fas fa-save"></i> <span id="spinnerBtnSaveExamDuration-{{$duration->id}}" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>@endif
                       @if(Auth::user()->hasPermission('staff-system-examDuration-edit'))<button type="button" class="btn btn-outline-danger d-none" id="btnCancelExamDuration-{{$duration->id}}" onclick="edit_exam_duration_cancel({{$duration->id}});"><i class="la la-times"></i></button>@endif
-                      {{-- @if(Auth::user()->hasPermission('staff-system-examDuration-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteExamDuration-{{$duration->id}}" onclick="delete_exam_duration({{$duration->id}});"><i class="fas fa-trash-alt"></i></button>@endif --}}
-                    {{-- </div> --}}
+                      @if(Auth::user()->hasPermission('staff-system-examDuration-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteExamDuration-{{$duration->id}}" onclick="delete_exam_duration({{$duration->id}});"><i class="fas fa-trash-alt"></i></button>@endif
+                    </div>
                   </td>
                 </tr>
                 @endforeach
               </tbody>
             </table>
           </div>
-          {{-- @if(Auth::user()->hasPermission('staff-system-examDuration-add'))
+          @if(Auth::user()->hasPermission('staff-system-examDuration-add'))
           <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-exam-duration"><i class="fas fa-plus"></i></button></div>
-          @endif --}}
+          @endif
         </div>
       </div>
       @endif
