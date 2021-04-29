@@ -113,7 +113,7 @@ class SystemController extends Controller
       'permissionID'=>['required', 'integer', 'exists:App\Models\User\Permission,id'],
       //'permissionName'=>['required', 'alpha_dash'],
       'portalName'=> ['required', Rule::in(['staff', 'student'])],
-      'permissionModule'=>['required', Rule::in(['dashboard', 'students', 'exams', 'results', 'users', 'system', 'website'])],
+      'permissionModule'=>['required', Rule::in(['dashboard', 'student', 'exam', 'result', 'user', 'system', 'website', 'information'])],
       'permissionDescription'=>['required'],
     ]);
 

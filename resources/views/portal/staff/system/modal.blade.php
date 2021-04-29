@@ -185,14 +185,14 @@
             <div class="form-group">
               <label for="permissionModule">Permission Module</label>
               <select class="form-control" name="permissionModule" id="permissionModule">
-                <option value="" disabled>Select Permission Module</option>
+                {{-- <option value="" disabled>Select Permission Module</option>
                 <option value="dashboard">Dashboard</option>
-                <option value="students">Students</option>
+                <option value="student">Students</option>
                 <option value="exams">Exams</option>
-                <option value="results">Results</option>
-                <option value="users">Users</option>
+                <option value="result">Results</option>
+                <option value="user">Users</option>
                 <option value="system">System</option>
-                <option value="website">Website</option>
+                <option value="website">Website</option> --}}
               </select>
               <span class="invalid-feedback" id="error-permissionModule" role="alert"></span>
             </div>
@@ -264,8 +264,7 @@
               <label for="subjectCode">Subject Code</label>
               <input type="hidden" class="form-control" id="subjectId" name="subjectId" />
               <span class="invalid-feedback" id="error-subjectId" role="alert"></span>
-              <input type="Scode" class="form-control" id="subjectCode" name="subjectCode" aria-describedby="ScodeHelp"/>
-              <small id="ScodeHelp" class="form-text text-muted">any help text</small>
+              <input type="Scode" class="form-control" id="subjectCode" name="subjectCode" />
               <span class="invalid-feedback" id="error-subjectCode" role="alert"></span>
             </div>
             <div class="form-group">
@@ -329,8 +328,7 @@
               <label for="examTypeName">Name</label>
               <input type="hidden" class="form-control" id="examTypeId" name="examTypeId" />
               <span class="invalid-feedback" id="error-examTypeId" role="alert"></span>
-              <input type="Ename" class="form-control" id="examTypeName" name="examTypeName" aria-describedby="ETnameHelp"/>
-              <small id="ETnameHelp" class="form-text text-muted">any help text</small>
+              <input type="Ename" class="form-control" id="examTypeName" name="examTypeName" />
               <span class="invalid-feedback" id="error-examTypeName" role="alert"></span>
             </div>
           </form>
@@ -360,20 +358,17 @@
           <form id="formCreatePhase">
             <div class="form-group">
               <label for="newPhaseCode">Phase Code</label>
-              <input type="text" class="form-control" id="newPhaseCode" name="newPhaseCode" aria-describedby="NewPhaseCodeHelp"/>
-              <small id="NewPhaseCodeHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="newPhaseCode" name="newPhaseCode" />
               <span class="invalid-feedback" id="error-newPhaseCode" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="newPhaseName">Phase Name</label>
-              <input type="text" class="form-control" id="newPhaseName" name="newPhaseName" aria-describedby="NewPhaseCodeHelp"/>
-              <small id="NewPhaseCodeHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="newPhaseName" name="newPhaseName" />
               <span class="invalid-feedback" id="error-newPhaseName" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="newPhaseDescription">Phase Description</label>
-              <input type="text" class="form-control" name="newPhaseDescription" id="newPhaseDescription" aria-describedby="NewPhaseDescHelp"/>
-              <small id="NewPhaseDescHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" name="newPhaseDescription" id="newPhaseDescription" />
               <span class="invalid-feedback" id="error-newPhaseDescription" role="alert"></span>
             </div>
           </form>
@@ -403,20 +398,17 @@
               <label for="phaseCode">Phase Code</label>
               <input type="hidden" class="form-control" name="phaseId" id="phaseId">
               <span class="invalid-feedback" id="error-phaseId" role="alert"></span>
-              <input type="text" class="form-control" id="phaseCode" name="phaseCode" aria-describedby="PhaseCodeHelp"/>
-              <small id="PhaseCodeHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="phaseCode" name="phaseCode" />
               <span class="invalid-feedback" id="error-phaseCode" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="phaseName">Phase Name</label>
-              <input type="text" class="form-control" id="phaseName" name="phaseName" aria-describedby="PhaseNameHelp"/>
-              <small id="PhaseNameHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="phaseName" name="phaseName" />
               <span class="invalid-feedback" id="error-phaseName" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="phaseDescription">Phase Description</label>
-              <input type="text" class="form-control" id="phaseDescription" name="phaseDescription" aria-describedby="PhaseDescHelp"/>
-              <small id="PhaseDescHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="phaseDescription" name="phaseDescription" />
               <span class="invalid-feedback" id="error-phaseDescription" role="alert"></span>
             </div>
           </form>
@@ -446,8 +438,7 @@
           <form id="formCreatePaymentMethod">
             <div class="form-group">
               <label for="newPaymentMethod">Payment Method</label>
-              <input type="text" class="form-control" id="newPaymentMethod" name="newPaymentMethod" aria-describedby="NewPaymentMethodHelp"/>
-              <small id="NewPaymentMethodHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="newPaymentMethod" name="newPaymentMethod" />
               <span class="invalid-feedback" id="error-newPaymentMethod" role="alert"></span>
             </div>
           </form>
@@ -476,8 +467,7 @@
               <label for="paymentMethodName">Payment Method</label>
               <input type="hidden" class="form-control" id="paymentMethodId" name="paymentMethodId" />
               <span class="invalid-feedback" id="error-paymentMethodId" role="alert"></span>
-              <input type="text" class="form-control" id="paymentMethodName" name="paymentMethodName" aria-describedby="PaymentMethodHelp"/>
-              <small id="PaymentMethodHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="paymentMethodName" name="paymentMethodName" />
               <span class="invalid-feedback" id="error-paymentMethodName" role="alert"></span>
             </div>
           </form>
@@ -507,8 +497,7 @@
           <form id="formCreatePaymentType">
             <div class="form-group">
               <label for="newPaymentType">Payment Type</label>
-              <input type="text" class="form-control" id="newPaymentType" name="newPaymentType" aria-describedby="NewPaymentTypeHelp"/>
-              <small id="NewPaymentTypeHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="newPaymentType" name="newPaymentType" />
               <span class="invalid-feedback" id="error-newPaymentType" role="alert"></span>
             </div>
           </form>
@@ -538,8 +527,7 @@
               <label for="paymentTypeName">Payment Type</label>
               <input type="hidden" class="form-control" name="paymentTypeId" id="paymentTypeId">
               <span class="invalid-feedback" id="error-paymentTypeId" role="alert"></span>
-              <input type="text" class="form-control" id="paymentTypeName" name="paymentTypeName" aria-describedby="PaymentTypeHelp"/>
-              <small id="PaymentTypeHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="paymentTypeName" name="paymentTypeName" />
               <span class="invalid-feedback" id="error-paymentTypeName" role="alert"></span>
             </div>
           </form>
