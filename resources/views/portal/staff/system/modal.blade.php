@@ -117,8 +117,8 @@
             </div>
             <div class="form-group">
               <label for="newPortalName">Portal Name</label>
-              <select class="form-control" name="newPortalName" id="newPortalName">
-                <option value="" selected disabled hidden>Select the Portal</option>
+              <select class="form-control" name="newPortalName" id="newPortalName" onchange="onchange_portal();">
+                <option value="" selected hidden>Select the Portal</option>
                 <option value="staff">Staff</option>
                 <option value="student">Student</option>
               </select>
@@ -127,14 +127,7 @@
             <div class="form-group">
               <label for="newPermissionModule">Permission Module</label>
               <select class="form-control" name="newPermissionModule" id="newPermissionModule">
-                <option value="" selected disabled hidden>Select Permission Module</option>
-                <option value="dashboard">Dashboard</option>
-                <option value="students">Students</option>
-                <option value="exams">Exams</option>
-                <option value="results">Results</option>
-                <option value="users">Users</option>
-                <option value="system">System</option>
-                <option value="website">Website</option>
+                <option value="" selected hidden>Select Permission Module</option>
               </select>
               <span class="invalid-feedback" id="error-newPermissionModule" role="alert"></span>
             </div>

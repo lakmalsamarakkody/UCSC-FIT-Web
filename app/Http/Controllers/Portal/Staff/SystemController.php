@@ -67,7 +67,7 @@ class SystemController extends Controller
     $permission_validator = Validator::make($request->all(), [
       'newPermissionName'=> ['required','alpha_dash','unique:App\Models\User\Permission,name'],
       'newPortalName'=> ['required', Rule::in(['staff', 'student'])],
-      'newPermissionModule'=>['required', Rule::in(['dashboard', 'students', 'exams', 'results', 'users', 'system', 'website'])],
+      'newPermissionModule'=>['required', Rule::in(['dashboard', 'student', 'exam', 'result', 'user', 'system', 'website', 'information'])],
       'newPermissionDescription'=> ['required'],
     ]);
 

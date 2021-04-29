@@ -58,6 +58,27 @@ let permissionTable = null;
 
   // CHANGE MODULES DROPDOWN ACCORDING TO PORTAL
   onchange_portal = () => {
+    
+    //ON CREATE MODAL
+    if($('#newPortalName').val() == 'student') {
+      $('#newPermissionModule').find('option').remove().end().append('<option value="" hidden selected>Select Permission Module</option>'+
+          '<option value="dashboard">Dashboard</option>'+
+          '<option value="information">Information</option>'+
+          '<option value="exam">Exams</option>'+
+          '<option value="result">Results</option></select>');
+    }
+    else if($('#newPortalName').val() == 'staff') {
+      $('#newPermissionModule').find('option').remove().end().append('<option value="" hidden selected>Select Permission Module</option>'+
+          '<option value="dashboard">Dashboard</option>'+
+          '<option value="student">Students</option>'+
+          '<option value="exam">Exams</option>'+
+          '<option value="result">Results</option>'+
+          '<option value="user">Users</option>'+
+          '<option value="system">System</option>'+
+          '<option value="website">Website</option></select>');
+    }
+
+    // ON EDIT MODAL
     if($('#portalName').val() == 'student') {
       $('#permissionModule').find('option').remove().end().append('<option value="" hidden selected>Select Permission Module</option>'+
           '<option value="dashboard">Dashboard</option>'+
