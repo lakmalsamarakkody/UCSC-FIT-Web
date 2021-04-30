@@ -194,7 +194,7 @@ invoke_assign_students_modal = (schedule_id) => {
                    $('#spanAssignSubject').html('FIT ' + data['schedule']['subject_code'] + ' - ' + data['schedule']['subject_name']);
                    $('#spanAssignExamType').html(data['schedule']['exam_type']);
                    $('#spanAssignExamDate').html(data['schedule']['date']);
-                   $('#spanAssignExamTime').html(data['schedule']['start_time'] + ' - ' + data['schedule']['end_time']);
+                   $('#spanAssignExamTime').html(data['start_time'] + ' - ' + data['end_time']);
 
                    draw_student_table();
                    $('#btnAssignStudents-'+schedule_id).removeAttr('disabled', 'disabled');

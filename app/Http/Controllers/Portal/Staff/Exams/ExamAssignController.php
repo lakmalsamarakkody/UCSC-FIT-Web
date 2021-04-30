@@ -66,6 +66,8 @@ class ExamAssignController extends Controller
             endif;
             $data = $data->get();
             return DataTables::of($data)
+            ->editColumn('start_time', function($data){ $start_time = Carbon::createFromFormat('H:i:s', $data->start_time)->isoFormat('hh:mm A'); return $start_time; })
+            ->editColumn('end_time', function($data){ $end_time = Carbon::createFromFormat('H:i:s', $data->end_time)->isoFormat('hh:mm A'); return $end_time; })
             ->rawColumns(['action'])
             ->make(true);
         endif;
@@ -80,7 +82,9 @@ class ExamAssignController extends Controller
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
         ])->first();
-        return response()->json(['status'=>'success', 'schedule'=>$schedule]);
+        $start_time = \Carbon\Carbon::parse($schedule->start_time)->format('h:i A');
+        $end_time = \Carbon\Carbon::parse($schedule->end_time)->format('h:i A');
+        return response()->json(['status'=>'success', 'schedule'=>$schedule, 'start_time'=>$start_time, 'end_time'=>$end_time]);
     }
 
     // STUDENT LIST
