@@ -61,7 +61,7 @@ class ExamsController extends Controller
                 'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
-            ])->where('schedule_release', false)->orderBy('date', 'desc')->orderBy('start_time', 'desc');
+            ])->where('schedule_release', false);
             
             return DataTables::of($data)
             ->editColumn('start_time', function($data){ $start_time = Carbon::createFromFormat('H:i:s', $data->start_time)->isoFormat('hh:mm A'); return $start_time; })
