@@ -61,9 +61,11 @@ class ExamsController extends Controller
                 'subject_code' => Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
-            ])->where('schedule_release', false)->orderBy('date', 'desc')->orderBy('start_time', 'desc');
+            ])->where('schedule_release', false);
             
             return DataTables::of($data)
+            ->editColumn('start_time', function($data){ $start_time = Carbon::createFromFormat('H:i:s', $data->start_time)->isoFormat('hh:mm A'); return $start_time; })
+            ->editColumn('end_time', function($data){ $end_time = Carbon::createFromFormat('H:i:s', $data->end_time)->isoFormat('hh:mm A'); return $end_time; })
             ->rawColumns(['action'])
             ->make(true);
         }
@@ -91,6 +93,8 @@ class ExamsController extends Controller
             //     $data = $data;
             // endif;
             return DataTables::of($data)
+            ->editColumn('start_time', function($data){ $start_time = Carbon::createFromFormat('H:i:s', $data->start_time)->isoFormat('hh:mm A'); return $start_time; })
+            ->editColumn('end_time', function($data){ $end_time = Carbon::createFromFormat('H:i:s', $data->end_time)->isoFormat('hh:mm A'); return $end_time; })
             ->rawColumns(['action'])
             ->make(true);
         }
@@ -131,6 +135,8 @@ class ExamsController extends Controller
             endif;
             $data = $data->get();
             return DataTables::of($data)
+            ->editColumn('start_time', function($data){ $start_time = Carbon::createFromFormat('H:i:s', $data->start_time)->isoFormat('hh:mm A'); return $start_time; })
+            ->editColumn('end_time', function($data){ $end_time = Carbon::createFromFormat('H:i:s', $data->end_time)->isoFormat('hh:mm A'); return $end_time; })
             ->rawColumns(['action'])
             ->make(true);
         endif;

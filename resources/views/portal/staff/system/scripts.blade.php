@@ -56,6 +56,49 @@ let permissionTable = null;
     // /PERMISSIONS TABLE
   });
 
+  // CHANGE MODULES DROPDOWN ACCORDING TO PORTAL
+  onchange_portal = () => {
+    
+    //ON CREATE MODAL
+    if($('#newPortalName').val() == 'student') {
+      $('#newPermissionModule').find('option').remove().end().append('<option value="" hidden selected>Select Permission Module</option>'+
+          '<option value="dashboard">Dashboard</option>'+
+          '<option value="information">Information</option>'+
+          '<option value="exam">Exams</option>'+
+          '<option value="result">Results</option></select>');
+    }
+    else if($('#newPortalName').val() == 'staff') {
+      $('#newPermissionModule').find('option').remove().end().append('<option value="" hidden selected>Select Permission Module</option>'+
+          '<option value="dashboard">Dashboard</option>'+
+          '<option value="student">Students</option>'+
+          '<option value="exam">Exams</option>'+
+          '<option value="result">Results</option>'+
+          '<option value="user">Users</option>'+
+          '<option value="system">System</option>'+
+          '<option value="website">Website</option></select>');
+    }
+
+    // ON EDIT MODAL
+    if($('#portalName').val() == 'student') {
+      $('#permissionModule').find('option').remove().end().append('<option value="" hidden selected>Select Permission Module</option>'+
+          '<option value="dashboard">Dashboard</option>'+
+          '<option value="information">Information</option>'+
+          '<option value="exam">Exams</option>'+
+          '<option value="result">Results</option></select>');
+    }
+    else if($('#portalName').val() == 'staff') {
+      $('#permissionModule').find('option').remove().end().append('<option value="" hidden selected>Select Permission Module</option>'+
+          '<option value="dashboard">Dashboard</option>'+
+          '<option value="student">Students</option>'+
+          '<option value="exam">Exams</option>'+
+          '<option value="result">Results</option>'+
+          '<option value="user">Users</option>'+
+          '<option value="system">System</option>'+
+          '<option value="website">Website</option></select>');
+    }
+  }
+  // /CHANGE MODULES DROPDOWN ACCORDING TO PORTAL
+
   // CREATE
   create_permission = () => {
     SwalQuestionSuccessAutoClose.fire({
@@ -146,7 +189,10 @@ let permissionTable = null;
           $('#permissionID').val(data['permission']['id']);
           $('#permissionName').val(data['permission']['name']);
           $('#portalName').val(data['permission']['portal']);
+
+          onchange_portal();
           $('#permissionModule').val(data['permission']['module']);
+
           $('#permissionDescription').val(data['permission']['description']);
           $('#modal-edit-permission').modal('show');
           $('#btnEditPermission-'+permission_id).removeAttr('disabled','disabled');
@@ -1004,6 +1050,82 @@ let permissionTable = null;
 // /EXAM_TYPE
 
 // EXAM_DURATION
+  // CREATE
+  set_exam_duration = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: "Are you sure?",
+      text: "Duration for the exam will be set.",
+      confirmButtonText: 'Yes, Set Duration!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Payload
+        var formData = new FormData($('#formCreateExamDuration')[0]);
+        formData.append('newExamDurationHours', $('#newExamDurationHours').val());
+        formData.append('newExamDurationMinutes', $('#newExamDurationMinutes').val());
+
+        //Validate information
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ route('staff.system.exam.duration.create') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreateExamDuration').attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in set exam duration ajax.');
+            $('#btnCreateExamDuration').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating data.');
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'error') {
+              console.log('Exam duration already exist error.');
+              SwalSystemErrorDanger.fire({
+                title: 'Already Exists!',
+                text: data['msg'],
+              })
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in set exam duration.');
+              SwalDoneSuccess.fire({
+                title: 'Set!',
+                text: 'Exam Duration set.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-create-exam-duration').modal('hide');
+                  location.reload();
+                }
+              });
+            }
+          },
+          error: function(err){
+            $('#btnCreateExamDuration').removeAttr('disabled', 'disabled');
+            console.log('Error in set exam duration ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Exam Duration has not been set.',
+        })
+      }
+    })
+  }
+  // / CREATE
+
   //EDIT
   edit_exam_duration_invoke = (exam_duration_id) => {
     console.log('edit_exam_duration_invoked');
@@ -1110,6 +1232,61 @@ let permissionTable = null;
     $('#btnEditExamDuration-'+exam_duration_id).removeClass('d-none');
   }
   // /EDIT
+
+  // DELETE
+  delete_exam_duration = (exam_duration_id) => {
+    SwalQuestionDanger.fire({
+      title: "Are you sure?",
+      text: "You wont be able to revert this!",
+      confirmButtonText: 'Yes, Delete it!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Payload
+        var formData = new FormData();
+        formData.append('exam_duration_id',exam_duration_id);
+
+        //Delete exam duration controller
+        $.ajax({
+          headers: {'X-CSRF-token' : $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ route('staff.system.exam.duration.delete') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteExamDuration-'+exam_duration_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in delete exam duration ajax.');
+            if(data['status'] == 'success') {
+              SwalDoneSuccess.fire({
+                title: 'Deleted!',
+                text: 'Exam duration has been deleted.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {$('#tbl-examduration-tr-'+exam_duration_id).remove();}
+              });
+            }
+            else if(data['status'] == 'errors') {
+              $('#btnDeleteExamDuration-'+exam_duration_id).removeAttr('disabled','disabled');
+              SwalSystemErrorDanger.fire();
+            }
+          },
+          error: function(err){
+            console.log('Error in delete exam duration ajax.');
+            $('#btnDeleteExamDuration-'+exam_duration_id).removeAttr('disabled','disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Exam duration has not been deleted.',
+        })
+      }
+    })
+  }
+  // /DELETE
 // /EXAM_DURATION
 
 // STUDENT PHASE

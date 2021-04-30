@@ -1,3 +1,107 @@
+{{-- PERMISSION --}}
+
+  <!-- CREATE -->
+  <div class="modal fade" id="modal-create-permission" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Permission</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formCreatePermission">
+            <div class="form-group">
+              <label for="newPermissionName">Permission Name</label>
+              <input type="text" class="form-control" name="newPermissionName" id="newPermissionName"/>
+              <span class="invalid-feedback" id="error-newPermissionName" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newPortalName">Portal Name</label>
+              <select class="form-control" name="newPortalName" id="newPortalName" onchange="onchange_portal();">
+                <option value="" selected hidden>Select the Portal</option>
+                <option value="staff">Staff</option>
+                <option value="student">Student</option>
+              </select>
+              <span class="invalid-feedback" id="error-newPortalName" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newPermissionModule">Permission Module</label>
+              <select class="form-control" name="newPermissionModule" id="newPermissionModule">
+                <option value="" selected hidden>Select Permission Module</option>
+              </select>
+              <span class="invalid-feedback" id="error-newPermissionModule" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newPermissionDescription">Permission Description</label>
+              <input type="text" class="form-control" name="newPermissionDescription" id="newPermissionDescription"/>
+              <span class="invalid-feedback" id="error-newPermissionDescription" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" id="btnCreatePermission" class="btn btn-outline-primary" onclick="create_permission()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ CREATE -->
+
+  <!-- EDIT -->
+  <div class="modal fade" id="modal-edit-permission" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-edit-permission-title">Permission Title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditPermission">
+            <div class="form-group">
+              <label for="permissionName">Permission Name</label>
+              <input type="hidden" class="form-control" id="permissionID" name="permissionID" />
+              <span class="invalid-feedback" id="error-permissionID" role="alert"></span>
+              <input type="text" class="form-control" id="permissionName" name="permissionName" disabled/>
+              <span class="invalid-feedback" id="error-permissionName" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="portalName">Portal Name</label>
+              <select class="form-control" name="portalName" id="portalName" onchange="onchange_portal();">
+                <option value="" hidden selected>Select the Portal</option>
+                <option value="staff">Staff</option>
+                <option value="student">Student</option>
+              </select>
+              <span class="invalid-feedback" id="error-portalName" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="permissionModule">Permission Module</label>
+              <select class="form-control" name="permissionModule" id="permissionModule">
+                <option value="" hidden selected>Select Permission Module</option>
+              </select>
+              <span class="invalid-feedback" id="error-permissionModule" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="permissionDescription">Permission Description</label>
+              <input type="text" class="form-control" id="permissionDescription" name="permissionDescription" />
+              <span class="invalid-feedback" id="error-permissionDescription" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditPermission" onclick="edit_permission()">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ EDIT -->
+
+{{-- /PERMISSION --}}
+
 {{-- USER ROLE --}}
 
   <!-- CREATE -->
@@ -96,124 +200,6 @@
 
 {{-- /USER ROLE --}}
 
-{{-- PERMISSION --}}
-
-  <!-- CREATE -->
-  <div class="modal fade" id="modal-create-permission" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Create Permission</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="formCreatePermission">
-            <div class="form-group">
-              <label for="newPermissionName">Permission Name</label>
-              <input type="text" class="form-control" name="newPermissionName" id="newPermissionName"/>
-              <span class="invalid-feedback" id="error-newPermissionName" role="alert"></span>
-            </div>
-            <div class="form-group">
-              <label for="newPortalName">Portal Name</label>
-              <select class="form-control" name="newPortalName" id="newPortalName">
-                <option value="" selected disabled hidden>Select the Portal</option>
-                <option value="staff">Staff</option>
-                <option value="student">Student</option>
-              </select>
-              <span class="invalid-feedback" id="error-newPortalName" role="alert"></span>
-            </div>
-            <div class="form-group">
-              <label for="newPermissionModule">Permission Module</label>
-              <select class="form-control" name="newPermissionModule" id="newPermissionModule">
-                <option value="" selected disabled hidden>Select Permission Module</option>
-                <option value="dashboard">Dashboard</option>
-                <option value="students">Students</option>
-                <option value="exams">Exams</option>
-                <option value="results">Results</option>
-                <option value="users">Users</option>
-                <option value="system">System</option>
-                <option value="website">Website</option>
-              </select>
-              <span class="invalid-feedback" id="error-newPermissionModule" role="alert"></span>
-            </div>
-            <div class="form-group">
-              <label for="newPermissionDescription">Permission Description</label>
-              <input type="text" class="form-control" name="newPermissionDescription" id="newPermissionDescription"/>
-              <span class="invalid-feedback" id="error-newPermissionDescription" role="alert"></span>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" id="btnCreatePermission" class="btn btn-outline-primary" onclick="create_permission()">Create</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--/ CREATE -->
-
-  <!-- EDIT -->
-  <div class="modal fade" id="modal-edit-permission" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-edit-permission-title">Permission Title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="formEditPermission">
-            <div class="form-group">
-              <label for="permissionName">Permission Name</label>
-              <input type="hidden" class="form-control" id="permissionID" name="permissionID" />
-              <span class="invalid-feedback" id="error-permissionID" role="alert"></span>
-              <input type="text" class="form-control" id="permissionName" name="permissionName" disabled/>
-              <span class="invalid-feedback" id="error-permissionName" role="alert"></span>
-            </div>
-            <div class="form-group">
-              <label for="portalName">Portal Name</label>
-              <select class="form-control" name="portalName" id="portalName">
-                <option value="" disabled>Select the Portal</option>
-                <option value="staff">Staff</option>
-                <option value="student">Student</option>
-              </select>
-              <span class="invalid-feedback" id="error-portalName" role="alert"></span>
-            </div>
-            <div class="form-group">
-              <label for="permissionModule">Permission Module</label>
-              <select class="form-control" name="permissionModule" id="permissionModule">
-                <option value="" disabled>Select Permission Module</option>
-                <option value="dashboard">Dashboard</option>
-                <option value="students">Students</option>
-                <option value="exams">Exams</option>
-                <option value="results">Results</option>
-                <option value="users">Users</option>
-                <option value="system">System</option>
-                <option value="website">Website</option>
-              </select>
-              <span class="invalid-feedback" id="error-permissionModule" role="alert"></span>
-            </div>
-            <div class="form-group">
-              <label for="permissionDescription">Permission Description</label>
-              <input type="text" class="form-control" id="permissionDescription" name="permissionDescription" />
-              <span class="invalid-feedback" id="error-permissionDescription" role="alert"></span>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" id="btnModalEditPermission" onclick="edit_permission()">Update</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--/ EDIT -->
-
-{{-- /PERMISSION --}}
-
 {{-- SUBJECTS --}}
   <!-- CREATE -->
   <div class="modal fade" id="modal-create-subject" tabindex="-1" role="dialog" aria-hidden="true">
@@ -264,8 +250,7 @@
               <label for="subjectCode">Subject Code</label>
               <input type="hidden" class="form-control" id="subjectId" name="subjectId" />
               <span class="invalid-feedback" id="error-subjectId" role="alert"></span>
-              <input type="Scode" class="form-control" id="subjectCode" name="subjectCode" aria-describedby="ScodeHelp"/>
-              <small id="ScodeHelp" class="form-text text-muted">any help text</small>
+              <input type="Scode" class="form-control" id="subjectCode" name="subjectCode" />
               <span class="invalid-feedback" id="error-subjectCode" role="alert"></span>
             </div>
             <div class="form-group">
@@ -329,8 +314,7 @@
               <label for="examTypeName">Name</label>
               <input type="hidden" class="form-control" id="examTypeId" name="examTypeId" />
               <span class="invalid-feedback" id="error-examTypeId" role="alert"></span>
-              <input type="Ename" class="form-control" id="examTypeName" name="examTypeName" aria-describedby="ETnameHelp"/>
-              <small id="ETnameHelp" class="form-text text-muted">any help text</small>
+              <input type="Ename" class="form-control" id="examTypeName" name="examTypeName" />
               <span class="invalid-feedback" id="error-examTypeName" role="alert"></span>
             </div>
           </form>
@@ -344,6 +328,63 @@
   </div>
   <!--/ EDIT -->
 {{-- /EXAM TYPE --}}
+
+{{-- EXAM DURATION --}}
+  {{-- CREATE --}}
+  <div class="modal fade" id="modal-create-exam-duration" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Set Exam Duration</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formCreateExamDuration">
+            <div class="row">
+              <div class="form-group col-xl-6">
+                <label for="newExamDurationSubject">Subject Name</label>
+                <select class="form-control" name="newExamDurationSubject" id="newExamDurationSubject">
+                  <option value="" selected hidden>Select Subject</option>
+                  @foreach ($subjects as $subject)
+                      <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                  @endforeach
+                </select>
+                <span class="invalid-feedback" id="error-newExamDurationSubject" role="alert"></span>
+              </div>
+              <div class="form-group col-xl-6">
+                <label for="newExamDurationExamType">Exam Type</label>
+                <select class="form-control" name="newExamDurationExamType" id="newExamDurationExamType">
+                  <option value="" selected hidden>Select Exam Type</option>
+                  @foreach ($exam_types as $type)
+                      <option value="{{ $type->id }}">{{ $type->name }}</option>
+                  @endforeach
+                </select>
+                <span class="invalid-feedback" id="error-newExamDurationExamType" role="alert"></span>
+              </div>
+              <div class="form-group col-xl-6">
+                <label for="newExamDurationHours">Duration(Hours)</label>
+                <input type="number" id="newExamDurationHours" class="form-control" placeholder="hours" min="0" max="12" />
+                <span class="invalid-feedback" id="error-newExamDurationHours" role="alert"></span>
+              </div>
+              <div class="form-group col-xl-6">
+                <label for="newExamDurationMinutes">Duration(Minutes)</label>
+                <input type="number" id="newExamDurationMinutes" class="form-control" placeholder="minutes" min="0" max="59" />
+                <span class="invalid-feedback" id="error-newExamDurationMinutes" role="alert"></span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" id="btnCreateExamDuration" class="btn btn-outline-primary" onclick="set_exam_duration();">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- / CREATE --}}
+{{-- / EXAM DURATION --}}
 
 {{-- STUDENT PHASE --}}
   <!-- CREATE -->
@@ -360,20 +401,17 @@
           <form id="formCreatePhase">
             <div class="form-group">
               <label for="newPhaseCode">Phase Code</label>
-              <input type="text" class="form-control" id="newPhaseCode" name="newPhaseCode" aria-describedby="NewPhaseCodeHelp"/>
-              <small id="NewPhaseCodeHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="newPhaseCode" name="newPhaseCode" />
               <span class="invalid-feedback" id="error-newPhaseCode" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="newPhaseName">Phase Name</label>
-              <input type="text" class="form-control" id="newPhaseName" name="newPhaseName" aria-describedby="NewPhaseCodeHelp"/>
-              <small id="NewPhaseCodeHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="newPhaseName" name="newPhaseName" />
               <span class="invalid-feedback" id="error-newPhaseName" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="newPhaseDescription">Phase Description</label>
-              <input type="text" class="form-control" name="newPhaseDescription" id="newPhaseDescription" aria-describedby="NewPhaseDescHelp"/>
-              <small id="NewPhaseDescHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" name="newPhaseDescription" id="newPhaseDescription" />
               <span class="invalid-feedback" id="error-newPhaseDescription" role="alert"></span>
             </div>
           </form>
@@ -403,20 +441,17 @@
               <label for="phaseCode">Phase Code</label>
               <input type="hidden" class="form-control" name="phaseId" id="phaseId">
               <span class="invalid-feedback" id="error-phaseId" role="alert"></span>
-              <input type="text" class="form-control" id="phaseCode" name="phaseCode" aria-describedby="PhaseCodeHelp"/>
-              <small id="PhaseCodeHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="phaseCode" name="phaseCode" />
               <span class="invalid-feedback" id="error-phaseCode" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="phaseName">Phase Name</label>
-              <input type="text" class="form-control" id="phaseName" name="phaseName" aria-describedby="PhaseNameHelp"/>
-              <small id="PhaseNameHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="phaseName" name="phaseName" />
               <span class="invalid-feedback" id="error-phaseName" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="phaseDescription">Phase Description</label>
-              <input type="text" class="form-control" id="phaseDescription" name="phaseDescription" aria-describedby="PhaseDescHelp"/>
-              <small id="PhaseDescHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="phaseDescription" name="phaseDescription" />
               <span class="invalid-feedback" id="error-phaseDescription" role="alert"></span>
             </div>
           </form>
@@ -446,8 +481,7 @@
           <form id="formCreatePaymentMethod">
             <div class="form-group">
               <label for="newPaymentMethod">Payment Method</label>
-              <input type="text" class="form-control" id="newPaymentMethod" name="newPaymentMethod" aria-describedby="NewPaymentMethodHelp"/>
-              <small id="NewPaymentMethodHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="newPaymentMethod" name="newPaymentMethod" />
               <span class="invalid-feedback" id="error-newPaymentMethod" role="alert"></span>
             </div>
           </form>
@@ -476,8 +510,7 @@
               <label for="paymentMethodName">Payment Method</label>
               <input type="hidden" class="form-control" id="paymentMethodId" name="paymentMethodId" />
               <span class="invalid-feedback" id="error-paymentMethodId" role="alert"></span>
-              <input type="text" class="form-control" id="paymentMethodName" name="paymentMethodName" aria-describedby="PaymentMethodHelp"/>
-              <small id="PaymentMethodHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="paymentMethodName" name="paymentMethodName" />
               <span class="invalid-feedback" id="error-paymentMethodName" role="alert"></span>
             </div>
           </form>
@@ -507,8 +540,7 @@
           <form id="formCreatePaymentType">
             <div class="form-group">
               <label for="newPaymentType">Payment Type</label>
-              <input type="text" class="form-control" id="newPaymentType" name="newPaymentType" aria-describedby="NewPaymentTypeHelp"/>
-              <small id="NewPaymentTypeHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="newPaymentType" name="newPaymentType" />
               <span class="invalid-feedback" id="error-newPaymentType" role="alert"></span>
             </div>
           </form>
@@ -538,8 +570,7 @@
               <label for="paymentTypeName">Payment Type</label>
               <input type="hidden" class="form-control" name="paymentTypeId" id="paymentTypeId">
               <span class="invalid-feedback" id="error-paymentTypeId" role="alert"></span>
-              <input type="text" class="form-control" id="paymentTypeName" name="paymentTypeName" aria-describedby="PaymentTypeHelp"/>
-              <small id="PaymentTypeHelp" class="form-text text-muted">any help text</small>
+              <input type="text" class="form-control" id="paymentTypeName" name="paymentTypeName" />
               <span class="invalid-feedback" id="error-paymentTypeName" role="alert"></span>
             </div>
           </form>
