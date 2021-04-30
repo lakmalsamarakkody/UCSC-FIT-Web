@@ -1232,6 +1232,61 @@ let permissionTable = null;
     $('#btnEditExamDuration-'+exam_duration_id).removeClass('d-none');
   }
   // /EDIT
+
+  // DELETE
+  delete_exam_duration = (exam_duration_id) => {
+    SwalQuestionDanger.fire({
+      title: "Are you sure?",
+      text: "You wont be able to revert this!",
+      confirmButtonText: 'Yes, Delete it!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Payload
+        var formData = new FormData();
+        formData.append('exam_duration_id',exam_duration_id);
+
+        //Delete exam duration controller
+        $.ajax({
+          headers: {'X-CSRF-token' : $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ route('staff.system.exam.duration.delete') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteExamDuration-'+exam_duration_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success in delete exam duration ajax.');
+            if(data['status'] == 'success') {
+              SwalDoneSuccess.fire({
+                title: 'Deleted!',
+                text: 'Exam duration has been deleted.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {$('#tbl-examduration-tr-'+exam_duration_id).remove();}
+              });
+            }
+            else if(data['status'] == 'errors') {
+              $('#btnDeleteExamDuration-'+exam_duration_id).removeAttr('disabled','disabled');
+              SwalSystemErrorDanger.fire();
+            }
+          },
+          error: function(err){
+            console.log('Error in delete exam duration ajax.');
+            $('#btnDeleteExamDuration-'+exam_duration_id).removeAttr('disabled','disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Exam duration has not been deleted.',
+        })
+      }
+    })
+  }
+  // /DELETE
 // /EXAM_DURATION
 
 // STUDENT PHASE

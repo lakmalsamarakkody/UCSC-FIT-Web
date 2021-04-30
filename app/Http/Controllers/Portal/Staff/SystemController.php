@@ -450,7 +450,7 @@ class SystemController extends Controller
   }
   // /CREATE FUNCTION
 
-  // EDIT FUNCTIONS
+  // EDIT FUNCTION
   public function editExamDuration(Request $request){
 
     //Validate exam duration id
@@ -478,7 +478,27 @@ class SystemController extends Controller
     endif;
     return response()->json(['status'=>'error', 'request'=>$request->all()]);
   }
-  // /EDIT FUNCTIONS
+  // /EDIT FUNCTION
+
+  // DELETE FUNCTION
+  public function deleteExamDuration(Request $request)
+  {
+    //Validate duration id
+    $durationId_validator = Validator::make($request->all(), [
+      'exam_duration_id' => ['required', 'integer', 'exists:exam_durations,id'],
+    ]);
+
+    //Check validator fails
+    if($durationId_validator->fails()):
+      return response()->json(['status'=>'errors', 'errors'=>$durationId_validator->errors()]);
+    else:
+      if(Duration::destroy($request->exam_duration_id)):
+        return response()->json(['status'=> 'success']);
+      endif;
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+  }
+  // /DELETE FUNCTION
   // /EXAM DURATION
 
   // STUDENT PHASE
