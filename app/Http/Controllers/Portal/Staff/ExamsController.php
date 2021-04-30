@@ -429,7 +429,9 @@ class ExamsController extends Controller
                 'subject_name' => Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
                 'exam_type' => Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')
         ])->first();
-        return response()->json(['status'=>'success', 'schedule'=>$schedule]);
+        $start_time = \Carbon\Carbon::parse($schedule->start_time)->format('h:i A');
+        $end_time = \Carbon\Carbon::parse($schedule->end_time)->format('h:i A');
+        return response()->json(['status'=>'success', 'schedule'=>$schedule, 'start_time'=>$start_time, 'end_time'=>$end_time]);
     }
 
     // STUDENTS TABLE

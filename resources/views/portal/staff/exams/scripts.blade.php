@@ -1007,7 +1007,7 @@ let heldExamTable = null;
           if(data['schedule'] != null) {
             $('#spaneScheduledExam').html(data['schedule']['year'] + ' ' + data['schedule']['month']);
             $('#spaneScheduledDate').html(data['schedule']['date']);
-            $('#spaneScheduledTime').html(data['schedule']['start_time'] + ' - ' + data['schedule']['end_time']);
+            $('#spaneScheduledTime').html(data['start_time'] + ' - ' + data['end_time']);
             $('#spaneScheduledSubject').html('FIT ' + data['schedule']['subject_code'] + ' - ' + data['schedule']['subject_name']);
             $('#spaneScheduledExamType').html(data['schedule']['exam_type']);
             view_assigned_students(schedule_id);
