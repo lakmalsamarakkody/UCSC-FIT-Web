@@ -50,6 +50,7 @@ class LoginController extends Controller
                     break;
             endswitch;
         elseif($status == 0):
+            Auth::logout();
             return abort(402);
         else:
             return abort(401);
