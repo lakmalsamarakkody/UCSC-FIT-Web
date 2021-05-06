@@ -76,6 +76,142 @@
   }
   // /EMAIL
 
+  // BLOCK STUDENT
+  block_activities = () => {
+    SwalQuestionSuccess.fire({
+      title: "Are you sure ?",
+      text: "Student's future activities will be blocked",
+      confirmButtonText: "Yes, Block!",
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ route('block.student') }}",
+          type: 'post',
+          data: {'id': "{{ $student->id }}"},         
+          beforeSend: function(){
+            // Show loader
+            $('body').addClass('freeze');
+            Swal.showLoading();
+          },
+          success: function(data){
+            $('body').removeClass('freeze');
+            Swal.hideLoading();
+            if(data['errors']){
+              $.each(data['errors'], function(key, value){
+                SwalNotificationErrorDanger.fire({
+                  title: 'Error!',
+                  text: value
+                })
+                // alert(value)
+              });
+            }else if (data['success']){
+              SwalDoneSuccess.fire({
+                title: "Blocked!",
+                text: "Student Activities Blocked",
+              }).then((result) => {
+                if(result.isConfirmed) {
+                  location.reload()
+                }
+              });
+            }else if (data['error']){
+              SwalSystemErrorDanger.fire({
+                title: 'Update Failed!',
+                text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+              })
+            }
+          },
+          error: function(err){
+            $('body').removeClass('freeze');
+            Swal.hideLoading();
+            SwalErrorDanger.fire({
+              title: 'Update Failed!',
+              text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+            })
+          }
+        });        
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Account did not blocked",
+        })
+      }
+    })
+  }
+  // /BLOCK STUDENT
+
+  // UNBLOCK STUDENT
+  unblock_activities = () => {
+    SwalQuestionSuccess.fire({
+      title: "Are you sure ?",
+      text: "Student's future activities will be unblocked",
+      confirmButtonText: "Yes, Unblock!",
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ route('unblock.student') }}",
+          type: 'post',
+          data: {'id': "{{ $student->id }}"},         
+          beforeSend: function(){
+            // Show loader
+            $('body').addClass('freeze');
+            Swal.showLoading();
+          },
+          success: function(data){
+            $('body').removeClass('freeze');
+            Swal.hideLoading();
+            if(data['errors']){
+              $.each(data['errors'], function(key, value){
+                SwalNotificationErrorDanger.fire({
+                  title: 'Error!',
+                  text: value
+                })
+                // alert(value)
+              });
+            }else if (data['success']){
+              SwalDoneSuccess.fire({
+                title: "Un-blocked!",
+                text: "Student Activities Unblocked",
+              }).then((result) => {
+                if(result.isConfirmed) {
+                  location.reload()
+                }
+              });
+            }else if (data['error']){
+              SwalSystemErrorDanger.fire({
+                title: 'Update Failed!',
+                text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+              })
+            }
+          },
+          error: function(err){
+            $('body').removeClass('freeze');
+            Swal.hideLoading();
+            SwalErrorDanger.fire({
+              title: 'Update Failed!',
+              text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+            })
+          }
+        });        
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Account did not un-blocked",
+        })
+      }
+    })
+  }
+  // /UNBLOCK STUDENT
+
   // ACTIVATE ACC
   activate_acc = () => {
     SwalQuestionSuccess.fire({

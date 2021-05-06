@@ -12,6 +12,7 @@ use App\Models\Subject;
 use App\Models\Exam\Schedule;
 use App\Models\Exam\Types;
 use App\Models\Exam;
+use App\Models\Student\Flag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -146,6 +147,46 @@ class StudentController extends Controller
         }
         // /UPDATE EMAIL
 
+        // ACCOUNT BLOCK
+        public function blockActivities(Request $request)
+        {
+            $validator = Validator::make($request->all(), 
+                [     
+                    'id'=> ['required','integer']
+                ]
+            );
+            if($validator->fails()):
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            else:
+                if(Flag::where('student_id', $request->id)->update(['phase_id' => 2])):
+                    return response()->json(['success'=>'success']);
+                endif;
+            endif;
+            return response()->json(['error'=>'error']);
+        }
+        // /ACCOUNT BLOCK
+
+        // ACCOUNT UNBLOCK
+        public function unBlockActivities(Request $request)
+        {
+            $validator = Validator::make($request->all(), 
+                [     
+                    'id'=> ['required','integer']
+                ]
+            );
+            if($validator->fails()):
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            else:
+                if(Flag::where('student_id', $request->id)->update(['phase_id' => 1])):
+                    return response()->json(['success'=>'success']);
+                endif;
+            endif;
+            return response()->json(['error'=>'error']);
+        }
+        // /ACCOUNT UNBLOCK
+
+
+        // ACCOUNT DEACTIVATE
         public function deactivateAccount(Request $request)
         {
             $user_id = Student::where('id', $request->id)->first()->user_id;
@@ -163,7 +204,9 @@ class StudentController extends Controller
             endif;
             return response()->json(['error'=>'error']);
         }
+        // /ACCOUNT DEACTIVATE
 
+        // ACCOUNT ACTIVATE
         public function reactivateAccount(Request $request)
         {
             $user_id = Student::where('id', $request->id)->first()->user_id;
@@ -181,6 +224,7 @@ class StudentController extends Controller
             endif;
             return response()->json(['error'=>'error']);
         }
+        // /ACCOUNT ACTIVATE
 
         // MEDICAL MODAL LOAD
         public function getMedicalDetails(Request $request)
