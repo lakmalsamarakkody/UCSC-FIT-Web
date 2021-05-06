@@ -53,6 +53,7 @@ class LoginController extends Controller
             Auth::logout();
             return abort(402);
         else:
+            Auth::logout();
             return abort(401);
         endif;
     }
