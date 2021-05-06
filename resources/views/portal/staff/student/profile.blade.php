@@ -45,7 +45,7 @@
             {{-- ACCOUNT DEACTIVATED ALERT --}}
             @if($student->flag->phase_id == 2)
               <div class="alert alert-danger" role="alert">
-                <h4 class="p-0 m-0">This student has been blocked from processes</h4> 
+                <h4 class="p-0 m-0">This student has been blocked from future activities</h4> 
               </div>            
             @endif
             {{-- /ACCOUNT DEACTIVATED ALERT --}}
