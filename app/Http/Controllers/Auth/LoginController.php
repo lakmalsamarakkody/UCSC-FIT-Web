@@ -49,8 +49,10 @@ class LoginController extends Controller
                     return '/portal/staff';
                     break;
             endswitch;
+        elseif($status == 0):
+            return abort(402);
         else:
-            return abort(403);
+            return abort(401);
         endif;
     }
 

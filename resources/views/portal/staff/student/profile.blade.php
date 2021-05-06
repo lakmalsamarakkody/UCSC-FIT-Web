@@ -22,13 +22,6 @@
             </ol>
           </nav>
 
-          @if($student->user->status == 0)
-          <div class="alert alert-danger float-right" role="alert">
-            <h4>This Account has been Deactivated</h4> 
-          </div>
-            
-          @endif
-
         </div>
     </section>
     <!-- /BREACRUMB -->
@@ -40,8 +33,24 @@
         <!-- <div class="col-lg-2"></div> -->
 
         <div class="col-lg-12">
+            
+            {{-- REGISTRATION HOLD ALERT --}}
+            @if($student->user->status == 0)
+              <div class="alert alert-danger" role="alert">
+                <h4 class="p-0 m-0">This account has been Deactivated</h4> 
+              </div>            
+            @endif
+            {{-- /ACCOUNT HOLD ALERT --}}
 
-            <div class="card   ">
+            {{-- ACCOUNT DEACTIVATED ALERT --}}
+            @if($student->user->status == 0)
+              <div class="alert alert-danger" role="alert">
+                <h4 class="p-0 m-0">This student's registration has been hold temporarily</h4> 
+              </div>            
+            @endif
+            {{-- /ACCOUNT DEACTIVATED ALERT --}}
+
+            <div class="card">
               <div class="card-header">
                 Student Details
               </div>
