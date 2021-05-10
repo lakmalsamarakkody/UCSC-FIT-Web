@@ -24,7 +24,6 @@ class PaymentController extends Controller
     $this->middleware('auth');
     $this->middleware('revalidate');
     $this->middleware('student.auth');
-    $this->middleware('student.registration.check');
     $this->middleware('student.payment.view');
   }
 
@@ -111,5 +110,17 @@ class PaymentController extends Controller
       // /SAVE PAYMENT
     endif;
     return response()->json(['error'=>'error']);
+  }
+
+  public function reregistration()
+  {
+    $student = Auth::user()->student;
+    $registration = NULL;
+    $payment = NULL;
+    if($student->current_active_registration() == NULL):
+      $reg_fee = Fee::where('purpose', 'reregistration')->first();
+      $banks = Bank::orderBy('name')->get();
+      return view('portal/student/payment/reregistration', compact( 'reg_fee', 'banks', 'student', 'registration', 'payment'));
+    endif;
   }
 }
