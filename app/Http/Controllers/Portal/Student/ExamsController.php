@@ -33,6 +33,7 @@ class ExamsController extends Controller
     $this->middleware('auth');
     $this->middleware('revalidate');
     $this->middleware('student.auth');
+    $this->middleware('student.info.view');
     $this->middleware('student.registration.active');
   }
 
