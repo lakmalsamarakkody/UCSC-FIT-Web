@@ -38,12 +38,7 @@ class LoginController extends Controller
             activity()->log('login');
             switch ($role):
                 case 'Student':
-                    $student = Student::where('user_id', Auth::user()->id)->first();
-                    if($student == NULL || $student->registration->first()->status == NULL):
-                        return '/portal/student/registration';
-                    else:
-                        return '/portal/student';
-                    endif;
+                    return '/portal/student';
                     break;
                 default:
                     return '/portal/staff';
