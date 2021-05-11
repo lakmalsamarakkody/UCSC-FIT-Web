@@ -23,12 +23,21 @@ view_modal_applicant = (registration_id) => {
     success: function(data){
       console.log('Success in invoke applicant modal get detials ajax.');
       if(data['status'] == 'success'){
+        // VIEW REG NO IF EXISTING STUDENT ENROLLMENT
         if(data['studentFlag']['enrollment'] == 'new'){
           $('#viewApplicationTitle').html('new student registration');
         }else{
           $('#trApplicationRegNo').removeClass('d-none');
           $('#spanregNo').html(data['student']['reg_no']);
           $('#viewApplicationTitle').html('existing student enrollment');
+        }
+        // VIEW LAST REGISTRATION IF RENEWAL
+        if(data['lastRegistration']){
+          $('#viewApplicationTitle').html('registration renewal');
+          $('#spanregNo').html(data['student']['reg_no']);
+          $('#trApplicationRegNo').removeClass('d-none');
+          $('#trApplicationLastRegExpDate').removeClass('d-none');
+          $('#spanLastRegExpDate').html(data['lastRegistration']['registration_expire_at']);
         }
         var date = new Date(data['registration']['created_at']);
         $('#spanSubmittedOn').html(date.toLocaleDateString());
