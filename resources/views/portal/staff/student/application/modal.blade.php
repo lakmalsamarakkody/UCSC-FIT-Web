@@ -268,14 +268,14 @@
                                 </div>
                             </div>
                             <div class="mt-4 col-12 text-center">
-                                @if(Auth::user()->hasPermission('staff-dashboard-registration-review-payment-approve'))
-                                <div id="divBtnApprovePayment" class="btn-group col-xl-3 col-md-6">
-                                    <button type="button" class="btn btn-success form-control" id="btnApprovePayment">Approve <span id="spinnerBtnApprovePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-                                </div>
-                                @endif
                                 @if(Auth::user()->hasPermission('staff-dashboard-registration-review-payment-decline'))
                                 <div id="divBtnDeclinePayment"  class="btn-group col-xl-3 col-md-6">
                                     <button type="button" class="btn btn-warning form-control" data-target="#modal-decline-message-payment" id="btnDeclinePayment" data-toggle="modal">Decline</button>
+                                </div>
+                                @endif
+                                @if(Auth::user()->hasPermission('staff-dashboard-registration-review-payment-approve'))
+                                <div id="divBtnApprovePayment" class="btn-group col-xl-3 col-md-6">
+                                    <button type="button" class="btn btn-success form-control" id="btnApprovePayment">Approve <span id="spinnerBtnApprovePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                                 </div>
                                 @endif
                             </div>
