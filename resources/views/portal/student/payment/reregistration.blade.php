@@ -2,18 +2,46 @@
 
 @section('content')
 
-<script type="text/javascript">
-
+  <script type="text/javascript">
     // ACTIVE NAVIGATION ENTRY
     $(document).ready(function ($) {
       $('#registration').addClass("active");
     });
+  </script>
 
-</script>
+  <!-- CONTENT -->
+  <div class="col-lg-12 payment min-vh-100">
 
-    <!-- CONTENT -->
-    <div class="col-lg-12 payment min-vh-100">
+    {{-- CHECK PAYMENT REVIEW STATUS --}}
+    @if($student->processing_registration() && $student->processing_registration()->payment_id && $student->processing_registration()->payment_status == NULL)
 
+      {{-- PAYMENT APPROVAL PENDING --}}
+      <div class="col-12 px-0">
+        <div class="alert alert-success shadow" role="alert">
+          <h4 class="alert-heading"><i class="far fa-check-circle"></i> Registration Renewal Payment Submitted Successfully</h4>
+          <p><a href="{{route ('student.home')}}" class="font-weight-bold">Go Home</a> to check whether your payment has beend approved. If your payment didn't get approved within 2 weeks please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator</a></p>
+          <hr>
+          <p class="font-weight-bold mb-0">FIT Coordinator : taw@ucsc.cmb.ac.lk</p>
+        </div>
+      </div>
+      {{-- /PAYMENT APPROVAL PENDING --}}
+    @else
+
+      @if($student->processing_registration() && $student->processing_registration()->payment_id && $student->processing_registration()->payment_status == 'Declined')
+        {{-- PAYMENT APPROVAL DECLINED --}}
+        <div class="col-12 px-0">
+          <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Payment Declined!</h4>
+            <p>{{ $student->processing_registration()->declined_msg }}</p>
+            <hr>
+            <p class="font-weight-bold mb-0">Please upload correct payment details</p>
+            <p class="font-weight-bold mb-0">If you think this was mistaken resubmit and send an email attached with your payment slip to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+            </div>
+        </div>
+        {{-- /PAYMENT APPROVAL DECLINED --}}
+      @endif
+
+      {{-- SHOW PAYMENT PAGE --}}
       <form id="registerPaymentForm">      
         <div class="row row-cols-1">
           {{-- PAYMENT DETAILS --}}
@@ -112,7 +140,7 @@
                                     <option value="" selected disabled>Select Bank</option>
                                       @forelse ($banks as $bank)
                                         @if($bank->name == 'Peoples Bank')
-                                          <option value="{{$bank->id}}">{{$bank->name}}</option>
+                                          <option value="{{$bank->id}}" selected>{{$bank->name}}</option>
                                         @else
                                           <option value="{{$bank->id}}">{{$bank->name}}</option>
                                         @endif;
@@ -222,9 +250,13 @@
 
         </div>
       </form>
+      {{-- SHOW PAYMENT PAGE --}}
 
-    </div>
-    <!-- /CONTENT -->
+    @endif
+    {{-- /CHECK PAYMENT REVIEW STATUS --}}
+
+  </div>
+  <!-- /CONTENT -->
 
   @include('portal.student.payment.registration.scripts')
 
