@@ -55,4 +55,13 @@ class Schedule extends Model
          */
         return $this->belongsTo(Subject::class,'subject_id','id');
     }
+
+    public function tempResult(){
+      /**
+       * The attributes that are assignable.
+       *
+       * connecting model , foreign_key , local_key
+       */
+      return $this->hasMany(TempResult::class, 'exam_schedule_id', 'id');
+  }
 }
