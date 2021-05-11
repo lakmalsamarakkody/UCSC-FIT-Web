@@ -16,7 +16,7 @@
 		<!-- CONTENT -->
 		<div class="col-lg-12 dashboard">
 				<div class="row justify-content-center">
-						@if($student->current_active_registration() == NULL && $student->last_registration() == NULL)
+						@if($student->current_active_registration() == NULL && ($student->last_registration() == NULL || $student->processing_registration()))
 
 								<!-- APPLICATION STATUS -->
 								@if($registration->application_submit)
@@ -118,7 +118,7 @@
 										<hr>
 								</div>
 								{{-- RE REGISTRATION ALERT IF NO CURRENT REGISTRATION --}}
-								@if($student->current_active_registration() == NULL)
+								@if($student->current_active_registration() == NULL && $student->processing_registration() == NULL)
 									<div class="col-12 mt-2">
 										<div class="alert alert-danger shadow" role="alert">
 												<h4 class="alert-heading"><i class="far fa-check-circle"></i> Your Registration has Expired! </h4>
@@ -131,9 +131,9 @@
 								{{-- RE REGISTRATION ALERT IF NO CURRENT REGISTRATION --}}
 						@endif
 
-					<div class="col">
-						<div class="card" >
-							<div class="card-header">Announcements</div>
+					<div class="col-12 mt-2">
+						<div class="card">
+							<div class="card-header">Site 	Announcements</div>
 							<div class="card-body px-4">
 								<ul class="mt-5 mr-5">
 									@forelse($announcements as $announcement)
