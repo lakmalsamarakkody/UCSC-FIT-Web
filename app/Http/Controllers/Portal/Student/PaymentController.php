@@ -122,6 +122,15 @@ class PaymentController extends Controller
     $student = Auth::user()->student;
     $reg_fee = Fee::where('purpose', 'reregistration')->first();
     $banks = Bank::orderBy('name')->get();
+    $payment = NULL;
+    $registration = NULL;
+    
+    //CHECK FOR PROCESSING REGISTRATION PAYMENT
+    $processingRegistration = $student->processing_registration();
+    if($processingRegistration):
+      $registration = $student->processing_registration()->id;
+      $payment = Payment::where('id', $processingRegistration->payment_id)->first();
+    endif;
 
 
     $lastRegistration = Registration::where('id',$student->last_registration()->id)->first();
@@ -135,68 +144,85 @@ class PaymentController extends Controller
       $regStart = Carbon::create($regStart)->addYear()->isoFormat('YYYY-MM-DD');
       $regEnd = Carbon::create($regEnd)->addYear()->isoFormat('YYYY-MM-DD');
     };
-    
-    $payment = NULL;
-    $registration = array();
 
     return view('portal/student/payment/reregistration', compact( 'reg_fee', 'banks', 'student', 'registration', 'payment', 'lastRegistration', 'regStart', 'regEnd', 'dueRegistrations'));
   }
   // /RE-REGISTRATION CONTROLLER
 
-    // RE-REGISTRATION PAYMENT SUBMIT
-    public function saveReRegPayment(Request $request)
-    {
-      $student = Auth::user()->student;
-      $reg_fee = Fee::where('purpose', 'reregistration')->first()->amount;
-      $lastRegistration = Registration::where('id',$student->last_registration()->id)->first();
-      $lastRegExpired = $student->last_registration()->registration_expire_at;
-      $dueRegistrations = 1;
-      $regStart = Carbon::create($lastRegExpired)->addDay()->isoFormat('YYYY-MM-DD');
-      $regEnd = Carbon::create($lastRegExpired)->addYear()->isoFormat('YYYY-MM-DD');
+  // RE-REGISTRATION PAYMENT SUBMIT
+  public function saveReRegPayment(Request $request)
+  {
+    $student = Auth::user()->student;
+    $reg_fee = Fee::where('purpose', 'reregistration')->first()->amount;
+    $lastRegistration = Registration::where('id',$student->last_registration()->id)->first();
+    $lastRegExpired = $student->last_registration()->registration_expire_at;
 
-      while($regEnd<Carbon::now()->isoFormat('YYYY-MM-DD')){
-        $dueRegistrations = $dueRegistrations+1;
-        $regStart = Carbon::create($regStart)->addYear()->isoFormat('YYYY-MM-DD');
-        $regEnd = Carbon::create($regEnd)->addYear()->isoFormat('YYYY-MM-DD');
-      };
+    // CHECK FOR PROCESSING REGISTRATION PAYMENT
+    $processingRegistration = $student->processing_registration();
+    if($processingRegistration):
+      $registration = $student->processing_registration()->id;
+      $payment = Payment::where('id', $processingRegistration->payment_id)->first();
+    endif;
+    // CHECK FOR PROCESSING REGISTRATION PAYMENT
 
-      $totalFee = $reg_fee * $dueRegistrations;
-  
-      // VALIDATIONS
-      $detailsValidator = Validator::make($request->all(), 
-        [     
-            'paidBank'=> ['required', 'numeric', 'exists:App\Models\Support\Bank,id', 'size:1'],
-            'paidBankBranch'=>['required', 'numeric', 'exists:App\Models\Support\BankBranch,id'],
-            'paidDate'=>['required', 'before_or_equal:today'],
-            'paidAmount'=>['required', 'numeric', 'size:'.$totalFee],
-            'bankSlip'=>['required', 'image']
-        ]
-      );
-      // /VALIDATIONS
-  
-      if($detailsValidator->fails()):
-        return response()->json(['errors'=>$detailsValidator->errors()]);
-      else:
-        $payment = new Payment();
-        $payment->method_id = 2;
-        $payment->type_id = 1;
-        $payment->student_id = $student->id;
-        $payment->amount = $request->paidAmount;
-        $payment->bank_id = $request->paidBank;
-        $payment->bank_branch_id = $request->paidBankBranch;
-        $payment->paid_date = $request->paidDate;
-  
-        // SET PAYMENT SLIP
-        $file_ext = $request->file('bankSlip')->getClientOriginalExtension();
-        $file_name = $student->id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
-        $payment->image = $file_name;
-        if(!$request->file('bankSlip')->storeAs('public/payments/registration/'.$student->id,$file_name)):
-          return response()->json(['error'=>'error']);
-        endif;
-        // /SET PAYMENT SLIP
-  
-        // SAVE REGISTRATION
-        if($payment->save()):
+    $dueRegistrations = 1;
+    $regStart = Carbon::create($lastRegExpired)->addDay()->isoFormat('YYYY-MM-DD');
+    $regEnd = Carbon::create($lastRegExpired)->addYear()->isoFormat('YYYY-MM-DD');
+
+    while($regEnd<Carbon::now()->isoFormat('YYYY-MM-DD')){
+      $dueRegistrations = $dueRegistrations+1;
+      $regStart = Carbon::create($regStart)->addYear()->isoFormat('YYYY-MM-DD');
+      $regEnd = Carbon::create($regEnd)->addYear()->isoFormat('YYYY-MM-DD');
+    };
+
+    $totalFee = $reg_fee * $dueRegistrations;
+
+    // VALIDATIONS
+    $detailsValidator = Validator::make($request->all(), 
+      [     
+          'paidBank'=> ['required', 'numeric', 'exists:App\Models\Support\Bank,id', 'size:1'],
+          'paidBankBranch'=>['required', 'numeric', 'exists:App\Models\Support\BankBranch,id'],
+          'paidDate'=>['required', 'before_or_equal:today'],
+          'paidAmount'=>['required', 'numeric', 'size:'.$totalFee],
+          'bankSlip'=>['required', 'image']
+      ]
+    );
+    // /VALIDATIONS
+
+    if($detailsValidator->fails()):
+      return response()->json(['errors'=>$detailsValidator->errors()]);
+    else:
+      $payment = new Payment();
+      $payment->method_id = 2;
+      $payment->type_id = 1;
+      $payment->student_id = $student->id;
+      $payment->amount = $request->paidAmount;
+      $payment->bank_id = $request->paidBank;
+      $payment->bank_branch_id = $request->paidBankBranch;
+      $payment->paid_date = $request->paidDate;
+
+      // SET PAYMENT SLIP
+      $file_ext = $request->file('bankSlip')->getClientOriginalExtension();
+      $file_name = $student->id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
+      $payment->image = $file_name;
+      if(!$request->file('bankSlip')->storeAs('public/payments/registration/'.$student->id,$file_name)):
+        return response()->json(['error'=>'error']);
+      endif;
+      // /SET PAYMENT SLIP
+
+      // SAVE REGISTRATION
+      if($payment->save()):
+
+        // CHECK FOR CURRENT REGISTRATION PROCESS
+        if($registration):
+          // UPDATE PAYMENT ID
+          $updateRegistration = Registration::where('id', $registration);
+          if($updateRegistration->update(['payment_id' => $payment->id,'payment_status' => NULL,'declined_msg' => NULL,'status' => NULL,])):
+            return response()->json(['success'=>'success']);
+          endif;
+
+        else:
+          // CREATE NEW REGISTRATION
           $newRegistration = new Registration();
           $newRegistration->student_id = $student->id;
           $newRegistration->registered_at = $regStart;
@@ -214,9 +240,11 @@ class PaymentController extends Controller
             return response()->json(['success'=>'success']);
           endif;
         endif;
-        // /SAVE REGISTRATION
+        // /CHECK FOR CURRENT REGISTRATION PROCESS
       endif;
-      return response()->json(['error'=>'error']);
-    }
-    // /RE-REGISTRATION PAYMENT SUBMIT
+      // /SAVE REGISTRATION
+    endif;
+    return response()->json(['error'=>'error']);
+  }
+  // /RE-REGISTRATION PAYMENT SUBMIT
 }
