@@ -110,17 +110,15 @@
                                 <div class="col-sm-9">
                                   <select class="form-control" id="paidBank" name="paidBank">
                                     <option value="" selected disabled>Select Bank</option>
-                                    @if($banks != NULL)
-                                      @foreach ($banks as $bank)
+                                      @forelse ($banks as $bank)
                                         @if($bank->name == 'Peoples Bank')
-                                          <option value="{{$bank->id}}" selected>{{$bank->name}}</option>
+                                          <option value="{{$bank->id}}">{{$bank->name}}</option>
                                         @else
                                           <option value="{{$bank->id}}">{{$bank->name}}</option>
                                         @endif;
-                                      @endforeach
-                                    @else
-                                      <option value="" disabled>No Banks Found</option>
-                                    @endif
+                                      @empty
+                                        <option value="" disabled>No Banks Found</option>
+                                      @endforelse
                                   </select>
                                   <span class="invalid-feedback" id="error-paidBank" role="alert"></span>
                                 </div>
