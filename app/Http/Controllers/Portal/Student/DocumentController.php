@@ -16,7 +16,7 @@ class DocumentController extends Controller
         $this->middleware('revalidate');
         $this->middleware('student.auth');
         $this->middleware('student.registration.check');
-        $this->middleware('student.payment.submit.check');
+        $this->middleware('student.registration.payment.submit.check');
     }
     
     public function index(){

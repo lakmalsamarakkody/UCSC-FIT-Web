@@ -16,6 +16,7 @@
       <div class="row">
 
         <!-- SCHEDULED EXAMS -->
+        @if(!$scheduled_exams->isEmpty())
         <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">Scheduled Exams</div>
@@ -55,6 +56,7 @@
             
           </div>
         </div>
+        @endif
         <!-- /SCHEDULED EXAMS-->
         
         {{-- APPLY FOR EXAMS --}}
@@ -132,7 +134,7 @@
                 {{-- </div> --}}
               </form>
             </div>
-            @if(Auth::user()->hasPermission('student-exam-apply-exams'))
+            @if(Auth::user()->hasPermission('student-exam-apply-exams') && !$isBlocked)
             <div class="card-footer mb-3">
               <div class="text-center">
                 <button type="button" class="btn btn-outline-primary" id="btnApplyForExams" onclick="select_exams()">SELECT EXAMS<span id="spinnerBtnApplyForExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
@@ -187,6 +189,7 @@
         </div> --}}
                 
         <!-- SELECTED EXAMS TABLE-->
+        @if(!$selected_exams->isEmpty())
         <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">Selected Exams</div>
@@ -224,19 +227,21 @@
                   </table>
                 </div>
             </div>
-            @if(Auth::user()->hasPermission('student-exam-pay-exams'))
+            @if(Auth::user()->hasPermission('student-exam-pay-exams') && !$isBlocked)
             <div class="card-footer mb-3">
               <div class="text-center">
-                <button type="button" class="btn btn-outline-success" id="btnApplyForExams" onclick="apply_for_exams()"><i class="fa fa-dollar-sign"></i> EXAM PAYMENT<span id="spinnerBtnApplyForExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-outline-success" id="btnApplyForExams" onclick="apply_for_exams()"><i class="fa fa-dollar-sign"></i> PAY FOR SELECTED EXAMS<span id="spinnerBtnApplyForExams" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
               </div>
             </div>
             @endif
           </div>
         </div>
+        @endif
         <!-- /SELECTED EXAMS TABLE-->
 
 
         <!-- APPLIED EXAMS TABLE-->
+        @if(!$applied_exams->isEmpty())
         <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">Applied Exams</div>
@@ -279,9 +284,11 @@
             </div>
           </div>
         </div>
+        @endif
         <!-- /APPLIED EXAMS TABLE-->
 
         <!-- HELD EXAMS TABLE -->
+        @if(true)
         <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">Held Exams</div>
@@ -455,7 +462,8 @@
             </div>
           </div>
         </div>
-        <!-- /ABSENT EXAMS TABLE-->
+        @endif
+        <!-- /HELD EXAMS TABLE-->
 
       </div>
     </div>

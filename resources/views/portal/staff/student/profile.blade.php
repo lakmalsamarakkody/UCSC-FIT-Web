@@ -22,13 +22,6 @@
             </ol>
           </nav>
 
-          @if($student->user->status == 0)
-          <div class="alert alert-danger float-right" role="alert">
-            <h4>This Account has been Deactivated</h4> 
-          </div>
-            
-          @endif
-
         </div>
     </section>
     <!-- /BREACRUMB -->
@@ -40,8 +33,24 @@
         <!-- <div class="col-lg-2"></div> -->
 
         <div class="col-lg-12">
+            
+            {{-- REGISTRATION HOLD ALERT --}}
+            @if($student->user->status == 0)
+              <div class="alert alert-danger" role="alert">
+                <h4 class="p-0 m-0">This account has been Deactivated</h4> 
+              </div>            
+            @endif
+            {{-- /ACCOUNT HOLD ALERT --}}
 
-            <div class="card   ">
+            {{-- ACCOUNT DEACTIVATED ALERT --}}
+            @if($student->flag->phase_id == 2)
+              <div class="alert alert-danger" role="alert">
+                <h4 class="p-0 m-0">This student has been blocked from future activities</h4> 
+              </div>            
+            @endif
+            {{-- /ACCOUNT DEACTIVATED ALERT --}}
+
+            <div class="card">
               <div class="card-header">
                 Student Details
               </div>
@@ -131,39 +140,56 @@
                           </div>
                           <div class="text-center w-100 ">
                             @if(Auth::user()->hasPermission('staff-student-profile-email-reset'))
-                              <button onclick="reset_email()" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Reset Email">
+                              <button onclick="reset_email()" class="btn btn-lg btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Reset Email">
                                 <i class="fa fa-envelope"></i>
                               </button>
                             @endif
-                            @if(Auth::user()->hasPermission('staff-student-profile-account'))
-                              @if($student->user->status==1)
-                              <button onclick="deactivate_acc()" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Deactivate Account">
-                                <i class="fa fa-user-alt-slash"></i>
+
+                            {{-- REGISTRATION block/UNblock --}}
+                            @if(!Auth::user()->hasPermission('staff-student-profile-block'))
+                              @if($student->flag->phase_id != 2)
+                              <button onclick="block_activities()" class="btn btn-lg btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Block User Activities">
+                                <i class="fa fa-user-lock"></i>
                               </button>
-                              @else                     
-                              <button onclick="activate_acc()" class="btn btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Activate Account">
-                                <i class="fa fa-user-alt"></i>
-                              </button>                           
+                              @else
+                              <button onclick="unblock_activities()" class="btn btn-lg btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Unblock User Activities">
+                                <i class="fa fa-unlock"></i>
+                              </button>
                               @endif
-                            @endif  
+                            @endif
+                            {{-- /REGISTRATION block/UNblock --}}
+
+                            {{-- ACCOUNT ACTIVATION/DEACTIVATION --}}
+                            @if(Auth::user()->hasPermission('staff-student-profile-account'))
+                              @if($student->user->status != 1)
+                                <button onclick="activate_acc()" class="btn btn-lg btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Activate Account">
+                                  <i class="fa fa-user-check"></i>
+                                </button> 
+                              @else                     
+                                <button onclick="deactivate_acc()" class="btn btn-lg btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Deactivate Account">
+                                  <i class="fa fa-user-alt-slash"></i>
+                                </button>                          
+                              @endif
+                            @endif
+                            {{-- ACCOUNT ACTIVATION/DEACTIVATION --}}
                           </div>
                           
-                              <table class="table table-borderless mt-4">                        
-                                  <tr>
-                                      <th>BIT Eligibility:</th>
-                                      @if( $student->flag->bit_eligible == 1 )                                        
-                                      <td><h4><span class="badge badge-success">Eligible</span></h4></td>
-                                      @else
-                                      <td><h4><span class="badge badge-danger">Not Eligible</span></h4></td>
-                                      @endif
-                                      <th>FIT Certificate:</th>
-                                      @if($student->flag->fit_cert == 1)            
-                                      <td><h4><span class="badge badge-success">Eligible</span></h4></td>
-                                      @else
-                                      <td><h4><span class="badge badge-danger">Not Eligible</span></h4></td>                                        
-                                      @endif
-                                  </tr>
-                              </table>
+                            <table class="table mt-4">                        
+                              <tr>
+                                <th>BIT Eligibility:</th>
+                                @if( $student->flag->bit_eligible == 1 )                                        
+                                <td><h4><span class="badge badge-success">Eligible</span></h4></td>
+                                @else
+                                <td><h4><span class="badge badge-danger">Not Eligible</span></h4></td>
+                                @endif
+                                <th>FIT Certificate:</th>
+                                @if($student->flag->fit_cert == 1)            
+                                <td><h4><span class="badge badge-success">Eligible</span></h4></td>
+                                @else
+                                <td><h4><span class="badge badge-danger">Not Eligible</span></h4></td>                                        
+                                @endif
+                              </tr>
+                            </table>
                       </div>   
                   </div>                                                            
                   <div class="col-12 col-md-6">
@@ -185,7 +211,8 @@
                           <p>{{ $student->permanent_country->name ?? ''}}</p>
                           @endif
                       </div>
-                  </div>                    
+                  </div>  
+                  @if($student->current_house || $student->current_country_id)                  
                   <div class="col-12 col-md-6">
                       <h5>Current Address</h5>
                       <hr>
@@ -206,6 +233,7 @@
                           @endif
                       </div>
                   </div>
+                  @endif
                   <div class="col-lg-12">
                       @if(Auth::user()->hasPermission('staff-student-profile-result-view') || Auth::user()->hasPermission('staff-student-profile-medical-view'))
                       <hr>

@@ -20,7 +20,7 @@ class RegistrationCheck
     {
         $uid = Auth::user()->id;
         $student = Student::where('user_id', $uid)->first();
-        if(is_null($student) || $student==null || ($student != NULL && $student->last_registration() == NULL)):
+        if(is_null($student) || $student==null || ($student != NULL && $student->all_registrations()->first() == NULL)):
             return $next($request);
         elseif($student != NULL && $student->last_registration()):
             return redirect('/portal/student/payment/re-registration');

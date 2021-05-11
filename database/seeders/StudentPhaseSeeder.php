@@ -19,10 +19,16 @@ class StudentPhaseSeeder extends Seeder
     DB::table('student_phases')->insert(
             array(
                 ['code'=> '1',
-                'name'=> 'Fresh User',
-                'description'=> 'Fresh user...',
+                'name'=> 'Default User',
+                'description'=> 'Default user...',
                 'created_at'=> '2020-11-25 10:13:53',
-                'updated_at'=> '2020-11-25 10:13:53']
+                'updated_at'=> '2020-11-25 10:13:53'],
+
+                ['code'=> '2',
+                'name'=> 'Blocked User',
+                'description'=> 'Blocked user...',
+                'created_at'=> '2020-11-25 10:13:53',
+                'updated_at'=> '2020-11-25 10:13:53'],
             )
         );
         

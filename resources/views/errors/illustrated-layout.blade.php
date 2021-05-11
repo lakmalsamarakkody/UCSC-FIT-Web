@@ -478,22 +478,22 @@
                         @yield('message')
                     </p>
 
-                    <a href="{{ app('router')->has('home') ? route('home') : url('/login') }}">
+                    <a href="{{ route('logout') }}">
                         <button class="button bg-indigo-light text-white font-bold uppercase tracking-wide py-3 px-6 border-0 rounded-lg">
                             {{ __('Login Back') }}
                         </button>
                     </a>   
                     
-                        @if(Auth::check())                            
-                            <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="button bg-indigo-light text-white font-bold uppercase tracking-wide py-3 px-6 border-0 rounded-lg">
-                                {{ __('Logout') }}
-                            </button>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-                        @endif                 
-                    {{-- <div class="text-white text-3xl  my-3">
-                        {{ __('Or Contact Administrator:') }}
+                    {{-- @if(Auth::check())                            
+                        <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="button bg-indigo-light text-white font-bold uppercase tracking-wide py-3 px-6 border-0 rounded-lg">
+                            {{ __('Logout') }}
+                        </button>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                    @endif --}}
+                    <div class="text-white text-3xl my-3">
+                        {{ __('Contact Administrator:') }}
                         <a class="text-white" href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a>
-                   </div> --}}
+                   </div>
                 </div>
             </div>
 

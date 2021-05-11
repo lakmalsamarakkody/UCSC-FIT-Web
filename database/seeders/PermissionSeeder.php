@@ -341,6 +341,14 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
+                    'name'=>'staff-student-profile-block',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can hold/unhold a student activities',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
                     'name'=>'staff-student-profile-account',
                     'portal'=>'staff',
                     'module'=>'student',

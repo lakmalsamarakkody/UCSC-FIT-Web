@@ -33,6 +33,7 @@ class ExamsController extends Controller
     $this->middleware('auth');
     $this->middleware('revalidate');
     $this->middleware('student.auth');
+    $this->middleware('student.info.view');
     $this->middleware('student.registration.active');
   }
 
@@ -52,8 +53,9 @@ class ExamsController extends Controller
     $student = Student::where('user_id',Auth::user()->id)->first();
     $selected_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', null)->get();
     $applied_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', '!=', null)->get();
-    $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=' , null)->where('schedule_status', 'Approved')->get();
+    $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('schedule_status', 'Approved')->get();
     $held_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('schedule_status', 'Approved')->get();
+    ($student->flag->phase_id == 2) ? $isBlocked=true : $isBlocked=false;
     
     return view('portal/student/exams',[
       // 'schedules' => $schedules,
@@ -63,7 +65,8 @@ class ExamsController extends Controller
       'selected_exams' => $selected_exams,
       'applied_exams' => $applied_exams,
       'scheduled_exams' => $scheduled_exams,
-      'held_exams' => $held_exams
+      'held_exams' => $held_exams,
+      'isBlocked' => $isBlocked
     ]);
   }
 

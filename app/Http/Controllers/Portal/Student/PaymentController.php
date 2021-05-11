@@ -9,6 +9,8 @@ use App\Models\Support\Bank;
 use App\Models\Support\Fee;
 use Illuminate\Http\Request;
 use App\Models\Student\hasExam;
+use App\Models\Student\Registration;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,7 +26,6 @@ class PaymentController extends Controller
     $this->middleware('auth');
     $this->middleware('revalidate');
     $this->middleware('student.auth');
-    $this->middleware('student.registration.check');
     $this->middleware('student.payment.view');
   }
 
@@ -111,5 +112,30 @@ class PaymentController extends Controller
       // /SAVE PAYMENT
     endif;
     return response()->json(['error'=>'error']);
+  }
+
+  public function reregistration()
+  {
+    $student = Auth::user()->student;
+    $reg_fee = Fee::where('purpose', 'reregistration')->first();
+    $banks = Bank::orderBy('name')->get();
+
+
+    $lastRegistration = Registration::where('id',$student->last_registration()->id)->first();
+    $lastRegExpired = $student->last_registration()->registration_expire_at;
+    $dueRegistrations = 1;
+    $regStart = Carbon::create($lastRegExpired)->addDay()->isoFormat('YYYY-MM-DD');
+    $regEnd = Carbon::create($lastRegExpired)->addYear()->isoFormat('YYYY-MM-DD');
+
+    while($regEnd<Carbon::now()->isoFormat('YYYY-MM-DD')){
+      $dueRegistrations = $dueRegistrations+1;
+      $regStart = Carbon::create($regStart)->addYear()->isoFormat('YYYY-MM-DD');
+      $regEnd = Carbon::create($regEnd)->addYear()->isoFormat('YYYY-MM-DD');
+    };
+    
+    $payment = NULL;
+    $registration = array();
+
+    return view('portal/student/payment/reregistration', compact( 'reg_fee', 'banks', 'student', 'registration', 'payment', 'lastRegistration', 'regStart', 'regEnd', 'dueRegistrations'));
   }
 }

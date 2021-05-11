@@ -18,7 +18,6 @@ class HomeController extends Controller
         $this->middleware('revalidate');
         $this->middleware('student.auth');
         $this->middleware('student.info.view');
-        $this->middleware('student.registration.active');
     }
 
     /**
@@ -29,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         // GET STUDENT DETAILS
-        $announcements = Anouncements::orderBy('created_at', 'desc')->take(6)->get();
+        $announcements = Anouncements::where('published',1)->orderBy('created_at', 'desc')->take(6)->get();
         $student = Student::where('user_id', Auth::user()->id)->first();
         $registration = Registration::where('student_id', $student->id)->latest()->first();
         $upcomingExams=Schedule::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();

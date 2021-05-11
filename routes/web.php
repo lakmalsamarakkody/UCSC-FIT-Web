@@ -74,6 +74,8 @@ Route::get('/portal/staff/students', [App\Http\Controllers\Portal\Staff\StudentC
 Route::get('student-list',[App\Http\Controllers\Portal\Staff\StudentController::class, 'getStudentList'])->name('student.list');
 Route::get('/portal/staff/student/profile/{id}/',[App\Http\Controllers\Portal\Staff\StudentController::class, 'viewStudent'])->name('student.profile');
 Route::post('/portal/staff/student/profile/update/email/request',[App\Http\Controllers\Portal\Staff\StudentController::class, 'emailUpdateRequest'])->name('update.email.request');
+Route::post('/portal/staff/student/profile/block',[App\Http\Controllers\Portal\Staff\StudentController::class, 'blockActivities'])->name('block.student');
+Route::post('/portal/staff/student/profile/unblock',[App\Http\Controllers\Portal\Staff\StudentController::class, 'unBlockActivities'])->name('unblock.student');
 Route::post('/portal/staff/student/profile/deactivate/account',[App\Http\Controllers\Portal\Staff\StudentController::class, 'deactivateAccount'])->name('deactivate.student');
 Route::post('/portal/staff/student/profile/reactivate/account',[App\Http\Controllers\Portal\Staff\StudentController::class, 'reactivateAccount'])->name('reactivate.student');
 Route::post('/portal/staff/student/profile/medical/details',[App\Http\Controllers\Portal\Staff\StudentController::class, 'getMedicalDetails'])->name('profile.medical.details');
@@ -336,6 +338,7 @@ Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\Result
 // PAYMENT PAGE
 Route::get('/portal/student/payment/registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'registration'])->name('payment.registration');
 Route::post('/portal/student/payment/registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'saveRegPayment']);
+Route::get('/portal/student/payment/re-registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'reregistration'])->name('payment.reregistration');
 // /PAYMENT PAGE
 
 // DOCUMENT PAGE
