@@ -148,7 +148,7 @@ class Student extends Model
 
     public function processing_registration()
     {
-        return $this->hasOne(Registration::class, 'student_id', 'id')->where('registered_at', '<=', date('Y-m-d'))->where('registration_expire_at', '>=', date('Y-m-d'))->where('status', NULL)->first();
+        return $this->hasOne(Registration::class, 'student_id', 'id')->where('registered_at', '<=', date('Y-m-d'))->where('registration_expire_at', '>=', date('Y-m-d'))->where('payment_status', '!=', 'Approved')->orWhere('payment_status', NULL)->where('status', NULL)->first();
     }
 
     public function current_active_registration()
