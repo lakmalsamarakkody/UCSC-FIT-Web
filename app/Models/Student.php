@@ -77,6 +77,15 @@ class Student extends Model
         return $this->hasMany(Registration::class, 'student_id', 'id');
     }
 
+    public function tempResult(){
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->hasMany(TempResult::class, 'student_reg_no', 'reg_no');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
