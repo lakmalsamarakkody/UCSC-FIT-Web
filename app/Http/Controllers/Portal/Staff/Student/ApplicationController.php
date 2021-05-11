@@ -197,16 +197,23 @@ class ApplicationController extends Controller
         $payment = Payment::where('id', $registration->first()->payment_id);
         if($payment->update(['status'=>'Approved'])):
             if($registration->update(['payment_status'=>'Approved'])):
-                if(isset($registration->first()->registered_at) && isset($registration->first()->registration_expire_at)):
-                    $registration->update(['status'=>1]);
-                endif;
-                $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
+                $student = Student::where('id', $registration->first()->student_id)->first();
                 $details = [
                     'subject' => 'Registration Payment Approved',
                     'title' => 'Registration Payment Approved',
                     'body' => "<p style='text-align: center; color: #fff;'>Registration Payment Approved.</P> <p style='text-align: center; color: #fff;'>Login and Upload the scanned copies of the required documents to complete your registration</P>",
                     'color' => '#1b672a'
                 ];
+                //COMPLETE REGISTRATION IF REGISTRATION RENEWAL PAYMENT
+                if(isset($registration->first()->registered_at) && isset($registration->first()->registration_expire_at)):
+                    $registration->update(['status'=>1]);
+                    $details = [
+                        'subject' => 'Registration Renewal Payment Approved',
+                        'title' => 'Registration Renewal Payment Approved',
+                        'body' => "<p style='text-align: center; color: #fff;'>Registration Payment Approved.</P> <p style='text-align: center; color: #fff;'>Your registration renewal process completed</P>",
+                        'color' => '#1b672a'
+                    ];
+                endif;
                 Mail::to($student->user->email)->queue( new NotificationEmail($details) );
                 return response()->json([ 'status'=>'success']);
             endif;
@@ -218,7 +225,7 @@ class ApplicationController extends Controller
         $registration = Registration::where('id', $request->registration_id);
         $payment = Payment::where('id', $registration->first()->payment_id);
         if($payment->update(['status'=>'Declined'])):
-            if($registration->update(['registered_at'=> NULL, 'registration_expire_at'=>NULL, 'payment_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
+            if($registration->update(['payment_status'=>'Declined', 'declined_msg'=>$request->declined_msg, 'status'=>NULL])):
                 $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
                 if($request->declined_msg != NULL):
                     $decline_msg = $request->declined_msg;
