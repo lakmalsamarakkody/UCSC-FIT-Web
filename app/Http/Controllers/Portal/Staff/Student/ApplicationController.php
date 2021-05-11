@@ -37,7 +37,7 @@ class ApplicationController extends Controller
     // NEW APPLICANT PAYMENT
     public function reviewRegPayment(){
         //$registrations = Registration::where('registered_at', NULL)->whereHas('payment', function ($query) {$query->where('status', NULL);})->get();
-        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', NULL)->get();
+        $registrations = Registration::where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', NULL)->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
 
@@ -76,6 +76,7 @@ class ApplicationController extends Controller
         $email = $student->user->email;
         $payment = NULL;
         $documents = NULL;
+        $lastRegistration = $student->last_registration();
         // PAYMENT DETAILS
         if($registration->payment_id != NULL):
             $payment = $registration->payment;
@@ -147,7 +148,7 @@ class ApplicationController extends Controller
         endif;
         $currentAddressDetails = array('currentCountry'=>$currentCountry, 'currentState'=>$currentState, 'currentCity'=>$currentCity);
         // /CURRENT ADDRESS
-        return response()->json(['status'=>'success', 'student'=>$student, 'registration'=>$registration, 'studentFlag'=>$studentFlag, 'payment'=> $payment, 'documents'=> $documents, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
+        return response()->json(['status'=>'success', 'student'=>$student, 'registration'=>$registration, 'lastRegistration' =>$lastRegistration, 'studentFlag'=>$studentFlag, 'payment'=> $payment, 'documents'=> $documents, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
 
     }
 
@@ -196,6 +197,9 @@ class ApplicationController extends Controller
         $payment = Payment::where('id', $registration->first()->payment_id);
         if($payment->update(['status'=>'Approved'])):
             if($registration->update(['payment_status'=>'Approved'])):
+                if(isset($registration->first()->registered_at) && isset($registration->first()->registration_expire_at)):
+                    $registration->update(['status'=>1]);
+                endif;
                 $student = Student::where('id', Registration::where('id', $request->registration_id)->first()->student_id)->first();
                 $details = [
                     'subject' => 'Registration Payment Approved',
