@@ -26,18 +26,18 @@
                 <div class="col-lg-12 content order-lg-1 order-1">  
                     <ul>
                         @foreach($announcements as $anouncement)
-                            @if($anouncement->created_at >= \Carbon\Carbon::today()->subDays(30))                                
+                            @if($anouncement->updated_at >= \Carbon\Carbon::today()->subDays(30))                                
                             <li>
                                 <h3><a href="{{ route("web.announcement", $anouncement->id) }}"><strong>{{ $anouncement->title }}</strong></a></h3>          
                                 {{-- <p class="description text-right">{{ \Carbon\Carbon::parse($anouncement->created_at)->format('M d Y') }}</p> --}}
-                                <p class="description text-right">{{ \Carbon\Carbon::today()->subDays(30) }}</p>
+                                <p class="description text-right">{{ $anouncement->updated_at }}</p>
                             </li>  
                             <hr>
                             @else
                             <li>
                                 <h3><a href="{{ route("web.announcement", $anouncement->id) }}">{{ $anouncement->title }}</a></h3>          
                                 {{-- <p class="description text-right">{{ \Carbon\Carbon::parse($anouncement->created_at)->format('M d Y') }}</p> --}}
-                                <p class="description text-right">{{ \Carbon\Carbon::today()->subDays(30) }}</p>
+                                <p class="description text-right">{{ $anouncement->updated_at }}</p>
                             </li>  
                             <hr> 
                             @endif                        
