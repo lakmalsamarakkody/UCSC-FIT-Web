@@ -23,20 +23,18 @@ class StudentNewSeeder extends Seeder
         for($i=0;$i<30;$i++):
             $f_name= $faker->firstName;
             $l_name=$faker->lastName;
-            $m_names=$f_name." ".$l_name;
             $initials= $f_name[0]." ".$l_name[0];
-            $full_name=$f_name." ".$m_names." ".$l_name;
+            $full_name=$f_name." ".$l_name;
             $gender=$faker->randomElement($array = array ('Male', 'Female'));
-            $year=$faker->randomElement($array = array('2018','2019','2020','2021'));
-            $month = $faker->numberBetween($min = 01, $max = 12);
-            $date = $faker->numberBetween($min = 01, $max = 25);
+            $year=$faker->randomElement($array = array('18','19','20','21'));
+            $month = $faker->randomElement($array = array('01','02','03','04','05','06','07','08','09','10','11','12'));
+            $date = $faker->randomElement($array = array('01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26'));
 
             $student = new Student;
             $student->reg_no = 'F'. $year . $month. $date . $faker->unique()->numerify('###');
             $student->user_id = $i+3;
             $student->title = $faker->title($gender);
             $student->first_name = $f_name ;
-            $student->middle_names = $m_names ;
             $student->last_name = $l_name ;
             $student->full_name = $full_name ;
             $student->initials = $initials ;
