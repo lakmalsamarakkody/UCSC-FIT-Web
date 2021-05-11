@@ -32,6 +32,11 @@
                                         <th>Registration No: </th>
                                         <td><span id="spanregNo" class="text-capitalize font-weight-bold"></span></td>
                                     </tr>
+
+                                    <tr id="trApplicationLastRegExpDate" class="d-none">
+                                        <th>Last Registration expired : </th>
+                                        <td><span id="spanLastRegExpDate" class="text-capitalize font-weight-bold"></span></td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
