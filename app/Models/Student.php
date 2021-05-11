@@ -137,6 +137,11 @@ class Student extends Model
         return $this->hasMany(Registration::class, 'student_id', 'id')->where('registered_at', '!=', NULL)->orderBy('registered_at', 'desc');
     }
 
+    public function processing_registration()
+    {
+        return $this->hasOne(Registration::class, 'student_id', 'id')->where('registered_at', '<=', date('Y-m-d'))->where('registration_expire_at', '>=', date('Y-m-d'))->where('status', NULL)->first();
+    }
+
     public function current_active_registration()
     {
         return $this->hasOne(Registration::class, 'student_id', 'id')->where('registered_at', '<=', date('Y-m-d'))->where('registration_expire_at', '>=', date('Y-m-d'))->where('status', 1)->first();
