@@ -337,8 +337,9 @@ Route::get('/portal/student/results',[App\Http\Controllers\Portal\Student\Result
 
 // PAYMENT PAGE
 Route::get('/portal/student/payment/registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'registration'])->name('payment.registration');
-Route::post('/portal/student/payment/registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'saveRegPayment']);
+Route::post('/portal/student/payment/registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'saveRegPayment'])->name('payment.registration.submit');
 Route::get('/portal/student/payment/re-registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'reregistration'])->name('payment.reregistration');
+Route::post('/portal/student/payment/re-registration',[App\Http\Controllers\Portal\Student\PaymentController::class,'saveReRegPayment'])->name('payment.reregistration.submit');
 // /PAYMENT PAGE
 
 // DOCUMENT PAGE
