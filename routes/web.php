@@ -177,6 +177,7 @@ Route::get('/portal/staff/results/exams', [App\Http\Controllers\Portal\Staff\Res
 Route::get('/portal/staff/result/view/{id}', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'viewResults'])->where('id', '[0-9]+')->name('results.view');
 
 Route::post('/portal/staff/results/temp/import', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'temporaryImport'])->name('results.temp.import');
+Route::get('/portal/staff/results/temp/import', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'getTempResults'])->name('get.temp.results');
 
 // /RESULTS PAGE
 
