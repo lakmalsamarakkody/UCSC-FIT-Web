@@ -236,6 +236,8 @@ Route::post('/portal/staff/system/createPaymentType', [App\Http\Controllers\Port
 Route::post('/portal/staff/system/editPaymentTypeGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editPaymentTypeGetDetails']);
 Route::post('/portal/staff/system/editPaymentType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editPaymentType']);
 Route::post('/portal/staff/system/deletePaymentType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deletePaymentType']);
+
+Route::post('/portal/staff/system/StudentImport', [App\Http\Controllers\Portal\Staff\SystemController::class, 'StudentImport'])->name('student.import');
 // /SYSTEM PAGE
 
 // INFORMATION PAGE

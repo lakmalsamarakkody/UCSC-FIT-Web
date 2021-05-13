@@ -740,6 +740,14 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
+                    'name'=>'staff-system-import-students',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can import students',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
                     'name'=>'staff-system-permission',
                     'portal'=>'staff',
                     'module'=>'system',

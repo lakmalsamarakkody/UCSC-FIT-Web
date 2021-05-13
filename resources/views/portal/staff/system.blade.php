@@ -29,6 +29,18 @@
   <!-- CONTENT -->
   <div class="col-md-12 system">
     <div class="row">
+
+      <!-- IMPORT STUDENTS -->
+      @if(Auth::user()->hasPermission('staff-system-import-students'))
+      <div class="col-3">
+        <button class="btn btn-lg btn-info w-100" data-toggle="modal" data-target="#importStudents">
+          <i class="fa fa-file-import"></i>
+          &nbsp; Import Students
+        </button>
+      </div>
+      @endif
+      <!-- /IMPORT STUDENTS -->
+
       <!-- PERMISSION -->
       @if(Auth::user()->hasPermission('staff-system-permission'))
       <div class="col-12 mt-xl-5 h-100">
