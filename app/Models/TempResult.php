@@ -11,6 +11,12 @@ class TempResult extends Model
     use HasFactory;
     protected $table='temp_results';
 
+    protected $fillable = [
+        'exam_schedule_id',
+        'student_reg_no',
+        'grade'
+    ];
+
     public function student()
     {
         return $this->belongsTo(Student::class);
