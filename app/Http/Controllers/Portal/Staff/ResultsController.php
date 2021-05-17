@@ -94,7 +94,7 @@ class ResultsController extends Controller
         $validator = Validator::make($request->all(), 
             [     
                 'schedule'=> ['required'],
-                'resultFile'=>['required', 'mimes:xls,xlsx']
+                'resultFile'=>['required', 'mimes:xlsx']
             ]
         );
         if($validator->fails()):
@@ -102,21 +102,57 @@ class ResultsController extends Controller
         else:
             $file = $request->file('resultFile');
             $exam_schedule_id = $request->schedule;
-            Excel::import(new ResultsImport($exam_schedule_id), $file);
-            return response()->json(['success'=>'success']);
+
+            
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            if(TempResult::truncate()):
+                DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+                Excel::import(new ResultsImport($exam_schedule_id), $file);
+                return response()->json(['success'=>'success']);
+            endif;
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            return response()->json(['error'=>'error']);
         endif;
     }
 
     public function getTempResults(Request $request)
     {
-        if ($request->ajax()) {
-            $data = TempResult::all();
-
+        if ($request->ajax()) :
+            $data = TempResult::join('students', 'temp_results.student_reg_no', '=', 'students.reg_no')
+            ->select('temp_results.id', 'temp_results.student_reg_no', 'temp_results.grade', 'students.initials', 'students.last_name', 'students.full_name', 'students.nic_old', 'students.nic_new', 'students.postal', 'students.passport')
+            ->get();
             return DataTables::of($data)
 
             ->addIndexColumn()
             ->rawColumns(['action'])
             ->make(true);
-        }
+        endif;
     }
+
+    public function getTempModalDetails(Request $request)
+    {
+        $schedules = Schedule::where('id', $request->id)->addSelect([
+            //'exam' => Exam::select(DB::raw("CONCAT(month, ' ', year) AS examname"))->whereColumn('exam_id','exams.id'),
+            'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
+            'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
+            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
+            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->get();
+
+            return response()->json($schedules);
+    }
+
+    public function temporaryDiscard()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if(TempResult::truncate()):
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            return response()->json(['success'=>'success']);
+        endif;
+        
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        return response()->json(['error'=>'error']);
+    }
+
+
 }

@@ -60,8 +60,16 @@
                     name: 'id'
                 },
                 {
+                    data: 'full_name', 
+                    name: 'full_name'
+                },
+                {
                     data: 'student_reg_no', 
                     name: 'student_reg_no'
+                },
+                {
+                    data: 'nic_old', 
+                    name: 'nic_old'
                 },
                 {
                     data: 'grade', 
@@ -74,10 +82,29 @@
                 {
                     targets: 0,
                     render: function(data, type, row) {
-                    var checkBox = '<div class="input-group"><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></div>';
-                    return checkBox;
-                }
+                      var checkBox = '<div class="input-group"><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></div>';
+                      return checkBox;
+                  }
 
+                },
+                {
+                    targets: 3,
+                    render: function(data, type, row) {
+                        var nic = null;
+                        if(row['nic_old'] != null) {
+                            nic = row['nic_old'];
+                        }
+                        if(row['nic_new'] != null) {
+                            nic = row['nic_new'];
+                        }
+                        if(row['postal'] != null) {
+                            nic = row['postal'];
+                        }
+                        if(row['passport'] != null) {
+                            nic = row['passport'];
+                        }
+                        return nic;
+                    }
                 }
             ]   
         });
@@ -119,13 +146,38 @@
                 $('#'+key).addClass('is-invalid');
                 $('#err'+key).append('<strong>'+value+'</strong>')
               });
-            }else if (data['success']){         
-              $('#importResults').modal('hide')
-              table1.draw();
-              $('#reviewResults').modal('show')
+            }else if (data['success']){ 
+              var id = $('#schedule').val();   
+              $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url: "{{ route('get.temp.modal.details') }}",
+                type: 'get',
+                data: {
+                  'id': id
+                },
+                success: function(data)
+                {
+                  // alert(data[0]['id'])
+                  if (data[0]['id'] != null){  
+                    $('#exam').html( data[0]['month'] + ' '+ data[0]['year'] )
+                    $('#subject').html( data[0]['subject_code'] +' '+ data[0]['subject_name'] +' - '+ data[0]['exam_type'] )
+                    $('#date').html( data[0]['date'] )
+                    $('#importResults').modal('hide')
+                    table1.draw();
+                    $('#reviewResults').modal('show')
+                  }
+                },
+                error: function(err)
+                {
+                  SwalNotificationWarning.fire({
+                      title: 'Import Failed!',
+                      text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                  })
+                }
+              });    
             }else if (data['error']){
               SwalNotificationWarning.fire({
-                title: 'Upload Failed!',
+                title: 'Import Failed!',
                 text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
               })
             }
@@ -164,6 +216,55 @@
       }
       // /IMPORT RESULTS
 
+
+      // DISCARD TEMPORARY RESULTS
+      discard = () => {
+         SwalQuestionSuccessAutoClose.fire({
+          title: "Are you sure ?",
+          text: "Imported Results will be discarded permanently",
+          confirmButtonText: "Yes, Discard!",
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              url: "{{ route('results.temp.discard') }}",
+              type: 'get',
+              success: function(data)
+              {
+                if (data['success']){  
+                  SwalNotificationSuccessAutoClose.fire({
+                    title: "Results Discarded!",
+                    text: "Imported results discarded Successfully",
+                  })
+                  table1.draw();
+                  $('#reviewResults').modal('hide')
+                }else if (data['error']){
+                  SwalNotificationWarning.fire({
+                    title: 'Discard Failed!',
+                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                  })
+                }
+              },
+              error: function(err)
+              {
+                SwalNotificationWarning.fire({
+                    title: 'Discard Failed!',
+                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                })
+              }
+            });
+
+          }
+          else{
+            SwalNotificationWarningAutoClose.fire({
+              title: "Cancelled!",
+              text: "Discard results aborted",
+            })
+          }
+        })
+      }
+      // /DISCARD TEMPORARY RESULTS
   });
 </script>
 @endsection

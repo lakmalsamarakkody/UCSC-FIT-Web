@@ -3,7 +3,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticEditSchedule">Import Results</h5>
-                    <button type="butoon" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="butoon" class="close" aria-label="Close" onclick="location.reload()">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -36,7 +36,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="location.reload()">Discard</button>
                     <button id="importTempResults" onclick="import_result()" type="button" class="btn btn-outline-primary">
                       Import
                       <span id="importTempResultsSpinner" class="spinner-border spinner-border-sm mb-2 d-none" role="status" aria-hidden="true"></span>
@@ -51,7 +51,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticEditSchedule">Review Results</h5>
-                    <button type="butoon" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="butoon" class="close" aria-label="Close"  onclick="discard()">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -61,9 +61,9 @@
                         <div class="form-group col-12">
                           <h5 id="nameHelp" class="form-text text-muted text-danger" style="color: red !important;">Please Re-Check if the schedule details are correct</h5>
                         </div>  
-                        <div class="col-4"><h5 class="w-100">Exam: <strong>january 2021</strong> </h5></div>
-                        <div class="col-4"><h5 class="w-100">Subject: <strong>103 ICT Applications</strong></h5></div>
-                        <div class="col-4"><h5 class="w-100">Date: <strong>19-01-2021</strong></h5></div>
+                        <div class="col-3"><h5 class="w-100">Exam: <strong><span class="modal-details" id="exam"></span></strong> </h5></div>
+                        <div class="col-5"><h5 class="w-100">Subject: <strong><span class="modal-details" id="subject"></span></strong></h5></div>
+                        <div class="col-4"><h5 class="w-100">Date: <strong><span class="modal-details" id="date"></span></strong></h5></div>
                         
                           
                           
@@ -72,8 +72,8 @@
                       <div class="form-row">
                         <div class="form-group col pt-5">
                           <label for="resultFile">Results File</label>
-                          <div class="overflow-auto w-100" style=" max-height: 500px;">
-                            <table class="table" id="tempResultsTable">
+                          <div class="w-100">
+                            <table class="table w-100" id="tempResultsTable">
                               <thead>
                                 <tr>
                                   <th><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></th>
@@ -84,118 +84,6 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <!-- <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr>
-                                <tr>
-                                  <td><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></td>
-                                  <td>Kailee Kailee Fay Fay</td>
-                                  <td>F2018119737</td>
-                                  <td>232978105V</td>
-                                  <td>85</td>
-                                </tr> -->
                               </tbody>
                             </table>
                           </div>
@@ -206,7 +94,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="discard()">Discard</button>
                     <button onclick="import_result()" type="button" class="btn btn-outline-primary" onclick="">Import</button>
                 </div>
             </div>
