@@ -1960,4 +1960,66 @@ let permissionTable = null;
   }
   // /DELETE
 // /PAYMENT TYPE
+
+// IMPORT STUDENT
+import_student = () => {
+
+  //Remove previous validation error messages
+  $('.form-control').removeClass('is-invalid');
+  $('.invalid-feedback').html('');
+  $('.invalid-feedback').hide();
+
+  //Form payload
+  var formData = new FormData($('#studentImportForm')[0]);
+
+  $.ajax({
+    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+    url: "{{ route('student.import') }}",
+    type: 'post',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function()
+    {
+      $("#importTempStudentSpinner").removeClass('d-none');
+      $('#importTempStudent').attr('disabled', 'disabled');
+    },
+    success: function(data)
+    {
+      $("#importTempStudentSpinner").addClass('d-none');
+      $('#importTempStudent').removeAttr('disabled');
+      if(data['errors']){
+        $.each(data['errors'], function(key, value){
+          SwalNotificationWarning.fire({
+            title: 'Import Failed!',
+            text: key +' : '+value,
+          })
+        });
+      }else if (data['status'] == 'success'){
+        $('#importStudent').modal('hide');
+        SwalDoneSuccess.fire({
+          title: 'Import Finished!',
+          text: 'Check database for further verification',
+        }).then((result) => {
+          if(result.isConfirmed) {location.reload()}
+        }); 
+      }else{
+        SwalNotificationWarning.fire({
+          title: 'Import Failed!',
+          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+        })
+      }
+    },
+    error: function(err)
+    {
+      $("#importTempStudentSpinner").addClass('d-none');
+      $('#importTempStudent').removeAttr('disabled');
+      SwalNotificationWarning.fire({
+        title: 'Upload Failed!',
+        text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+      })
+    }
+  });
+}
+// /IMPORT STUDENT
 </script>

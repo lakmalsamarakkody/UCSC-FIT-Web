@@ -584,4 +584,41 @@
   </div>
   <!--/ EDIT -->
 {{--/ PAYMENT TYPE --}}
+
+{{-- IMPORT STUDENTS --}}
+<div class="modal fade" id="importStudents" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticimportStudents" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="staticimportStudents">Import Students</h5>
+              <button type="butoon" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="class-body p-5">
+              <form id="studentImportForm">
+                <div class="form-row">
+                  <div class="form-group col-12">
+                    <label for="studentFile">Student Import File</label>
+                    <div class="drop-zone">
+                      <span class="drop-zone__prompt">Drop Students File here or click to upload</span>
+                      <input type="file" name="studentImportFile" id="studentImportFile" class="drop-zone__input" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                    </div>
+                      <span id="errorStudentFile" class="invalid-feedback" role="alert"></span>
+                  </div>
+                </div>
+              </form>
+
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+              <button id="importTempStudent" onclick="import_student()" type="button" class="btn btn-outline-primary">
+                Import
+                <span id="importTempStudentSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+              </button>
+          </div>
+      </div>
+  </div>
+</div>
+{{-- /IMPORT STUDENTS --}}
     

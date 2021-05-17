@@ -20,6 +20,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Unique;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\StudentsImport;
 
 use function GuzzleHttp\Promise\all;
 
@@ -759,4 +761,23 @@ class SystemController extends Controller
   }
   // /DELETE FUNCTION
   // /PAYMENT TYPE
+
+  // IMPORT STUDENTS
+  public function StudentImport(Request $request)
+  {
+    $validator = Validator::make($request->all(), 
+      [
+        'studentImportFile'=>['required', 'mimes:xls,xlsx']
+      ]
+    );
+    if($validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$validator->errors()]);
+    else:
+      $file = $request->file('studentImportFile');
+      Excel::import(new StudentsImport, $file);
+      return response()->json(['status'=>'success']);
+    endif;
+    return response()->json(['status'=>'error']);
+  }
+  // /IMPORT STUDENTS
 }
