@@ -179,6 +179,8 @@ Route::get('/portal/staff/result/view/{id}', [App\Http\Controllers\Portal\Staff\
 Route::post('/portal/staff/results/temp/import', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'temporaryImport'])->name('results.temp.import');
 Route::get('/portal/staff/results/temp/discard', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'temporaryDiscard'])->name('results.temp.discard');
 
+Route::post('/portal/staff/results/import', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'Import'])->name('results.import');
+
 Route::get('/portal/staff/results/temp/get/modal/details', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'getTempModalDetails'])->name('get.temp.modal.details');
 Route::get('/portal/staff/results/temp/get/details', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'getTempResults'])->name('get.temp.results');
 
