@@ -12,6 +12,8 @@ use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Imports\HeadingRowFormatter;
 use Throwable;
 
+HeadingRowFormatter::default('none');
+
 
 class StudentsImport implements ToModel, WithHeadingRow
 {

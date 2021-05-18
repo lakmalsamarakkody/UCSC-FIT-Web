@@ -22,6 +22,10 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\StudentsImport;
+use App\Models\Student;
+use App\Models\TempStudent;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 use function GuzzleHttp\Promise\all;
 
@@ -765,6 +769,9 @@ class SystemController extends Controller
   // IMPORT STUDENTS
   public function StudentImport(Request $request)
   {
+    // ================
+    TempStudent::truncate();
+    // ================
     $validator = Validator::make($request->all(), 
       [
         'studentImportFile'=>['required', 'mimes:xls,xlsx']
@@ -774,8 +781,47 @@ class SystemController extends Controller
       return response()->json(['status'=>'error', 'errors'=>$validator->errors()]);
     else:
       $file = $request->file('studentImportFile');
-      Excel::import(new StudentsImport, $file);
-      return response()->json(['status'=>'success']);
+      // IMPORT EXCEL SHEET TO TEMPORARY
+      if(Excel::import(new StudentsImport, $file)):
+
+        // INITIALIZE CREATING RECORDS
+        $tempStudents = TempStudent::get();
+        if($tempStudents):
+
+          // VALIDATE BEFORE CREATING RECORDS
+          foreach($tempStudents as $tempStudent):
+            if(!$tempStudent->reg_no || !$tempStudent->unique_id || !$tempStudent->email):
+              return response()->json(['status'=>'error', 'errors'=> [ 'Insufficient Data' => 'RegNo, NIC and Email fields are mandatory for all students']]);
+            endif;
+            if( Student::where('reg_no', $tempStudent->reg_no)->first() ||
+                Student::where('nic_old', $tempStudent->unique_id)->first() ||
+                Student::where('nic_new', $tempStudent->unique_id)->first() ||
+                Student::where('postal', $tempStudent->unique_id)->first() ||
+                Student::where('passport', $tempStudent->unique_id)->first() ||
+                User::where('email', $tempStudent->email)->first()
+            ):
+              return response()->json(['status'=>'error', 'errors'=> [ 'Aborted' => 'Existing record found']]);
+            endif;
+          endforeach;
+          // /VALIDATE BEFORE CREATING RECORDS
+
+          // CREATE RECORDS
+          foreach($tempStudents as $tempStudent):
+            // CREATE USER
+            User::create([ 
+              'name' => 'name',
+              'email' => $tempStudent->email,
+              'password' => Hash::make($tempStudent->unique_id),
+            ]);
+          endforeach;
+          return response()->json(['status'=>'success']);
+          // /CREATE RECORDS
+
+        endif;
+        // /INITIALIZE CREATING RECORDS
+      else:
+        return response()->json(['status'=>'error', 'errors'=> [ 'Failed' => 'Importing failed. Check your data sheet for duplicates']]);
+      endif;
     endif;
     return response()->json(['status'=>'error']);
   }
