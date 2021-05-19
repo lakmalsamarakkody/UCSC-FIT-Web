@@ -790,9 +790,12 @@ class SystemController extends Controller
 
           // VALIDATE BEFORE CREATING RECORDS
           foreach($tempStudents as $tempStudent):
+            // CHECK FOR MANDATORY FILEDS
             if(!$tempStudent->reg_no || !$tempStudent->unique_id || !$tempStudent->email):
               return response()->json(['status'=>'error', 'errors'=> [ 'Insufficient Data' => 'RegNo, NIC and Email fields are mandatory for all students']]);
             endif;
+
+            // CHECK FOR EXISTING RECORDS
             if( Student::where('reg_no', $tempStudent->reg_no)->first() ||
                 Student::where('nic_old', $tempStudent->unique_id)->first() ||
                 Student::where('nic_new', $tempStudent->unique_id)->first() ||
@@ -800,7 +803,7 @@ class SystemController extends Controller
                 Student::where('passport', $tempStudent->unique_id)->first() ||
                 User::where('email', $tempStudent->email)->first()
             ):
-              return response()->json(['status'=>'error', 'errors'=> [ 'Aborted' => 'Existing record found']]);
+              return response()->json(['status'=>'error', 'errors'=> [ 'Aborted' => 'Existing record found regarding : '.$tempStudent->reg_no]]);
             endif;
           endforeach;
           // /VALIDATE BEFORE CREATING RECORDS
@@ -808,11 +811,11 @@ class SystemController extends Controller
           // CREATE RECORDS
           foreach($tempStudents as $tempStudent):
             // CREATE USER
-            User::create([ 
-              'name' => 'name',
-              'email' => $tempStudent->email,
-              'password' => Hash::make($tempStudent->unique_id),
-            ]);
+            // User::create([ 
+            //   'name' => 'name',
+            //   'email' => $tempStudent->email,
+            //   'password' => Hash::make($tempStudent->unique_id),
+            // ]);
           endforeach;
           return response()->json(['status'=>'success']);
           // /CREATE RECORDS
