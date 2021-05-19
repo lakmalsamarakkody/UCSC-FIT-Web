@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
             return preg_match('/^[0-9]{9}[V|v]$/',$value);
         });
         Validator::extend('fit_reg_no', function($attribute, $value) {
-            //Old NIC number format
+            //FIT Registration format
             return preg_match('/^[F][0-9]{2}(0[1-9]|10|11|12)([0-2][0-9]|30|31)[0-9]{3}$/',$value);
         });
         // /INPUTS
