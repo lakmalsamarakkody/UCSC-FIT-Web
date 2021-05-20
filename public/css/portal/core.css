@@ -384,6 +384,9 @@ ol.breadcrumb li.breadcrumb-item a:hover{
   background: linear-gradient(to bottom, #ffffff 0%, #ffffff 100%)!important;
 }
 
+.dataTables_scrollHeadInner {
+  width: 100% !important;
+}
 /* /DATATABLE */
 
 /* TABLE */
