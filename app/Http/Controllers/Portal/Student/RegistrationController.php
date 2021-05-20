@@ -235,6 +235,7 @@ class RegistrationController extends Controller
       //save regno only if existing student
       if($request->enrollment == 'existing'):
         $student->reg_no = $request->regNo;
+        if($request->regNo): $student->reg_year = '20'.substr($student->reg_no, 1, 2); endif;
       else:
         $student->reg_no = NULL;
       endif;
@@ -334,6 +335,7 @@ class RegistrationController extends Controller
       //save regno only if existing student
       if($request->enrollment == 'existing'):
         $student->reg_no = $request->regNo;
+        if($request->regNo): $student->reg_year = '20'.substr($student->reg_no, 1, 2); endif;
       else:
         $student->reg_no = NULL;
       endif;
