@@ -789,38 +789,169 @@ class SystemController extends Controller
         if($tempStudents):
 
           // VALIDATE BEFORE CREATING RECORDS
-          foreach($tempStudents as $tempStudent):
-            if(!$tempStudent->reg_no || !$tempStudent->unique_id || !$tempStudent->email):
-              return response()->json(['status'=>'error', 'errors'=> [ 'Insufficient Data' => 'RegNo, NIC and Email fields are mandatory for all students']]);
-            endif;
-            if( Student::where('reg_no', $tempStudent->reg_no)->first() ||
-                Student::where('nic_old', $tempStudent->unique_id)->first() ||
-                Student::where('nic_new', $tempStudent->unique_id)->first() ||
-                Student::where('postal', $tempStudent->unique_id)->first() ||
-                Student::where('passport', $tempStudent->unique_id)->first() ||
-                User::where('email', $tempStudent->email)->first()
-            ):
-              return response()->json(['status'=>'error', 'errors'=> [ 'Aborted' => 'Existing record found']]);
-            endif;
-          endforeach;
+            foreach($tempStudents as $tempStudent):
+              // CHECK FOR MANDATORY FILEDS
+              if(!$tempStudent->reg_no || !$tempStudent->unique_id || !$tempStudent->email):
+                return response()->json(['status'=>'error', 'errors'=> [ 'Insufficient Data' => 'RegNo, NIC and Email fields are mandatory for all students']]);
+              endif;
+
+              // CHECK FOR INVALID REGISTRATION NUMBERS
+              if(!preg_match('/^[F][0-9]{2}(0[1-9]|10|11|12)([0-2][0-9]|30|31)[0-9]{3}$/',$tempStudent->reg_no)):
+                return response()->json(['status'=>'error', 'errors'=> [ 'Invalid Registration Number' => 'error on : '.$tempStudent->reg_no]]);
+              endif;
+
+              // CHECK FOR EXISTING RECORDS
+              if( Student::where('reg_no', $tempStudent->reg_no)->first() ||
+                  Student::where('nic_old', $tempStudent->unique_id)->first() ||
+                  Student::where('nic_new', $tempStudent->unique_id)->first() ||
+                  Student::where('postal', $tempStudent->unique_id)->first() ||
+                  Student::where('passport', $tempStudent->unique_id)->first() ||
+                  User::where('email', $tempStudent->email)->first()
+              ):
+                return response()->json(['status'=>'error', 'errors'=> [ 'Aborted' => 'Existing record found regarding : '.$tempStudent->reg_no]]);
+              endif;
+            endforeach;
           // /VALIDATE BEFORE CREATING RECORDS
 
           // CREATE RECORDS
-          foreach($tempStudents as $tempStudent):
-            // CREATE USER
-            User::create([ 
-              'name' => 'name',
-              'email' => $tempStudent->email,
-              'password' => Hash::make($tempStudent->unique_id),
-            ]);
-          endforeach;
-          return response()->json(['status'=>'success']);
+            foreach($tempStudents as $tempStudent):
+
+              // CONFIGURE DETAILS
+                $title = $first_name = $middle_name = $last_name = $full_name = $initials = $dob = $gender = $unique_type = $telephone_country_code = $telephone = $reg_year = NULL;
+                $dt = now();
+
+                // SET NAMES
+                  // FULL NAME
+                  $full_name = strtolower($tempStudent->full_name);
+                  $full_name = ucwords($full_name);
+
+                  //FIRST, MIDDLE, LAST NAMES
+                  if(str_word_count($full_name)>2):
+                    $names = explode(" ", $full_name);
+                    $first_name = $names[count($names)-2];
+                    for($x=0; $x<=count($names)-3; $x++):
+                      $middle_name .= $names[$x]." ";
+                    endfor;
+                    $last_name = $names[count($names)-1];
+                  elseif(str_word_count($full_name)==2):
+                    $names = explode(" ", $full_name,2);
+                    $first_name = $names[0];
+                    $last_name = $names[1];
+                  else:
+                    $first_name = $full_name;
+                  endif;
+
+                  // INITIALS
+                  for($y=0; $y<= count($names)-2;$y++):
+                    $initials.=$names[$y][0];
+                  endfor;
+                // SET NAMES
+
+                //TELEPHONE
+                if($tempStudent->telephone):
+                  if(strlen($tempStudent->telephone)>=9)
+                  $telephone_country_code = 94;
+                  $telephone = $tempStudent->telephone;
+                endif;
+
+                //REG YEAR
+                $reg_year = '20'.substr($tempStudent->reg_no, 1, 2);
+                
+                // CHECK UNIQUE TYPE
+                  if(preg_match('/^[0-9]{9}[V|v]$/',$tempStudent->unique_id)):
+                    //TITLE, GENDER, DOB, UNIQUE TYPE
+                    $unique_type = 'nic_old';
+                    $year = '19'.substr($tempStudent->unique_id, 0, 2);
+                    $days = substr($tempStudent->unique_id, 2, 3);
+                    if($days>500): 
+                      $days -=500;
+                      $gender = 'Female';
+                      $title = 'Miss';
+                    else:
+                      $gender = 'Male';
+                      $title = 'Mr';
+                    endif;
+                    $dt->set('year', $year);
+                    $isLeapYear = $dt->isLeapYear();
+                    if($isLeapYear):
+                      $dob = $dt->dayOfYear($days)->isoFormat('Y-MM-DD');
+                    else:
+                      $dob = $dt->dayOfYear($days-1)->isoFormat('Y-MM-DD');
+                    endif;
+                  elseif(preg_match('/^[0-9]{12}$/',$tempStudent->unique_id)):
+                    //TITLE, GENDER, DOB, UNIQUE TYPE
+                    $unique_type = 'nic_new';
+                    $year = substr($tempStudent->unique_id, 0, 4);
+                    $days = substr($tempStudent->unique_id, 4, 3);
+                    if($days>500): 
+                      $days -=500;
+                      $gender = 'Female';
+                      $title = 'Miss';
+                    else:
+                      $gender = 'Male';
+                      $title = 'Mr';
+                    endif;
+                    $dt->set('year', $year);
+                    $isLeapYear = $dt->isLeapYear();
+                    if($isLeapYear):
+                      $dob = $dt->dayOfYear($days)->isoFormat('Y-MM-DD');
+                    else:
+                      $dob = $dt->dayOfYear($days-1)->isoFormat('Y-MM-DD');
+                    endif;
+                  elseif(preg_match('/^[N|n][0-9]{7}$/',$tempStudent->unique_id)):
+                    $unique_type = 'passport';
+                    return response()->json(['status'=>'error', 'errors'=> [ 'NIC TEST' => 'passport']]);
+                  else:
+                    $unique_type = 'postal';
+                    return response()->json(['status'=>'error', 'errors'=> [ 'NIC TEST' => 'postal']]);
+                  endif;
+                // /CHECK UNIQUE TYPE
+              // /CONFIGURE DETAILS
+
+              // CREATE USER
+                $user = new User();
+                $user->name = $first_name;
+                $user->email = $tempStudent->email;
+                $user->password = Hash::make($tempStudent->unique_id);
+
+                if($user->save()):
+                  
+                  // CREATE STUDENT
+                    $student = new Student();
+                    $student->reg_no = $tempStudent->reg_no;
+                    $student->user_id = $user->id;
+                    $student->title = $title;
+                    $student->first_name = $first_name;
+                    $student->middle_names = $middle_name;
+                    $student->last_name = $last_name;
+                    $student->full_name = $full_name;
+                    $student->initials = $initials;
+                    $student->dob = $dob;
+                    $student->gender = $gender;
+                    $student->citizenship = 'Sri Lankan';
+                    $student->$unique_type = $tempStudent->unique_id;
+                    $student->permanent_country_id = 67;
+                    $student->designation = $tempStudent->designation;
+                    $student->telephone_country_code = $telephone_country_code;
+                    $student->telephone = $telephone;
+                    $student->reg_year = $reg_year;
+
+                    if($student->save()):
+                    else:
+                      return response()->json(['status'=>'error', 'errors'=> [ 'Error occured' => 'while creating student record for '.$tempStudent->reg_no]]);
+                    endif;
+                  // /CREATE STUDENT
+                else:
+                  return response()->json(['status'=>'error', 'errors'=> [ 'Error occured' => 'while creating user record for '.$tempStudent->reg_no]]);
+                endif;
+            endforeach;
+            return response()->json(['status'=>'success']);
           // /CREATE RECORDS
 
         endif;
         // /INITIALIZE CREATING RECORDS
       else:
-        return response()->json(['status'=>'error', 'errors'=> [ 'Failed' => 'Importing failed. Check your data sheet for duplicates']]);
+        return response()->json(['status'=>'error', 'errors'=> [ 'Aborted' => 'Please check your data sheet for duplicates']]);
       endif;
     endif;
     return response()->json(['status'=>'error']);
