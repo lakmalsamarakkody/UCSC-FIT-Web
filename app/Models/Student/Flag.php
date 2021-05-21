@@ -18,6 +18,7 @@ class Flag extends Model
     protected static $logName = 'student_flag';
     
     protected $table='student_flags';
+    protected $fillable = ['student_id', 'info_complete', 'info_editable', 'declaration', 'bit_eligible', 'fit_cert', 'phase_id', 'enrollment'];
 
     public function student(){
         return $this->belongsTo(Student::class, 'student_id', 'id');

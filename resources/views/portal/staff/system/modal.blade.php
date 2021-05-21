@@ -596,6 +596,7 @@
               </button>
           </div>
           <div class="class-body p-5">
+              <div class="alert alert-danger">Student data in selected file will be merged to your existing production database.</div>
               <form id="studentImportForm">
                 <div class="form-row">
                   <div class="form-group col-12">

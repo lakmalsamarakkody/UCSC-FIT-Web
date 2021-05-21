@@ -21,9 +21,7 @@ class Payment extends Model
     protected static $logAttributes = ['*'];
     protected static $logName = 'payment';
 
-    protected $fillable = [
-        'status',
-    ];
+    protected $fillable = [ 'method_id', 'type_id', 'amount', 'bank_id', 'bank_branch_id', 'paid_date', 'image', 'status',];
 
     public function type()
     {
