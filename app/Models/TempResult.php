@@ -19,11 +19,11 @@ class TempResult extends Model
 
     public function student()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Student::class,'student_reg_no','reg_no');
     }
 
     public function schedule()
     {
-        return $this->belongsTo(Schedule::class);
+        return $this->belongsTo(Schedule::class,'exam_schedule_id','id');
     }
 }
