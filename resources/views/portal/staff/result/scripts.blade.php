@@ -47,6 +47,9 @@
             searching: false,
             processing: true,
             serverSide: true,
+            scrollY:        "400px",
+            scrollCollapse: true,
+            paging:         false,
             ajax: {
                 url:"{{ route('get.temp.results') }}",
                 data : function (d) {
@@ -57,7 +60,9 @@
             columns: [
                 {
                     data: 'id', 
-                    name: 'id'
+                    name: 'id',
+                    orderable: false, 
+                    searchable: false
                 },
                 {
                     data: 'full_name', 
@@ -82,7 +87,7 @@
                 {
                     targets: 0,
                     render: function(data, type, row) {
-                      var checkBox = '<div class="input-group"><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></div>';
+                      var checkBox = '<div class="input-group"><input type="checkbox" class="selected-results" name="assignCheck[]" value="'+data+'" /></div>';
                       return checkBox;
                   }
 
@@ -113,8 +118,12 @@
             table.draw();
         });
 
-      // IMPORT RESULTS
-      import_result = () => {
+      $('#selectAllResults').on('change', function () {
+        $('input:checkbox').not(this).prop('checked', this.checked);
+      })
+
+      // IMPORT TEMPORARY RESULTS
+      import_temp_result = () => {
 
         //Remove previous validation error messages
         $('.form-control').removeClass('is-invalid');
@@ -192,34 +201,90 @@
             })
           }
         });
-        // SwalQuestionSuccessAutoClose.fire({
-        //   title: "Are you sure ?",
-        //   text: "Results will be imported to the Database",
-        //   confirmButtonText: "Yes, Send!",
-        // })
-        // .then((result) => {
-        //   if (result.isConfirmed) {
-        //     SwalNotificationSuccessAutoClose.fire({
-        //       title: "Imported!",
-        //       text: "Results imported",
-        //     })
-        //     $('#importResults').modal('hide')
-        //     $('#reviewResults').modal('show')
-        //   }
-        //   else{
-        //     SwalNotificationWarningAutoClose.fire({
-        //       title: "Cancelled!",
-        //       text: "Results not imported",
-        //     })
-        //   }
-        // })
+      }
+      // /IMPORT TEMPORARY RESULTS
+
+
+      // IMPORT RESULTS
+      import_result = () => {
+
+        SwalQuestionSuccessAutoClose.fire({
+          title: "Are you sure ?",
+          text: "Imported Results will be imported permanently",
+          confirmButtonText: "Yes, Import!",
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            selectedResults = [];
+            $('.selected-results').each(function() {
+                if($(this).is(":checked")) {
+                  selectedResults.push($(this).val());
+                }
+            });
+
+            // Form Payload
+            let formData = new FormData();
+            var json_arr = JSON.stringify(selectedResults);
+            formData.append('selectedResults', json_arr);
+
+            $.ajax({
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              url: "{{ route('results.import') }}",
+              type: 'post',
+              data: formData,              
+              processData: false,
+              contentType: false,
+              beforeSend: function()
+              {
+                $("#importResultsSpinner").removeClass('d-none');
+                $('#importResults').attr('disabled', 'disabled');
+              },
+              success: function(data)
+              {
+                $("#importResultsSpinner").addClass('d-none');
+                $('#importResults').removeAttr('disabled');
+                if (data['success']){  
+                  SwalDoneSuccess.fire({
+                    title: "Results Imported!",
+                    text: "Imported results Successfully",
+                  }).then((result1) => {
+                      if (result.isConfirmed) {
+                        location.reload()
+                      }
+                    })
+                }else if (data['error']){
+                  table1.draw()
+                  SwalNotificationWarning.fire({
+                    title: 'Import Failed!',
+                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                  })
+                }
+              },
+              error: function(err)
+              {
+                $("#importResultsSpinner").addClass('d-none');
+                $('#importResults').removeAttr('disabled');
+                SwalNotificationWarning.fire({
+                    title: 'Import Failed!',
+                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                })
+              }
+            });
+
+          }
+          else{
+            SwalNotificationWarningAutoClose.fire({
+              title: "Cancelled!",
+              text: "Discard results aborted",
+            })
+          }
+        })
       }
       // /IMPORT RESULTS
 
-
       // DISCARD TEMPORARY RESULTS
       discard = () => {
-         SwalQuestionSuccessAutoClose.fire({
+        SwalQuestionSuccessAutoClose.fire({
           title: "Are you sure ?",
           text: "Imported Results will be discarded permanently",
           confirmButtonText: "Yes, Discard!",

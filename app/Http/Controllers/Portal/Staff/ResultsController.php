@@ -42,7 +42,7 @@ class ResultsController extends Controller
             'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
-            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->get();
+            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->orderBy('date', 'desc')->get();
         return view('portal/staff/results',compact('years','months','schedules'));
     }
 
@@ -154,5 +154,47 @@ class ResultsController extends Controller
         return response()->json(['error'=>'error']);
     }
 
+    public function Import(Request $request)
+    {
+        // echo $request->selectedResults;
+        $ids =  json_decode($request->selectedResults);
+        foreach ($ids as $id):
+            $temp_data = TempResult::where('id', $id)->first();
+            if ($temp_data->grade >= 50):
+                $status = 'P';
+            elseif ($temp_data->grade < 50):
+                $status = 'F';
+            else:
+                $status = 'AB';
+            endif;
+            hasExam::where('student_id', $temp_data->student->id)
+            ->where('exam_schedule_id', $temp_data->exam_schedule_id)
+            ->update([
+                'mark' => $temp_data->grade,
+                'result' => 1,
+                'status' => $status
+            ]);
+
+            /** 
+             * Results Field of student_exam table
+             * 
+             * no result updated -> 0
+             * imported but not released -> 1
+             * released -> 2
+             * 
+             */
+
+            TempResult::where('id', $id)->delete();
+        endforeach;
+
+        if (TempResult::all()->isEmpty()):
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            TempResult::truncate();
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            return response()->json(['success'=>'success']);
+        else:
+            return response()->json(['error'=>'error']);
+        endif;
+    }
 
 }

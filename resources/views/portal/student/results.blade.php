@@ -97,7 +97,7 @@
                                       <td>FIT {{ $result->subject->code }}</td>
                                       <td>{{ $result->subject->name }}</td>
                                       <td>
-                                        @if( $result->result == 0 )                                        
+                                        @if( $result->result <= 1 )                                        
                                         @else
                                           @if( $result->status == "P" )
                                             <h4><span class="badge badge-success">P</span></h4>

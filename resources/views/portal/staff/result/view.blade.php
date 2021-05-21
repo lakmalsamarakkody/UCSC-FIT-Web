@@ -125,7 +125,7 @@
                       {{-- FIT103 Practical --}}
                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->get('mark'))
                       <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('mark')['mark'] }}</td>
-                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['result']==1)
+                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['result']>1)
                         @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['status'] == 'P')
                         <td><i class="fa fa-check"></i></td>
                         @elseif(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['status'] == 'F')

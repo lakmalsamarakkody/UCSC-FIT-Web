@@ -37,7 +37,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" onclick="location.reload()">Discard</button>
-                    <button id="importTempResults" onclick="import_result()" type="button" class="btn btn-outline-primary">
+                    <button id="importTempResults" onclick="import_temp_result()" type="button" class="btn btn-outline-primary">
                       Import
                       <span id="importTempResultsSpinner" class="spinner-border spinner-border-sm mb-2 d-none" role="status" aria-hidden="true"></span>
                     </button>
@@ -73,10 +73,10 @@
                         <div class="form-group col pt-5">
                           <label for="resultFile">Results File</label>
                           <div class="w-100">
-                            <table class="table w-100" id="tempResultsTable">
+                            <table class="table w-100 display" id="tempResultsTable">
                               <thead>
                                 <tr>
-                                  <th><input type="checkbox" class="assign-exam-check" name="assignCheck[]" value="'+data+'" /></th>
+                                  <th class="text-center"><input type="checkbox" id="selectAllResults"/></th>
                                   <th>Name</th>
                                   <th>Reg Number</th>
                                   <th>NIC</th>
@@ -95,7 +95,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" onclick="discard()">Discard</button>
-                    <button onclick="import_result()" type="button" class="btn btn-outline-primary" onclick="">Import</button>
+                    <button id="importResults" onclick="import_result()" type="button" class="btn btn-outline-primary">
+                      Import
+                      <span id="importResultsSpinner" class="spinner-border spinner-border-sm mb-2 d-none" role="status" aria-hidden="true"></span>
+                    </button>
                 </div>
             </div>
         </div>
