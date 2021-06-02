@@ -43,7 +43,14 @@ class ResultsController extends Controller
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->orderBy('date', 'desc')->get();
-        return view('portal/staff/results',compact('years','months','schedules'));
+
+        $previous_years_exams = Exam::where('year', '<', $today->year);
+        $previous_exams = Exam::where('year', $today->year)->where('month', '<', $today->month)->union($previous_years_exams)->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+        
+        $subjects = Subject::all();
+        $exam_types = Types::all();
+
+        return view('portal/staff/results',compact('years', 'months', 'schedules', 'previous_exams', 'exam_types', 'subjects'));
     }
 
     public function getExamList(Request $request)

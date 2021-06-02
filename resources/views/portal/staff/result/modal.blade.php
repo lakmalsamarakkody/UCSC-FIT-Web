@@ -11,11 +11,31 @@
                     <form id="resultsImportForm">
                       <div class="form-row">
                         <div class="form-group col">
-                          <label for="schedule">Exam Schedule</label>
+                          <label for="schedule">Exam</label>
                           <select id="schedule" name="schedule" class="form-control form-control-lg ">
-                            <option value=""selected>Exam Schedule</option>
-                            @foreach($schedules as $schedule)                          
-                            <option value="{{ $schedule->id }}">{{ $schedule->year }} {{ $schedule->month }} - {{ $schedule->subject_code }} {{ $schedule->subject_name }} - {{ $schedule->exam_type }} - {{ $schedule->date }}</option>
+                            <option value=""selected>Exam</option>
+                            @foreach($previous_exams as $exam)                          
+                            <option value="{{$exam->id}}">{{$exam->year}} {{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName }}</option>
+                            @endforeach
+                          </select>
+                          <span id="errschedule" class="invalid-feedback" role="alert"></span>
+                        </div>
+                        <div class="form-group col">
+                          <label for="schedule">Subject</label>
+                          <select id="schedule" name="schedule" class="form-control form-control-lg ">
+                            <option value=""selected>Subject</option>
+                            @foreach($subjects as $subject)                          
+                            <option value="{{$subject->id}}">{{$subject->name}}</option>
+                            @endforeach
+                          </select>
+                          <span id="errschedule" class="invalid-feedback" role="alert"></span>
+                        </div>
+                        <div class="form-group col">
+                          <label for="schedule">Exam Type</label>
+                          <select id="schedule" name="schedule" class="form-control form-control-lg ">
+                            
+                            @foreach($exam_types as $exam_type)                          
+                            <option value="{{$exam_type->id}}">{{$exam_type->name}}</option>
                             @endforeach
                           </select>
                           <span id="errschedule" class="invalid-feedback" role="alert"></span>
