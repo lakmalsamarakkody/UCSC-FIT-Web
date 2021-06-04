@@ -171,9 +171,14 @@ class ResultsController extends Controller
     public function Import(Request $request)
     {
         // echo $request->selectedResults;
-        $ids =  json_decode($request->selectedResults);
+        $ids =  json_decode($request->selectedResults);        
         foreach ($ids as $id):
             $temp_data = TempResult::where('id', $id)->first();
+            $schedules = Schedule::select('id')
+                                    ->where('exam_id', $temp_data->exam_id)
+                                    ->where('subject_id', $temp_data->subject_id)
+                                    ->where('exam_type_id', $temp_data->exam_type_id)
+                                    ->get();
             if ($temp_data->grade >= 50):
                 $status = 'P';
             elseif ($temp_data->grade < 50):
@@ -182,7 +187,9 @@ class ResultsController extends Controller
                 $status = 'AB';
             endif;
             hasExam::where('student_id', $temp_data->student->id)
-            ->where('exam_schedule_id', $temp_data->exam_schedule_id)
+            ->where('subject_id', $temp_data->subject_id)
+            ->where('exam_type_id', $temp_data->exam_type_id)
+            ->whereIn('exam_schedule_id', $schedules)
             ->update([
                 'mark' => $temp_data->grade,
                 'result' => 1,
