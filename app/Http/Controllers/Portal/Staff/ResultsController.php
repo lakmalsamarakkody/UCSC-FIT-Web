@@ -100,7 +100,9 @@ class ResultsController extends Controller
     {
         $validator = Validator::make($request->all(), 
             [     
-                'schedule'=> ['required'],
+                'exam'=> ['required'],
+                'subject'=> ['required'],
+                'examType'=> ['required'],
                 'resultFile'=>['required', 'mimes:xlsx']
             ]
         );
@@ -108,13 +110,18 @@ class ResultsController extends Controller
             return response()->json(['errors'=>$validator->errors()]);
         else:
             $file = $request->file('resultFile');
-            $exam_schedule_id = $request->schedule;
+            $details = [
+               'exam' =>  $request->exam,
+               'subject' =>  $request->subject,
+               'examType' =>  $request->examType
+            ];
 
+            // return response()->json($details);
             
             DB::statement('SET FOREIGN_KEY_CHECKS=0;');
             if(TempResult::truncate()):
                 DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-                Excel::import(new ResultsImport($exam_schedule_id), $file);
+                Excel::import(new ResultsImport($details), $file);
                 return response()->json(['success'=>'success']);
             endif;
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -138,7 +145,7 @@ class ResultsController extends Controller
 
     public function getTempModalDetails(Request $request)
     {
-        $schedules = Schedule::where('id', $request->id)->addSelect([
+        $data = Schedule::where('exam_id', $request->exam)->where('subject_id', $request->subject)->where('exam_type_id', $request->examType)->addSelect([
             //'exam' => Exam::select(DB::raw("CONCAT(month, ' ', year) AS examname"))->whereColumn('exam_id','exams.id'),
             'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
             'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
@@ -146,7 +153,7 @@ class ResultsController extends Controller
             'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->get();
 
-            return response()->json($schedules);
+            return response()->json($data);
     }
 
     public function temporaryDiscard()

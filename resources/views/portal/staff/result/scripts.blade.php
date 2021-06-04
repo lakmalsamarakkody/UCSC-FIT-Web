@@ -156,24 +156,31 @@
                 $('#err'+key).append('<strong>'+value+'</strong>')
               });
             }else if (data['success']){ 
-              var id = $('#schedule').val();   
+              var exam = $('#exam').val();   
+              var subject = $('#subject').val();   
+              var examType = $('#examType').val();   
               $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 url: "{{ route('get.temp.modal.details') }}",
                 type: 'get',
                 data: {
-                  'id': id
+                  'exam': exam,
+                  'subject': subject,
+                  'examType': examType
                 },
                 success: function(data)
                 {
                   // alert(data[0]['id'])
                   if (data[0]['id'] != null){  
-                    $('#exam').html( data[0]['month'] + ' '+ data[0]['year'] )
-                    $('#subject').html( data[0]['subject_code'] +' '+ data[0]['subject_name'] +' - '+ data[0]['exam_type'] )
-                    $('#date').html( data[0]['date'] )
-                    $('#importResults').modal('hide')
+                    // alert(data[0]['id'])
+                    $('#examDetails').html( data[0]['month'] + ' '+ data[0]['year'] );
+                    $('#subjectDetails').html( data[0]['subject_code'] +' '+ data[0]['subject_name'] );
+                    $('#typeDetails').html( data[0]['exam_type'] );
+                    $('#importResults').modal('hide');
                     table1.draw();
                     $('#reviewResults').modal('show')
+                  }else{
+                    alert('sfdfdf')
                   }
                 },
                 error: function(err)

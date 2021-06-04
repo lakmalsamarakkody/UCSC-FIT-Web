@@ -12,7 +12,9 @@ class TempResult extends Model
     protected $table='temp_results';
 
     protected $fillable = [
-        'exam_schedule_id',
+        'exam_id',
+        'subject_id',
+        'exam_type_id',
         'student_reg_no',
         'grade'
     ];
@@ -24,6 +26,16 @@ class TempResult extends Model
 
     public function schedule()
     {
-        return $this->belongsTo(Schedule::class,'exam_schedule_id','id');
+        return $this->belongsTo(Schedule::class,'exam_id','exam_id');
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class,'subject_id','id');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Types::class,'exam_type_id','id');
     }
 }

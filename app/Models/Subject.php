@@ -28,6 +28,10 @@ class Subject extends Model
         return $this->hasMany(Schedule::class, 'subject_id', 'id');
     }
 
+    public function tempResult(){
+        return $this->hasMany(TempResult::class, 'subject_id', 'id');
+    }
+
     public function fee(){
         return $this->hasMany(Fee::class, 'subject_id', 'id');
     }

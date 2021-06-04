@@ -3,6 +3,7 @@
 namespace App\Models\Exam;
 
 use App\Models\Support\Fee;
+use App\Models\TempResult;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -32,5 +33,10 @@ class Types extends Model
     public function duration()
     {
         return $this->hasMany(Duration::class, 'exam_type_id', 'id');
+    }
+
+    public function tempResult()
+    {
+        return $this->hasMany(TempResult::class, 'exam_type_id', 'id');
     }
 }

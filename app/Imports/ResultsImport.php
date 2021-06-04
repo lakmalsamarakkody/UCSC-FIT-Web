@@ -24,21 +24,27 @@ class ResultsImport implements ToModel, WithHeadingRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    public $exam_schedule_id;
+    public $details;
 
-    public function __construct($exam_schedule_id)
+    public function __construct($details)
     {
-        $this->exam_schedule_id = $exam_schedule_id;
+        $this->details = $details;
     }
 
     public function model(array $row)
     {
-        if ($row['Reg No.'] == Null || $row['Reg No.'] == "") {
+        if ($row['First name'] == Null || $row['First name'] == "") {
         }
         else {
+            $exam = $this->details['exam'];
+            $subject = $this->details['subject'];
+            $examType = $this->details['examType'];
+            // echo $examType;
             return new TempResult([
-                'exam_schedule_id' =>  $this->exam_schedule_id,
-                'student_reg_no' => $row['Reg No.'],
+                'exam_id' =>  $exam,
+                'subject_id' =>  $subject,
+                'exam_type_id' =>  $examType,
+                'student_reg_no' => substr($row['First name'], 0, 10),
                 'grade' => $row['Grade/100.00']
             ]);
         }
