@@ -158,7 +158,8 @@ Route::post('/portal/staff/exams/schedule/delete/after/release',[App\Http\Contro
 // EXAM LIST PAGE
 Route::get('/portal/staff/exams/list', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class, 'index']);
 Route::post('/portal/staff/exams/list/create', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class, 'createExam']);
-Route::get('/portal/staff/exams/exams/list', [App\Http\Controllers\Portal\Staff\ExamListController::class, 'getExamList'])->name('exam.exam.list');
+Route::get('/portal/staff/exams/exams/list', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class, 'getExamList'])->name('exam.exams.list');
+Route::get('/portal/staff/exams/exams/list/export/{eid}/{sid}/{etid}', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class, 'export'])->name('exam.exams.list.export');
 Route::post('/portal/staff/exams/list/delete', [App\Http\Controllers\Portal\Staff\Exams\ExamListController::class , 'deleteExam']);
 // /EXAM LIST PAGE
 

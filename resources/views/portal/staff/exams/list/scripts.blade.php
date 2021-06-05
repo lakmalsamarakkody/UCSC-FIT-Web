@@ -1,4 +1,73 @@
 <script type="text/javascript">
+
+  $(document).ready( function () {
+    $('#tableExamList').DataTable({
+      searching: true,
+      ordering:  true
+    });
+  } );
+  // EXAM LIST
+  // $(function () {
+    
+  //   var table = $('.yajra-datatable.tableExam').DataTable({
+  //     searching: true,
+  //     processing: true,
+  //     serverSide: true,
+  //     ajax: {
+  //       url:"{{ route('exam.exams.list') }}",
+  //     },
+  //     order: [ [0, 'desc'],[2, 'desc'] ],
+  //     columns: [
+  //         {
+  //             data: 'year', 
+  //             name: 'year'
+  //         },
+  //         {
+  //             data: 'month', 
+  //             name: 'month'
+  //         },
+  //         {
+  //             data: 'id', 
+  //             name: 'id'
+  //         },
+  //         {
+  //             data: 'id', 
+  //             name: 'id', 
+  //             orderable: true, 
+  //             searchable: false
+  //         },
+  //     ],
+  //     columnDefs: [
+  //         {
+  //             targets: 2,
+  //             render: function ( data, type, row ) {
+  //                 var buttons = '@if(Auth::user()->hasPermission("staff-exam-examList-downloadStdList"))'+
+  //                 '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i> ICT Applications - eTest </button>'+
+  //                 '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i> ICT Applications - practical </button>'+
+  //                 '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i> English - eTest </button>'+
+  //                 '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i> English - practical </button>'+
+  //                 '<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i> Maths - eTest </button>'+
+  //                               '@endif';
+  //                 return buttons;
+  //             }
+  //         },
+  //         {
+  //             targets: 3,
+  //             render: function ( data, type, row ) {
+  //                 var buttons = '@if(Auth::user()->hasPermission("staff-exam-examList-viewResults"))<a target="_blank" href="/portal/staff/result/view/'+data+'"><button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button></a>@endif'+
+  //                               '@if(Auth::user()->hasPermission("staff-exam-examList-delete"))<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete Exam" id="btnDeleteExam-'+data+'" onclick="onclick_delete_exam('+data+');"><i class="fas fa-trash-alt"></i></button>@endif';
+  //                 return buttons;
+  //             }
+  //         },
+  //     ]   
+  //   });
+ 
+  //   reload = () => {
+  //     table.draw();
+  //   }
+  
+  // });
+  // /EXAM LIST
   // CREATE
   onclick_create_exam = () => {
     SwalQuestionSuccessAutoClose.fire({
@@ -111,55 +180,4 @@
   }
   // /DELETE
 
-    $(function () {
-      
-        var table = $('.yajra-datatable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url:"{{ route('results.exam.list') }}",
-                data : function (d) {
-                    d.year = $('#year').val();
-                    d.month = $('#month').val();
-                }
-            },
-            columns: [
-                {
-                    data: 'year', 
-                    name: 'year'
-                },
-                {
-                    data: 'month', 
-                    name: 'month'
-                },
-                {
-                    data: 'id', 
-                    name: 'id', 
-                    orderable: false, 
-                    searchable: false
-                },
-            ],
-            columnDefs: [
-                {
-                    targets: 2,
-                    render: function ( data, type, row ) {
-                        var buttons = '@if(Auth::user()->hasPermission("staff-exam-examList-viewResults"))<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button>@endif'+
-                                      '@if(Auth::user()->hasPermission("staff-exam-examList-delete"))<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete Exam" id="btnDeleteExam-'+data+'" onclick="onclick_delete_exam('+data+');"><i class="fas fa-trash-alt"></i></button>@endif'
-                        
-                        return buttons;
-                    }
-
-                }
-            ]   
-        });
-
-
-        
-        reload = () => {
-            table.draw();
-
-        }
-    
-
-  });
 </script>

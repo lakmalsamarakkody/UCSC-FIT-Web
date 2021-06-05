@@ -93,6 +93,13 @@
             </div>
             <div class="card-body">
               <table class="table yajra-datatable">
+                <thead class="text-center">
+                  <tr>
+                    <th>Year</th>
+                    <th>Month</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
                 <tbody class="text-center">
                 </tbody>
               </table>

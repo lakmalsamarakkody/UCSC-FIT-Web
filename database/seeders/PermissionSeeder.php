@@ -528,6 +528,14 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
+                    'name'=>'staff-exam-examList-downloadStdList',
+                    'portal'=>'staff',
+                    'module'=>'exam',
+                    'description'=>'Can download student list of an exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
                     'name'=>'staff-exam-examList-viewResults',
                     'portal'=>'staff',
                     'module'=>'exam',

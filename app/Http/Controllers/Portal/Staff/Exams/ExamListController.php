@@ -8,15 +8,53 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Exam;
+use App\Models\Subject;
+use App\Models\Support\Fee;
+use Carbon\Carbon;
+use App\Exports\StudentExamListExport;
+use App\Models\Exam\Types;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExamListController extends Controller
 {
     //Exam list view
     public function index()
     {
-        $exams = Exam::orderby('year', 'desc')->orderby('month', 'desc')->get();
-        return view('portal/staff/exams/exam_list', compact('exams'));
+        $exams = Exam::orderby('year', 'desc')->orderby('month', 'desc')->paginate(10);
+        $examTypes = Fee::where('purpose', 'exam')->get();
+        return view('portal/staff/exams/exam_list', compact('exams', 'examTypes'));
     }
+
+    // GET EXAM LIST
+    public function getExamList(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Exam::get();
+            $subjects = Fee::where('purpose', 'exam')->get();
+            return DataTables::of($data,$subjects)
+            ->editColumn('month', function ($data) {
+                return $data->month ? with(Carbon::createFromDate($data->year,$data->month)->monthName) : '';
+            })
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+    }
+    // /GET EXAM LIST
+
+    // DOWNLOAD EXAM LIST
+    public function export($eid,$sid,$etid) 
+    {
+        $exam = Exam::where('id',$eid)->first();
+        $subject = Subject::where('id',$sid)->first();
+        $examType = Types::where('id',$etid)->first();
+        if($exam && $subject && $examType):
+        return (new StudentExamListExport)->forExam($eid)->forSubject($sid)->forExamType($etid)->download($exam->year.'-'.$exam->month.'-'.$subject->name.'-'.$examType->name.'.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        else:
+            return (new StudentExamListExport)->forExam($eid)->forSubject($sid)->forExamType($etid)->download('StudentExamListExport.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        endif;
+    }
+    // /DOWNLOAD EXAM LIST
     
     //Create
     public function createExam(Request $request)

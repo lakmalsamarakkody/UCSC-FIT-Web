@@ -89,7 +89,7 @@
           <div class="card">
             <div class="card-header">Exams</div>
             <div class="card-body">
-              <table class="table yajra-datatable tableExam">
+              <table class="table yajra-datatable tableExam" id="tableExamList">
                 <thead class="text-center">
                   <tr>
                     <th>Year</th>
@@ -103,6 +103,19 @@
                     <td>{{ $exam->year }}</td>
                     <td>{{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName}}</td>
                     <td>
+                      @if(Auth::user()->hasPermission("staff-exam-examList-downloadStdList"))
+                      <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fa fa-file-download"></i> student list
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        @foreach ($examTypes as $examType)
+                          <a class="dropdown-item" href="/portal/staff/exams/exams/list/export/{{$exam->id}}/{{$examType->subject_id}}/{{$examType->exam_type_id}}">{{ App\Models\Subject::where('id',$examType->subject_id)->first()->name}} ({{ App\Models\Exam\Types::where('id',$examType->exam_type_id)->first()->name}})</a>
+                        @endforeach
+                        </div>
+                      </div>
+                      @endif
+
                       <div class="btn-group">
                         @if(Auth::user()->hasPermission('staff-exam-examList-viewResults'))<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button>@endif
                         @if(Auth::user()->hasPermission('staff-exam-examList-delete'))<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete Exam" id="btnDeleteExam-{{$exam->id}}" onclick="onclick_delete_exam({{$exam->id}});"><i class="fas fa-trash-alt"></i></button>@endif
@@ -112,8 +125,9 @@
                   @endforeach
                 </tbody>
               </table>
-
+              
             </div>
+            <div class="card-footer">{{ $exams->links('pagination::bootstrap-4') }}</div>
           </div>
         </div>
         <!-- /EXAM TABLE-->
