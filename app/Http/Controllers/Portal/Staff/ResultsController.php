@@ -43,7 +43,14 @@ class ResultsController extends Controller
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->orderBy('date', 'desc')->get();
-        return view('portal/staff/results',compact('years','months','schedules'));
+
+        $previous_years_exams = Exam::where('year', '<', $today->year);
+        $previous_exams = Exam::where('year', $today->year)->where('month', '<', $today->month)->union($previous_years_exams)->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+        
+        $subjects = Subject::all();
+        $exam_types = Types::all();
+
+        return view('portal/staff/results',compact('years', 'months', 'schedules', 'previous_exams', 'exam_types', 'subjects'));
     }
 
     public function getExamList(Request $request)
@@ -93,7 +100,9 @@ class ResultsController extends Controller
     {
         $validator = Validator::make($request->all(), 
             [     
-                'schedule'=> ['required'],
+                'exam'=> ['required'],
+                'subject'=> ['required'],
+                'examType'=> ['required'],
                 'resultFile'=>['required', 'mimes:xlsx']
             ]
         );
@@ -101,13 +110,18 @@ class ResultsController extends Controller
             return response()->json(['errors'=>$validator->errors()]);
         else:
             $file = $request->file('resultFile');
-            $exam_schedule_id = $request->schedule;
+            $details = [
+               'exam' =>  $request->exam,
+               'subject' =>  $request->subject,
+               'examType' =>  $request->examType
+            ];
 
+            // return response()->json($details);
             
             DB::statement('SET FOREIGN_KEY_CHECKS=0;');
             if(TempResult::truncate()):
                 DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-                Excel::import(new ResultsImport($exam_schedule_id), $file);
+                Excel::import(new ResultsImport($details), $file);
                 return response()->json(['success'=>'success']);
             endif;
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -131,7 +145,7 @@ class ResultsController extends Controller
 
     public function getTempModalDetails(Request $request)
     {
-        $schedules = Schedule::where('id', $request->id)->addSelect([
+        $data = Schedule::where('exam_id', $request->exam)->where('subject_id', $request->subject)->where('exam_type_id', $request->examType)->addSelect([
             //'exam' => Exam::select(DB::raw("CONCAT(month, ' ', year) AS examname"))->whereColumn('exam_id','exams.id'),
             'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
             'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
@@ -139,7 +153,7 @@ class ResultsController extends Controller
             'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->get();
 
-            return response()->json($schedules);
+            return response()->json($data);
     }
 
     public function temporaryDiscard()
@@ -157,9 +171,14 @@ class ResultsController extends Controller
     public function Import(Request $request)
     {
         // echo $request->selectedResults;
-        $ids =  json_decode($request->selectedResults);
+        $ids =  json_decode($request->selectedResults);        
         foreach ($ids as $id):
             $temp_data = TempResult::where('id', $id)->first();
+            $schedules = Schedule::select('id')
+                                    ->where('exam_id', $temp_data->exam_id)
+                                    ->where('subject_id', $temp_data->subject_id)
+                                    ->where('exam_type_id', $temp_data->exam_type_id)
+                                    ->get();
             if ($temp_data->grade >= 50):
                 $status = 'P';
             elseif ($temp_data->grade < 50):
@@ -168,7 +187,9 @@ class ResultsController extends Controller
                 $status = 'AB';
             endif;
             hasExam::where('student_id', $temp_data->student->id)
-            ->where('exam_schedule_id', $temp_data->exam_schedule_id)
+            ->where('subject_id', $temp_data->subject_id)
+            ->where('exam_type_id', $temp_data->exam_type_id)
+            ->whereIn('exam_schedule_id', $schedules)
             ->update([
                 'mark' => $temp_data->grade,
                 'result' => 1,

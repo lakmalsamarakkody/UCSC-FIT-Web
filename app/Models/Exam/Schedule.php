@@ -62,6 +62,6 @@ class Schedule extends Model
        *
        * connecting model , foreign_key , local_key
        */
-      return $this->hasMany(TempResult::class, 'exam_schedule_id', 'id');
+      return $this->hasMany(TempResult::class, 'exam_id', 'exam_id');
   }
 }

@@ -11,14 +11,34 @@
                     <form id="resultsImportForm">
                       <div class="form-row">
                         <div class="form-group col">
-                          <label for="schedule">Exam Schedule</label>
-                          <select id="schedule" name="schedule" class="form-control form-control-lg ">
-                            <option value=""selected>Exam Schedule</option>
-                            @foreach($schedules as $schedule)                          
-                            <option value="{{ $schedule->id }}">{{ $schedule->year }} {{ $schedule->month }} - {{ $schedule->subject_code }} {{ $schedule->subject_name }} - {{ $schedule->exam_type }} - {{ $schedule->date }}</option>
+                          <label for="exam">Exam</label>
+                          <select id="exam" name="exam" class="form-control form-control-lg ">
+                            <option value=""selected>Exam</option>
+                            @foreach($previous_exams as $exam)                          
+                            <option value="{{$exam->id}}">{{$exam->year}} {{ \Carbon\Carbon::createFromDate($exam->year,$exam->month)->monthName }}</option>
                             @endforeach
                           </select>
-                          <span id="errschedule" class="invalid-feedback" role="alert"></span>
+                          <span id="errexam" class="invalid-feedback" role="alert"></span>
+                        </div>
+                        <div class="form-group col">
+                          <label for="subject">Subject</label>
+                          <select id="subject" name="subject" class="form-control form-control-lg ">
+                            <option value=""selected>Subject</option>
+                            @foreach($subjects as $subject)                          
+                            <option value="{{$subject->id}}">{{$subject->name}}</option>
+                            @endforeach
+                          </select>
+                          <span id="errsubject" class="invalid-feedback" role="alert"></span>
+                        </div>
+                        <div class="form-group col">
+                          <label for="examType">Exam Type</label>
+                          <select id="examType" name="examType" class="form-control form-control-lg ">
+                            
+                            @foreach($exam_types as $exam_type)                          
+                            <option value="{{$exam_type->id}}">{{$exam_type->name}}</option>
+                            @endforeach
+                          </select>
+                          <span id="errexamType" class="invalid-feedback" role="alert"></span>
                         </div>
                       </div>
                       <div class="form-row">
@@ -61,9 +81,9 @@
                         <div class="form-group col-12">
                           <h5 id="nameHelp" class="form-text text-muted text-danger" style="color: red !important;">Please Re-Check if the schedule details are correct</h5>
                         </div>  
-                        <div class="col-3"><h5 class="w-100">Exam: <strong><span class="modal-details" id="exam"></span></strong> </h5></div>
-                        <div class="col-5"><h5 class="w-100">Subject: <strong><span class="modal-details" id="subject"></span></strong></h5></div>
-                        <div class="col-4"><h5 class="w-100">Date: <strong><span class="modal-details" id="date"></span></strong></h5></div>
+                        <div class="col-3"><h5 class="w-100">Exam: <strong><span class="modal-details" id="examDetails"></span></strong> </h5></div>
+                        <div class="col-5"><h5 class="w-100">Subject: <strong><span class="modal-details" id="subjectDetails"></span></strong></h5></div>
+                        <div class="col-4"><h5 class="w-100">Type: <strong><span class="modal-details" id="typeDetails"></span></strong></h5></div>
                         
                           
                           
