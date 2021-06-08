@@ -1998,9 +1998,10 @@ import_student = () => {
           $('#importTempStudent').removeAttr('disabled');
           if(data['errors']){
             $.each(data['errors'], function(key, value){
-              SwalNotificationWarningAutoClose.fire({
+              SwalNotificationWarning.fire({
                 title: 'Import Failed!',
                 text: key +' : '+value,
+                showConfirmButton : true,
               })
               .then(() => {
                 location.reload();
@@ -2020,7 +2021,7 @@ import_student = () => {
               text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
             })
             .then(() => {
-              location.reload();
+              //location.reload();
             })
           }
         },
@@ -2033,7 +2034,7 @@ import_student = () => {
             text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
           })
           .then(() => {
-            location.reload();
+            //location.reload();
           })
         }
       });
@@ -2044,7 +2045,7 @@ import_student = () => {
         text: 'Import process cancelled.',
       })
       .then(() => {
-        location.reload();
+        //location.reload();
       })
     }
   })

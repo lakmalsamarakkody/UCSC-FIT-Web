@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\TempStudent;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
@@ -15,7 +16,7 @@ use Throwable;
 HeadingRowFormatter::default('none');
 
 
-class StudentsImport implements ToModel, WithHeadingRow
+class StudentsImport implements ToModel,WithHeadingRow
 {
     use Importable;
     /**
@@ -26,25 +27,25 @@ class StudentsImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new TempStudent([
-            'reg_no' => $row['reg_no'],
-            'full_name' => $row['full_name'],
-            'initials' => $row['initials'],
-            'last_name' => $row['last_name'],
-            'title' => $row['title'],
-            'gender' => $row['gender'],
-            'citizenship' => $row['citizenship'],
-            'unique_id' => $row['unique_id'],
-            'dob' => $row['dob'],
-            'permanent_address_line1' => $row['permanent_address_line1'],
-            'permanent_address_line2' => $row['permanent_address_line2'],
-            'permanent_address_line3' => $row['permanent_address_line3'],
-            'city' => $row['city'],
-            'telephone' => $row['telephone'],
-            'email' => $row['email'],
-            'reg_fee' => $row['reg_fee'],
-            'paid_branch' => $row['paid_branch'],
-            'paid_date' => $row['paid_date'],
-            'designation' => $row['designation'],
+            'reg_no' => $row['RegNo'],
+            'full_name' => $row['FullName'],
+            'initials' => $row['Initials'],
+            'last_name' => $row['LastName'],
+            'title' => $row['Title'],
+            'gender' => $row['Gender'],
+            'citizenship' => $row['Citizenship'],
+            'unique_id' => $row['UniqueId'],
+            'dob' => gmdate("Y-m-d", (($row['Dob'] - 25569) * 86400)),
+            'permanent_address_line1' => $row['PermanentAddressLine1'],
+            'permanent_address_line2' => $row['PermanentAddressLine2'],
+            'permanent_address_line3' => $row['PermanentAddressLine3'],
+            'city' => $row['City'],
+            'telephone' => $row['Telephone'],
+            'email' => $row['Email'],
+            'reg_fee' => $row['RegFee'],
+            'paid_branch' => $row['PaidBranch'],
+            'paid_date' => gmdate("Y-m-d", (($row['PaidDate'] - 25569) * 86400)),
+            'designation' => $row['Designation'],
         ]);
     }
 }

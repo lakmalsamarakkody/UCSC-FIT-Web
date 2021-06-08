@@ -23,13 +23,16 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\StudentsImport;
 use App\Models\Student;
+use App\Models\Support\BankBranch;
 use App\Models\Support\Fee;
+use App\Models\Support\SlCity;
 use App\Models\TempStudent;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 use function GuzzleHttp\Promise\all;
+use function PHPUnit\Framework\isNull;
 
 class SystemController extends Controller
 {
@@ -792,8 +795,11 @@ class SystemController extends Controller
 
           // VALIDATE BEFORE CREATING RECORDS
             foreach($tempStudents as $tempStudent):
+
+              set_time_limit(0);
+
               // CHECK FOR MANDATORY FILEDS
-              if(!$tempStudent->reg_no || !$tempStudent->unique_id || !$tempStudent->email):
+              if(!$tempStudent->reg_no || !$tempStudent->unique_id /*|| !$tempStudent->email*/):
                 return response()->json(['status'=>'error', 'errors'=> [ 'Insufficient Data' => 'RegNo, NIC and Email fields are mandatory for all students']]);
               endif;
 
@@ -802,7 +808,268 @@ class SystemController extends Controller
                 return response()->json(['status'=>'error', 'errors'=> [ 'Invalid Registration Number' => 'error on : '.$tempStudent->reg_no]]);
               endif;
 
+              // CHECK FOR UNIQUES
+              if( TempStudent::where('reg_no', $tempStudent->reg_no)->get()->count() > 1 ||
+                  TempStudent::where('unique_id', $tempStudent->unique_id)->get()->count() > 1 /*||
+                  TempStudent::where('email', $tempStudent->email)->get()->count() > 1 */
+              ):
+              return response()->json(['status'=>'error', 'errors'=> [ 'Aborted' => 'Duplicate found in your data sheet regarding : '.$tempStudent->reg_no]]);
+            endif;
+
               // CHECK FOR EXISTING RECORDS
+              if( Student::where('reg_no', $tempStudent->reg_no)->first() ||
+                  Student::where('nic_old', $tempStudent->unique_id)->first() ||
+                  Student::where('nic_new', $tempStudent->unique_id)->first() ||
+                  Student::where('postal', $tempStudent->unique_id)->first() ||
+                  Student::where('passport', $tempStudent->unique_id)->first() ||
+                  User::where('email', $tempStudent->email)->first() ||
+                  User::where('email', strtolower($tempStudent->reg_no)."@fit.ucsc.ac.lk")->first()
+              ):
+                return response()->json(['status'=>'error', 'errors'=> [ 'Aborted' => 'Existing record found in the database regarding : '.$tempStudent->reg_no]]);
+              endif;
+            endforeach;
+          // /VALIDATE BEFORE CREATING RECORDS
+
+          // CREATE RECORDS
+            foreach($tempStudents as $tempStudent):
+              
+              // CONFIGURE DETAILS
+              set_time_limit(0);
+
+                // USER RECORD
+                if(TempStudent::where('email', $tempStudent->email)->get()->count() > 1 || isNull($tempStudent->email)):
+                  $userEmail = strtolower($tempStudent->reg_no)."@fit.ucsc.ac.lk";
+                else:
+                 $userEmail = $tempStudent->email;
+                endif;
+
+                // STUDENT RECORD
+                  $title = $first_name = $middle_name = $last_name = $full_name = $initials = $dob = $gender = $unique_type = $telephone_country_code = $telephone = $reg_year = $permanent_city_id = $citizenship = $permanent_country_id = $designation = $bank_branch_id = NULL;
+                  $dt = now();
+
+                  // SET NAMES
+                    $full_name = ucwords(strtolower($tempStudent->full_name));
+                    $last_name = ucwords(strtolower($tempStudent->last_name));
+                    $initials = strtoupper($tempStudent->initials);
+                    $title = ucfirst(strtolower($tempStudent->title));
+
+                    //FIRST, MIDDLE
+                    if(str_word_count($full_name)>2):
+                      $names = explode(" ", $full_name);
+                      $first_name = $names[count($names)-2];
+                      for($x=0; $x<=count($names)-3; $x++):
+                        $middle_name .= $names[$x]." ";
+                      endfor;
+                    elseif(str_word_count($full_name)==2):
+                      $names = explode(" ", $full_name,2);
+                      $first_name = $names[0];
+                    else:
+                      $first_name = $full_name;
+                    endif;
+                  // SET NAMES
+
+                  //DOB, GENDER
+                  if($tempStudent->dob): 
+                    $dob=$tempStudent->dob;
+                  endif;
+                  if($tempStudent->gender):
+                    if($tempStudent->gender == "M"):
+                    $gender = "Male";
+                    else:
+                    $gender = "Female";
+                    endif;
+                  endif;
+
+                  //TELEPHONE
+                  if($tempStudent->telephone):
+                    if(strlen($tempStudent->telephone)>=9)
+                    $telephone_country_code = 94;
+                    $telephone = $tempStudent->telephone;
+                  endif;
+
+                  //CITY
+                  $city = SlCity::where('name','like', '%'.$tempStudent->city.'%')->first();
+                  if($city):
+                    $permanent_city_id = $city->id;
+                  endif;
+
+                  // CITIZENSHIP
+                  if($tempStudent->citizenship):
+                    if($tempStudent->citizenship == "SL"):
+                      $citizenship = 'Sri Lankan';
+                      $permanent_country_id = 67;
+                    else:
+                      $citizenship = $tempStudent->citizenship;
+                    endif;
+                  else:
+                    $citizenship = 'Sri Lankan';
+                    $permanent_country_id = 67;
+                  endif;
+                  // /CITIZENSHIP
+
+                  // DESIGNATION
+                  $designation = ucwords(strtolower($tempStudent->designation));
+
+                  //REG YEAR
+                  $reg_year = '20'.substr($tempStudent->reg_no, 1, 2);
+                  
+                  // CHECK UNIQUE TYPE
+                    if(preg_match('/^[0-9]{9}[V|v]$/',$tempStudent->unique_id)):
+                      $unique_type = 'nic_old';
+                    elseif(preg_match('/^[0-9]{12}$/',$tempStudent->unique_id)):
+                      $unique_type = 'nic_new';
+                    elseif(preg_match('/^[N|n][0-9]{7}$/',$tempStudent->unique_id)):
+                      $unique_type = 'passport';
+                    else:
+                      $unique_type = 'postal';
+                    endif;
+                  // /CHECK UNIQUE TYPE
+                // /STUDENT RECORD
+
+                // STUDENT REGISTRATION RECORD
+                  $registeredAt = Carbon::createFromFormat('Ymd','20'.substr($tempStudent->reg_no, 1, 6))->isoFormat('Y-MM-DD');
+                  $registrationExpireAt = Carbon::create($registeredAt)->addYear()->subDay()->isoFormat('Y-MM-DD');
+                // /STUDENT REGISTRATION RECORD
+
+                // PAYMENT RECORD
+                  // AMOUNT
+                  if($tempStudent->reg_fee):
+                    $registrationFee = $tempStudent->reg_fee;
+                  else:
+                    if(Fee::where('purpose', 'registration')->first()):
+                      $registrationFee = Fee::where('purpose', 'registration')->first()->amount;
+                    else:
+                      $registrationFee = 2750;
+                    endif;
+                  endif;
+
+                  //BRANCH
+                  if($tempStudent->paid_branch):
+                    $branchID = BankBranch::where('name', 'like', '%'.$tempStudent->paid_branch.'%')->first();
+                    if($branchID):
+                      $bank_branch_id = $branchID->id;
+                    endif;
+                  endif;
+                // /PAYMENT RECORD
+
+              // /CONFIGURE DETAILS
+
+              // CREATE USER
+                $user = new User();
+                $user->name = $first_name;
+                $user->email = $userEmail;
+                $user->password = Hash::make($tempStudent->unique_id);
+
+                if($user->save()):
+                  
+                  // CREATE STUDENT
+                    $student = new Student();
+                    $student->reg_no = $tempStudent->reg_no;
+                    $student->user_id = $user->id;
+                    $student->title = $title;
+                    $student->first_name = $first_name;
+                    $student->middle_names = $middle_name;
+                    $student->last_name = $last_name;
+                    $student->full_name = $full_name;
+                    $student->initials = $initials;
+                    $student->dob = $dob;
+                    $student->gender = $gender;
+                    $student->citizenship = $citizenship;
+                    $student->$unique_type = $tempStudent->unique_id;
+                    $student->permanent_house = ucwords(strtolower($tempStudent->permanent_address_line1));
+                    $student->permanent_address_line1 = ucwords(strtolower($tempStudent->permanent_address_line2));
+                    $student->permanent_address_line2 = ucwords(strtolower($tempStudent->permanent_address_line3));
+                    $student->permanent_city_id = $permanent_city_id;
+                    $student->permanent_country_id = $permanent_country_id;
+                    $student->designation = $designation;
+                    $student->telephone_country_code = $telephone_country_code;
+                    $student->telephone = $telephone;
+                    $student->reg_year = $reg_year;
+
+                    if($student->save()):
+
+                      // CREATE STUDENT FLAG RECORD
+                        if($student->flag()->create(['info_complete'=>1, 'info_editable'=>0, 'declaration'=>1, 'bit_eligible'=>0, 'fit_cert'=>0, 'phase_id'=>1, 'enrollment'=>'existing',])):
+                          
+                          // CREATE STUDENT REGISTRATION RECORD
+                            // REGISTRATION PAYMENT
+                            $payment = new Payment();
+                            $payment->method_id = 2;
+                            $payment->type_id = 1;
+                            $payment->student_id = $student->id;
+                            $payment->amount = $registrationFee;
+                            $payment->bank_id = 1;
+                            $payment->bank_branch_id = $bank_branch_id;
+                            $payment->paid_date = $tempStudent->paid_date;
+                            $payment->status = 'Approved';
+                            if($payment->save() && $student->registration()->create(['registered_at'=>$registeredAt, 'registration_expire_at'=>$registrationExpireAt, 'application_submit'=>1, 'application_status'=>'Approved', 'document_submit'=>1, 'document_status'=>'Approved', 'payment_id'=>$payment->id, 'payment_status'=> 'Approved', 'status'=>1])):
+                              TempStudent::destroy($tempStudent->id);
+                              continue;
+                            else:
+                              return response()->json(['status'=>'error', 'errors'=> [ 'Error occured' => 'while creating student registration record for '.$tempStudent->reg_no]]);
+                            endif;
+                          // /CREATE STUDENT REGISTRATION RECORD
+                        else:
+                          return response()->json(['status'=>'error', 'errors'=> [ 'Error occured' => 'while creating student flag record for '.$tempStudent->reg_no]]);
+                        endif;
+                      // /CREATE STUDENT FLAG RECORD
+                    else:
+                      return response()->json(['status'=>'error', 'errors'=> [ 'Error occured' => 'while creating student record for '.$tempStudent->reg_no]]);
+                    endif;
+                  // /CREATE STUDENT
+                else:
+                  return response()->json(['status'=>'error', 'errors'=> [ 'Error occured' => 'while creating user record for '.$tempStudent->reg_no]]);
+                endif;
+            endforeach;
+            set_time_limit(60);
+            return response()->json(['status'=>'success']);
+          // /CREATE RECORDS
+
+        endif;
+        // /INITIALIZE CREATING RECORDS
+      else:
+        return response()->json(['status'=>'error', 'errors'=> [ 'Aborted' => 'Please check your data sheet for duplicates']]);
+      endif;
+    endif;
+    return response()->json(['status'=>'error']);
+  }
+  // /IMPORT STUDENTS
+
+  // IMPORT STUDENTS - OLD STRUCTURE
+  /*public function StudentImportOld(Request $request)
+  {
+    ================
+    TempStudent::truncate();
+    ================
+    $validator = Validator::make($request->all(), 
+      [
+        'studentImportFile'=>['required', 'mimes:xls,xlsx']
+      ]
+    );
+    if($validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$validator->errors()]);
+    else:
+      $file = $request->file('studentImportFile');
+      IMPORT EXCEL SHEET TO TEMPORARY
+      if(Excel::import(new StudentsImport, $file)):
+
+        INITIALIZE CREATING RECORDS
+        $tempStudents = TempStudent::get();
+        if($tempStudents):
+
+          VALIDATE BEFORE CREATING RECORDS
+            foreach($tempStudents as $tempStudent):
+              CHECK FOR MANDATORY FILEDS
+              if(!$tempStudent->reg_no || !$tempStudent->unique_id || !$tempStudent->email):
+                return response()->json(['status'=>'error', 'errors'=> [ 'Insufficient Data' => 'RegNo, NIC and Email fields are mandatory for all students']]);
+              endif;
+
+              CHECK FOR INVALID REGISTRATION NUMBERS
+              if(!preg_match('/^[F][0-9]{2}(0[1-9]|10|11|12)([0-2][0-9]|30|31)[0-9]{3}$/',$tempStudent->reg_no)):
+                return response()->json(['status'=>'error', 'errors'=> [ 'Invalid Registration Number' => 'error on : '.$tempStudent->reg_no]]);
+              endif;
+
+              CHECK FOR EXISTING RECORDS
               if( Student::where('reg_no', $tempStudent->reg_no)->first() ||
                   Student::where('nic_old', $tempStudent->unique_id)->first() ||
                   Student::where('nic_new', $tempStudent->unique_id)->first() ||
@@ -813,22 +1080,22 @@ class SystemController extends Controller
                 return response()->json(['status'=>'error', 'errors'=> [ 'Aborted' => 'Existing record found regarding : '.$tempStudent->reg_no]]);
               endif;
             endforeach;
-          // /VALIDATE BEFORE CREATING RECORDS
+          /VALIDATE BEFORE CREATING RECORDS
 
-          // CREATE RECORDS
+          CREATE RECORDS
             foreach($tempStudents as $tempStudent):
 
-              // CONFIGURE DETAILS
-                // STUDENT RECORD
+              CONFIGURE DETAILS
+                STUDENT RECORD
                   $title = $first_name = $middle_name = $last_name = $full_name = $initials = $dob = $gender = $unique_type = $telephone_country_code = $telephone = $reg_year = NULL;
                   $dt = now();
 
-                  // SET NAMES
-                    // FULL NAME
+                  SET NAMES
+                    FULL NAME
                     $full_name = strtolower($tempStudent->full_name);
                     $full_name = ucwords($full_name);
 
-                    //FIRST, MIDDLE, LAST NAMES
+                    FIRST, MIDDLE, LAST NAMES
                     if(str_word_count($full_name)>2):
                       $names = explode(" ", $full_name);
                       $first_name = $names[count($names)-2];
@@ -844,29 +1111,29 @@ class SystemController extends Controller
                       $first_name = $full_name;
                     endif;
 
-                    // INITIALS
+                    INITIALS
                     for($y=0; $y<= count($names)-2;$y++):
                       $initials.=$names[$y][0];
                     endfor;
-                  // SET NAMES
+                  SET NAMES
 
-                  //TELEPHONE
+                  TELEPHONE
                   if($tempStudent->telephone):
                     if(strlen($tempStudent->telephone)>=9)
                     $telephone_country_code = 94;
                     $telephone = $tempStudent->telephone;
                   endif;
 
-                  // DESIGNATION
+                  DESIGNATION
                   $designation = strtolower($tempStudent->designation);
                   $designation = ucwords($designation);
 
-                  //REG YEAR
+                  REG YEAR
                   $reg_year = '20'.substr($tempStudent->reg_no, 1, 2);
                   
-                  // CHECK UNIQUE TYPE
+                  CHECK UNIQUE TYPE
                     if(preg_match('/^[0-9]{9}[V|v]$/',$tempStudent->unique_id)):
-                      //TITLE, GENDER, DOB, UNIQUE TYPE
+                      TITLE, GENDER, DOB, UNIQUE TYPE
                       $unique_type = 'nic_old';
                       $year = '19'.substr($tempStudent->unique_id, 0, 2);
                       $days = substr($tempStudent->unique_id, 2, 3);
@@ -886,7 +1153,7 @@ class SystemController extends Controller
                         $dob = $dt->dayOfYear($days-1)->isoFormat('Y-MM-DD');
                       endif;
                     elseif(preg_match('/^[0-9]{12}$/',$tempStudent->unique_id)):
-                      //TITLE, GENDER, DOB, UNIQUE TYPE
+                      TITLE, GENDER, DOB, UNIQUE TYPE
                       $unique_type = 'nic_new';
                       $year = substr($tempStudent->unique_id, 0, 4);
                       $days = substr($tempStudent->unique_id, 4, 3);
@@ -907,30 +1174,28 @@ class SystemController extends Controller
                       endif;
                     elseif(preg_match('/^[N|n][0-9]{7}$/',$tempStudent->unique_id)):
                       $unique_type = 'passport';
-                      return response()->json(['status'=>'error', 'errors'=> [ 'NIC TEST' => 'passport']]);
                     else:
                       $unique_type = 'postal';
-                      return response()->json(['status'=>'error', 'errors'=> [ 'NIC TEST' => 'postal']]);
                     endif;
-                  // /CHECK UNIQUE TYPE
-                // /STUDENT RECORD
+                  /CHECK UNIQUE TYPE
+                /STUDENT RECORD
 
-                // STUDENT REGISTRATION RECORD
+                STUDENT REGISTRATION RECORD
                   $registeredAt = Carbon::createFromFormat('Ymd','20'.substr($tempStudent->reg_no, 1, 6))->isoFormat('Y-MM-DD');
                   $registrationExpireAt = Carbon::create($registeredAt)->addYear()->subDay()->isoFormat('Y-MM-DD');
-                // /STUDENT REGISTRATION RECORD
+                /STUDENT REGISTRATION RECORD
 
-                // PAYMENT RECORD
+                PAYMENT RECORD
                 if(Fee::where('purpose', 'registration')->first()):
                   $registrationFee = Fee::where('purpose', 'registration')->first()->amount;
                 else:
                   $registrationFee = '2750';
                 endif;
-                // /PAYMENT RECORD
+                /PAYMENT RECORD
 
-              // /CONFIGURE DETAILS
+              /CONFIGURE DETAILS
 
-              // CREATE USER
+              CREATE USER
                 $user = new User();
                 $user->name = $first_name;
                 $user->email = $tempStudent->email;
@@ -938,7 +1203,7 @@ class SystemController extends Controller
 
                 if($user->save()):
                   
-                  // CREATE STUDENT
+                  CREATE STUDENT
                     $student = new Student();
                     $student->reg_no = $tempStudent->reg_no;
                     $student->user_id = $user->id;
@@ -960,11 +1225,11 @@ class SystemController extends Controller
 
                     if($student->save()):
 
-                      // CREATE STUDENT FLAG RECORD
+                      CREATE STUDENT FLAG RECORD
                         if($student->flag()->create(['info_complete'=>1, 'info_editable'=>0, 'declaration'=>1, 'bit_eligible'=>0, 'fit_cert'=>0, 'phase_id'=>1, 'enrollment'=>'existing',])):
                           
-                          // CREATE STUDENT REGISTRATION RECORD
-                            // REGISTRATION PAYMENT
+                          CREATE STUDENT REGISTRATION RECORD
+                            REGISTRATION PAYMENT
                             $payment = new Payment();
                             $payment->method_id = 2;
                             $payment->type_id = 1;
@@ -979,29 +1244,29 @@ class SystemController extends Controller
                             else:
                               return response()->json(['status'=>'error', 'errors'=> [ 'Error occured' => 'while creating student registration record for '.$tempStudent->reg_no]]);
                             endif;
-                          // /CREATE STUDENT REGISTRATION RECORD
+                          /CREATE STUDENT REGISTRATION RECORD
                         else:
                           return response()->json(['status'=>'error', 'errors'=> [ 'Error occured' => 'while creating student flag record for '.$tempStudent->reg_no]]);
                         endif;
-                      // /CREATE STUDENT FLAG RECORD
+                      /CREATE STUDENT FLAG RECORD
                     else:
                       return response()->json(['status'=>'error', 'errors'=> [ 'Error occured' => 'while creating student record for '.$tempStudent->reg_no]]);
                     endif;
-                  // /CREATE STUDENT
+                  /CREATE STUDENT
                 else:
                   return response()->json(['status'=>'error', 'errors'=> [ 'Error occured' => 'while creating user record for '.$tempStudent->reg_no]]);
                 endif;
             endforeach;
             return response()->json(['status'=>'success']);
-          // /CREATE RECORDS
+          /CREATE RECORDS
 
         endif;
-        // /INITIALIZE CREATING RECORDS
+        /INITIALIZE CREATING RECORDS
       else:
         return response()->json(['status'=>'error', 'errors'=> [ 'Aborted' => 'Please check your data sheet for duplicates']]);
       endif;
     endif;
     return response()->json(['status'=>'error']);
-  }
-  // /IMPORT STUDENTS
+  }*/
+  // /IMPORT STUDENTS - OLD STRUCTURE
 }

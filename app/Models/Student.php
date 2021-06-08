@@ -28,7 +28,7 @@ class Student extends Model
     protected static $logName = 'student';
 
     protected $table='students';
-    protected $fillable = ['user_id', 'title', 'first_name', 'middle_names', 'last_name', 'initials', 'full_name', 'dob', 'gender', 'citizenship', 'permanent_country_id', 'telephone_country_code', 'telephone', 'reg_year'];
+    protected $fillable = ['user_id', 'title', 'first_name', 'middle_names', 'last_name', 'initials', 'full_name', 'dob', 'gender', 'citizenship', 'permanent_house', 'permanent_address_line1', 'permanent_address_line2', 'permanent_address_line3', 'permanent_address_line4', 'permanent_city_id', 'permanent_country_id', 'telephone_country_code', 'telephone', 'designation', 'reg_year'];
 
     
     public function flag(){
