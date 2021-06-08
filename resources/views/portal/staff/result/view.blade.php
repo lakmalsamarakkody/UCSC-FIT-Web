@@ -33,7 +33,7 @@
 
         <div class="col-lg-12">
 
-        <div class="card">
+        {{-- <div class="card">
           <div class="card-header">Filters</div>
           <div class="card-body">
             <form>
@@ -70,7 +70,7 @@
               </div>              
             </form>
           </div>
-        </div>
+        </div> --}}
 
         </div>
         <!-- <div class="col-lg-1"></div> -->

@@ -202,7 +202,7 @@ class ResultsController extends Controller
              * Results Field of student_exam table
              * 
              * no result updated -> 0
-             * imported but not released -> 1
+             * imported but not released (hold) -> 1
              * released -> 2
              * 
              */
@@ -218,6 +218,57 @@ class ResultsController extends Controller
         else:
             return response()->json(['error'=>'error']);
         endif;
+    }
+
+    public function releaseResults(Request $request)
+    {
+        $schedules = Schedule::select('id')->where('exam_id', $request->id)->get();
+
+        hasExam::whereIn('exam_schedule_id', $schedules)
+            ->update([
+                'result' => 2
+            ]);
+
+        Exam::where('id', $request->id)
+            ->update([
+                'result_released' => 'released'
+            ]);
+
+        return response()->json(['success'=>'success']);
+
+            /** 
+             * Results Field of student_exam table
+             * 
+             * no result updated -> 0
+             * imported but not released (hold) -> 1
+             * released -> 2
+             * 
+             */
+    }
+
+    public function holdResults(Request $request)
+    {
+        $schedules = Schedule::select('id')->where('exam_id', $request->id)->get();
+
+        hasExam::whereIn('exam_schedule_id', $schedules)
+            ->update([
+                'result' => 1
+            ]);
+
+        Exam::where('id', $request->id)
+            ->update([
+                'result_released' => 'hold'
+            ]);
+
+        return response()->json(['success'=>'success']);
+            /** 
+             * Results Field of student_exam table
+             * 
+             * no result updated -> 0
+             * imported but not released (hold) -> 1
+             * released -> 2
+             * 
+             */
     }
 
 }
