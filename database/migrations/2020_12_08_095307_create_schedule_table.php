@@ -25,7 +25,6 @@ class CreateScheduleTable extends Migration
             $table->text('declined_message')->nullable();
             $table->boolean('schedule_release')->default(false);
             $table->boolean('schedule_declined')->default(false);
-            $table->string('result_released')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

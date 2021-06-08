@@ -17,6 +17,7 @@ class CreateExamsTable extends Migration
             $table->id();
             $table->year('year');
             $table->integer('month');
+            $table->string('result_released')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
