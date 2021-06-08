@@ -21,6 +21,7 @@ class CreateAnouncementsTable extends Migration
             $table->string('image')->nullable();
             $table->string('button_text')->nullable();
             $table->string('button_link')->nullable();
+            $table->boolean('published')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -17,6 +17,7 @@ class CreateEmailTokensTable extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->string('token');
+            $table->string('role')->nullable();
             $table->timestamps();
         });
     }

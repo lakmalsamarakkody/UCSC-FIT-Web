@@ -22,6 +22,7 @@ class CreateStudentFlagsTable extends Migration
             $table->boolean('bit_eligible')->default(false);
             $table->boolean('fit_cert')->default(false);
             $table->integer('phase_id')->default(1);
+            $table->string('enrollment')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
