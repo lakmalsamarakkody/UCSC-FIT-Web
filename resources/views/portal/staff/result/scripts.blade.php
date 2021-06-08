@@ -56,7 +56,7 @@
                         btnGroup += '<a title="View Results" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-success text-center" href="{{ route("results.view", ":id") }}" target="_blank"><i class="fa fa-eye"></i></a>';
 
                         if (row['result_released'] == "released"){
-                          btnGroup += '<button title="Release Results" data-tooltip="tooltip"  data-placement="bottom"  class="btn btn-danger text-center" onclick="hold_results('+data+')"><i class="fas fa-times-circle"></i></button>';
+                          btnGroup += '<button title="Hold Results" data-tooltip="tooltip"  data-placement="bottom"  class="btn btn-danger text-center" onclick="hold_results('+data+')"><i class="fas fa-times-circle"></i></button>';
                         } else {
                           btnGroup += '<button title="Release Results" data-tooltip="tooltip"  data-placement="bottom"  class="btn btn-primary text-center" onclick="release_results('+data+')"><i class="fas fa-share-square"></i></button></div>';
                         }
