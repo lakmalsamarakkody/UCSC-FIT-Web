@@ -24,19 +24,47 @@
                     name: 'month'
                 },
                 {
+                    data: 'result_released', 
+                    name: 'result_released'
+                },
+                {
                     data: 'id', 
                     name: 'id', 
                     orderable: false, 
                     searchable: false
-                },
+                }
             ],
             columnDefs: [
                 {
                     targets: 2,
                     render: function ( data, type, row ) {
-                        var button = '<a class="btn btn-outline-success w-100 text-center" href="{{ route("results.view", ":id") }}" target="_blank"><i class="fa fa-eye"></i>&nbsp;View Results</a>'
-                        button = button.replace(':id', data);
-                        return button;
+                      if (data == "released"){
+                        return '<h4><span class="badge badge-pill badge-success">Released</span></h4>';
+                      } else if (data == "hold") {
+                        return '<h4><span class="badge badge-pill badge-danger">Hold</span></h4>';
+                      } else {
+                        return '<h4><span class="badge badge-pill badge-dark">Pending</span></h4>';
+                      }
+                    }
+
+                },
+                {
+                    targets: 3,
+                    render: function ( data, type, row ) {
+                        var btnGroup = '<div class = "btn-group">';
+
+                        btnGroup += '<a title="View Results" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-success text-center" href="{{ route("results.view", ":id") }}" target="_blank"><i class="fa fa-eye"></i></a>';
+
+                        if (row['result_released'] == "released"){
+                          btnGroup += '<button title="Release Results" data-tooltip="tooltip"  data-placement="bottom"  class="btn btn-danger text-center" onclick="hold_results('+data+')"><i class="fas fa-times-circle"></i></button>';
+                        } else {
+                          btnGroup += '<button title="Release Results" data-tooltip="tooltip"  data-placement="bottom"  class="btn btn-primary text-center" onclick="release_results('+data+')"><i class="fas fa-share-square"></i></button></div>';
+                        }
+
+                        btnGroup += '</div>';
+                        
+                        btnGroup = btnGroup.replace(':id', data);
+                        return btnGroup;
                     }
 
                 }
@@ -337,6 +365,110 @@
         })
       }
       // /DISCARD TEMPORARY RESULTS
+
+      // RELEASE RESULTS
+      release_results = (id) => {
+        SwalQuestionWarningAutoClose.fire({
+          title: "Are you sure ?",
+          text: "Results will be released for the students",
+          confirmButtonText: "Yes, Release!",
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              url: "{{ route('results.release') }}",
+              data :{
+                'id':id
+              },
+              type: 'post',
+              success: function(data)
+              {
+                if (data['success']){  
+                  SwalNotificationSuccessAutoClose.fire({
+                    title: "Results Released!",
+                    text: "Results has been released Successfully",
+                  })
+                  table.draw();
+                }else if (data['error']){
+                  SwalNotificationWarning.fire({
+                    title: 'Release Failed!',
+                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                  })
+                }
+              },
+              error: function(err)
+              {
+                SwalNotificationWarning.fire({
+                    title: 'Release Failed!',
+                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                })
+              }
+            });
+
+          }
+          else{
+            SwalNotificationWarningAutoClose.fire({
+              title: "Cancelled!",
+              text: "Release results aborted",
+            })
+          }
+        })
+      }
+      // /RELEASE RESULTS
+
+
+      // HOLD RESULTS
+      hold_results = (id) => {
+        SwalQuestionWarningAutoClose.fire({
+          title: "Are you sure ?",
+          text: "Results will be holden from students",
+          confirmButtonText: "Yes, Hold!",
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              url: "{{ route('results.hold') }}",
+              data :{
+                'id':id
+              },
+              type: 'post',
+              success: function(data)
+              {
+                if (data['success']){  
+                  SwalNotificationSuccessAutoClose.fire({
+                    title: "Results Holden!",
+                    text: "Results has been holden Successfully",
+                  })
+                  table.draw();
+                }else if (data['error']){
+                  SwalNotificationWarning.fire({
+                    title: 'Hold Failed!',
+                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                  })
+                }
+              },
+              error: function(err)
+              {
+                SwalNotificationWarning.fire({
+                    title: 'Hold Failed!',
+                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                })
+              }
+            });
+
+          }
+          else{
+            SwalNotificationWarningAutoClose.fire({
+              title: "Cancelled!",
+              text: "Hold results aborted",
+            })
+          }
+        })
+      }
+      // /HOLD RESULTS
+
   });
 </script>
 @endsection

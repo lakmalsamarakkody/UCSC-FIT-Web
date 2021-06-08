@@ -97,6 +97,7 @@
                   <tr>
                     <th>Year</th>
                     <th>Month</th>
+                    <th>Status</th>
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
