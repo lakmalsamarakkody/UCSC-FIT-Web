@@ -104,7 +104,6 @@ class StudentExamListExport implements FromQuery,ShouldAutoSize,WithProperties,W
             ->where('exam_schedules.exam_id', $this->exam_id)
             ->where('exam_schedules.subject_id', $this->subject_id)
             ->where('exam_schedules.exam_type_id', $this->exam_type_id)
-            ->where('exam_schedules.schedule_release',0)
             ->orderBy('students.id')
             ->distinct();
     }
