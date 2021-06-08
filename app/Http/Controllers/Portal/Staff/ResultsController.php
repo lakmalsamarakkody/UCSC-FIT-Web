@@ -191,7 +191,9 @@ class ResultsController extends Controller
             ->where('exam_type_id', $temp_data->exam_type_id)
             ->whereIn('exam_schedule_id', $schedules)
             ->update([
-                'mark' => $temp_data->grade,
+                'raw_mark' => $temp_data->grade,
+                'round_mark' => round($temp_data->grade, 0),
+                'mark' => round($temp_data->grade, 0),
                 'result' => 1,
                 'status' => $status
             ]);
