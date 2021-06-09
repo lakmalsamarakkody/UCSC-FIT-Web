@@ -837,7 +837,7 @@ class SystemController extends Controller
               set_time_limit(0);
 
                 // USER RECORD
-                if(TempStudent::where('email', $tempStudent->email)->get()->count() > 1 || isNull($tempStudent->email)):
+                if(TempStudent::where('email', $tempStudent->email)->get()->count() > 1 || $tempStudent->email == NULL):
                   $userEmail = strtolower($tempStudent->reg_no)."@fit.ucsc.ac.lk";
                 else:
                  $userEmail = $tempStudent->email;
