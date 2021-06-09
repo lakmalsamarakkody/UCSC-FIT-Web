@@ -118,15 +118,16 @@ class ExamApplicationController extends Controller
     public function appliedExamsTable(Request $request)
     {
         $today = Carbon::today();
-        $data = hasExam::where('payment_id', '!=', null)->where('payment_id',$request->payment_id)->where(function($query) {
-            $query->where('schedule_status', 'Scheduled')->orWhere('schedule_status', 'Pending');
-        })->addSelect([
+        $data = hasExam::where('payment_id', '!=', null)
+            ->where('payment_id',$request->payment_id)
+            ->where('schedule_status', 'Scheduled')->orWhere('schedule_status', 'Pending')
+            ->addSelect([
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
+            'schedule_date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'requested_month'=> Exam::select(DB::raw("MONTHNAME(CONCAT(year, '-',month, '-01')) as monthname"))->whereColumn('requested_exam_id', 'exams.id'),
             'requested_year'=> Exam::select('year')->whereColumn('requested_exam_id', 'exams.id'),
-            'schedule_date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'schedule_time'=> Schedule::select(DB::raw('CONCAT(start_time, end_time) as time'))->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'start_time'=>Schedule::select('start_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'end_time'=>Schedule::select('end_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
@@ -135,8 +136,13 @@ class ExamApplicationController extends Controller
         ->addColumn('requested_exam', function($row) {
             return $row->requested_year.' '.$row->requested_month;
         })
-        ->editColumn('start_time', function($data){ $start_time = Carbon::createFromFormat('H:i:s', $data->start_time)->isoFormat('hh:mmA'); return $start_time; })
-        ->editColumn('end_time', function($data){ $end_time = Carbon::createFromFormat('H:i:s', $data->end_time)->isoFormat('hh:mmA'); return $end_time; })
+        ->addColumn('schedule_time', function($row) {
+            if($row->start_time && $row->end_time ):
+                return Carbon::createFromFormat('H:i:s', $row->start_time)->isoFormat('hh:mmA').' '.Carbon::createFromFormat('H:i:s', $row->end_time)->isoFormat('hh:mmA');
+            else:
+                return NULL;
+            endif;
+        })
         ->rawColumns(['action'])
         ->make(true);
     }
