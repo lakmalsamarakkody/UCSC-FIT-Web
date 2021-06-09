@@ -45,7 +45,7 @@ class StudentExamListExport implements FromQuery,ShouldAutoSize,WithProperties,W
 
     public function headings(): array
     {
-        return ["ID", "Registration number", "Full Name"];
+        return ["Student ID", "Registration number", "Full Name"];
     }
 
     public function styles(Worksheet $sheet)
