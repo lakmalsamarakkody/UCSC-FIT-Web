@@ -482,7 +482,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-view-students',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can view all assign students for a schedule',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
@@ -490,7 +490,7 @@ class PermissionSeeder extends Seeder
                 [
                     'name'=>'staff-exam-schedule-student-deschedule',
                     'portal'=>'staff',
-                    'module'=>'exams',
+                    'module'=>'exam',
                     'description'=>'Can deschedule an assigned student',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
