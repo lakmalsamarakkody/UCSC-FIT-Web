@@ -248,29 +248,7 @@ class ResultsController extends Controller
                 'result_released' => 'released'
             ]);
 
-        //checking BIT eligibily and FIT certificate eligibility
-        $students = hasExam::select('student_id')->whereIn('exam_schedule_id', $schedules)->get();
-                // return $students;
-        foreach ($students as $student) {
-            $_103_eTest = hasExam::where('student_id', $student->student_id)->where('subject_id', 1)->where('exam_type_id', 1)->where('status', 'P')->get()->count();
-            $_203_eTest = hasExam::where('student_id', $student->student_id)->where('subject_id', 2)->where('exam_type_id', 1)->where('status', 'P')->get()->count();
-            $_303_eTest = hasExam::where('student_id', $student->student_id)->where('subject_id', 3)->where('exam_type_id', 1)->where('status', 'P')->get()->count();
-            $_103_prac = hasExam::where('student_id', $student->student_id)->where('subject_id', 1)->where('exam_type_id', 2)->where('status', 'P')->get()->count();
-            $_203_prac = hasExam::where('student_id', $student->student_id)->where('subject_id', 2)->where('exam_type_id', 2)->where('status', 'P')->get()->count();
-
-            if ( $_103_eTest>0 || $_203_eTest>0 || $_303_eTest>0 ):
-                Flag::where('student_id', $student->student_id)->update([
-                    'bit_eligible' => 1
-                ]);
-                if ( $_103_prac>0 || $_203_prac>0 ):
-                    Flag::where('student_id', $student->student_id)->update([
-                        'fit_cert' => 1
-                    ]);
-                endif;
-            endif;
-
-        }
-        // /checking BIT eligibily and FIT certificate eligibility
+        $this->checkCertificates($request->id);
 
         return response()->json(['success'=>'success']);
 
@@ -297,6 +275,8 @@ class ResultsController extends Controller
             ->update([
                 'result_released' => 'hold'
             ]);
+
+        $this->checkCertificates($request->id);
 
         return response()->json(['success'=>'success']);
             /** 
@@ -331,6 +311,45 @@ class ResultsController extends Controller
             return response()->json(['status'=>'success']);
         endif;
         return response()->json(['status'=>'error']);
+    }
+
+    private function checkCertificates($examID){
+
+        $schedules = Schedule::select('id')->where('exam_id', $examID)->get();
+
+        //checking BIT eligibily and FIT certificate eligibility
+        $students = hasExam::select('student_id')->whereIn('exam_schedule_id', $schedules)->get();
+        foreach ($students as $student) {
+            $_103_eTest = hasExam::where('student_id', $student->student_id)->where('subject_id', 1)->where('exam_type_id', 1)->where('status', 'P')->where('result',2)->get()->count();
+            $_203_eTest = hasExam::where('student_id', $student->student_id)->where('subject_id', 2)->where('exam_type_id', 1)->where('status', 'P')->where('result',2)->get()->count();
+            $_303_eTest = hasExam::where('student_id', $student->student_id)->where('subject_id', 3)->where('exam_type_id', 1)->where('status', 'P')->where('result',2)->get()->count();
+            $_103_prac = hasExam::where('student_id', $student->student_id)->where('subject_id', 1)->where('exam_type_id', 2)->where('status', 'P')->where('result',2)->get()->count();
+            $_203_prac = hasExam::where('student_id', $student->student_id)->where('subject_id', 2)->where('exam_type_id', 2)->where('status', 'P')->where('result',2)->get()->count();
+
+            if ( $_103_eTest>0 && $_203_eTest>0 && $_303_eTest>0 ):
+                Flag::where('student_id', $student->student_id)->update([
+                    'bit_eligible' => 1
+                ]);
+                if ( $_103_prac>0 && $_203_prac>0 ):
+                    Flag::where('student_id', $student->student_id)->update([
+                        'fit_cert' => 1
+                    ]);
+                else:
+                    Flag::where('student_id', $student->student_id)->update([
+                        'fit_cert' => 0
+                    ]);
+                endif;
+            else:
+                Flag::where('student_id', $student->student_id)->update([
+                    'bit_eligible' => 0
+                ]);
+                Flag::where('student_id', $student->student_id)->update([
+                    'fit_cert' => 0
+                ]);
+            endif;
+        }
+        // /checking BIT eligibily and FIT certificate eligibility
+
     }
 
 }
