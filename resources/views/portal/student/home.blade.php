@@ -136,7 +136,7 @@
 											</li>
 									@endif
 								@empty
-									hello
+									<h5>No announcements</h5>
 								@endforelse
 							</ul>
 						</div>
