@@ -237,20 +237,27 @@ class ResultsController extends Controller
     public function releaseResults(Request $request)
     {
         $schedules = Schedule::select('id')->where('exam_id', $request->id)->get();
+        
+        if( hasExam::whereIn('exam_schedule_id', $schedules)->where('result', 1)->count() <= 0 ):
+            return response()->json(['no_results'=>'no_results']);
+        else:        
+            hasExam::whereIn('exam_schedule_id', $schedules)
+                ->update([
+                    'result' => 2
+                ]);
 
-        hasExam::whereIn('exam_schedule_id', $schedules)
-            ->update([
-                'result' => 2
-            ]);
+            Exam::where('id', $request->id)
+                ->update([
+                    'result_released' => 'released'
+                ]);
 
-        Exam::where('id', $request->id)
-            ->update([
-                'result_released' => 'released'
-            ]);
+            $this->checkCertificates($request->id);
 
-        $this->checkCertificates($request->id);
+            return response()->json(['success'=>'success']);
 
-        return response()->json(['success'=>'success']);
+        endif;
+
+
 
             /** 
              * Results Field of student_exam table
@@ -263,7 +270,7 @@ class ResultsController extends Controller
     }
 
     public function holdResults(Request $request)
-    {
+    {        
         $schedules = Schedule::select('id')->where('exam_id', $request->id)->get();
 
         hasExam::whereIn('exam_schedule_id', $schedules)

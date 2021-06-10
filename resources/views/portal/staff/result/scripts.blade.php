@@ -390,10 +390,10 @@
                     text: "Results has been released Successfully",
                   })
                   table.draw();
-                }else if (data['error']){
+                }else if (data['no_results']){
                   SwalNotificationWarning.fire({
-                    title: 'Release Failed!',
-                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                    title: 'Zero Results Imported!',
+                    text: 'Please import results to release',
                   })
                 }
               },
