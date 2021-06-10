@@ -148,8 +148,8 @@
                 <tbody class="text-center">
                 @foreach($students as $student)                  
                     <tr>
-                      <td>{{ $student->student->reg_no }}</td>
-                      <td>{{ $student->student->initials }} {{ $student->student->last_name }}</td>
+                      <td>{{ $student->student->reg_no ?? "" }}</td>
+                      <td>{{ $student->student->initials ?? "" }} {{ $student->student->last_name ?? "" }}</td>
 
                       {{-- FIT103 E-Test --}}
                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('mark'))
