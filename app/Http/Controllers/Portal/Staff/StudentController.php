@@ -105,139 +105,159 @@ class StudentController extends Controller
         $student = Student::find($id);
         $registration = Registration::where('student_id', $id)->latest()->first();
         $medicals = Medical::where('student_id', $id)->orderBy('created_at','desc')->get();
-        return view('portal/staff/student/profile', compact('student', 'registration', 'medicals'));
+        $exams = hasExam::where('student_id', $id)->join('exam_schedules', 'student_exams.exam_schedule_id', '=', 'exam_schedules.id')->groupBy('exam_id')->select('exam_id')->get();
+        
+        $exam_ids = array();
+        foreach($exams as $exam){
+            $exam_ids [] = $exam->exam_id;
+        }
+
+        // echo response()->json($exam_ids);
+
+        $schedules = hasExam::where('student_id', $id)->join('exam_schedules', 'student_exams.exam_schedule_id', '=', 'exam_schedules.id')->whereIn('exam_schedules.exam_id', $exam_ids)->get();
+
+        // $schedules=Schedule::where('exam_id',$id)->get();
+
+        
+        $schedule_ids = array();
+        foreach($schedules as $schedule){
+            $schedule_ids [] = $schedule->id;
+        }
+
+
+        return view('portal/staff/student/profile', compact('student', 'registration', 'medicals', 'exams', 'schedule_ids'));
     }
 
-        // UPDATE EMAIL
-        public function emailUpdateRequest(Request $request)
-        {
-           
-            $validator = Validator::make($request->all(), 
-                [     
-                    'email'=> ['required', 'email', 'unique:users']
-                ],
-                [
-                    'unique'=>'Email already in use'
-                ]
-            );
-            if($validator->fails()):
-                return response()->json(['errors'=>$validator->errors()->all()]);
-            else:
-                $email =  $request->email;
-                $token = Str::random(32);
-                $user_id = Student::where('id', $request->id)->first()->user_id;
-    
-                $details = [
-                    'id' => $user_id,
-                    'email' => $email,
-                    'token' => $token
-                ];
-    
-                if(Mail::to($email)->send(new ChangeEmail($details))):
-                    return response()->json(['error'=>'error']);
-                else:
-                    if(User::where('id',$user_id)->update(['email_change_token'=> $token,'email_change'=> $email])):
-                        activity()->withProperties(['student_id' => $request->id, 'email' => $email])->log('Email Change Request');
-                        return response()->json(['success'=>'success']);
-                    endif;
-                endif;
-    
-            endif;
-            return response()->json(['error'=>'error']);
-        }
-        // /UPDATE EMAIL
-
-        // ACCOUNT BLOCK
-        public function blockActivities(Request $request)
-        {
-            $validator = Validator::make($request->all(), 
-                [     
-                    'id'=> ['required','integer']
-                ]
-            );
-            if($validator->fails()):
-                return response()->json(['errors'=>$validator->errors()->all()]);
-            else:
-                if(Flag::where('student_id', $request->id)->update(['phase_id' => 2])):
-                    return response()->json(['success'=>'success']);
-                endif;
-            endif;
-            return response()->json(['error'=>'error']);
-        }
-        // /ACCOUNT BLOCK
-
-        // ACCOUNT UNBLOCK
-        public function unBlockActivities(Request $request)
-        {
-            $validator = Validator::make($request->all(), 
-                [     
-                    'id'=> ['required','integer']
-                ]
-            );
-            if($validator->fails()):
-                return response()->json(['errors'=>$validator->errors()->all()]);
-            else:
-                if(Flag::where('student_id', $request->id)->update(['phase_id' => 1])):
-                    return response()->json(['success'=>'success']);
-                endif;
-            endif;
-            return response()->json(['error'=>'error']);
-        }
-        // /ACCOUNT UNBLOCK
-
-
-        // ACCOUNT DEACTIVATE
-        public function deactivateAccount(Request $request)
-        {
+    // UPDATE EMAIL
+    public function emailUpdateRequest(Request $request)
+    {
+        
+        $validator = Validator::make($request->all(), 
+            [     
+                'email'=> ['required', 'email', 'unique:users']
+            ],
+            [
+                'unique'=>'Email already in use'
+            ]
+        );
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        else:
+            $email =  $request->email;
+            $token = Str::random(32);
             $user_id = Student::where('id', $request->id)->first()->user_id;
-            $validator = Validator::make($request->all(), 
-                [     
-                    'message'=> ['required']
-                ]
-            );
-            if($validator->fails()):
-                return response()->json(['errors'=>$validator->errors()->all()]);
+
+            $details = [
+                'id' => $user_id,
+                'email' => $email,
+                'token' => $token
+            ];
+
+            if(Mail::to($email)->send(new ChangeEmail($details))):
+                return response()->json(['error'=>'error']);
             else:
-                if(User::where('id', $user_id)->update(['status' => 0, 'message' => $request->message])):
+                if(User::where('id',$user_id)->update(['email_change_token'=> $token,'email_change'=> $email])):
+                    activity()->withProperties(['student_id' => $request->id, 'email' => $email])->log('Email Change Request');
                     return response()->json(['success'=>'success']);
                 endif;
             endif;
-            return response()->json(['error'=>'error']);
-        }
-        // /ACCOUNT DEACTIVATE
 
-        // ACCOUNT ACTIVATE
-        public function reactivateAccount(Request $request)
-        {
-            $user_id = Student::where('id', $request->id)->first()->user_id;
-            $validator = Validator::make($request->all(), 
-                [     
-                    'message'=> ['required']
-                ]
-            );
-            if($validator->fails()):
-                return response()->json(['errors'=>$validator->errors()->all()]);
-            else:
-                if(User::where('id', $user_id)->update(['status' => 1, 'message' => $request->message])):
-                    return response()->json(['success'=>'success']);
-                endif;
+        endif;
+        return response()->json(['error'=>'error']);
+    }
+    // /UPDATE EMAIL
+
+    // ACCOUNT BLOCK
+    public function blockActivities(Request $request)
+    {
+        $validator = Validator::make($request->all(), 
+            [     
+                'id'=> ['required','integer']
+            ]
+        );
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        else:
+            if(Flag::where('student_id', $request->id)->update(['phase_id' => 2])):
+                return response()->json(['success'=>'success']);
             endif;
-            return response()->json(['error'=>'error']);
-        }
-        // /ACCOUNT ACTIVATE
+        endif;
+        return response()->json(['error'=>'error']);
+    }
+    // /ACCOUNT BLOCK
 
-        // MEDICAL MODAL LOAD
-        public function getMedicalDetails(Request $request)
-        {
-            $medical = Medical::where('id', $request->medical_id)->first();
-            $exam = hasExam::where('id',$medical->student_exam_id)->addSelect([
-                'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
-                'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
-                'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
-                'held_date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id')
-            ])->first();
-            $student = Student::where('id', $medical->student_id)->first();
-            return response()->json(['status'=>'success', 'medical'=>$medical, 'exam'=>$exam, 'student'=>$student]);
-        }
-        // /MEDICAL MODAL LOAD
+    // ACCOUNT UNBLOCK
+    public function unBlockActivities(Request $request)
+    {
+        $validator = Validator::make($request->all(), 
+            [     
+                'id'=> ['required','integer']
+            ]
+        );
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        else:
+            if(Flag::where('student_id', $request->id)->update(['phase_id' => 1])):
+                return response()->json(['success'=>'success']);
+            endif;
+        endif;
+        return response()->json(['error'=>'error']);
+    }
+    // /ACCOUNT UNBLOCK
+
+
+    // ACCOUNT DEACTIVATE
+    public function deactivateAccount(Request $request)
+    {
+        $user_id = Student::where('id', $request->id)->first()->user_id;
+        $validator = Validator::make($request->all(), 
+            [     
+                'message'=> ['required']
+            ]
+        );
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        else:
+            if(User::where('id', $user_id)->update(['status' => 0, 'message' => $request->message])):
+                return response()->json(['success'=>'success']);
+            endif;
+        endif;
+        return response()->json(['error'=>'error']);
+    }
+    // /ACCOUNT DEACTIVATE
+
+    // ACCOUNT ACTIVATE
+    public function reactivateAccount(Request $request)
+    {
+        $user_id = Student::where('id', $request->id)->first()->user_id;
+        $validator = Validator::make($request->all(), 
+            [     
+                'message'=> ['required']
+            ]
+        );
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        else:
+            if(User::where('id', $user_id)->update(['status' => 1, 'message' => $request->message])):
+                return response()->json(['success'=>'success']);
+            endif;
+        endif;
+        return response()->json(['error'=>'error']);
+    }
+    // /ACCOUNT ACTIVATE
+
+    // MEDICAL MODAL LOAD
+    public function getMedicalDetails(Request $request)
+    {
+        $medical = Medical::where('id', $request->medical_id)->first();
+        $exam = hasExam::where('id',$medical->student_exam_id)->addSelect([
+            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
+            'held_date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id')
+        ])->first();
+        $student = Student::where('id', $medical->student_id)->first();
+        return response()->json(['status'=>'success', 'medical'=>$medical, 'exam'=>$exam, 'student'=>$student]);
+    }
+    // /MEDICAL MODAL LOAD
 }
