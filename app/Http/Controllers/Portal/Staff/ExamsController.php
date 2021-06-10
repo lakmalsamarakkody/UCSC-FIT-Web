@@ -240,7 +240,7 @@ class ExamsController extends Controller
             return response()->json(['status'=>'error', 'errors'=>$edit_schedule_validator->errors()]);
         else:
             //Check if the exact schedule is in the table
-            $exists_schedule = Schedule::where('date',$request->editScheduleExamDate)->where('end_time', '>', $request->editScheduleStartTime)->first();
+            $exists_schedule = Schedule::where('id', '!=', $request->editScheduleId)->where('date',$request->editScheduleExamDate)->where('end_time', '>', $request->editScheduleStartTime)->first();
             if($exists_schedule != null):
                 return response()->json(['status'=>'exist', 'msg'=>'Another schedule already exists in this time period.']);
             endif;
