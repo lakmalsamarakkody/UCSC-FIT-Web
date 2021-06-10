@@ -185,6 +185,7 @@ Route::post('/portal/staff/results/import', [App\Http\Controllers\Portal\Staff\R
 Route::get('/portal/staff/results/temp/get/modal/details', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'getTempModalDetails'])->name('get.temp.modal.details');
 Route::get('/portal/staff/results/temp/get/details', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'getTempResults'])->name('get.temp.results');
 
+Route::post('/portal/staff/results/pushUpResults', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'pushUpResults'])->name('results.pushUpResults');
 Route::post('/portal/staff/results/release', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'releaseResults'])->name('results.release');
 Route::post('/portal/staff/results/hold', [App\Http\Controllers\Portal\Staff\ResultsController::class, 'holdResults'])->name('results.hold');
 

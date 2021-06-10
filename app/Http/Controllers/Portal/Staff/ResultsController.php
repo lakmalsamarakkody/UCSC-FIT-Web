@@ -37,21 +37,29 @@ class ResultsController extends Controller
         $months = Exam::select('month')->groupBy('month')->get();
 
         $today = Carbon::today();
-        $schedules = Schedule::where('date', '<', $today)->addSelect([
-            //'exam' => Exam::select(DB::raw("CONCAT(month, ' ', year) AS examname"))->whereColumn('exam_id','exams.id'),
-            'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
-            'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
-            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
-            'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
-            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->orderBy('date', 'desc')->get();
+        // $schedules = Schedule::where('date', '<', $today)->addSelect([
+        //     //'exam' => Exam::select(DB::raw("CONCAT(month, ' ', year) AS examname"))->whereColumn('exam_id','exams.id'),
+        //     'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
+        //     'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
+        //     'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+        //     'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
+        //     'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->orderBy('date', 'desc')->get();
 
-        $previous_years_exams = Exam::where('year', '<', $today->year);
-        $previous_exams = Exam::where('year', $today->year)->where('month', '<', $today->month)->union($previous_years_exams)->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+        // $previous_years_exams = Exam::where('year', '<', $today->year);
+        // $previous_exams = Exam::where('year', $today->year)->where('month', '<', $today->month)->union($previous_years_exams)->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+
+        $previous_exams = Exam::where('year', '<=', $today->year)->where('month', '<=', $today->month)
+                            ->join('exam_schedules', 'exams.id', 'exam_schedules.exam_id')
+                            ->select('exams.id','exams.year','exams.month')
+                            ->where('exam_schedules.date', '<', $today)
+                            ->orderBy('exams.year', 'desc')->orderBy('exams.month', 'desc')
+                            ->distinct()
+                            ->get();
         
         $subjects = Subject::all();
         $exam_types = Types::all();
 
-        return view('portal/staff/results',compact('years', 'months', 'schedules', 'previous_exams', 'exam_types', 'subjects'));
+        return view('portal/staff/results',compact('years', 'months', 'previous_exams', 'exam_types', 'subjects'));
     }
 
     public function getExamList(Request $request)
@@ -78,9 +86,14 @@ class ResultsController extends Controller
 
     public function viewResults($id)
     {
+        $exam_id = $id;
+        $subjects = Subject::all();
+        $exam_types = Types::all();
         $schedules=Schedule::where('exam_id',$id)->get();
+        $isReleased = NULL;
 
-        
+        (Exam::where('id', $exam_id)->where('result_released','released')->first()? $isReleased=TRUE : $isReleased=FALSE);
+
         $schedule_ids = array();
         foreach($schedules as $schedule){
             $schedule_ids [] = $schedule->id;
@@ -94,7 +107,7 @@ class ResultsController extends Controller
         //     echo $result;
         // }
         // echo $results;
-        return view('portal/staff/result/view', compact('students', 'schedule_ids'));
+        return view('portal/staff/result/view', compact('exam_id', 'isReleased', 'subjects', 'exam_types' ,'students', 'schedule_ids'));
     }
 
     public function temporaryImport(Request $request)
@@ -193,8 +206,8 @@ class ResultsController extends Controller
             ->whereIn('exam_schedule_id', $schedules)
             ->update([
                 'raw_mark' => $temp_data->grade,
-                'round_mark' => round($temp_data->grade, 0),
-                'mark' => round($temp_data->grade, 0),
+                'round_mark' => ceil($temp_data->grade),
+                'mark' => ceil($temp_data->grade),
                 'result' => 1,
                 'status' => $status
             ]);
@@ -294,6 +307,30 @@ class ResultsController extends Controller
              * released -> 2
              * 
              */
+    }
+
+    public function pushUpResults(Request $request){
+
+        $examId = $request->examId;
+        $subjectId = $request->subjectID;
+        $examTypeID = $request->examTypeID;
+        $pushUpMark = $request->pushUpMark;
+
+        $schedules=Schedule::where('exam_id',$examId)->get();
+        $schedule_ids = array();
+        foreach($schedules as $schedule){
+            $schedule_ids [] = $schedule->id;
+        }
+
+        $query = hasExam::whereIn('exam_schedule_id',$schedule_ids)->where('subject_id',$subjectId)->where('exam_type_id',$examTypeID)->where('mark', '<', 50)->where('mark', '>=', $pushUpMark);
+        if($query->first()):
+            if($query->update(['mark'=>50, 'status'=>'P'])):
+                return response()->json(['status'=>'success']);
+            endif;
+        else:
+            return response()->json(['status'=>'success']);
+        endif;
+        return response()->json(['status'=>'error']);
     }
 
 }

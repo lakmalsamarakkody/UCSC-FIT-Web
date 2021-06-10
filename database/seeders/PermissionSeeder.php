@@ -586,6 +586,38 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                [
+                    'name'=>'staff-result-view',
+                    'portal'=>'staff',
+                    'module'=>'result',
+                    'description'=>'Can view results',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-result-hold',
+                    'portal'=>'staff',
+                    'module'=>'result',
+                    'description'=>'Can hold results',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-result-release',
+                    'portal'=>'staff',
+                    'module'=>'result',
+                    'description'=>'Can release results',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-result-view-pushResults',
+                    'portal'=>'staff',
+                    'module'=>'result',
+                    'description'=>'Can push results of a exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
                 // /STAFF->RESULTS
 
                 // STAFF->USERS

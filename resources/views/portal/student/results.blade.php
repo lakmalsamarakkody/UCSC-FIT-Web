@@ -87,7 +87,7 @@
                           <table class="table w-100 text-center">
                               <thead>
                                   <th>Subject</th>
-                                  <th>Exam Type</th>
+                                  <th>Exam</th>
                                   <th>Result</th>
                                   <th>Medical</th>
                               </thead>
@@ -95,7 +95,7 @@
                               @foreach( App\Models\Student\hasExam::where('student_id', Auth::user()->student->id)->where('exam_schedule_id', '!=' , null)->join('exam_schedules', 'student_exams.exam_schedule_id', '=', 'exam_schedules.id')->where('exam_id', $exam->exam_id)->get() as $result)
                                   <tr>
                                       <td>FIT {{ $result->subject->code }}</td>
-                                      <td>{{ $result->subject->name }}</td>
+                                      <td>{{ $result->subject->name }} - {{ $result->type->name }}</td>
                                       <td>
                                         @if( $result->result <= 1 )                                        
                                         @else

@@ -21,9 +21,9 @@ class CreateStudentExamsTable extends Migration
             $table->integer('exam_type_id');
             $table->integer('requested_exam_id')->nullable();
             $table->boolean('result')->nullable()->default(false);
-            $table->integer('raw_mark')->nullable();
+            $table->decimal('raw_mark',10,2)->nullable();
             $table->integer('round_mark')->nullable();
-            $table->decimal('mark',10,2)->nullable();
+            $table->integer('mark')->nullable();
             $table->string('status')->nullable()->default('AB');
             $table->integer('payment_id')->nullable();
             $table->string('payment_status')->nullable();

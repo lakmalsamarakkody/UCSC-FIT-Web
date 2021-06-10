@@ -11,7 +11,7 @@
 
 </script>
     <!-- BREACRUMB -->
-    <section class="col-sm-10 mb-3">
+    <section class="col-6 col-md-7 col-lg-10 mb-3">
         <div class="row">           
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb ">
@@ -24,9 +24,9 @@
 
     <!-- IMPORT RESULTS -->
     @if(Auth::user()->hasPermission('staff-result-import'))
-    <div class="col-sm-2">
+    <div class="col-6 col-md-5 col-lg-2">
       <div class="row">
-        <div class="w-100 text-right pr-4">
+        <div class="w-100 text-right">
           <button class="btn w-100 btn-lg btn-info float-right pull-right" data-toggle="modal" data-target="#importResults">
             <i class="fa fa-file-import"></i>
              &nbsp; Import Results
