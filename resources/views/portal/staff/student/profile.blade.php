@@ -263,35 +263,125 @@
                                   <thead class="text-center">
                                     <tr>
                                       <th rowspan="2">Exam</th>
-                                      <th colspan="2">FIT 103</th>
-                                      <th colspan="2">FIT 203</th>
-                                      <th >FIT 303</th>
+                                      <th colspan="4">FIT 103</th>
+                                      <th colspan="4">FIT 203</th>
+                                      <th  colspan="2">FIT 303</th>
                                     </tr>
                                     <tr>
-                                      <th>E-Test</th>
-                                      <th>Practical</th>
-                                      <th>E-Test</th>
-                                      <th>Practical</th>
-                                      <th>E-Test</th>
+                                      <th colspan="2">E-Test</th>
+                                      <th colspan="2">Practical</th>
+                                      <th colspan="2">E-Test</th>
+                                      <th colspan="2">Practical</th>
+                                      <th  colspan="2">E-Test</th>
                                     </tr>
                                   </thead>
                                   <tbody class="text-center">
+
+                                  @foreach($exams as $exam)
+
                                     <tr>
-                                      <td>2021 March</td>
-                                      <td>78</td>
-                                      <td>90</td>
-                                      <td>45</td>
-                                      <td>89</td>
-                                      <td>40</td>
+                                      <td>{{ \Carbon\Carbon::createFromDate(App\Models\Exam::find($exam->exam_id)->year, App\Models\Exam::find($exam->exam_id)->month)->monthName}} {{ App\Models\Exam::find($exam->exam_id)->year }}</td>
+                                      
+                                      {{-- FIT103 E-Test --}}
+                                      @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->get('mark'))
+                                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->latest()->first('mark')['mark'] }}</td>
+                                        @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->latest()->first('result')['result']>0)
+                                          @if( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->latest()->first('status')['status'] == 'P' )
+                                          <td><h4><span class="badge badge-success">P</span></h4></td>
+                                          @elseif( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->latest()->first('status')['status'] == 'F' )
+                                          <td><h4><span class="badge badge-danger">F</span></h4></td>
+                                          @else
+                                          <td><h4><span class="badge badge-primary">{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->latest()->first('status')['status'] }}</span></h4></td>
+                                          @endif
+                                        @else
+                                          <td></td> 
+                                        @endif
+                                      @else
+                                      <td></td>  
+                                      <td></td>  
+                                      @endif
+                                      
+                                      {{-- FIT103 Practical --}}
+                                      @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 2)->get('mark'))
+                                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 2)->latest()->first('mark')['mark'] }}</td>
+                                        @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 2)->latest()->first('result')['result']>0)
+                                          @if( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 2)->latest()->first('status')['status'] == 'P' )
+                                          <td><h4><span class="badge badge-success">P</span></h4></td>
+                                          @elseif( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 2)->latest()->first('status')['status'] == 'F' )
+                                          <td><h4><span class="badge badge-danger">F</span></h4></td>
+                                          @else
+                                          <td><h4><span class="badge badge-primary">{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 2)->latest()->first('status')['status'] }}</span></h4></td>
+                                          @endif
+                                        @else
+                                          <td></td> 
+                                        @endif
+                                      @else
+                                      <td></td>  
+                                      <td></td>  
+                                      @endif
+
+                                      {{-- FIT203 E-Test --}}
+                                      @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 1)->get('mark'))
+                                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 1)->latest()->first('mark')['mark'] }}</td>
+                                        @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 1)->latest()->first('result')['result']>0)
+                                          @if( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 1)->latest()->first('status')['status'] == 'P' )
+                                          <td><h4><span class="badge badge-success">P</span></h4></td>
+                                          @elseif( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 1)->latest()->first('status')['status'] == 'F' )
+                                          <td><h4><span class="badge badge-danger">F</span></h4></td>
+                                          @else
+                                          <td><h4><span class="badge badge-primary">{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 1)->latest()->first('status')['status'] }}</span></h4></td>
+                                          @endif
+                                        @else
+                                          <td></td> 
+                                        @endif
+                                      @else
+                                      <td></td>  
+                                      <td></td>  
+                                      @endif
+
+                                      {{-- FIT203 Practical --}}
+                                      @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 2)->get('mark'))
+                                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 2)->latest()->first('mark')['mark'] }}</td>
+                                        @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 2)->latest()->first('result')['result']>0)
+                                          @if( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 2)->latest()->first('status')['status'] == 'P' )
+                                          <td><h4><span class="badge badge-success">P</span></h4></td>
+                                          @elseif( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 2)->latest()->first('status')['status'] == 'F' )
+                                          <td><h4><span class="badge badge-danger">F</span></h4></td>
+                                          @else
+                                          <td><h4><span class="badge badge-primary">{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 2)->latest()->first('status')['status'] }}</span></h4></td>
+                                          @endif
+                                        @else
+                                          <td></td> 
+                                        @endif
+                                      @else
+                                      <td></td>  
+                                      <td></td>  
+                                      @endif
+
+                                      {{-- FIT303 E-Test --}}
+                                      @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 3)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 3)->where('exam_type_id', 1)->get('mark'))
+                                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 3)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 3)->where('exam_type_id', 1)->latest()->first('mark')['mark'] }}</td>
+                                        @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 3)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 3)->where('exam_type_id', 1)->latest()->first('result')['result']>0)
+                                          @if( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 3)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 3)->where('exam_type_id', 1)->latest()->first('status')['status'] == 'P' )
+                                          <td><h4><span class="badge badge-success">P</span></h4></td>
+                                          @elseif( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 3)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 3)->where('exam_type_id', 1)->latest()->first('status')['status'] == 'F' )
+                                          <td><h4><span class="badge badge-danger">F</span></h4></td>
+                                          @else
+                                          <td><h4><span class="badge badge-primary">{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 3)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 3)->where('exam_type_id', 1)->latest()->first('status')['status'] }}</span></h4></td>
+                                          @endif
+                                        @else
+                                          <td></td> 
+                                        @endif
+                                      @else
+                                      <td></td>  
+                                      <td></td>  
+                                      @endif
+
+
                                     </tr>
-                                    <tr>
-                                      <td>2021 March</td>
-                                      <td>70</td>
-                                      <td>80</td>
-                                      <td>49</td>
-                                      <td>74</td>
-                                      <td>78</td>
-                                    </tr>
+
+                                  @endforeach
+
                                   </tbody>
                                 </table>
                               </div>
