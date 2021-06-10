@@ -117,7 +117,7 @@
                       @endif
 
                       <div class="btn-group">
-                        @if(Auth::user()->hasPermission('staff-exam-examList-viewResults'))<button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-exam-examList-viewResults'))<a href="/portal/staff/result/view/{{$exam->id}}" target="_blank"><button type="button" class="btn btn-outline-success" data-tooltip="tooltip" data-toggle="modal" data-placement="bottom" title="View Results"><i class="fas fa-eye"></i></button></a>@endif
                         @if(Auth::user()->hasPermission('staff-exam-examList-delete'))<button type="button" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Delete Exam" id="btnDeleteExam-{{$exam->id}}" onclick="onclick_delete_exam({{$exam->id}});"><i class="fas fa-trash-alt"></i></button>@endif
                       </div>
                     </td>
