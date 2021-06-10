@@ -109,8 +109,8 @@
               SwalDoneSuccess.fire({
                 title: "Created!",
                 text: "Exam created.",
-              }).then((result1) => {
-                      reload();
+              }).then((result) => {
+                      location.reload();
                     })
             }
           },
@@ -160,8 +160,8 @@
                     SwalDoneSuccess.fire({
                         title: 'Deleted!',
                         text: 'Exam has been deleted.',
-                    }).then((result1) => {
-                      reload();
+                    }).then((result) => {
+                      location.reload();
                     })
                 },
                 error: function(err){

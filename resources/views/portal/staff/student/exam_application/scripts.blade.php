@@ -72,7 +72,7 @@
                             return 'Not Scheduled'
                         }
                         else {
-                            return row['start_time'] + ' - ' + row['end_time'];
+                            return data;
                         }
                     }
                 },

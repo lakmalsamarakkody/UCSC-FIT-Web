@@ -43,7 +43,7 @@
                       } else if (data == "hold") {
                         return '<h4><span class="badge badge-pill badge-danger">Hold</span></h4>';
                       } else {
-                        return '<h4><span class="badge badge-pill badge-dark">Pending</span></h4>';
+                        return '<h4><span class="badge badge-pill badge-warning">Pending</span></h4>';
                       }
                     }
 
@@ -53,12 +53,12 @@
                     render: function ( data, type, row ) {
                         var btnGroup = '<div class = "btn-group">';
 
-                        btnGroup += '<a title="View Results" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-success text-center" href="{{ route("results.view", ":id") }}" target="_blank"><i class="fa fa-eye"></i></a>';
+                        btnGroup += '@if(Auth::user()->hasPermission("staff-result-view"))<a title="View Results" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-success text-center" href="{{ route("results.view", ":id") }}" target="_blank"><i class="fa fa-eye"></i></a>@endif';
 
                         if (row['result_released'] == "released"){
-                          btnGroup += '<button title="Hold Results" data-tooltip="tooltip"  data-placement="bottom"  class="btn btn-danger text-center" onclick="hold_results('+data+')"><i class="fas fa-times-circle"></i></button>';
+                          btnGroup += '@if(Auth::user()->hasPermission("staff-result-hold"))<button title="Hold Results" data-tooltip="tooltip"  data-placement="bottom"  class="btn btn-danger text-center" onclick="hold_results('+data+')"><i class="fas fa-ban"></i></button>@endif';
                         } else {
-                          btnGroup += '<button title="Release Results" data-tooltip="tooltip"  data-placement="bottom"  class="btn btn-primary text-center" onclick="release_results('+data+')"><i class="fas fa-share-square"></i></button></div>';
+                          btnGroup += '@if(Auth::user()->hasPermission("staff-result-release"))<button title="Release Results" data-tooltip="tooltip"  data-placement="bottom"  class="btn btn-primary text-center" onclick="release_results('+data+')"><i class="fas fa-share-square"></i></button></div>@endif';
                         }
 
                         btnGroup += '</div>';

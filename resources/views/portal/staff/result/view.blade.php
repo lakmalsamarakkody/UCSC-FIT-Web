@@ -31,56 +31,104 @@
       <div class="row">
         <!-- <div class="col-lg-2"></div> -->
 
-        <div class="col-lg-12">
+        {{-- <div class="col-lg-12">
 
-        {{-- <div class="card">
-          <div class="card-header">Filters</div>
-          <div class="card-body">
-            <form>
-              <div class="form-row">
-                <div class="form-group col-12">
-                  <div class="input-group input-group-md">
-                    <div class="input-group-prepend">
-                      <button type="button" class="form-control btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"><i class="fa fa-filter"></i>&nbsp;Filter</button>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Enter search details.."/>
-                    <div class="input-group-append">
-                      <button type="button" class="form-control btn btn-primary"><i class="fa fa-search"></i>&nbsp;Search</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="collapse" id="collapseExample">
-                <div class="card shadow-none">
-                  <div class="card-body">
-                    <div class="form-row">
-                      <div class="form-group col">
-                        <label for="InputStudentName">Name</label>
-                        <input type="text" class="form-control form-control-sm" id="InputStudentName" aria-describedby="InputStudentNameHelp"/>
-                        <small id="InputStudentNameHelp" class="form-text text-muted">Enter Name Here</small>
+          <div class="card">
+            <div class="card-header">Filters</div>
+            <div class="card-body">
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-12">
+                    <div class="input-group input-group-md">
+                      <div class="input-group-prepend">
+                        <button type="button" class="form-control btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"><i class="fa fa-filter"></i>&nbsp;Filter</button>
                       </div>
-                      <div class="form-group col">
-                        <label for="InputStudentNIC">Registration Number</label>
-                        <input type="text" class="form-control form-control-sm" id="InputStudentNIC" aria-describedby="InputStudentNICHelp"/>
-                        <small id="InputStudentNICHelp" class="form-text text-muted">Enter Registration Number Here</small>
+                      <input type="text" class="form-control" placeholder="Enter search details.."/>
+                      <div class="input-group-append">
+                        <button type="button" class="form-control btn btn-primary"><i class="fa fa-search"></i>&nbsp;Search</button>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>              
-            </form>
-          </div>
+                <div class="collapse" id="collapseExample">
+                  <div class="card shadow-none">
+                    <div class="card-body">
+                      <div class="form-row">
+                        <div class="form-group col">
+                          <label for="InputStudentName">Name</label>
+                          <input type="text" class="form-control form-control-sm" id="InputStudentName" aria-describedby="InputStudentNameHelp"/>
+                          <small id="InputStudentNameHelp" class="form-text text-muted">Enter Name Here</small>
+                        </div>
+                        <div class="form-group col">
+                          <label for="InputStudentNIC">Registration Number</label>
+                          <input type="text" class="form-control form-control-sm" id="InputStudentNIC" aria-describedby="InputStudentNICHelp"/>
+                          <small id="InputStudentNICHelp" class="form-text text-muted">Enter Registration Number Here</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>              
+              </form>
+            </div>
+          </div> 
+
         </div> --}}
-
-        </div>
         <!-- <div class="col-lg-1"></div> -->
+
+        {{-- PUSH UP RESULTS --}}
+        @if(Auth::user()->hasPermission('staff-result-view-pushResults') && !$isReleased)
+        <div class="col-lg-12">
+          <div class="card shadow  mt-3">
+            <div class="card-header">
+              Push up Results
+            </div>
+            <div class="card-body">
+              <form id="resultsPushForm">
+                <div class="form-row">
+                  <div class="form-group col">
+                    {{-- <label for="subject">Subject</label> --}}
+                    <select id="subject" name="subject" class="form-control">
+                      <option value=null selected>Subject</option>
+                      @foreach($subjects as $subject)                          
+                      <option value="{{$subject->id}}">{{$subject->name}}</option>
+                      @endforeach
+                    </select>
+                    <span id="errsubject" class="invalid-feedback" role="alert"></span>
+                  </div>
+                  <div class="form-group col">
+                    {{-- <label for="examType">Exam Type</label> --}}
+                    <select id="examType" name="examType" class="form-control">
+                      <option value=null selected>Exam type</option>
+                      @foreach($exam_types as $exam_type)                          
+                      <option value="{{$exam_type->id}}">{{$exam_type->name}}</option>
+                      @endforeach
+                    </select>
+                    <span id="errexamType" class="invalid-feedback" role="alert"></span>
+                  </div>
+                  <div class="form-group col">
+                    <input type="number" id="txtPushMark" class="form-control" placeholder="Push-up mark (default : 48)" max="49" min="0"/>
+                  </div>
+                  <div class="form-group col">
+                    <button type="button" id="btnPushResults" class="btn btn-outline-primary w-100" onclick="pushResults({{ $exam_id}})">
+                      Push
+                      <span id="btnPushResultsSpinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        @endif
+        {{-- /PUSH UP RESULTS --}}
+
         <div class="col-lg-12">
           <div class="card shadow  mt-3">
             <div class="card-header">
               Results
             </div>
             <div class="card-body">
-              <table class="table table-bordered yajra-datatable">
+              <table class="table table-bordered table-hover yajra-datatable">
                 <thead class="text-center">
                   <tr>
                     <th rowspan="2">Registration No</th>
@@ -101,11 +149,16 @@
                 @foreach($students as $student)                  
                     <tr>
                       <td>{{ $student->student->reg_no }}</td>
-                      <td>{{ $student->student->full_name }}</td>
+                      <td>{{ $student->student->initials }} {{ $student->student->last_name }}</td>
 
                       {{-- FIT103 E-Test --}}
-                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->get('mark'))
-                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('mark')['mark'] }}</td>
+                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('mark'))
+                      <td>
+                        {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('round_mark')['round_mark'] }}
+                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('mark')['mark'])  
+                        <span class="text-success">-></span>  {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('mark')['mark'] }}
+                        @endif
+                        </td>
                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first()['result']>0)
                         @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first()['status'] == 'P')
                         <td><i class="fa fa-check"></i></td>
@@ -123,8 +176,13 @@
                       @endif
 
                       {{-- FIT103 Practical --}}
-                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->get('mark'))
-                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('mark')['mark'] }}</td>
+                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('mark'))
+                      <td>
+                        {{App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('round_mark')['round_mark']}}
+                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('mark')['mark'])
+                        <span class="text-success">-></span> {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('mark')['mark'] }}
+                        @endif
+                      </td>
                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['result']>0)
                         @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['status'] == 'P')
                         <td><i class="fa fa-check"></i></td>
@@ -142,8 +200,13 @@
                       @endif
 
                       {{-- FIT203 E-Test --}}
-                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->get('mark'))
-                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('mark')['mark'] }}</td>
+                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('mark'))
+                      <td>
+                        {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('round_mark')['round_mark'] }}
+                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('mark')['mark'])
+                        <span class="text-success">-></span> {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('mark')['mark'] }}
+                        @endif
+                        </td>
                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first()['result']>0)
                         @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first()['status'] == 'P')
                         <td><i class="fa fa-check"></i></td>
@@ -161,8 +224,13 @@
                       @endif
 
                       {{-- FIT203 Practical --}}
-                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->get('mark'))
-                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('mark')['mark'] }}</td>
+                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('mark'))
+                      <td>
+                        {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('round_mark')['round_mark'] }}
+                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('mark')['mark'])
+                        <span class="text-success">-></span> {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('mark')['mark'] }}
+                        @endif
+                      </td>
                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first()['result']>0)
                         @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first()['status'] == 'P')
                         <td><i class="fa fa-check"></i></td>
@@ -181,15 +249,20 @@
                       
 
                       {{-- FIT303 E-Test --}}
-                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->get('mark'))
-                      <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('mark')['mark'] }}</td>
-                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['result']>0)
+                      @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('mark'))
+                      <td>
+                        {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('round_mark')['round_mark'] }}
+                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('mark')['mark'])
+                        <span class="text-success">-></span> {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('mark')['mark'] }}
+                        @endif
+                      </td>
+                          @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['result']>0)
                         @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['status'] == 'P')
                         <td><i class="fa fa-check"></i></td>
                         @elseif(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['status'] == 'F')
                         <td><i class="fa fa-times"></i></td>  
                         @else
-                        <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 2)->first()['status'] }}</td>
+                        <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['status'] }}</td>
                         @endif
                        @else
                       <td></td> 

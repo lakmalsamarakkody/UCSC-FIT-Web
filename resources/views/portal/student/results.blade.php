@@ -87,7 +87,7 @@
                           <table class="table w-100 text-center">
                               <thead>
                                   <th>Subject</th>
-                                  <th>Exam Type</th>
+                                  <th>Exam</th>
                                   <th>Result</th>
                                   <th>Medical</th>
                               </thead>
