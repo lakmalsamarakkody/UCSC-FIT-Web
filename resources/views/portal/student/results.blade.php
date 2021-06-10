@@ -94,8 +94,8 @@
                               <tbody>
                               @foreach( App\Models\Student\hasExam::where('student_id', Auth::user()->student->id)->where('exam_schedule_id', '!=' , null)->join('exam_schedules', 'student_exams.exam_schedule_id', '=', 'exam_schedules.id')->where('exam_id', $exam->exam_id)->get() as $result)
                                   <tr>
-                                      <td>FIT {{ $result->subject->code }}</td>
-                                      <td>{{ $result->subject->name }}</td>
+                                      <td>FIT {{ $result->subject->code }} {{ $result->subject->name }}</td>
+                                      <td>{{ $result->type->name }}</td>
                                       <td>
                                         @if( $result->result <= 1 )                                        
                                         @else
