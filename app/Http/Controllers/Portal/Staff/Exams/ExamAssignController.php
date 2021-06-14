@@ -14,6 +14,8 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isNull;
+
 class ExamAssignController extends Controller
 {
     public function index()
@@ -148,20 +150,27 @@ class ExamAssignController extends Controller
     {
         $schedule = Schedule::where('id', $request->schedule_id)->first();
         $students_array = json_decode($request->assign_students);
+        $isExists = NULL;
         if($students_array == null):
             return response()->json(['status'=>'unselected']);
         else:
             foreach($students_array as $student):
-                $exam = hasExam::create([
-                    'student_id'=> $student,
-                    'exam_schedule_id'=> $request->schedule_id,
-                    'subject_id'=> $schedule->subject_id,
-                    'exam_type_id'=> $schedule->exam_type_id,
-                    'schedule_status'=> 'Approved',
-                    'payment_status'=> 'Approved'
-                ]);
+                $isRecordExists = hasExam::where('student_id',$student)->where('exam_schedule_id',$request->schedule_id)->where('subject_id',$schedule->subject_id)->where('exam_type_id',$schedule->exam_type_id)->first();
+                if($isRecordExists):
+                    $isExists = TRUE;
+                else:
+                    $exam = hasExam::create([
+                        'student_id'=> $student,
+                        'exam_schedule_id'=> $request->schedule_id,
+                        'subject_id'=> $schedule->subject_id,
+                        'exam_type_id'=> $schedule->exam_type_id,
+                        'schedule_status'=> 'Approved',
+                        'payment_status'=> 'Approved'
+                    ]);
+                endif;
             endforeach;
-            return response()->json(['status'=>'success']);
+            if($isExists) return response()->json(['status'=>'success', 'exists'=>'Skipped some existing records']);
+            return response()->json(['status'=>'success', 'exists'=>""]);
     endif;
     }
     // /ASSIGN STUDENTS FOR THE EXAM

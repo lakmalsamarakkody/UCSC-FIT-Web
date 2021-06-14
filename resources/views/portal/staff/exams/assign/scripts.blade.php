@@ -94,8 +94,8 @@ draw_student_table = () => {
     $('.tbl-assign-students-yajradt').DataTable().clear().destroy();
     studentTable = $('.tbl-assign-students-yajradt').DataTable({
         processing: true,
-        serverSide: true,
-        searching: false,
+        serverSide: false,
+        searching: true,
         ajax: {
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             url: "{{ route('exams.assign.students.table') }}",
@@ -262,7 +262,7 @@ assign_students = () => {
                         console.log('Success in assign students for exam.');
                         SwalDoneSuccess.fire({
                             title: 'Success!',
-                            text: 'Selected students have been assigned for the exam.',
+                            text: 'Selected students have been assigned for the exam. '+data['exists'],
                         })
                         .then((result) => {
                             if(result.isConfirmed) {
