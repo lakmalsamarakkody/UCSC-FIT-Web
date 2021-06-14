@@ -75,6 +75,12 @@
         </div> --}}
         <!-- <div class="col-lg-1"></div> -->
 
+        {{-- EXAM TITLE --}}
+        <div class="col-lg-12 text-center">
+          <h1><span class="badge badge-secondary"> {{ App\Models\Exam::where('id',$exam_id)->first()->year }} - {{ Carbon\Carbon::createFromDate(2000,App\Models\Exam::where('id',$exam_id)->first()->month)->monthName }} </span></h1>
+        </div>
+        {{-- EXAM TITLE --}}
+
         {{-- PUSH UP RESULTS --}}
         @if(Auth::user()->hasPermission('staff-result-view-pushResults') && !$isReleased)
         <div class="col-lg-12">
@@ -109,7 +115,7 @@
                     <input type="number" id="txtPushMark" class="form-control" placeholder="Push-up mark (default : 48)" max="49" min="0"/>
                   </div>
                   <div class="form-group col">
-                    <button type="button" id="btnPushResults" class="btn btn-outline-primary w-100" onclick="pushResults({{ $exam_id}})">
+                    <button type="button" id="btnPushResults" class="btn btn-outline-primary w-100" onclick="pushResults({{$exam_id}})">
                       Push
                       <span id="btnPushResultsSpinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
                     </button>
@@ -128,7 +134,7 @@
               Results
             </div>
             <div class="card-body">
-              <table class="table table-bordered table-hover yajra-datatable">
+              <table class="table border-0 table-bordered table-hover yajra-datatable">
                 <thead class="text-center">
                   <tr>
                     <th rowspan="2">Registration No</th>
