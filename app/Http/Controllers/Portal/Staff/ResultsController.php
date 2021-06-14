@@ -201,16 +201,22 @@ class ResultsController extends Controller
                 $status = 'AB';
             endif;
             hasExam::where('student_id', $temp_data->student->id)
-            ->where('subject_id', $temp_data->subject_id)
-            ->where('exam_type_id', $temp_data->exam_type_id)
-            ->whereIn('exam_schedule_id', $schedules)
-            ->update([
-                'raw_mark' => $temp_data->grade,
-                'round_mark' => ceil($temp_data->grade),
-                'mark' => ceil($temp_data->grade),
-                'result' => 1,
-                'status' => $status
-            ]);
+                    ->where('subject_id', $temp_data->subject_id)
+                    ->where('exam_type_id', $temp_data->exam_type_id)
+                    ->whereIn('exam_schedule_id', $schedules)
+                    ->update([
+                        'raw_mark' => $temp_data->grade,
+                        'round_mark' => ceil($temp_data->grade),
+                        'mark' => ceil($temp_data->grade),                
+                        'status' => $status
+                    ]);
+
+            hasExam::where('subject_id', $temp_data->subject_id)
+                    ->where('exam_type_id', $temp_data->exam_type_id)
+                    ->whereIn('exam_schedule_id', $schedules)
+                    ->update([
+                        'result' => 1,
+                    ]);
 
             /** 
              * Results Field of student_exam table
