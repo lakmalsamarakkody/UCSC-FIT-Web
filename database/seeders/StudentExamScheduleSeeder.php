@@ -18,16 +18,15 @@ class StudentExamScheduleSeeder extends Seeder
         $students=Student::all();
         
         foreach($students as $student):
-            if ($student->id < 81) {
+            if ($student->id < 85) {
                 DB::table('student_exams')->insert(
                     array(
                         [
-                            'exam_schedule_id' => 136,
+                            'exam_schedule_id' => 145,
                             'student_id'=>$student->id,
-                            'subject_id'=> 1,
+                            'subject_id'=> 3,
                             'exam_type_id' =>  1,
                             'requested_exam_id' => 28,
-                            'status'=> 'AB',
                             'payment_id'=> $student->id,
                             'payment_status'=> 'Approved',
                             'schedule_status'=> 'Approved',
