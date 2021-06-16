@@ -133,7 +133,6 @@
       url = url.replace(':id', id);
       //    alert (id)
       let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1500,height=700,left=100,top=100`;
-      //window.open( url,'User_Profile',params)
-      window.open( url,'_blank');
+      window.open( url,'User_Profile',params)
   }
 </script>
