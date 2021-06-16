@@ -19,7 +19,8 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert(
             array(
-                ['name'=> 'elc',
+                [
+		'name'=> 'elc',
                 'email'=>"elc@ucsc.cmb.ac.lk",
                 'password'=>'$2y$10$chLDig2zqSahPLNRnur.0O3xzyvjlzH54Jwsp.gblzj3Ltp.dfxkG',
                 'role_id'=> '2',
