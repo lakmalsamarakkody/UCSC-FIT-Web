@@ -29,19 +29,19 @@
                                     </tr>
                                     <tr>
                                         <th>User Name:</th>
-                                        <td>{{ Auth::user()->name }}.</td>
+                                        <td>{{ Auth::user()->name }}</td>
                                     </tr>
                                     <tr>
                                         <th>User Email:</th>
-                                        <td>{{ Auth::user()->email }}.</td>
+                                        <td>{{ Auth::user()->email }}</td>
                                     </tr>
                                     <tr>
                                         <th>User Role:</th>
-                                        <td>{{ Auth::user()->role->name }}.</td>
+                                        <td>{{ Auth::user()->role->name }}</td>
                                     </tr>
                                     <tr>
                                         <th>User Created at:</th>
-                                        <td>{{ Auth::user()->created_at }}.</td>
+                                        <td>{{ Auth::user()->created_at }}</td>
                                     </tr>
                                 </table>
                             </div>
