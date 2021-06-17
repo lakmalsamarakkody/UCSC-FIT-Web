@@ -277,7 +277,7 @@
                                   </thead>
                                   <tbody class="text-center">
 
-                                  {{-- @foreach($exams as $exam) --}}
+                                  @foreach($exams as $exam)
 
                                     <tr>
                                       {{-- <td>{{ \Carbon\Carbon::createFromDate(App\Models\Exam::find($exam->exam_id)->year, App\Models\Exam::find($exam->exam_id)->month)->monthName}} {{ App\Models\Exam::find($exam->exam_id)->year }}</td> --}}
@@ -380,7 +380,7 @@
 
                                     </tr>
 
-                                  {{-- @endforeach --}}
+                                  @endforeach
 
                                   </tbody>
                                 </table>
@@ -391,6 +391,23 @@
                               {{-- MEDICAL TAB CONTENT --}}
                               @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
                               <div class="tab-pane fade" id="medicals" role="tabpanel" aria-labelledby="medicals-tab">
+                                
+                                
+                                <div class="input-group mb-4">
+                                  <div class="col-lg-3 col-5">
+                                    <span class="badge badge-warning">P</span> <b>Pending</b>
+                                  </div>
+                                  <div class="col-lg-3 col-7">
+                                    <span class="badge badge-success">A</span> <b>Approved</b>
+                                  </div>
+                                  <div class="col-lg-3 col-5">
+                                    <span class="badge badge-danger">D</span> <b>Declined</b>
+                                  </div>
+                                  <div class="col-lg-3 col-7">
+                                    <span class="badge badge-secondary">R</span> <b>Declined to Resubmit</b>
+                                  </div>
+                                </div>
+                                
                                 <table class="table table-bordered table-responsive-md">
                                   <thead class="text-center">
                                     <tr>
@@ -398,6 +415,7 @@
                                       <th>Held Date</th>
                                       <th>Subject</th>
                                       <th>Exam Type</th>
+                                      <th>Status</th>
                                       <th>Medical</th>
                                     </tr>
                                   </thead>
@@ -418,6 +436,8 @@
                                           @else
                                             <span class="badge badge-secondary">R</span>
                                           @endif
+                                        </td>
+                                        <td>
                                           @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
                                             <button class="btn btn-sm btn-warning px-32 text-center" id="modalProfileMedical-{{ $medical->id }}" onclick="view_medical({{ $medical->id }});"><i class="fa fa-eye p-0"></i></button>
                                           @endif
@@ -426,20 +446,6 @@
                                       @endforeach
                                   </tbody>
                                 </table>
-                                <div class="input-group">
-                                  <div class="col-lg-3 col-5">
-                                    <span class="badge badge-warning">P</span> <b>Pending</b>
-                                  </div>
-                                  <div class="col-lg-3 col-7">
-                                    <span class="badge badge-success">A</span> <b>Approved</b>
-                                  </div>
-                                  <div class="col-lg-3 col-5">
-                                    <span class="badge badge-danger">D</span> <b>Declined</b>
-                                  </div>
-                                  <div class="col-lg-3 col-7">
-                                    <span class="badge badge-secondary">R</span> <b>Declined to Resubmit</b>
-                                  </div>
-                                </div>
                               </div>
                               @endif
                               {{-- /MEDICAL TAB CONTENT --}}
