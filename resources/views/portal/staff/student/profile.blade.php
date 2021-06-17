@@ -425,11 +425,11 @@
                                         <td>
                                           @if($medical->status == 'Pending')
                                             <span class="badge badge-warning">P</span>
-                                          @elseif($medical->status == 'Approved')
+                                          @elseif($medical->status == 'Approved' || $medical->status == 'Rescheduled')
                                             <span class="badge badge-success">A</span>
                                           @elseif($medical->status == 'Declined')
                                             <span class="badge badge-danger">D</span>
-                                          @else
+                                          @elseif($medical->status == 'Resubmit')
                                             <span class="badge badge-secondary">R</span>
                                           @endif
                                         </td>
