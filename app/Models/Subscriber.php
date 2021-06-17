@@ -11,7 +11,6 @@ class Subscriber extends Model
 {
     use HasFactory;
     use LogsActivity;
-    use SoftDeletes;
 
     protected static $logAttributes = ['*'];
     protected static $logName = 'subscriber';
