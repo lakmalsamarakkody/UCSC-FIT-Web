@@ -135,7 +135,7 @@
                   </div>
                   <div class="col-md-4 align-middle">  
                       <div class="row  justify-content-center">                               
-                          <div class="img mt-5 mb-2  position-relative">
+                          {{-- <div class="img mt-5 mb-2  position-relative">
                               <img src="{{ asset('storage/portal/avatar/'.$student->user_id.'/'.$student->user->profile_pic)}}" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
                           </div>
                           <div class="text-center w-100 ">
@@ -143,10 +143,10 @@
                               <button onclick="reset_email()" class="btn btn-lg btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Reset Email">
                                 <i class="fa fa-envelope"></i>
                               </button>
-                            @endif
+                            @endif --}}
 
                             {{-- REGISTRATION block/UNblock --}}
-                            @if(!Auth::user()->hasPermission('staff-student-profile-block'))
+                            {{-- @if(!Auth::user()->hasPermission('staff-student-profile-block'))
                               @if($student->flag->phase_id != 2)
                               <button onclick="block_activities()" class="btn btn-lg btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Block User Activities">
                                 <i class="fa fa-user-lock"></i>
@@ -156,11 +156,11 @@
                                 <i class="fa fa-unlock"></i>
                               </button>
                               @endif
-                            @endif
+                            @endif --}}
                             {{-- /REGISTRATION block/UNblock --}}
 
                             {{-- ACCOUNT ACTIVATION/DEACTIVATION --}}
-                            @if(Auth::user()->hasPermission('staff-student-profile-account'))
+                            {{-- @if(Auth::user()->hasPermission('staff-student-profile-account'))
                               @if($student->user->status != 1)
                                 <button onclick="activate_acc()" class="btn btn-lg btn-outline-success" data-tooltip="tooltip" data-placement="bottom" title="Activate Account">
                                   <i class="fa fa-user-check"></i>
@@ -170,11 +170,11 @@
                                   <i class="fa fa-user-alt-slash"></i>
                                 </button>                          
                               @endif
-                            @endif
+                            @endif --}}
                             {{-- ACCOUNT ACTIVATION/DEACTIVATION --}}
                           </div>
                           
-                            <table class="table mt-4">                        
+                            {{-- <table class="table mt-4">                        
                               <tr>
                                 <th>BIT Eligibility:</th>
                                 @if( $student->flag->bit_eligible == 1 )                                        
@@ -189,14 +189,14 @@
                                 <td><h4><span class="badge badge-danger">Not Eligible</span></h4></td>                                        
                                 @endif
                               </tr>
-                            </table>
+                            </table> --}}
                       </div>   
                   </div>                                                            
                   <div class="col-12 col-md-6">
                       <h5>Permanent Address</h5>
                       <hr>
                       <div class="ml-lg-4">
-                          <p>{{ $student->permanent_house }}</p>  
+                          {{-- <p>{{ $student->permanent_house }}</p>  
                           <p>{{ $student->permanent_address_line1 ?? '' }}</p>
                           <p>{{ $student->permanent_address_line2 ?? '' }}</p>  
                           <p>{{ $student->permanent_address_line3 ?? '' }}</p>  
@@ -209,10 +209,10 @@
                           <p>{{ $student->permanent_city_world->name ?? ''}}</p>
                           <p>{{ $student->permanent_district_world->name ?? ''}}</p>
                           <p>{{ $student->permanent_country->name ?? ''}}</p>
-                          @endif
+                          @endif --}}
                       </div>
                   </div>  
-                  @if($student->current_house || $student->current_country_id)                  
+                  {{-- @if($student->current_house || $student->current_country_id)                  
                   <div class="col-12 col-md-6">
                       <h5>Current Address</h5>
                       <hr>
@@ -233,16 +233,16 @@
                           @endif
                       </div>
                   </div>
-                  @endif
+                  @endif --}}
                   <div class="col-lg-12">
-                      @if(Auth::user()->hasPermission('staff-student-profile-result-view') || Auth::user()->hasPermission('staff-student-profile-medical-view'))
+                      {{-- @if(Auth::user()->hasPermission('staff-student-profile-result-view') || Auth::user()->hasPermission('staff-student-profile-medical-view'))
                       <hr>
-                      @endif
+                      @endif --}}
                       <div class="row">                        
                           <div class="col-lg-12">
                             {{-- TAB LIST --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                              @if(Auth::user()->hasPermission('staff-student-profile-result-view'))
+                              {{-- @if(Auth::user()->hasPermission('staff-student-profile-result-view'))
                               <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="result-tab" data-toggle="tab" href="#result" role="tab" aria-controls="result" aria-selected="true">Results</a>
                               </li>
@@ -251,12 +251,12 @@
                               <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="medicals-tab" data-toggle="tab" href="#medicals" role="tab" aria-controls="medicals" aria-selected="false">Medicals</a>
                               </li>
-                              @endif
+                              @endif --}}
                             </ul>
                             {{-- /TAB LIST --}}
 
                             {{-- /RESULT TAB CONTENT --}}
-                            @if(Auth::user()->hasPermission('staff-student-profile-result-view'))
+                            {{-- @if(Auth::user()->hasPermission('staff-student-profile-result-view')) --}}
                             <div class="tab-content pt-3" id="myTabContent">
                               <div class="tab-pane fade show active" id="result" role="tabpanel" aria-labelledby="results-tab">
                                 <table class="table table-bordered table-responsive-md">
@@ -277,13 +277,13 @@
                                   </thead>
                                   <tbody class="text-center">
 
-                                  @foreach($exams as $exam)
+                                  {{-- @foreach($exams as $exam) --}}
 
                                     <tr>
-                                      <td>{{ \Carbon\Carbon::createFromDate(App\Models\Exam::find($exam->exam_id)->year, App\Models\Exam::find($exam->exam_id)->month)->monthName}} {{ App\Models\Exam::find($exam->exam_id)->year }}</td>
+                                      {{-- <td>{{ \Carbon\Carbon::createFromDate(App\Models\Exam::find($exam->exam_id)->year, App\Models\Exam::find($exam->exam_id)->month)->monthName}} {{ App\Models\Exam::find($exam->exam_id)->year }}</td> --}}
                                       
                                       {{-- FIT103 E-Test --}}
-                                      @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->get('mark'))
+                                      {{-- @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->get('mark'))
                                       <td>{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->latest()->first('mark')['mark'] }}</td>
                                         @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->latest()->first('result')['result']>0)
                                           @if( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->latest()->first('status')['status'] == 'P' )
@@ -299,10 +299,10 @@
                                       @else
                                       <td></td>  
                                       <td></td>  
-                                      @endif
+                                      @endif --}}
                                       
                                       {{-- FIT103 Practical --}}
-                                      @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 2)->get('mark'))
+                                      {{-- @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 2)->get('mark'))
                                       <td>{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 2)->latest()->first('mark')['mark'] }}</td>
                                         @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 2)->latest()->first('result')['result']>0)
                                           @if( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 2)->latest()->first('status')['status'] == 'P' )
@@ -318,10 +318,10 @@
                                       @else
                                       <td></td>  
                                       <td></td>  
-                                      @endif
+                                      @endif --}}
 
                                       {{-- FIT203 E-Test --}}
-                                      @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 1)->get('mark'))
+                                      {{-- @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 1)->get('mark'))
                                       <td>{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 1)->latest()->first('mark')['mark'] }}</td>
                                         @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 1)->latest()->first('result')['result']>0)
                                           @if( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 1)->latest()->first('status')['status'] == 'P' )
@@ -337,10 +337,10 @@
                                       @else
                                       <td></td>  
                                       <td></td>  
-                                      @endif
+                                      @endif --}}
 
                                       {{-- FIT203 Practical --}}
-                                      @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 2)->get('mark'))
+                                      {{-- @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 2)->get('mark'))
                                       <td>{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 2)->latest()->first('mark')['mark'] }}</td>
                                         @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 2)->latest()->first('result')['result']>0)
                                           @if( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 2)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 2)->where('exam_type_id', 2)->latest()->first('status')['status'] == 'P' )
@@ -356,10 +356,10 @@
                                       @else
                                       <td></td>  
                                       <td></td>  
-                                      @endif
+                                      @endif --}}
 
                                       {{-- FIT303 E-Test --}}
-                                      @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 3)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 3)->where('exam_type_id', 1)->get('mark'))
+                                      {{-- @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 3)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 3)->where('exam_type_id', 1)->get('mark'))
                                       <td>{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 3)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 3)->where('exam_type_id', 1)->latest()->first('mark')['mark'] }}</td>
                                         @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 3)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 3)->where('exam_type_id', 1)->latest()->first('result')['result']>0)
                                           @if( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 3)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 3)->where('exam_type_id', 1)->latest()->first('status')['status'] == 'P' )
@@ -375,21 +375,21 @@
                                       @else
                                       <td></td>  
                                       <td></td>  
-                                      @endif
+                                      @endif --}}
 
 
                                     </tr>
 
-                                  @endforeach
+                                  {{-- @endforeach --}}
 
                                   </tbody>
                                 </table>
                               </div>
-                              @endif
+                              {{-- @endif --}}
                               {{-- /RESULT TAB CONTENT --}}
 
                               {{-- MEDICAL TAB CONTENT --}}
-                              @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
+                              {{-- @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
                               <div class="tab-pane fade" id="medicals" role="tabpanel" aria-labelledby="medicals-tab">
                                 <table class="table table-bordered table-responsive-md">
                                   <thead class="text-center">
@@ -441,7 +441,7 @@
                                   </div>
                                 </div>
                               </div>
-                              @endif
+                              @endif --}}
                               {{-- /MEDICAL TAB CONTENT --}}
                             </div>
                           </div>
