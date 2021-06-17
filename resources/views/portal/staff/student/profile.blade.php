@@ -389,7 +389,7 @@
                               {{-- /RESULT TAB CONTENT --}}
 
                               {{-- MEDICAL TAB CONTENT --}}
-                              @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
+                              {{-- @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
                               <div class="tab-pane fade" id="medicals" role="tabpanel" aria-labelledby="medicals-tab">
                                 <table class="table table-bordered table-responsive-md">
                                   <thead class="text-center">
@@ -441,7 +441,7 @@
                                   </div>
                                 </div>
                               </div>
-                              @endif
+                              @endif --}}
                               {{-- /MEDICAL TAB CONTENT --}}
                             </div>
                           </div>
