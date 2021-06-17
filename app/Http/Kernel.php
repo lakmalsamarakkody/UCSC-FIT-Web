@@ -75,5 +75,6 @@ class Kernel extends HttpKernel
         'student.registration.check' => \App\Http\Middleware\Portal\Student\Registration\RegistrationCheck::class,
         'student.registration.active' => \App\Http\Middleware\Portal\Student\Registration\ActiveRegistrationCheck::class,
         'student.info.view' => \App\Http\Middleware\Portal\Student\ViewInformation::class,
+        'check.fit.certificate' => \App\Http\Middleware\Portal\Student\Registration\CheckFITCertificate::class,
     ];
 }
