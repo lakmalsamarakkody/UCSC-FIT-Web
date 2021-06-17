@@ -256,7 +256,7 @@
                             {{-- /TAB LIST --}}
 
                             {{-- /RESULT TAB CONTENT --}}
-                            {{-- @if(Auth::user()->hasPermission('staff-student-profile-result-view')) --}}
+                            @if(Auth::user()->hasPermission('staff-student-profile-result-view'))
                             <div class="tab-content pt-3" id="myTabContent">
                               <div class="tab-pane fade show active" id="result" role="tabpanel" aria-labelledby="results-tab">
                                 <table class="table table-bordered table-responsive-md">
@@ -385,11 +385,11 @@
                                   </tbody>
                                 </table>
                               </div>
-                              {{-- @endif --}}
+                              @endif
                               {{-- /RESULT TAB CONTENT --}}
 
                               {{-- MEDICAL TAB CONTENT --}}
-                              {{-- @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
+                              @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
                               <div class="tab-pane fade" id="medicals" role="tabpanel" aria-labelledby="medicals-tab">
                                 <table class="table table-bordered table-responsive-md">
                                   <thead class="text-center">
@@ -441,7 +441,7 @@
                                   </div>
                                 </div>
                               </div>
-                              @endif --}}
+                              @endif
                               {{-- /MEDICAL TAB CONTENT --}}
                             </div>
                           </div>
