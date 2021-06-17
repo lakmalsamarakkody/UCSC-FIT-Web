@@ -57,7 +57,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-lg-8">
-                    <table class="table">
+                    {{-- <table class="table">
                         <tr>
                             <th>Registration Number:</th>
                             <td>{{ $student->reg_no ?? 'Not Registered Yet' }}</td>
@@ -130,7 +130,7 @@
                             <th>Telephone No:</th>
                             <td>+{{ $student->telephone_country_code ?? '' }}{{ $student->telephone ?? '' }}</td>
                         </tr>
-                    </table>
+                    </table> --}}
 
                   </div>
                   <div class="col-md-4 align-middle">  
