@@ -19,7 +19,7 @@ class MobileLogin extends Controller
    public function login(Request $request){
 
         $validator=Validator::make($request->all(),[
-              "name"=>"required|name",
+              "name"=>"required",
               "password"=>"required"
 
         ]);
@@ -31,14 +31,14 @@ class MobileLogin extends Controller
 
       }
 
-       if(!Auth::attempt($request->only('name','password'))){
-             return response()->json([
-                 'status_code'=>500,
-                  'message'=>'Unauthorized',
-                  'islogin'=>false,
-             ],500);
-       }
-        $user=User::where('name',$request->name)->first();
+    //    if(!Auth::attempt($request->only('name','password'))){
+    //          return response()->json([
+    //              'status_code'=>500,
+    //               'message'=>'Unauthorized',
+    //               'islogin'=>false,
+    //          ],500);
+    //    }
+        $user=User::where('email',$request->name)->first();
         $roletype=Role::where('id',$user->role_id)->select('name')->first();
       
             $pro=Storage::url('portal/avatar/'.$user->id.'/'.$user->profile_pic);
