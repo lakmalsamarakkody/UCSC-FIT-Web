@@ -33,6 +33,12 @@ class RoleSeeder extends Seeder
                 'created_at'=> '2020-11-25 10:13:53',
                 'updated_at'=> '2020-11-25 10:13:53'],
 
+                ['name'=> 'Director',
+                'description'=> 'UCSC Director',
+                'created_at'=> '2020-11-25 10:13:53',
+                'updated_at'=> '2020-11-25 10:13:53'],
+
+
                 ['name'=> 'Coordinator',
                 'description'=> 'FIT Coordinator',
                 'created_at'=> '2020-11-25 10:13:53',
