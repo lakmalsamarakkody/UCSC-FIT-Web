@@ -203,12 +203,10 @@
                           <p>{{ $student->permanent_address_line4 ?? '' }}</p>
                           @if( $student->permanent_country_id == 67 )                                         
                           <p>{{ $student->permanent_city_sl->name ?? ''}}</p>                                       
-                          <p>{{ $student->permanent_district_sl->name ?? ''}}</p>
-                          <p>{{ $student->permanent_country->name ?? ''}}</p>
+                          <p>{{ $student->permanent_district_sl->name ?? ''}} - {{ $student->permanent_country->name ?? ''}}</p>
                           @else                                    
                           <p>{{ $student->permanent_city_world->name ?? ''}}</p>
-                          <p>{{ $student->permanent_district_world->name ?? ''}}</p>
-                          <p>{{ $student->permanent_country->name ?? ''}}</p>
+                          <p>{{ $student->permanent_district_world->name ?? ''}} - {{ $student->permanent_country->name ?? ''}}</p>
                           @endif
                       </div>
                   </div>  
@@ -224,12 +222,10 @@
                           <p>{{ $student->current_address_line4 ?? '' }}</p>
                           @if( $student->current_country_id == 67 )                                         
                           <p>{{ $student->current_city_sl->name ?? ''}}</p>                                       
-                          <p>{{ $student->current_district_sl->name ?? ''}}</p>
-                          <p>{{ $student->current_country->name ?? ''}}</p>
+                          <p>{{ $student->current_district_sl->name ?? ''}} - {{ $student->current_country->name ?? ''}}</p>
                           @else                                    
                           <p>{{ $student->current_city_world->name ?? ''}}</p>
-                          <p>{{ $student->current_district_world->name ?? ''}}</p>
-                          <p>{{ $student->current_country->name ?? ''}}</p>
+                          <p>{{ $student->current_district_world->name ?? ''}} - {{ $student->current_country->name ?? ''}}</p>
                           @endif
                       </div>
                   </div>
