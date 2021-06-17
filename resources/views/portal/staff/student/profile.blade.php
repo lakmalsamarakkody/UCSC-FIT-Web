@@ -76,7 +76,7 @@
                         </tr>
                         <tr>
                             <th>Middle Names:</th>
-                            <td>{{ $student->middle_names }}</td>
+                            <td>{{ $student->middle_names ?? '' }}</td>
                         </tr>
                         <tr>
                             <th>Full Name:</th>
@@ -128,7 +128,7 @@
                         </tr>
                         <tr>
                             <th>Telephone No:</th>
-                            <td>+{{ $student->telephone_country_code }}{{ $student->telephone }}</td>
+                            <td>+{{ $student->telephone_country_code ?? '' }}{{ $student->telephone ?? '' }}</td>
                         </tr>
                     </table>
 
@@ -197,10 +197,10 @@
                       <hr>
                       <div class="ml-lg-4">
                           <p>{{ $student->permanent_house }}</p>  
-                          <p>{{ $student->permanent_address_line1 }}</p>
-                          <p>{{ $student->permanent_address_line2 }}</p>  
-                          <p>{{ $student->permanent_address_line3 }}</p>  
-                          <p>{{ $student->permanent_address_line4 }}</p>
+                          <p>{{ $student->permanent_address_line1 ?? '' }}</p>
+                          <p>{{ $student->permanent_address_line2 ?? '' }}</p>  
+                          <p>{{ $student->permanent_address_line3 ?? '' }}</p>  
+                          <p>{{ $student->permanent_address_line4 ?? '' }}</p>
                           @if( $student->permanent_country_id == 67 )                                         
                           <p>{{ $student->permanent_city_sl->name ?? ''}}</p>                                       
                           <p>{{ $student->permanent_district_sl->name ?? ''}}</p>
@@ -218,10 +218,10 @@
                       <hr>
                       <div class="ml-lg-4">
                           <p>{{ $student->current_house }}</p>  
-                          <p>{{ $student->current_address_line1 }}</p>
-                          <p>{{ $student->current_address_line2 }}</p>  
-                          <p>{{ $student->current_address_line3 }}</p>  
-                          <p>{{ $student->current_address_line4 }}</p>
+                          <p>{{ $student->current_address_line1 ?? '' }}</p>
+                          <p>{{ $student->current_address_line2 ?? '' }}</p>  
+                          <p>{{ $student->current_address_line3 ?? '' }}</p>  
+                          <p>{{ $student->current_address_line4 ?? '' }}</p>
                           @if( $student->current_country_id == 67 )                                         
                           <p>{{ $student->current_city_sl->name ?? ''}}</p>                                       
                           <p>{{ $student->current_district_sl->name ?? ''}}</p>
