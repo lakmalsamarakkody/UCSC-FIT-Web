@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
                 [
 		'name'=> 'elc',
                 'email'=>"elc@ucsc.cmb.ac.lk",
-                'password'=>'$2y$10$chLDig2zqSahPLNRnur.0O3xzyvjlzH54Jwsp.gblzj3Ltp.dfxkG',
+                'password'=>'$2y$10$uswHJshtPWc7xZk/y7SnJ.Z/rXLAOCAa64U8neNbt6SnpnxSvhD2O',
                 'role_id'=> '2',
                 'status'=> true,
                 'created_at'=> '2020-11-23 10:13:53',
