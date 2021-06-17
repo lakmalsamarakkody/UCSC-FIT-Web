@@ -17,7 +17,7 @@ class RolePermissionSeeder extends Seeder
         DB::table('role_permissions')->truncate();
 
         for($i=2; $i<=2; $i++){
-            for($j=1; $j<=120; $j++){
+            for($j=1; $j<=150; $j++){
                 DB::table('role_permissions')->insert(
                     array (
                         [
