@@ -63,7 +63,7 @@ class GuestController extends Controller
             $user->role_id = $request->role;
 
             $email_token = Email_Token::where('email', $email)->first();
-            if(is_Null($email_token)):
+            if(!$email_token):
                 return abort(403);
             else:
                 if( $email_token['role'] == $request->role && $email_token['email'] == $request->email ):
