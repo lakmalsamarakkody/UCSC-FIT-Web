@@ -38,21 +38,8 @@ class MobileLogin extends Controller
                   'islogin'=>false,
              ],500);
        }
-        $user=User::
-       where('name',$request->name)
-        ->select(
-            'id',
-            'name',
-             'email',
-             'status',
-               'role_id',
-               'profile_pic'
-
-        )
-        ->first();
-        $roletype=Role::where('id',$user->role_id)->select(
-             'name'
-        )->first();
+        $user=User::where('name',$request->name)->first();
+        $roletype=Role::where('id',$user->role_id)->select('name')->first();
       
             $pro=Storage::url('portal/avatar/'.$user->id.'/'.$user->profile_pic);
         
