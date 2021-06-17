@@ -27,7 +27,7 @@ class GuestController extends Controller
         if($validator->fails()):
             return view('website/error');
         else:
-            $email_token = Email_Token::where('email', $email)->get()->first();
+            $email_token = Email_Token::where('email', $email)->first();
             if(is_Null($email_token)):
                 return abort(403);
             else:
@@ -62,20 +62,20 @@ class GuestController extends Controller
             $user->password = Hash::make($request->password);
             $user->role_id = $request->role;
 
-            $email_token = Email_Token::where('email', $email)->get()->first();
-            if(is_Null($email_token['token'])):
+            $email_token = Email_Token::where('email', $email)->first();
+            if(!$email_token):
                 return abort(403);
             else:
                 if( $email_token['role'] == $request->role && $email_token['email'] == $request->email ):
                     if($user->save()):
-                        $subscriber_check = Subscriber::where( 'email', $email )->first();
-                        if (!$subscriber_check) {
+                        $subscriber_check = Subscriber::where('email', $email)->first();
+                        if(!$subscriber_check):
                             $token = Str::random(32);
                             $subscriber = new Subscriber();
                             $subscriber->email = $email;
                             $subscriber->token = $token;
                             $subscriber->save();
-                        }
+                        endif;
                         if(Email_Token::where('email', $email)->delete()):
                             return response()->json(['success'=>'success']);
                         endif;

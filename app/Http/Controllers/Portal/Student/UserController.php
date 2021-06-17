@@ -64,13 +64,13 @@ class UserController extends Controller
             $user->role_id = '1';
 
             $email_token = Email_Token::where('email', $email)->first();
-            if(is_Null($email_token['token'])):
+            if(!$email_token):
                 return abort(403);
             else:
                 if($user->save()):
                     if(Email_Token::where('email', $email)->delete()):
-                        $subscriber_check = Subscriber::where( 'email', $email )->first();
-                        if (isNull($subscriber_check)) {
+                        $subscriber_check = Subscriber::where( 'email', $email)->first();
+                        if (!$subscriber_check) {
                             $token = Str::random(32);
                             $subscriber = new Subscriber();
                             $subscriber->email = $email;
