@@ -280,10 +280,10 @@
                                   @foreach($exams as $exam)
 
                                     <tr>
-                                      {{-- <td>{{ \Carbon\Carbon::createFromDate(App\Models\Exam::find($exam->exam_id)->year, App\Models\Exam::find($exam->exam_id)->month)->monthName}} {{ App\Models\Exam::find($exam->exam_id)->year }}</td> --}}
+                                      <td>{{ \Carbon\Carbon::createFromDate(App\Models\Exam::find($exam->exam_id)->year, App\Models\Exam::find($exam->exam_id)->month)->monthName}} {{ App\Models\Exam::find($exam->exam_id)->year }}</td>
                                       
                                       {{-- FIT103 E-Test --}}
-                                      {{-- @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->get('mark'))
+                                      @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->get('mark'))
                                       <td>{{ App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->latest()->first('mark')['mark'] }}</td>
                                         @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->latest()->first('result')['result']>0)
                                           @if( App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 1)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 1)->latest()->first('status')['status'] == 'P' )
@@ -299,7 +299,7 @@
                                       @else
                                       <td></td>  
                                       <td></td>  
-                                      @endif --}}
+                                      @endif
                                       
                                       {{-- FIT103 Practical --}}
                                       {{-- @if(App\Models\Student\hasExam::where('student_id', $student->id)->whereIn('exam_schedule_id', App\Models\Exam\Schedule::where('exam_id', $exam->exam_id)->where('subject_id', 1)->where('exam_type_id', 2)->get('id')->toArray())->where('subject_id', 1)->where('exam_type_id', 2)->get('mark'))
