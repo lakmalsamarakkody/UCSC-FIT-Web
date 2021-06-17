@@ -69,7 +69,7 @@ class GuestController extends Controller
                 if( $email_token['role'] == $request->role && $email_token['email'] == $request->email ):
                     if($user->save()):
                         $subscriber_check = Subscriber::where( 'email', $email )->first();
-                        if (is_Null($subscriber_check['email'])) {
+                        if (!$subscriber_check) {
                             $token = Str::random(32);
                             $subscriber = new Subscriber();
                             $subscriber->email = $email;
