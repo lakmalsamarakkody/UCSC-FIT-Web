@@ -35,19 +35,19 @@
         <div class="col-lg-12">
             
             {{-- REGISTRATION HOLD ALERT --}}
-            @if($student->user->status == 0)
+            {{-- @if($student->user->status == 0)
               <div class="alert alert-danger" role="alert">
                 <h4 class="p-0 m-0">This account has been Deactivated</h4> 
               </div>            
-            @endif
+            @endif --}}
             {{-- /ACCOUNT HOLD ALERT --}}
 
             {{-- ACCOUNT DEACTIVATED ALERT --}}
-            @if($student->flag->phase_id == 2)
+            {{-- @if($student->flag->phase_id == 2)
               <div class="alert alert-danger" role="alert">
                 <h4 class="p-0 m-0">This student has been blocked from future activities</h4> 
               </div>            
-            @endif
+            @endif --}}
             {{-- /ACCOUNT DEACTIVATED ALERT --}}
 
             <div class="card">
