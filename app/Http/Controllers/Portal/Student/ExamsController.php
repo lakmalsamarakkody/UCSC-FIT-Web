@@ -106,7 +106,8 @@ class ExamsController extends Controller
             $passed_exam = hasExam::where( 'student_id', $student_id )
                               ->where( 'subject_id', $exam_to_apply->subject_id )
                               ->where( 'exam_type_id', $exam_to_apply->exam_type_id )
-                              ->where( 'result', 1 )
+                              ->where( 'result', 2 )
+                              ->where( 'status', 'P' )
                               ->first(); 
 
             $scheduled_exam = hasExam::where( 'student_id', $student_id )
