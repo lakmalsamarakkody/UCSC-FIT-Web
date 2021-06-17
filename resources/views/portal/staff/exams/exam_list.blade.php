@@ -51,7 +51,7 @@
                   <div class="form-group col-xl-4 col-lg-6">
                     <label for="examMonth">Month</label>
                     <select name="examMonth" id="examMonth" class="form-control">
-                      <option value={{now()->month}} selected hidden disabled>{{now()->monthName}}</option>
+                      <option value={{now()->month}} selected hidden>{{now()->monthName}}</option>
                       <option value=1>January</option>
                       <option value=2>February</option>
                       <option value=3>March</option>
