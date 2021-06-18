@@ -22,6 +22,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\StudentsImport;
+use App\Mail\Subscribe;
 use App\Models\Student;
 use App\Models\Subscriber;
 use App\Models\Support\BankBranch;
@@ -965,11 +966,14 @@ class SystemController extends Controller
                 if($user->save()):
 
                   // CREATE SUBSCRIBER RECORD
-                  $token = Str::random(32);
-                  $subscriber = new Subscriber();
-                  $subscriber->email = $userEmail;
-                  $subscriber->token = $token;
-                  $subscriber->save();
+                  $existingSubscriber = Subscriber::where('email', $userEmail)->first();
+                  if(!$existingSubscriber):
+                    $token = Str::random(32);
+                    $subscriber = new Subscriber();
+                    $subscriber->email = $userEmail;
+                    $subscriber->token = $token;
+                    $subscriber->save();
+                  endif;
                   
                   // CREATE STUDENT
                     $student = new Student();
