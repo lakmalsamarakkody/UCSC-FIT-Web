@@ -102,7 +102,7 @@
 							<hr>
 					</div>
 					{{-- RE REGISTRATION ALERT IF NO CURRENT REGISTRATION --}}
-					@if($student->current_active_registration() == NULL && $student->last_registration() && $student->processing_registration() == NULL && $student->flag->fit_cert==0)
+					@if($student->current_active_registration() == NULL && $student->last_registration() && $student->processing_registration() == NULL)
 						<div class="col-12 mt-2">
 							<div class="alert alert-danger shadow" role="alert">
 									<h4 class="alert-heading"><i class="far fa-check-circle"></i> Your Registration has Expired! </h4>
