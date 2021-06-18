@@ -100,7 +100,7 @@
             <!-- MENU SECTION -->
             <div class="nav-menu w-100">
               <ul>
-                @if ( (Auth::user()->student == NULL || Auth::user()->student->current_active_registration() == NULL) && Auth::user()->student->flag->fit_cert==0 )
+                @if ( (Auth::user()->student == NULL || Auth::user()->student->current_active_registration() == NULL) )
                   <li id="registration"><a href="{{ route('student.registration') }}" class="font-weight-bold text-warning">Registration</a></li>
                 @endif
                 @if(Auth::user()->hasPermission('student-dashboard'))
@@ -179,7 +179,7 @@
                 <div class="col-6 text-right align-self-center"><i class="fa fa-bars fa-2x" data-toggle="collapse" data-target="#collapseMobileNav" aria-expanded="false"></i></div>
                 <div class="col-12 mt-2 px-0 collapse border-top border-darken-1" id="collapseMobileNav">
                   <ul>
-                    @if ( (Auth::user()->student == NULL || Auth::user()->student->current_active_registration() == NULL) && Auth::user()->student->flag->fit_cert==0 )
+                    @if ( (Auth::user()->student == NULL || Auth::user()->student->current_active_registration() == NULL) )
                       <li id="registration"><a href="{{ route('student.registration') }}" class="font-weight-bold text-warning">Registration</a></li>
                     @endif
                     @if(Auth::user()->hasPermission('student-dashboard'))
