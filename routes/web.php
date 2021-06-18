@@ -97,6 +97,7 @@ Route::post('/portal/staff/student/application/declineDocumentBirth', [App\Http\
 Route::post('/portal/staff/student/application/declineDocumentId', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'declineDocumentId'])->name('student.application.declineDocumentId');
 Route::get('/portal/staff/student/application/reviewRegistration', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'reviewRegistration'])->name('student.application.reviewRegistration');
 Route::post('/portal/staff/student/application/registerStudent', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'registerStudent'])->name('student.application.registerStudent');
+Route::post('/portal/staff/student/application/registerAllStudents', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'registerAllStudents'])->name('student.application.registerAllStudents');
 Route::get('/portal/staff/student/registered', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'registered'])->name('student.application.registered');
 // /REGISTRATION CARDS
 

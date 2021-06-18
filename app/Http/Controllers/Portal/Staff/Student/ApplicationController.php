@@ -18,6 +18,7 @@ use App\Models\Support\WorldDivision;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class ApplicationController extends Controller
 {
@@ -57,7 +58,8 @@ class ApplicationController extends Controller
         $regDate = Carbon::now()->isoFormat('YYYY-MM-DD');
         $regExpireDate = Carbon::now()->addYear()->subDay()->isoFormat('YYYY-MM-DD');
         $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status',  'Approved')->get();
-        return view('portal/staff/student/applications', compact('registrations', 'regDate', 'regExpireDate'));
+        $isRegistrationActivateView = TRUE;
+        return view('portal/staff/student/applications', compact('registrations', 'regDate', 'regExpireDate', 'isRegistrationActivateView'));
     }
     public function registered(){
         $registrations = Registration::where('registered_at', '!=', NULL)->where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status', 'Approved')->where('status', 1)->get();
@@ -320,6 +322,18 @@ class ApplicationController extends Controller
 
     // REGISTRATION
     public function registerStudent(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'registration_id' => 'required',
+            'regDate' => 'required',
+            'regExpireDate' => 'required',
+            'regStatus' => 'required'
+        ]);
+
+        if($validator->fails()):
+            return response()->json([ 'status'=>'error', 'data'=>"All input fields are mandatory to proceed activation"]);
+        endif;
+
         $registration = Registration::where('id', $request->registration_id);
         $flag = $registration->first()->flag;
         $student = $registration->first()->student;
@@ -340,6 +354,7 @@ class ApplicationController extends Controller
                 if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.$newRegNoSerialCode, 'reg_year'=> Carbon::now()->year])):
                     // UPDATE REGISTRATION
                     if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
+                        $student = $registration->first()->student;
                         $details = [
                             'subject' => 'You Are Registered',
                             'title' => 'You Are Registered',
@@ -355,6 +370,7 @@ class ApplicationController extends Controller
                 if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.'001', 'reg_year'=> Carbon::now()->year])):
                     // UPDATE REGISTRATION
                     if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
+                        $student = $registration->first()->student;
                         $details = [
                             'subject' => 'You Are Registered',
                             'title' => 'You Are Registered',
@@ -386,6 +402,65 @@ class ApplicationController extends Controller
         endif;
 
         return response()->json([ 'status'=>'error', 'data'=>$dateFormat]);
+    }
+
+    public function registerAllStudents(){
+
+        $registrations = Registration::select('id')->where('registered_at', NULL)->where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status',  'Approved')->get();
+        foreach($registrations as $currentRegistration):
+            $registration = Registration::where('id', $currentRegistration->id);
+            $flag = $registration->first()->flag;
+            $student = $registration->first()->student;
+
+            $regDate =  Carbon::now()->isoFormat('YYYY-MM-DD');
+            $regExpireDate = Carbon::now()->addYear()->subDay()->isoFormat('YYYY-MM-DD');
+
+            // CHECKING ENROLLMENT
+            if($flag->enrollment == 'new'):
+
+                // REGISTER NEW STUDENT
+                $dateFormat = Carbon::now()->isoFormat('YYMMDD');
+                $lastRegNo = Student::where('reg_no', 'like', 'F'.$dateFormat.'%')->orderBy('reg_no', 'desc')->first();
+                //CHECK ANY STUDENT REGISTERED TODAY
+                if($lastRegNo != NULL):
+                    //GENERATE NEXT REG_NO
+                    $lastRegNoSerial = (int)substr($lastRegNo->reg_no, -3);
+                    $newRegNoSerial = $lastRegNoSerial+1;
+                    $newRegNoSerialCode = str_pad($newRegNoSerial, 3, '0', STR_PAD_LEFT);
+                    //SAVE REG NO
+                    if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.$newRegNoSerialCode, 'reg_year'=> Carbon::now()->year])):
+                        // UPDATE REGISTRATION
+                        if($registration->update(['registered_at'=>$regDate, 'registration_expire_at'=>$regExpireDate, 'status'=>1 ])):
+                            $student = $registration->first()->student;
+                            $details = [
+                                'subject' => 'You Are Registered',
+                                'title' => 'You Are Registered',
+                                'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$regDate." </p><p style='color: #fff;'> Registration Expires at: ".$regExpireDate." </p>",
+                                'color' => '#1b672a'
+                            ];
+                            Mail::to($student->user->email)->queue( new NotificationEmail($details) );
+                        endif;
+                    endif;
+                else:
+                    //SAVE REG NO
+                    if($registration->first()->student()->update(['reg_no'=>'F'.$dateFormat.'001', 'reg_year'=> Carbon::now()->year])):
+                        // UPDATE REGISTRATION
+                        if($registration->update(['registered_at'=>$regDate, 'registration_expire_at'=>$regExpireDate, 'status'=>1 ])):
+                            $student = $registration->first()->student;
+                            $details = [
+                                'subject' => 'You Are Registered',
+                                'title' => 'You Are Registered',
+                                'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$regDate." </p><p style='color: #fff;'> Registration Expires at: ".$regExpireDate." </p>",
+                                'color' => '#1b672a'
+                            ];
+                            Mail::to($student->user->email)->queue( new NotificationEmail($details) );
+                        endif;
+                    endif;
+                endif;
+                // /REGISTER NEW STUDENT
+            endif;
+        endforeach;
+        return response()->json([ 'status'=>'success']);
     }
     // /REGISTRATION
 }

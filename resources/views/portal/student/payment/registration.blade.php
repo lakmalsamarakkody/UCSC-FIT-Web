@@ -172,7 +172,7 @@
                                 <div class="form-group row">
                                   <label for="inputPaidAmount" class="col-sm-3 col-form-label">Paid Amount</label>
                                   <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="paidAmount" name="paidAmount" value="{{ $reg_fee->amount }}" @if($payment != NULL) value="{{$payment->amount}}" @endif>
+                                    <input type="number" class="form-control" id="paidAmount" name="paidAmount" value="{{ $reg_fee->amount }}" @if($payment != NULL) value="{{$payment->amount}}" @endif readonly>
                                     <span class="invalid-feedback" id="error-paidAmount" role="alert"></span>
                                   </div>
                                 </div>  
