@@ -1,6 +1,64 @@
 @section('script')
 <script type="text/javascript">
 
+  // USER ROLE
+  makeEditableRole = () =>{
+    if($('#trChnageUserRole').hasClass('d-none')){
+      $('#trChnageUserRole').removeClass('d-none')
+    }else{
+      $('#trChnageUserRole').addClass('d-none')
+    }
+  }
+  change_userRole = () => {
+    event.preventDefault();
+    SwalQuestionDanger.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, update user role!',
+    })
+    .then((result) => {
+      if(result.isConfirmed) {
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ route('user.update.role') }}",
+          type: 'post',
+          data: {'id': "{{ $user->id }}", 'roleID': $('#changeUserRole').val() },         
+          beforeSend: function(){
+            $('#spinnerUpdateRole').removeClass('d-none');
+          },
+          success: function(data){
+            if(data['status'] == "success"){
+              $('#spinnerUpdateRole').addClass('d-none');
+              SwalDoneSuccess.fire({
+                title: 'User role Updated!',
+                text: 'User role Updated successfully',
+              }).then((result) => {
+                if(result.isConfirmed) {
+                  location.reload();
+                }
+              });
+            }else{
+              SwalSystemErrorDanger.fire().then((result) => { location.reload(); });
+            }
+          },
+          error: function(){
+            $('#spinnerUpdateRole').addClass('d-none');
+            $('#trChnageUserRole').addClass('d-none')
+            SwalSystemErrorDanger.fire()
+          }
+        })
+      }else{
+        $('#trChnageUserRole').addClass('d-none')
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Aborted!',
+          text: 'User role update process aborted.',
+        })
+      }
+    });
+  }
+
   // EMAIL
   reset_email = () => {
     SwalQuestionSuccess.fire({

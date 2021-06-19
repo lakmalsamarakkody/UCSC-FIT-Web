@@ -25,7 +25,7 @@ class UsersController extends Controller
 
   public function index()
   {
-    $roles = Role::all();    
+    $roles = Role::all();
     return view('portal/staff/users',compact('roles'));
   }
 
@@ -61,7 +61,25 @@ class UsersController extends Controller
   public function viewUser($id)
   {
     $user = User::find($id);
-    return view('portal/staff/user/profile', compact('user'));
+    $roles = Role::all();
+    return view('portal/staff/user/profile', compact('user', 'roles'));
+  }
+
+  // UPDATE USER ROLE
+  public function updateRole(Request $request){
+
+    $validator = Validator::make($request->all(), 
+        [     
+            'id'=> ['required', 'exists:users'],
+            'roleID' => ['required', 'exists:roles,id']
+        ]
+    );
+    if(!$validator->fails()):
+        if(User::where('id', $request->id)->update(['role_id' => $request->roleID])):
+            return response()->json(['status' => "success"]);
+        endif;
+    endif;
+    return response()->json(['status' => "error"]);
   }
 
   // UPDATE EMAIL

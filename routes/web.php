@@ -196,6 +196,7 @@ Route::post('/portal/staff/results/hold', [App\Http\Controllers\Portal\Staff\Res
 Route::get('/portal/staff/users', [App\Http\Controllers\Portal\Staff\UsersController::class, 'index'])->name('users');
 Route::get('/portal/staff/users/user-list',[App\Http\Controllers\Portal\Staff\UsersController::class, 'getUserList'])->name('user.list');
 Route::get('/portal/staff/user/profile/{id}',[App\Http\Controllers\Portal\Staff\UsersController::class, 'viewUser'])->name('user.profile');
+Route::post('/portal/staff/user/profile/update/role',[App\Http\Controllers\Portal\Staff\UsersController::class, 'updateRole'])->name('user.update.role');
 Route::post('/portal/staff/user/profile/update/email/request',[App\Http\Controllers\Portal\Staff\UsersController::class, 'emailUpdateRequest'])->name('user.update.email.request');
 Route::post('/portal/staff/user/profile/deactivate/account',[App\Http\Controllers\Portal\Staff\UsersController::class, 'deactivateAccount'])->name('deactivate.user');
 Route::post('/portal/staff/user/profile/reactivate/account',[App\Http\Controllers\Portal\Staff\UsersController::class, 'reactivateAccount'])->name('reactivate.user');
