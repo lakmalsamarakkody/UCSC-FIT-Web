@@ -36,6 +36,8 @@
                 <p>
                     To <b>Register</b>, Sign up your email here and we'll send you an email with <b>login details and steps on how to Register for FIT</b>.
                 </p>
+
+                <p>Only one account can be created using one email</p>
                 <div class="form">
                     <div id="error">
 
