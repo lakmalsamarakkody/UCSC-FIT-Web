@@ -182,7 +182,7 @@
                         @endif
 
                       @else
-                        <td colspan="2"></td>
+                        <td colspan="2"><h5><span class="badge badge-light">N/A</span></h5></td>
                       @endif
                       {{-- /FIT103 E-Test --}}
 
@@ -211,7 +211,7 @@
                         @endif
 
                       @else
-                        <td colspan="2"></td>
+                        <td colspan="2"><h5><span class="badge badge-light">N/A</span></h5></td>
                       @endif
                       {{-- /FIT103 Practical --}}
 
@@ -240,7 +240,7 @@
                         @endif
 
                       @else
-                        <td colspan="2"></td>
+                        <td colspan="2"><h5><span class="badge badge-light">N/A</span></h5></td>
                       @endif
                       {{-- /FIT203 E-Test --}}
 
@@ -269,7 +269,7 @@
                         @endif
 
                       @else
-                        <td colspan="2"></td>
+                        <td colspan="2"><h5><span class="badge badge-light">N/A</span></h5></td>
                       @endif
                       {{-- /FIT203 Practical --}}
                       
@@ -299,7 +299,7 @@
                         @endif
 
                       @else
-                        <td colspan="2"></td>
+                        <td colspan="2"><h5><span class="badge badge-light">N/A</span></h5></td>
                       @endif
                       {{-- /FIT303 E-Test --}}
                                             
