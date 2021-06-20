@@ -75,9 +75,9 @@
         </div> --}}
         <!-- <div class="col-lg-1"></div> -->
 
-        {{-- EXAM TITLE --}}
+        {{-- EXAM TITLE --}}  
         <div class="col-lg-12 text-center">
-          <h1><span class="badge badge-secondary"> {{ App\Models\Exam::where('id',$exam_id)->first()->year }} - {{ Carbon\Carbon::createFromDate(2000,App\Models\Exam::where('id',$exam_id)->first()->month)->monthName }} </span></h1>
+          <h1><span class="badge badge-primary"> {{ App\Models\Exam::where('id',$exam_id)->first()->year }} - {{ Carbon\Carbon::createFromDate(2000,App\Models\Exam::where('id',$exam_id)->first()->month)->monthName }} </span> @if(App\Models\Exam::where('id',$exam_id)->first()->result_released == "released") <span class="badge badge-success"> Released</span> @elseif(App\Models\Exam::where('id',$exam_id)->first()->result_released == "hold") <span class="badge badge-danger"> Hold</span> @else <span class="badge badge-warning"> Pending</span> @endif</h1>
         </div>
         {{-- EXAM TITLE --}}
 
@@ -134,11 +134,11 @@
               Results
             </div>
             <div class="card-body">
-              <table class="table border-0 table-bordered table-hover yajra-datatable">
+              <table class="table table-bordered table-hover yajra-datatable">
                 <thead class="text-center">
                   <tr>
-                    <th rowspan="2">Registration No</th>
-                    <th rowspan="2">Name</th>
+                    <th class="font-weight-bold" rowspan="2">Registration No</th>
+                    <th class="font-weight-bold" rowspan="2">Name</th>
                     <th colspan="4">FIT 103</th>
                     <th colspan="4">FIT 203</th>
                     <th rowspan="2" colspan="2">FIT 303</th>
@@ -154,129 +154,154 @@
                 <tbody class="text-center">
                 @foreach($students as $student)                  
                     <tr>
-                      <td>{{ $student->student->reg_no ?? "" }}</td>
-                      <td>{{ $student->student->initials ?? "" }} {{ $student->student->last_name ?? "" }}</td>
+                      <td class="font-weight-bold">{{ $student->student->reg_no ?? "" }}</td>
+                      <td class="font-weight-bold">{{ $student->student->initials ?? "" }} {{ $student->student->last_name ?? "" }}</td>
 
                       {{-- FIT103 E-Test --}}
                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('mark'))
-                      <td>
-                        {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('round_mark')['round_mark'] }}
-                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('mark')['mark'])  
-                        <span class="text-success">-></span>  {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('mark')['mark'] }}
-                        @endif
+                          
+                        {{-- MARKS --}}
+                        <td>
+                          @if(Auth::user()->hasPermission('staff-result-view-marks'))
+                            {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('round_mark')['round_mark'] }}
+                            @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('mark')['mark'])  
+                              <span class="text-success font-weight-bold">-></span>  {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first('mark')['mark'] }}
+                            @endif
+                          @else
+                            <i class="fa fa-ban text-secondary"></i>
+                          @endif
                         </td>
-                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first()['result']>0)
+
+                        {{-- STATUS --}}
                         @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first()['status'] == 'P')
-                        <td><i class="fa fa-check"></i></td>
+                          <td><h5><span class="badge badge-success">P</span></h5></td>
                         @elseif(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first()['status'] == 'F')
-                        <td><i class="fa fa-times"></i></td>  
+                          <td><h5><span class="badge badge-danger">F</span></h5></td>
                         @else
-                        <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first()['status'] }}</td>
+                          <td><h5><span class="badge badge-secondary">{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 1)->first()['status'] }}</span></h5></td>
                         @endif
-                       @else
-                      <td></td> 
-                       @endif
+
                       @else
-                      <td></td>  
-                      <td></td>  
+                        <td colspan="2"></td>
                       @endif
+                      {{-- /FIT103 E-Test --}}
 
                       {{-- FIT103 Practical --}}
                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('mark'))
-                      <td>
-                        {{App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('round_mark')['round_mark']}}
-                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('mark')['mark'])
-                        <span class="text-success">-></span> {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('mark')['mark'] }}
-                        @endif
-                      </td>
-                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['result']>0)
+                          
+                        {{-- MARKS --}}
+                        <td>
+                          @if(Auth::user()->hasPermission('staff-result-view-marks'))
+                            {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('round_mark')['round_mark'] }}
+                            @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('mark')['mark'])  
+                              <span class="text-success font-weight-bold">-></span>  {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first('mark')['mark'] }}
+                            @endif
+                          @else
+                            <i class="fa fa-ban text-secondary"></i>
+                          @endif
+                        </td>
+
+                        {{-- STATUS --}}
                         @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['status'] == 'P')
-                        <td><i class="fa fa-check"></i></td>
+                          <td><h5><span class="badge badge-success">P</span></h5></td>
                         @elseif(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['status'] == 'F')
-                        <td><i class="fa fa-times"></i></td>  
+                          <td><h5><span class="badge badge-danger">F</span></h5></td>
                         @else
-                        <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['status'] }}</td>
+                          <td><h5><span class="badge badge-secondary">{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 1)->where('exam_type_id', 2)->first()['status'] }}</span></h5></td>
                         @endif
-                       @else
-                      <td></td> 
-                       @endif
+
                       @else
-                      <td></td>  
-                      <td></td>  
+                        <td colspan="2"></td>
                       @endif
+                      {{-- /FIT103 Practical --}}
 
                       {{-- FIT203 E-Test --}}
                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('mark'))
-                      <td>
-                        {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('round_mark')['round_mark'] }}
-                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('mark')['mark'])
-                        <span class="text-success">-></span> {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('mark')['mark'] }}
-                        @endif
+                          
+                        {{-- MARKS --}}
+                        <td>
+                          @if(Auth::user()->hasPermission('staff-result-view-marks'))
+                            {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('round_mark')['round_mark'] }}
+                            @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('mark')['mark'])  
+                              <span class="text-success font-weight-bold">-></span>  {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first('mark')['mark'] }}
+                            @endif
+                          @else
+                            <i class="fa fa-ban text-secondary"></i>
+                          @endif
                         </td>
-                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first()['result']>0)
+
+                        {{-- STATUS --}}
                         @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first()['status'] == 'P')
-                        <td><i class="fa fa-check"></i></td>
+                          <td><h5><span class="badge badge-success">P</span></h5></td>
                         @elseif(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first()['status'] == 'F')
-                        <td><i class="fa fa-times"></i></td>  
+                          <td><h5><span class="badge badge-danger">F</span></h5></td>
                         @else
-                        <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first()['status'] }}</td>
+                          <td><h5><span class="badge badge-secondary">{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 1)->first()['status'] }}</span></h5></td>
                         @endif
-                       @else
-                      <td></td> 
-                       @endif
+
                       @else
-                      <td></td>  
-                      <td></td>  
+                        <td colspan="2"></td>
                       @endif
+                      {{-- /FIT203 E-Test --}}
 
                       {{-- FIT203 Practical --}}
                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('mark'))
-                      <td>
-                        {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('round_mark')['round_mark'] }}
-                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('mark')['mark'])
-                        <span class="text-success">-></span> {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('mark')['mark'] }}
-                        @endif
-                      </td>
-                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first()['result']>0)
+                          
+                        {{-- MARKS --}}
+                        <td>
+                          @if(Auth::user()->hasPermission('staff-result-view-marks'))
+                            {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('round_mark')['round_mark'] }}
+                            @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('mark')['mark'])  
+                              <span class="text-success font-weight-bold">-></span>  {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first('mark')['mark'] }}
+                            @endif
+                          @else
+                            <i class="fa fa-ban text-secondary"></i>
+                          @endif
+                        </td>
+
+                        {{-- STATUS --}}
                         @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first()['status'] == 'P')
-                        <td><i class="fa fa-check"></i></td>
+                          <td><h5><span class="badge badge-success">P</span></h5></td>
                         @elseif(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first()['status'] == 'F')
-                        <td><i class="fa fa-times"></i></td>  
+                          <td><h5><span class="badge badge-danger">F</span></h5></td>
                         @else
-                        <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first()['status'] }}</td>
+                          <td><h5><span class="badge badge-secondary">{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 2)->where('exam_type_id', 2)->first()['status'] }}</span></h5></td>
                         @endif
-                       @else
-                      <td></td> 
-                       @endif
+
                       @else
-                      <td></td>  
-                      <td></td>  
+                        <td colspan="2"></td>
                       @endif
+                      {{-- /FIT203 Practical --}}
                       
 
                       {{-- FIT303 E-Test --}}
                       @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('mark'))
-                      <td>
-                        {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('round_mark')['round_mark'] }}
-                        @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('mark')['mark'])
-                        <span class="text-success">-></span> {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('mark')['mark'] }}
-                        @endif
-                      </td>
-                          @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['result']>0)
+                          
+                        {{-- MARKS --}}
+                        <td>
+                          @if(Auth::user()->hasPermission('staff-result-view-marks'))
+                            {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('round_mark')['round_mark'] }}
+                            @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('round_mark')['round_mark'] != App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('mark')['mark'])  
+                              <span class="text-success font-weight-bold">-></span>  {{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first('mark')['mark'] }}
+                            @endif
+                          @else
+                            <i class="fa fa-ban text-secondary"></i>
+                          @endif
+                        </td>
+
+                        {{-- STATUS --}}
                         @if(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['status'] == 'P')
-                        <td><i class="fa fa-check"></i></td>
+                          <td><h5><span class="badge badge-success">P</span></h5></td>
                         @elseif(App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['status'] == 'F')
-                        <td><i class="fa fa-times"></i></td>  
+                          <td><h5><span class="badge badge-danger">F</span></h5></td>
                         @else
-                        <td>{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['status'] }}</td>
+                          <td><h5><span class="badge badge-secondary">{{ App\Models\Student\hasExam::where('student_id', $student->student_id)->whereIn('exam_schedule_id', $schedule_ids)->where('subject_id', 3)->where('exam_type_id', 1)->first()['status'] }}</span></h5></td>
                         @endif
-                       @else
-                      <td></td> 
-                       @endif
+
                       @else
-                      <td></td>  
-                      <td></td>  
+                        <td colspan="2"></td>
                       @endif
+                      {{-- /FIT303 E-Test --}}
                                             
                                             
                       <td><button onclick="view_student('{{ $student->student_id }}');" data-toggle="modal" data-target="#exampleModal" title="View Profile" data-tooltip="tooltip" data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></button></td>

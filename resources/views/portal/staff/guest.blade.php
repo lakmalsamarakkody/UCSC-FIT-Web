@@ -86,7 +86,7 @@
                                         <form action="" id="updateAccount">
                                             <div class="form-row">   
                                             <div class="form-group col-12 col-md-4">
-                                                <label for="rePassword">User Name</label>
+                                                <label for="rePassword">Display Name</label>
                                                 <input type="text" class="form-control " id="name" name="name"/>
                                                 <small id="nameHelp" class="form-text text-muted">Enter UserName</small>
                                                 <span class="invalid-feedback" id="error-name" role="alert"></span>
