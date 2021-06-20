@@ -75,9 +75,9 @@
         </div> --}}
         <!-- <div class="col-lg-1"></div> -->
 
-        {{-- EXAM TITLE --}}
+        {{-- EXAM TITLE --}}  
         <div class="col-lg-12 text-center">
-          <h1><span class="badge badge-secondary"> {{ App\Models\Exam::where('id',$exam_id)->first()->year }} - {{ Carbon\Carbon::createFromDate(2000,App\Models\Exam::where('id',$exam_id)->first()->month)->monthName }} </span></h1>
+          <h1><span class="badge badge-primary"> {{ App\Models\Exam::where('id',$exam_id)->first()->year }} - {{ Carbon\Carbon::createFromDate(2000,App\Models\Exam::where('id',$exam_id)->first()->month)->monthName }} </span> @if(App\Models\Exam::where('id',$exam_id)->first()->result_released == "released") <span class="badge badge-success"> Released</span> @elseif(App\Models\Exam::where('id',$exam_id)->first()->result_released == "hold") <span class="badge badge-danger"> Hold</span> @else <span class="badge badge-warning"> Pending</span> @endif</h1>
         </div>
         {{-- EXAM TITLE --}}
 

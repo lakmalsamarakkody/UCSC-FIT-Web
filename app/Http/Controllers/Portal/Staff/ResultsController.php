@@ -244,7 +244,7 @@ class ResultsController extends Controller
     {
         $schedules = Schedule::select('id')->where('exam_id', $request->id)->get();
         
-        if( hasExam::whereIn('exam_schedule_id', $schedules)->where('result', 1)->count() <= 0 ):
+        if( hasExam::whereIn('exam_schedule_id', $schedules)->where('result', 1)->orWhere('result', 2)->count() <= 0 ):
             return response()->json(['no_results'=>'no_results']);
         else:        
             hasExam::whereIn('exam_schedule_id', $schedules)
