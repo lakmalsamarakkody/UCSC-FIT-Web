@@ -696,8 +696,8 @@ decline_documentId = (registration_id, docType) => {
 
 // REGISTER STUDENT
 view_modal_registerStudent = (registration_id,email,enrollment,regNo) => {
-  let oldRegDate = '{{ $regDate }}';
-  let oldRegExpireDate = '{{ $regExpireDate }}';
+  let oldRegDate = '{{ $regDate ?? '' }}';
+  let oldRegExpireDate = '{{ $regExpireDate ?? '' }}';
   $('#btnRegisterStudent').attr('onclick','registerStudent('+registration_id+')');
   $('#regStudentEmail').html(email);
   $('#registerStudentTitle').html('Register Student');
