@@ -32,9 +32,7 @@ class ExamApplicationController extends Controller
     public function reviewExamPayments()
     {
         $today = Carbon::today();
-        $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', null)->where(function ($query) {
-            $query->where('schedule_status', 'Pending')->orWhere('schedule_status', 'Scheduled');
-          })->orderBy('created_at', 'asc')->get()->unique('payment_id');
+        $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', null)->where('schedule_status', 'Pending')->orWhere('schedule_status', 'Scheduled')->orderBy('created_at', 'asc')->get()->unique('payment_id');
         $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('schedule_status', 'Pending')->get();
         return view('portal/staff/student/exam_application', [
@@ -49,9 +47,7 @@ class ExamApplicationController extends Controller
     public function reviewExamApplications()
     {
         $today = Carbon::today();
-        $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where(function ($query) {
-            $query->where('schedule_status', 'Pending')->orWhere('schedule_status', 'Scheduled');
-          })->orderBy('created_at', 'asc')->get()->unique('payment_id');
+        $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where('schedule_status', 'Pending')->orWhere('schedule_status', 'Scheduled')->orderBy('created_at', 'asc')->get()->unique('payment_id');
         $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('schedule_status', 'Pending')->get();
         return view('portal/staff/student/exam_application', [
