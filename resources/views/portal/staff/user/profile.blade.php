@@ -49,34 +49,61 @@
                 <div class="row">
                   <div class="col-lg-8">
                     <table class="table">
-                        <tr>
-                            <th>User ID:</th>
-                            <td>{{ $user->id }}</td>
-                        </tr>
-                        <tr>
-                            <th>User Name:</th>
-                            <td>{{ $user->name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Email:</th>
-                            <td>{{ $user->email }}</td>
-                        </tr>
-                        <tr>
-                            <th>Status:</th>
-                            <td>                            
-                            @if($user->status==1)
-                            <h4><span class="badge badge-success">Active</span></h4>
-                            @else                     
-                            <h4><span class="badge badge-danger">Deactive</span></h4>                           
-                            @endif 
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Deativated/ Reactivated Reason:</th>
-                            <td>{{ $user->message }}</td>
-                        </tr>
+                      <tr>
+                          <th>User ID:</th>
+                          <td>{{ $user->id }}</td>
+                      </tr>
+                      <tr>
+                          <th>User Name:</th>
+                          <td>{{ $user->name }}</td>
+                      </tr>
+                      <tr>
+                        <th>User Role:</th>
+                        <td><h5><span class="badge badge-warning"> {{ $user->role->name }} </span></h5></td>
+                      </tr>
+                      <tr>
+                          <th>Email:</th>
+                          <td>{{ $user->email }}</td>
+                      </tr>
+                      <tr>
+                          <th>Status:</th>
+                          <td>                            
+                          @if($user->status==1)
+                          <h4><span class="badge badge-success">Active</span></h4>
+                          @else                     
+                          <h4><span class="badge badge-danger">Deactive</span></h4>                           
+                          @endif 
+                          </td>
+                      </tr>
+                      @if(Auth::user()->hasPermission('staff-user-profile-chnageUserRole'))
+                      <tr id="trChnageUserRole" class="d-none">
+                        <th>User Role:</th>
+                        <td>
+                          <form class="form-inline">
+                            <div class="form-group">
+                              <select class="form-control" name="changeUserRole" id="changeUserRole">
+                                <option value="" hidden>Select Role</option>
+                                @foreach($roles as $role)
+                                  @if($role->id == $user->role->id)
+                                    <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
+                                  @else
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                  @endif
+                                @endforeach
+                              </select>
+                            </div>
+                            <button onclick="change_userRole()" class="btn btn-outline-primary ml-2" >update <span id="spinnerUpdateRole" class="spinner-border spinner-border-sm d-none"></span></button>
+                          </form>
+                        </td>
+                      </tr>
+                      @endif
+                      @if($user->message)
+                      <tr>
+                          <th>Deativated/ Reactivated Reason:</th>
+                          <td>{{ $user->message }}</td>
+                      </tr>
+                      @endif
                     </table>
-
                   </div>
                   <div class="col-md-4 align-middle">  
                       <div class="row mb-5 justify-content-center">                               
@@ -84,6 +111,11 @@
                               <img src="{{ asset('storage/portal/avatar/'.$user->id.'/'.$user->profile_pic)}}" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
                           </div>
                           <div class="text-center w-100 ">
+                            @if(Auth::user()->hasPermission('staff-user-profile-chnageUserRole'))
+                            <button class="btn btn-outline-primary" onclick="makeEditableRole()" data-tooltip="tooltip" data-placement="bottom" title="Change Role" data-toggle="collapse" data-target="#collapseChangeRole" aria-expanded="false" aria-controls="collapseChangeRole">
+                              <i class="fa fa-user-shield"></i>
+                            </button>
+                            @endif
                             @if(Auth::user()->hasPermission('staff-user-profile-resetEmail'))
                             <button onclick="reset_email()" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Reset Email">
                               <i class="fa fa-envelope"></i>

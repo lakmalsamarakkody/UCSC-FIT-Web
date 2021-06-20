@@ -40,7 +40,7 @@ class Registration extends Controller
                     'email'=>'unique:users'
                 ],
                 $messages=[
-                    'unique'=>'User account exist! Please login to continue registration'
+                    'unique'=>'User account exists! Please login to continue'
                 ]
             );
             if($revalidator->fails()):

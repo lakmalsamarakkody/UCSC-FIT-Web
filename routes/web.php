@@ -97,6 +97,7 @@ Route::post('/portal/staff/student/application/declineDocumentBirth', [App\Http\
 Route::post('/portal/staff/student/application/declineDocumentId', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'declineDocumentId'])->name('student.application.declineDocumentId');
 Route::get('/portal/staff/student/application/reviewRegistration', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'reviewRegistration'])->name('student.application.reviewRegistration');
 Route::post('/portal/staff/student/application/registerStudent', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'registerStudent'])->name('student.application.registerStudent');
+Route::post('/portal/staff/student/application/registerAllStudents', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'registerAllStudents'])->name('student.application.registerAllStudents');
 Route::get('/portal/staff/student/registered', [App\Http\Controllers\Portal\Staff\Student\ApplicationController::class, 'registered'])->name('student.application.registered');
 // /REGISTRATION CARDS
 
@@ -195,6 +196,7 @@ Route::post('/portal/staff/results/hold', [App\Http\Controllers\Portal\Staff\Res
 Route::get('/portal/staff/users', [App\Http\Controllers\Portal\Staff\UsersController::class, 'index'])->name('users');
 Route::get('/portal/staff/users/user-list',[App\Http\Controllers\Portal\Staff\UsersController::class, 'getUserList'])->name('user.list');
 Route::get('/portal/staff/user/profile/{id}',[App\Http\Controllers\Portal\Staff\UsersController::class, 'viewUser'])->name('user.profile');
+Route::post('/portal/staff/user/profile/update/role',[App\Http\Controllers\Portal\Staff\UsersController::class, 'updateRole'])->name('user.update.role');
 Route::post('/portal/staff/user/profile/update/email/request',[App\Http\Controllers\Portal\Staff\UsersController::class, 'emailUpdateRequest'])->name('user.update.email.request');
 Route::post('/portal/staff/user/profile/deactivate/account',[App\Http\Controllers\Portal\Staff\UsersController::class, 'deactivateAccount'])->name('deactivate.user');
 Route::post('/portal/staff/user/profile/reactivate/account',[App\Http\Controllers\Portal\Staff\UsersController::class, 'reactivateAccount'])->name('reactivate.user');

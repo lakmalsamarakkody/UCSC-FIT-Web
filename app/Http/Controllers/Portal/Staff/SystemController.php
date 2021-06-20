@@ -22,7 +22,9 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\StudentsImport;
+use App\Mail\Subscribe;
 use App\Models\Student;
+use App\Models\Subscriber;
 use App\Models\Support\BankBranch;
 use App\Models\Support\Fee;
 use App\Models\Support\SlCity;
@@ -30,6 +32,7 @@ use App\Models\TempStudent;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 use function GuzzleHttp\Promise\all;
 use function PHPUnit\Framework\isNull;
@@ -961,6 +964,16 @@ class SystemController extends Controller
                 $user->password = Hash::make($tempStudent->unique_id);
 
                 if($user->save()):
+
+                  // CREATE SUBSCRIBER RECORD
+                  $existingSubscriber = Subscriber::where('email', $userEmail)->first();
+                  if(!$existingSubscriber):
+                    $token = Str::random(32);
+                    $subscriber = new Subscriber();
+                    $subscriber->email = $userEmail;
+                    $subscriber->token = $token;
+                    $subscriber->save();
+                  endif;
                   
                   // CREATE STUDENT
                     $student = new Student();

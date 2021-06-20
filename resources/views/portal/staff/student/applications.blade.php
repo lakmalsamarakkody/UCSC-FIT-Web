@@ -38,7 +38,10 @@
             <div class="card-header">Applications</div>
             <div class="card-body">
               @if(!$registrations->isEmpty())
-                <table class="table yajra-datatable">
+                @if($isRegistrationActivateView  ?? false )
+                  <div class="row px-3"><div class="ml-auto text-right"><button id="btnRegisterAll" class="btn btn-danger" onclick="registerAll()"><i class="fas fa-exclamation-triangle"> </i> Register All</button></div></div>
+                @endif
+                <table class="table yajra-datatable mt-2">
                   <thead class="text-center">
                     <tr>
                       <th>Student Name</th>

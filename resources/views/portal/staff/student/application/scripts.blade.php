@@ -44,6 +44,9 @@ view_modal_applicant = (registration_id) => {
         $('#spanEnrollment').html(data['studentFlag']['enrollment']);
 
         //APPLICATION
+        if(data['registration']['application_status'] == 'Declined'){
+          $('#spanDetailStatus').html(data['registration']['application_status']+'('+data['registration']['declined_msg']+')');
+        }
         $('#spanTitle').html(data['student']['title']);
         $('#spanFirstName').html(data['student']['first_name']);
         $('#spanMiddleNames').html(data['student']['middle_names']);
@@ -106,6 +109,9 @@ view_modal_applicant = (registration_id) => {
         // /APPLICATION
 
         // PAYMENT
+        if(data['registration']['payment_status'] == 'Declined'){
+          $('#spanPaymentStatus').html(data['registration']['payment_status']+'('+data['registration']['declined_msg']+')');
+        }
         if(data['payment'] != null){
           $('#payment-tab').removeClass('d-none');
           $('#spanPaymentDate').html(data['payment']['details']['paid_date']);
@@ -142,6 +148,9 @@ view_modal_applicant = (registration_id) => {
         // /PAYMENT
 
         //DOCUMENTS
+        if(data['registration']['document_status'] == 'Declined'){
+          $('#spanDocumentsStatus').html(data['registration']['document_status']+' ('+data['registration']['declined_msg']+')');
+        }
         if(data['documents'] != null){
           $('#documents-tab').removeClass('d-none');
           $('#imgBirthFront').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['bcFront']+')');
@@ -687,12 +696,20 @@ decline_documentId = (registration_id, docType) => {
 
 // REGISTER STUDENT
 view_modal_registerStudent = (registration_id,email,enrollment,regNo) => {
+  let oldRegDate = '{{ $regDate }}';
+  let oldRegExpireDate = '{{ $regExpireDate }}';
   $('#btnRegisterStudent').attr('onclick','registerStudent('+registration_id+')');
   $('#regStudentEmail').html(email);
+  $('#registerStudentTitle').html('Register Student');
+  $('#divRegStudentRegno').addClass('d-none');
+  $('#regDate').val(oldRegDate);
+  $('#regExpireDate').val(oldRegExpireDate);
   if(enrollment == 'existing'){
     $('#registerStudentTitle').html('Enroll Existing Student')
     $('#divRegStudentRegno').removeClass('d-none');
     $('#regStudentRegno').html(regNo);
+    $('#regDate').val(null);
+    $('#regExpireDate').val(null);
   }
   $('#modal-register-student').modal('show');
 }
@@ -740,6 +757,11 @@ registerStudent = (registration_id) => {
                 location.reload()
               }
             });
+          }
+          else if (data['status'] == 'error'){
+            SwalNotificationWarningAutoClose.fire({
+              title: data['data'],
+            })
           }else{
             SwalSystemErrorDanger.fire({
               title: 'Student Registration Process Failed!',
@@ -763,7 +785,75 @@ registerStudent = (registration_id) => {
       })
     }
   })
-} 
+}
+
+registerAll = () => {
+  // jQuery.fn.exists = function(){ return this.length > 0; }
+  // while($('#btnApproveRegistration1').exists()) {
+  //   $('[id|=btnApproveRegistration]').remove();
+  //   console.log("elemnt exists registerAll");
+  //}
+  // $("[id^=btnApproveRegistration]" ).each(function( index ) {
+  //   console.log( index + ": " + $( this ).text() );
+  // });
+
+  SwalQuestionWarningAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Register all now!',
+  })
+  .then((result) => {
+    if(result.isConfirmed) {
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('student.application.registerAllStudents') }}",
+        type: 'post',
+        processData: false,
+        contentType: false,           
+        beforeSend: function(){
+          $('#btnRegisterAll').attr('disabled','disabled');
+          $("[id^=spinnerBtnApproveRegistration]" ).each(function( index ) {
+            $(this).removeClass('d-none');
+          });
+        },
+        success: function(data){
+          $("[id^=spinnerBtnApproveRegistration]" ).each(function( index ) {
+            $(this).addClass('d-none');
+          });
+          $('#btnRegisterAll').removeAttr('disabled');
+          if (data['status'] == 'success'){
+            SwalDoneSuccess.fire({
+              title: 'Done!',
+              text: 'All students registered successfully',
+            }).then((result) => {
+              if(result.isConfirmed) {
+                location.replace("{{route('home')}}");
+              }
+            });
+          }else{
+            SwalSystemErrorDanger.fire({
+              title: 'Student Registration Process Failed!',
+            })
+          }
+        },
+        error: function(err){
+          $("[id^=spinnerBtnApproveRegistration]" ).each(function( index ) {
+            $(this).addClass('d-none');
+          });
+          $('#btnRegisterAll').removeAttr('disabled');
+        }
+      })
+    }
+    else{
+      SwalNotificationWarningAutoClose.fire({
+        title: 'Aborted!',
+        text: 'Student Registration process aborted.',
+      })
+    }
+  })
+}
 // /REGISTER STUDENT
 
 </script>
