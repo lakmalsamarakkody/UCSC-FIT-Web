@@ -52,8 +52,12 @@
                     targets: 3,
                     render: function ( data, type, row ) {
                         var btnGroup = '<div class = "btn-group">';
-
-                        btnGroup += '@if(Auth::user()->hasPermission("staff-result-view"))<a title="View Results" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-success text-center" href="{{ route("results.view", ":id") }}" target="_blank"><i class="fa fa-eye"></i></a>@endif';
+                        
+                        if (row['result_released'] == "released"){
+                          btnGroup += '@if(Auth::user()->hasPermission("staff-result-view"))<a title="View Results" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-success text-center" href="{{ route("results.view", ":id") }}" target="_blank"><i class="fa fa-eye"></i></a>@endif';
+                        } else {
+                          btnGroup += '@if(Auth::user()->hasPermission("staff-result-view"))@if(Auth::user()->hasPermission("staff-result-view-pending"))<a title="View Results" data-tooltip="tooltip"  data-placement="bottom" class="btn btn-success text-center" href="{{ route("results.view", ":id") }}" target="_blank"><i class="fa fa-eye"></i></a>@endif @endif';
+                        }
 
                         if (row['result_released'] == "released"){
                           btnGroup += '@if(Auth::user()->hasPermission("staff-result-hold"))<button title="Hold Results" data-tooltip="tooltip"  data-placement="bottom"  class="btn btn-danger text-center" onclick="hold_results('+data+')"><i class="fas fa-ban"></i></button>@endif';

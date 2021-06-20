@@ -595,6 +595,14 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
+                    'name'=>'staff-result-view-pending',
+                    'portal'=>'staff',
+                    'module'=>'result',
+                    'description'=>'Can view pending result exams',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
                     'name'=>'staff-result-hold',
                     'portal'=>'staff',
                     'module'=>'result',
@@ -615,6 +623,14 @@ class PermissionSeeder extends Seeder
                     'portal'=>'staff',
                     'module'=>'result',
                     'description'=>'Can push results of a exam',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-result-view-marks',
+                    'portal'=>'staff',
+                    'module'=>'result',
+                    'description'=>'Can view marks of a student',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
