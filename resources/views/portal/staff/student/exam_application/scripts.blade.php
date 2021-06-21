@@ -671,5 +671,71 @@
             }
         })
     }
+
+    ApproveAll = () => {
+        
+        SwalQuestionDangerAutoClose.fire({
+            title: "Are you sure?",
+            text: "You wont be able to revert this!",
+            confirmButtonText: 'Yes, Approve all schedules now!',
+        })
+        .then((result) => {
+            if(result.isConfirmed) {
+            $.ajax({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('student.application.exams.approveAll.schedules') }}",
+                type: 'post',
+                processData: false,
+                contentType: false,           
+                beforeSend: function(){
+                $('#btnRegisterAll').attr('disabled','disabled');
+                $("[id^=spinnerBtnViewModalAppliedExams]" ).each(function( index ) {
+                    $(this).removeClass('d-none');
+                });
+                },
+                success: function(data){
+                $("[id^=spinnerBtnViewModalAppliedExams]" ).each(function( index ) {
+                    $(this).addClass('d-none');
+                });
+                $('#btnRegisterAll').removeAttr('disabled');
+                if (data['status'] == 'success'){
+                    SwalDoneSuccess.fire({
+                    title: 'Done!',
+                    text: 'All students registered successfully',
+                    }).then((result) => {
+                    if(result.isConfirmed) {
+                        location.reload();
+                    }
+                    });
+                }else if (data['status'] == 'error'){
+                    SwalNotificationWarningAutoClose.fire({
+                        title: data['title'],
+                        text : data['msg'],
+                    })
+                }
+                else{
+                    SwalSystemErrorDanger.fire({
+                    title: 'Student Registration Process Failed!',
+                    })
+                }
+                },
+                error: function(err){
+                $("[id^=spinnerBtnViewModalAppliedExams]" ).each(function( index ) {
+                    $(this).addClass('d-none');
+                });
+                $('#btnRegisterAll').removeAttr('disabled');
+                }
+            })
+            }
+            else{
+            SwalNotificationWarningAutoClose.fire({
+                title: 'Aborted!',
+                text: 'Student Registration process aborted.',
+            })
+            }
+        })
+    }
     // /APPROVE SCHEDULES
 </script>

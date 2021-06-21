@@ -116,7 +116,7 @@ class ExamApplicationController extends Controller
         $today = Carbon::today();
         $data = hasExam::where('payment_id', '!=', null)
             ->where('payment_id',$request->payment_id)
-            ->where('schedule_status', 'Scheduled')->orWhere('schedule_status', 'Pending')
+            ->where('schedule_status', '!=', 'Approved')
             ->addSelect([
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
@@ -127,7 +127,7 @@ class ExamApplicationController extends Controller
             'schedule_time'=> Schedule::select(DB::raw('CONCAT(start_time, end_time) as time'))->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'start_time'=>Schedule::select('start_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
             'end_time'=>Schedule::select('end_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
-        ]);
+        ])->orderBy('requested_exam_id')->orderBy('subject_id')->orderBy('exam_type_id');
         return DataTables::of($data)
         ->addColumn('requested_exam', function($row) {
             return $row->requested_year.' '.$row->requested_month;
@@ -220,7 +220,8 @@ class ExamApplicationController extends Controller
         if($request->ajax()):
             $applied_exam = hasExam::where('id',$request->applied_exam_id)->first();
             $data = Schedule::where('subject_id',$applied_exam->subject_id)->where('exam_type_id',$applied_exam->exam_type_id)->where('date', '>=', $today)->where('schedule_release', 1)->addSelect([
-                'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+                'subject'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+                'examtype'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
             ]);
             if($request->exam != null):
                 $data = $data->where('exam_id', $request->exam);
@@ -230,6 +231,7 @@ class ExamApplicationController extends Controller
             ->editColumn('start_time', function($data){ $start_time = Carbon::createFromFormat('H:i:s', $data->start_time)->isoFormat('hh:mm A'); return $start_time; })
             ->editColumn('end_time', function($data){ $end_time = Carbon::createFromFormat('H:i:s', $data->end_time)->isoFormat('hh:mm A'); return $end_time; })
             ->rawColumns(['action'])
+            ->addColumn('subject_name', function($row) {return $row->subject.' - '.$row->examtype;})
             ->make(true);
         endif;
     }
@@ -274,7 +276,18 @@ class ExamApplicationController extends Controller
             endforeach;
             return response()->json(['status'=>'success']);
         endif;
-        //dd($request->all());
+    }
+
+    public function approveAllScheduledExams(Request $request){
+        $scheduled_exams = hasExam::where('exam_schedule_id', '!=', null)->where('schedule_status', 'Scheduled')->get();
+        if($scheduled_exams->isEmpty()):
+            return response()->json(['status'=>'error', 'title'=>'There are no scheduled exams to approve.', 'msg'=>'Please assign schedules first for the following students']);
+        else:
+            foreach($scheduled_exams as $exam):
+                hasExam::where('id', $exam->id)->update(['schedule_status'=>'Approved']);
+            endforeach;
+            return response()->json(['status'=>'success']);
+        endif;
     }
     // APPROVE SCHEDULED EXAMS
     // /FUNCTIONS IN EXAM APPLICATION/PAYMENT VIEW MODAL

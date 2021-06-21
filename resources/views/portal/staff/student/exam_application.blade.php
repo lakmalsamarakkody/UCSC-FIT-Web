@@ -38,6 +38,9 @@
               @if($exam_applicants->isEmpty())
                 <div class="alert alert-info" role="alert">No results found!</div>
               @else
+                @if(Auth::user()->hasPermission('staff-dashboard-exam-application-approveSchedules'))
+                  <div class="row px-3 mb-3"><div class="ml-auto text-right"><button id="btnApproveAll" class="btn btn-danger" onclick="ApproveAll()"><i class="fas fa-exclamation-triangle"> </i> Approve All</button></div></div>
+                @endif
                 <table class="table yajra-datatable">
                   <thead>
                     <tr>
@@ -54,7 +57,7 @@
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
                           <td>{{ $applicant->created_at->isoFormat('YYYY-MM-DD') }}</td>
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
-                          <td>
+                          <td class="text-right">
                             <div class="btn-group">
                               <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                             </div>
