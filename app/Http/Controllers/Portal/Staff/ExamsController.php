@@ -170,9 +170,9 @@ class ExamsController extends Controller
             $exam = Exam::where('id', $request->scheduleExam)->first();
             $exam_date = Carbon::createFromDate($exam->year,$exam->month,1);
             $schedule_date = Carbon::createFromDate($request->scheduleDate);
-            if(!$schedule_date->isSameMonth($exam_date)):
-                return response()->json(['status'=>'date_error', 'msg'=>'Exam schedule date not in selected exam month. Please select suitable schedule date.']);
-            endif;
+            // if(!$schedule_date->isSameMonth($exam_date)):
+            //     return response()->json(['status'=>'date_error', 'msg'=>'Exam schedule date not in selected exam month. Please select suitable schedule date.']);
+            // endif;
 
             $exam_schedule = new Schedule();
             $exam_schedule->exam_id = $request->scheduleExam;
@@ -249,9 +249,9 @@ class ExamsController extends Controller
             $exam = Exam::where('id', $request->editScheduleExam)->first();
             $exam_date = Carbon::createFromDate($exam->year,$exam->month,1);
             $schedule_date = Carbon::createFromDate($request->editScheduleExamDate);
-            if(!$schedule_date->isSameMonth($exam_date)):
-                return response()->json(['status'=>'date_error', 'msg'=>'Exam schedule date not in selected exam month. Please select suitable schedule date.']);
-            endif;
+            // if(!$schedule_date->isSameMonth($exam_date)):
+            //     return response()->json(['status'=>'date_error', 'msg'=>'Exam schedule date not in selected exam month. Please select suitable schedule date.']);
+            // endif;
 
             if(Schedule::where('id',$request->editScheduleId)->update([
                 'exam_id' => $request->editScheduleExam,
@@ -519,9 +519,9 @@ class ExamsController extends Controller
             $exam = Exam::where('id', $request->postponeExam)->first();
             $exam_date = Carbon::createFromDate($exam->year,$exam->month,1);
             $schedule_date = Carbon::createFromDate($request->postponeExamDate);
-            if(!$schedule_date->isSameMonth($exam_date)):
-                return response()->json(['status'=>'date_error', 'msg'=>'Exam schedule date not in selected exam month. Please select suitable schedule date.']);
-            endif;
+            // if(!$schedule_date->isSameMonth($exam_date)):
+            //     return response()->json(['status'=>'date_error', 'msg'=>'Exam schedule date not in selected exam month. Please select suitable schedule date.']);
+            // endif;
 
             
             if(Schedule::where('id', $request->postponeScheduleId)->update([

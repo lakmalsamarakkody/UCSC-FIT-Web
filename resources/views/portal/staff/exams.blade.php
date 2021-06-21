@@ -34,7 +34,7 @@
         <div class="col-md-6 col-12 mb-5">
           <a href="{{ url('/portal/staff/exams/list') }}" style="text-decoration: none">
             <div class="card">
-              <div class="card-header bg-primary text-center py-4 text-white">Exam List</div>
+              <div class="card-header bg-primary text-center py-4 text-white">Exam List <br/>( create / view exams )</div>
             </div>
           </a>
         </div>
@@ -46,7 +46,7 @@
         <div class="col-md-6 col-12 mb-5">
           <a href="{{ route('exams.assign') }}" style="text-decoration: none">
             <div class="card">
-              <div class="card-header bg-primary text-center py-4 text-white">Assign Exams</div>
+              <div class="card-header bg-primary text-center py-4 text-white">Assign Exams for students <br/>( overriding payments )</div>
             </div>
           </a>
         </div>
@@ -57,7 +57,7 @@
         @if(Auth::user()->hasPermission('staff-exam-schedule-add'))
         <div class="col-12 mb-5">
           <div class="card">
-            <div class="card-header">Create Exam Schedule</div>
+            <div class="card-header">Create Exam Session</div>
             <div class="card-body">
               <form action="" method="POST" id="formCreateSchedule">
                 <div class="form-row align-items-center">
@@ -128,7 +128,7 @@
         @if(Auth::user()->hasPermission('staff-exam-schedule-drafted-view'))
         <div class="col-12 mb-5">
           <div class="card">
-            <div class="card-header">Drafted Exam Schedules</div>
+            <div class="card-header">Tentative Exam Sessions</div>
             <div class="card-body">
               <table class="table schedules-before-release-yajradt">
                 <thead>
@@ -151,7 +151,7 @@
                 {{ $upcoming_schedules->withQueryString()->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }}
               </div> --}}
               <div class="text-center">
-                @if(Auth::user()->hasPermission("staff-exam-schedule-allRelease"))<button type="button" class="btn btn-outline-primary" id="btnReleaseAllSchedules" onclick="release_schedules()">RELEASE ALL APPROVED SCHEDULES<span id="spinnerBtnReleaseSchedules" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>@endif
+                @if(Auth::user()->hasPermission("staff-exam-schedule-allRelease"))<button type="button" class="btn btn-outline-primary" id="btnReleaseAllSchedules" onclick="release_schedules()">RELEASE ALL APPROVED EXAM SESSIONS<span id="spinnerBtnReleaseSchedules" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>@endif
               </div>
             </div>
           </div>
@@ -163,7 +163,7 @@
         @if(Auth::user()->hasPermission('staff-exam-schedule-scheduled-view'))
         <div class="col-12 mb-5">
           <div class="card">
-            <div class="card-header">Scheduled Exams</div>
+            <div class="card-header">Released Exam Sessions</div>
             <div class="card-body">
               <table class="table schedules-after-release-yajradt">
                 <thead>

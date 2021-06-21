@@ -114,6 +114,7 @@ Route::post('/portal/staff/student/exams/application/schedules/table', [App\Http
 // Route::post('/portal/staff/student/exams/application/schedules/search', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'searchSchedulesByExam'])->name('student.application.exams.schedules.search');
 Route::post('/portal/staff/student/exams/application/schedule/exam', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'scheduleAppliedExam'])->name('student.application.exams.schedule.exam');
 Route::post('/portal/staff/student/exams/application/schedules/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveScheduledExams'])->name('student.application.exams.approve.schedules');
+Route::post('/portal/staff/student/exams/application/schedules/approve/all', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveAllScheduledExams'])->name('student.application.exams.approveAll.schedules');
 
 // EXAM MEDICAL
 Route::get('/portal/staff/student/exams/medical', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'reviewMedicals'])->name('student.exams.medical');
