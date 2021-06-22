@@ -231,7 +231,8 @@ class ExamApplicationController extends Controller
             ->editColumn('start_time', function($data){ $start_time = Carbon::createFromFormat('H:i:s', $data->start_time)->isoFormat('hh:mm A'); return $start_time; })
             ->editColumn('end_time', function($data){ $end_time = Carbon::createFromFormat('H:i:s', $data->end_time)->isoFormat('hh:mm A'); return $end_time; })
             ->rawColumns(['action'])
-            ->addColumn('subject_name', function($row) {return $row->subject.' - '.$row->examtype;})
+            // ->addColumn('subject_name', function($row) {return $row->subject.' - '.$row->examtype;})
+            ->editColumn('count', function($data) { $count = hasExam::where('exam_schedule_id',$data->id)->count(); return $count;})
             ->make(true);
         endif;
     }
