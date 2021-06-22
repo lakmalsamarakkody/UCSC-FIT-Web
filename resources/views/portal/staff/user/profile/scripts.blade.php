@@ -134,6 +134,93 @@
   }
   // /EMAIL
 
+  // CLOSE ACCOUNT FOR RE-REGISTRATION
+  closeAccount = () => {
+    SwalQuestionDanger.fire({
+      title: "Are you sure ?",
+      text: "Account will be permanently closed",
+      confirmButtonText: "Yes, Close!",
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        SwalQuestionDanger.fire({
+          title: "Reason to Close ?",
+          input: 'textarea',
+          inputLabel: 'Message',
+          inputPlaceholder: 'Type your message here...',
+          inputAttributes: {
+            'aria-label': 'Type your message here'
+          },
+          inputValidator: (value) => {
+            if (!value) {
+              return 'You need to write something!'
+            }
+          },
+          timer: false,
+          showCancelButton: true,
+          confirmButtonText: "Close Account!",
+        }).then((result) => {
+          //alert(result.value)
+          $.ajax({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('close.user') }}",
+            type: 'post',
+            data: { 'message': result.value, 'id': "{{ $user->id }}"},         
+            beforeSend: function(){
+              // Show loader
+              $('body').addClass('freeze');
+              Swal.showLoading();
+            },
+            success: function(data){
+              $('body').removeClass('freeze');
+              Swal.hideLoading();
+              if(data['errors']){
+                $.each(data['errors'], function(key, value){
+                  SwalNotificationErrorDanger.fire({
+                    title: 'Error!',
+                    text: value
+                  })
+                });
+              }else if (data['success']){
+                SwalDoneSuccess.fire({
+                  title: "Closed!",
+                  text: "Account Closed Successfully",
+                }).then((result) => {
+                  if(result.isConfirmed) {
+                    location.reload()
+                  }
+                });
+              }else if (data['error']){
+                SwalSystemErrorDanger.fire({
+                  title: 'Process Failed!',
+                  text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                })
+              }
+            },
+            error: function(err){
+              $('body').removeClass('freeze');
+              Swal.hideLoading();
+              SwalErrorDanger.fire({
+                title: 'Process Failed!',
+                text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+              })
+            }
+          });
+
+        })
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Account not deactivated",
+        })
+      }
+    })
+  }
+  // /CLOSE ACCOUNT FOR RE-REGISTRATION
+
   // ACTIVATE ACC
   activate_acc = () => {
     SwalQuestionSuccess.fire({

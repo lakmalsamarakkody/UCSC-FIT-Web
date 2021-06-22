@@ -121,6 +121,31 @@ class UsersController extends Controller
   }
   // /UPDATE EMAIL
 
+  // CLOSE ACCOUNT FOR RE-REGISTRATION
+  public function closeAccount(Request $request){
+    $user = User::where('id',$request->id)->first();
+    $validator = Validator::make($request->all(), 
+        [     
+            'message'=> ['required']
+        ]
+    );
+    if($validator->fails()):
+        return response()->json(['errors'=>$validator->errors()->all()]);
+    else:
+        if($user):
+            // DEACTIVATE AND CHANGED EMAIL TO CLOSED
+            if(User::where('id', $user->id)->update(['status' => 0, 'message' => $request->message, 'email' => $user->email.'-closed'])):
+                // CHANGE UNIQUE IDS TO CLOSED
+                if($user->student()->update(['nic_old'=> $user->student->nic_old.'-closed-user-'.$user->id, 'nic_new'=> $user->student->nic_new.'-closed-user-'.$user->id, 'postal'=> $user->student->postal.'-closed-user-'.$user->id, 'passport'=> $user->student->passport.'-closed-user-'.$user->id ])):
+                    return response()->json(['success'=>'success']);
+                endif;
+            endif;
+        endif;
+    endif;
+    return response()->json(['error'=>'error']);
+  }
+  // /CLOSE ACCOUNT FOR RE-REGISTRATION
+
   public function deactivateAccount(Request $request)
   {
       $user_id = $request->id;

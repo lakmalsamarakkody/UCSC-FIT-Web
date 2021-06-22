@@ -27,9 +27,9 @@ class CreateStudentsTable extends Migration
             $table->string('gender')->nullable();
             $table->string('citizenship')->nullable();
             
-            $table->string('nic_old')->unique()->length(10)->nullable();
-            $table->bigInteger('nic_new')->unique()->length(12)->nullable();
-            $table->string('postal')->unique()->length(9)->nullable();
+            $table->string('nic_old')->unique()->nullable();
+            $table->string('nic_new')->unique()->nullable();
+            $table->string('postal')->unique()->nullable();
             $table->string('passport')->unique()->nullable();
 
             $table->string('education')->nullable();
