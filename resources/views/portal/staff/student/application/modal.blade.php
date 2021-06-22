@@ -81,7 +81,10 @@
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-md-12 order-md-1 order-2">
+                                                    <div class="col-md-12 order-md-1 order-1">
+                                                        <div class="text-center">
+                                                            <a id="linkOpenImgAvatar" href="#" target="_blank"><img id="imgAvatar" alt="Avatar" class="rounded img-thumbnail avatar" width="250px" onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';"><br/></a>
+                                                        </div>
                                                         <table id="tblPersonal" class="table">
                                                             <tr>
                                                                 <th>Title:</th>

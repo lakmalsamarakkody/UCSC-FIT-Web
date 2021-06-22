@@ -47,6 +47,10 @@ view_modal_applicant = (registration_id) => {
         if(data['registration']['application_status'] == 'Declined'){
           $('#spanDetailStatus').html(data['registration']['application_status']+'('+data['registration']['declined_msg']+')');
         }
+        $('#imgAvatar').removeAttr('src');
+        $('#linkOpenImgAvatar').removeAttr('href');
+        $('#imgAvatar').attr('src', '/storage/portal/avatar/'+data['user']['id']+'/'+data['user']['profile_pic']);
+        $('#linkOpenImgAvatar').attr('href', '/storage/portal/avatar/'+data['user']['id']+'/'+data['user']['profile_pic']);
         $('#spanTitle').html(data['student']['title']);
         $('#spanFirstName').html(data['student']['first_name']);
         $('#spanMiddleNames').html(data['student']['middle_names']);

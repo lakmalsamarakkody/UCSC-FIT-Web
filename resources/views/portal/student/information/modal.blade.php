@@ -22,7 +22,9 @@
               </div>
               
             </form>
-            <span class="alert alert-danger d-block text-center " role="alert">Avoid upploading inappropiate images! Accounts with such images will be banned without notice.</span>
+
+            <span class="alert alert-danger d-block text-center " role="alert">Image must be cropped to a square shape (Ratio 1:1). Please check your image height and width are same.</span>
+            <span class="alert alert-danger d-block text-center " role="alert">Avoid uploading inappropiate images! Accounts with such images will be banned without notice.</span>
             
             <div class="float-right">
               <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"  onclick="window.location.reload();">Discard</button>
@@ -37,7 +39,7 @@
           <h6>
             Or Select a previous Image</h6>
           <div class="past-img float-left">          
-          @foreach(File::glob(public_path('storage/portal/avatar/'.$student->id).'/*') as $path)
+          @foreach(File::glob(public_path('storage/portal/avatar/'.$student->user_id).'/*') as $path)
           <button class="btn btn-link" onclick="select_profile_pic('{{ str_replace(public_path(), '', $path) }}')">
             <img src="{{ url('') }}{{ str_replace(public_path(), '', $path) }}" width="50px">
           </button>

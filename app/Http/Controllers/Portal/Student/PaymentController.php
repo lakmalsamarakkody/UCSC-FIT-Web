@@ -214,7 +214,7 @@ class PaymentController extends Controller
       if($payment->save()):
 
         // CHECK FOR CURRENT REGISTRATION PROCESS
-        if($registration):
+        if($processingRegistration):
           // UPDATE PAYMENT ID
           $updateRegistration = Registration::where('id', $registration);
           if($updateRegistration->update(['payment_id' => $payment->id,'payment_status' => NULL,'declined_msg' => NULL,'status' => NULL,])):

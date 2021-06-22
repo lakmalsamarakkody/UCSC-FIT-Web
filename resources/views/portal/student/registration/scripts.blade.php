@@ -61,6 +61,7 @@
             $('#'+key).addClass('is-invalid');
             $('#error-'+key).append('<strong>'+value+'</strong>')
             window.location.hash = '#'+key;
+            window.location.hash = '#enrollment';
           });
         }else if (data['status'] = 'success'){
           SwalQuestionSuccessAutoClose.fire({
@@ -89,6 +90,7 @@
                     $('#divSaveInformation').addClass('d-none');
                     $('#divResetForm').addClass('d-none');
                     $('#divEditInformation').removeClass('d-none');
+                    $('#btnEditPropic').addClass('d-none');
 
                     //CHECK IS INFO COMPLETE TO SHOW DECLARATION
                     $.ajax({
@@ -173,6 +175,7 @@
         $('#btnSaveInformation').removeAttr('disabled','disabled');
         $('#divEditInformation').addClass('d-none');
         $('#divSubmitButton').collapse('hide');
+        $('#btnEditPropic').removeClass('d-none');
       }
       else {
         SwalNotificationWarningAutoClose.fire({
@@ -629,5 +632,118 @@
     })
   }
   // /SUBMIT APPLICATION
+
+  // UPDATE PROFILE PIC
+  upload_profile_pic = () => {
+    
+    $('.form-control').removeClass('is-invalid');
+    $('.invalid-feedback').html('');
+    $('.invalid-feedback').hide();
+
+
+    // FORM PAYLOAD
+    var formData = new FormData($("#profilePicForm")[0]);
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{ route('upload.profile.pic') }}",
+      type: 'post',
+      data: formData,  
+      processData: false,
+      contentType: false,         
+      beforeSend: function(){
+        // Show loader
+        $("#spinnerprofilePic").removeClass('d-none');
+        $('#btnUploadProfilePic').attr('disabled','disabled');
+      },
+      success: function(data){
+        $("#spinnerprofilePic").addClass('d-none');
+        $('#btnUploadProfilePic').removeAttr('disabled');
+        if(data['errors']){
+          $.each(data['errors'], function(key, value){
+            $('#error-'+key).show();
+            $('#'+key).addClass('is-invalid');
+            $('#error-'+key).append('<strong>'+value+'</strong>');
+            window.location.hash = '#'+key;
+          });
+        }else if (data['success']){
+          $('.form-control').val('');
+          SwalDoneSuccess.fire({
+            title: 'Succesfully Uploaded!',
+            text: 'Profile picture updated succefully',
+          }).then((result) => {
+            if(result.isConfirmed) {
+              location.reload()
+            }
+          });
+        }else if (data['error']){
+          SwalSystemErrorDanger.fire({
+            title: 'Upload Failed!',
+            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+          })
+        }
+      },
+      error: function(err){
+        $("#spinnerprofilePic").addClass('d-none');
+        $('#btnUploadProfilePic').removeAttr('disabled');
+        SwalErrorDanger.fire({
+          title: 'Upload Failed!',
+          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+        })
+      }
+    });
+  }
+  // /UPDATE PROFILE PIC
+
+  // SELECT PROFILE PIC
+  select_profile_pic = (path) => {
+    
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{ route('select.profile.pic') }}",
+      type: 'post',
+      data: {
+          'path':path
+      },          
+      beforeSend: function(){
+        // Show loader
+        $("#spinnerprofilePic").removeClass('d-none');
+        $('#btnUploadProfilePic').attr('disabled','disabled');
+      },
+      success: function(data){
+        $("#spinnerprofilePic").addClass('d-none');
+        $('#btnUploadProfilePic').removeAttr('disabled');
+        if (data['success']){
+          $('.form-control').val('');
+          SwalDoneSuccess.fire({
+            title: 'Succesfully Uploaded!',
+            text: 'Profile picture updated succefully',
+          }).then((result) => {
+            if(result.isConfirmed) {
+              location.reload()
+            }
+          });
+        }else if (data['error']){
+          SwalSystemErrorDanger.fire({
+            title: 'Upload Failed!',
+            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+          })
+        }
+      },
+      error: function(err){
+        $("#spinnerprofilePic").addClass('d-none');
+        $('#btnUploadProfilePic').removeAttr('disabled');
+        SwalErrorDanger.fire({
+          title: 'Upload Failed!',
+          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+        })
+      }
+    });
+  }
+  // /SELECT PROFILE PIC
 
   </script>

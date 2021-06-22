@@ -75,6 +75,12 @@
                           @endif 
                           </td>
                       </tr>
+                      @if(Auth::user()->hasStudent($user->id))
+                        <tr>
+                          <th>Student Profile:</th>
+                          <td><a href="/portal/staff/student/profile/{{ Auth::user()->hasStudent($user->id) }}" class="btn btn-primary">View Profile</a></td>
+                        </tr>
+                      @endif
                       @if(Auth::user()->hasPermission('staff-user-profile-chnageUserRole'))
                       <tr id="trChnageUserRole" class="d-none">
                         <th>User Role:</th>
@@ -111,16 +117,29 @@
                               <img src="{{ asset('storage/portal/avatar/'.$user->id.'/'.$user->profile_pic)}}" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';">
                           </div>
                           <div class="text-center w-100 ">
+
                             @if(Auth::user()->hasPermission('staff-user-profile-chnageUserRole'))
                             <button class="btn btn-outline-primary" onclick="makeEditableRole()" data-tooltip="tooltip" data-placement="bottom" title="Change Role" data-toggle="collapse" data-target="#collapseChangeRole" aria-expanded="false" aria-controls="collapseChangeRole">
                               <i class="fa fa-user-shield"></i>
                             </button>
                             @endif
+
                             @if(Auth::user()->hasPermission('staff-user-profile-resetEmail'))
                             <button onclick="reset_email()" class="btn btn-outline-warning" data-tooltip="tooltip" data-placement="bottom" title="Reset Email">
                               <i class="fa fa-envelope"></i>
                             </button>
                             @endif
+
+                            {{-- CLOSE REGISTRATION --}}
+                            @if(Auth::user()->hasStudent($user->id) && $user->status==1)
+                              @if(Auth::user()->hasPermission('staff-user-profile-closeToReReg'))
+                                <button class="btn btn-outline-danger" onclick="closeAccount()" data-tooltip="tooltip" data-placement="bottom" title="Close account for Re-registration">
+                                  <i class="fa fa-people-arrows"></i>
+                                </button>
+                              @endif
+                            @endif
+                            {{-- CLOSE REGISTRATION --}}
+
                             @if($user->status==1)
                               @if(Auth::user()->hasPermission('staff-user-profile-deactivate'))
                               <button onclick="deactivate_acc()" class="btn btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Deactivate Account">
@@ -133,7 +152,7 @@
                                 <i class="fa fa-user-check"></i>
                               </button>
                               @endif
-                            @endif     
+                            @endif  
                           </div>                          
                       </div>   
                   </div>  

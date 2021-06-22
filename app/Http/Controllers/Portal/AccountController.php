@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Portal;
 use App\Http\Controllers\Controller;
 use App\Mail\ChangeEmail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +21,11 @@ class AccountController extends Controller
         $this->middleware('revalidate');
     }
 
+    public function updateLoginActivity(Request $request){
+        User::where('id', Auth::user()->id)->update(['last_login'=> Carbon::now()]);
+        return TRUE;
+    }
+
     // UPLOAD PROFILE PIC
     public function uploadProfilePic(Request $request)
     {
@@ -28,7 +34,7 @@ class AccountController extends Controller
                 'profileImage'=> ['required', 'image', 'dimensions:ratio=1/1']
             ],
             [
-                'dimensions'=>'image must be cropped to a square shape (Ratio 1:1)'
+                'dimensions'=>'image must be cropped to a square shape (Ratio 1:1). Please check your image height and width are same.'
             ]
         );
 
