@@ -33,7 +33,7 @@ class HomeController extends Controller
     {
       // CARD COUNTS
       // Registration
-      $applicationCount = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->get()->count();
+      $applicationCount = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->where('payment_id', '!=', NULL)->get()->count();
       $paymentReviewCount = Registration::where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', NULL)->get()->count();
       $documentPendingCount = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '0')->get()->count();
       $documentReviewCount = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', "Approved")->where('payment_id', '!=', NULL)->where('payment_status', 'Approved')->where('document_submit', '1')->where('document_status', NULL)->get()->count();

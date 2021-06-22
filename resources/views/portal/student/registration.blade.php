@@ -60,6 +60,27 @@
                             <!-- PERSONAL DETAILS -->
                             <div class="details px-3 pb-3 mt-4">
                                 <h6 class="text-left mt-4 mb-4">Personal Details</h6>
+                                {{-- PROFILE PICTURE --}}
+                                <div class="form-row align-item-center mt-2">
+                                    <div class="form-group col-xl-6 col-md-12">
+                                        <div class="img mb-2  position-relative">
+                                            <button type="button" class="btn btn-outline-warning position-absolute m-3" data-tooltip="tooltip" data-placement="bottom" title="Change Profile Picture" data-toggle="modal" data-target="#modal-profile-picture"><i class="fa fa-edit"></i></button>
+                                            <img src="{{ asset('storage/portal/avatar/'.$student->user_id.'/'.$student->user->profile_pic)}}" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';"><br/>
+                                            <a href="https://www.befunky.com/create/crop-photo/" target="_blank" ><span class="alert alert-primary font-weight-bold">Click to open free online tool for image cropping</span></a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-12">
+                                        <div class="alert alert-danger">
+                                        <span class="alert alert-danger d-block my-0 font-weight-bold text-uppercase" role="alert"> Upload A Clear Photo of Your Face.</span>
+                                        <span class="alert alert-danger d-block my-0" role="alert"> * Image must be lower than 5MB in size.</span>
+                                        <span class="alert alert-danger d-block my-0" role="alert"> * Image must be cropped to a square shape (Ratio 1:1).</span>
+                                        <span class="alert alert-danger d-block my-0" role="alert"> * (1:1 ratio - Image height and width must be same)</span>
+                                        <span class="alert alert-danger d-block my-0" role="alert"> * Avoid uploading inappropiate images! Accounts with such images will be banned without notice.</span>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- PROFILE PICTURE --}}
                                 <small>* Please fill your name and birthday as appearing in the Birth Certificate.</small>
                                 <div class="form-row align-item-center mt-2">
                                     <div class="form-group col-xl-6 col-md-12">
@@ -607,6 +628,7 @@
 
     </div>
     <!-- /CONTENT -->
+    @include('portal.student.registration.modal')
 @endsection
 
 @section('script')

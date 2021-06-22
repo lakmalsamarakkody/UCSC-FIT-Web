@@ -28,7 +28,7 @@ class AccountController extends Controller
                 'profileImage'=> ['required', 'image', 'dimensions:ratio=1/1']
             ],
             [
-                'dimensions'=>'image must be cropped to a square shape (Ratio 1:1)'
+                'dimensions'=>'image must be cropped to a square shape (Ratio 1:1). Please check your image height and width are same.'
             ]
         );
 

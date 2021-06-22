@@ -15,6 +15,7 @@ use App\Models\Support\WorldCity;
 use App\Models\Support\WorldCountry;
 use App\Models\Support\WorldDivision;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -112,6 +113,7 @@ class RegistrationController extends Controller
   //Validate SaveInfoButton Request
   public function saveInfoValidator(Request $request)
   {
+    $minBirthYear = Carbon::now()->subYears(10)->isoFormat('YYYY');
     $validator = Validator::make($request->all(), [   
       'enrollment' => ['nullable',Rule::in(['new', 'existing'])],
       'regNo' => ['nullable', 'fit_reg_no'],
@@ -121,7 +123,7 @@ class RegistrationController extends Controller
       'lastName' => ['nullable', 'alpha', 'min:3'],
       'fullName' => ['nullable', 'alpha_dash_space'],
       'initials' => ['nullable', 'alpha_capital'],
-      'dob' => ['nullable' , 'date','before:today'],
+      'dob' => ['nullable' , 'date','before:'.$minBirthYear.'-01-01'],
       'gender' => ['nullable', Rule::in(['Male', 'Female'])],
       'citizenship' => ['nullable', Rule::in(['Sri Lankan', 'Foreign National'])],
       'uniqueType' => ['nullable', Rule::in(['nic', 'postal', 'passport'])],
@@ -431,6 +433,8 @@ class RegistrationController extends Controller
       'info_complete'=> 0,
     ]);
 
+    $minBirthYear = Carbon::now()->subYears(10)->isoFormat('YYYY');
+
     $validator = Validator::make($request->all(), [
       'enrollment' => ['required',Rule::in(['new', 'existing'])],
       'title' => ['required', 'exists:titles,title'],
@@ -438,7 +442,7 @@ class RegistrationController extends Controller
       'lastName' => ['required', 'alpha', 'min:3'],
       'fullName' => ['required', 'alpha_dash_space'],
       'initials' => ['required', 'alpha_capital'],
-      'dob' => ['required' , 'date','before:today'],
+      'dob' => ['required' , 'date','before:'.$minBirthYear.'-01-01'],
       'gender' => ['required', Rule::in(['Male', 'Female'])],
       'citizenship' => ['required', Rule::in(['Sri Lankan', 'Foreign National'])],
       'uniqueType' => ['required', Rule::in(['nic', 'postal', 'passport'])],
@@ -489,6 +493,14 @@ class RegistrationController extends Controller
       ]);
     endif;
 
+    // CHECK FOR PROFILE IMAGE
+    if (!file_exists('storage/portal/avatar/'.Auth::user()->id.'/'.Auth::user()->profile_pic)):
+      $avatarValidator = Validator::make($request->all(), 
+        [     'profileImage'=> ['required', 'image', 'dimensions:ratio=1/1']],
+        ['dimensions'=>'image must be cropped to a square shape (Ratio 1:1). Please check your image height and width are same.']
+      );
+    endif;
+
     if($validator->fails()):
       return response()->json(['errors'=>$validator->errors()]);
     elseif(isset($enrollment_validator) && $enrollment_validator->fails()):
@@ -497,6 +509,8 @@ class RegistrationController extends Controller
       return response()->json(['errors'=>$uniqueID_validator->errors()]);
     elseif(isset($current_address_validator) && $current_address_validator->fails()):
       return response()->json(['errors'=>$current_address_validator->errors()]);
+    elseif(isset($avatarValidator) && $avatarValidator->fails()):
+      return response()->json(['errors'=>$avatarValidator->errors()]);
     else:
       $student_flag = $student->flag()->update([
         'info_complete'=> 1,

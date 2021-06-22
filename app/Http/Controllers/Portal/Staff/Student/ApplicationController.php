@@ -15,6 +15,7 @@ use App\Models\Support\SlDistrict;
 use App\Models\Support\WorldCity;
 use App\Models\Support\WorldCountry;
 use App\Models\Support\WorldDivision;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -31,7 +32,7 @@ class ApplicationController extends Controller
     // NEW APPLICANT
     public function Applications()
     {
-        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->get();
+        $registrations = Registration::where('registered_at', NULL)->where('application_submit', '1')->where('application_status', NULL)->where('payment_id', '!=', NULL)->get();
         return view('portal/staff/student/applications', compact('registrations'));
     }
 
@@ -74,6 +75,7 @@ class ApplicationController extends Controller
     {
         $registration = Registration::find($request->registration_id);
         $student = Registration::find($request->registration_id)->student;
+        $user = User::where('id', $student->user_id)->first();
         $studentFlag = $student->flag;
         $email = $student->user->email;
         $payment = NULL;
@@ -150,7 +152,7 @@ class ApplicationController extends Controller
         endif;
         $currentAddressDetails = array('currentCountry'=>$currentCountry, 'currentState'=>$currentState, 'currentCity'=>$currentCity);
         // /CURRENT ADDRESS
-        return response()->json(['status'=>'success', 'student'=>$student, 'registration'=>$registration, 'lastRegistration' =>$lastRegistration, 'studentFlag'=>$studentFlag, 'payment'=> $payment, 'documents'=> $documents, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
+        return response()->json(['status'=>'success', 'user'=>$user, 'student'=>$student, 'registration'=>$registration, 'lastRegistration' =>$lastRegistration, 'studentFlag'=>$studentFlag, 'payment'=> $payment, 'documents'=> $documents, 'email'=>$email, 'permanentAddressDetails'=>$permanentAddressDetails, 'currentAddressDetails'=>$currentAddressDetails]);
 
     }
 
