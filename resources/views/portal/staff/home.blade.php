@@ -36,7 +36,7 @@
           @if(Auth::user()->hasPermission('staff-dashboard-registration-application-view'))
           <a href="{{ route('student.application') }}">
           @endif
-            <div class="card card-dash shadow green-none bg-primary h-100" style="max-width: 18rem;">
+            <div class="card card-dash shadow green-none bg-primary h-100">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $applicationCount }}</div>
               </div>
@@ -50,7 +50,7 @@
           @if(Auth::user()->hasPermission('staff-dashboard-registration-review-payment-view'))
           <a href="{{ route('student.application.reviewRegPayment') }}">
           @endif
-            <div class="card h-100 card-dash shadow red-none bg-main-warning" style="max-width: 18rem;">
+            <div class="card h-100 card-dash shadow red-none bg-main-warning">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $paymentReviewCount }}</div>
               </div>
@@ -64,7 +64,7 @@
           @if(Auth::user()->hasPermission('staff-dashboard-registration-pending-documents-view'))
           <a href="{{ route('student.application.reviewRegDocumentsPending') }}">
           @endif
-            <div class="card h-100 card-dash shadow black-none bg-primary" style="max-width: 18rem;">
+            <div class="card h-100 card-dash shadow black-none bg-primary">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $documentPendingCount }}</div>
               </div>
@@ -78,7 +78,7 @@
           @if(Auth::user()->hasPermission('staff-dashboard-registration-review-documents-view'))
           <a href="{{ route('student.application.reviewRegDocuments') }}">
           @endif
-            <div class="card h-100 card-dash shadow yellow-none bg-main-warning" style="max-width: 18rem;">
+            <div class="card h-100 card-dash shadow yellow-none bg-main-warning">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $documentReviewCount }}</div>
               </div>
@@ -92,7 +92,7 @@
           @if(Auth::user()->hasPermission('staff-dashboard-registration-pending-registrations-view'))
           <a href="{{ route('student.application.reviewRegistration') }}">
           @endif
-            <div class="card h-100 card-dash shadow red-none bg-danger" style="max-width: 18rem;">
+            <div class="card h-100 card-dash shadow red-none bg-danger">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $pendingRegistration }}</div>
               </div>
@@ -106,7 +106,7 @@
           @if(Auth::user()->hasPermission('staff-dashboard-registration-active-registrations-view'))
           <a href="{{ route('students') }}">
           @endif
-            <div class="card h-100 card-dash shadow black-none bg-success" style="max-width: 18rem;">
+            <div class="card h-100 card-dash shadow black-none bg-success">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $totalRegistered }}</div>
               </div>
@@ -126,7 +126,7 @@
           @if(Auth::user()->hasPermission('staff-dashboard-exam-review-payments-view'))
           <a href="{{ route('student.application.exams.payments') }}">
           @endif
-            <div class="card h-100 card-dash shadow yellow-none bg-main-warning" style="max-width: 18rem;">
+            <div class="card h-100 card-dash shadow yellow-none bg-main-warning">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $examPaymentReviewCount }}</div>
               </div>
@@ -140,7 +140,7 @@
           @if(Auth::user()->hasPermission('staff-dashboard-exam-assign-schedules-view'))
           <a href="{{ route('student.application.exams') }}">
           @endif
-            <div class="card h-100 card-dash shadow red-none bg-danger" style="max-width: 18rem;">
+            <div class="card h-100 card-dash shadow red-none bg-danger">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $revieweExamsToScheduleCount }}</div>
               </div>
@@ -154,7 +154,7 @@
           @if(Auth::user()->hasPermission('staff-dashboard-exam-review-medicals-view'))
           <a href="{{ route('student.exams.medical') }}">
           @endif
-            <div class="card h-100 card-dash shadow yellow-none bg-main-warning" style="max-width: 18rem;">
+            <div class="card h-100 card-dash shadow yellow-none bg-main-warning">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $medicalReviewCount }}</div>
               </div>
@@ -168,7 +168,7 @@
           @if(Auth::user()->hasPermission('staff-dashboard-exam-reschedule-exams-view'))
           <a href="{{ route('student.exams.reschedule') }}">
           @endif
-            <div class="card h-100 card-dash shadow red-none bg-danger" style="max-width: 18rem;">
+            <div class="card h-100 card-dash shadow red-none bg-danger">
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $examToRescheduleCount }}</div>
               </div>
@@ -270,16 +270,18 @@
                 <tbody>
                   @foreach($lastLogins as $lastLogin)
                     <tr class="text-center">
-                      <td>{{ $lastLogin->id }}</td>
+                      {{-- <td>{{ $lastLogin->id }}</td> --}}
                       <td>{{ $lastLogin->name }}</td>
                       <td>{{ $lastLogin->email }}</td>
                       <td> {{ Carbon\Carbon::create($lastLogin->last_login)->isoFormat('YYYY-MM-DD HH:mm:ss')  }}</td>
-                      @if(Auth::user()->hasPermission("staff-user-profile-view"))
-                        <td><a onclick="view_profile({{ $lastLogin->id }});" title="View Profile" data-tooltip="tooltip" data-placement="bottom" type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a></td>
-                      @endif
-                      @if(Auth::user()->hasPermission("staff-student-profile") && Auth::user()->hasStudent($lastLogin->id))
-                        <td><a onclick="view_student('{{ $lastLogin->student->id }}');" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a></td>
-                      @endif
+                      <td class="text-right">
+                        @if(Auth::user()->hasPermission("staff-student-profile") && Auth::user()->hasStudent($lastLogin->id))
+                          <a onclick="view_student('{{ $lastLogin->student->id }}');" title="View Student Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-info"><i class="fas fa-user-graduate"></i></a>
+                        @endif
+                        @if(Auth::user()->hasPermission("staff-user-profile-view"))
+                          <a onclick="view_profile({{ $lastLogin->id }});" title="View User Profile" data-tooltip="tooltip" data-placement="bottom" type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a>
+                        @endif
+                      </td>
                     </tr>
                   @endforeach
                 </tbody>
