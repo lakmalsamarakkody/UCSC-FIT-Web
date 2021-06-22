@@ -37,9 +37,13 @@ class DocumentController extends Controller
     public function uploadBirth(Request $request){
         $validator = Validator::make($request->all(), 
             [     
-                'birthCertificateFront'=> ['required', 'image'],
-                'birthCertificateBack'=>['required', 'image']
-            ]);
+                'birthCertificateFront'=> ['required', 'image', 'max:5120'],
+                'birthCertificateBack'=>['required', 'image', 'max:5120']
+            ],
+            [
+                'max'=>'Image may not be greater than 5MB'
+            ]
+        );
 
         if($validator->fails()):
             return response()->json(['errors'=>$validator->errors()]);
@@ -93,19 +97,31 @@ class DocumentController extends Controller
     public function uploadId(Request $request){
         $validator_front = Validator::make($request->all(), 
         [     
-            'documentFront'=> ['required', 'image']
-        ]);
+            'documentFront'=> ['required', 'image', 'max:5120']
+        ],
+        [
+            'max'=>'Image may not be greater than 5MB'
+        ]
+    );
 
         if(Auth::user()->student->nic_old != Null):
             $validator_back = Validator::make($request->all(), 
             [     
-                'documentBack'=> ['required', 'image']
-            ]);
+                'documentBack'=> ['required', 'image', 'max:5120']
+            ],
+            [
+                'max'=>'Image may not be greater than 5MB'
+            ]
+        );
         else:
             $validator_back = Validator::make($request->all(), 
             [     
-                'documentBack'=> ['image']
-            ]);
+                'documentBack'=> ['image', 'max:5120']
+            ],
+            [
+                'max'=>'Image may not be greater than 5MB'
+            ]
+        );
         endif;
 
         // CHECK VALIDATIONS

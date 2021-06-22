@@ -31,11 +31,12 @@ class AccountController extends Controller
     {
         $validator = Validator::make($request->all(), 
             [     
-                'profileImage'=> ['required', 'image', 'dimensions:ratio=1/1']
+                'profileImage'=> ['required', 'image', 'max:5120', 'dimensions:ratio=1/1']
             ],
             [
-                'dimensions'=>'image must be cropped to a square shape (Ratio 1:1). Please check your image height and width are same.'
-            ]
+                'dimensions'=>'image must be cropped to a square shape (Ratio 1:1). Please check your image height and width are same.',
+                'max'=>'The profile image may not be greater than 5MB'
+            ],
         );
 
         if($validator->fails()):
