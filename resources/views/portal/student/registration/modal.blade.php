@@ -38,12 +38,14 @@
 
         <h6>
           Or Select a previous Image</h6>
-        <div class="past-img float-left">          
-        @foreach(File::glob(public_path('storage/portal/avatar/'.$student->user_id).'/*') as $path)
-        <button class="btn btn-link" onclick="select_profile_pic('{{ str_replace(public_path(), '', $path) }}')">
-          <img src="{{ url('') }}{{ str_replace(public_path(), '', $path) }}" width="50px">
-        </button>
-        @endforeach
+        <div class="past-img float-left">
+        @if($student)
+          @foreach(File::glob(public_path('storage/portal/avatar/'.$student->user_id).'/*') as $path)
+          <button class="btn btn-link" onclick="select_profile_pic('{{ str_replace(public_path(), '', $path) }}')">
+            <img src="{{ url('') }}{{ str_replace(public_path(), '', $path) }}" width="50px">
+          </button>
+          @endforeach
+        @endif
         </div>
       </div>
     </div>

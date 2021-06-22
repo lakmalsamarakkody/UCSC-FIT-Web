@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::post('logout',[App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');
 Route::get('logout',[App\Http\Controllers\Auth\LoginController::class,'logout']);
+Route::post('/portal/user/update/activity',[App\Http\Controllers\Portal\AccountController::class,'updateLoginActivity'])->name('activity.update.login');
 /*
 |--------------------------------------------------------------------------
 | WEBSITE ROUTES

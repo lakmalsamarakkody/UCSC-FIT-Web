@@ -90,6 +90,7 @@
                     $('#divSaveInformation').addClass('d-none');
                     $('#divResetForm').addClass('d-none');
                     $('#divEditInformation').removeClass('d-none');
+                    $('#btnEditPropic').addClass('d-none');
 
                     //CHECK IS INFO COMPLETE TO SHOW DECLARATION
                     $.ajax({
@@ -174,6 +175,7 @@
         $('#btnSaveInformation').removeAttr('disabled','disabled');
         $('#divEditInformation').addClass('d-none');
         $('#divSubmitButton').collapse('hide');
+        $('#btnEditPropic').removeClass('d-none');
       }
       else {
         SwalNotificationWarningAutoClose.fire({

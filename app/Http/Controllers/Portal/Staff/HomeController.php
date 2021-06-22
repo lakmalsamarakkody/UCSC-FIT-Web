@@ -8,6 +8,7 @@ use App\Models\Exam\Schedule;
 use App\Models\Student\hasExam;
 use App\Models\Student\Medical;
 use App\Models\Student\Registration;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -47,8 +48,13 @@ class HomeController extends Controller
       $examToRescheduleCount = Medical::where('status', 'Approved')->get()->count();
       // /CARD COUNTS
       
+      // EXAMS
       $upcomingExams=Schedule::where('date', '>=', date('Y-m-d'))->orderby('date')->take(6)->get();
       $heldExams=Schedule::where('date', '<', date('Y-m-d'))->orderby('date', 'desc')->take(6)->get();
+
+      //LAST LOGIN
+      $lastLogins = User::orderBy('last_login', 'desc')->take(10)->get();
+
       return view('portal/staff/home',compact(
         'applicationCount',
         'paymentReviewCount',
@@ -61,7 +67,8 @@ class HomeController extends Controller
         'examPaymentReviewCount',
         'revieweExamsToScheduleCount',
         'medicalReviewCount',
-        'examToRescheduleCount'
+        'examToRescheduleCount',
+        'lastLogins'
       ));
     }
 }

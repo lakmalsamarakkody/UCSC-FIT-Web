@@ -64,8 +64,8 @@
                                 <div class="form-row align-item-center mt-2">
                                     <div class="form-group col-xl-6 col-md-12">
                                         <div class="img mb-2  position-relative">
-                                            <button type="button" class="btn btn-outline-warning position-absolute m-3" data-tooltip="tooltip" data-placement="bottom" title="Change Profile Picture" data-toggle="modal" data-target="#modal-profile-picture"><i class="fa fa-edit"></i></button>
-                                            <img src="{{ asset('storage/portal/avatar/'.$student->user_id.'/'.$student->user->profile_pic)}}" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';"><br/>
+                                            <button type="button" id="btnEditPropic" class="btn btn-outline-warning position-absolute m-3" data-tooltip="tooltip" data-placement="bottom" title="Change Profile Picture" data-toggle="modal" data-target="#modal-profile-picture"><i class="fa fa-edit"></i></button>
+                                            <img src="@if($student){{ asset('storage/portal/avatar/'.$student->user_id.'/'.$student->user->profile_pic)}} @endif" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';"><br/>
                                             <a href="https://www.befunky.com/create/crop-photo/" target="_blank" ><span class="alert alert-primary font-weight-bold">Click to open free online tool for image cropping</span></a>
                                         </div>
                                     </div>

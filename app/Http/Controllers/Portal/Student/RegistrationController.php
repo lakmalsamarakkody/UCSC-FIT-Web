@@ -494,7 +494,7 @@ class RegistrationController extends Controller
     endif;
 
     // CHECK FOR PROFILE IMAGE
-    if (!file_exists('storage/portal/avatar/'.Auth::user()->id.'/'.Auth::user()->profile_pic)):
+    if ( !Auth::user()->profile_pic || !file_exists('storage/portal/avatar/'.Auth::user()->id.'/'.Auth::user()->profile_pic)):
       $avatarValidator = Validator::make($request->all(), 
         [     'profileImage'=> ['required', 'image', 'dimensions:ratio=1/1']],
         ['dimensions'=>'image must be cropped to a square shape (Ratio 1:1). Please check your image height and width are same.']

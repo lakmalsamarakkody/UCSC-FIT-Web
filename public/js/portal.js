@@ -15,5 +15,21 @@ $.ajaxSetup({
 
 $(function () {
     $('[data-tooltip="tooltip"]').tooltip()
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/portal/user/update/activity",
+        type: 'post',
+        // data: { 'userID': '{{ Auth::user()->id}}' },         
+        success: function(data){
+            console.log('login activity updated')
+        },
+        error: function(err){
+            console.log('login activity update error')
+        }
+    });
+    // /UPDATE LAST LOGIN ACTIVITY
 })
 

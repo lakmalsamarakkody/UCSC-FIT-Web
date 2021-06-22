@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Portal;
 use App\Http\Controllers\Controller;
 use App\Mail\ChangeEmail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +19,11 @@ class AccountController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('revalidate');
+    }
+
+    public function updateLoginActivity(Request $request){
+        User::where('id', Auth::user()->id)->update(['last_login'=> Carbon::now()]);
+        return TRUE;
     }
 
     // UPLOAD PROFILE PIC

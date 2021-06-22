@@ -113,9 +113,9 @@
                   @if(Auth::user()->hasPermission('student-exam'))
                   <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>
                   @endif
-                  @if(Auth::user()->hasPermission('student-result'))
-                  <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
-                  @endif
+                @endif
+                @if(Auth::user()->hasPermission('student-result'))
+                <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
                 @endif
               </ul>
 
@@ -193,10 +193,12 @@
                       @if(Auth::user()->hasPermission('student-exam'))
                       <li id="exams"><a href="{{ route('student.exam') }}">Exams</a></li>
                       @endif
-                      @if(Auth::user()->hasPermission('student-result'))
-                      <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
-                      @endif
                     @endif
+
+                    @if(Auth::user()->hasPermission('student-result'))
+                    <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
+                    @endif
+                   
                     <li id="logout"><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                   </ul>
                 </div>

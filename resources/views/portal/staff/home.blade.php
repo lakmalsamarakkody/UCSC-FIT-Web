@@ -32,7 +32,7 @@
         <h5 class="col-12 title font-weight-bold px-0">REGISTRATIONS</h5>
 
         <!-- SUMMARY CARDS(REGISTRATION) -->
-        <div class="col-xl-2 col-lg-4 p-1">
+        <div class="col-xl-2 col-lg-4 col-md-6 p-1">
           @if(Auth::user()->hasPermission('staff-dashboard-registration-application-view'))
           <a href="{{ route('student.application') }}">
           @endif
@@ -46,7 +46,7 @@
           </a>
         </div>
         
-        <div class="col-xl-2 col-lg-4 p-1">
+        <div class="col-xl-2 col-lg-4 col-md-6 p-1">
           @if(Auth::user()->hasPermission('staff-dashboard-registration-review-payment-view'))
           <a href="{{ route('student.application.reviewRegPayment') }}">
           @endif
@@ -60,7 +60,7 @@
           </a>
         </div>
 
-        <div class="col-xl-2 col-lg-4 p-1">
+        <div class="col-xl-2 col-lg-4 col-md-6 p-1">
           @if(Auth::user()->hasPermission('staff-dashboard-registration-pending-documents-view'))
           <a href="{{ route('student.application.reviewRegDocumentsPending') }}">
           @endif
@@ -74,7 +74,7 @@
           </a>
         </div>
 
-        <div class="col-xl-2 col-lg-4 p-1">
+        <div class="col-xl-2 col-lg-4 col-md-6 p-1">
           @if(Auth::user()->hasPermission('staff-dashboard-registration-review-documents-view'))
           <a href="{{ route('student.application.reviewRegDocuments') }}">
           @endif
@@ -88,7 +88,7 @@
           </a>
         </div>
         
-        <div class="col-xl-2 col-lg-4 p-1">
+        <div class="col-xl-2 col-lg-4 col-md-6 p-1">
           @if(Auth::user()->hasPermission('staff-dashboard-registration-pending-registrations-view'))
           <a href="{{ route('student.application.reviewRegistration') }}">
           @endif
@@ -102,7 +102,7 @@
           </a>
         </div>
 
-        <div class="col-xl-2 col-lg-4 p-1">
+        <div class="col-xl-2 col-lg-4 col-md-6 p-1">
           @if(Auth::user()->hasPermission('staff-dashboard-registration-active-registrations-view'))
           <a href="{{ route('students') }}">
           @endif
@@ -122,7 +122,7 @@
       <div class="row">
         <h5 class="col-12 title font-weight-bold mt-5 px-0">EXAMS</h5>
 
-        <div class="col-xl-2 col-lg-4 p-1">
+        <div class="col-lg-3 col-md-6 p-1">
           @if(Auth::user()->hasPermission('staff-dashboard-exam-review-payments-view'))
           <a href="{{ route('student.application.exams.payments') }}">
           @endif
@@ -136,7 +136,7 @@
           </a>
         </div>
 
-        <div class="col-xl-2 col-lg-4 p-1">
+        <div class="col-lg-3 col-md-6 p-1">
           @if(Auth::user()->hasPermission('staff-dashboard-exam-assign-schedules-view'))
           <a href="{{ route('student.application.exams') }}">
           @endif
@@ -150,7 +150,7 @@
           </a>
         </div>
 
-        <div class="col-xl-2 col-lg-4 p-1">
+        <div class="col-lg-3 col-md-6 p-1">
           @if(Auth::user()->hasPermission('staff-dashboard-exam-review-medicals-view'))
           <a href="{{ route('student.exams.medical') }}">
           @endif
@@ -164,7 +164,7 @@
           </a>
         </div>
 
-        <div class="col-xl-2 col-lg-4 p-1">
+        <div class="col-lg-3 col-md-6 p-1">
           @if(Auth::user()->hasPermission('staff-dashboard-exam-reschedule-exams-view'))
           <a href="{{ route('student.exams.reschedule') }}">
           @endif
@@ -180,6 +180,8 @@
       </div>
       {{-- /SUMMARY CARDS(EXAMS) --}}
       
+
+      {{-- EXAMS --}}
       <div class="row mt-3">        
         <div class="col-lg-6 col-md-12 px-1">
             <a href="{{ route('exams') }}" style="height: 30rem;">
@@ -247,24 +249,49 @@
             </a>
         </div>
       </div>
+      {{-- EXAMS --}}
 
+      {{-- LAST LOGINS --}}
+      <div class="row mt-3">
+        <div class="col-12 px-1">
 
+          <div class="card">
+            <div class="card-header">Recent logins</div>
+            <div class="card-body px-0">
+              <table class="table table-hover">
+                <thead class="text-center">
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Recent Activity</th>
+                      <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @foreach($lastLogins as $lastLogin)
+                    <tr class="text-center">
+                      <td>{{ $lastLogin->id }}</td>
+                      <td>{{ $lastLogin->name }}</td>
+                      <td>{{ $lastLogin->email }}</td>
+                      <td> {{ Carbon\Carbon::create($lastLogin->last_login)->isoFormat('YYYY-MM-DD HH:mm:ss')  }}</td>
+                      @if(Auth::user()->hasPermission("staff-user-profile-view"))
+                        <td><a onclick="view_profile({{ $lastLogin->id }});" title="View Profile" data-tooltip="tooltip" data-placement="bottom" type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a></td>
+                      @endif
+                      @if(Auth::user()->hasPermission("staff-student-profile") && Auth::user()->hasStudent($lastLogin->id))
+                        <td><a onclick="view_student('{{ $lastLogin->student->id }}');" title="View Profile" data-tooltip="tooltip"  data-placement="bottom"  type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i></a></td>
+                      @endif
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>        
+          </div>
 
-
-        <div class="col-lg-12">
-          <span>
-            &nbsp; <br>
-            &nbsp; <br>
-            &nbsp; <br>
-          </span>
         </div>
-
-
       </div>
+      {{-- /LAST LOGINS --}}
+
     </div>
     <!-- /CONTENT -->
-
-
-
-
+    @include('portal.staff.home.scripts')
 @endsection
