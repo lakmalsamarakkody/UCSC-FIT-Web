@@ -206,7 +206,10 @@ class ExamsController extends Controller
         'paidBankBranch'=>['required', 'numeric', 'exists:App\Models\Support\BankBranch,id'],
         'paidDate'=>['required', 'before_or_equal:today'],
         'paidAmount'=>['required', 'numeric'],
-        'bankSlip'=>['required', 'image']
+        'bankSlip'=>['required', 'image', 'max:5120']
+      ],
+      [
+        'max'=>'The profile image may not be greater than 5MB'
       ]
     );
     $student = Auth::user()->student;
@@ -275,7 +278,10 @@ class ExamsController extends Controller
     $validator = Validator::make($request->all(), 
       [     
           'reason'=> ['required'],
-          'medical'=> ['required', 'image']
+          'medical'=> ['required', 'image', 'max:5120']
+      ],
+      [
+        'max'=>'The profile image may not be greater than 5MB'
       ]
     );
 
