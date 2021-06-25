@@ -68,7 +68,10 @@ class PaymentController extends Controller
     if(!$request->noPaymentSlip):
       $bankSlipValidator = Validator::make($request->all(),
         [
-          'bankSlip'=>['required', 'image']
+          'bankSlip'=>['required', 'image', 'max:5120']
+        ],
+        [
+          'max'=>'Image may not be greater than 5MB'
         ]
       );
     endif;
@@ -184,7 +187,10 @@ class PaymentController extends Controller
           'paidBankBranch'=>['required', 'numeric', 'exists:App\Models\Support\BankBranch,id'],
           'paidDate'=>['required', 'before_or_equal:today'],
           'paidAmount'=>['required', 'numeric', 'size:'.$totalFee],
-          'bankSlip'=>['required', 'image']
+          'bankSlip'=>['required', 'image', 'max:5120']
+      ],
+      [
+        'max'=>'Image may not be greater than 5MB'
       ]
     );
     // /VALIDATIONS
@@ -214,7 +220,7 @@ class PaymentController extends Controller
       if($payment->save()):
 
         // CHECK FOR CURRENT REGISTRATION PROCESS
-        if($registration):
+        if($processingRegistration):
           // UPDATE PAYMENT ID
           $updateRegistration = Registration::where('id', $registration);
           if($updateRegistration->update(['payment_id' => $payment->id,'payment_status' => NULL,'declined_msg' => NULL,'status' => NULL,])):

@@ -377,8 +377,8 @@
             },
             columns: [
                 {
-                    data: 'subject_name',
-                    name: 'subject_name'
+                    data: 'count',
+                    name: 'count'
                 },
                 {
                     data: 'date',
@@ -395,7 +395,7 @@
                 {
                     data: 'id',
                     name: 'id',
-                    className: "text-center",
+                    className: "text-right",
                     orderable: false,
                     searchable: false
                 },

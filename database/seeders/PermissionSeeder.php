@@ -717,6 +717,14 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                [
+                    'name'=>'staff-user-profile-closeToReReg',
+                    'portal'=>'staff',
+                    'module'=>'user',
+                    'description'=>'Can close a user account to allow re-register as a new student',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
                 // /STAFF->USERS
 
                 // STAFF->WEBSITE

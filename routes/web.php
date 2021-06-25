@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::post('logout',[App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');
 Route::get('logout',[App\Http\Controllers\Auth\LoginController::class,'logout']);
+Route::post('/portal/user/update/activity',[App\Http\Controllers\Portal\AccountController::class,'updateLoginActivity'])->name('activity.update.login');
 /*
 |--------------------------------------------------------------------------
 | WEBSITE ROUTES
@@ -199,6 +200,7 @@ Route::get('/portal/staff/users/user-list',[App\Http\Controllers\Portal\Staff\Us
 Route::get('/portal/staff/user/profile/{id}',[App\Http\Controllers\Portal\Staff\UsersController::class, 'viewUser'])->name('user.profile');
 Route::post('/portal/staff/user/profile/update/role',[App\Http\Controllers\Portal\Staff\UsersController::class, 'updateRole'])->name('user.update.role');
 Route::post('/portal/staff/user/profile/update/email/request',[App\Http\Controllers\Portal\Staff\UsersController::class, 'emailUpdateRequest'])->name('user.update.email.request');
+Route::post('/portal/staff/user/profile/close/account',[App\Http\Controllers\Portal\Staff\UsersController::class, 'closeAccount'])->name('close.user');
 Route::post('/portal/staff/user/profile/deactivate/account',[App\Http\Controllers\Portal\Staff\UsersController::class, 'deactivateAccount'])->name('deactivate.user');
 Route::post('/portal/staff/user/profile/reactivate/account',[App\Http\Controllers\Portal\Staff\UsersController::class, 'reactivateAccount'])->name('reactivate.user');
 Route::post('/portal/staff/user/create/user',[App\Http\Controllers\Portal\Staff\UsersController::class, 'createUser'])->name('add.new.user');

@@ -62,6 +62,16 @@ class User extends Authenticatable
         return $this->hasOne(Student::class, 'user_id', 'id');
     }
 
+    public function hasStudent($userID)
+    {
+        $student = Student::where('user_id', $userID)->first();
+        if($student):
+            return $student->id;
+        else:
+            return FALSE;
+        endif;
+    }
+
     // CHECK IF USER HAS SOME PERMISSION
 	public function hasPermission($permission) {
 

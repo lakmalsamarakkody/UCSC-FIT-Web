@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="viewExamApplication"></h5>
+                <h5 class="modal-title" id="viewExamApplication">Exam Application</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -11,7 +11,6 @@
             <div class="modal-body">
                 
                 <div class="card shadow-none">
-                    <div class="card-header pb-0">Exam Application</div>
                     <div class="card-body pb-0">                        
                         <div class="row">
                             <div class="col-12">
@@ -218,7 +217,7 @@
                                 </div>
                             </div>
                             <div class="card">
-                                <div class="card-header">Schedules for Applied Exam</div>
+                                <div class="card-header">Available Sessions for Applied Exam</div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div id="divSearchSchedules" class="col-12">
@@ -237,11 +236,11 @@
                                             </div> --}}
                                         </div>
                                         {{-- id="tblSchedulesForAppliedExam" --}}
-                                        <div class="col-md-12 order-md-1 order-2 mt-5">
+                                        <div class="col-md-12 order-md-1 order-2 mt-2">
                                             <table class="table tbl-schedules-for-applied-exam">
                                                 <thead>
                                                     <tr>
-                                                        <th>Subject</th>
+                                                        <th>Total Assigned</th>
                                                         <th>Date</th>
                                                         <th>Start Time</th>
                                                         <th>End Time</th>

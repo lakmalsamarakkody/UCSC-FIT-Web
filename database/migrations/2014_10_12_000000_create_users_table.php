@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('email_change_token')->nullable();
             $table->string('email_change')->nullable();
             $table->longText('message')->nullable();
+            $table->timestamp('last_login')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
