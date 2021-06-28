@@ -164,7 +164,7 @@ class ApplicationController extends Controller
             $details = [
                 'subject' => 'Registration Details Approved',
                 'title' => 'Registration Details Approved',
-                'body' => "Registration Details Approved! You'll be notified once you are registered.",
+                'body' => "You will be notified once your registration is successfully complete. Upon successful completion of your registration, you will receive your FIT registration number",
                 'color' => '#1b672a'
             ];
             Mail::to($student->user->email)->queue( new NotificationEmail($details) );
@@ -205,7 +205,7 @@ class ApplicationController extends Controller
                 $details = [
                     'subject' => 'Registration Payment Approved',
                     'title' => 'Registration Payment Approved',
-                    'body' => "<p style='text-align: center; color: #fff;'>Registration Payment Approved.</P> <p style='text-align: center; color: #fff;'>Login and Upload the scanned copies of the required documents to complete your registration</P>",
+                    'body' => "<p style='text-align: center; color: #fff;'>Login and Upload the scanned copies of the required documents to complete your registration</P> <p style='text-align: center; color: #fff;'> Upon successful completion of your registration, you will receive your FIT registration number</p>",
                     'color' => '#1b672a'
                 ];
                 //COMPLETE REGISTRATION IF REGISTRATION RENEWAL PAYMENT
@@ -214,7 +214,7 @@ class ApplicationController extends Controller
                     $details = [
                         'subject' => 'Registration Renewal Payment Approved',
                         'title' => 'Registration Renewal Payment Approved',
-                        'body' => "<p style='text-align: center; color: #fff;'>Registration Payment Approved.</P> <p style='text-align: center; color: #fff;'>Your registration renewal process completed</P>",
+                        'body' => "<p style='text-align: center; color: #fff;'>Your registration renewal process completed</P>",
                         'color' => '#1b672a'
                     ];
                 endif;
@@ -258,7 +258,7 @@ class ApplicationController extends Controller
             $details = [
                 'subject' => 'Registration Documents Approved',
                 'title' => 'Registration Documents Approved',
-                'body' => "Registration Documents Approved! You'll be notified once you are registered.",
+                'body' => "You will be notified once your registration is successfully complete. Upon successful completion of your registration, you will receive your FIT registration number",
                 'color' => '#1b672a'
             ];
             Mail::to($student->user->email)->queue( new NotificationEmail($details) );
@@ -358,9 +358,10 @@ class ApplicationController extends Controller
                     if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
                         $student = $registration->first()->student;
                         $details = [
-                            'subject' => 'You Are Registered',
-                            'title' => 'You Are Registered',
-                            'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>",
+                            'subject' => 'You Are Registered!',
+                            'title' => 'Cheers! Welcome Aboard! You are now a successfully registered FIT student.',
+                            'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>
+                                        <p>You can try login to the VLE (<a href='http://fit.bit.lk/vle'>http://fit.bit.lk/vle</a>) after two two weeks time, from today, using your Registration Number as the username and the NIC / Passport number as the password.</p>", 
                             'color' => '#1b672a'
                         ];
                         Mail::to($student->user->email)->queue( new NotificationEmail($details) );
@@ -374,9 +375,10 @@ class ApplicationController extends Controller
                     if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
                         $student = $registration->first()->student;
                         $details = [
-                            'subject' => 'You Are Registered',
-                            'title' => 'You Are Registered',
-                            'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>",
+                            'subject' => 'You Are Registered!',
+                            'title' => 'Cheers! Welcome Aboard! You are now a successfully registered FIT student.',
+                            'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>
+                                        <p>You can try login to the VLE (<a href='http://fit.bit.lk/vle'>http://fit.bit.lk/vle</a>) after two two weeks time, from today, using your Registration Number as the username and the NIC / Passport number as the password.</p>", 
                             'color' => '#1b672a'
                         ];
                         Mail::to($student->user->email)->queue( new NotificationEmail($details) );
@@ -391,9 +393,10 @@ class ApplicationController extends Controller
             // ENROLL EXISTING STUDENT
             if($registration->update(['registered_at'=>$request->regDate, 'registration_expire_at'=>$request->regExpireDate, 'status'=>$request->regStatus ])):
                 $details = [
-                    'subject' => 'You Are Registered',
-                    'title' => 'You Are Registered',
-                    'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>",
+                    'subject' => 'You Are Registered!',
+                    'title' => 'Cheers! Welcome Aboard! You are now a successfully registered FIT student.',
+                    'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$request->regDate." </p><p style='color: #fff;'> Registration Expires at: ".$request->regExpireDate." </p>
+                                <p>You can try login to the VLE (<a href='http://fit.bit.lk/vle'>http://fit.bit.lk/vle</a>) after two two weeks time, from today, using your Registration Number as the username and the NIC / Passport number as the password.</p>", 
                     'color' => '#1b672a'
                 ];
                 Mail::to($student->user->email)->queue( new NotificationEmail($details) );
@@ -435,9 +438,10 @@ class ApplicationController extends Controller
                         if($registration->update(['registered_at'=>$regDate, 'registration_expire_at'=>$regExpireDate, 'status'=>1 ])):
                             $student = $registration->first()->student;
                             $details = [
-                                'subject' => 'You Are Registered',
-                                'title' => 'You Are Registered',
-                                'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$regDate." </p><p style='color: #fff;'> Registration Expires at: ".$regExpireDate." </p>",
+                                'subject' => 'You Are Registered!',
+                                'title' => 'Cheers! Welcome Aboard! You are now a successfully registered FIT student.',
+                                'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$regDate." </p><p style='color: #fff;'> Registration Expires at: ".$regExpireDate." </p>
+                                            <p>You can try login to the VLE (<a href='http://fit.bit.lk/vle'>http://fit.bit.lk/vle</a>) after two two weeks time, from today, using your Registration Number as the username and the NIC / Passport number as the password.</p>", 
                                 'color' => '#1b672a'
                             ];
                             Mail::to($student->user->email)->queue( new NotificationEmail($details) );
@@ -450,9 +454,10 @@ class ApplicationController extends Controller
                         if($registration->update(['registered_at'=>$regDate, 'registration_expire_at'=>$regExpireDate, 'status'=>1 ])):
                             $student = $registration->first()->student;
                             $details = [
-                                'subject' => 'You Are Registered',
-                                'title' => 'You Are Registered',
-                                'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$regDate." </p><p style='color: #fff;'> Registration Expires at: ".$regExpireDate." </p>",
+                                'subject' => 'You Are Registered!',
+                                'title' => 'Cheers! Welcome Aboard! You are now a successfully registered FIT student.',
+                                'body' => "<h3 style='text-align: center; color: #fff;'>Registration Details</h3><p style='color: #fff;'>Registration Number: ".$student->reg_no." </p><p style='color: #fff;'>Registered at: ".$regDate." </p><p style='color: #fff;'> Registration Expires at: ".$regExpireDate." </p>
+                                            <p>You can try login to the VLE (<a href='http://fit.bit.lk/vle'>http://fit.bit.lk/vle</a>) after two two weeks time, from today, using your Registration Number as the username and the NIC / Passport number as the password.</p>", 
                                 'color' => '#1b672a'
                             ];
                             Mail::to($student->user->email)->queue( new NotificationEmail($details) );

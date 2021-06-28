@@ -4,7 +4,7 @@
 <h1 style="text-align: center; color: #fff;">{{ $details['title'] }}</h1>
 
 <p style="text-align: center; color: #fff;">{!! $details['body'] !!}</p>
-<p style="text-align: center; color: #fff;">Click the button below to Login to the portal</p>
+<p style="text-align: center; color: #fff;">Click the button below to login to the portal</p>
 
 
 <table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
