@@ -117,6 +117,10 @@
                 @if(Auth::user()->hasPermission('student-result'))
                 <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
                 @endif
+
+                @if ( Auth::user()->student != NULL && Auth::user()->student->current_active_registration())
+                <li id="results"><a target="_blank"  href="http://fit.bit.lk/vle" class="">Visit VLE</a></li>
+                @endif
               </ul>
 
                 <div class="logout-menu w-100 text-center " style="display:flex; align-items:flex-end;">
@@ -199,6 +203,11 @@
                     <li id="results"><a href="{{ route('student.results') }}">Results</a></li>
                     @endif
                    
+
+                    @if ( Auth::user()->student != NULL && Auth::user()->student->current_active_registration())
+                    <li id="results"><a target="_blank"  href="http://fit.bit.lk/vle" class="">Visit VLE</a></li>
+                    @endif
+
                     <li id="logout"><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                   </ul>
                 </div>
