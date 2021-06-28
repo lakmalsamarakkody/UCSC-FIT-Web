@@ -14,7 +14,7 @@ const SwalQuestionSuccessAutoClose = Swal.mixin({
   confirmButtonColor: color_success,
   showCancelButton: true,
   cancelButtonColor: color_primary,
-  timer: 5000,
+  timer: 12000,
   timerProgressBar: true,
   allowOutsideClick: false,
 })
@@ -32,7 +32,7 @@ const SwalQuestionDangerAutoClose = Swal.mixin({
   confirmButtonColor: color_danger,
   showCancelButton: true,
   cancelButtonColor: color_primary,
-  timer: 5000,
+  timer: 12000,
   timerProgressBar: true,
   allowOutsideClick: false,
 })
@@ -42,7 +42,7 @@ const SwalQuestionWarningAutoClose = Swal.mixin({
   confirmButtonColor: color_warning,
   showCancelButton: true,
   cancelButtonColor: color_primary,
-  timer: 5000,
+  timer: 12000,
   timerProgressBar: true,
   allowOutsideClick: false,
 })
@@ -102,7 +102,7 @@ const SwalNotificationSuccessAutoClose = Swal.mixin({
   showConfirmButton: false,
   toast: true,
   position: 'top-end',
-  timer: 5000,
+  timer: 12000,
   timerProgressBar: true,
 })
 const SwalNotificationWarning = Swal.mixin({
@@ -118,7 +118,7 @@ const SwalNotificationWarningAutoClose = Swal.mixin({
   showConfirmButton: false,
   toast: true,
   position: 'top-end',
-  timer: 5000,
+  timer: 12000,
   timerProgressBar: true,
 })
 const SwalNotificationErrorDanger = Swal.mixin({
@@ -134,7 +134,7 @@ const SwalNotificationErrorDangerAutoClose = Swal.mixin({
   showConfirmButton: false,
   toast: true,
   position: 'top-end',
-  timer: 5000,
+  timer: 12000,
   timerProgressBar: true,
 })
 // /SWEETALERT NOTIFICATION

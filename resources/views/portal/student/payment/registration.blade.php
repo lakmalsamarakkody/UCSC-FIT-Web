@@ -41,7 +41,7 @@
               <p>{{ $registration->declined_msg }}</p>
               <hr>
               <p class="font-weight-bold mb-0">Please upload correct payment details</p>
-              <p class="font-weight-bold mb-0">If you think this was mistaken resubmit and send an email attached with your payment slip to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+              <p class="font-weight-bold mb-0">If you think this is a mistake, please resubmit your payment details and then email a copy of the original payment slip to FIT coordinator <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
               </div>
           </div>
           {{-- /PAYMENT APPROVAL DECLINED --}}
@@ -79,7 +79,7 @@
                     <div class="row">
                       <div class="col-md-4">Registration Expires On:</div>
                       @if($student && $student->flag() && $student->flag->enrollment == 'new' )
-                        <div class="col-md-8" >{{now()->isoFormat('MMMM Do')}} {{ now()->year+1 }} (Approximately)</div>
+                        <div class="col-md-8" >{{now()->isoFormat('Do MMMM')}} {{ now()->year+1 }} (Approximately)</div>
                       @else
                         <div class="col-md-8" >One year after your last registration date</div>
                       @endif

@@ -21,7 +21,7 @@
               <h4 class="alert-heading"><i class="fas fa-check-circle"></i> Payment Approved</h4>
               <p>Your payment has been approved.</p>
               <hr>
-              <p class="font-weight-bold mb-0">Upload your Your Scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) below here.. </p>
+              <p class="font-weight-bold mb-0">Upload your scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) below here.</p>
             </div>
           </div>
           {{-- /PAYMENT APPROVED --}}
@@ -35,9 +35,9 @@
           <div class="col-12 px-0">
             <div class="alert alert-success" role="alert">
               <h4 class="alert-heading"><i class="fas fa-check-circle"></i> Documents Submitted Successfully</h4>
-              <p>Your registration process will be completed after submitted documents are approved.</p>
+              <p>Your registration will complete only after the documents have been approved.</p>
               <hr>
-              <p class="font-weight-bold mb-0">If your registration didn't get approved within 2 weeks please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+              <p class="font-weight-bold mb-0">If your registration has not been approved within  two weeks time, please email the FIT Coordinator <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk) stating your concerns.</a></p>
             </div>
           </div>
           {{-- /DOCUMENT APPROVAL PENDING --}}
@@ -45,15 +45,14 @@
           {{-- SUBMIT HARD COPIES --}}
           <div class="col-12 px-0">
             <div class="alert alert-danger" role="alert">
-              <h3 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> POST YOUR APPLICATION, PAYMENT SLIP, IDENTITY DOCUMENTS </h3>
+              <h3 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> POST THE FOLLOWING DOCUMENTS THROUGH REGISTERED-POST </h3>
               <p>Make sure to post your </p>
                 <p><i>
-                application - <button type="button" class="btn btn-sm btn-outline-danger" onclick="window.location.href='/portal/student/information'"> Application </button><br/>
-                payment slip - - Previously uploaded Scanned Payment Slip <br/>
-                documents (Birth Certificate and NIC/Postal/Passport image Copies) - Previously uploaded Scanned Images<br/>
+                Application - <button type="button" class="btn btn-sm btn-outline-danger" onclick="window.location.href='/portal/student/information'"> Download Application </button><br/>
+                Payment slip - Payment voucher (EDC copy -1) <br/>
+                Documents -  Copies of your birth certificate, a copy of your national identity card or a copy of any other valid identification document which was previously uploaded<br/>
                 </i></p>
               <p>
-              through register post. <br/>
               Posting above mentioned documents are mandatory in completion of your registration process.</p>
               <hr>
               <span>Address to post the FIT Application,Payment Slip and Documents: </span>
@@ -179,15 +178,15 @@
                 <div class="card">
                   <div class="card-header">Birth Certificate</div>
                   <div class="card-body pt-2">
-                    <span><strong>Please Upload clear images of both sides of the birth certificate with your details are clearly visible</strong> </span> 
+                    <span><strong>Please upload clear images of both the sides of the birth certificate and the NIC. All your details must be clearly visible in the images.</strong> </span> 
                     <form id="birthCertificateForm">  
                       <div class="form-row">
                         @if($student->document()->where('type', 'birth')->where('side', 'front')->first() == NULL)
                         <div class="col-lg">
                           <div class="form-group">
-                            <small id="birthCertificateHelp" class="form-text text-muted">Upload your scanned front side of the birth certificate here in JPEG/ PNG file format</small>
+                            <small id="birthCertificateHelp" class="form-text text-muted">Upload the scanned front side of the birth certificate here (JPEG/ PNG). Maximum file size: 5mb</small>
                             <div class="drop-zone">
-                              <span class="drop-zone__prompt">Scanned Birth Certificate (Front)<br><small>Drop image File here or click to upload</small> </span>
+                              <span class="drop-zone__prompt">Scanned Birth Certificate (Front)<br><small>Drop image here or click to select file</small> </span>
                               <input type="file" name="birthCertificateFront" id="birthCertificateFront" class="drop-zone__input form-control"/>
                             </div>
                             <span class="invalid-feedback birth" id="error-birthCertificateFront" role="alert"></span>
@@ -197,9 +196,9 @@
                         @if($student->document()->where('type', 'birth')->where('side', 'back')->first() == NULL)
                         <div class="col-lg">
                           <div class="form-group">
-                            <small id="birthCertificateHelp" class="form-text text-muted">Upload your scanned reverse side of the birth certificate here in JPEG/ PNG file format</small>
+                            <small id="birthCertificateHelp" class="form-text text-muted">Upload the scanned rear(other) side of the birth certificate here (JPEG/ PNG). Maximum file size: 5mb</small>
                             <div class="drop-zone">
-                              <span class="drop-zone__prompt">Scanned Birth Certificate (Back)<br><small>Drop image File here or click to upload</small> </span>
+                              <span class="drop-zone__prompt">Scanned Birth Certificate (Back)<br><small>Drop image here or click to select file</small> </span>
                               <input type="file" name="birthCertificateBack" id="birthCertificateBack" class="drop-zone__input form-control"/>
                             </div>
                             <span class="invalid-feedback birth" id="error-birthCertificateBack" role="alert"></span>
@@ -268,9 +267,9 @@
                         <div class="form-row">               
                           <div class="col">
                             <div class="form-group">
-                              <small id="documentFrontHelp" class="form-text text-muted">Upload your scanned front side of the {{ $document_type }} here in JPEG/ PNG file format</small>
+                              <small id="documentFrontHelp" class="form-text text-muted">Upload your scanned front side of the {{ $document_type }} here in JPEG/ PNG file format. Maximum file size: 5mb</small>
                               <div class="drop-zone">
-                                <span class="drop-zone__prompt">Scanned {{ $document_type }} Front<br><small>Drop image File here or click to upload</small> </span>
+                                <span class="drop-zone__prompt">Scanned {{ $document_type }} Front<br><small>Drop image here or click to select file</small> </span>
                                 <input type="file" name="documentFront" id="documentFront" class="drop-zone__input form-control"/>
                               </div>
                               <span class="invalid-feedback id-doc" id="error-documentFront" role="alert"></span>
@@ -279,9 +278,9 @@
                           @if($student->nic_old != NULL) 
                           <div class="col">
                             <div class="form-group">
-                              <small id="documentBackHelp" class="form-text text-muted">Upload your scanned reverse side of the {{ $document_type }} here in JPEG/ PNG file format</small>
+                              <small id="documentBackHelp" class="form-text text-muted">Upload your scanned rear (other) side of the {{ $document_type }} here in JPEG/ PNG file format. Maximum file size: 5mb</small>
                               <div class="drop-zone">
-                                <span class="drop-zone__prompt">Scanned {{ $document_type }} Back<br><small>Drop image File here or click to upload</small> </span>
+                                <span class="drop-zone__prompt">Scanned {{ $document_type }} Back<br><small>Drop image here or click to select file</small> </span>
                                 <input type="file" name="documentBack" id="documentBack" class="drop-zone__input form-control"/>
                               </div>
                               <span class="invalid-feedback id-doc" id="error-documentBack" role="alert"></span>

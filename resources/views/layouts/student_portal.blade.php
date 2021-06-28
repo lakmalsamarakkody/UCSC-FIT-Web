@@ -119,7 +119,7 @@
                 @endif
 
                 @if ( Auth::user()->student != NULL && Auth::user()->student->current_active_registration())
-                <li id="results"><a target="_blank"  href="http://fit.bit.lk/vle" class="">Visit VLE</a></li>
+                <li id="vle" style="background-color: rgb(33, 116, 44);"><a target="_blank"  href="http://fit.bit.lk/vle" class="">Visit VLE</a></li>
                 @endif
               </ul>
 
@@ -205,7 +205,7 @@
                    
 
                     @if ( Auth::user()->student != NULL && Auth::user()->student->current_active_registration())
-                    <li id="results"><a target="_blank"  href="http://fit.bit.lk/vle" class="">Visit VLE</a></li>
+                    <li id="vle" style="background-color: rgb(33, 116, 44);"><a target="_blank"  href="http://fit.bit.lk/vle" class="">Visit VLE</a></li>
                     @endif
 
                     <li id="logout"><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
@@ -235,7 +235,7 @@
 
           <div class=" w-100 text-right pb-2 pr-3" >
             Copyright &copy;  {{ now()->year }}<strong><a target="_blank" href="https://ucsc.cmb.ac.lk/" > UCSC</a> </strong>. All Rights Reserved |
-            Powered by <strong><a target="_blank" href="http://www.e-learning.lk/">e-Learning Center - UCSC </a> </strong>
+            Powered by <strong><a target="_blank" href="http://www.e-learning.lk/">e-Learning Centre - UCSC </a> </strong>
           </div>
           </div>
         </div>
