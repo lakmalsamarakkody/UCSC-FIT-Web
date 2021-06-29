@@ -21,7 +21,7 @@
               <h4 class="alert-heading"><i class="fas fa-check-circle"></i> Payment Approved</h4>
               <p>Your payment has been approved.</p>
               <hr>
-              <p class="font-weight-bold mb-0">Upload your scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) below here.</p>
+              <p class="font-weight-bold mb-0">Please upload clear images of both the sides of the birth certificate and the {{$document_type}}. All your details must be clearly visible in the images.</p>
             </div>
           </div>
           {{-- /PAYMENT APPROVED --}}
@@ -37,7 +37,7 @@
               <h4 class="alert-heading"><i class="fas fa-check-circle"></i> Documents Submitted Successfully</h4>
               <p>Your registration will complete only after the documents have been approved.</p>
               <hr>
-              <p class="font-weight-bold mb-0">If your registration has not been approved within  two weeks time, please email the FIT Coordinator <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk) stating your concerns.</a></p>
+              <p class="font-weight-bold mb-0">If your registration has not been approved within  two weeks time, please email the FIT Coordinator <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a> stating your concerns.</p>
             </div>
           </div>
           {{-- /DOCUMENT APPROVAL PENDING --}}
@@ -50,12 +50,12 @@
                 <p><i>
                 Application - <button type="button" class="btn btn-sm btn-outline-danger" onclick="window.location.href='/portal/student/information'"> Download Application </button><br/>
                 Payment slip - Payment voucher (EDC copy -1) <br/>
-                Documents -  Copies of your birth certificate, a copy of your national identity card or a copy of any other valid identification document which was previously uploaded<br/>
+                Documents -  Copies of your birth certificate, a copy of your {{$document_type}} which was previously uploaded<br/>
                 </i></p>
               <p>
-              Posting above mentioned documents are mandatory in completion of your registration process.</p>
+              Please note that it is mandatory to send the said documents to the address given below, in order to successfully complete your registration process.</p>
               <hr>
-              <span>Address to post the FIT Application,Payment Slip and Documents: </span>
+              <span>Address:</span>
               <p class="font-weight-bold mb-0">
                 Senior Assistant Registrar (EDC),<br/>
                 External Degrees Centre of UCSC,<br/>
@@ -78,6 +78,7 @@
               <div class="alert alert-warning" role="alert">
                 <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Required Identification Documents has been uploaded</h4>
                 <p>Submit your documents for approval</p>
+                <p>You cannot change the documents once you click on Submit</p>
                 <hr>
                 <button class="btn btn-outline-primary" id="btnSubmitDocs" onclick="submitDocuments()">Submit Documents <span id="spinnerSubmitDocs" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
               </div>

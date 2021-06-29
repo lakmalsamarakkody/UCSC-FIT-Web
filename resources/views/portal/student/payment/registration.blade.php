@@ -22,9 +22,9 @@
         <div class="col-12 px-0">
           <div class="alert alert-info" role="alert">
             <h4 class="alert-heading"><i class="far fa-check-circle"></i> Payment Submitted Successfully</h4>
-            <p>Come back later to check whether your payment has beend approved. If your payment didn't get approved within 2 weeks please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+            <p>Once your application and the payment has been approved upload the following scanned documents (JPEG/ PNG file format) <br>Birth Certificate <br>Unique Identification images (NIC / Passport / Postal ID)). <br>If your payment doesn't get approved within 2 weeks please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
             <hr>
-            <p class="font-weight-bold mb-0">Prepare Your Scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) </p>
+            <p class="font-weight-bold mb-0">Now you may prepare your scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) to upload once your payment has been confirmed.</p>
           </div>
         </div>
         {{-- /PAYMENT APPROVAL PENDING --}}
@@ -184,7 +184,7 @@
                                   @if($payment != NULL)
                                     <span id="InputUploadedBankslipHelp" class="form-text text-muted">Uploaded bank slip</span>
                                     <div class="drop-zone" onclick="window.open('{{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image)}}')" style="background: url({{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image)}}) no-repeat center; background-size: cover;"></div>
-                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</span>
+                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format. Maximum file size: 5mb</span>
                                     <div class="drop-zone">
                                       <span class="drop-zone__prompt">Reupload Bank Slip <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
