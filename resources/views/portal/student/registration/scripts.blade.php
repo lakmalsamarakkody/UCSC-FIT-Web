@@ -3,6 +3,28 @@
   // BODY ONLOAD
   $(document).ready(function(){
 
+    $('.addAddressLinebtn').on('click', function() {
+      $(this).find('.fas').toggleClass('fa-plus fa-minus');
+      var title = 'Add extra address line' ;
+
+      if( $(this).find('.fas').hasClass('fa-minus')){
+        title = 'Remove extra address line';
+      }
+      $(this).tooltip('dispose');
+      $(this).attr('title', title);
+      $(this).tooltip('show');
+    });
+
+    // FULL NAME 
+    $('.name').change(function(){
+      var first_name = $('#firstName').val()
+      var last_name = $('#lastName').val()
+
+      $('#fullName').val(first_name + ' ' + last_name);
+
+    }); 
+    // /FULL NAME 
+
     // CHECK COUNTRY AND SET STATE OR DISTRICT
     setViewDistrictState();
 
@@ -228,6 +250,10 @@
             $.each(data['country_list'], function(key,value){
               $('#country').append($('<option>', { value: value.id,text : value.name}));
             })
+            if($('#citizenship').val() == 'Sri Lankan'){
+              $('select[name="country"]').find('option[value="67"]').attr("selected",true);
+              onChangeCountry()
+            }
             //$.each(data['country_list'], function(key,value){console.log( value.id + value.name)  });
           }
         }
@@ -248,6 +274,7 @@
     //SET DISTRICT OR STATE VIEW 
     if($('#country').val() == '67') {
       // set visible selects
+      $('select[name="telephoneCountryCode"]').find('option[value="94"]').attr("selected",true);
       $('#divSelectDistrict').collapse('show');
       $('#divSelectState').collapse('hide');
       $('#citizenship').val('Sri Lankan');

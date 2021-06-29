@@ -23,7 +23,7 @@
                     <h4 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Application Declined!</h4>
                     <p>{{ $registration->declined_msg }}</p>
                     <hr>
-                    <p class="font-weight-bold mb-0">Please check your informations and submit application again.</p>
+                    <p class="font-weight-bold mb-0">Re-check your information and submit application again.</p>
                     </div>
                 @endif
                 {{-- /DECLINED MESAGE IF APPLICATION DECLINED --}}
@@ -42,7 +42,7 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="selectEnrollment">Enrolling as</label>
                                         <select name="enrollment" id="enrollment" class="form-control">
-                                            <option disabled hidden selected>Select your enrollment</option>
+                                            {{-- <option disabled hidden selected>Select your enrollment</option> --}}
                                             <option value="new" @if($student && $student->flag->enrollment == 'new') selected @endif>New Student</option>
                                             <option value="existing" @if($student && $student->flag->enrollment == 'existing') selected @endif>Existing Student</option>
                                         </select>
@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12 collapse" id="divinputRegNo">
                                         <label for="regNo">Your Registration No</label>
-                                        <input type="text" class="form-control text-capitalize" id="regNo" name="regNo" placeholder="Starts with Capital letter (e.g. F)" @if($student) value="{{ $student->reg_no }}" @endif/>
+                                        <input type="text" class="form-control text-capitalize" id="regNo" name="regNo" placeholder="Starts with Capital letter (example: F)" @if($student) value="{{ $student->reg_no }}" @endif/>
                                         <span class="invalid-feedback" id="error-regNo" role="alert"></span>
                                     </div>
                                 </div>
@@ -65,8 +65,8 @@
                                     <div class="form-group col-xl-6 col-md-12">
                                         <div class="img mb-2  position-relative">
                                             <button type="button" id="btnEditPropic" class="btn btn-outline-warning position-absolute m-3" data-tooltip="tooltip" data-placement="bottom" title="Change Profile Picture" data-toggle="modal" data-target="#modal-profile-picture"><i class="fa fa-edit"></i></button>
-                                            <img src="@if($student){{ asset('storage/portal/avatar/'.$student->user_id.'/'.$student->user->profile_pic)}} @endif" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';"><br/>
-                                            <a href="https://www.befunky.com/create/crop-photo/" target="_blank" ><span class="alert alert-primary font-weight-bold">Click to open free online tool for image cropping</span></a>
+                                            <img src="{{ asset('storage/portal/avatar/'.Auth::user()->id.'/'.Auth::user()->profile_pic)}}" alt="Avatar" class="avatar" width="250px"  onError="this.onerror=null;this.src='{{ asset('img/portal/avatar/default.jpg') }}';"><br/>
+                                            <a href="https://www.befunky.com/create/crop-photo/" target="_blank" ><span class="alert alert-primary font-weight-bold">Click to open a free online tool for image cropping</span></a>
                                         </div>
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
@@ -101,30 +101,44 @@
                                         </select>
                                         <span class="invalid-feedback" id="error-title" role="alert"></span>
                                     </div>
+                                </div>
+                                <div class="form-row align-item-center mt-2">
                                     <div class="form-group col-xl-6 col-md-12">
-                                        <label for="firstName">First Name</label>
-                                        <input type="text" class="form-control text-capitalize" id="firstName" name="firstName" placeholder="Start with Capital letter (e.g. Charith)" @if($student) value="{{ $student->first_name }}" @endif/>
+                                        <label for="firstName">First Name (Calling Name/ Display Name)</label>
+                                        <span class="form-text text-muted mt-0">Start with Capital letter (example: Charith)</span>
+                                        <input type="text" class="form-control text-capitalize name" id="firstName" name="firstName" placeholder="Start with Capital letter (example: Charith)" @if($student) value="{{ $student->first_name }}" @endif/>
                                         <span class="invalid-feedback" id="error-firstName" role="alert"></span>
                                     </div>
-                                    <div class="form-group col-xl-6 col-md-12">
+                                    {{-- <div class="form-group col-xl-6 col-md-12">
                                         <label for="middleNames">Middle Names</label>
-                                        <input type="text" class="form-control text-capitalize" id="middleNames" name="middleNames" placeholder="First Letters of name with Capital letter (e.g. Kumara Sampath)" @if($student) value="{{ $student->middle_names }}" @endif/>
+                                        <input type="text" class="form-control text-capitalize" id="middleNames" name="middleNames" placeholder="First Letters of name with Capital letter (example: Kumara Sampath)" @if($student) value="{{ $student->middle_names }}" @endif/>
                                         <span class="invalid-feedback" id="error-middleNames" role="alert"></span>
-                                    </div>
-                                    <div class="form-group col-xl-6 col-md-12">
-                                        <label for="lastName">Name with Initials</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend col-4 px-0">
-                                                <input type="text" class="form-control text-uppercase" id="initials" name="initials" placeholder="e.g. CKS" @if($student) value="{{ $student->initials }}" @endif/>
+                                    </div> --}}
+                                    <div class="form-group col-xl-12 col-md-12">
+                                        <label for="lastName" class="mb-0">Name with Initials</label>
+                                        <div class="row">
+                                            <div class="col-4">                                                
+                                                <label for="initials" class="mb-0">Initials</label>
+                                                <span class="form-text text-muted mt-0">example: CKS</span>
                                             </div>
-                                            <input type="text" class="form-control text-capitalize" id="lastName" name="lastName" placeholder="e.g. Wickramarachchi" @if($student) value="{{ $student->last_name }}" @endif/>
+                                            <div class="col-8 pl-2">                                                
+                                                <label for="lastName" class="mb-0">Last Name</label>
+                                                <span class="form-text text-muted mt-0">example: Wickramarachchi</span>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend col-4 px-0">  
+                                                <input type="text" class="form-control text-uppercase" id="initials" name="initials" placeholder="example: CKS" @if($student) value="{{ $student->initials }}" @endif/>
+                                            </div>
+                                            <input type="text" class="form-control text-capitalize name" id="lastName" name="lastName" placeholder="example: Wickramarachchi" @if($student) value="{{ $student->last_name }}" @endif/>
                                         </div>
                                         <span class="invalid-feedback" id="error-initials" role="alert"></span>
                                         <span class="invalid-feedback" id="error-lastName" role="alert"></span>
                                     </div>
                                     <div class="form-group col-xl-12 col-md-12">
                                         <label for="fullName">Full Name</label>
-                                        <input type="text" class="form-control text-capitalize" id="fullName" name="fullName" placeholder="e.g. Charith Kumara Sampath Wickramarachchi" @if($student) value="{{ $student->full_name }}" @endif/>
+                                        <span class="form-text text-muted mt-0">example: Charith Kumara Sampath Wickramarachchi</span>
+                                        <input type="text" class="form-control text-capitalize" id="fullName" name="fullName" placeholder="example: Charith Kumara Sampath Wickramarachchi" @if($student) value="{{ $student->full_name }}" @endif/>
                                         <span class="invalid-feedback" id="error-fullName" role="alert"></span>
                                     </div>
                                     <div class="form-group col-xl-6 col-md-12">
@@ -267,7 +281,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="addressLine1" class="col-xl-4 col-md-12 col-form-label">Address Line 1:</label>
+                                            <label for="addressLine1" class="col-xl-4 col-md-12 col-form-label">Address Line 1: <small>(Optional)</small></label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control" id="addressLine1" name="addressLine1" @if($student) value="{{ $student->permanent_address_line1 }}" @endif>
                                                 <span class="invalid-feedback" id="error-addressLine1" role="alert"></span>
@@ -288,69 +302,16 @@
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="addField">
-                                            <label for="addressLine4" class="col-xl-4 col-md-12 col-form-label">Address Line 4:</label>
+                                            <label for="addressLine4" class="col-xl-4 col-md-12 col-form-label">Address Line 4: <small>(Optional)</small></label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control" id="addressLine4" name="addressLine4" @if($student) value="{{ $student->permanent_address_line4 }}" @endif>
                                                 <span class="invalid-feedback" id="error-addressLine4" role="alert"></span>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="city" class="col-xl-4 col-md-12 col-form-label">City:</label>
-                                            <div class="col-xl-8 col-md-12">
-                                                <select name="city" id="city" class="form-control">
-                                                    <option disabled selected>Select your city</option>
-                                                    @if ($student)
-                                                        @foreach ($city_list as $city)
-                                                            @if($student->permanent_city_id == $city->id)
-                                                                <option value="{{ $city->id }}" selected>{{ $city->name }}</option>
-                                                            @else
-                                                                <option value="{{ $city->id }}">{{ $city->name }}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                <span class="invalid-feedback" id="error-city" role="alert"></span>
-                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.</small>
-                                            </div>
+                                        <div class="text-right mb-3" id="divCollapsePlus1">
+                                            <button class="btn btn-outline-primary form-control col-2 text-center addAddressLinebtn" type="button" id="plusField" data-toggle="collapse" data-target="#addField" aria-expanded="false" aria-controls="addField" data-tooltip="tooltip" data-placement="bottom" title="Add extra Address Line"><i class="fas fa-plus"></i></button>
                                         </div>
-                                        <div class="form-group row collapse" id="divSelectDistrict">
-                                            <label for="selectDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
-                                            <div class="col-xl-8 col-md-12">
-                                                <select name="selectDistrict" id="selectDistrict" class="form-control" onchange="onChangeState('sriLanka')">
-                                                    <option disabled selected>Select your district</option>
-                                                    @if ($student)
-                                                        @foreach ($states_list as $states)
-                                                            @if($student->permanent_state_id == $states->id)
-                                                                <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
-                                                            @else
-                                                                <option value="{{ $states->id }}">{{ $states->name }}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                <span class="invalid-feedback" id="error-selectDistrict" role="alert"></span>
-                                                <small class="form-text text-muted">* Districts are shown after selecting a Country.</small>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row collapse" id="divSelectState">
-                                            <label for="selectState" class="col-xl-4 col-md-12 col-form-label">State:</label>
-                                            <div class="col-xl-8 col-md-12">
-                                                <select name="selectState" id="selectState" class="form-control" onchange="onChangeState('foreignState')">
-                                                    <option disabled selected>Select your state</option>
-                                                    @if ($student)
-                                                        @foreach ($states_list as $states)
-                                                            @if($student->permanent_state_id == $states->id)
-                                                                <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
-                                                            @else
-                                                                <option value="{{ $states->id }}">{{ $states->name }}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                <span class="invalid-feedback" id="error-selectState" role="alert"></span>
-                                                <small class="form-text text-muted">* States are shown after selecting a Country.</small>
-                                            </div>
-                                        </div>
+
                                         <div class="form-group row">
                                             <label for="country" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                                             <div class="col-xl-8 col-md-12">
@@ -372,9 +333,68 @@
                                                 <small class="form-text text-muted">* Select country to show District/State.</small>
                                             </div>
                                         </div>
-                                        <div class="text-right" id="divCollapsePlus1">
-                                            <button class="btn btn-outline-primary form-control col-2 text-center" type="button" id="plusField" data-toggle="collapse" data-target="#addField" aria-expanded="false" aria-controls="addField" data-tooltip="tooltip" data-placement="bottom" title="Add extra Address Line"><i class="fas fa-plus"></i></button>
+
+                                        <div class="form-group row collapse" id="divSelectDistrict">
+                                            <label for="selectDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="selectDistrict" id="selectDistrict" class="form-control" onchange="onChangeState('sriLanka')">
+                                                    <option disabled selected>Select your district</option>
+                                                    @if ($student)
+                                                        @foreach ($states_list as $states)
+                                                            @if($student->permanent_state_id == $states->id)
+                                                                <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
+                                                            @else
+                                                                <option value="{{ $states->id }}">{{ $states->name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                <span class="invalid-feedback" id="error-selectDistrict" role="alert"></span>
+                                                <small class="form-text text-muted">* Districts are shown after selecting a Country.</small>
+                                            </div>
                                         </div>
+                                        <div class="form-group row collapse" id="divSelectState">
+                                            <label for="selectState" class="col-xl-4 col-md-12 col-form-label">State: <small>(Optional)</small></label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="selectState" id="selectState" class="form-control" onchange="onChangeState('foreignState')">
+                                                    <option disabled selected>Select your state</option>
+                                                    @if ($student)
+                                                        @foreach ($states_list as $states)
+                                                            @if($student->permanent_state_id == $states->id)
+                                                                <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
+                                                            @else
+                                                                <option value="{{ $states->id }}">{{ $states->name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                <span class="invalid-feedback" id="error-selectState" role="alert"></span>
+                                                <small class="form-text text-muted">* States are shown after selecting a Country.</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="city" class="col-xl-4 col-md-12 col-form-label">City:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="city" id="city" class="form-control">
+                                                    <option disabled selected>Select your city</option>
+                                                    @if ($student)
+                                                        @foreach ($city_list as $city)
+                                                            @if($student->permanent_city_id == $city->id)
+                                                                <option value="{{ $city->id }}" selected>{{ $city->name }}</option>
+                                                            @else
+                                                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                <span class="invalid-feedback" id="error-city" role="alert"></span>
+                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.</small>
+                                            </div>
+                                        </div>
+
+
+
                                     </div>
                                     
                                     <div class="form-group col-xl-6 col-md-12">
@@ -390,7 +410,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="currentAddressLine1" class="col-xl-4 col-md-12 col-form-label">Address Line 1:</label>
+                                            <label for="currentAddressLine1" class="col-xl-4 col-md-12 col-form-label">Address Line 1: <small>(Optional)</small></label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('currentAddressLine1') is-invalid @enderror" id="currentAddressLine1" name="currentAddressLine1" @if($student) value="{{ $student->current_address_line1 }}" @endif disabled>
                                                 <span class="invalid-feedback" id="error-currentAddressLine1" role="alert"></span>
@@ -426,7 +446,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row collapse" id="addCurrentField">
-                                            <label for="currentAddressLine4" class="col-xl-4 col-md-12 col-form-label">Address Line 4:</label>
+                                            <label for="currentAddressLine4" class="col-xl-4 col-md-12 col-form-label">Address Line 4: <small>(Optional)</small></label>
                                             <div class="col-xl-8 col-md-12">
                                                 <input type="text" class="form-control @error('currentAddressLine4') is-invalid @enderror" id="currentAddressLine4" name="currentAddressLine4" @if($student) value="{{ $student->current_address_line4 }}" @endif disabled>
                                                 <span class="invalid-feedback" id="error-currentAddressLine4" role="alert"></span>
@@ -437,63 +457,11 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="currentCity" class="col-xl-4 col-md-12 col-form-label">City:</label>
-                                            <div class="col-xl-8 col-md-12">
-                                                <select id="currentCity" name="currentCity" class="form-control" disabled>
-                                                    <option selected disabled>Select your city</option>
-                                                    @if ($student)
-                                                        @foreach ($current_city_list as $city)
-                                                            @if($student->current_city_id == $city->id)
-                                                                <option value="{{ $city->id }}" selected>{{ $city->name }}</option>
-                                                            @else
-                                                                <option value="{{ $city->id }}">{{ $city->name }}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                <span class="invalid-feedback" id="error-currentCity" role="alert"></span>
-                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.</small>
-                                            </div>
+
+                                        <div class="text-right collapse mb-3" id="divCollapsePlus2">
+                                            <button class="btn btn-outline-primary form-control col-2 text-center addAddressLinebtn" type="button" id="plusCurrentField" data-toggle="collapse" data-target="#addCurrentField" aria-expanded="false" aria-controls="addCurrentField" data-tooltip="tooltip" data-placement="bottom" title="Add extra Address Line" disabled><i class="fas fa-plus"></i></button>
                                         </div>
-                                        <div class="form-group row collapse" id="divSelectCurrentDistrict">
-                                            <label for="selectCurrentDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
-                                            <div class="col-xl-8 col-md-12">
-                                                <select name="selectCurrentDistrict" id="selectCurrentDistrict" class="form-control" disabled onchange="onChangeCurrentState('sriLanka')">
-                                                    <option selected disabled>Select your district</option>
-                                                    @if ($student)
-                                                        @foreach ($current_states_list as $states)
-                                                            @if($student->current_state_id == $states->id)
-                                                                <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
-                                                            @else
-                                                                <option value="{{ $states->id }}">{{ $states->name }}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                <span class="invalid-feedback" id="error-selectCurrentDistrict" role="alert"></span>
-                                                <small class="form-text text-muted">* Districts are shown after selecting a Country.</small>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row collapse" id="divSelectCurrentState">
-                                            <label for="selectCurrentState" class="col-xl-4 col-md-12 col-form-label">State:</label>
-                                            <div class="col-xl-8 col-md-12">
-                                                <select name="selectCurrentState" id="selectCurrentState" class="form-control" disabled onchange="onChangeCurrentState('foreignState')">
-                                                    <option selected disabled>Select your state</option>
-                                                    @if ($student)
-                                                        @foreach ($current_states_list as $states)
-                                                            @if($student->current_state_id == $states->id)
-                                                                <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
-                                                            @else
-                                                                <option value="{{ $states->id }}">{{ $states->name }}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                <span class="invalid-feedback" id="error-selectCurrentState" role="alert"></span>
-                                                <small class="form-text text-muted">* States are shown after selecting a Country.</small>
-                                            </div>
-                                        </div>
+
                                         <div class="form-group row">
                                             <label for="currentCountry" class="col-xl-4 col-md-12 col-form-label">Country:</label>
                                             <div class="col-xl-8 col-md-12">
@@ -515,10 +483,71 @@
                                                 <small class="form-text text-muted">* Select country to show District/State.</small>
                                             </div>
                                         </div>
-                                        <div class="text-right collapse" id="divCollapsePlus2">
-                                            <button class="btn btn-outline-primary form-control col-2 text-center" type="button" id="plusCurrentField" data-toggle="collapse" data-target="#addCurrentField" aria-expanded="false" aria-controls="addCurrentField" data-tooltip="tooltip" data-placement="bottom" title="Add extra Address Line" disabled><i class="fas fa-plus"></i></button>
+
+                                        <div class="form-group row collapse" id="divSelectCurrentDistrict">
+                                            <label for="selectCurrentDistrict" class="col-xl-4 col-md-12 col-form-label">District:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="selectCurrentDistrict" id="selectCurrentDistrict" class="form-control" disabled onchange="onChangeCurrentState('sriLanka')">
+                                                    <option selected disabled>Select your district</option>
+                                                    @if ($student)
+                                                        @foreach ($current_states_list as $states)
+                                                            @if($student->current_state_id == $states->id)
+                                                                <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
+                                                            @else
+                                                                <option value="{{ $states->id }}">{{ $states->name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                <span class="invalid-feedback" id="error-selectCurrentDistrict" role="alert"></span>
+                                                <small class="form-text text-muted">* Districts are shown after selecting a Country.</small>
+                                            </div>
                                         </div>
+                                        <div class="form-group row collapse" id="divSelectCurrentState">
+                                            <label for="selectCurrentState" class="col-xl-4 col-md-12 col-form-label">State: <small>(Optional)</small></label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select name="selectCurrentState" id="selectCurrentState" class="form-control" disabled onchange="onChangeCurrentState('foreignState')">
+                                                    <option selected disabled>Select your state</option>
+                                                    @if ($student)
+                                                        @foreach ($current_states_list as $states)
+                                                            @if($student->current_state_id == $states->id)
+                                                                <option value="{{ $states->id }}" selected>{{ $states->name }}</option>
+                                                            @else
+                                                                <option value="{{ $states->id }}">{{ $states->name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                <span class="invalid-feedback" id="error-selectCurrentState" role="alert"></span>
+                                                <small class="form-text text-muted">* States are shown after selecting a Country.</small>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group row">
+                                            <label for="currentCity" class="col-xl-4 col-md-12 col-form-label">City:</label>
+                                            <div class="col-xl-8 col-md-12">
+                                                <select id="currentCity" name="currentCity" class="form-control" disabled>
+                                                    <option selected disabled>Select your city</option>
+                                                    @if ($student)
+                                                        @foreach ($current_city_list as $city)
+                                                            @if($student->current_city_id == $city->id)
+                                                                <option value="{{ $city->id }}" selected>{{ $city->name }}</option>
+                                                            @else
+                                                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                <span class="invalid-feedback" id="error-currentCity" role="alert"></span>
+                                                <small class="form-text text-muted">* Cities are shown after selecting a District/State.</small>
+                                            </div>
+                                        </div>
+
                                     </div>
+
+
                                     <div class="form-group col-xl-6 col-md-12">
                                         <label for="telephone">Telephone Number</label>
                                         <div class="input-group">
@@ -578,13 +607,13 @@
                             <div class="row justify-content-end">
 
                                 <div class="mt-3 col-xl-3 col-md-6 order-sm-1 order-3 @if($student && $student->flag->info_complete==1) d-none @endif " id="divResetForm">
-                                    <button type="button" class="btn btn-outline-warning form-control" id="btnResetForm" onclick="reset_form()">Reset Form</button>
+                                    <button type="button" class="btn btn-outline-secondary form-control" id="btnResetForm" onclick="reset_form()">Reset Form</button>
                                 </div>
                                 <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2  @if($student && $student->flag->info_complete==1) d-none @endif " id="divSaveInformation">
-                                    <button type="button" class="btn btn-outline-secondary form-control" id="btnSaveInformation" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_information()">Save information</button>
+                                    <button type="button" class="btn btn-outline-primary form-control" id="btnSaveInformation" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_information()">Save information</button>
                                 </div>
                                 <div class="mt-3 col-xl-3 col-md-6 order-sm-3 order-1  @if($student && $student->flag->info_complete==0) d-none @endif " id="divEditInformation">
-                                    <button type="button" class="btn btn-outline-warning form-control" id="btnEditInformation" onclick="edit_information()">Edit Information</button>
+                                    <button type="button" class="btn btn-outline-primary form-control" id="btnEditInformation" onclick="edit_information()">Edit Information</button>
                                 </div>
 
                             </div>
@@ -594,7 +623,7 @@
                         <!-- INFO NOT COMPLETED ALERT -->
                         <div class="px-3 my-4 alert alert-danger border-danger d-none collapse" id="infoCompleteAlert">
                             <h6 class="text-left text-danger">Application is not completed</h6>
-                            <p>Following fields must be completed to continue and submit the application.</p>
+                            <p>Following fields must be completed to continue and submit the application. Click on the "Edit Information" button and change the following details</p>
                             <div id="toBeCompletedErrors">
 
                             </div>

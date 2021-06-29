@@ -197,7 +197,7 @@
             if (data['status'] = 'success'){
               SwalDoneSuccess.fire({
                 title: 'ID Deleted!',
-                text: 'Please upload corrected ID again',
+                text: 'Please upload a corrected ID again',
               }).then((result) => {
                 if(result.isConfirmed) {
                   location.reload()
@@ -236,7 +236,7 @@
   submitDocuments = () =>{
     SwalQuestionWarningAutoClose.fire({
       title: 'Are you sure?',
-      text: "You won't be able to change uploaded documents after submit.",
+      text: "You cannot change the documents once you click OK",
     }).then((result) => {
       if(result.isConfirmed){
         $.ajax({
@@ -258,7 +258,7 @@
             if (data['status'] = 'success'){
               SwalDoneSuccess.fire({
                 title: 'Documents submitted successfully!',
-                text: 'Your registration will be completed after submitted document approval completed',
+                text: 'Your registration will complete only after the documents have been approved',
               }).then((result) => {
                 if(result.isConfirmed) {
                   location.reload()

@@ -449,7 +449,10 @@ class RegistrationController extends Controller
       'qualification' => ['required', Rule::in(['degree', 'higherdiploma', 'diploma', 'advancedlevel', 'ordinarylevel', 'otherqualification'])],
 
       'house' => ['required','address'],
-      'addressLine1' => ['required','address'],
+      'addressLine1' => ['nullable', 'address'],
+      'addressLine2' => ['nullable', 'address'],
+      'addressLine3' => ['nullable', 'address'],
+      'addressLine4' => ['nullable', 'address'],
       'country' => ['required','exists:world_countries,id'],
 
       'telephoneCountryCode' => ['required', 'numeric', 'digits_between:1,5' ],
@@ -552,9 +555,9 @@ class RegistrationController extends Controller
         return response()->json(['status' => 'error','errors'=>$validator->errors()->all()]);
     else:
       if ( $request->citizenship == 'Sri Lankan' ):
-        $countries_list = WorldCountry::select('id','name')->where('name', 'Sri Lanka')->orderBy('name')->get();
+        $countries_list = WorldCountry::select('id','name')->orderBy('name')->get();
       elseif ( $request->citizenship == 'Foreign National' ):
-        $countries_list = WorldCountry::select('id','name')->where('name', '!=', 'Sri Lanka')->orderBy('name')->get();
+        $countries_list = WorldCountry::select('id','name')->orderBy('name')->get();
       endif;
       return response()->json(['status'=>'success', 'country_list'=>$countries_list ]);
     endif;

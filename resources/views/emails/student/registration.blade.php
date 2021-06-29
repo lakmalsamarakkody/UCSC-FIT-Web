@@ -3,7 +3,7 @@
 
 <h1 style="text-align: center; color: #fff;">Register to FIT</h1>
 
-<p style="text-align: center; color: #fff;">Your All set! <br> Now you can complete your registration for the Foundation of Information Technology by login in to your account by clicking below.</p> 
+<p style="text-align: center; color: #fff;">You are all set! <br> Now you can complete your registration for the Foundation of Information Technology by login in to your account by clicking below.</p> 
 
 
 <table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
