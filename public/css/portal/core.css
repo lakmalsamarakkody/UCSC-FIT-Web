@@ -52,6 +52,23 @@ html{
   scroll-behavior: smooth;
 }
 
+::-webkit-input-placeholder {
+  text-transform: initial;
+}
+
+:-moz-placeholder { 
+  text-transform: initial;
+}
+
+::-moz-placeholder {  
+  text-transform: initial;
+}
+
+:-ms-input-placeholder { 
+  text-transform: initial;
+}
+
+
 /* BOOTSRAP TOGLLE */
 .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
   .toggle.ios .toggle-handle { border-radius: 20px; }
