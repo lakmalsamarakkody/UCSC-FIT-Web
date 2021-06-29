@@ -76,7 +76,7 @@
             {{-- SUBMIT DOCUMENTS --}}
             <div class="col-12 px-0">
               <div class="alert alert-warning" role="alert">
-                <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Required Identification Documents has been uploaded</h4>
+                <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Required Documents has been uploaded</h4>
                 <p>Submit your documents for approval</p>
                 <p>You cannot change the documents once you click on Submit</p>
                 <hr>
@@ -349,6 +349,26 @@
           {{-- /IF ALL COMPLETE SHOW SUBMIT DOCUMENTS BUTTON --}}
         @endif
         {{-- /DOCUMENT SUBMIT CHECK --}}
+
+
+
+        {{-- DOCUMENT SUBMIT CHECK --}}
+        @if($registration->document_submit == 1 && $registration->document_status != 'Declined')
+        @else
+          {{-- IF ALL COMPLETE SHOW SUBMIT DOCUMENTS BUTTON --}}
+          @if($student->document()->where('type', 'birth')->first() != NULL && $student->document()->where('type', 'NIC')->orWhere('type', 'Postal')->orWhere('type', 'Passport')->first() != NULL)
+            {{-- SUBMIT DOCUMENTS --}}
+            <div class="col-12 px-0 my-4">
+              <div class="alert alert-warning" role="alert">
+                <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Required Documents has been uploaded</h4>
+                <p>Submit your documents for approval</p>
+                <p>You cannot change the documents once you click on Submit</p>
+                <hr>
+                <button class="btn btn-outline-primary" id="btnSubmitDocs" onclick="submitDocuments()">Submit Documents <span id="spinnerSubmitDocs" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+              </div>
+            </div>
+          @endif
+        @endif
 
       </div>
     </div>
