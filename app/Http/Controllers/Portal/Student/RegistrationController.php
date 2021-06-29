@@ -120,7 +120,7 @@ class RegistrationController extends Controller
       'title' => ['nullable', 'exists:titles,title'],
       'firstName' => ['nullable', 'alpha','min:3'],
       'middleNames' => ['nullable', 'alpha_dash_space'],
-      'lastName' => ['nullable', 'alpha', 'min:3'],
+      'lastName' => ['nullable', 'alpha_dash_space', 'min:3'],
       'fullName' => ['nullable', 'alpha_dash_space'],
       'initials' => ['nullable', 'alpha_capital'],
       'dob' => ['nullable' , 'date','before:'.$minBirthYear.'-01-01'],
@@ -243,7 +243,12 @@ class RegistrationController extends Controller
       endif;
       $student->title = $request->title;
       $student->first_name = $request->firstName;
-      $student->middle_names = $request->middleNames;
+
+      //Fetch middle names from the full name by deducting first and last names
+      $find = array($request->firstName, $request->lastName);
+      $middleNames = trim(str_replace($find,'',$request->fullName));
+      $student->middle_names = $middleNames;
+
       $student->last_name = $request->lastName;
       $student->initials = $request->initials;
       $student->full_name = $request->fullName;
@@ -281,7 +286,7 @@ class RegistrationController extends Controller
       $student->current_country_id = $request->currentCountry;
 
       $student->telephone_country_code = $request->telephoneCountryCode;
-      $student->telephone = $request->telephone;
+      $student->telephone = ltrim($request->telephone, '0');
 
       // CHECK UNIQUE ID AND SAVE TO RELEVANT FIELD
       if($request->uniqueType == 'nic'):
@@ -343,7 +348,12 @@ class RegistrationController extends Controller
       endif;
       $student->title = $request->title;
       $student->first_name = $request->firstName;
-      $student->middle_names = $request->middleNames;
+
+      //Fetch middle names from the full name by deducting first and last names
+      $find = array($request->firstName, $request->lastName);
+      $middleNames = trim(str_replace($find,'',$request->fullName));
+      $student->middle_names = $middleNames;
+
       $student->last_name = $request->lastName;
       $student->initials = $request->initials;
       $student->full_name = $request->fullName;
@@ -381,7 +391,7 @@ class RegistrationController extends Controller
       $student->current_country_id = $request->currentCountry;
 
       $student->telephone_country_code = $request->telephoneCountryCode;
-      $student->telephone = $request->telephone;
+      $student->telephone = ltrim($request->telephone, '0');
 
       // CHECK UNIQUE ID AND SAVE TO RELEVANT FIELD
       if($request->uniqueType == 'nic'):
@@ -439,7 +449,7 @@ class RegistrationController extends Controller
       'enrollment' => ['required',Rule::in(['new', 'existing'])],
       'title' => ['required', 'exists:titles,title'],
       'firstName' => ['required', 'alpha','min:3'],
-      'lastName' => ['required', 'alpha', 'min:3'],
+      'lastName' => ['required', 'alpha_dash_space', 'min:3'],
       'fullName' => ['required', 'alpha_dash_space'],
       'initials' => ['required', 'alpha_capital'],
       'dob' => ['required' , 'date','before:'.$minBirthYear.'-01-01'],

@@ -136,7 +136,7 @@
                                         <span class="invalid-feedback" id="error-lastName" role="alert"></span>
                                     </div>
                                     <div class="form-group col-xl-12 col-md-12">
-                                        <label for="fullName">Full Name</label>
+                                        <label for="fullName">Full Name (As appearing in the Birth Certificate)</label>
                                         <span class="form-text text-muted mt-0">example: Charith Kumara Sampath Wickramarachchi</span>
                                         <input type="text" class="form-control text-capitalize" id="fullName" name="fullName" placeholder="example: Charith Kumara Sampath Wickramarachchi" @if($student) value="{{ $student->full_name }}" @endif/>
                                         <span class="invalid-feedback" id="error-fullName" role="alert"></span>
