@@ -623,7 +623,7 @@
                         <!-- INFO NOT COMPLETED ALERT -->
                         <div class="px-3 my-4 alert alert-danger border-danger d-none collapse" id="infoCompleteAlert">
                             <h6 class="text-left text-danger">Application is not completed</h6>
-                            <p>Following fields must be completed to continue and submit the application. Click on the "Edit Information" button and change the following details</p>
+                            <p>Following field(s) must be completed to continue and submit the application. Click on the "Edit Information" button and change the following details</p>
                             <div id="toBeCompletedErrors">
 
                             </div>
