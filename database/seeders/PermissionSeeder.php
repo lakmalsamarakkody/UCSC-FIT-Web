@@ -314,10 +314,26 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
-                    'name'=>'staff-dashboard-exam-review-reschedules-view',
+                    'name'=>'staff-dashboard-exam-review-reschedule-requests-view',
                     'portal'=>'staff',
                     'module'=>'dashboard',
                     'description'=>'Can view reschedule requests',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-reschedule-request-payment-approve',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can approve a reschedule request',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-dashboard-reschedule-request-payment-decline',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can decline a reschedule request',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
