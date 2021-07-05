@@ -28,6 +28,12 @@ class PaymentTypeSeeder extends Seeder
                     'name'=>'exam',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                
+                [
+                    'name'=>'reschedule',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
                 ]
                 
             )

@@ -19,39 +19,43 @@
         @if(!$scheduled_exams->isEmpty())
         <div class="col-12 mt-4 px-0">
           <div class="card">
-            <div class="card-header">Scheduled Exams</div>
+            <div class="card-header">
+              Scheduled Exams
+              <div class="btn-group float-right">
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal-exam-reschedule">Request Reschedule</button>
+              </div>
+            </div>
             
             <div class="card-body">
-              {{-- <pre>
-                {{$exams}}
-              </pre> --}}
-              @foreach ($scheduled_exams as $exam)
-                @if($exam->schedule->date > date('Y-m-d'))
-                  <div class="accordion" id="accordion_{{$exam->id}}">
-                    <div class="card mb-4 shadow-sm">
-                      <div class="card-header text-secondary" id="heading_{{$exam->id}}">
-                        FIT {{ $exam->subject->code }} - {{ $exam->subject->name }} ({{ $exam->type->name }})
-                        <div class="btn-group float-right">
-                          <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}"><i class="far fa-eye"></i> View</button>
-                        </div>
-                      </div>
-                  
-                      <div id="collapse_{{$exam->id}}" class="collapse" aria-labelledby="heading_{{$exam->id}}" data-parent="#accordion_{{$exam->id}}">
-                        <div class="card-body text-md-center border-top border-secondary">
-                          <div class="row">
-                            <div class="col-12 col-md-4"> Date : {{ $exam->schedule->date }}</div>
-                            <div class="col-12 col-md-4"> Start Time : {{ $exam->schedule->start_time }}</div>
-                            <div class="col-12 col-md-4"> End Time : {{ $exam->schedule->end_time }}</div>
-                            {{-- <div class="col-12 offset-md-4 col-md-4 my-3">
-                              <button type="button" class="btn btn-outline-primary w-100" data-tooltip="tooltip" data-placement="bottom" title="Apply Exam" onclick="window.open('/portal/student/payment')"><i class="far fa-hand-point-right"></i> Apply</button>
-                            </div> --}}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                @endif
-              @endforeach
+
+              <table class="table table-hover">
+
+                <thead>
+                  <tr>
+                    <th class="text-center">Subject Code</th>
+                    <th class="text-center">Subject</th>
+                    <th class="text-center">Exam Type</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">Time</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  @foreach ($scheduled_exams as $exam)
+                    @if($exam->schedule->date > date('Y-m-d'))
+                    <tr>
+                      <td class="text-center">FIT {{ $exam->subject->code }}</td>
+                      <td class="text-center">{{ $exam->subject->name }}</td>
+                      <td class="text-center">{{ $exam->type->name }}</td>
+                      <td class="text-center">{{ $exam->schedule->date }}</td>
+                      <td class="text-center">{{ $exam->schedule->start_time }} - {{ $exam->schedule->end_time }}</td>
+                    </tr>
+                    @endif
+                  @endforeach
+                </tbody>
+
+              </table>                  
+
             </div>
             
           </div>
@@ -305,15 +309,15 @@
                           @if(Auth::user()->hasPermission('student-exam-medical'))
                           <div class="col-12 col-md-3 text-md-right">
                             @if($exam->medical != null && $exam->medical->status=='Pending' )
-                              <button type="button" class="btn btn-outline-warning w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Medical Approval Pending</button>
+                              <button type="button" class="btn btn-outline-warning w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Issue Report Approval Pending</button>
                             @elseif($exam->medical != null &&  $exam->medical->status=='Approved' )
-                              <button type="button" class="btn btn-outline-success w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Medical Approved</button>
+                              <button type="button" class="btn btn-outline-success w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Issue Report Approved</button>
                             @elseif($exam->medical != null &&  $exam->medical->status=='Declined' )
-                              <button type="button" class="btn btn-outline-danger w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Medical Declined</button>
+                              <button type="button" class="btn btn-outline-danger w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Issue Report Declined</button>
                               @elseif($exam->medical != null &&  $exam->medical->status=='Resubmit' )
-                              <button type="button" class="btn btn-outline-secondary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Resubmit Medical</button>
+                              <button type="button" class="btn btn-outline-secondary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Resubmit Issue Report</button>
                             @elseif(\Carbon\Carbon::now() <= \Carbon\Carbon::create($exam->schedule->date)->addDays(15))
-                              <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}"><i class="fas fa-file-medical"></i> Upload medical</button>
+                              <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}"><i class="fas fa-file-medical"></i> Report Issue</button>
                             @endif
                           </div>
                           @endif
@@ -347,7 +351,7 @@
 
                               <div class="col-12">
                                 <div class="alert alert-success" role="alert">
-                                  <h4 class="alert-heading">Medical Approved</h4>
+                                  <h4 class="alert-heading">Issue Report Approved</h4>
                                   <p>Your exam will be re-scheduled and will be notified</p>
                                   <hr>
                                   <p class="mb-0">If not notified in two weeks, call e-Learning Center, UCSC for inquiries</p>
@@ -359,7 +363,7 @@
                             
                               <div class="col-12">
                                 <div class="alert alert-danger" role="alert">
-                                  <h4 class="alert-heading">Medical Decline</h4>
+                                  <h4 class="alert-heading">Issue Report Decline</h4>
                                   <p>You may have to re-apply for the exams</p>
                                   <hr>
                                   <p class="mb-0">Call e-Learning Center, UCSC for inquiries</p>
@@ -370,7 +374,7 @@
                               <div class="col-12">
                                 <div class="alert alert-info" role="alert">
                                   {{-- <h4 class="alert-heading">Declined Reason</h4> --}}
-                                  <p><b>Reason of Decline the Medical: </b>{{$exam->medical->declined_message}}</p>
+                                  <p><b>Reason of Decline the Issue Report: </b>{{$exam->medical->declined_message}}</p>
                                 </div>
                                 {{-- <div class="col-12">
                                   <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapseMedical_{{$exam->id}}" aria-expanded="true" aria-controls="collapseMedical_{{$exam->id}}">Resubmit Medical</button>
@@ -387,9 +391,9 @@
                                     </div>
                                   </div>
                                   <div class="form-group mx-2">
-                                    <span id="InputMedicalHelp" class="form-text text-muted">Upload your scanned medical here in JPEG/ PNG file format</span>
+                                    <span id="InputMedicalHelp" class="form-text text-muted">Upload your scanned supporting document here in JPEG/ PNG file format. Maximum file size: 5mb</span>
                                     <div class="drop-zone">
-                                      <span class="drop-zone__prompt">Scanned Medical <br><small>Drop image File here or click to upload</small> </span>
+                                      <span class="drop-zone__prompt">Scanned Supporting Document <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="medical" id="{{ $exam->id }}-medical" class="drop-zone__input form-control"/>
                                     </div>
                                     <span class="invalid-feedback" id="{{ $exam->id }}-error-medical" role="alert"></span>
@@ -413,9 +417,9 @@
                                     </div>
                                   </div>
                                   <div class="form-group mx-2">
-                                    <span id="InputMedicalHelp" class="form-text text-muted">Upload your scanned medical here in JPEG/ PNG file format</span>
+                                    <span id="InputMedicalHelp" class="form-text text-muted">Upload your scanned supporting document here in JPEG/ PNG file format. Maximum file size: 5mb</span>
                                     <div class="drop-zone">
-                                      <span class="drop-zone__prompt">Scanned Medical <br><small>Drop image File here or click to upload</small> </span>
+                                      <span class="drop-zone__prompt">Scanned Supporting Document <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="medical" id="{{ $exam->id }}-medical" class="drop-zone__input form-control"/>
                                     </div>
                                     <span class="invalid-feedback" id="{{ $exam->id }}-error-medical" role="alert"></span>

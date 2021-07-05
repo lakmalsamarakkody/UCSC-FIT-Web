@@ -60,6 +60,10 @@ class FeeSeeder extends Seeder
                 'amount' => '2250',
                 'created_at'=> '2020-11-25 10:13:53',
                 'updated_at'=> '2020-11-25 10:13:53'],
+                ['purpose'=> 'reschedule',
+                'amount' => '1500',
+                'created_at'=> '2020-11-25 10:13:53',
+                'updated_at'=> '2020-11-25 10:13:53'],
             )
         );
 
