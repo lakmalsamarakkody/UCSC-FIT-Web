@@ -58,11 +58,7 @@
                         <td>
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-review-medical-view'))
                           <div class="btn-group">
-<<<<<<< Updated upstream
-                            <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedMedical-{{ $payment->id }}" onclick="view_modal_medical({{ $payment->id }});"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedMedical-{{ $payment->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
-=======
                             <button type="button" class="btn btn-outline-primary" id="btnViewModalRescheduleRequest-{{ $payment->id }}" onclick="view_modal_reschedule_request({{ $payment->id }});"><i class="fas fa-user"></i> View <span id="spinnerbtnViewModalRescheduleRequest-{{ $payment->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
->>>>>>> Stashed changes
                           </div>
                           @endif
                         </td>
@@ -78,13 +74,8 @@
         <!-- /MEDICALS LIST -->
 
       </div>
-<<<<<<< Updated upstream
-      @include('portal.staff.student.medical.modal')
-      @include('portal.staff.student.medical.scripts')
-=======
       @include('portal.staff.student.reschedule_requests.modal')
       @include('portal.staff.student.reschedule_requests.scripts')
->>>>>>> Stashed changes
     </div>
     <!-- /CONTENT -->
 
