@@ -313,6 +313,14 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                [
+                    'name'=>'staff-dashboard-exam-review-reschedules-view',
+                    'portal'=>'staff',
+                    'module'=>'dashboard',
+                    'description'=>'Can view reschedule requests',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
                 // /STAFF->DASHBOARD
 
                 // STAFF->STUDENTS
@@ -1082,7 +1090,7 @@ class PermissionSeeder extends Seeder
                     'description'=>'Can delete a payment type',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
-                ],
+                ]
                 // /STAFF->SYSTEM
                 // /STAFF PORTAL
             )

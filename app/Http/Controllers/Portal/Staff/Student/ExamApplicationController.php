@@ -61,12 +61,23 @@ class ExamApplicationController extends Controller
     // REVIEW MEDICALS
     public function reviewMedicals()
     {
-        $medicals = Medical::where('status', 'Pending')->orderBy('created_at', 'asc')->get();
+        $medicals = Medical::where('status', 'Pending')->where('type', 'medical')->orderBy('created_at', 'asc')->get();
         return view('portal/staff/student/medical', [
             'medicals'=> $medicals
         ]);
     }
     // /REVIEW MEDICALS
+
+    // REVIEW RESCHEDULE REQUESTS
+    public function reviewRescheduleRequests()
+    {
+        // $medicals = Medical::where('status', 'Pending')->where('type', 'reschedule')->orderBy('created_at', 'asc')->get();
+        $payments = Payment::where('status', null)->where('type_id', 3)->get();
+        return view('portal/staff/student/reschedule_requests', [
+            'payments'=> $payments
+        ]);
+    }
+    // /REVIEW RESCHEDULE REQUESTS
 
     // REVIEW EXAMS TO RESCHEDULE
     public function reviewExamsToReschedule()
