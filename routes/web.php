@@ -63,9 +63,6 @@ Route::get('/portal/information/verify/{email}/token/{token}/id/{id}', [App\Http
 Route::post('/portal/information/update/password', [App\Http\Controllers\Portal\AccountController::class, 'changePassword'])->name('change.password');
 Route::get('/email/changed/success', [App\Http\Controllers\Portal\EmailChanged::class, 'index'])->name('changed.success');
 
-
-Route::get('crop-image-upload', [App\Http\Controllers\Portal\CropImageController::class],'index');
-Route::post('crop-image-upload ', [App\Http\Controllers\Portal\CropImageController::class],'uploadCropImage');
 /*
 |--------------------------------------------------------------------------
 | STAFF PORTAL ROUTES
