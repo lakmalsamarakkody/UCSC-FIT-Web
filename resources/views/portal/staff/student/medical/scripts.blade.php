@@ -21,6 +21,8 @@ view_modal_medical =(medical_id) => {
         },
         success: function(data) {
             console.log('Success in get medical details ajax.');
+            $('#btnViewModalAppliedMedical-'+medical_id).removeAttr('disabled', 'disabled');
+            $('#spinnerBtnViewModalAppliedMedical-'+medical_id).addClass('d-none');
             if(data['status'] == 'success') {
                 console.log('Success in get medical details.');
                 //Student Details
@@ -40,8 +42,6 @@ view_modal_medical =(medical_id) => {
                     $('#imgMedical').attr('style', 'background: url(/storage/medicals/'+data['student']['id']+'/'+data['medical']['image']+')');
                     $('#imgMedical').attr('onclick', 'window.open("/storage/medicals/'+data['student']['id']+'/'+data['medical']['image']+'")');
 
-                    $('#btnViewModalAppliedMedical-'+medical_id).removeAttr('disabled', 'disabled');
-                    $('#spinnerBtnViewModalAppliedMedical-'+medical_id).addClass('d-none');
                     $('#modal-medical').modal('show');
                 }
             }
