@@ -362,7 +362,7 @@ class ExamsController extends Controller
       if($request->supportDocument):
         $ext = $request->file('supportDocument')->getClientOriginalExtension();
         $medical_name = $student_id.'_reschedule_document_'.date('Y-m-d').'_'.time().'.'. $ext;
-
+        $request->file('supportDocument')->storeAs('public/reschedules/'.$student_id,$medical_name);
       endif;
 
       $file_ext = $request->file('bankSlip')->getClientOriginalExtension();
