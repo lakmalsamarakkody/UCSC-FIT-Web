@@ -316,22 +316,6 @@ class ExamsController extends Controller
     return response()->json(['error'=>'error']);
   }
 
-  public function deleteExamMedical(Request $request)
-  {
-    $student_id = Auth::user()->student->id;
-    $student_exam = hasExam::where('id',$request->id)->first();
-    $medical = Medical::where('id', $student_exam->medical_id);
-
-    $medical_image = ($medical->first())->image;
-
-    if( $medical->forceDelete() && Storage::delete('public/medicals/'.$student_id.'/'.$medical_image) && $student_exam->update(['medical_id'=>null])):     
-
-      return response()->json(['status'=>'success']);
-
-    endif;
-    return response()->json(['error'=>'error']);
-  }
-
   public function requestReschedule(Request $request)
   {
     $reschedule_fee = Fee::where('purpose', 'reschedule')->first()->amount;
