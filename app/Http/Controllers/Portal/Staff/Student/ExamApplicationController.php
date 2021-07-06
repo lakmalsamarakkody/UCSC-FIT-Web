@@ -419,4 +419,27 @@ class ExamApplicationController extends Controller
     // /RESCHEDULE
     // /RESCHEDULE EXAMS
 
+
+    // RESCHEDULE REQUESTS
+    // LOAD RESCHEDULE REQUEST MODAL
+    public function getRescheduleRequestDetails(Request $request)
+    {
+        $medicals = Medical::where('payment_id', $request->payment_id)->select('student_exam_id')->get();
+        $exams = hasExam::whereIn('id',$medicals)->addSelect([
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
+            'date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
+            'time'=> Schedule::select('start_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
+        ])->get();
+        $payment = Payment::where('id',$request->payment_id)->addSelect([
+            'bank'=> Bank::select('name')->whereColumn('bank_id', 'banks.id'),
+            'bank_branch'=> BankBranch::select('name')->whereColumn('bank_branch_id', 'bank_branches.id'),
+            'bank_branch_code'=> BankBranch::select('code')->whereColumn('bank_branch_id', 'bank_branches.id'),
+        ])->first();
+        $student = Student::where('id', $payment->student_id)->first();
+        $medical = Medical::where('payment_id', $request->payment_id)->first();
+        return response()->json(['status'=> 'success', 'student'=> $student, 'payment'=>$payment, 'exams'=>$exams, 'medical'=>$medical]);
+    }
+    // /LOAD MEDICAL MODAL
 }
