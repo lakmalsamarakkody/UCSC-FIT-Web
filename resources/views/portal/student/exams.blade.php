@@ -339,12 +339,6 @@
                                 <div onclick="window.open('{{ asset('storage/medicals/'.$exam->student_id.'/'.$exam->medical->image)}}')" class="drop-zone" style="background: url({{ asset('storage/medicals/'.$exam->student_id.'/'.$exam->medical->image)}}) no-repeat center; background-size: cover; cursor: pointer;">
                                 </div>
                               </div>
-                              <div class="col-12 mt-2">
-                                <button class="btn btn-outline-danger w-100" onclick="delete_medical({{ $exam->id }})">
-                                  <i class="fa fa-trash"></i>
-                                  Delete
-                                </button>
-                              </div> 
 
 
                             @elseif($exam->medical != null && $exam->medical->status=='Approved' )
