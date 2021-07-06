@@ -92,7 +92,7 @@
                     <h2 class="title">UCSC e-Testing Lab</h2>
                     <p class="description">If your question is related to examination matters of FIT programme, 
                         <br>for example <b>submitting applications for examination,</b> etc. please contact External Degrees Centre. 
-                        <br>It is recommended to check the FIT website ( <a href="www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you contact the relevant details.
+                        <br>It is recommended to check the FIT website ( <a href="http://www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you contact the relevant details.
                     </p>
                 </div>
             </div>
