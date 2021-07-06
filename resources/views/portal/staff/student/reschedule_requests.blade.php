@@ -33,7 +33,7 @@
         <!-- MEDICALS LIST -->
         <div class="col-12 md-5">
           <div class="card">
-            <div class="card-header">Reschedule Requests Submitted Students</div>
+            <div class="card-header">Reschedule Requests Submitted</div>
             <div class="card-body">
               @if($payments->isEmpty())
                 <div class="alert alert-info" role="alert">No results found!</div>
