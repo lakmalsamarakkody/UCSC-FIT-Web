@@ -4,18 +4,18 @@
 
 <script type="text/JavaScript">
 
-    // ACTIVE NAVIGATION ENTRY
+    {{-- ACTIVE NAVIGATION ENTRY --}}
     $(document).ready(function ($) {
         $('#exams').addClass("active");
     });
 
 </script>
 
-    <!-- CONTENT -->
+    {{-- CONTENT --}}
     <div class="col-lg-12 student-exams min-vh-100">
       <div class="row">
-
-        <!-- SCHEDULED EXAMS -->
+        {{-- Please Use A Computer For The Best Viewing of exam details. --}}
+        {{-- SCHEDULED EXAMS --}}
         @if(!$scheduled_exams->isEmpty())
         <div class="col-12 mt-4 px-0">
           <div class="card">
@@ -42,7 +42,7 @@
 
                 <tbody>
                   @foreach ($scheduled_exams as $exam)
-                    @if($exam->schedule->date > date('Y-m-d'))
+                    @if($exam->schedule->date > date('Y-m-d') && $exam->medical==null)
                     <tr>
                       <td class="text-center">FIT {{ $exam->subject->code }}</td>
                       <td class="text-center">{{ $exam->subject->name }}</td>
@@ -61,7 +61,60 @@
           </div>
         </div>
         @endif
-        <!-- /SCHEDULED EXAMS-->
+        {{-- /SCHEDULED EXAMS--}}
+
+        {{-- SCHEDULED EXAMS --}}
+        @if(!$scheduled_exams->isEmpty())
+        <div class="col-12 mt-4 px-0">
+          <div class="card">
+            <div class="card-header">
+              Reschedule requested exams
+            </div>
+            
+            <div class="card-body">
+              <p>Click on the status for more information</p>
+              <table class="table table-hover">
+
+                <thead>
+                  <tr>
+                    <th class="text-center">Subject Code</th>
+                    <th class="text-center">Subject</th>
+                    <th class="text-center">Exam Type</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">Time</th>
+                    <th class="text-center">Status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  @foreach ($scheduled_exams as $exam)
+                    @if($exam->schedule->date > date('Y-m-d') && $exam->medical!=null)
+                    <tr>
+                      <td class="text-center">FIT {{ $exam->subject->code }}</td>
+                      <td class="text-center">{{ $exam->subject->name }}</td>
+                      <td class="text-center">{{ $exam->type->name }}</td>
+                      <td class="text-center">{{ $exam->schedule->date }}</td>
+                      <td class="text-center">{{ $exam->schedule->start_time }} - {{ $exam->schedule->end_time }}</td>
+                      @if($exam->medical->status == "Approved")
+                      <td class="text-center text-success"><button data-toggle="popover"  data-placement="left" title="Request Approved" data-content="Wait until we reschedule your exam. If not rescheduled withing two weeks, please contact e-Learning Centre-UCSC" type="button" class="btn btn-success w-100">{{ $exam->medical->status }}</button></td>
+                      @elseif($exam->medical->status == "Pending")
+                      <td class="text-center text-default"><button data-toggle="popover"  data-placement="left" title="Request Pending" data-content="Your request is being processed. Please wait! If not rescheduled withing two weeks, please contact e-Learning Centre-UCSC" type="button" class="btn btn-warning w-100">{{ $exam->medical->status }}</button></td>
+                      @elseif($exam->medical->status == "Declined")   
+                      <td class="text-center text-danger"><button data-toggle="popover"  data-placement="left" title="Request Declined" data-content="Your request has been declined due to following reason(s): {{ $exam->medical->declined_message }}" type="button" class="btn btn-danger w-100">{{ $exam->medical->status }}</button></td>                   
+                      @endif                      
+                    </tr>
+                    @endif
+                  @endforeach
+                </tbody>
+
+              </table>                  
+
+            </div>
+            
+          </div>
+        </div>
+        @endif
+        {{-- /SCHEDULED EXAMS--}}
         
         {{-- APPLY FOR EXAMS --}}
         <div class="col-12 mt-4 px-0">
@@ -149,7 +202,7 @@
         </div>
         {{-- /APPLY FOR EXAMS --}}
 
-        <!-- APPLIED EXAMS TABLE -->
+        {{-- APPLIED EXAMS TABLE --}}
         {{-- <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">Applied Exams</div>
@@ -192,7 +245,7 @@
           </div>
         </div> --}}
                 
-        <!-- SELECTED EXAMS TABLE-->
+        {{-- SELECTED EXAMS TABLE--}}
         @if(!$selected_exams->isEmpty())
         <div class="col-12 mt-4 px-0">
           <div class="card">
@@ -241,10 +294,10 @@
           </div>
         </div>
         @endif
-        <!-- /SELECTED EXAMS TABLE-->
+        {{-- /SELECTED EXAMS TABLE--}}
 
 
-        <!-- APPLIED EXAMS TABLE-->
+        {{-- APPLIED EXAMS TABLE--}}
         @if(!$applied_exams->isEmpty())
         <div class="col-12 mt-4 px-0">
           <div class="card">
@@ -289,9 +342,9 @@
           </div>
         </div>
         @endif
-        <!-- /APPLIED EXAMS TABLE-->
+        {{-- /APPLIED EXAMS TABLE--}}
 
-        <!-- HELD EXAMS TABLE -->
+        {{-- HELD EXAMS TABLE --}}
         @if(true)
         <div class="col-12 mt-4 px-0">
           <div class="card">
@@ -307,16 +360,22 @@
                           <div class="col-6 col-md-3 text-center pt-2">{{ $exam->subject->name }} ({{ $exam->type->name }})</div>
                           <div class="col-4 col-md-3 text-center pt-2">{{$exam->schedule->date}} ({{ \Carbon\Carbon::create($exam->schedule->start_time)->isoFormat('hh:mm A')}} - {{ \Carbon\Carbon::create($exam->schedule->end_time)->isoFormat('hh:mm A') }})</div>
                           @if(Auth::user()->hasPermission('student-exam-medical'))
-                          <div class="col-12 col-md-3 text-md-right">
-                            @if($exam->medical != null && $exam->medical->status=='Pending' )
+                          <div class="col-12 col-md-3 text-center">
+                            @if($exam->medical != null && $exam->medical->status=='Pending' && $exam->medical->type == 'reschedule')
+                              Reschedule Requested <span class="text-default">(Pending)</span> 
+                            @elseif($exam->medical != null && $exam->medical->status=='Approved' && $exam->medical->type == 'reschedule')
+                              Reschedule Requested <span class="text-success">(Approved)</span> 
+                            @elseif($exam->medical != null && $exam->medical->status=='Declined' && $exam->medical->type == 'reschedule')
+                              Reschedule Requested <span class="text-danger">(Declined)</span> <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}"><i class="fas fa-file-medical"></i> Reason to decline</button>
+                            @elseif($exam->medical != null && $exam->medical->status=='Pending' && $exam->medical->type == 'medical')
                               <button type="button" class="btn btn-outline-warning w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Issue Report Approval Pending</button>
-                            @elseif($exam->medical != null &&  $exam->medical->status=='Approved' )
+                            @elseif($exam->medical != null &&  $exam->medical->status=='Approved'  && $exam->medical->type == 'medical' )
                               <button type="button" class="btn btn-outline-success w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Issue Report Approved</button>
-                            @elseif($exam->medical != null &&  $exam->medical->status=='Declined' )
+                            @elseif($exam->medical != null &&  $exam->medical->status=='Declined'  && $exam->medical->type == 'medical' )
                               <button type="button" class="btn btn-outline-danger w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Issue Report Declined</button>
-                              @elseif($exam->medical != null &&  $exam->medical->status=='Resubmit' )
+                              @elseif($exam->medical != null &&  $exam->medical->status=='Resubmit' && $exam->medical->type == 'medical')
                               <button type="button" class="btn btn-outline-secondary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}">Resubmit Issue Report</button>
-                            @elseif(\Carbon\Carbon::now() <= \Carbon\Carbon::create($exam->schedule->date)->addDays(15))
+                            @elseif(\Carbon\Carbon::now() <= \Carbon\Carbon::create($exam->schedule->date)->addDays(15) )
                               <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse" data-target="#collapseAbsent_{{$exam->id}}" aria-expanded="true" aria-controls="collapseAbsent_{{$exam->id}}"><i class="fas fa-file-medical"></i> Report Issue</button>
                             @endif
                           </div>
@@ -327,10 +386,10 @@
                       <div id="collapseAbsent_{{$exam->id}}" class="collapse" aria-labelledby="heading_{{$exam->id}}" data-parent="#accordionAbsent_{{$exam->id}}">
                         <div class="card-body text-md-center border-top border-secondary">
                           <div class="row">
-                            <!-- <div class="col-12 col-md-4"> Date : {{ $exam->schedule->date }}</div>
+                            {{-- <div class="col-12 col-md-4"> Date : {{ $exam->schedule->date }}</div>
                             <div class="col-12 col-md-4"> Start Time : {{ $exam->schedule->start_time }}</div>
-                            <div class="col-12 col-md-4"> End Time : {{ $exam->schedule->end_time }}</div> -->
-                            @if($exam->medical != null && $exam->medical->status=='Pending' )
+                            <div class="col-12 col-md-4"> End Time : {{ $exam->schedule->end_time }}</div> --}}
+                            @if($exam->medical != null && $exam->medical->status=='Pending'  && $exam->medical->type == 'medical' )
 
                               <div class="col-12">
                                 <div class="alert alert-light" role="alert">
@@ -341,7 +400,7 @@
                               </div>
 
 
-                            @elseif($exam->medical != null && $exam->medical->status=='Approved' )
+                            @elseif($exam->medical != null && $exam->medical->status=='Approved'  && $exam->medical->type == 'medical')
 
                               <div class="col-12">
                                 <div class="alert alert-success" role="alert">
@@ -353,7 +412,7 @@
                               </div>
 
 
-                            @elseif($exam->medical != null && $exam->medical->status=='Declined' )    
+                            @elseif($exam->medical != null && $exam->medical->status=='Declined'  && $exam->medical->type == 'medical' )    
                             
                               <div class="col-12">
                                 <div class="alert alert-danger" role="alert">
@@ -364,7 +423,7 @@
                                 </div>
                               </div>
 
-                            @elseif($exam->medical != null && $exam->medical->status=='Resubmit')
+                            @elseif($exam->medical != null && $exam->medical->status=='Resubmit'  && $exam->medical->type == 'medical' )
                               <div class="col-12">
                                 <div class="alert alert-info" role="alert">
                                   {{-- <h4 class="alert-heading">Declined Reason</h4> --}}
@@ -401,9 +460,16 @@
                                 </button>
                               </div>
                             @else
-                              <div class="col-12">
+                            @if($exam->medical != null && $exam->medical->status=='Declined' && $exam->medical->type == 'reschedule')
+                            <div class="col-12">
+                              <div class="alert alert-info" role="alert">
+                                <p><b>Reason of Decline the Reschedule Request: </b>{{$exam->medical->declined_message}}</p>
+                              </div>
+                            </div>
+                            @else
+                              <div class="col-12">                                
                                 <form id="{{$exam->id}}-medicalUploadform">
-                                  <div class="form-group ">
+                                  <div class="form-group ">                                
                                     <label for="inputPaidAmount" class="col-12 col-form-label">Reason</label>
                                     <div class="col-12">
                                       <input type="text" class="form-control" id="{{ $exam->id }}-reason" name="reason">
@@ -425,7 +491,8 @@
                                   Upload
                                   <span id="{{$exam->id}}-spinnermedicalUpload" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
                                 </button>
-                              </div>                              
+                              </div> 
+                              @endif                             
                             @endif
                             {{-- <div class="col-12 offset-md-4 col-md-4 my-3">
                               <button type="button" class="btn btn-outline-primary w-100" data-tooltip="tooltip" data-placement="bottom" title="Apply Exam" onclick="window.open('/portal/student/payment')"><i class="far fa-hand-point-right"></i> Apply</button>
@@ -461,11 +528,11 @@
           </div>
         </div>
         @endif
-        <!-- /HELD EXAMS TABLE-->
+        {{-- /HELD EXAMS TABLE--}}
 
       </div>
     </div>
-    <!-- /CONTENT -->
+    {{-- /CONTENT --}}
     @include('portal.student.exams.scripts')
     @include('portal.student.exams.modal')
 @endsection

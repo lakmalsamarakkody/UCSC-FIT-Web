@@ -39,6 +39,7 @@
                 <form id="requestRescheduleForm">
 
                     <label class="col-form-label">Select the schedules you want to request to reschedule</label>
+                    <p>If you cannot see any schedules below, you cannot request a reschedule</p>
 
                     <div class="form-group ">
                     <input type="checkbox" id="selectAllSchedules"/>
@@ -49,7 +50,17 @@
 
                         <tbody>
                             @foreach ($scheduled_exams as $exam)
-                                @if(\Carbon\Carbon::create($exam->schedule->date) >= \Carbon\Carbon::now()->addDays(2))
+                              @if($exam->schedule->date > date('Y-m-d'))
+                                @if($exam->medical != null)
+                                <tr>
+                                    <td>Requested</td>
+                                    <td class="text-center">FIT {{ $exam->subject->code }}</td>
+                                    <td class="text-center">{{ $exam->subject->name }}</td>
+                                    <td class="text-center">{{ $exam->type->name }}</td>
+                                    <td class="text-center">{{ $exam->schedule->date }}</td>
+                                    <td class="text-center">{{ $exam->schedule->start_time }} - {{ $exam->schedule->end_time }}</td>
+                                </tr>                                
+                                @elseif(\Carbon\Carbon::create($exam->schedule->date) >= \Carbon\Carbon::now()->addDays(2))
                                 <tr>
                                     <td><div class="input-group"><input type="checkbox" class="selected-schedules" name="requestReschduleCheck[]" value="{{ $exam->id }}" /></div></td>
                                     <td class="text-center">FIT {{ $exam->subject->code }}</td>
@@ -68,6 +79,7 @@
                                     <td class="text-center">{{ $exam->schedule->start_time }} - {{ $exam->schedule->end_time }}</td>
                                 </tr>
                                 @endif
+                              @endif
                             @endforeach
                         </tbody>
 
