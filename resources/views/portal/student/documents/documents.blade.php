@@ -43,7 +43,7 @@
           {{-- /DOCUMENT APPROVAL PENDING --}}
 
           {{-- SUBMIT HARD COPIES --}}
-          <div class="col-12 px-0">
+          {{-- <div class="col-12 px-0">
             <div class="alert alert-danger" role="alert">
               <h3 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> POST THE FOLLOWING DOCUMENTS THROUGH REGISTERED-POST </h3>
               <p>Make sure to post your </p>
@@ -65,7 +65,7 @@
                 Sri Lanka.
               </p>
             </div>
-          </div>
+          </div> --}}
           {{-- /SUBMIT HARD COPIES --}}
         
         {{-- DOCUMENTS NOT SUBMITTED --}}
