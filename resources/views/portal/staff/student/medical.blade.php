@@ -17,7 +17,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb ">
               <li class="breadcrumb-item"><a href="{{ url('/portal/staff/') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Medicals</li>
+              <li class="breadcrumb-item active" aria-current="page">Exam Issues</li>
             </ol>
           </nav>
 
@@ -33,7 +33,7 @@
         <!-- MEDICALS LIST -->
         <div class="col-12 md-5">
           <div class="card">
-            <div class="card-header">Medical Submitted Students</div>
+            <div class="card-header">Exam Issues Report Submitted Students</div>
             <div class="card-body">
               @if($medicals->isEmpty())
                 <div class="alert alert-info" role="alert">No results found!</div>

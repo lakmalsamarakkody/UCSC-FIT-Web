@@ -145,7 +145,7 @@
                 <div class="card-title text-center m-0">{{ $revieweExamsToScheduleCount }}</div>
               </div>
               <div class="card-header bg-transparent text-center p-0"><h1>Assign <br/> Exam Schedules </h1></div>
-              <div class="card-footer bg-transparent text-right">@if(Auth::user()->hasPermission('staff-dashboard-exam-assign-schedules-view') && $revieweExamsToScheduleCount>0 ) View <i class="fa fa-arrow-alt-circle-right">@else <i>&nbsp;</i>@endif</div>
+              <div class="card-footer bg-transparent text-right">@if(Auth::user()->hasPermission('staff-dashboard-exam-assign-schedules-view') && $revieweExamsToScheduleCount>0 ) View <i class="fa fa-arrow-alt-circle-right">@else <i>&nbsp;@endif</i></div>
             </div>
           </a>
         </div>
@@ -158,14 +158,14 @@
               <div class="card-body p-0 my-0 ">
                 <div class="card-title text-center m-0">{{ $medicalReviewCount }}</div>
               </div>
-              <div class="card-header bg-transparent text-center p-0"><h1>Review <br> Medicals </h1></div>
+              <div class="card-header bg-transparent text-center p-0"><h1>Exam <br> Issues </h1></div>
               <div class="card-footer bg-transparent text-right">@if(Auth::user()->hasPermission('staff-dashboard-exam-review-medicals-view') && $medicalReviewCount>0 ) View <i class="fa fa-arrow-alt-circle-right">@else <i>&nbsp;@endif</i></div>
             </div>
           </a>
         </div>
 
         <div class="col-lg-2 col-md-6 p-1">
-          @if(Auth::user()->hasPermission('staff-dashboard-exam-review-reschedules-view') && $rescheduleReviewCount>0 )
+          @if(Auth::user()->hasPermission('staff-dashboard-exam-review-reschedule-requests-view') && $rescheduleReviewCount>0 )
           <a href="{{ route('student.exams.reschedule.requests') }}">
           @endif
             <div class="card h-100 card-dash shadow yellow-none bg-main-primary">
@@ -173,7 +173,7 @@
                 <div class="card-title text-center m-0">{{ $rescheduleReviewCount }}</div>
               </div>
               <div class="card-header bg-transparent text-center p-0"><h1>Reschedule <br> Requests </h1></div>
-              <div class="card-footer bg-transparent text-right">@if(Auth::user()->hasPermission('staff-dashboard-exam-review-reschedules-view') && $rescheduleReviewCount>0 ) View <i class="fa fa-arrow-alt-circle-right">@else <i>&nbsp;@endif</i></div>
+              <div class="card-footer bg-transparent text-right">@if(Auth::user()->hasPermission('staff-dashboard-exam-review-reschedule-requests-view') && $rescheduleReviewCount>0 ) View <i class="fa fa-arrow-alt-circle-right">@else <i>&nbsp;@endif</i></div>
             </div>
           </a>
         </div>
