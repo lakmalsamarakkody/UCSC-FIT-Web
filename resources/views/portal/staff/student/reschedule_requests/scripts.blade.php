@@ -1,13 +1,13 @@
 <script type="text/javascript">
 
-// INVOKE MEDICAL MODAL
+// INVOKE RESCHEDULE REQUEST DETAIL MODAL
 view_modal_reschedule_request =(payment_id) => {
 
     // Form Payload
     var formData = new FormData();
     formData.append('payment_id', payment_id);
 
-    // Get medical details controller
+    // Get reschedule request details controller
     $.ajax({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         url: "{{ route('student.exams.reschedule.request.details') }}",
@@ -86,7 +86,6 @@ view_modal_reschedule_request =(payment_id) => {
                     $('#imgExamPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/reschedules/'+data['student']['id']+'/'+data['payment']['image']+'")'); 
                     
                     $('#btnApprovePayment').attr('onclick', 'approve_payment('+data['payment']['id']+')'); 
-                    $('#btnDeclineResubmit').attr('onclick', 'resubmission_enable_decline('+data['payment']['id']+')'); 
                     $('#btnDeclinePayment').attr('onclick', 'decline_payment('+data['payment']['id']+')'); 
 
                     $('#modal-view-reschedule-request').modal('show');
@@ -101,7 +100,7 @@ view_modal_reschedule_request =(payment_id) => {
         }
     });
 }
-// /INVOKE MEDICAL MODAL
+// /INVOKE RESCHEDULE REQUEST DETAIL MODAL
 
 // APPROVE PAYMENT
 approve_payment = (payment_id) => {
@@ -120,7 +119,7 @@ approve_payment = (payment_id) => {
             // Approve medical controller
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                url: "{{ route('student.exams.medical.approve') }}",
+                url: "{{ route('student.exams.reschedule.request.approve') }}",
                 type: 'post',
                 data: formData,
                 processData: false,
@@ -132,7 +131,7 @@ approve_payment = (payment_id) => {
                     $('#btnDeclinePayment').attr('disabled','disabled');    
                 },
                 success: function(data){
-                    console.log('Approve medical ajax success.');
+                    console.log('Approve reschedule request ajax success.');
                     $("#spinnerBtnApprovePayment").addClass('d-none');
                     $('#btnApprovePayment').removeAttr('disabled', 'disabled');
                     $('#btnDeclineResubmit').removeAttr('disabled','disabled'); 
@@ -140,7 +139,7 @@ approve_payment = (payment_id) => {
                     if (data['status'] == 'success'){
                         SwalDoneSuccess.fire({
                             title: 'Approved!',
-                            text: 'Medical approved successfully',
+                            text: 'Reschedule request approved successfully',
                         }).then((result) => {
                             if(result.isConfirmed) {
                                 location.reload();
@@ -149,18 +148,18 @@ approve_payment = (payment_id) => {
                     }
                     else {
                         SwalSystemErrorDanger.fire({
-                            title: 'Medical Approval Process Failed!',
+                            title: 'Reschedule request Approval Process Failed!',
                         })
                     }
                 },
                 error: function(err) {
-                    console.log('Approve medical ajax error');
+                    console.log('Approve reschedule request ajax error');
                     $("#spinnerBtnApprovePayment").addClass('d-none');
                     $('#btnApprovePayment').removeAttr('disabled', 'disabled');
                     $('#btnDeclineResubmit').removeAttr('disabled','disabled'); 
                     $('#btnDeclinePayment').removeAttr('disabled','disabled');  
                     SwalSystemErrorDanger.fire({
-                        title: 'Medical Approval Process Failed!',
+                        title: 'Reschedule request Approval Process Failed!',
                     })
                 }
             });
@@ -168,7 +167,7 @@ approve_payment = (payment_id) => {
         else {
             SwalNotificationWarningAutoClose.fire({
                 title: 'Aborted!',
-                text: 'Medical approval process aborted.',
+                text: 'Reschedule request approval process aborted.',
             })
         }
     })
@@ -176,41 +175,58 @@ approve_payment = (payment_id) => {
 // /APPROVE PAYMENT
 
 // DECLINE PAYMENT
-decline_medical = (payment_id) => {
+decline_payment = (payment_id) => {
+$(document).off('focusin.modal');
     SwalQuestionDanger.fire({
-        title: "Are you sure ?",
-        text: "The medical will be declined",
-        confirmButtonText: "Yes, Decline!",
+        title: "Reason to Decline ?",
+        input: 'textarea',
+        inputLabel: 'Message',
+        inputPlaceholder: 'Type your message here...',
+        inputAttributes: {
+            'aria-label': 'Type your message here'
+        },
+        inputValidator: (value) => {
+            if(!value) {
+                return 'You need to write something!'
+            }
+        },
+        timer: false,
+        showCancelButton: true,
+        confirmButtonText: "Decline!",
     })
     .then((result) => {
         if(result.isConfirmed) {
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                url: "{{ route('student.exams.medical.decline') }}",
+                url: "{{ route('student.exams.reschedule.request.decline') }}",
                 type: 'post',
-                data: {'payment_id': payment_id},
+                data: {'message': result.value,'payment_id': payment_id},
                 beforeSend: function() {
-                    $("#spinnerBtnDeclineMedical").removeClass('d-none');
-                    $('#btnDeclineMedical').attr('disabled', 'disabled');
+                    $("#spinnerBtnDeclinePayment").removeClass('d-none');
+                    $('#btnApprovePayment').attr('disabled','disabled'); 
+                    $('#btnDeclineResubmit').attr('disabled','disabled'); 
+                    $('#btnDeclinePayment').attr('disabled','disabled');   
                     Swal.showLoading();
                 },
                 success: function(data) {
-                    console.log('Success in decline medical ajax.');
-                    $("#spinnerBtnDeclineMedical").addClass('d-none');
-                    $('#btnDeclineMedical').removeAttr('disabled', 'disabled');
+                    console.log('Success in decline reschedule request ajax.');
+                    $("#spinnerBtnDeclinePayment").addClass('d-none');
+                    $('#btnApprovePayment').removeAttr('disabled', 'disabled');
+                    $('#btnDeclineResubmit').removeAttr('disabled','disabled'); 
+                    $('#btnDeclinePayment').removeAttr('disabled','disabled'); 
                     Swal.hideLoading();
                     if(data['status'] == 'error') {
-                        console.log('Error in decline medical.');
+                        console.log('Error in decline reschedule request.');
                         SwalSystemErrorDanger.fire({
                             title: 'Decline Failed!',
                             text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
                         })
                     }
                     else if(data['status'] == 'success') {
-                        console.log('Success in decline medical.');
+                        console.log('Success in decline reschedule request.');
                         SwalDoneSuccess.fire({
                             title: 'Declined!',
-                            text: 'Medical has been Declined.'
+                            text: 'Reschedule request has been Declined.'
                         })
                         .then((result2) => {
                             if(result2.isConfirmed) {
@@ -220,9 +236,11 @@ decline_medical = (payment_id) => {
                     }
                 },
                 error: function(err) {
-                    console.log('Error in decline medical ajax.');
-                    $("#spinnerBtnDeclineMedical").addClass('d-none');
-                    $('#btnDeclineMedical').removeAttr('disabled', 'disabled');
+                    console.log('Error in decline reschedule request ajax.');
+                    $("#spinnerBtnDeclinePayment").addClass('d-none');
+                    $('#btnApprovePayment').removeAttr('disabled', 'disabled');
+                    $('#btnDeclineResubmit').removeAttr('disabled','disabled'); 
+                    $('#btnDeclinePayment').removeAttr('disabled','disabled'); 
                     SwalSystemErrorDanger.fire();
                 }
             });
@@ -230,7 +248,7 @@ decline_medical = (payment_id) => {
         else {
             SwalNotificationWarningAutoClose.fire({
                 title: 'Cancelled!',
-                text: 'Medical decline process aborted.',
+                text: 'Reschedule request decline process aborted.',
             })
         }
     });
@@ -262,31 +280,35 @@ resubmission_enable_decline = (payment_id) => {
         if(result.isConfirmed) {
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                url: "{{ route('student.exams.medical.resubmit.decline') }}",
+                url: "{{ route('student.exams.reschedule.request.resubmit.decline') }}",
                 type: 'post',
                 data: {'message': result.value, 'payment_id': payment_id},
                 beforeSend: function() {
                     $("#spinnerBtnDeclineResubmit").removeClass('d-none');
-                    $('#btnDeclineResubmit').attr('disabled', 'disabled');
+                    $('#btnApprovePayment').attr('disabled','disabled'); 
+                    $('#btnDeclineResubmit').attr('disabled','disabled'); 
+                    $('#btnDeclinePayment').attr('disabled','disabled'); 
                     Swal.showLoading();
                 },
                 success: function(data) {
-                    console.log('Success in decline medical with resubmit ajax.');
+                    console.log('Success in decline reschedule request with resubmit ajax.');
                     $("#spinnerBtnDeclineResubmit").addClass('d-none');
-                    $('#btnDeclineResubmit').removeAttr('disabled', 'disabled');
+                    $('#btnApprovePayment').removeAttr('disabled', 'disabled');
+                    $('#btnDeclineResubmit').removeAttr('disabled','disabled'); 
+                    $('#btnDeclinePayment').removeAttr('disabled','disabled'); 
                     Swal.hideLoading();
                     if(data['status'] == 'error') {
-                        console.log('Error in decline medical.');
+                        console.log('Error in decline reschedule request with resubmit.');
                         SwalSystemErrorDanger.fire({
                             title: 'Decline Failed!',
                             text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
                         })
                     }
                     else if(data['status'] == 'success') {
-                        console.log('Success in decline medical with resubmit.');
+                        console.log('Success in decline reschedule request with resubmit.');
                         SwalDoneSuccess.fire({
                             title: 'Declined!',
-                            text: 'Medical has been Declined.'
+                            text: 'Reschedule request has been Declined.'
                         })
                         .then((result1) => {
                             if(result1.isConfirmed) {
@@ -296,9 +318,11 @@ resubmission_enable_decline = (payment_id) => {
                     }
                 },
                 error: function(err) {
-                    console.log('Error in decline medical with resubmit ajax.');
+                    console.log('Error in decline reschedule request with resubmit ajax.');
                     $("#spinnerBtnDeclineResubmit").addClass('d-none');
-                    $('#btnDeclineResubmit').removeAttr('disabled', 'disabled');
+                    $('#btnApprovePayment').removeAttr('disabled', 'disabled');
+                    $('#btnDeclineResubmit').removeAttr('disabled','disabled'); 
+                    $('#btnDeclinePayment').removeAttr('disabled','disabled'); 
                     SwalSystemErrorDanger.fire();
                 }
             });
@@ -306,7 +330,7 @@ resubmission_enable_decline = (payment_id) => {
         else {
             SwalNotificationWarningAutoClose.fire({
                 title: 'Cancelled!',
-                text: 'Medical decline process aborted.',
+                text: 'Reschedule request decline process aborted.',
             })
         }
     });

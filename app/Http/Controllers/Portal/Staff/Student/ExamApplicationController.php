@@ -441,5 +441,52 @@ class ExamApplicationController extends Controller
         $medical = Medical::where('payment_id', $request->payment_id)->first();
         return response()->json(['status'=> 'success', 'student'=> $student, 'payment'=>$payment, 'exams'=>$exams, 'medical'=>$medical]);
     }
-    // /LOAD MEDICAL MODAL
+    // /LOAD  RESCHEDULE REQUEST MODAL
+
+    // APPROVE  RESCHEDULE REQUEST
+    public function approveRescheduleRequest(Request $request)
+    {
+        $payment = Payment::where('id', $request->payment_id)->first();
+        $medical = Medical::where('payment_id', $request->payment_id);
+        if($medical->update(['status'=> 'Approved']) && $payment->update(['status' => 'Approve'])):
+            $student = Student::where('id', Payment::where('id', $request->payment_id)->first()->student_id)->first();
+            $details = [
+                'subject' => 'Exam Reschedule Request Approved',
+                'title' => 'Exam Reschedule Request Payment Approved',
+                'body' => 'Exam Reschedule Request Payment Approved! <br> You will ne notified when it is re-scheduled',
+                'color' => '#1b672a'
+            ];
+            Mail::to($student->user->email)->queue( new NotificationEmail($details) );
+            return response()->json(['status'=>'success']);
+        endif;
+        return response()->json(['status'=>'error']);
+    }
+    // /APPROVE  RESCHEDULE REQUEST
+
+    // DECLINE  RESCHEDULE REQUEST
+    public function declineRescheduleRequest(Request $request)
+    {
+        $payment = Payment::where('id', $request->payment_id)->first();
+        $medical = Medical::where('payment_id', $request->payment_id);
+        if($medical->update(['status'=> 'Declined', 'declined_message' => $request->message]) && $payment->update(['status' => 'Declined'])):
+            $student = Student::where('id', Payment::where('id', $request->payment_id)->first()->student_id)->first();
+            if($request->message != NULL):
+                $decline_msg = $request->message;
+            else:
+                $decline_msg = '';
+            endif;
+            $details = [
+                'subject' => 'Exam Reschedule Request Declined',
+                'title' => 'Exam Reschedule Request Payment Declined',
+                'body' => $decline_msg,
+                'color' => '#821919'
+            ];
+            Mail::to($student->user->email)->queue( new NotificationEmail($details) );
+            return response()->json(['status'=>'success']);
+        endif;
+        return response()->json(['status'=>'error']);
+    }
+    // /DECLINE  RESCHEDULE REQUEST
+
+    // /RESCHEDULE REQUESTS
 }

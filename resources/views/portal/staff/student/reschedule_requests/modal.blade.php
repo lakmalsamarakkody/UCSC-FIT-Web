@@ -128,11 +128,6 @@
                               </div>
                               @endif
                               @if(Auth::user()->hasPermission('staff-dashboard-reschedule-request-payment-decline'))
-                              <div id="divBtnDeclineResubmit" class="btn-group col-xl-4 mt-1">
-                                  <button type="button" class="btn btn-primary form-control" id="btnDeclineResubmit">Decline to Resubmit<span id="spinnerBtnDeclineResubmit" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
-                              </div>
-                              @endif
-                              @if(Auth::user()->hasPermission('staff-dashboard-reschedule-request-payment-decline'))
                               <div id="divBtnDeclinePayment" class="btn-group col-xl-3 mt-1">
                                   <button type="button" class="btn btn-warning form-control" id="btnDeclinePayment">Decline<span id="spinnerBtnDeclinePayment" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>
                               </div>
