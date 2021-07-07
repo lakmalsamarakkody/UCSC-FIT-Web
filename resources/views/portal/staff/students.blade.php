@@ -33,7 +33,21 @@
 
         <div class="col-lg-12">
          <div class="card">
-          <div class="card-header">Filters</div>
+          <div class="card-header">
+            Filters
+            @if(Auth::user()->hasPermission("staff-student-downloadStdList"))
+            <div class="btn-group  float-right" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle border-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgb(14, 97, 25) !important">
+                <i class="fa fa-file-download"></i> student list
+              </button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item text-capitalize" href="{{ url('/portal/staff/student/list/export/lastday') }}">Last Day</a>
+                <a class="dropdown-item text-capitalize" href="{{ url('/portal/staff/student/list/export/lastweek') }}">Last Week</a>
+                <a class="dropdown-item text-capitalize" href="{{ url('/portal/staff/student/list/export/lastmonth') }}">Last Month</a>
+              </div>
+            </div>
+            @endif
+          </div>
           <div class="card-body">
             <form>
               <div class="form-row">
