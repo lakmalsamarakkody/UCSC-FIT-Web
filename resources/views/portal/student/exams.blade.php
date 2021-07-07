@@ -96,11 +96,11 @@
                       <td class="text-center">{{ $exam->schedule->date }}</td>
                       <td class="text-center">{{ $exam->schedule->start_time }} - {{ $exam->schedule->end_time }}</td>
                       @if($exam->medical->status == "Approved")
-                      <td class="text-center text-success"><button data-toggle="popover"  data-placement="left" title="Request Approved" data-content="Wait until we reschedule your exam. If not rescheduled withing two weeks, please contact e-Learning Centre-UCSC" type="button" class="btn btn-success w-100">{{ $exam->medical->status }}</button></td>
+                      <td class="text-center text-success"><button data-toggle="popover"  data-placement="left" title="Wait until we reschedule your exam. If not rescheduled withing two weeks, please contact e-Learning Centre-UCSC" type="button" class="btn btn-success w-100">{{ $exam->medical->status }}</button></td>
                       @elseif($exam->medical->status == "Pending")
-                      <td class="text-center text-default"><button data-toggle="popover"  data-placement="left" title="Request Pending" data-content="Your request is being processed. Please wait! If not rescheduled withing two weeks, please contact e-Learning Centre-UCSC" type="button" class="btn btn-warning w-100">{{ $exam->medical->status }}</button></td>
+                      <td class="text-center text-default"><button data-toggle="popover"  data-placement="left" title="Your request is being processed. Please wait! If not rescheduled withing two weeks, please contact e-Learning Centre-UCSC" type="button" class="btn btn-warning w-100">{{ $exam->medical->status }}</button></td>
                       @elseif($exam->medical->status == "Declined")   
-                      <td class="text-center text-danger"><button data-toggle="popover"  data-placement="left" title="Request Declined" data-content="Your request has been declined due to following reason(s): {{ $exam->medical->declined_message }}" type="button" class="btn btn-danger w-100">{{ $exam->medical->status }}</button></td>                   
+                      <td class="text-center text-danger"><button data-toggle="popover"  data-placement="left" title="Your exam is still active on the given schedule. Your request has been declined due to following reason(s):" data-content="{{ $exam->medical->declined_message }}." type="button" class="btn btn-danger w-100">{{ $exam->medical->status }}</button></td>                   
                       @endif                      
                     </tr>
                     @endif
