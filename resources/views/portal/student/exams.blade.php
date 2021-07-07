@@ -42,7 +42,7 @@
 
                 <tbody>
                   @foreach ($scheduled_exams as $exam)
-                    @if($exam->schedule->date > date('Y-m-d') && $exam->medical==null)
+                    @if($exam->schedule->date > date('Y-m-d') && ($exam->medical==null || ($exam->medical != null && $exam->medical->status == "Declined")))
                     <tr>
                       <td class="text-center">FIT {{ $exam->subject->code }}</td>
                       <td class="text-center">{{ $exam->subject->name }}</td>
