@@ -18,6 +18,12 @@ use function PHPUnit\Framework\isNull;
 
 class ExamAssignController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('revalidate');
+        $this->middleware('staff.auth');
+    }
     public function index()
     {
         $today = Carbon::today();
