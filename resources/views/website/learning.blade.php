@@ -30,7 +30,7 @@
             <div class="col-lg-7 content order-lg-1 order-1">
                 <h2 class="title">Virtual Learning Environment</h2>
                 <br/>
-                <p><b>All registered FIT students will receive a registration number and a password to access the online learning management system <a href="http://fit.bit.lk/vle">(FITVLE)</b> </p>
+                <p><b>All registered FIT students will receive a registration number and a password to access the online learning management system <a href="http://fit.bit.lk/vle">(FITVLE)</a>.</b> </p>
                 
                 <p>Once your registration is confirmed, you will be notified with login details to an online learning environment <a href="http://fit.bit.lk/vle">(FITVLE)</a>. It is mandatory to include a valid email address when you register for the FIT programme. If you have any problem, you can contact the e-Learning Centre of UCSC to get more information regarding your registration.
                     <br/><b>Tel: <a href="tel:+94112591080">+94 11 2591080 </a></b>(Working Hours Only) 
