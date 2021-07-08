@@ -26,8 +26,8 @@ class AddColumnsToExamSchedulesTable extends Migration
      */
     public function down()
     {
-        Schema::table('exam_schedules', function (Blueprint $table) {
-            //
+        Schema::table('exam_schedules', function (Blueprint $table) {            
+            $table->dropColumn(['lab', 'lab_capacity']);
         });
     }
 }
