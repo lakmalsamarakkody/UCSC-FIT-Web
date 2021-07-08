@@ -20,11 +20,11 @@ view_modal_medical =(medical_id) => {
             $('#spinnerBtnViewModalAppliedMedical-'+medical_id).removeClass('d-none');
         },
         success: function(data) {
-            console.log('Success in get medical details ajax.');
             $('#btnViewModalAppliedMedical-'+medical_id).removeAttr('disabled', 'disabled');
             $('#spinnerBtnViewModalAppliedMedical-'+medical_id).addClass('d-none');
+            console.log('Success in get exam issue report details ajax.');
             if(data['status'] == 'success') {
-                console.log('Success in get medical details.');
+                console.log('Success in get exam issue report details.');
                 //Student Details
                 $('#spanStudentName').html(data['student']['initials'] + ' ' + data['student']['last_name']);
                 $('#spanRegNumber').html(data['student']['reg_no']);
@@ -47,7 +47,7 @@ view_modal_medical =(medical_id) => {
             }
         },
         error: function(err) {
-            console.log('Error in get medical details ajax.');
+            console.log('Error in get exam issue report details ajax.');
             $('#btnViewModalAppliedMedical-'+medical_id).removeAttr('disabled', 'disabled');
             $('#spinnerBtnViewModalAppliedMedical-'+medical_id).addClass('d-none');
             SwalSystemErrorDanger.fire();
@@ -83,13 +83,13 @@ approve_medical = () => {
                     $('#btnApproveMedical').attr('disabled','disabled');    
                 },
                 success: function(data){
-                    console.log('Approve medical ajax success.');
+                    console.log('Approve exam issue report ajax success.');
                     $("#spinnerBtnApproveMedical").addClass('d-none');
                     $('#btnApproveMedical').removeAttr('disabled', 'disabled');
                     if (data['status'] == 'success'){
                         SwalDoneSuccess.fire({
                             title: 'Approved!',
-                            text: 'Medical approved successfully',
+                            text: 'Exam issue report approved successfully',
                         }).then((result) => {
                             if(result.isConfirmed) {
                                 location.reload();
@@ -98,16 +98,16 @@ approve_medical = () => {
                     }
                     else {
                         SwalSystemErrorDanger.fire({
-                            title: 'Medical Approval Process Failed!',
+                            title: 'Exam issue report Approval Process Failed!',
                         })
                     }
                 },
                 error: function(err) {
-                    console.log('Approve medical ajax error');
+                    console.log('Approve exam issue report ajax error');
                     $("#spinnerBtnApproveMedical").addClass('d-none');
                     $('#btnApproveMedical').removeAttr('disabled', 'disabled');
                     SwalSystemErrorDanger.fire({
-                        title: 'Medical Approval Process Failed!',
+                        title: 'Exam issue report Approval Process Failed!',
                     })
                 }
             });
@@ -115,7 +115,7 @@ approve_medical = () => {
         else {
             SwalNotificationWarningAutoClose.fire({
                 title: 'Aborted!',
-                text: 'Medical approval process aborted.',
+                text: 'Exam issue report approval process aborted.',
             })
         }
     })
@@ -126,7 +126,7 @@ approve_medical = () => {
 decline_medical = () => {
     SwalQuestionDanger.fire({
         title: "Are you sure ?",
-        text: "The medical will be declined",
+        text: "The exam issue report will be declined",
         confirmButtonText: "Yes, Decline!",
     })
     .then((result) => {
@@ -142,22 +142,22 @@ decline_medical = () => {
                     Swal.showLoading();
                 },
                 success: function(data) {
-                    console.log('Success in decline medical ajax.');
+                    console.log('Success in decline exam issue report ajax.');
                     $("#spinnerBtnDeclineMedical").addClass('d-none');
                     $('#btnDeclineMedical').removeAttr('disabled', 'disabled');
                     Swal.hideLoading();
                     if(data['status'] == 'error') {
-                        console.log('Error in decline medical.');
+                        console.log('Error in decline exam issue report.');
                         SwalSystemErrorDanger.fire({
                             title: 'Decline Failed!',
                             text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
                         })
                     }
                     else if(data['status'] == 'success') {
-                        console.log('Success in decline medical.');
+                        console.log('Success in decline exam issue report.');
                         SwalDoneSuccess.fire({
                             title: 'Declined!',
-                            text: 'Medical has been Declined.'
+                            text: 'Exam issue report has been Declined.'
                         })
                         .then((result2) => {
                             if(result2.isConfirmed) {
@@ -167,7 +167,7 @@ decline_medical = () => {
                     }
                 },
                 error: function(err) {
-                    console.log('Error in decline medical ajax.');
+                    console.log('Error in decline exam issue report ajax.');
                     $("#spinnerBtnDeclineMedical").addClass('d-none');
                     $('#btnDeclineMedical').removeAttr('disabled', 'disabled');
                     SwalSystemErrorDanger.fire();
@@ -177,7 +177,7 @@ decline_medical = () => {
         else {
             SwalNotificationWarningAutoClose.fire({
                 title: 'Cancelled!',
-                text: 'Medical decline process aborted.',
+                text: 'Exam issue report decline process aborted.',
             })
         }
     });
@@ -218,22 +218,22 @@ resubmission_enable_decline = () => {
                     Swal.showLoading();
                 },
                 success: function(data) {
-                    console.log('Success in decline medical with resubmit ajax.');
+                    console.log('Success in decline exam issue report with resubmit ajax.');
                     $("#spinnerBtnDeclineResubmit").addClass('d-none');
                     $('#btnDeclineResubmit').removeAttr('disabled', 'disabled');
                     Swal.hideLoading();
                     if(data['status'] == 'error') {
-                        console.log('Error in decline medical.');
+                        console.log('Error in decline exam issue report with resubmit ajax.');
                         SwalSystemErrorDanger.fire({
                             title: 'Decline Failed!',
                             text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
                         })
                     }
                     else if(data['status'] == 'success') {
-                        console.log('Success in decline medical with resubmit.');
+                        console.log('Success in decline exam issue report with resubmit.');
                         SwalDoneSuccess.fire({
                             title: 'Declined!',
-                            text: 'Medical has been Declined.'
+                            text: 'Exam issue report has been Declined.'
                         })
                         .then((result1) => {
                             if(result1.isConfirmed) {
@@ -243,7 +243,7 @@ resubmission_enable_decline = () => {
                     }
                 },
                 error: function(err) {
-                    console.log('Error in decline medical with resubmit ajax.');
+                    console.log('Error in decline exam issue report with resubmit ajax.');
                     $("#spinnerBtnDeclineResubmit").addClass('d-none');
                     $('#btnDeclineResubmit').removeAttr('disabled', 'disabled');
                     SwalSystemErrorDanger.fire();
@@ -253,7 +253,7 @@ resubmission_enable_decline = () => {
         else {
             SwalNotificationWarningAutoClose.fire({
                 title: 'Cancelled!',
-                text: 'Medical decline process aborted.',
+                text: 'Exam issue report decline process aborted.',
             })
         }
     });

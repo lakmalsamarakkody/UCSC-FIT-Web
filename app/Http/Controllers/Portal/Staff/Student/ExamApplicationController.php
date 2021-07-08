@@ -67,12 +67,23 @@ class ExamApplicationController extends Controller
     // REVIEW MEDICALS
     public function reviewMedicals()
     {
-        $medicals = Medical::where('status', 'Pending')->orderBy('created_at', 'asc')->get();
+        $medicals = Medical::where('status', 'Pending')->where('type', 'medical')->orderBy('created_at', 'asc')->get();
         return view('portal/staff/student/medical', [
             'medicals'=> $medicals
         ]);
     }
     // /REVIEW MEDICALS
+
+    // REVIEW RESCHEDULE REQUESTS
+    public function reviewRescheduleRequests()
+    {
+        // $medicals = Medical::where('status', 'Pending')->where('type', 'reschedule')->orderBy('created_at', 'asc')->get();
+        $payments = Payment::where('status', null)->where('type_id', 3)->get();
+        return view('portal/staff/student/reschedule_requests', [
+            'payments'=> $payments
+        ]);
+    }
+    // /REVIEW RESCHEDULE REQUESTS
 
     // REVIEW EXAMS TO RESCHEDULE
     public function reviewExamsToReschedule()
@@ -414,4 +425,74 @@ class ExamApplicationController extends Controller
     // /RESCHEDULE
     // /RESCHEDULE EXAMS
 
+
+    // RESCHEDULE REQUESTS
+    // LOAD RESCHEDULE REQUEST MODAL
+    public function getRescheduleRequestDetails(Request $request)
+    {
+        $medicals = Medical::where('payment_id', $request->payment_id)->select('student_exam_id')->get();
+        $exams = hasExam::whereIn('id',$medicals)->addSelect([
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id', 'subjects.id'),
+            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id'),
+            'date'=> Schedule::select('date')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
+            'time'=> Schedule::select('start_time')->whereColumn('exam_schedule_id', 'exam_schedules.id'),
+        ])->get();
+        $payment = Payment::where('id',$request->payment_id)->addSelect([
+            'bank'=> Bank::select('name')->whereColumn('bank_id', 'banks.id'),
+            'bank_branch'=> BankBranch::select('name')->whereColumn('bank_branch_id', 'bank_branches.id'),
+            'bank_branch_code'=> BankBranch::select('code')->whereColumn('bank_branch_id', 'bank_branches.id'),
+        ])->first();
+        $student = Student::where('id', $payment->student_id)->first();
+        $medical = Medical::where('payment_id', $request->payment_id)->first();
+        return response()->json(['status'=> 'success', 'student'=> $student, 'payment'=>$payment, 'exams'=>$exams, 'medical'=>$medical]);
+    }
+    // /LOAD  RESCHEDULE REQUEST MODAL
+
+    // APPROVE  RESCHEDULE REQUEST
+    public function approveRescheduleRequest(Request $request)
+    {
+        $payment = Payment::where('id', $request->payment_id)->first();
+        $medical = Medical::where('payment_id', $request->payment_id);
+        if($medical->update(['status'=> 'Approved']) && $payment->update(['status' => 'Approve'])):
+            $student = Student::where('id', Payment::where('id', $request->payment_id)->first()->student_id)->first();
+            $details = [
+                'subject' => 'Exam Reschedule Request Approved',
+                'title' => 'Exam Reschedule Request Payment Approved',
+                'body' => 'Exam Reschedule Request Payment Approved! <br> You will ne notified when it is re-scheduled',
+                'color' => '#1b672a'
+            ];
+            Mail::to($student->user->email)->queue( new NotificationEmail($details) );
+            return response()->json(['status'=>'success']);
+        endif;
+        return response()->json(['status'=>'error']);
+    }
+    // /APPROVE  RESCHEDULE REQUEST
+
+    // DECLINE  RESCHEDULE REQUEST
+    public function declineRescheduleRequest(Request $request)
+    {
+        $payment = Payment::where('id', $request->payment_id)->first();
+        $medical = Medical::where('payment_id', $request->payment_id);
+        if($medical->update(['status'=> 'Declined', 'declined_message' => $request->message]) && $payment->update(['status' => 'Declined'])):
+            $student = Student::where('id', Payment::where('id', $request->payment_id)->first()->student_id)->first();
+            if($request->message != NULL):
+                $decline_msg = $request->message;
+            else:
+                $decline_msg = '';
+            endif;
+            $details = [
+                'subject' => 'Exam Reschedule Request Declined',
+                'title' => 'Exam Reschedule Request Payment Declined',
+                'body' => $decline_msg,
+                'color' => '#821919'
+            ];
+            Mail::to($student->user->email)->queue( new NotificationEmail($details) );
+            return response()->json(['status'=>'success']);
+        endif;
+        return response()->json(['status'=>'error']);
+    }
+    // /DECLINE  RESCHEDULE REQUEST
+
+    // /RESCHEDULE REQUESTS
 }

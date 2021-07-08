@@ -144,7 +144,7 @@
         <!-- /SIDE BAR -->
 
         <!-- PAGE AREA -->
-        <div class="col-lg-10 page-area">
+        <div class="col-lg-10 page-area min-vh-100">
           <div class="row">
 
             <!-- NAV BAR -->

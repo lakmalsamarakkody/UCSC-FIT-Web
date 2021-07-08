@@ -17,7 +17,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb ">
               <li class="breadcrumb-item"><a href="{{ url('/portal/staff/') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Exam Issues</li>
+              <li class="breadcrumb-item active" aria-current="page">Reschedule Requests</li>
             </ol>
           </nav>
 
@@ -33,9 +33,9 @@
         <!-- MEDICALS LIST -->
         <div class="col-12 md-5">
           <div class="card">
-            <div class="card-header">Exam Issues Report Submitted Students</div>
+            <div class="card-header">Reschedule Requests Submitted</div>
             <div class="card-body">
-              @if($medicals->isEmpty())
+              @if($payments->isEmpty())
                 <div class="alert alert-info" role="alert">No results found!</div>
               @else
                 <table class="table yajra-datatable">
@@ -43,22 +43,22 @@
                     <tr>
                       <th>Registration No</th>
                       <th>Student Name</th>
-                      <th>Subject</th>
+                      <th>No. of Subjects</th>
                       <th>Date Applied</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($medicals as $medical)
+                    @foreach ($payments as $payment)
                       <tr>
-                        <td>{{ $medical->student_exam->student->reg_no }}</td>
-                        <td>{{ $medical->student_exam->student->initials }} {{ $medical->student_exam->student->last_name }}</td>
-                        <td>{{ $medical->student_exam->subject->name }} ({{ $medical->student_exam->type->name }})</td>
-                        <td>{{ $medical->created_at->isoFormat('YYYY-MM-DD') }}</td>
+                        <td>{{ $payment->student->reg_no }}</td>
+                        <td>{{ $payment->student->initials }} {{ $payment->student->last_name }}</td>
+                        <td>{{ App\Models\Student\Medical::where('payment_id', $payment->id)->count() }}</td>
+                        <td>{{ $payment->created_at->isoFormat('YYYY-MM-DD') }}</td>
                         <td>
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-review-medical-view'))
                           <div class="btn-group">
-                            <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedMedical-{{ $medical->id }}" onclick="view_modal_medical({{ $medical->id }});"><i class="fas fa-user"></i> View <span id="spinnerBtnViewModalAppliedMedical-{{ $medical->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                            <button type="button" class="btn btn-outline-primary" id="btnViewModalRescheduleRequest-{{ $payment->id }}" onclick="view_modal_reschedule_request({{ $payment->id }});"><i class="fas fa-user"></i> View <span id="spinnerbtnViewModalRescheduleRequest-{{ $payment->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                           </div>
                           @endif
                         </td>
@@ -74,8 +74,8 @@
         <!-- /MEDICALS LIST -->
 
       </div>
-      @include('portal.staff.student.medical.modal')
-      @include('portal.staff.student.medical.scripts')
+      @include('portal.staff.student.reschedule_requests.modal')
+      @include('portal.staff.student.reschedule_requests.scripts')
     </div>
     <!-- /CONTENT -->
 

@@ -126,6 +126,13 @@ Route::post('/portal/staff/student/exams/medical/decline', [App\Http\Controllers
 Route::post('/portal/staff/student/exams/medical/decline/resubmit', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineToResubmitMedical'])->name('student.exams.medical.resubmit.decline');
 
 // EXAM RESCHEDULE
+Route::get('/portal/staff/student/exams/reschedule/requests', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'reviewRescheduleRequests'])->name('student.exams.reschedule.requests');
+Route::post('/portal/staff/student/exams/reschedule/request/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getRescheduleRequestDetails'])->name('student.exams.reschedule.request.details');
+Route::post('/portal/staff/student/exams/reschedule/request/approve', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'approveRescheduleRequest'])->name('student.exams.reschedule.request.approve');
+Route::post('/portal/staff/student/exams/reschedule/request/decline', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineRescheduleRequest'])->name('student.exams.reschedule.request.decline');
+Route::post('/portal/staff/student/exams/reschedule/request/decline/resubmit', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'declineToResubmitRescheduleRequest'])->name('student.exams.reschedule.request.resubmit.decline');
+
+// EXAM RESCHEDULE
 Route::get('/portal/staff/student/exams/reschedule', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'reviewExamsToReschedule'])->name('student.exams.reschedule');
 Route::post('/portal/staff/student/exams/reschedule/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getRescheduleExamDetails'])->name('student.exams.reschedule.details');
 Route::post('/portal/staff/student/exams/reschedule/table', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'schedulesTableForRescheduleExam'])->name('student.exams.reschedule.table');
@@ -351,6 +358,8 @@ Route::post('/portal/student/exam/payment',[App\Http\Controllers\Portal\Student\
 Route::post('/portal/student/exam/declined/message',[App\Http\Controllers\Portal\Student\ExamsController::class,'getExamDeclinedMessage'])->name('student.exam.declined.message');
 Route::post('/portal/student/exam/medical/upload',[App\Http\Controllers\Portal\Student\ExamsController::class,'uploadExamMedical'])->name('student.exam.medical.upload');
 Route::post('/portal/student/exam/medical/delete',[App\Http\Controllers\Portal\Student\ExamsController::class,'deleteExamMedical'])->name('student.exam.medical.delete');
+
+Route::post('/portal/student/exam/reschedule/request',[App\Http\Controllers\Portal\Student\ExamsController::class,'requestReschedule'])->name('student.request.reschedule');
 // /EXAMS PAGE
 
 // RESULT PAGE

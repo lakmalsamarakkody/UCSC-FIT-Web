@@ -61,7 +61,7 @@
             <div class="card-body">
               <form action="" method="POST" id="formCreateSchedule">
                 <div class="form-row align-items-center">
-                  <div class="form-group col-xl-2 col-lg-4">
+                  <div class="form-group col-lg-4">
                     <label for="scheduleExam">Exam</label>
                     <select name="scheduleExam" id="scheduleExam" class="form-control">
                       <option value="" selected hidden disabled>Select Exam</option>
@@ -73,7 +73,7 @@
                     </select>
                     <span class="invalid-feedback" id="error-scheduleExam" role="alert"></span>
                   </div>
-                  <div class="form-group col-xl-3 col-lg-4">
+                  <div class="form-group col-lg-4">
                     <label for="scheduleSubject">Subejct</label>
                     <select name="scheduleSubject" id="scheduleSubject" class="form-control">
                       <option value="" selected>Select Subject</option>
@@ -83,7 +83,7 @@
                     </select>
                     <span class="invalid-feedback" id="error-scheduleSubject" role="alert"></span>
                   </div>
-                  <div class="form-group col-xl-2 col-lg-4">
+                  <div class="form-group col-lg-4">
                     <label for="scheduleExamType">Exam Type</label>
                     <select name="scheduleExamType" id="scheduleExamType" class="form-control">
                       <option value="" selected>Select Exam Type</option>
@@ -93,21 +93,31 @@
                     </select>
                     <span class="invalid-feedback" id="error-scheduleExamType" role="alert"></span>
                   </div>
-                  <div class="form-group col-xl-2 col-lg-6">
+                  <div class="form-group col-lg-4">
                     <label for="scheduleDate">Date</label>
                     <input type="date" id="scheduleDate" name="scheduleDate" class="form-control"/>
                     <span class="invalid-feedback" id="error-scheduleDate" role="alert"></span>
                   </div>
-                  <div class="form-group col-xl-2 col-lg-6">
+                  <div class="form-group col-lg-4">
                     <label for="scheduleStartTime">Start Time</label>
                     <input type="time" id="scheduleStartTime" name="scheduleStartTime" class="form-control"/>
                     <span class="invalid-feedback" id="error-scheduleStartTime" role="alert"></span>
+                  </div>
+                  <div class="form-group col-lg-4">
+                    <label for="scheduleLab">Lab</label>
+                    <select id="scheduleLab" name="scheduleLab" class="form-control">
+                      <option value="" selected>Select Lab</option>
+                      @foreach($labs as $lab)
+                        <option value="{{$lab->id}}">{{$lab->name}}</option>
+                      @endforeach
+                    </select>
+                    <span class="invalid-feedback" id="error-scheduleLab" role="alert"></span>
                   </div>
                   {{-- <div class="form-group col-xl-1 col-lg-4">
                     <label for="endTime">End Time</label>
                     <input type="time" name="endTime" class="form-control"/>
                   </div> --}}
-                  <div class="form-group col-xl-1 col-lg-12 text-center">
+                  <div class="form-group col-lg-12 text-center">
                     <label for="btnCreateSchedule">&nbsp;</label>
                     <button type="button" class="btn btn-outline-primary form-control" onclick="create_schedule();" id="btnCreateSchedule" name="btnCreateSchedule"><i class="fas fa-plus"></i></button>
                     <span class="invalid-feedback" role="alert">test</span>
@@ -140,6 +150,7 @@
                     <th>Date</th>
                     <th>Start Time</th>
                     <th>End Time</th>
+                    <th>Lab</th>
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
@@ -175,6 +186,7 @@
                     <th>Date</th>
                     <th>Start Time</th>
                     <th>End Time</th>
+                    <th>Lab</th>
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
@@ -257,6 +269,7 @@
                     <th>Date</th>
                     <th>Started Time</th>
                     <th>Ended Time</th>
+                    <th>Lab</th>
                     <th></th>
                   </tr>
                 </thead>
