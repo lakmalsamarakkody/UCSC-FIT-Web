@@ -279,7 +279,7 @@ class StudentController extends Controller
         endif;
         
         $registrations = Registration::where('registered_at', '>=', $date)->get();
-           
+        $student_array [] =array(); 
         foreach($registrations as $registration):
             $student_array[] = array(
                 $registration->student->id,
