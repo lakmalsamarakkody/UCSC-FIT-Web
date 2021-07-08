@@ -77,8 +77,7 @@
                             <li><p>English for ICT (FIT 203)</p></li>
                             <li><p>Mathematics for ICT (FIT 303)</p></li>
                         </ul>
-                        <p>and e-Learning based online system will be available for all registered students to follow courses at any time during the day. e-Testing based system will be used for the evaluation once the student is ready to take the test at University of Colombo School of Computing (UCSC) etesting lab. Hence, students could start the programme at any time during the year and they can take exams at any month during the year at testing centres. At the same time, several private institutes conduct face to face classes based on the FIT syllabuses.
-                    </p>
+                    <p>The students registered for the FIT programme will get access to a virtual learning environment <a href="http://fit.bit.lk/vle">(FITVLE)</a> that will help them to learn online. All e-tests are conducted via an e-testing system. The students will get access to this system when they take the e-tests. The students can start the programme at any time during the year, and they can apply for the examinations at any time when they are ready.</p>
                     
                     <div class="icon-box wow fadeInUp" data-wow-delay="0.2s"  style="padding-top: 80px;">
                       <a href="{{ url('/programme') }}"><div class="icon"><i class="fa fa-book"></i></div></a>

@@ -92,6 +92,12 @@
                     </div>
                                                 
                 </div>
+
+                <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
+                    <a href="{{ url('/registration') }}"><div class="icon"><i class="fa fa-hand-point-right"></i></div></a>
+                    <h4 class="title"><a href="{{ url('/registration') }}">Don't have an account yet?</a></h4>
+                    <p class="description">How to Register for FIT Programme</p>
+                </div>
             </div>
         </div>
     </section>
