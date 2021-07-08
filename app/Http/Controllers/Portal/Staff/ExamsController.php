@@ -9,6 +9,7 @@ use App\Models\Exam\Schedule;
 use App\Models\Subject;
 use App\Models\Exam\Types;
 use App\Models\Student;
+use App\Models\Lab;
 use App\Models\Student\hasExam;
 //use Dotenv\Validator;
 use Illuminate\Http\Request;
@@ -33,9 +34,10 @@ class ExamsController extends Controller
         $today = Carbon::today();
         // var_dump($today->month);
         // exit;
-        $exam_schedules=Schedule::where('date', '<', $today)->orderBy('date','desc');
+        // $exam_schedules=Schedule::where('date', '<', $today)->orderBy('date','desc');
         $subjects=Subject::orderBy('id')->get();
         $exam_types=Types::orderBy('id')->get();
+        $labs = Lab::orderBy('id')->get();
 
         $next_years_exams = Exam::where('year', '>', $today->year);
         $upcoming_exams = Exam::where('year', $today->year)->where('month', '>=', $today->month)->union($next_years_exams)->orderBy('year', 'asc')->orderBy('month', 'asc')->get();
@@ -43,10 +45,10 @@ class ExamsController extends Controller
         $search_exams = Exam::where('year', $today->year)->where('month', '<=', $today->month)->union($previous_year_exams)->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
 
         $years = Exam::select('year')->where('year', '<=', $today->year)->orderBy('year','desc')->distinct()->get();
-        $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->get();
+        // $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->get();
         //$released_upcoming_scheduless = Schedule::where('date', '>=', $today)->orderBy('date', 'asc')->paginate(5,['*'],'released_schedule');
 
-        return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'upcoming_exams', 'search_exams', 'years', 'upcoming_schedules'));
+        return view('portal/staff/exams',compact('subjects','exam_types', 'labs','upcoming_exams', 'search_exams', 'years'));
     }
 
     // SCHEDULES TABLE(BEFORE RELEASE)

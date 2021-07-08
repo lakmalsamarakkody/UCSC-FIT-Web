@@ -73,7 +73,7 @@
                     </select>
                     <span class="invalid-feedback" id="error-scheduleExam" role="alert"></span>
                   </div>
-                  <div class="form-group col-xl-3 col-lg-4">
+                  <div class="form-group col-xl-2 col-lg-4">
                     <label for="scheduleSubject">Subejct</label>
                     <select name="scheduleSubject" id="scheduleSubject" class="form-control">
                       <option value="" selected>Select Subject</option>
@@ -93,15 +93,24 @@
                     </select>
                     <span class="invalid-feedback" id="error-scheduleExamType" role="alert"></span>
                   </div>
-                  <div class="form-group col-xl-2 col-lg-6">
+                  <div class="form-group col-xl-2 col-lg-4">
                     <label for="scheduleDate">Date</label>
                     <input type="date" id="scheduleDate" name="scheduleDate" class="form-control"/>
                     <span class="invalid-feedback" id="error-scheduleDate" role="alert"></span>
                   </div>
-                  <div class="form-group col-xl-2 col-lg-6">
+                  <div class="form-group col-xl-1 col-lg-4">
                     <label for="scheduleStartTime">Start Time</label>
                     <input type="time" id="scheduleStartTime" name="scheduleStartTime" class="form-control"/>
                     <span class="invalid-feedback" id="error-scheduleStartTime" role="alert"></span>
+                  </div>
+                  <div class="form-group col-xl-2 col-lg-4">
+                    <label for="scheduleLab">Lab</label>
+                    <select id="scheduleLab" name="scheduleLab" class="form-control">
+                      <option value="" selected>Select Lab</option>
+                      @foreach($labs as $lab)
+                        <option value="{{$lab->id}}">{{$lab->name}}</option>
+                      @endforeach
+                    </select>
                   </div>
                   {{-- <div class="form-group col-xl-1 col-lg-4">
                     <label for="endTime">End Time</label>
