@@ -102,7 +102,7 @@
             
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body pt-0 pt-0 pl-md-5">
-                        <b>Yes</b>, you can. If you pass all three subjects in Advanced Level exams, you can directly register BIT programme without following FIT.
+                        <b>Yes</b>, you can. If you pass all three subjects in the Advanced Level exams, you can directly register for BIT programme without following the FIT
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@
             
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                        You have to sit for FIT e-Tests and practical tests to obtain FIT certificate. However, you cannot obtain FIT certificate by submitting similar courses conducted at some other institutes.
+                        You have to sit for FIT e-Tests and practical tests to obtain the FIT certificate. You cannot claim the FIT certificate by submitting certificates of any similar courses.
                     </div>
                 </div>
             </div>
@@ -128,13 +128,13 @@
             <div class="card border-0">
                 <div class="card-header bg-transparent border-bottom-0" id="headingThree">
                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>I have done similar courses with respect to FIT programme, can I register for BIT?</h4>
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>I have done courses similar to the FIT programme. Can I register for BIT?</h4>
                     </button>
                 </div>
             
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                        It is difficult to say since all similar courses are not acceptable. However, if you have done similar courses, we recommend you to take FIT e-Tests and apply BIT registration based on the results.
+                        It is difficult to say since all similar courses are not acceptable. However, if you have done similar courses/study programmes, we recommend you to take FIT e-Tests and apply for BIT registration based on the results.
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
             
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                        <b>Yes</b> , you must have successfully completed, G.C.E.(O/L) exam.
+                        <b>Yes</b>, You must have completed, GCE (O/L) examination with credit passes for maths and English.
                     </div>
                 </div>
             </div>
@@ -166,7 +166,7 @@
             
                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                        You have to register FIT programme and it could be done online by submitting your email <a href="{{url('#registration')}}">here</a>. 
+                        You have to register for the FIT programme via FIT information system  <a href="{{url('#registration')}}">https://reg.fit.bit.lk</a>. First, create an account by providing a valid email address. 
                     </div>
                 </div>
             </div>
@@ -176,13 +176,13 @@
             <div class="card border-0">
                 <div class="card-header bg-transparent border-bottom-0" id="headingSix">
                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>When can I register for FIT ?</h4>
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>When can I register for the FIT?</h4>
                     </button>
                 </div>
             
                 <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                        Students can register for FIT at any time of the year; however the registration period will expire after365 calendar days depending on the registration date.
+                        Students can register for the FIT programme at any time of the year. The registration period will expire after 365 calendar days from the registration date.
                     </div>
                 </div>
             </div>
@@ -192,13 +192,13 @@
             <div class="card border-0">
                 <div class="card-header bg-transparent border-bottom-0" id="headingSeven">
                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
-                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Do I have to come to UCSC to register?</h4>
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Do I have to come to the UCSC to register?</h4>
                     </button>
                 </div>
             
                 <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                        <b>No</b>, you do not have to come to UCSC to register. However, it takes 2-3 working days to validate your actual payment through credit card or bank.
+                        <b>No</b>, you do not have to come to the UCSC to register. You can register online via FIT information system (reg.fit.bit.lk).  However, it takes 2-7 working days to validate your payments provide you access to the FITVLE.
                     </div>
                 </div>
             </div>

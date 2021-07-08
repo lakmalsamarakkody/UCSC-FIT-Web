@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Portal\Staff;
 
+use App\Exports\StudentDetailsExport;
 use App\Http\Controllers\Controller;
 use App\Mail\ChangeEmail;
 use App\Models\Student;
@@ -14,19 +15,21 @@ use App\Models\Exam\Types;
 use App\Models\Exam;
 use App\Models\Student\Flag;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('revalidate');
+        // $this->middleware('revalidate');         // Removed Due To Error When Exporting Excels
         $this->middleware('staff.auth');
     }
 
@@ -260,4 +263,39 @@ class StudentController extends Controller
         return response()->json(['status'=>'success', 'medical'=>$medical, 'exam'=>$exam, 'student'=>$student]);
     }
     // /MEDICAL MODAL LOAD
+
+    public function exportStudentDetails($duration)
+    {
+
+        if($duration=='lastday'):
+            $date = Carbon::now()->subdays(1)->format('Y-m-d');
+            // echo $date;
+        elseif($duration=='lastweek'):
+            $date = Carbon::now()->subdays(7)->format('Y-m-d');
+            // echo $date;
+        elseif($duration=='lastmonth'):
+            $date = Carbon::now()->subdays(30)->format('Y-m-d');
+            // echo $date;
+        endif;
+        
+        $registrations = Registration::where('registered_at', '>=', $date)->get();
+           
+        foreach($registrations as $registration):
+            $student_array[] = array(
+                $registration->student->id,
+                $registration->student->reg_no,
+                $registration->student->full_name,
+                $registration->student->nic_old.$registration->student->nic_new.$registration->student->postal.$registration->student->passport,
+                $registration->student->user->email,
+            );
+        endforeach;
+
+        
+
+        $student_array = new StudentDetailsExport($student_array);
+        return Excel::download($student_array, 'students_'.$duration.'_created_at_'.date('Y-m-d H:i:s').'.xlsx');
+
+        return redirect()->route('students');
+        
+    }
 }

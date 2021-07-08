@@ -103,7 +103,7 @@
             
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body pt-0 pt-0 pl-md-5">
-                        Generally, it takes 8-10 months to complete all courses if it is very beginner. However, it depends on the past experience and your knowledge in the area. Moreover, it will be an added qualification for those who seek higher education in ICT or employment in the IT industry or BPO industry.
+                        Generally, it takes 8-10 months to complete all courses if it is very beginner. However, it depends on your experience and your knowledge of IT. Moreover, it will be an added qualification for those who seek higher education in ICT or IT-related employment.
                     </div>
                 </div>
             </div>
@@ -120,8 +120,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
                         Please contact the relevant facilitator of the course, through a forum, message or email. Contact details are given in the <a href="{{ url('/contact') }}">contact us</a> page.
-                        <br/>If you are not satisfied with the reply, contact the coordinator of VLE through ( <a href="mailto:kph@ucsc.cmb.ac.lk">kph@ucsc.cmb.ac.lk</a> ).
-                        <br/>If you are still not satisfied with the reply, send your complain in writing to the Director, UCSC by using the e-mail (<a href="mailto:director@ucsc.cmb.ac.lk">director@ucsc.cmb.ac.lk</a>)
+                        <br/>If you are not satisfied with the reply, contact the coordinator of VLE through email  ( <a href="mailto:taw@ucsc.cmb.ac.lk">taw@ucsc.cmb.ac.lk</a> ).
+                        <br/>If you are still not satisfied with the reply, send your complaint in writing to the Director, UCSC by using the email (<a href="mailto:director@ucsc.cmb.ac.lk">director@ucsc.cmb.ac.lk</a>)
                     </div>
                 </div>
             </div>
@@ -137,7 +137,7 @@
             
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                        Yes, there are some differences and those improvements are done to enhance the FIT programme. All students are supposed to follow the current syllabus.
+                        Yes, there are some differences, and those improvements are done to enhance the FIT programme. The students are supposed to follow the new syllabus as all the examinations are conducted based on the new syllabi.
                     </div>
                 </div>
             </div>
