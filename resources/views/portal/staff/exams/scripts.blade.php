@@ -45,12 +45,16 @@ let heldExamTable = null;
           name: 'end_time'
         },
         {
+          data: 'lab',
+          name: 'lab'
+        },
+        {
           data: 'id',
           name: 'id',
           className: "text-right",
           orderable: false,
           searchable: false
-        },
+        }
       ],
       columnDefs: [
         {
@@ -68,6 +72,12 @@ let heldExamTable = null;
         },
         {
           targets: 7,
+          render: function(data, type, row) {
+            return 'Lab ' + data;
+          }
+        },
+        {
+          targets: 8,
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">';
             if( row['schedule_approval'] == null || row['schedule_approval'] == 'declined' ){
@@ -156,6 +166,10 @@ let heldExamTable = null;
           name: 'end_time'
         },
         {
+          data: 'lab',
+          name: 'lab'
+        },
+        {
           data: 'id',
           name: 'id',
           orderable: false,
@@ -178,6 +192,12 @@ let heldExamTable = null;
         },
         {
           targets: 7,
+          render: function(data, type, row) {
+            return 'Lab ' + data;
+          }
+        },
+        {
+          targets: 8,
           render: function(data, type, row) {
             var btnGroup = '<div class="btn-group">'+
             '@if(Auth::user()->hasPermission("staff-exam-schedule-view-students"))<button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="invoke_modal_assigned_students('+data+');"><i class="fas fa-address-book"></i></button>@endif'+
@@ -238,6 +258,10 @@ let heldExamTable = null;
           name: 'end_time'
         },
         {
+          data: 'lab',
+          name: 'lab'
+        },
+        {
           data: 'id',
           name: 'id',
           orderable: false,
@@ -260,6 +284,12 @@ let heldExamTable = null;
         },
         {
           targets: 7,
+          render: function(data, type, row) {
+            return 'Lab ' + data;
+          }
+        },
+        {
+          targets: 8,
           render: function(data, type, row) {
             let btnGroup = '@if(Auth::user()->hasPermission("staff-exam-schedule-view-students"))<div class="btn-group"><button type="button" class="btn btn-outline-primary" data-tooltip="tooltip" data-placement="bottom" title="View Assigned Students" id="btnViewAssignedStudents-'+data+'" onclick="invoke_modal_assigned_students('+data+');"><i class="fas fa-address-book"></i></button></div>@endif';
             return btnGroup;
