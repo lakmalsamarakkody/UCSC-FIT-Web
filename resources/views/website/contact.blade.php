@@ -39,11 +39,11 @@
         <hr style="padding-bottom: 20px; !important">
         <div class="row  about-container ">
             <div class="col-lg-8 content order-lg-1 order-1 mb-5">               
-                <h2 class="title"><a href="mailto:edc@ucsc.cmb.ac.lk" style="color:#000">Administration Matters</a></h2>
+                <h2 class="title"><a href="mailto:edc@ucsc.cmb.ac.lk" style="color:#000">Administrative Matters</a></h2>
                 <br/>
                 <p>If your question is related to administration matters of FIT programme, 
-                        <br>for example <b>registration, submitting applications for examination,</b> etc. please create an account in the online information system (FIT-SIS). You will be able to get all relevant information and support via our online system. However, if you have any doubts or questions, you can contact the e-Learning Centre. 
-                        <br>It is recommended to check the FIT website ( <a href="www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you try to contact us over the phone.
+                        <br>for example <b>registration, submitting applications for examination,</b> etc. please create an account in the <a href="{{ url('/login') }}"> online information system</a></a>. You will be able to get all relevant information and support via our online system. However, if you have any doubts or questions, you can contact the e-Learning Centre. 
+                        <br>It is recommended to check the FIT website ( <a href="{{ url('/') }}">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you try to contact us over the phone.
                 </p>
             </div>
             <div class="col-lg-4 content order-lg-2 order-2">               
@@ -120,9 +120,9 @@
         <div class="row  about-container ">
             <div class="col-lg-8 content order-lg-1 order-1">               
                     <h2 class="title"><a href="mailto:edc@ucsc.cmb.ac.lk"  style="color:#000">Complaints </a></h2>
-                    <p class="description"> If you want to make a complain about any service related to the FIT Programme,<br>
+                    <p class="description"> If you want to make a complaint about any service related to the FIT Programme,<br>
                         you are requested to contact the following staff members depending on your issue.<br>
-                        It is recommended to send your complain by email rather than contacting through phone, unless it is an urgent matter.
+                        It is recommended to send your complaint via email rather than contacting us through phone, unless it is an urgent matter.
                     </p>
             </div>
             <div class="col-lg-4 content order-lg-2 order-2">               

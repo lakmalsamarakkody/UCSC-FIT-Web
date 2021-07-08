@@ -30,14 +30,14 @@
             <div class="col-lg-7 content order-lg-1 order-1">
                 <h2 class="title">Virtual Learning Environment</h2>
                 <br/>
-                <p><b>The students registered for the FIT programme will get access to a virtual learning environment (FITVLE) that will help them to learn online. All e-tests are conducted via an e-testing system. The students will get access to this system when they take the e-tests. The students can start the programme at any time during the year, and they can apply for the examinations at any time when they are ready.</b> </p>
+                <p><b>All registered FIT students will receive a registration number and a password to access the online learning management system <a href="http://fit.bit.lk/vle">(FITVLE)</b> </p>
                 
-                <p>Once your payment is confirmed for the registration, you will be notified with login details. It is mandatory to include a valid email address when you register for the FIT programme. If you have any problem, you can contact the e-Learning Centre of UCSC to get more information regarding your registration.
-                    <br/><b>Tel: <a href="tel:+94112591080">011 2591080 </a></b>
+                <p>Once your registration is confirmed, you will be notified with login details to an online learning environment <a href="http://fit.bit.lk/vle">(FITVLE)</a>. It is mandatory to include a valid email address when you register for the FIT programme. If you have any problem, you can contact the e-Learning Centre of UCSC to get more information regarding your registration.
+                    <br/><b>Tel: <a href="tel:+94112591080">+94 11 2591080 </a></b>(Working Hours Only) 
                 </p>
                 <p>Within two weeks after your registration, we will enrol you on the FITVLE online courses. If you could not access the VLE after two weeks with the given username and password, please contact the VLE administrator.
-                    <b><br/>Email:<a href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a>  
-                    <br/>Tel: <a href="tel:+94112591080">011 2591080</a> </b>
+                    <b><br/>Email: <a href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a>  
+                    <br/>Tel: <a href="tel:+94112591080">+94 11 2591080</a> </b>(Working Hours Only) 
                 </p>
                 <p>There are three separate online courses for the FIT Programme. You can access online interactive e-learning content and discuss with other learners and online e-facilitators in the course.</p>
                 <p>Several private teaching institutes in Sri Lanka conduct classes based on the FIT curriculum. Students are kindly advised to directly contact these institutes if they are interested to attend face to face classes based on the FIT programme.</p>
