@@ -14,7 +14,7 @@ class AddColumnsToExamSchedulesTable extends Migration
     public function up()
     {
         Schema::table('exam_schedules', function (Blueprint $table) {
-            $table->integer('lab')->after('exam_type_id');
+            $table->string('lab')->after('exam_type_id');
             $table->integer('lab_capacity')->after('lab');
         });
     }
