@@ -47,7 +47,7 @@ class ExamsController extends Controller
         $years = Exam::select('year')->where('year', '<=', $today->year)->orderBy('year','desc')->distinct()->get();
         // $upcoming_schedules = Schedule::where('date', '>=',$today)->orderBy('date','asc')->get();
         //$released_upcoming_scheduless = Schedule::where('date', '>=', $today)->orderBy('date', 'asc')->paginate(5,['*'],'released_schedule');
-
+        // return view('portal/staff/exams',compact('exam_schedules','subjects','exam_types', 'upcoming_exams', 'search_exams', 'years', 'upcoming_schedules'));
         return view('portal/staff/exams',compact('subjects','exam_types', 'labs','upcoming_exams', 'search_exams', 'years'));
     }
 
