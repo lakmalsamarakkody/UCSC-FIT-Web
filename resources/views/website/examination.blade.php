@@ -245,7 +245,7 @@
             
                 <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                        <b>Yes</b>, There are no separate exams for students who registered before 2021. {{ now()->year }}.
+                        <b>Yes</b>, There are no separate exams for students who registered before {{ now()->year }}.
                     </div>
                 </div>
             </div>
