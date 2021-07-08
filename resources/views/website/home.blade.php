@@ -132,8 +132,7 @@
                 
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div class="card-body pt-0 pl-md-5">
-                            There are two certificates. When you pass all three e-Tests of FIT courses, you can get a certificate certifying your scores.
-                            <br/>When you complete all three e-Tests and two practical tests of FIT courses, you can get the final FIT certificate.
+                            There is only one certificate in this programme. It will be offered to you after you pass all three e-Tests and the two Practical tests. But if required, you can get a programme status letter after passing all three eTests. Also, you can take a printout of your profile page in the FIT information system and use it as a proof of registration to this programme.
                         </div>
                     </div>
                 </div>
