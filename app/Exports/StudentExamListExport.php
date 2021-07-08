@@ -31,15 +31,12 @@ class StudentExamListExport implements FromQuery,ShouldAutoSize,WithProperties,W
     public function properties(): array
     {
         return [
-            'creator'        => 'Lakmal Samarakkody',
-            'lastModifiedBy' => 'Lakmal Samarakkody',
             'title'          => 'Student Exam List Export',
             'description'    => 'student list of particular exam',
             'subject'        => 'studentList',
             'keywords'       => 'students,exam,export,spreadsheet',
             'category'       => 'export',
-            'manager'        => 'Lakmal Samarakkody',
-            'company'        => 'UCCS',
+            'company'        => 'UCSC',
         ];
     }
 

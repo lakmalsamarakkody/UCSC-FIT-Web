@@ -17,6 +17,12 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ExamListController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        // $this->middleware('revalidate');         // Removed Due To Error When Exporting Excels
+        $this->middleware('staff.auth');
+    }
     //Exam list view
     public function index()
     {

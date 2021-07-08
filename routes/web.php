@@ -80,6 +80,7 @@ Route::post('/portal/staff/student/profile/unblock',[App\Http\Controllers\Portal
 Route::post('/portal/staff/student/profile/deactivate/account',[App\Http\Controllers\Portal\Staff\StudentController::class, 'deactivateAccount'])->name('deactivate.student');
 Route::post('/portal/staff/student/profile/reactivate/account',[App\Http\Controllers\Portal\Staff\StudentController::class, 'reactivateAccount'])->name('reactivate.student');
 Route::post('/portal/staff/student/profile/medical/details',[App\Http\Controllers\Portal\Staff\StudentController::class, 'getMedicalDetails'])->name('profile.medical.details');
+Route::get('/portal/staff/student/list/export/{duration}',[App\Http\Controllers\Portal\Staff\StudentController::class, 'exportStudentDetails']);
 // /STUDENT PAGE
 
 // HOME PAGE

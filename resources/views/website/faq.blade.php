@@ -35,7 +35,7 @@
                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body pt-0 pt-0 pl-md-5">
                                 It is a pre-degree program for those who wish to follow the <a href="http://www.bit.lk"><b>Bachelor of Information Technology (BIT)</b></a> at UCSC. 
-                                Moreover, it will be an added qualification for those who seek higher education in ICT or employment in the IT industry or BPO industry.
+                                Moreover, it will be an added qualification for those who seek higher education in ICT or employments related to IT.
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                     
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                You can obtain ICT related certification to find an employment in ICT or related areas as a beginner. Since BIT is an external degree programme, you could do a full time or part time job while following the <a href="http://www.bit.lk"><b>BIT Programme</b></a>
+                                You can obtain ICT related certification to find an employment in ICT or related areas as a beginner. Since BIT is an external degree programme, you could do a full time or part time job while following the  <a href="http://www.bit.lk"><b>BIT Programme</b></a>
                                 <br/>If you do not have enough qualifications to register BIT programme, you can use FIT certification to obtain BIT registration.
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                     
                         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                At the moment, FIT is considered as an alternative qualification to register BIT programme.However, it is difficult to say about other programmes since conditions of registration vary from one to another. However, if any other institute decides to consider FIT certification equivalent qualification for registration, we will announce them.
+                               At the moment, FIT is considered as an alternative qualification to register BIT programme. However, it is difficult to say about other programs since conditions of registration vary from one to another. However, if any other institute decides to consider FIT certification equivalent qualification for registration, we will announce them.
                             </div>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                     
                         <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
                             <div class="card-body pt-0 pt-0 pl-md-5">
-                                Generally, it takes 8-10 months to complete all courses if it is very beginner. However, it depends on the past experience and your knowledge in the area. Moreover, it will be an added qualification for those who seek higher education in ICT or employment in the IT industry or BPO industry.
+                               Generally, it takes 8-10 months to complete all courses if it is very beginner. However, it depends on your experience and your knowledge of IT. Moreover, it will be an added qualification for those who seek higher education in ICT or IT-related employment.
                             </div>
                         </div>
                     </div>
@@ -157,8 +157,8 @@
                         <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
                                 Please contact the relevant facilitator of the course, through a forum, message or email. Contact details are given in the <a href="{{ url('/contact') }}">contact us</a> page.
-                                <br/>If you are not satisfied with the reply, contact the coordinator of VLE through ( <a href="mailto:kph@ucsc.cmb.ac.lk">kph@ucsc.cmb.ac.lk</a> ).
-                                <br/>If you are still not satisfied with the reply, send your complain in writing to the Director, UCSC by using the e-mail (<a href="mailto:director@ucsc.cmb.ac.lk">director@ucsc.cmb.ac.lk</a>)
+                                <br/>If you are not satisfied with the reply, contact the coordinator of VLE through email  ( <a href="mailto:taw@ucsc.cmb.ac.lk">taw@ucsc.cmb.ac.lk</a> ).
+                                <br/>If you are still not satisfied with the reply, send your complaint in writing to the Director, UCSC by using the email (<a href="mailto:director@ucsc.cmb.ac.lk">director@ucsc.cmb.ac.lk</a>)
                             </div>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                     
                         <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                Yes, there are some differences and those improvements are done to enhance the FIT programme. All students are supposed to follow the current syllabus.
+                                Yes, there are some differences, and those improvements are done to enhance the FIT programme. The students are supposed to follow the new syllabus as all the examinations are conducted based on the new syllabi.
                             </div>
                         </div>
                     </div>
@@ -199,7 +199,7 @@
                     
                         <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
                             <div class="card-body pt-0 pt-0 pl-md-5">
-                                <b>No</b> UCSC will not conduct any face-to-face classes. Private institutes conduct face-to-face classes based on the FIT programme. However, UCSC will not undertake any responsibility or comment on their performances.
+                                <b>No</b> UCSC will not conduct any face-to-face classes. Private institutes conduct face-to-face classes based on the FIT syllabi. However, UCSC will not undertake any responsibility or comment on their performances. Therefore, we advise all the students to follow the online courses in the FITVLE and get updated by checking the announcements we made via the FITVLE and FIT information system.
                             </div>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
                     
                         <div id="collapse11" class="collapse" aria-labelledby="heading11" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                You can follow online courses of FIT programme if you have some similar IT experience. Otherwise, you can select a private institute which conducts classes based on the FIT programme.
+                                You can follow online courses in the FITVLE.  Otherwise, you can select a private institute that conducts classes based on the FIT syllabi.
                             </div>
                         </div>
                     </div>
@@ -231,7 +231,7 @@
                     
                         <div id="collapse12" class="collapse" aria-labelledby="heading12" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                Online courses provide general guidance for a self-learning student. They are designed and developed based on the FIT curriculum. However, if you find difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.
+                               Online courses provide general guidance for a self-learning student. They are designed and developed based on the FIT curriculum. However, if you find it difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.
                             </div>
                         </div>
                     </div>
@@ -247,7 +247,7 @@
                     
                         <div id="collapse13" class="collapse" aria-labelledby="heading13" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                No there is no compulsory requirement. There are lot of self-learning students who follow FIT programme. However, if you find difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.
+                                There is no compulsory requirement. There are a lot of self-learning students who follow the FIT programme. However, if you find it difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.
                             </div>
                         </div>
                     </div>
@@ -257,13 +257,13 @@
                     <div class="card border-0">
                         <div class="card-header bg-transparent border-bottom-0" id="heading14">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse14" aria-expanded="true" aria-controls="collapse14">
-                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>How long will it take to get access to online system (LMS) after registration?</h4>
+                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>How long will it take to get access to the virtual learning environment (FITVLE) after registration?</h4>
                             </button>
                         </div>
                     
                         <div id="collapse14" class="collapse" aria-labelledby="heading14" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                            It will take 3-4 working days (after receiving your registration detail from the EDC) to create your account. If you have provided an email address, we will inform as soon as we create an account in the online system. If it is delayed more than two days, please contact <a href="{{ url('/contact')}}">External Degree Centre or e-Learning Centre.</a>
+                            It will take 3-4 working days( maximum 7days) after submitting your registration detail via FIT information system. If you have provided a valid email address, we will inform you as soon as we create an account in the online system. If it delays more than seven days, please contact the admin of the FITVLE <a href="mailto:admin@fit.bit.lk">(admin@fit.bit.lk)</a>.
                             </div>
                         </div>
                     </div>
@@ -287,7 +287,7 @@
                     
                         <div id="collapse15" class="collapse" aria-labelledby="heading15" data-parent="#accordion">
                             <div class="card-body pt-0 pt-0 pl-md-5">
-                                The official results will be issued within <b> two weeks</b> after the end of exam. It will take 2-3 weeks to issue FIT practical tests.
+                                Usually, FIT e-test results are released <b> two weeks</b> after completing the examinations in the schedule. But, it takes 2-3 weeks to publish the FIT practical test results.
                             </div>
                         </div>
                     </div>
@@ -297,13 +297,13 @@
                     <div class="card border-0">
                         <div class="card-header bg-transparent border-bottom-0" id="heading16">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse16" aria-expanded="true" aria-controls="collapse16">
-                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>When practical test will be held?</h4>
+                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>When will the practical test be held?</h4>
                             </button>
                         </div>
                     
                         <div id="collapse16" class="collapse" aria-labelledby="heading16" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                If there is enough demand, the practical tests are also held once in a month. However, the time table could be varied depending on the demand and availability.
+                                If there is enough demand, the practical tests can also be held once a month. However, the time plan could vary depending on the demand and availability.
                             </div>
                         </div>
                     </div>
@@ -319,7 +319,7 @@
                     
                         <div id="collapse17" class="collapse" aria-labelledby="heading17" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                <b>Yes</b>, you have to pass relevant tests of FIT programme to obtain the certificates. The pass mark for any e-Test or practical test will be 50 marks.
+                                <b>Yes</b>, you have to pass relevant tests of the FIT programme to obtain the certificates. The pass mark for any e-Test or practical test will be 50 marks.
                             </div>
                         </div>
                     </div>
@@ -335,7 +335,7 @@
                     
                         <div id="collapse18" class="collapse" aria-labelledby="heading18" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                These online courses are self-learning optional resources for registered students. Your marks or performances in online courses will not be considered when deciding your final grade.
+                                These online quizzes are optional self-learning resources for registered students. Your marks or performances in online courses will not be considered when deciding your final grade. However, assignment quizzes are mandatory, and the students should pass these assignment quizzes before applying for the e-Tests.
                             </div>
                         </div>
                     </div>
@@ -345,13 +345,13 @@
                     <div class="card border-0">
                         <div class="card-header bg-transparent border-bottom-0" id="heading19">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse19" aria-expanded="true" aria-controls="collapse19">
-                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Does my practice quiz marks will be counted for final grade?</h4>
+                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Does my practice quiz marks will be counted for the final grade?</h4>
                             </button>
                         </div>
                     
                         <div id="collapse19" class="collapse" aria-labelledby="heading19" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                <b>No</b>, they will not be counted for final grade in the course. Final grade of a course depends on the e-Tests and practical.
+                                <b>No</b>, practice quizzes or Assignments marks are not counted for the final grade in the course. The final grade of a course depends on your performance in the e-Tests and practical tests. However, assignment quizzes are mandatory, and you should pass these assignment quizzes before applying for the e-Tests.
                             </div>
                         </div>
                     </div>
@@ -361,13 +361,13 @@
                     <div class="card border-0">
                         <div class="card-header bg-transparent border-bottom-0" id="heading20">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse20" aria-expanded="true" aria-controls="collapse20">
-                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Where can I take FIT exams?</h4>
+                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Where can I take the FIT exams?</h4>
                             </button>
                         </div>
                     
                         <div id="collapse20" class="collapse" aria-labelledby="heading20" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                You can take FIT exams at NODES Centres or at UCSC e-Testing Lab at the external degree centre.
+                                You can take the FIT exams at the UCSC or online from home (if we conduct online tests).
                             </div>
                         </div>
                     </div>
@@ -377,13 +377,13 @@
                     <div class="card border-0">
                         <div class="card-header bg-transparent border-bottom-0" id="heading21">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse21" aria-expanded="true" aria-controls="collapse21">
-                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>If I am a repeat student (registered before {{ now()->year }}), do I have to follow the new syllabus when I take next exam?</h4>
+                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>If I am a repeat student (registered before {{ now()->year }}), do I have to follow the new syllabus when I take the next exam?</h4>
                             </button>
                         </div>
                     
                         <div id="collapse21" class="collapse" aria-labelledby="heading21" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                You can select MS Office 2007 or 2003 when selecting the ICT Application course. There are no separate exams for students who registered before {{ now()->year }}.
+                                <b>Yes</b>, There are no separate exams for students who registered before 2021. {{ now()->year }}.
                             </div>
                         </div>
                     </div>
@@ -399,7 +399,7 @@
                     
                         <div id="collapse22" class="collapse" aria-labelledby="heading22" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                No, there is no such a requirement. You can decide in the way you like to do. However, if you register for all e-Tests, you can do all these three e-Tests on the same day.
+                                No, there is no such requirement. You can decide and do it in the way you like. However, if you register for all e-Tests, you can do all these three e-Tests on the same day.
                             </div>
                         </div>
                     </div>
@@ -425,7 +425,7 @@
                     
                         <div id="collapse23" class="collapse" aria-labelledby="heading23" data-parent="#accordion">
                             <div class="card-body pt-0 pt-0 pl-md-5">
-                                <b>Yes</b>, you can. If you pass all three subjects in Advanced Level exams, you can directly register BIT programme without following FIT.
+                                <b>Yes</b>, you can. If you pass all three subjects in the Advanced Level exams, you can directly register for BIT programme without following the FIT
                             </div>
                         </div>
                     </div>
@@ -441,7 +441,7 @@
                     
                         <div id="collapse24" class="collapse" aria-labelledby="heading24" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                You have to sit for FIT e-Tests and practical tests to obtain FIT certificate. However, you cannot obtain FIT certificate by submitting similar courses conducted at some other institutes.
+                                You have to sit for FIT e-Tests and practical tests to obtain the FIT certificate. You cannot claim the FIT certificate by submitting certificates of any similar courses.
                             </div>
                         </div>
                     </div>
@@ -451,13 +451,13 @@
                     <div class="card border-0">
                         <div class="card-header bg-transparent border-bottom-0" id="heading25">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse25" aria-expanded="true" aria-controls="collapse25">
-                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>I have done similar courses with respect to FIT programme, can I register for BIT?</h4>
+                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>I have done courses similar to the FIT programme. Can I register for BIT?</h4>
                             </button>
                         </div>
                     
                         <div id="collapse25" class="collapse" aria-labelledby="heading25" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                It is difficult to say since all similar courses are not acceptable. However, if you have done similar courses, we recommend you to take FIT e-Tests and apply BIT registration based on the results.
+                                It is difficult to say since all similar courses are not acceptable. However, if you have done similar courses/study programmes, we recommend you to take FIT e-Tests and apply for BIT registration based on the results.
                             </div>
                         </div>
                     </div>
@@ -473,7 +473,7 @@
                     
                         <div id="collapse26" class="collapse" aria-labelledby="heading26" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                <b>Yes</b> , you must have successfully completed, G.C.E.(O/L) exam.
+                                <b>Yes</b>, You must have completed, GCE (O/L) examination with credit passes for maths and English.
                             </div>
                         </div>
                     </div>
@@ -489,7 +489,7 @@
                     
                         <div id="collapse27" class="collapse" aria-labelledby="heading27" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                You have to register FIT programme and it could be done online by submitting your email <a href="{{url('#registration')}}">here</a>. 
+                                You have to register for the FIT programme via FIT information system  <a href="{{url('#registration')}}">https://reg.fit.bit.lk</a>. First, create an account by providing a valid email address. 
                             </div>
                         </div>
                     </div>
@@ -499,13 +499,13 @@
                     <div class="card border-0">
                         <div class="card-header bg-transparent border-bottom-0" id="heading28">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse28" aria-expanded="true" aria-controls="collapse28">
-                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>When can I register for FIT ?</h4>
+                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>When can I register for the FIT?</h4>
                             </button>
                         </div>
                     
                         <div id="collapse28" class="collapse" aria-labelledby="heading28" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                Students can register for FIT at any time of the year; however the registration period will expire after365 calendar days depending on the registration date.
+                                Students can register for the FIT programme at any time of the year. The registration period will expire after 365 calendar days from the registration date.
                             </div>
                         </div>
                     </div>
@@ -515,13 +515,13 @@
                     <div class="card border-0">
                         <div class="card-header bg-transparent border-bottom-0" id="heading29">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse29" aria-expanded="true" aria-controls="collapse29">
-                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Do I have to come to UCSC to register?</h4>
+                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Do I have to come to the UCSC to register?</h4>
                             </button>
                         </div>
                     
                         <div id="collapse29" class="collapse" aria-labelledby="heading29" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                <b>No</b>, you do not have to come to UCSC to register. However, it takes 2-3 working days to validate your actual payment through credit card or bank.
+                                <b>No</b>, you do not have to come to the UCSC to register. You can register online via FIT information system (reg.fit.bit.lk).  However, it takes 2-7 working days to validate your payments provide you access to the FITVLE.
                             </div>
                         </div>
                     </div>

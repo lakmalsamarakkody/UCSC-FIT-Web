@@ -27,6 +27,12 @@ use function PHPUnit\Framework\isEmpty;
 
 class ExamApplicationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('revalidate');
+        $this->middleware('staff.auth');
+    }
     // PAGES FROM HOME PAGE EXAMS CARDS
     // REVIEW EXAM PAYMENTS
     public function reviewExamPayments()

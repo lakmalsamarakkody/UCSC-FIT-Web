@@ -73,11 +73,11 @@
                     <p>FIT is also a certification programme for employment seekers or school leavers to justify their knowledge and skills in ICT for their future endeavors. University of Colombo School of Computing (UCSC), which is the most reputed higher education institute in the field of computer science and Information Communication Technology in Sri Lanka, will issue these certificates once you successfully complete relevant assessment of the FIT programme.</p>
                     <p>The FIT, Foundation in Information Technology, programme consists of three courses, namely,
                         <ul>
-                            <li>ICT Applications (FIT 103)</li>
-                            <li>English for ICT (FIT 203)</li>
-                            <li>Mathematics for ICT (FIT 303)</li>
+                            <li><p>ICT Applications (FIT 103)</p></li>
+                            <li><p>English for ICT (FIT 203)</p></li>
+                            <li><p>Mathematics for ICT (FIT 303)</p></li>
                         </ul>
-                        and e-Learning based online system will be available for all registered students to follow courses at any time during the day. e-Testing based system will be used for the evaluation once the student is ready to take the test at University of Colombo School of Computing (UCSC) etesting lab. Hence, students could start the programme at any time during the year and they can take exams at any month during the year at testing centres. At the same time, several private institutes conduct face to face classes based on the FIT syllabuses.
+                        <p>and e-Learning based online system will be available for all registered students to follow courses at any time during the day. e-Testing based system will be used for the evaluation once the student is ready to take the test at University of Colombo School of Computing (UCSC) etesting lab. Hence, students could start the programme at any time during the year and they can take exams at any month during the year at testing centres. At the same time, several private institutes conduct face to face classes based on the FIT syllabuses.
                     </p>
                     
                     <div class="icon-box wow fadeInUp" data-wow-delay="0.2s"  style="padding-top: 80px;">
@@ -116,8 +116,8 @@
                 
                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body pt-0 pt-0 pl-md-5">
-                            It is a pre-degree program for those who wish to follow the <a href="http://www.bit.lk"><b>Bachelor of Information Technology (BIT)</b></a> at UCSC. 
-                            Moreover, it will be an added qualification for those who seek higher education in ICT or employment in the IT industry or BPO industry.
+                             It is a pre-degree program for those who wish to follow the <a href="http://www.bit.lk"><b>Bachelor of Information Technology (BIT)</b></a> at UCSC. 
+                                Moreover, it will be an added qualification for those who seek higher education in ICT or employments related to IT.
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                 
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                         <div class="card-body pt-0 pl-md-5">
-                            You can obtain ICT related certification to find an employment in ICT or related areas as a beginner. Since BIT is an external degree programme, you could do a full time or part time job while following the <a href="http://www.bit.lk"><b>BIT Programme</b></a>
+                            You can obtain ICT related certification to find an employment in ICT or related areas as a beginner. Since BIT is an external degree programme, you could do a full time or part time job while following the  <a href="http://www.bit.lk"><b>BIT Programme</b></a>
                             <br/>If you do not have enough qualifications to register BIT programme, you can use FIT certification to obtain BIT registration.
                         </div>
                     </div>
@@ -167,7 +167,7 @@
                 
                     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                         <div class="card-body pt-0 pl-md-5">
-                            At the moment, FIT is considered as an alternative qualification to register BIT programme.However, it is difficult to say about other programmes since conditions of registration vary from one to another. However, if any other institute decides to consider FIT certification equivalent qualification for registration, we will announce them.
+                            At the moment, FIT is considered as an alternative qualification to register BIT programme. However, it is difficult to say about other programs since conditions of registration vary from one to another. However, if any other institute decides to consider FIT certification equivalent qualification for registration, we will announce them.
                         </div>
                     </div>
                 </div>

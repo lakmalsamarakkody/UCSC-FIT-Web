@@ -30,12 +30,12 @@
             <div class="col-lg-7 content order-lg-1 order-1">
                 <h2 class="title">Virtual Learning Environment</h2>
                 <br/>
-                <p><b>All registered FIT students will receive a registration number and a password to access the online learning management system</b> </p>
+                <p><b>The students registered for the FIT programme will get access to a virtual learning environment (FITVLE) that will help them to learn online. All e-tests are conducted via an e-testing system. The students will get access to this system when they take the e-tests. The students can start the programme at any time during the year, and they can apply for the examinations at any time when they are ready.</b> </p>
                 
-                <p>Once your payment is confirmed for the registration, you will be notified with login details. It is mandatory to include a valid email address when you register for the FIT programme. Otherwise you have to contact External Degrees Centre of UCSC to find out the status of your registration.
-                    <br/><b>Tel: <a href="tel:+94114720511">011 4720511 </a>/ <a href="tel:+94114720513">011 4720513</a> </b>
+                <p>Once your payment is confirmed for the registration, you will be notified with login details. It is mandatory to include a valid email address when you register for the FIT programme. If you have any problem, you can contact the e-Learning Centre of UCSC to get more information regarding your registration.
+                    <br/><b>Tel: <a href="tel:+94112591080">011 2591080 </a></b>
                 </p>
-                <p>Within 2 weeks of registration we will enroll you to the LMS online courses. If you could not access the LMS after 2 weeks with the given username and password, please contact the LMS administrator.
+                <p>Within two weeks after your registration, we will enrol you on the FITVLE online courses. If you could not access the VLE after two weeks with the given username and password, please contact the VLE administrator.
                     <b><br/>Email:<a href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a>  
                     <br/>Tel: <a href="tel:+94112591080">011 2591080</a> </b>
                 </p>
@@ -93,7 +93,7 @@
             
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body pt-0 pt-0 pl-md-5">
-                        <b>No</b> UCSC will not conduct any face-to-face classes. Private institutes conduct face-to-face classes based on the FIT programme. However, UCSC will not undertake any responsibility or comment on their performances.
+                        <b>No</b> UCSC will not conduct any face-to-face classes. Private institutes conduct face-to-face classes based on the FIT syllabi. However, UCSC will not undertake any responsibility or comment on their performances. Therefore, we advise all the students to follow the online courses in the FITVLE and get updated by checking the announcements we made via the FITVLE and FIT information system.
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
             
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                        You can follow online courses of FIT programme if you have some similar IT experience. Otherwise, you can select a private institute which conducts classes based on the FIT programme.
+                        You can follow online courses in the FITVLE.  Otherwise, you can select a private institute that conducts classes based on the FIT syllabi.
                     </div>
                 </div>
             </div>
@@ -125,7 +125,7 @@
             
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                        Online courses provide general guidance for a self-learning student. They are designed and developed based on the FIT curriculum. However, if you find difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.
+                        Online courses provide general guidance for a self-learning student. They are designed and developed based on the FIT curriculum. However, if you find it difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.
                     </div>
                 </div>
             </div>
@@ -135,13 +135,13 @@
             <div class="card border-0">
                 <div class="card-header bg-transparent border-bottom-0" id="headingFour">
                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Should I go to Institute to complete FIT programme?</h4>
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>hould I go to Institute to complete FIT programme?</h4>
                     </button>
                 </div>
             
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                        No there is no compulsory requirement. There are lot of self-learning students who follow FIT programme. However, if you find difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.
+                        There is no compulsory requirement. There are a lot of self-learning students who follow the FIT programme. However, if you find it difficult to understand the subject matter given in the syllabus and online courses, it is better to consider attending classes conducted by a private institute.
                     </div>
                 </div>
             </div>
@@ -151,13 +151,13 @@
             <div class="card border-0">
                 <div class="card-header bg-transparent border-bottom-0" id="headingFive">
                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>How long will it take to get access to online system (LMS) after registration?</h4>
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>How long will it take to get access to the virtual learning environment (FITVLE) after registration?</h4>
                     </button>
                 </div>
             
                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                    It will take 3-4 working days (after receiving your registration detail from the EDC) to create your account. If you have provided an email address, we will inform as soon as we create an account in the online system. If it is delayed more than two days, please contact <a href="{{ url('/contact')}}">External Degree Centre or e-Learning Centre.</a>
+                        It will take 3-4 working days( maximum 7days) after submitting your registration detail via FIT information system. If you have provided a valid email address, we will inform you as soon as we create an account in the online system. If it delays more than seven days, please contact the admin of the FITVLE <a href="mailto:admin@fit.bit.lk">(admin@fit.bit.lk)</a>.
                     </div>
                 </div>
             </div>
