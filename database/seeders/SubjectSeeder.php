@@ -16,23 +16,23 @@ class SubjectSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('subjects')->truncate();
-    $faker=\Faker\Factory::create();
+    // $faker=\Faker\Factory::create();
         DB::table('subjects')->insert(
             array(
                 ['name'=> 'ICT Applications',
                 'code'=> '103',
-                'created_at'=>$faker->dateTimeBetween('2020-11-01', '2020-11-30'),
+                'created_at'=>'2020-11-30 10:13:53',
                 'updated_at'=> '2020-11-30 10:13:53'],
                 
                 ['name'=> 'English for ICT',
                 'code'=> '203',
-                'created_at'=>$faker->dateTimeBetween('2020-11-01', '2020-11-30'),
+                'created_at'=>'2020-11-30 10:13:53',
                 'updated_at'=> '2020-11-30 10:13:53'],
 
                 
                 ['name'=> 'Mathematics for ICT',
                 'code'=> '303',
-                'created_at'=>$faker->dateTimeBetween('2020-11-01', '2020-11-30'),
+                'created_at'=>'2020-11-30 10:13:53',
                 'updated_at'=> '2020-11-30 10:13:53']
 
             )
