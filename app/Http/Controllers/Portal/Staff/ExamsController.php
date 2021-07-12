@@ -156,6 +156,7 @@ class ExamsController extends Controller
             'scheduleExamType' => ['required','exists:App\Models\Exam\Types,id'],
             'scheduleDate' => ['required', 'date', 'after:today'],
             'scheduleStartTime' => ['required'],
+            'scheduleLab' =>['required', 'exists:App\Models\Lab,id' ]
         ]);
     
         //Check validation errors
@@ -163,7 +164,7 @@ class ExamsController extends Controller
             return response()->json(['errors'=>$exam_schedule_validator->errors()]);
         else:
             //Check if the exact schedule is in the table
-            $exists_schedule = Schedule::where('date',$request->scheduleDate)->where('end_time', '>', $request->scheduleStartTime)->first();
+            $exists_schedule = Schedule::where('date',$request->scheduleDate)->where('end_time', '>', $request->scheduleStartTime)->where('lab', $request->scheduleLab)->first();
             if($exists_schedule != null):
                 return response()->json(['status'=>'exist', 'msg'=>'Exam schedule already exists.']);
             endif;
@@ -182,6 +183,9 @@ class ExamsController extends Controller
             $exam_schedule->exam_type_id = $request->scheduleExamType;
             $exam_schedule->date = $request->scheduleDate;
             $exam_schedule->start_time = $request->scheduleStartTime;
+            $selected_lab = Lab::where('id', $request->scheduleLab)->first();
+            $exam_schedule->lab = $selected_lab->name;
+            $exam_schedule->lab_capacity = $selected_lab->capacity;
 
             //SET EXAM END TIME
             $examDuration = Duration::where('subject_id', $request->scheduleSubject)->where('exam_type_id', $request->scheduleExamType)->first();
