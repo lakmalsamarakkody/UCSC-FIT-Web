@@ -22,39 +22,47 @@
             <div class="card-header">
               Scheduled Exams
               <div class="btn-group float-right">
-                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal-exam-reschedule">Request Reschedule</button>
+                <button class="btn btn-primary" title="Click to request reschedule for the below schedules" data-tooltip="tooltip" type="button" data-toggle="modal" data-target="#modal-exam-reschedule">Request Reschedule</button>
               </div>
             </div>
             
             <div class="card-body">
 
-              <table class="table table-hover">
+             <p>Click on more details for more information</p>
 
-                <thead>
-                  <tr>
-                    <th class="text-center">Subject Code</th>
-                    <th class="text-center">Subject</th>
-                    <th class="text-center">Exam Type</th>
-                    <th class="text-center">Date</th>
-                    <th class="text-center">Time</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  @foreach ($scheduled_exams as $exam)
-                    @if($exam->schedule->date > date('Y-m-d') && ($exam->medical==null || ($exam->medical != null && $exam->medical->status == "Declined")))
-                    <tr>
-                      <td class="text-center">FIT {{ $exam->subject->code }}</td>
-                      <td class="text-center">{{ $exam->subject->name }}</td>
-                      <td class="text-center">{{ $exam->type->name }}</td>
-                      <td class="text-center">{{ $exam->schedule->date }}</td>
-                      <td class="text-center">{{ $exam->schedule->start_time }} - {{ $exam->schedule->end_time }}</td>
-                    </tr>
-                    @endif
-                  @endforeach
-                </tbody>
-
-              </table>                  
+              @foreach ($scheduled_exams as $exam)
+                @if($exam->schedule->date > date('Y-m-d') && ($exam->medical==null || ($exam->medical != null && $exam->medical->status == "Declined")))
+                {{-- @if($exam->schedule->date > date('Y-m-d')) --}}
+                  <div class="accordion" id="accordion_{{$exam->id}}">
+                    <div class="card mb-4 shadow-none border-top border-info border-bottom"  data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}">
+                      <div class="card-header text-secondary" id="heading_{{$exam->id}}">
+                        <div class="row">
+                          <div class="col-2 col-md-3 text-center pt-2">FIT {{ $exam->subject->code }}</div>
+                          <div class="col-6 col-md-3 text-center pt-2">{{ $exam->subject->name }} ({{ $exam->type->name }})</div>
+                          <div class="col-4 col-md-3 text-center pt-2">{{$exam->schedule->date}}</div>
+                          <div class="btn-group  col-md-3">
+                            <button class="btn btn-outline-success w-100" type="button" data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}"><i class="far fa-eye"></i> More Details</button>
+                          </div>
+                        </div>
+                      </div>
+                  
+                      <div id="collapse_{{$exam->id}}" class="collapse" aria-labelledby="heading_{{$exam->id}}" data-parent="#accordion_{{$exam->id}}">
+                        <div class="card-body text-md-center border-top border-secondary">
+                          <div class="row">
+                            <div class="col-12 col-md-4"> Start Time : {{ $exam->schedule->start_time }}</div>
+                            <div class="col-12 col-md-4"> End Time : {{ $exam->schedule->end_time }}</div>
+                            <div class="col-12 col-md-4"> Lab : {{ $exam->schedule->lab }}</div>
+                            {{-- <div class="col-12 offset-md-4 col-md-4 my-3">
+                              <button type="button" class="btn btn-outline-primary w-100" data-tooltip="tooltip" data-placement="bottom" title="Apply Exam" onclick="window.open('/portal/student/payment')"><i class="far fa-hand-point-right"></i> Apply</button>
+                            </div> --}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                @endif
+              @endforeach
+            
 
             </div>
             
@@ -72,42 +80,67 @@
             </div>
             
             <div class="card-body">
-              <p>Click on the status for more information</p>
-              <table class="table table-hover">
-
-                <thead>
-                  <tr>
-                    <th class="text-center">Subject Code</th>
-                    <th class="text-center">Subject</th>
-                    <th class="text-center">Exam Type</th>
-                    <th class="text-center">Date</th>
-                    <th class="text-center">Time</th>
-                    <th class="text-center">Status</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  @foreach ($scheduled_exams as $exam)
-                    @if($exam->schedule->date > date('Y-m-d') && $exam->medical!=null)
-                    <tr>
-                      <td class="text-center">FIT {{ $exam->subject->code }}</td>
-                      <td class="text-center">{{ $exam->subject->name }}</td>
-                      <td class="text-center">{{ $exam->type->name }}</td>
-                      <td class="text-center">{{ $exam->schedule->date }}</td>
-                      <td class="text-center">{{ $exam->schedule->start_time }} - {{ $exam->schedule->end_time }}</td>
-                      @if($exam->medical->status == "Approved")
-                      <td class="text-center text-success"><button data-toggle="popover"  data-placement="left" title="Wait until we reschedule your exam. If not rescheduled withing two weeks, please contact e-Learning Centre-UCSC" type="button" class="btn btn-success w-100">{{ $exam->medical->status }}</button></td>
-                      @elseif($exam->medical->status == "Pending")
-                      <td class="text-center text-default"><button data-toggle="popover"  data-placement="left" title="Your request is being processed. Please wait! If not rescheduled withing two weeks, please contact e-Learning Centre-UCSC" type="button" class="btn btn-warning w-100">{{ $exam->medical->status }}</button></td>
-                      @elseif($exam->medical->status == "Declined")   
-                      <td class="text-center text-danger"><button data-toggle="popover"  data-placement="left" title="Your exam is still active on the given schedule. Your request has been declined due to following reason(s):" data-content="{{ $exam->medical->declined_message }}." type="button" class="btn btn-danger w-100">{{ $exam->medical->status }}</button></td>                   
-                      @endif                      
-                    </tr>
-                    @endif
-                  @endforeach
-                </tbody>
-
-              </table>                  
+             <p>Click on the status for more information</p>
+              <p>If Declined prior to the exam, the schedule will appear again under 'Scheduled Exams' </p>
+              
+              @foreach ($scheduled_exams as $exam)
+                @if($exam->schedule->date > date('Y-m-d') && $exam->medical!=null)
+                {{-- @if($exam->schedule->date > date('Y-m-d')) --}}
+                  <div class="accordion" id="accordion_{{$exam->id}}">
+                    <div class="card mb-4 shadow-none border-top @if($exam->medical->status == 'Approved') border-success @elseif($exam->medical->status == "Pending") border-warning @elseif($exam->medical->status == "Declined")  border-danger @endif border-bottom"  data-toggle="collapse" data-target="#collapse_{{$exam->id}}" aria-expanded="true" aria-controls="collapse_{{$exam->id}}">
+                      <div class="card-header text-secondary" id="heading_{{$exam->id}}">
+                        <div class="row">
+                          <div class="col-2 col-md-3 text-center pt-2">FIT {{ $exam->subject->code }}</div>
+                          <div class="col-6 col-md-3 text-center pt-2">{{ $exam->subject->name }} ({{ $exam->type->name }})</div>
+                          <div class="col-4 col-md-3 text-center pt-2">{{$exam->schedule->date}}</div>
+                          <div class="col-md-3 pt-2">
+                            @if($exam->medical->status == "Approved")
+                            <p class="text-center text-success">{{ $exam->medical->status }}</p>
+                            @elseif($exam->medical->status == "Pending")
+                            <p class="text-center text-default">{{ $exam->medical->status }}</p>
+                            @elseif($exam->medical->status == "Declined")   
+                            <p class="text-center text-danger">{{ $exam->medical->status }}</p>                   
+                            @endif  
+                          </div>
+                        </div>
+                      </div>
+                  
+                      <div id="collapse_{{$exam->id}}" class="collapse" aria-labelledby="heading_{{$exam->id}}" data-parent="#accordion_{{$exam->id}}">
+                        <div class="card-body text-md-center border-top border-secondary">
+                          <div class="row">                          
+                                                 
+                            @if($exam->medical->status == "Approved")
+                            <div class="col-12 alert alert-success" role="alert">
+                              <p>You will receive a new schedule <br> If not rescheduled withing two weeks, please contact e-Learning Centre-UCSC</p>
+                            </div>
+                            @elseif($exam->medical->status == "Pending")
+                            <div class="col-12 alert alert-warning" role="alert">
+                              <p>Your request is being processed. Please wait! <br> If not processed withing two weeks, please contact e-Learning Centre-UCSC</p>
+                            </div>
+                            @elseif($exam->medical->status == "Declined")
+                            <div class="col-12 alert alert-danger" role="alert">
+                              <p>Your exam is still active for the given schedule.<br> Your request has been declined due to following reason(s): {{ $exam->medical->declined_message }}.</p>                  
+                            </div>
+                            @endif  
+                            
+                            <div class="col-12 col-md-4"> Start Time : {{ $exam->schedule->start_time }}</div>
+                            <div class="col-12 col-md-4"> End Time : {{ $exam->schedule->end_time }}</div>
+                            <div class="col-12 col-md-4"> Lab : {{ $exam->schedule->lab }}</div>
+                            {{-- @if($exam->medical->status == "Declined")   
+                            <div class="col-12 alert alert-danger" role="alert">
+                              <p>Your exam is still active for the given schedule.<br> Your request has been declined due to following reason(s): {{ $exam->medical->declined_message }}.</p>                  
+                            </div>
+                            @endif  --}}
+                            {{-- <div class="col-12 offset-md-4 col-md-4 my-3">
+                              <button type="button" class="btn btn-outline-primary w-100" data-tooltip="tooltip" data-placement="bottom" title="Apply Exam" onclick="window.open('/portal/student/payment')"><i class="far fa-hand-point-right"></i> Apply</button>
+                            </div> --}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                @endif
+              @endforeach                
 
             </div>
             
@@ -121,7 +154,7 @@
           <div class="card">
             <div class="card-header">Apply for Exams</div>
             <div class="card-body">
-              <small class="mb-4">*Please select the exams you want to apply(using checkboxes in left side) and select the preferred month for each exam you select.</small>
+              <p>Please select the exams you want to apply (using checkboxes in left side) and select the preferred month for each exam you select.</p>
               <form action="" id="formApplyExam">
                 <div class="table-responsive-md mt-4">
                   <table class="table table-hover">
@@ -353,12 +386,12 @@
               @foreach ($held_exams as $exam)
                 @if($exam->schedule->date <= date('Y-m-d'))
                   <div class="accordion" id="accordionAbsent_{{$exam->id}}">
-                    <div class="card mb-4 shadow-sm">
+                    <div class="card mb-4  shadow-none border-top border-info border-bottom">
                       <div class="card-header text-secondary" id="heading_{{$exam->id}}">
                         <div class="row">
-                          <div class="col-2 col-md-3 text-center pt-2">FIT {{ $exam->subject->code }}</div>
-                          <div class="col-6 col-md-3 text-center pt-2">{{ $exam->subject->name }} ({{ $exam->type->name }})</div>
-                          <div class="col-4 col-md-3 text-center pt-2">{{$exam->schedule->date}} ({{ \Carbon\Carbon::create($exam->schedule->start_time)->isoFormat('hh:mm A')}} - {{ \Carbon\Carbon::create($exam->schedule->end_time)->isoFormat('hh:mm A') }})</div>
+                          <div class="col-2 col-md-3 text-center py-2">FIT {{ $exam->subject->code }}</div>
+                          <div class="col-6 col-md-3 text-center py-2">{{ $exam->subject->name }} ({{ $exam->type->name }})</div>
+                          <div class="col-4 col-md-3 text-center py-2">{{$exam->schedule->date}} ({{ \Carbon\Carbon::create($exam->schedule->start_time)->isoFormat('hh:mm A')}} - {{ \Carbon\Carbon::create($exam->schedule->end_time)->isoFormat('hh:mm A') }})</div>
                           @if(Auth::user()->hasPermission('student-exam-medical'))
                           <div class="col-12 col-md-3 text-center">
                             @if($exam->medical != null && $exam->medical->status=='Pending' && $exam->medical->type == 'reschedule')
