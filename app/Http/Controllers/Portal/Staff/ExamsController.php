@@ -240,6 +240,8 @@ class ExamsController extends Controller
             'editScheduleExamDate'=> ['required', 'date', 'after:today'],
             'editScheduleStartTime'=> ['required'],
             'editScheduleEndTime'=> ['required'],
+            'editScheduleLab'=> ['required', 'exists:App\Models\Lab,id'],
+            'editScheduleLabCapacity'=> ['required', 'integer']
         ]);
 
         //Check validator fails
@@ -247,7 +249,8 @@ class ExamsController extends Controller
             return response()->json(['status'=>'error', 'errors'=>$edit_schedule_validator->errors()]);
         else:
             //Check if the exact schedule is in the table
-            $exists_schedule = Schedule::where('id', '!=', $request->editScheduleId)->where('date',$request->editScheduleExamDate)->where('end_time', '>', $request->editScheduleStartTime)->first();
+            $scheduled_lab = Lab::where('id', $request->editScheduleLab)->first();
+            $exists_schedule = Schedule::where('id', '!=', $request->editScheduleId)->where('date',$request->editScheduleExamDate)->where('end_time', '>', $request->editScheduleStartTime)->where('lab', $scheduled_lab->name)->first();
             if($exists_schedule != null):
                 return response()->json(['status'=>'exist', 'msg'=>'Another schedule already exists in this time period.']);
             endif;
@@ -266,7 +269,9 @@ class ExamsController extends Controller
                 'exam_type_id' => $request->editScheduleExamType,
                 'date' => $request->editScheduleExamDate,
                 'start_time' => $request->editScheduleStartTime,
-                'end_time' => $request->editScheduleEndTime
+                'end_time' => $request->editScheduleEndTime,
+                'lab' => $scheduled_lab->name,
+                'lab_capacity'=> $request->editScheduleLabCapacity
             ])):
                 return response()->json(['status'=>'success']);
             endif;
@@ -511,6 +516,7 @@ class ExamsController extends Controller
             'postponeExamDate'=> ['required', 'date', 'after: today'],
             'postponeExamStartTime'=> ['required'],
             'postponeExamEndTime'=> ['required'],
+            'postponeExamLab'=> ['required', 'exists:App\Models\Lab,id']
         ]);
 
         // Check validator fails
@@ -518,7 +524,9 @@ class ExamsController extends Controller
             return response()->json(['status'=>'errors', 'errors'=>$postpone_exam_validator->errors()]);
         else:
             // Check if the schedule is already exists
-            $exists_schedule = Schedule::where('date',$request->postponeExamDate)->where('end_time', '>', $request->postponeExamStartTime)->first();
+            $scheduled_lab = Lab::where('id', $request->postponeExamLab)->first();
+            $exists_schedule = Schedule::where('date',$request->postponeExamDate)->where('end_time', '>', $request->postponeExamStartTime)
+            ->where('lab', $scheduled_lab->name)->first();
             if($exists_schedule != null):
                 return response()->json(['status'=>'exist', 'msg'=>'Another schedule already exists in this time period.']);
             endif;
@@ -536,7 +544,8 @@ class ExamsController extends Controller
                 'exam_id'=>$request->postponeExam,
                 'date' => $request->postponeExamDate,
                 'start_time' => $request->postponeExamStartTime,
-                'end_time' => $request->postponeExamEndTime
+                'end_time' => $request->postponeExamEndTime,
+                'lab' => $scheduled_lab->name,
             ])):
             return response()->json(['status'=>'success']);
             endif;
