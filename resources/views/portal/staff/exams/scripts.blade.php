@@ -413,6 +413,8 @@ let heldExamTable = null;
           $('#editScheduleExamDate').val(data['schedule']['date']);
           $('#editScheduleStartTime').val(data['schedule']['start_time']);
           $('#editScheduleEndTime').val(data['schedule']['end_time']);
+          $('#editScheduleLab').val(data['scheduled_lab_id']);
+          $('#editScheduleLabCapacity').val(data['schedule']['lab_capacity']);
           $('#modal-edit-schedule').modal('show');
           $('#btnEditSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
         }
@@ -1143,6 +1145,7 @@ let heldExamTable = null;
           $('#postponeExamDate').val(data['schedule']['date']);
           $('#postponeExamStartTime').val(data['schedule']['start_time']);
           $('#postponeExamEndTime').val(data['schedule']['end_time']);
+          $('#postponeExamLab').val(data['scheduled_lab_id']);
           $('#modal-postpone-schedule').modal('show');
           $('#btnPostponeSchedule-'+schedule_id).removeAttr('disabled', 'disabled');
         }

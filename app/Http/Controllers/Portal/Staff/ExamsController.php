@@ -221,7 +221,8 @@ class ExamsController extends Controller
             return response()->json(['status'=>'error', 'errors'=>$schedule_id_validator->errors()]);
         else:
             if($schedule = Schedule::find($request->schedule_id)):
-                return response()->json(['status'=>'success', 'schedule'=>$schedule]);
+                $scheduled_lab_id = Lab::where('name', $schedule->lab)->first()->id;
+                return response()->json(['status'=>'success', 'schedule'=>$schedule, 'scheduled_lab_id'=>$scheduled_lab_id]);
             endif;
         endif;
         return response()->json(['status'=>'error', 'data'=>$request->all()]);
@@ -493,7 +494,8 @@ class ExamsController extends Controller
                 $subjectName = $schedule->subject->name;
                 $examType = $schedule->type->name;
                 $title = $Exam." / ".$subjectName." (FIT-".$subjectCode.") / ".$examType;
-                return response()->json(['status'=> 'success', 'schedule'=> $schedule, 'title'=> $title]);
+                $scheduled_lab_id = Lab::where('name', $schedule->lab)->first()->id;
+                return response()->json(['status'=> 'success', 'schedule'=> $schedule, 'title'=> $title, 'scheduled_lab_id'=>$scheduled_lab_id]);
             endif;
         endif;
         return response()->json(['status'=>'error', 'data'=>$request->all()]);

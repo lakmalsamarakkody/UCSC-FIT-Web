@@ -13,7 +13,7 @@
                 <div class="class-body">
                     <form id="formEditSchedule">
                         <div class="form-row align-items-center px-4">
-                          <div class="form-group col-xl-2 col-lg-4">
+                          <div class="form-group col-3">
                             <label for="editScheduleExam">Exam</label>
                             <input type="hidden" class="form-control" id="editScheduleId" name="editScheduleId">
                             <span class="invalid-feedback" id="error-editScheduleId" role="alert"></span>
@@ -25,7 +25,7 @@
                             </select>
                             <span class="invalid-feedback" id="error-editScheduleExam" role="alert"></span>
                           </div>
-                          <div class="form-group col-xl-2 col-lg-4">
+                          <div class="form-group col-3">
                             <label for="editScheduleSubject">Subejct</label>
                             <select name="editScheduleSubject" id="editScheduleSubject" class="form-control">
                                 <option value="" selected>Select Subject</option>
@@ -35,7 +35,7 @@
                             </select>
                             <span class="invalid-feedback" id="error-editScheduleSubject" role="alert"></span>
                           </div>
-                          <div class="form-group col-xl-2 col-lg-4">
+                          <div class="form-group col-3">
                             <label for="editScheduleExamType">Exam Type</label>
                             <select name="editScheduleExamType" id="editScheduleExamType" class="form-control">
                                 <option value="" selected>Select Exam Type</option>
@@ -45,20 +45,35 @@
                             </select>
                             <span class="invalid-feedback" id="error-editScheduleExamType" role="alert"></span>
                           </div>
-                          <div class="form-group col-xl-2 col-lg-4">
+                          <div class="form-group col-3">
                             <label for="editScheduleExamDate">Date</label>
                             <input type="date" name="editScheduleExamDate" id="editScheduleExamDate" class="form-control"/>
                             <span class="invalid-feedback" id="error-editScheduleExamDate" role="alert"></span>
                           </div>
-                          <div class="form-group col-xl-2 col-lg-4">
+                          <div class="form-group col-3">
                             <label for="editScheduleStartTime">Start Time</label>
                             <input type="time" name="editScheduleStartTime" id="editScheduleStartTime" class="form-control"/>
                             <span class="invalid-feedback" id="error-editScheduleStartTime" role="alert"></span>
                           </div>
-                          <div class="form-group col-xl-2 col-lg-4">
+                          <div class="form-group col-3">
                             <label for="editScheduleEndTime">End Time</label>
                             <input type="time" name="editScheduleEndTime" id="editScheduleEndTime" class="form-control"/>
                             <span class="invalid-feedback" id="error-editScheduleEndTime" role="alert"></span>
+                          </div>
+                          <div class="form-group col-3 ">
+                            <label for="editScheduleLab">Lab</label>
+                            <select name="editScheduleLab" id="editScheduleLab" class="form-control">
+                                <option value="" selected>Select Lab</option>
+                                @foreach ($labs as $lab)
+                                    <option value="{{ $lab->id }}">{{ $lab->name }}</option>
+                                @endforeach
+                            </select>
+                            <span class="invalid-feedback" id="error-editScheduleLab" role="alert"></span>
+                          </div>
+                          <div class="form-group col-3">
+                            <label for="editScheduleLabCapacity">Lab Capacity</label>
+                            <input type="text" name="editScheduleLabCapacity" id="editScheduleLabCapacity" class="form-control">
+                            <span class="invalid-feedback" id="error-editScheduleLabCapacity" role="alert"></span>
                           </div>
                         </div>
                     </form>
@@ -110,7 +125,7 @@
                     <h5 class="card-header p-0" id="modal-postpone-schedule-title"></h5><br/>
                     <form id="formPostponeSchedule">
                         <div class="form-row align-items-center">
-                            <div class="form-group col-lg-3 col-md-6">
+                            <div class="form-group col-xl-3 col-lg-6">
                                 <label for="postponeExam">Exam</label>
                                 <input type="hidden" class="form-control" id="postponeScheduleId" name="postponeScheduleId">
                                 <select name="postponeExam" id="postponeExam" class="form-control">
@@ -121,20 +136,30 @@
                                 </select>
                                 <span class="invalid-feedback" id="error-postponeExam" role="alert"></span>
                               </div>
-                            <div class="form-group col-lg-3 col-md-6">
+                            <div class="form-group col-xl-3 col-lg-6">
                                 <label for="postponeExamDate">Date</label>
                                 <input type="date" class="form-control" name="postponeExamDate" id="postponeExamDate" />
                                 <span class="invalid-feedback" id="error-postponeExamDate" role="alert"></span>
                             </div>
-                            <div class="form-group col-lg-3 col-md-6">
+                            <div class="form-group col-xl-2 col-lg-4">
                                 <label for="postponeExamStartTime">Start Time</label>
                                 <input type="time" class="form-control" name="postponeExamStartTime" id="postponeExamStartTime" />
                                 <span class="invalid-feedback" id="error-postponeExamStartTime" role="alert"></span>
                             </div>
-                            <div class="form-group col-lg-3 col-md-6">
+                            <div class="form-group col-xl-2 col-lg-4">
                                 <label for="postponeExamEndTime">End Time</label>
                                 <input type="time" class="form-control" name="postponeExamEndTime" id="postponeExamEndTime" />
                                 <span class="invalid-feedback" id="error-postponeExamEndTime" role="alert"></span>
+                            </div>
+                            <div class="form-group col-xl-2 col-lg-4">
+                                <label for="postponeExamLab">Lab</label>
+                                <select name="postponeExamLab" id="postponeExamLab" class="form-control">
+                                    <option value="" selected>Select Lab</option>
+                                    @foreach ($labs as $lab)
+                                        <option value="{{ $lab->id }}">{{ $lab->name }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="invalid-feedback" id="error-postponeExamLab" role="alert"></span>
                             </div>
 
                         </div>
