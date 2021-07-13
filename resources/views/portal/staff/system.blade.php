@@ -373,6 +373,47 @@
       @endif
       <!-- /PAYMENT TYPES -->
 
+      {{-- LABS --}}
+      <div class="col-xl-6 col-lg-12 mt-xl-5">
+        <div class="card h-100">
+          <div class="card-header">LABS</div>
+          <div class="card-body">
+            <div class="card-text">
+              <table class="table table-responsive-md">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Capacity</th>
+                    <th>Status</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($labs as $lab)
+                  <tr id="tbl-lab-tr-{{$lab->id}}">
+                    <td>{{ $lab->id }}</td>
+                    <td>{{ $lab->name }}</td>
+                    <td>{{ $lab->capacity }}</td>
+                    <td>{{ $lab->status }}</td>
+                    <td class="text-right">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-outline-warning" id="btnEditLab-{{ $lab->id }}" onclick="edit_lab_modal_invoke({{ $lab->id }});"><i class="fas fa-edit"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-lab"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+      {{-- /LABS --}}
+
       @include('portal.staff.system.modal')
     
     </div>
