@@ -260,6 +260,10 @@ Route::post('/portal/staff/system/editPaymentTypeGetDetails', [App\Http\Controll
 Route::post('/portal/staff/system/editPaymentType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editPaymentType']);
 Route::post('/portal/staff/system/deletePaymentType', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deletePaymentType']);
 
+Route::post('/portal/staff/system/createLab', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createLab'])->name('create.lab');
+Route::post('/portal/staff/system/editLabGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editLabGetDetails'])->name('edit.lab.details');
+Route::post('/portal/staff/system/editLab', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editLab'])->name('edit.lab');
+
 Route::post('/portal/staff/system/StudentImport', [App\Http\Controllers\Portal\Staff\SystemController::class, 'StudentImport'])->name('student.import');
 // /SYSTEM PAGE
 
