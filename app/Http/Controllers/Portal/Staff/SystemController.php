@@ -780,6 +780,26 @@ class SystemController extends Controller
   // CREATE FUNCTION
   public function createLab(Request $request)
   {
+    //Validatinng form data
+    $lab_validator = Validator::make($request->all(), [
+      'newLabName' => ['required', 'unique:labs,name'],
+      'newLabCapacity' => ['required', 'integer'],
+      'newLabStatus' => ['required', Rule::in(['Active', 'Deactive'])],
+    ]);
+
+    // Check validation errors
+    if($lab_validator->fails()):
+      return response()->json(['errors'=>$lab_validator->errors()]);
+    else:
+      $lab = new Lab();
+      $lab->name = $request->newLabName;
+      $lab->capacity = $request->newLabCapacity;
+      $lab->status = $request->newLabStatus;
+      if($lab->save()):
+        return response()->json(['status'=>'success', 'lab'=>$lab]);
+      endif;
+    endif;
+    return response()->json(['status'=>'error']);
 
   }
   // /CREATE FUNCTION
