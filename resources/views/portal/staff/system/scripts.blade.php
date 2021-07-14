@@ -1961,6 +1961,49 @@ let permissionTable = null;
   // /DELETE
 // /PAYMENT TYPE
 
+// LAB
+// CREATE
+create_lab = () => {
+  
+}
+// /CREATE
+// EDIT
+// Fill modal with lab details
+edit_lab_modal_invoke = (lab_id) => {
+  //Form Payload
+  let formData = new FormData();
+  formData.append('lab_id', lab_id);
+
+  $.ajax({
+    headers: {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')},
+    url: "{{ route('edit.lab.details') }}",
+    type: 'post',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function(){$('#btnEditLab-'+lab_id).attr('disabled', 'disabled');},
+    success: function(data) {
+      console.log('Success in edit lab get details ajax.');
+      if(data['status'] == 'success'){
+        $('#edit-lab-title').html('Edit Lab ' + data['lab']['name']);
+        $('#labId').val(data['lab']['id']);
+        $('#labCapacity').val(data['lab']['capacity']);
+        $('#labStatus').val(data['lab']['status']);
+        $('#modal-edit-lab').modal('show');
+        $('#btnEditLab-'+lab_id).removeAttr('disabled', 'disabled');
+      }
+    },
+    error: function(err) {
+      console.log('Error in edit payment get details ajax');
+      $('#btnEditLab-'+lab_id).removeAttr('disabled', 'disabled');
+      SwalSystemErrorDanger.fire();
+    }
+  });
+}
+// /Fill modal with lab details
+// /EDIT
+// /LAB
+
 // IMPORT STUDENT
 import_student = () => {
 
