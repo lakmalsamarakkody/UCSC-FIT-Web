@@ -825,7 +825,25 @@ class SystemController extends Controller
 
   public function editLab(Request $request)
   {
-    
+    //Validate lab data
+    $edit_lab_validator = Validator::make($request->all(), [
+      'labId'=> ['required', 'integer', 'exists:labs,id'],
+      'labCapacity'=> ['required', 'integer'],
+      'labStatus'=> ['required', Rule::in(['Active', 'Deactive'])],
+    ]);
+
+    //Check validator fails
+    if($edit_lab_validator->fails()):
+      return response()->json(['errors'=>$edit_lab_validator->errors()]);
+    else:
+      if(Lab::where('id', $request->labId)->update([
+        'id' => $request->labId,
+        'capacity' => $request->labCapacity,
+        'status' => $request->labStatus,
+      ])):
+      return response()->json(['status'=>'success']);
+      endif;
+    endif;
   }
   // /EDIT FUNCTIONS
   // /LAB

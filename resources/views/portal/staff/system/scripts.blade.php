@@ -2066,6 +2066,72 @@ let permissionTable = null;
     });
   }
   // /Fill modal with lab details
+
+  edit_lab = () => {
+    SwalQuestionSuccessAutoClose.fire({
+      title: 'Are you sure?',
+      text: 'Lab will be updated!',
+      confirmButtonText: 'Yes, Update!',
+    })
+    .then((result)=> {
+      if(result.isConfirmed) {
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+
+        //Form Payload
+        let formData = new FormData($('#formEditLab')[0]);
+
+        //Edit lab controller
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ route('edit.lab') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function() {$('#btnModalEditLab').attr('disabled', 'disabled');},
+          success: function(data) {
+            console.log('Success in edit lab ajax.');
+            $('#btnModalEditLab').removeAttr('disabled', 'disabled');
+            if(data['errors']) {
+              console.log('Errors in validating lab data.');
+              $.each(data['errors'], function(key, value) {
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success') {
+              console.log('Success in edit lab.');
+              SwalDoneSuccess.fire({
+                title: 'Updated!',
+                text: 'Lab has been updated.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-edit-lab').modal('hide');
+                  location.reload();
+                }
+              });
+            }
+          },
+          error: function(err) {
+            console.log('Error in edit lab ajax.');
+            $('#btnModalEditLab').removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else {
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Lab has not been updated.',
+        })
+      }
+    })
+  }
   // /EDIT
 // /LAB
 
