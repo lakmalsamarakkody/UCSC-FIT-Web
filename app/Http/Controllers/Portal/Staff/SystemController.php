@@ -837,7 +837,6 @@ class SystemController extends Controller
       return response()->json(['errors'=>$edit_lab_validator->errors()]);
     else:
       if(Lab::where('id', $request->labId)->update([
-        'id' => $request->labId,
         'capacity' => $request->labCapacity,
         'status' => $request->labStatus,
       ])):
