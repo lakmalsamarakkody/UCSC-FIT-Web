@@ -32,7 +32,7 @@
                 <br/>
                 <p>Students, who are competent about the subject as given in the syllabus <b>can apply for the examination at any time</b>. </p>
                 <br/>
-                <p>However,<b> you should be able to pass the online assignments in the<a href="http://fit.bit.lk/vle"><b> FITVLE</b></a> before applying for the e-Tests. </b>Those who have not passed the VLE-based online assignments are not called for the examinations even if they have made the necessary payments.</p>   
+                <p>However,<b> you should be able to pass the online assignments in the<a href="https://fitvle.bit.lk/"><b> FITVLE</b></a> before applying for the e-Tests. </b>Those who have not passed the VLE-based online assignments are not called for the examinations even if they have made the necessary payments.</p>   
                 
                 <table class="table table-responsive-sm table-hover">
                     <thead>
@@ -69,7 +69,7 @@
             </div>
             
             <div class="myBox col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/exam.png') }}); cursor: pointer;">
-                <a target="_blank"  href="http://fit.bit.lk/vle"></a>
+                <a target="_blank"  href="https://fitvle.bit.lk/"></a>
 
             </div>
 
@@ -92,7 +92,7 @@
                     <h2 class="title">UCSC e-Testing Lab</h2>
                     <p class="description">If your question is related to examination matters of FIT programme, 
                         <br>for example <b>submitting applications for examination,</b> etc. please contact the e-Learning Center. 
-                        <br>It is recommended to check the FIT website ( <a href="http://www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you try to visit us or reach us over the phone.
+                        <br>It is recommended to check the FIT website ( <a href="http://www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="https://fitvle.bit.lk/">https://fitvle.bit.lk/</a> ) before you try to visit us or reach us over the phone.
                     </p>
                 </div>
             </div>
