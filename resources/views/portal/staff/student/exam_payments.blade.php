@@ -17,7 +17,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb ">
               <li class="breadcrumb-item"><a href="{{ url('/portal/staff/') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Exam Applications</li>
+              <li class="breadcrumb-item active" aria-current="page">Exam Paymentss</li>
             </ol>
           </nav>
 
@@ -31,13 +31,16 @@
       <div class="row">
           
         <!-- APPLICATIONS LIST -->
-        <div class="col-5 md-5">
+        <div class="col-12 md-5">
           <div class="card">
-            <div class="card-header">Exam Applicants</div>
-            <div class="card-body overflow-auto" style="max-height:600px">
+            <div class="card-header">Exam Payments</div>
+            <div class="card-body">
               @if($exam_applicants->isEmpty())
                 <div class="alert alert-info" role="alert">No results found!</div>
               @else
+                @if(Auth::user()->hasPermission('staff-dashboard-exam-application-approveSchedules'))
+                  <div class="row px-3 mb-3"><div class="ml-auto text-right"><button id="btnApproveAll" class="btn btn-danger" onclick="ApproveAll()"><i class="fas fa-exclamation-triangle"> </i> Approve All</button></div></div>
+                @endif
                 <table class="table yajra-datatable">
                   {{-- <thead>
                     <tr>
@@ -58,6 +61,7 @@
                         <tr>
                           <td>{{ $applicant->student->reg_no }}</td>
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
+                          <td>{{ $applicant->created_at->isoFormat('YYYY-MM-DD') }}</td>
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">

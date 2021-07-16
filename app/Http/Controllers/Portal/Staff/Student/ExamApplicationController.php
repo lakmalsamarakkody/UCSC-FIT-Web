@@ -41,7 +41,7 @@ class ExamApplicationController extends Controller
         $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', null)->where('schedule_status', 'Pending')->orWhere('schedule_status', 'Scheduled')->orderBy('created_at', 'asc')->get()->unique('payment_id');
         $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('schedule_status', 'Pending')->get();
-        return view('portal/staff/student/exam_application', [
+        return view('portal/staff/student/exam_payments', [
             'exam_applicants' => $exam_applicants,
             'applied_exams' => $applied_exams,
             'exams' => $exams
