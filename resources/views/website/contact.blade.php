@@ -43,7 +43,7 @@
                 <br/>
                 <p>If your question is related to administration matters of FIT programme, 
                         <br>for example <b>registration, submitting applications for examination,</b> etc. please create an account in the <a href="{{ url('/login') }}"> online information system</a></a>. You will be able to get all relevant information and support via our online system. However, if you have any doubts or questions, you can contact the e-Learning Centre. 
-                        <br>It is recommended to check the FIT website ( <a href="{{ url('/') }}">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you try to contact us over the phone.
+                        <br>It is recommended to check the FIT website ( <a href="{{ url('/') }}">www.fit.bit.lk</a> ) or FIT LMS ( <a href="https://fitvle.bit.lk/">https://fitvle.bit.lk/</a> ) before you try to contact us over the phone.
                 </p>
             </div>
             <div class="col-lg-4 content order-lg-2 order-2">               
@@ -68,9 +68,9 @@
             <div class="col-lg-8 content order-lg-1 order-1">               
                     <h2 class="title"><a href="mailto:admin@fit.bit.lk"  style="color:#000">e-Learning Services</a></h2>
                     <p class="description">If your question is related to e-learning services,
-                        <br>for example,<b>login into the Learning Management System </b>( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> )  
+                        <br>for example,<b>login into the Learning Management System </b>( <a href="https://fitvle.bit.lk/">https://fitvle.bit.lk/</a> )  
                         <b>online assignments and accessing online courses related issues,</b> etc. contact e-Learning Centre. 
-                        <br>If your question is about online course content, it is recommended to check the relevent discussion forum of the course and post your question before you contact relevant facilitator at e-Learning Centre. <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> (Check the VLE site for announcements)
+                        <br>If your question is about online course content, it is recommended to check the relevent discussion forum of the course and post your question before you contact relevant facilitator at e-Learning Centre. <a href="https://fitvle.bit.lk/">https://fitvle.bit.lk/</a> (Check the VLE site for announcements)
                     </p>
                 
             </div>
@@ -96,7 +96,7 @@
                     <h2 class="title"><a href="mailto:taw@ucsc.cmb.ac.lk"  style="color:#000">Academic Matters</a></h2>
                     <p class="description">If your question is related to administration matters of FIT programme, 
                         <br>for example <b>registration, submitting applications for examination,</b> etc. please contact External Degrees Centre. 
-                        <br>It is recommended to check the FIT website ( <a href="www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="http://fit.bit.lk/vle">http://fit.bit.lk/vle</a> ) before you contact the relevant details.
+                        <br>It is recommended to check the FIT website ( <a href="www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="https://fitvle.bit.lk/">https://fitvle.bit.lk/</a> ) before you contact the relevant details.
                     </p>
             </div>
             <div class="col-lg-4 content order-lg-2 order-2">               

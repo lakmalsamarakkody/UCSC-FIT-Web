@@ -77,7 +77,7 @@
                             <li><p>English for ICT (FIT 203)</p></li>
                             <li><p>Mathematics for ICT (FIT 303)</p></li>
                         </ul>
-                    <p>The students registered for the FIT programme will get access to a virtual learning environment <a href="http://fit.bit.lk/vle">(FITVLE)</a> that will help them to learn online. All e-tests are conducted via an e-testing system. The students will get access to this system when they take the e-tests. The students can start the programme at any time during the year, and they can apply for the examinations at any time when they are ready.</p>
+                    <p>The students registered for the FIT programme will get access to a virtual learning environment <a href="https://fitvle.bit.lk/">(FITVLE)</a> that will help them to learn online. All e-tests are conducted via an e-testing system. The students will get access to this system when they take the e-tests. The students can start the programme at any time during the year, and they can apply for the examinations at any time when they are ready.</p>
                     
                     <div class="icon-box wow fadeInUp" data-wow-delay="0.2s"  style="padding-top: 80px;">
                       <a href="{{ url('/programme') }}"><div class="icon"><i class="fa fa-book"></i></div></a>

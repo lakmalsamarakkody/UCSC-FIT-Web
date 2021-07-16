@@ -30,9 +30,9 @@
             <div class="col-lg-7 content order-lg-1 order-1">
                 <h2 class="title">Virtual Learning Environment</h2>
                 <br/>
-                <p><b>All registered FIT students will receive a registration number and a password to access the online learning management system <a href="http://fit.bit.lk/vle">(FITVLE)</a>.</b> </p>
+                <p><b>All registered FIT students will receive a registration number and a password to access the online learning management system <a href="https://fitvle.bit.lk/">(FITVLE)</a>.</b> </p>
                 
-                <p>Once your registration is confirmed, you will be notified with login details to an online learning environment <a href="http://fit.bit.lk/vle">(FITVLE)</a>. It is mandatory to include a valid email address when you register for the FIT programme. If you have any problem, you can contact the e-Learning Centre of UCSC to get more information regarding your registration.
+                <p>Once your registration is confirmed, you will be notified with login details to an online learning environment <a href="https://fitvle.bit.lk/">(FITVLE)</a>. It is mandatory to include a valid email address when you register for the FIT programme. If you have any problem, you can contact the e-Learning Centre of UCSC to get more information regarding your registration.
                     <br/><b>Tel: <a href="tel:+94112591080">+94 11 2591080 </a></b>(Working Hours Only) 
                 </p>
                 <p>Within two weeks after your registration, we will enrol you on the FITVLE online courses. If you could not access the VLE after two weeks with the given username and password, please contact the VLE administrator.
@@ -43,11 +43,11 @@
                 <p>Several private teaching institutes in Sri Lanka conduct classes based on the FIT curriculum. Students are kindly advised to directly contact these institutes if they are interested to attend face to face classes based on the FIT programme.</p>
                 <p>It is important to mention that all FIT exams will be conducted in English medium and all learning materials developed based on the curriculum are available in English.</p>   
                 
-                <a target="_blank" href="http://fit.bit.lk/vle"><button id="vle_link" class="btn btn-primary">Go to VLE</button></a>
+                <a target="_blank" href="https://fitvle.bit.lk/"><button id="vle_link" class="btn btn-primary">Go to VLE</button></a>
             </div>
 
             <div class="myBox col-lg-5 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/vle-logo.png') }}); cursor: pointer; margin-top:200px;">
-                <a target="_blank"  href="http://fit.bit.lk/vle"></a>
+                <a target="_blank"  href="https://fitvle.bit.lk/"></a>
             </div>
         </div><!-- #main header -->
 
