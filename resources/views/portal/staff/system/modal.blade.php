@@ -661,7 +661,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-          <button type="button" class="btn btn-outline-primary" id="btnModalEditLab" onclick="edit_lab();">Update</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditLab" onclick="edit_lab();">Apply Changes</button>
         </div>
       </div>
 
