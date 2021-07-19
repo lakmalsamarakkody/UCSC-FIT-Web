@@ -52,17 +52,94 @@ class ExamApplicationController extends Controller
     // REVIEW EXAM APPLICATIONS
     public function reviewExamApplications()
     {
+        $selSechedule = Null;
         $today = Carbon::today();
         $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where('schedule_status', 'Pending')->orWhere('schedule_status', 'Scheduled')->orderBy('created_at', 'asc')->get()->unique('payment_id');
         $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('schedule_status', 'Pending')->get();
-        return view('portal/staff/student/exam_application', [
-            'exam_applicants' => $exam_applicants,
-            'applied_exams' => $applied_exams,
-            'exams' => $exams
-        ]);
+        $schedules = Schedule::where('date', '>', $today)->where('schedule_release', 1)->addSelect([
+            'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
+            'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
+            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
+            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->get();
+        $sel_exam_applicants = null;
+        return view('portal/staff/student/exam_application', compact('exam_applicants', 'applied_exams', 'exams', 'schedules', 'selSechedule', 'sel_exam_applicants'));
     }
     // /REVIEW EXAM APPLICATIONS
+
+    // SELECT SCHEDULE
+    public function selectSchedule($id)
+    {
+        if($id==null):
+            return redirect('student.application.exams');
+        endif;
+        $selSechedule = Null;
+        $today = Carbon::today();
+        $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where('schedule_status', 'Pending')->orWhere('schedule_status', 'Scheduled')->orderBy('created_at', 'asc')->get()->unique('payment_id');
+        $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
+        $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('schedule_status', 'Pending')->get();
+        $schedules = Schedule::where('date', '>', $today)->where('schedule_release', 1)->addSelect([
+            'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
+            'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
+            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
+            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->get();
+        $selSechedule = Schedule::where('id', $id)->addSelect([
+            'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
+            'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
+            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
+            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->first();
+        $lab_occupied = hasExam::where('exam_schedule_id', $id)->count();
+        $sel_exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where('schedule_status', 'Scheduled')->where('exam_schedule_id', $id)->orderBy('created_at', 'asc')->get()->unique('payment_id');
+        return view('portal/staff/student/exam_application', compact('exam_applicants', 'applied_exams', 'exams', 'schedules', 'selSechedule', 'lab_occupied', 'sel_exam_applicants'));
+
+    }
+    // /SELECT SCHEDULE
+
+    // EXAM SCHEDULES TABLE
+
+
+    public function getSchedulesToAssign(Request $request)
+    {
+        $today = Carbon::today();
+        if ($request->ajax()):
+            $data = Schedule::where('date', '>', $today)->where('schedule_release', 1)->addSelect([
+                'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
+                'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
+                'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+                'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
+                'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')]);
+
+            if($request->year != null || $request->exam != null || $request->date != null || $request->subject != null || $request->type != null):
+
+                if($request->year != null):
+                    $data = $data->whereYear('date', $request->year);
+                endif;
+                
+                if($request->exam != null): 
+                    $data = $data->where('exam_id',$request->exam);
+                endif;
+                if($request->date != null):
+                    $data = $data->where('date', $request->date);
+                endif;
+                if($request->subject != null):
+                    $data = $data->where('subject_id', $request->subject);
+                endif;
+                if($request->type != null):
+                    $data = $data->where('exam_type_id', $request->type);
+                endif;
+            endif;
+            $data = $data->get();
+            return DataTables::of($data)
+            ->editColumn('start_time', function($data){ $start_time = Carbon::createFromFormat('H:i:s', $data->start_time)->isoFormat('hh:mm A'); return $start_time; })
+            ->editColumn('end_time', function($data){ $end_time = Carbon::createFromFormat('H:i:s', $data->end_time)->isoFormat('hh:mm A'); return $end_time; })
+            ->rawColumns(['action'])
+            ->make(true);
+        endif;
+    }
+    // /EXAM SCHEDULES TABLE
 
     // REVIEW MEDICALS
     public function reviewMedicals()

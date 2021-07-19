@@ -1,5 +1,19 @@
 <script type="text/javascript">
 
+
+    $('#schedule').on('change', function() {
+        let url = null
+        if($('#schedule').val()==''){
+            url = "{{ route('student.application.exams') }}"
+        } else {            
+            url = "{{ url('/portal/staff/student/exams/select/schedule/:id') }}"
+            url = url.replace(':id', $('#schedule').val())
+        }
+        window.location.replace(url)
+    })
+
+
+
     // INVOKE APPLIED EXAMS MODAL
     let appliedExamTable = null;
     applied_exam_table = (payment_id) => {
