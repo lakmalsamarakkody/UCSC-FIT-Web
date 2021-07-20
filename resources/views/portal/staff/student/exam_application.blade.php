@@ -239,6 +239,8 @@
             <div class="card-header">
               Assigned Exam Applicants
               @if($sel_exam_applicants!=null)
+              @elseif($sel_exam_applicants->isEmpty())
+              @else
               <div class="btn-group float-right">
                 <button class="btn btn-danger" type="button" onclick="remove_selected()">Remove Selected</button>
               </div>
