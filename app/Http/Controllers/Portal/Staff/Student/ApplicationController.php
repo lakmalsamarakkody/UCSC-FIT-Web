@@ -108,7 +108,7 @@ class ApplicationController extends Controller
         //GET DIVISION OR DISTRICT
         if($student->permanent_state_id != NULL):
             if($student->permanent_country_id == 67):
-                $permanentState = SlDistrict::find($student->permanent_state_id)->first()->name;
+                $permanentState = SlDistrict::where('id',$student->permanent_state_id)->first()->name;
             else:
                 $permanentState = WorldDivision::where('id',$student->permanent_state_id)->first()->name;
             endif;
@@ -117,7 +117,7 @@ class ApplicationController extends Controller
         //GET CITY
         if($student->permanent_city_id != NULL):
             if($student->permanent_country_id == 67):
-                $permanentCity = SlCity::find($student->permanent_city_id)->first()->name;
+                $permanentCity = SlCity::where('id',$student->permanent_city_id)->first()->name;
             else:
                 $permanentCity = WorldCity::where('id',$student->permanent_city_id)->first()->name;
             endif;
@@ -136,7 +136,7 @@ class ApplicationController extends Controller
         //GET DIVISION OR DISTRICT
         if($student->current_state_id != NULL):
             if($student->current_country_id == 67):
-                $currentState = SlDistrict::find($student->current_state_id)->first()->name;
+                $currentState = SlDistrict::where('id',$student->current_state_id)->first()->name;
             else:
                 $currentState = WorldDivision::where('id',$student->current_state_id)->first()->name;
             endif;
@@ -145,7 +145,7 @@ class ApplicationController extends Controller
         //GET CITY
         if($student->current_city_id != NULL):
             if($student->current_country_id == 67):
-                $currentCity = SlCity::find($student->current_city_id)->first()->name;
+                $currentCity = SlCity::where('id',$student->current_city_id)->first()->name;
             else:
                 $currentCity = WorldCity::where('id',$student->current_city_id)->first()->name;
             endif;
