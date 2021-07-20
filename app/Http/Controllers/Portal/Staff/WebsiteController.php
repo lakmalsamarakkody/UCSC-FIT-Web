@@ -149,7 +149,8 @@ class WebsiteController extends Controller
 
         $subscribers = Subscriber::all();
 
-        foreach( $subscribers as $subscriber ):                
+        foreach( $subscribers as $subscriber ):     
+            set_time_limit(0);           
             $details = [
                 'title' => $announcement->title,
                 'description' => $announcement->description,
@@ -159,8 +160,7 @@ class WebsiteController extends Controller
             ];
             
             Mail::to($subscriber->email)->later(now()->addSeconds(5), new Announcement($details));
-            sleep(5);
-
+            set_time_limit(60);
         endforeach;
 
         return response()->json(['status'=>'success']); 
