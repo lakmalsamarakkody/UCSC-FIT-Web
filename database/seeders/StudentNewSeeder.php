@@ -7,9 +7,11 @@ use App\Models\Student\Flag;
 use App\Models\Student\hasExam;
 use App\Models\Student\Payment;
 use App\Models\Student\Registration;
+use App\Models\Subscriber;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class StudentNewSeeder extends Seeder
 {
@@ -41,7 +43,19 @@ class StudentNewSeeder extends Seeder
             $user->status = 1;
             $user->profile_pic = '6_profile_pic_2021-01-15_1610687576.png';
 
+ 
+
             $user->save();   
+           
+            $token = Str::random(32);
+            $subscriber = new Subscriber();
+            $subscriber->email = $user->email;
+            $subscriber->token = $token;
+
+            
+            $subscriber->save();
+
+
 
             $student = new Student;
             $student->reg_no = 'F'. $year . $month. $date . $faker->unique()->numerify('###');
