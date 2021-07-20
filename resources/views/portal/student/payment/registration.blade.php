@@ -22,7 +22,9 @@
         <div class="col-12 px-0">
           <div class="alert alert-info" role="alert">
             <h4 class="alert-heading"><i class="far fa-check-circle"></i> Payment Submitted Successfully</h4>
-            <p>Once your application and the payment has been approved upload the following scanned documents (JPEG/ PNG file format) <br>Birth Certificate <br>Unique Identification images (NIC / Passport / Postal ID)). <br>If your payment doesn't get approved within 2 weeks please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+            <p>Once your application and the payment has been approved upload the following scanned documents (JPEG/ PNG file format) <br>Birth Certificate <br>Unique Identification images (NIC / Passport / Postal ID)). <br></p> 
+            <hr>
+            <p class="font-weight-bold mb-0">If your payment doesn't get approved within 2 weeks please report a complain via an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
             <hr>
             <p class="font-weight-bold mb-0">Now you may prepare your scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) to upload once your payment has been confirmed.</p>
           </div>
