@@ -130,6 +130,11 @@
                     <div class="tab-content col-12" id="PaymentMethodTabContent">
                       {{-- BANK PAYMENT --}}
                       <div class="tab-pane fade show active mt-4" id="bank" role="tabpanel" aria-labelledby="bank-tab">
+                        <ul>
+                          <li>Download and Print the Payment Voucher</li>
+                          <li>Pay the registration fee to the bank with the payment voucher (The bank will sign and certify the EDC Copy-1 and Candidate's Copy-2 of the payment voucher)</li>
+                          <li>Scan your certified EDC Copy-1 of the payment voucher and upload.</li>
+                        </ul>
                         <form enctype="multipart/form-data">
                           <div class="form-row">                    
                             <div class="col-lg-12">
