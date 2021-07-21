@@ -44,6 +44,8 @@
                 <a class="dropdown-item text-capitalize" href="{{ url('/portal/staff/student/list/export/lastday') }}">Last Day</a>
                 <a class="dropdown-item text-capitalize" href="{{ url('/portal/staff/student/list/export/lastweek') }}">Last Week</a>
                 <a class="dropdown-item text-capitalize" href="{{ url('/portal/staff/student/list/export/lastmonth') }}">Last Month</a>
+                <hr>
+                <a class="dropdown-item text-capitalize" href="{{ url('/portal/staff/student/list/export/all') }}">All</a>
               </div>
             </div>
             @endif
