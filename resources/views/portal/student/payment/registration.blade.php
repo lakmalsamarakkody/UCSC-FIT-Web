@@ -121,6 +121,12 @@
                       <div class="tab-content col-12" id="PaymentMethodTabContent">
                         {{-- BANK PAYMENT --}}
                         <div class="tab-pane fade show active mt-4" id="bank" role="tabpanel" aria-labelledby="bank-tab">
+                          
+                          <ul>
+                            <li>Download and Print the Payment Voucher</li>
+                            <li>Pay the registration fee to the bank with the payment voucher (The bank will sign and certify the EDC Copy-1 and Candidate's Copy-2 of the payment voucher)</li>
+                            <li>Scan your certified EDC Copy-1 of the payment voucher and upload.</li>
+                          </ul>
                           <form enctype="multipart/form-data">
                             <div class="form-row">                    
                               <div class="col-lg-12">
@@ -184,17 +190,17 @@
                                 {{-- UPLOAD PAYMENT SLIP --}}
                                 <div class="form-group mx-2">
                                   @if($payment != NULL)
-                                    <span id="InputUploadedBankslipHelp" class="form-text text-muted">Uploaded bank slip</span>
+                                    <span id="InputUploadedBankslipHelp" class="form-text text-muted">Uploaded payment voucher</span>
                                     <div class="drop-zone" onclick="window.open('{{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image)}}')" style="background: url({{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image)}}) no-repeat center; background-size: cover;"></div>
-                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format. Maximum file size: 5mb</span>
+                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned payment voucher EDC copy-1 here in JPEG/ PNG file format. Maximum file size: 5mb</span>
                                     <div class="drop-zone">
-                                      <span class="drop-zone__prompt">Reupload Bank Slip <br><small>Drop image File here or click to upload</small> </span>
+                                      <span class="drop-zone__prompt">Reupload Payment Voucher EDC copy-1 <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
                                     </div>
                                   @else
-                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</span>
+                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned payment voucher EDC copy-1 here in JPEG/ PNG file format</span>
                                     <div class="drop-zone">
-                                      <span class="drop-zone__prompt">Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
+                                      <span class="drop-zone__prompt">Scanned Payment Voucher EDC copy-1 <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
                                     </div>
                                   @endif
