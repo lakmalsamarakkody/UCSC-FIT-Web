@@ -111,7 +111,7 @@
                       {{-- PAYMENT ACTION --}}
                       <ul class="nav nav-tabs col-12" id="PaymentMethodTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                          <a class="nav-link active" id="bank-tab" data-toggle="tab" href="#bank" role="tab" aria-controls="bank" aria-selected="true">Pay Through Bank Slip</a>
+                          <a class="nav-link active" id="bank-tab" data-toggle="tab" href="#bank" role="tab" aria-controls="bank" aria-selected="true">Pay Through Payment Voucher</a>
                         </li>
                         {{-- <li class="nav-item" role="presentation">
                           <a class="nav-link" id="online-tab" data-toggle="tab" href="#online" role="tab" aria-controls="online" aria-selected="false">Pay Online</a>
