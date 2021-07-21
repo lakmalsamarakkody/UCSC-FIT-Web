@@ -276,6 +276,23 @@ class StudentController extends Controller
         elseif($duration=='lastmonth'):
             $date = Carbon::now()->subdays(30)->format('Y-m-d');
             // echo $date;
+        elseif($duration=='all'):
+            $registrations = Registration::get();
+            $student_array [] =array(); 
+            foreach($registrations as $registration):
+                $student_array[] = array(
+                    $registration->student->id,
+                    $registration->student->reg_no,
+                    $registration->student->full_name,
+                    $registration->student->nic_old.$registration->student->nic_new.$registration->student->postal.$registration->student->passport,
+                    $registration->student->user->email,
+                );
+            endforeach;
+
+            $student_array = new StudentDetailsExport($student_array);
+            return Excel::download($student_array, 'students_All_created_at_'.date('Y-m-d H:i:s').'.xlsx');
+    
+            return redirect()->route('students');
         endif;
         
         $registrations = Registration::where('registered_at', '>=', $date)->get();
