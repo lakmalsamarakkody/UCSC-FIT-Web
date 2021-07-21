@@ -1,26 +1,5 @@
 <script type="text/javascript">
 
-    $(document).ready(function(){
-        $('.selectAllEtestThree').on('change', function () {
-            $('.etestThree').not(this).prop('checked', this.checked);
-        })
-
-        $('.selectAllEtestTwo').on('change', function () {
-            $('.etestTwo').not(this).prop('checked', this.checked);
-        })
-
-        $('.selectAllEtestOne').on('change', function () {
-            $('.etestOne').not(this).prop('checked', this.checked);
-        })
-
-        $('.selectAllPracTwo').on('change', function () {
-            $('.pracTwo').not(this).prop('checked', this.checked);
-        })
-
-        $('.selectAllPracOne').on('change', function () {
-            $('.pracOne').not(this).prop('checked', this.checked);
-        })
-    })
 
     $('#schedule').on('change', function() {
         let url = null

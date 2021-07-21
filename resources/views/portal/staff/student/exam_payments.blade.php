@@ -166,8 +166,8 @@
         <!-- /APPLICATIONS LIST -->
 
       </div>
-      @include('portal.staff.student.exam_application.modal')
-      @include('portal.staff.student.exam_application.scripts')
+      @include('portal.staff.student.exam_payments.modal')
+      @include('portal.staff.student.exam_payments.scripts')
     </div>
     <!-- /CONTENT -->
 

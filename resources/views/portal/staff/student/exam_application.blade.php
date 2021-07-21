@@ -103,17 +103,16 @@
                   <tbody>
                     <div class="card">
                       {{-- E-TEST LIST --}}
-                      <tr><th colspan="6" class="card-header font-weight-bold text-white bg-dark">E-tests</th></tr>
+                      <tr><th colspan="5" class="card-header font-weight-bold text-white bg-dark">E-tests</th></tr>
                       {{-- APPLIED ALL --}}
                       <tr>
-                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selected-schedules" name="requestReschduleCheck[]" value="" /></div></th>
-                        <th colspan="5" class="card-header font-weight-bold text-white bg-secondary">Applied All Subjects</th>
+                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllEtestThree" name="requestReschduleCheck[]" value="" /></div></th>
+                        <th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied All Subjects</th>
                       </tr>
                       @foreach ($exam_applicants as $applicant)
                         @if( App\Models\Student\hasExam::where('exam_type_id',1)->where('payment_id',$applicant->payment_id)->count() >= 3)
                         <tr>
-                          <td><div class="input-group"><input type="checkbox" class="selected-schedules" name="requestReschduleCheck[]" value="{{ $applicant->id }}" /></div></td>
-                          <td>{{ $applicant->student->reg_no }}</td>
+                          <td><div class="input-group"><input type="checkbox" class="etestThree" name="requestReschduleCheck[]" value="{{ $applicant->id }}" /></div></td>
                           <td>{{ $applicant->student->reg_no }}</td>
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
                           <td>{{ \Carbon\Carbon::createFromDate($applicant->exam->year, $applicant->exam->month)->monthName}} {{ $applicant->exam->year }}</td>
@@ -130,12 +129,13 @@
                       {{-- /APPLIED ALL --}}
                       {{-- APPLIED ONLY 2 SUBJECTS --}}
                       <tr>
-                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selected-schedules" name="requestReschduleCheck[]" value="" /></div></th>
-                        <th colspan="5" class="card-header font-weight-bold text-white bg-secondary">Applied 02 Subjects</th>
+                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllEtestTwo" name="requestReschduleCheck[]" value="" /></div></th>
+                        <th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied 02 Subjects</th>
                       </tr>
                       @foreach ($exam_applicants as $applicant)
                         @if( App\Models\Student\hasExam::where('exam_type_id',1)->where('payment_id',$applicant->payment_id)->count() == 2)
                         <tr>
+                          <td><div class="input-group"><input type="checkbox" class="etestTwo" name="requestReschduleCheck[]" value="{{ $applicant->id }}" /></div></td>
                           <td>{{ $applicant->student->reg_no }}</td>
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
                           <td>{{ \Carbon\Carbon::createFromDate($applicant->exam->year, $applicant->exam->month)->monthName}} {{ $applicant->exam->year }}</td>
@@ -152,12 +152,13 @@
                       {{-- /APPLIED ONLY 2 SUBJECTS --}}
                       {{-- APPLIED ONLY 1 SUBJECT --}}
                       <tr>
-                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selected-schedules" name="requestReschduleCheck[]" value="" /></div></th>
-                        <th colspan="5" class="card-header font-weight-bold text-white bg-secondary">Applied only 01 Subject</th>
+                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllEtestOne" name="requestReschduleCheck[]" value="" /></div></th>
+                        <th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied only 01 Subject</th>
                       </tr>
                       @foreach ($exam_applicants as $applicant)
                         @if( App\Models\Student\hasExam::where('exam_type_id',1)->where('payment_id',$applicant->payment_id)->count() == 1)
                         <tr>
+                          <td><div class="input-group"><input type="checkbox" class="etestOne" name="requestReschduleCheck[]" value="{{ $applicant->id }}" /></div></td>
                           <td>{{ $applicant->student->reg_no }}</td>
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
                           <td>{{ \Carbon\Carbon::createFromDate($applicant->exam->year, $applicant->exam->month)->monthName}} {{ $applicant->exam->year }}</td>
@@ -174,17 +175,18 @@
                       {{-- /APPLIED ONLY 1 SUBJECT --}}
                       {{-- /E-TEST LIST --}}
                       {{-- PRACTICAL LIST --}}
-                      <tr><th colspan="6"></th></tr>
-                      <tr><th colspan="6"></th></tr>
-                      <tr><th colspan="6" style="cell-padding:50px" class="card-header font-weight-bold text-white bg-dark">Practicals</th></tr>
+                      <tr><th colspan="5"></th></tr>
+                      <tr><th colspan="5"></th></tr>
+                      <tr><th colspan="5" style="cell-padding:50px" class="card-header font-weight-bold text-white bg-dark">Practicals</th></tr>
                       {{-- APPLIED ALL --}}
                       <tr>
-                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selected-schedules" name="requestReschduleCheck[]" value="" /></div></th>
-                        <th colspan="5" class="card-header font-weight-bold text-white bg-secondary">Applied All</th>
+                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllPracTwo" name="requestReschduleCheck[]" value="" /></div></th>
+                        <th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied All</th>
                       </tr>
                       @foreach ($exam_applicants as $applicant)
                         @if( App\Models\Student\hasExam::where('exam_type_id',2)->where('payment_id',$applicant->payment_id)->count() >= 2)
                         <tr>
+                          <td><div class="input-group"><input type="checkbox" class="pracTwo" name="requestReschduleCheck[]" value="{{ $applicant->id }}" /></div></td>
                           <td>{{ $applicant->student->reg_no }}</td>
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
                           <td>{{ \Carbon\Carbon::createFromDate($applicant->exam->year, $applicant->exam->month)->monthName}} {{ $applicant->exam->year }}</td>
@@ -201,12 +203,13 @@
                       {{-- /APPLIED ALL --}}
                       {{-- APPLIED ONLY 1 SUBJECT --}}
                       <tr>
-                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selected-schedules" name="requestReschduleCheck[]" value="" /></div></th>
-                        <th colspan="5" class="card-header font-weight-bold text-white bg-secondary">Applied only 01 Practical</th>
+                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllPracOne" name="requestReschduleCheck[]" value="" /></div></th>
+                        <th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied only 01 Practical</th>
                       </tr>
                       @foreach ($exam_applicants as $applicant)
                         @if( App\Models\Student\hasExam::where('exam_type_id',2)->where('payment_id',$applicant->payment_id)->count() == 1)
                         <tr>
+                          <td><div class="input-group"><input type="checkbox" class="pracOne" name="requestReschduleCheck[]" value="{{ $applicant->id }}" /></div></td>
                           <td>{{ $applicant->student->reg_no }}</td>
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
                           <td>{{ \Carbon\Carbon::createFromDate($applicant->exam->year, $applicant->exam->month)->monthName}} {{ $applicant->exam->year }}</td>
@@ -238,7 +241,7 @@
           <div class="card">
             <div class="card-header">
               Assigned Exam Applicants
-              @if($sel_exam_applicants!=null)
+              @if($sel_exam_applicants==null)
               @elseif($sel_exam_applicants->isEmpty())
               @else
               <div class="btn-group float-right">
@@ -264,7 +267,7 @@
                   <tbody>
                     <div class="card">
                       {{-- E-TEST LIST --}}
-                      <tr><th colspan="4" class="card-header font-weight-bold text-white bg-dark">E-tests</th></tr>
+                      {{-- <tr><th colspan="4" class="card-header font-weight-bold text-white bg-dark">E-tests</th></tr> --}}
                       {{-- APPLIED ALL --}}
                       <tr><th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied All Subjects</th></tr>
                       @foreach ($sel_exam_applicants as $applicant)
@@ -324,9 +327,9 @@
                       {{-- /APPLIED ONLY 1 SUBJECT --}}
                       {{-- /E-TEST LIST --}}
                       {{-- PRACTICAL LIST --}}
-                      <tr><th colspan="4"></th></tr>
-                      <tr><th colspan="4"></th></tr>
-                      <tr><th colspan="4" style="cell-padding:50px" class="card-header font-weight-bold text-white bg-dark">Practicals</th></tr>
+                      {{-- <tr><th colspan="4"></th></tr> --}}
+                      {{-- <tr><th colspan="4"></th></tr> --}}
+                      {{-- <tr><th colspan="4" style="cell-padding:50px" class="card-header font-weight-bold text-white bg-dark">Practicals</th></tr> --}}
                       {{-- APPLIED ALL --}}
                       <tr><th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied All</th></tr>
                       @foreach ($sel_exam_applicants as $applicant)
@@ -377,7 +380,7 @@
         <!-- /ASSIGNED LIST -->
 
       </div>
-      @include('portal.staff.student.exam_application.modal')
+      {{-- @include('portal.staff.student.exam_application.modal') --}}
       @include('portal.staff.student.exam_application.scripts')
     </div>
     <!-- /CONTENT -->
