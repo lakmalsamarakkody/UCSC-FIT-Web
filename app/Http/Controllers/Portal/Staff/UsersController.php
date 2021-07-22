@@ -31,6 +31,7 @@ class UsersController extends Controller
 
   public function getUserList(Request $request)
   {
+    ini_set('memory_limit','4096M');
     if ($request->ajax()) {
       $data = User::addSelect(['role_name' => Role::select('name')->whereColumn('role_id', 'roles.id')]);
       if($request->name!=null){
