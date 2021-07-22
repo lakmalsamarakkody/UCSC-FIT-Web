@@ -194,11 +194,11 @@
                                     <div class="drop-zone" onclick="window.open('{{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image)}}')" style="background: url({{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image)}}) no-repeat center; background-size: cover;"></div>
                                     <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned payment voucher EDC copy-1 here in JPEG/ PNG file format. Maximum file size: 5mb</span>
                                     <div class="drop-zone">
-                                      <span class="drop-zone__prompt">Reupload Payment Voucher EDC copy-1 <br><small>Drop image File here or click to upload</small> </span>
+                                      <span class="drop-zone__prompt">Re-upload Payment Voucher EDC copy-1 <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
                                     </div>
                                   @else
-                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned payment voucher EDC copy-1 here in JPEG/ PNG file format</span>
+                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned payment voucher EDC copy-1 here in JPEG/ PNG file format. Maximum file size: 5mb</span>
                                     <div class="drop-zone">
                                       <span class="drop-zone__prompt">Scanned Payment Voucher EDC copy-1 <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
