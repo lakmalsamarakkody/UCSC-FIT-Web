@@ -42,6 +42,7 @@
                     <div id="error">
 
                     </div>
+                    {{-- <div class="alert alert-info" role="alert">Registration will be available soon! </div> --}}
                     <form class="contactForm" onsubmit="send_email()">
                         <div class="form-group">
                             <input type="email" class="form-control" name="email" id="email" placeholder="Type Your Email Here"  data-rule="email" data-msg="Please enter a valid email" />

@@ -47,6 +47,7 @@ class StudentController extends Controller
 
     public function getStudentList(Request $request)
     {
+        ini_set('memory_limit','4096M');
         if ($request->ajax()) {
             $data = Student::join('student_flags', 'students.id', '=', 'student_flags.student_id');
             if($request->name!=null){
@@ -286,6 +287,8 @@ class StudentController extends Controller
                     $registration->student->full_name,
                     $registration->student->nic_old.$registration->student->nic_new.$registration->student->postal.$registration->student->passport,
                     $registration->student->user->email,
+                    $registration->student->telephone_country_code. $registration->student->telephone,
+                    $registration->student->user->id,
                 );
             endforeach;
 
@@ -304,6 +307,8 @@ class StudentController extends Controller
                 $registration->student->full_name,
                 $registration->student->nic_old.$registration->student->nic_new.$registration->student->postal.$registration->student->passport,
                 $registration->student->user->email,
+                $registration->student->telephone_country_code. $registration->student->telephone,
+                $registration->student->user->id,
             );
         endforeach;
 

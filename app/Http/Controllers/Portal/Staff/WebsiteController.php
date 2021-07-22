@@ -34,6 +34,7 @@ class WebsiteController extends Controller
     }
     public function getAnnouncementList(Request $request)
     {
+        ini_set('memory_limit','4096M');
         if ($request->ajax()) {
             $data = Anouncements::all();
             return DataTables::of($data)

@@ -142,9 +142,9 @@
                           </div>
                           <div class="col-lg-12">
                             <div class="form-group mx-2">
-                              <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format</span>
+                              <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned payment voucher EDC copy-1 here in JPEG/ PNG file format. Maximum file size: 5mb</span>
                               <div class="drop-zone">
-                                <span class="drop-zone__prompt">Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
+                                <span class="drop-zone__prompt">Scanned Payment Voucher EDC copy-1 <br><small>Drop image File here or click to upload</small> </span>
                                 <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
                               </div>
                               <span class="invalid-feedback" id="error-bankSlip" role="alert"></span>

@@ -22,7 +22,9 @@ class StudentDetailsExport implements FromArray, withHeadings
             'Registration Number',
             'Name',
             'NIC',
-            'Email', 
+            'Email',
+            'Telephone',
+            'User ID'
         ];
     }
 
