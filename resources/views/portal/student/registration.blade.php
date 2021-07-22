@@ -44,15 +44,15 @@
                                         <select name="enrollment" id="enrollment" class="form-control">
                                             {{-- <option disabled hidden selected>Select your enrollment</option> --}}
                                             <option value="new" @if($student && $student->flag->enrollment == 'new') selected @endif>New Student</option>
-                                            <option value="existing" @if($student && $student->flag->enrollment == 'existing') selected @endif>Existing Student</option>
+                                            {{-- <option value="existing" @if($student && $student->flag->enrollment == 'existing') selected @endif>Existing Student</option> --}}
                                         </select>
                                         <span class="invalid-feedback" id="error-enrollment" role="alert"></span>
                                     </div>
-                                    <div class="form-group col-xl-6 col-md-12 collapse" id="divinputRegNo">
+                                    {{-- <div class="form-group col-xl-6 col-md-12 collapse" id="divinputRegNo">
                                         <label for="regNo">Your Registration No</label>
                                         <input type="text" class="form-control text-capitalize" id="regNo" name="regNo" placeholder="Starts with Capital letter (example: F)" @if($student) value="{{ $student->reg_no }}" @endif/>
                                         <span class="invalid-feedback" id="error-regNo" role="alert"></span>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <!-- /REGISTRATION DETAILS -->
