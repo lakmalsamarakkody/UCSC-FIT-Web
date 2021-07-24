@@ -59,7 +59,15 @@
         @if($selSechedule)
         <div class="col-12 mb-3">
           <div class="card">
-            <div class="card-header">Selected Schedule Details</div>
+            <div class="card-header">
+              Selected Schedule Details
+              <div class="btn-group float-right">
+                <button class="btn btn-primary" id="btnAssignSelected" onclick="publish_schedule()">
+                  Publish To Students
+                  <span id="assingSelectedSpinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
             <div class="card-body" >
               <div class="row text-center">
                 <div class="col">
@@ -91,35 +99,46 @@
           <div class="card">
             <div class="card-header">
               Unassigned Exam Applicants
-              <div class="btn-group float-right">
-                <button class="btn btn-primary" onclick="assign_selected()">Assign Selected</button>
-              </div>
-            </div>
-            <div class="card-body overflow-auto" style="max-height:600px">
-              @if($exam_applicants->isEmpty())
-                <div class="alert alert-info" role="alert">No results found!</div>
+              @if($exam_applicants==null)
+              @elseif($exam_applicants->isEmpty())
               @else
-                <table class="table yajra-datatable">
+              <div class="btn-group float-right">
+                <button class="btn btn-primary" id="btnAssignSelected" onclick="assign_selected()">
+                  Assign Selected
+                  <span id="assingSelectedSpinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
+                </button>
+              </div>
+              | <span id="selectedCount">0</span> Selected
+              @endif
+            </div>
+            <div class="card-body overflow-auto" style="max-height:400px">
+              @if($exam_applicants==null)
+                <div class="alert alert-info" role="alert">No schedule selected!</div>                
+              @elseif($exam_applicants->isEmpty())
+                <div class="alert alert-info" role="alert">No applicants found!</div>
+              @else
+              <form id="applyToExamForm">
+                <table class="table">
                   <tbody>
                     <div class="card">
                       {{-- E-TEST LIST --}}
                       <tr><th colspan="5" class="card-header font-weight-bold text-white bg-dark">E-tests</th></tr>
                       {{-- APPLIED ALL --}}
                       <tr>
-                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllEtestThree" name="requestReschduleCheck[]" value="" /></div></th>
+                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllEtestThree"/></div></th>
                         <th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied All Subjects</th>
                       </tr>
                       @foreach ($exam_applicants as $applicant)
                         @if( App\Models\Student\hasExam::where('exam_type_id',1)->where('payment_id',$applicant->payment_id)->count() >= 3)
                         <tr>
-                          <td><div class="input-group"><input type="checkbox" class="etestThree" name="requestReschduleCheck[]" value="{{ $applicant->id }}" /></div></td>
+                          <td><div class="input-group"><input type="checkbox" class="etestThree assign" name="exmAssignCheck[]" value="{{ $applicant->id }}" /></div></td>
                           <td>{{ $applicant->student->reg_no }}</td>
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
                           <td>{{ \Carbon\Carbon::createFromDate($applicant->exam->year, $applicant->exam->month)->monthName}} {{ $applicant->exam->year }}</td>
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"><i class="fas fa-user"></i> Assign <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                              <button type="button" class="btn btn-outline-primary assign-applicant" onclick="assign_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Assign</button>
                             </div>
                           </td>
                           @endif
@@ -129,20 +148,20 @@
                       {{-- /APPLIED ALL --}}
                       {{-- APPLIED ONLY 2 SUBJECTS --}}
                       <tr>
-                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllEtestTwo" name="requestReschduleCheck[]" value="" /></div></th>
+                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllEtestTwo"/></div></th>
                         <th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied 02 Subjects</th>
                       </tr>
                       @foreach ($exam_applicants as $applicant)
                         @if( App\Models\Student\hasExam::where('exam_type_id',1)->where('payment_id',$applicant->payment_id)->count() == 2)
                         <tr>
-                          <td><div class="input-group"><input type="checkbox" class="etestTwo" name="requestReschduleCheck[]" value="{{ $applicant->id }}" /></div></td>
+                          <td><div class="input-group"><input type="checkbox" class="etestTwo assign" name="exmAssignCheck[]" value="{{ $applicant->id }}" /></div></td>
                           <td>{{ $applicant->student->reg_no }}</td>
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
                           <td>{{ \Carbon\Carbon::createFromDate($applicant->exam->year, $applicant->exam->month)->monthName}} {{ $applicant->exam->year }}</td>
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"><i class="fas fa-user"></i> Assign <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                              <button type="button" class="btn btn-outline-primary assign-applicant" onclick="assign_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Assign</button>
                             </div>
                           </td>
                           @endif
@@ -152,20 +171,20 @@
                       {{-- /APPLIED ONLY 2 SUBJECTS --}}
                       {{-- APPLIED ONLY 1 SUBJECT --}}
                       <tr>
-                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllEtestOne" name="requestReschduleCheck[]" value="" /></div></th>
+                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllEtestOne"/></div></th>
                         <th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied only 01 Subject</th>
                       </tr>
                       @foreach ($exam_applicants as $applicant)
                         @if( App\Models\Student\hasExam::where('exam_type_id',1)->where('payment_id',$applicant->payment_id)->count() == 1)
                         <tr>
-                          <td><div class="input-group"><input type="checkbox" class="etestOne" name="requestReschduleCheck[]" value="{{ $applicant->id }}" /></div></td>
+                          <td><div class="input-group"><input type="checkbox" class="etestOne assign" name="exmAssignCheck[]" value="{{ $applicant->id }}" /></div></td>
                           <td>{{ $applicant->student->reg_no }}</td>
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
                           <td>{{ \Carbon\Carbon::createFromDate($applicant->exam->year, $applicant->exam->month)->monthName}} {{ $applicant->exam->year }}</td>
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"><i class="fas fa-user"></i> Assign <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                              <button type="button" class="btn btn-outline-primary assign-applicant" onclick="assign_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Assign</button>
                             </div>
                           </td>
                           @endif
@@ -180,20 +199,20 @@
                       <tr><th colspan="5" style="cell-padding:50px" class="card-header font-weight-bold text-white bg-dark">Practicals</th></tr>
                       {{-- APPLIED ALL --}}
                       <tr>
-                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllPracTwo" name="requestReschduleCheck[]" value="" /></div></th>
+                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllPracTwo"/></div></th>
                         <th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied All</th>
                       </tr>
                       @foreach ($exam_applicants as $applicant)
                         @if( App\Models\Student\hasExam::where('exam_type_id',2)->where('payment_id',$applicant->payment_id)->count() >= 2)
                         <tr>
-                          <td><div class="input-group"><input type="checkbox" class="pracTwo" name="requestReschduleCheck[]" value="{{ $applicant->id }}" /></div></td>
+                          <td><div class="input-group"><input type="checkbox" class="pracTwo assign" name="exmAssignCheck[]" value="{{ $applicant->id }}" /></div></td>
                           <td>{{ $applicant->student->reg_no }}</td>
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
                           <td>{{ \Carbon\Carbon::createFromDate($applicant->exam->year, $applicant->exam->month)->monthName}} {{ $applicant->exam->year }}</td>
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"><i class="fas fa-user"></i> Assign <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                              <button type="button" class="btn btn-outline-primary assign-applicant" onclick="assign_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Assign</button>
                             </div>
                           </td>
                           @endif
@@ -203,20 +222,20 @@
                       {{-- /APPLIED ALL --}}
                       {{-- APPLIED ONLY 1 SUBJECT --}}
                       <tr>
-                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllPracOne" name="requestReschduleCheck[]" value="" /></div></th>
+                        <th class="card-header font-weight-bold text-white bg-secondary"><div class="input-group"><input type="checkbox" class="selectAllPracOne"/></div></th>
                         <th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied only 01 Practical</th>
                       </tr>
                       @foreach ($exam_applicants as $applicant)
                         @if( App\Models\Student\hasExam::where('exam_type_id',2)->where('payment_id',$applicant->payment_id)->count() == 1)
                         <tr>
-                          <td><div class="input-group"><input type="checkbox" class="pracOne" name="requestReschduleCheck[]" value="{{ $applicant->id }}" /></div></td>
+                          <td><div class="input-group"><input type="checkbox" class="pracOne assign" name="exmAssignCheck[]" value="{{ $applicant->id }}" /></div></td>
                           <td>{{ $applicant->student->reg_no }}</td>
                           <td>{{ $applicant->student->initials }} {{ $applicant->student->last_name}}</td>
                           <td>{{ \Carbon\Carbon::createFromDate($applicant->exam->year, $applicant->exam->month)->monthName}} {{ $applicant->exam->year }}</td>
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-primary" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"><i class="fas fa-user"></i> Assign <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                              <button type="button" class="btn btn-outline-primary assign-applicant" onclick="assign_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Assign</button>
                             </div>
                           </td>
                           @endif
@@ -228,6 +247,7 @@
                     </div>
                   </tbody>
                 </table>
+              </form>
               @endif
 
             </div>
@@ -241,15 +261,17 @@
           <div class="card">
             <div class="card-header">
               Assigned Exam Applicants
-              @if($sel_exam_applicants==null)
-              @elseif($sel_exam_applicants->isEmpty())
-              @else
               <div class="btn-group float-right">
-                <button class="btn btn-danger" type="button" onclick="remove_selected()">Remove Selected</button>
-              </div>
+              @if($selSechedule)
+                @if($lab_occupied < $selSechedule->lab_capacity)                  
+                  <span class="text-success">Slots remain: {{ $selSechedule->lab_capacity - $lab_occupied }}</span>
+                @else
+                  <span class="text-danger">Slots remain: {{ $selSechedule->lab_capacity - $lab_occupied }}</span>
+                @endif                
               @endif
+              </div>
             </div>
-            <div class="card-body overflow-auto" style="max-height:600px">
+            <div class="card-body overflow-auto" style="max-height:413px">
               @if($selSechedule==null)
                 <div class="alert alert-info" role="alert">No schedule selected!</div>                
               @elseif($sel_exam_applicants->isEmpty())
@@ -267,7 +289,7 @@
                   <tbody>
                     <div class="card">
                       {{-- E-TEST LIST --}}
-                      {{-- <tr><th colspan="4" class="card-header font-weight-bold text-white bg-dark">E-tests</th></tr> --}}
+                      <tr><th colspan="4" class="card-header font-weight-bold text-white bg-dark">E-tests</th></tr>
                       {{-- APPLIED ALL --}}
                       <tr><th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied All Subjects</th></tr>
                       @foreach ($sel_exam_applicants as $applicant)
@@ -279,7 +301,7 @@
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-danger" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"> Remove <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Remove</button>
                             </div>
                           </td>
                           @endif
@@ -298,7 +320,7 @@
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-danger" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"> Remove <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Remove</button>
                             </div>
                           </td>
                           @endif
@@ -317,7 +339,7 @@
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-danger" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"> Remove <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Remove</button>
                             </div>
                           </td>
                           @endif
@@ -327,9 +349,9 @@
                       {{-- /APPLIED ONLY 1 SUBJECT --}}
                       {{-- /E-TEST LIST --}}
                       {{-- PRACTICAL LIST --}}
-                      {{-- <tr><th colspan="4"></th></tr> --}}
-                      {{-- <tr><th colspan="4"></th></tr> --}}
-                      {{-- <tr><th colspan="4" style="cell-padding:50px" class="card-header font-weight-bold text-white bg-dark">Practicals</th></tr> --}}
+                      <tr><th colspan="4"></th></tr>
+                      <tr><th colspan="4"></th></tr>
+                      <tr><th colspan="4" style="cell-padding:50px" class="card-header font-weight-bold text-white bg-dark">Practicals</th></tr>
                       {{-- APPLIED ALL --}}
                       <tr><th colspan="4" class="card-header font-weight-bold text-white bg-secondary">Applied All</th></tr>
                       @foreach ($sel_exam_applicants as $applicant)
@@ -341,7 +363,7 @@
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-danger" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"> Remove <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Remove</button>
                             </div>
                           </td>
                           @endif
@@ -360,7 +382,7 @@
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-danger" id="btnViewModalAppliedExams-{{ $applicant->payment_id }}" onclick="view_modal_applied_exams({{$applicant->payment_id}})"> Remove <span id="spinnerBtnViewModalAppliedExams-{{ $applicant->payment_id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Remove</button>
                             </div>
                           </td>
                           @endif

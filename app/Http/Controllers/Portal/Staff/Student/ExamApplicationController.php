@@ -54,7 +54,7 @@ class ExamApplicationController extends Controller
     {
         $selSechedule = Null;
         $today = Carbon::today();
-        $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where('schedule_status', 'Pending')->orWhere('schedule_status', 'Scheduled')->orderBy('created_at', 'asc')->get()->unique('payment_id');
+        $exam_applicants = Null;
         $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('schedule_status', 'Pending')->get();
         $schedules = Schedule::where('date', '>', $today)->where('schedule_release', 1)->addSelect([
@@ -74,9 +74,15 @@ class ExamApplicationController extends Controller
         if($id==null):
             return redirect('student.application.exams');
         endif;
-        $selSechedule = Null;
+        $selSechedule = Null;        
+        $selSechedule = Schedule::where('id', $id)->addSelect([
+            'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
+            'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
+            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
+            'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
+            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->first();
         $today = Carbon::today();
-        $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where('schedule_status', 'Pending')->orWhere('schedule_status', 'Scheduled')->orderBy('created_at', 'asc')->get()->unique('payment_id');
+        $exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where('schedule_status', 'Pending')->where('requested_exam_id', $selSechedule->exam_id)->where('subject_id',  $selSechedule->subject_id)->where('exam_type_id',  $selSechedule->exam_type_id)->orderBy('created_at', 'asc')->get()->unique('payment_id');
         $exams = Exam::where('year', '>=', $today->year)->where('month', '>=', $today->month)->orderBy('year', 'asc')->get();
         $applied_exams = hasExam::where('exam_schedule_id', '!=', null)->where('schedule_status', 'Pending')->get();
         $schedules = Schedule::where('date', '>', $today)->where('schedule_release', 1)->addSelect([
@@ -85,22 +91,66 @@ class ExamApplicationController extends Controller
             'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
             'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->get();
-        $selSechedule = Schedule::where('id', $id)->addSelect([
-            'year' => Exam::select('year')->whereColumn('exam_id', 'exams.id'),
-            'month' => Exam::select(DB::raw("MONTHNAME(CONCAT(year,'-',month,'-01')) as monthname"))->whereColumn('exam_id', 'exams.id'),
-            'subject_code'=> Subject::select('code')->whereColumn('subject_id', 'subjects.id'),
-            'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
-            'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->first();
         $lab_occupied = hasExam::where('exam_schedule_id', $id)->count();
         $sel_exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where('schedule_status', 'Scheduled')->where('exam_schedule_id', $id)->orderBy('created_at', 'asc')->get()->unique('payment_id');
         return view('portal/staff/student/exam_application', compact('exam_applicants', 'applied_exams', 'exams', 'schedules', 'selSechedule', 'lab_occupied', 'sel_exam_applicants'));
-
     }
     // /SELECT SCHEDULE
 
+    // ASSIGN ALL SELECTED STUDENTS TO SCHEDULE
+    public function assignSelectedToSchedule(Request $request)
+    {
+        if($request->exmAssignCheck == NULL):
+            return response()->json(['status'=>'unselected']);      
+        endif;
+
+        $schedule = Schedule::where('id', $request->examScheduleId)->first();
+        $lab_occupied = hasExam::where('exam_schedule_id', $request->examScheduleId)->count();
+        $lab_remaining = $schedule->lab_capacity-$lab_occupied;
+
+        if($lab_remaining < $request->selectedCount):
+            return response()->json(['status'=>'over-limit']); 
+        endif;
+
+        if($schedule->lab_capacity <= $lab_occupied):
+            return response()->json(['status'=>'full']); 
+        endif;
+
+        foreach($request->exmAssignCheck as $student_exam_id):
+            $student_exam = hasExam::where('id', $student_exam_id);
+            $student_exam->update(['exam_schedule_id'=>$request->examScheduleId, 'schedule_status'=> 'Scheduled']);
+        endforeach;
+        return response()->json(['status'=>'success']);
+    }
+    // /ASSIGN ALL SELECTED STUDENTS TO SCHEDULE
+
+    // ASSIGN A STUDENT TO SCHEDULE
+    public function assignStudentToSchedule(Request $request)
+    {
+        $schedule = Schedule::where('id', $request->schedule)->first();
+        $lab_occupied = hasExam::where('exam_schedule_id', $request->schedule)->count();
+
+        if($schedule->lab_capacity < $lab_occupied+1):
+            return response()->json(['status'=>'full']); 
+        endif;
+
+        $student_exam = hasExam::where('id', $request->applicant);
+        $student_exam->update(['exam_schedule_id'=>$request->schedule, 'schedule_status'=> 'Scheduled']);
+        return response()->json(['status'=>'success']);
+
+    }
+    // /ASSIGN A STUDENT TO SCHEDULE
+
+    // REMOVE A STUDENT FROM SCHEDULE
+    public function removeStudentToSchedule(Request $request)
+    {
+        $student_exam = hasExam::where('id', $request->applicant);
+        $student_exam->update(['exam_schedule_id'=>NULL, 'schedule_status'=> 'Pending']);
+        return response()->json(['status'=>'success']);
+    }
+    // /REMOVE A STUDENT FROM SCHEDULE
+
     // EXAM SCHEDULES TABLE
-
-
     public function getSchedulesToAssign(Request $request)
     {
         $today = Carbon::today();

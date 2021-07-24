@@ -38,9 +38,9 @@
               @if($exam_applicants->isEmpty())
                 <div class="alert alert-info" role="alert">No results found!</div>
               @else
-                @if(Auth::user()->hasPermission('staff-dashboard-exam-application-approveSchedules'))
+                {{-- @if(Auth::user()->hasPermission('staff-dashboard-exam-application-approveSchedules'))
                   <div class="row px-3 mb-3"><div class="ml-auto text-right"><button id="btnApproveAll" class="btn btn-danger" onclick="ApproveAll()"><i class="fas fa-exclamation-triangle"> </i> Approve All</button></div></div>
-                @endif
+                @endif --}}
                 <table class="table yajra-datatable">
                   {{-- <thead>
                     <tr>
