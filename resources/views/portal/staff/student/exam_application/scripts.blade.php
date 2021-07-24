@@ -1,6 +1,9 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
+
+
+
         $('.selectAllEtestThree').on('change', function () {
             $('.etestThree').not(this).prop('checked', this.checked);
             count_selected ()
@@ -104,6 +107,11 @@
                         title: 'Selected over the Lab Capacity!',
                         text: 'Please reduce the selection and assign again',
                     })
+                }else if(data['status'] == 'published'){
+                    SwalNotificationWarningAutoClose.fire({
+                        title: 'Session Published!',
+                        text: 'Session already published and cannot be changed',
+                    })
                 }else if(data['status'] == 'success'){
                     location.reload();
                 }else{
@@ -145,6 +153,11 @@
                         title: 'Lab Full!',
                         text: 'Lab Capacity is Full',
                     })
+                }else if(data['status'] == 'published'){
+                    SwalNotificationWarningAutoClose.fire({
+                        title: 'Session Published!',
+                        text: 'Session already published and cannot be changed',
+                    })
                 }else if(data['status'] == 'success'){
                     location.reload();
                 }else{
@@ -178,7 +191,12 @@
             success: function(data) {
                 console.log('Success in remove student ajax.');
                 $('.remove-applicant').removeAttr('disabled', 'disabled');
-                if(data['status'] == 'success'){
+                if(data['status'] == 'published'){
+                    SwalNotificationWarningAutoClose.fire({
+                        title: 'Session Published!',
+                        text: 'Session already published and cannot be changed',
+                    })
+                }else if(data['status'] == 'success'){
                     location.reload();
                 }else{
                     console.log('Error in remove student controller.');
@@ -194,12 +212,13 @@
     }
     // /REMOVE APPLICANT
 
-    ApproveAll = () => {
+    // PUBLISH SCHEDULE
+    publish_schedule = (schedule_id) => {
         
         SwalQuestionDangerAutoClose.fire({
             title: "Are you sure?",
             text: "You wont be able to revert this!",
-            confirmButtonText: 'Yes, Approve all schedules now!',
+            confirmButtonText: 'Yes, Publish Schedule Now!',
         })
         .then((result) => {
             if(result.isConfirmed) {
@@ -207,47 +226,37 @@
                 headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "{{ route('student.application.exams.approveAll.schedules') }}",
+                url: "{{ route('student.application.exams.publish.schedule') }}",
                 type: 'post',
-                processData: false,
-                contentType: false,           
+                data: {
+                    'scheduleId' : schedule_id
+                },           
                 beforeSend: function(){
-                $('#btnRegisterAll').attr('disabled','disabled');
-                $("[id^=spinnerBtnViewModalAppliedExams]" ).each(function( index ) {
-                    $(this).removeClass('d-none');
-                });
+                    $('.btn').attr('disabled','disabled');
                 },
                 success: function(data){
-                $("[id^=spinnerBtnViewModalAppliedExams]" ).each(function( index ) {
-                    $(this).addClass('d-none');
-                });
-                $('#btnRegisterAll').removeAttr('disabled');
-                if (data['status'] == 'success'){
-                    SwalDoneSuccess.fire({
-                    title: 'Done!',
-                    text: 'All students registered successfully',
-                    }).then((result) => {
-                    if(result.isConfirmed) {
-                        location.reload();
+                    $('.btn').removeAttr('disabled');
+                    if (data['status'] == 'success'){
+                        SwalDoneSuccess.fire({
+                            title: 'Session Published!',
+                            text: 'All students are notified with session details',
+                        }).then((result) => {
+                            if(result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    }else if(data['status'] == 'empty'){
+                        SwalNotificationWarningAutoClose.fire({
+                            title: 'Session Empty!',
+                            text: 'Assign students and publish again',
+                        })
+                    }else{
+                        SwalSystemErrorDanger.fire()
                     }
-                    });
-                }else if (data['status'] == 'error'){
-                    SwalNotificationWarningAutoClose.fire({
-                        title: data['title'],
-                        text : data['msg'],
-                    })
-                }
-                else{
-                    SwalSystemErrorDanger.fire({
-                    title: 'Student Registration Process Failed!',
-                    })
-                }
                 },
                 error: function(err){
-                $("[id^=spinnerBtnViewModalAppliedExams]" ).each(function( index ) {
-                    $(this).addClass('d-none');
-                });
-                $('#btnRegisterAll').removeAttr('disabled');
+                    $('.btn').removeAttr('disabled');
+                    SwalSystemErrorDanger.fire()
                 }
             })
             }
@@ -259,5 +268,6 @@
             }
         })
     }
-    // /APPROVE SCHEDULES
+    // /PUBLISH SCHEDULE
+
 </script>

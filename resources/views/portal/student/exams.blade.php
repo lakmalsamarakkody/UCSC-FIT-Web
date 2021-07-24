@@ -72,7 +72,8 @@
         {{-- /SCHEDULED EXAMS--}}
 
         {{-- SCHEDULED EXAMS --}}
-        @if(!$scheduled_exams->isEmpty())
+        {{-- @if(!$scheduled_exams->isEmpty()) --}}
+        @if(App\Models\Student\Medical::where('student_id', Auth::user()->student->id)->where('type', 'reschedule')->count() > 0)
         <div class="col-12 mt-4 px-0">
           <div class="card">
             <div class="card-header">

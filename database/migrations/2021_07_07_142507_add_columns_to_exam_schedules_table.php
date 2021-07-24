@@ -16,6 +16,7 @@ class AddColumnsToExamSchedulesTable extends Migration
         Schema::table('exam_schedules', function (Blueprint $table) {
             $table->string('lab')->after('exam_type_id');
             $table->integer('lab_capacity')->after('lab');
+            $table->string('status')->default('Processing')->after('schedule_declined');
         });
     }
 

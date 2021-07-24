@@ -32,7 +32,7 @@
 
         <div class="col-12 mb-3">
           <div class="card">
-            <div class="card-header">Schedule</div>
+            <div class="card-header">Exam Session</div>
             <div class="card-body" >
               <form id="scheduleSelectFrm">
                 <div class="form-row">
@@ -60,13 +60,27 @@
         <div class="col-12 mb-3">
           <div class="card">
             <div class="card-header">
-              Selected Schedule Details
-              <div class="btn-group float-right">
-                <button class="btn btn-primary" id="btnAssignSelected" onclick="publish_schedule()">
-                  Publish To Students
-                  <span id="assingSelectedSpinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
-                </button>
-              </div>
+              Selected Exam Session Details
+              @if($selSechedule->status == 'Published')
+              
+                | <span class=" text-success">Session Published</span>
+              
+              @else
+                @if(Auth::user()->hasPermission('staff-dashboard-exam-application-approveSchedules'))
+                <div class="btn-group float-right">
+                  <button class="btn btn-success" id="btnAssignSelected" onclick="publish_schedule({{ $selSechedule->id }})">
+                    <i class="fas fa-bullhorn"></i> Publish To Students
+                    <span id="assingSelectedSpinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
+                  </button>
+                @endif
+                </div>
+              @endif
+                <div class="btn-group float-right">
+                  <button class="btn btn-success" id="btnAssignSelected" onclick="publish_schedule({{ $selSechedule->id }})" style="background-color:rgb(14, 97, 25) !important">
+                    <i class="fa fa-file-download"></i> Export List
+                    <span id="assingSelectedSpinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
+                  </button>
+                </div>
             </div>
             <div class="card-body" >
               <div class="row text-center">
@@ -95,7 +109,7 @@
         @endif
 
         <!-- APPLICATIONS LIST -->
-        <div class="col-6 md-5">
+        <div class="col md-5 @if($selSechedule && $selSechedule->status == 'Published') d-none @endif" id="unassigned">
           <div class="card">
             <div class="card-header">
               Unassigned Exam Applicants
@@ -257,7 +271,7 @@
 
                   
         <!-- ASSIGNED LIST -->
-        <div class="col-6 md-5">
+        <div class="col md-5" id="assigned">
           <div class="card">
             <div class="card-header">
               Assigned Exam Applicants
@@ -301,7 +315,7 @@
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Remove</button>
+                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"> Remove</button>
                             </div>
                           </td>
                           @endif
@@ -320,7 +334,7 @@
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Remove</button>
+                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"> Remove</button>
                             </div>
                           </td>
                           @endif
@@ -339,7 +353,7 @@
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Remove</button>
+                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"> Remove</button>
                             </div>
                           </td>
                           @endif
@@ -363,7 +377,7 @@
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Remove</button>
+                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"> Remove</button>
                             </div>
                           </td>
                           @endif
@@ -382,7 +396,7 @@
                           @if(Auth::user()->hasPermission('staff-dashboard-exam-application-view'))
                           <td class="text-right">
                             <div class="btn-group">
-                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"><i class="fas fa-user"></i> Remove</button>
+                              <button type="button" class="btn btn-outline-danger remove-applicant" onclick="remove_applicant({{ $applicant->id }}, {{ $selSechedule->id ?? '' }})"> Remove</button>
                             </div>
                           </td>
                           @endif

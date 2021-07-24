@@ -92,7 +92,7 @@ class ExamApplicationController extends Controller
             'subject_name'=> Subject::select('name')->whereColumn('subject_id','subjects.id'),
             'exam_type'=> Types::select('name')->whereColumn('exam_type_id', 'exam_types.id')])->get();
         $lab_occupied = hasExam::where('exam_schedule_id', $id)->count();
-        $sel_exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where('schedule_status', 'Scheduled')->where('exam_schedule_id', $id)->orderBy('created_at', 'asc')->get()->unique('payment_id');
+        $sel_exam_applicants = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where('schedule_status', '!=', 'Pending')->where('exam_schedule_id', $id)->orderBy('created_at', 'asc')->get()->unique('payment_id');
         return view('portal/staff/student/exam_application', compact('exam_applicants', 'applied_exams', 'exams', 'schedules', 'selSechedule', 'lab_occupied', 'sel_exam_applicants'));
     }
     // /SELECT SCHEDULE
@@ -110,6 +110,10 @@ class ExamApplicationController extends Controller
 
         if($lab_remaining < $request->selectedCount):
             return response()->json(['status'=>'over-limit']); 
+        endif;
+
+        if ($schedule->status == 'Published'):
+            return response()->json(['status'=>'published']);
         endif;
 
         if($schedule->lab_capacity <= $lab_occupied):
@@ -134,6 +138,10 @@ class ExamApplicationController extends Controller
             return response()->json(['status'=>'full']); 
         endif;
 
+        if ($schedule->status == 'Published'):
+            return response()->json(['status'=>'published']);
+        endif;
+
         $student_exam = hasExam::where('id', $request->applicant);
         $student_exam->update(['exam_schedule_id'=>$request->schedule, 'schedule_status'=> 'Scheduled']);
         return response()->json(['status'=>'success']);
@@ -144,11 +152,40 @@ class ExamApplicationController extends Controller
     // REMOVE A STUDENT FROM SCHEDULE
     public function removeStudentToSchedule(Request $request)
     {
+        $schedule = Schedule::where('id', $request->schedule)->first();
+        if ($schedule->status == 'Published'):
+            return response()->json(['status'=>'published']);
+        endif;
         $student_exam = hasExam::where('id', $request->applicant);
         $student_exam->update(['exam_schedule_id'=>NULL, 'schedule_status'=> 'Pending']);
         return response()->json(['status'=>'success']);
     }
     // /REMOVE A STUDENT FROM SCHEDULE
+
+    // PUBLISH SCHEDULE TO STUDENTS
+    public function publishSchedule(Request $request)
+    {
+        $student_exams = hasExam::where('exam_schedule_id', $request->scheduleId)->get();
+        if($student_exams->count() <= 0):
+            return response()->json(['status'=>'empty']);
+        endif;
+        Schedule::where('id', $request->scheduleId)->update(['status'=>'Published']);
+        foreach($student_exams as $student_exam):
+            $student_exam->update(['schedule_status'=>'Approved']);
+            set_time_limit(0);           
+            $details = [
+                'subject' => 'Exam for '.$student_exam->schedule->subject->name.' Scheduled',
+                'title' => 'Exam for '.$student_exam->schedule->subject->name.' Scheduled',
+                'body' => 'Exam schedule details <br><br> Subject: F'.$student_exam->schedule->subject->code.' '.$student_exam->schedule->subject->name.' <br> Scheduled Date: '.$student_exam->schedule->date.'<br> Scheduled Time: '.$student_exam->schedule->start_time.'<br> Login to the portal for more details.',
+                'color' => '#1b672a'
+            ];            
+            Mail::to($student_exam->student->user->email)->later(now()->addSeconds(5), new NotificationEmail($details));
+            set_time_limit(60);
+        endforeach;
+        return response()->json(['status'=>'success']);
+
+    }
+    // /PUBLISH SCHEDULE TO STUDENTS
 
     // EXAM SCHEDULES TABLE
     public function getSchedulesToAssign(Request $request)

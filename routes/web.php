@@ -123,6 +123,7 @@ Route::get('/portal/staff/student/exams/select/schedule/{id}', [App\Http\Control
 Route::post('/portal/staff/student/exams/asign/schedule/selected', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'assignSelectedToSchedule'])->name('student.application.exams.assign.selected');
 Route::post('/portal/staff/student/exams/asign/schedule/student', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'assignStudentToSchedule'])->name('student.application.exams.assign.student');
 Route::post('/portal/staff/student/exams/remove/schedule/student', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'removeStudentToSchedule'])->name('student.application.exams.remove.student');
+Route::post('/portal/staff/student/exams/publish/schedule/', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'publishSchedule'])->name('student.application.exams.publish.schedule');
 // EXAM MEDICAL
 Route::get('/portal/staff/student/exams/medical', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'reviewMedicals'])->name('student.exams.medical');
 Route::post('/portal/staff/student/exams/medical/details', [App\Http\Controllers\Portal\Staff\Student\ExamApplicationController::class, 'getMedicalDetails'])->name('student.exams.medical.details');
