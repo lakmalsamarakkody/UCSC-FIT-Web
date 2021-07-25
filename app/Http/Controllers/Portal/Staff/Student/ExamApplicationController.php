@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Portal\Staff\Student;
 
+use App\Exports\StudentExamExport;
 use App\Http\Controllers\Controller;
 use App\Mail\NotificationEmail;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,7 @@ use App\Models\Student\Registration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -30,7 +32,7 @@ class ExamApplicationController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('revalidate');
+        // $this->middleware('revalidate');         // Removed Due To Error When Exporting Excels
         $this->middleware('staff.auth');
     }
     // PAGES FROM HOME PAGE EXAMS CARDS
@@ -186,6 +188,36 @@ class ExamApplicationController extends Controller
 
     }
     // /PUBLISH SCHEDULE TO STUDENTS
+
+    // EXPORT SCHEDULE
+    public function exportSchedule($scheduleId)
+    {
+        $student_exams = hasExam::where('exam_schedule_id', $scheduleId)->get();
+        $schedule = Schedule::where('id', $scheduleId)->first();
+        $student_array [] =array(); 
+        foreach($student_exams as $student_exam):
+            $student_array[] = array(
+                $student_exam->student->id,
+                $student_exam->student->reg_no,
+                $student_exam->student->full_name,
+                $student_exam->student->nic_old.$student_exam->student->nic_new.$student_exam->student->postal.$student_exam->student->passport,
+                $student_exam->student->user->email,
+                $student_exam->student->telephone_country_code. $student_exam->student->telephone,
+                $schedule->subject->code." ".$schedule->subject->name,
+                $schedule->type->name,
+                $schedule->date,
+                $schedule->start_time,
+                $schedule->lab,
+            );
+        endforeach;       
+
+        $student_array = new StudentExamExport($student_array);
+        return Excel::download($student_array, $schedule->subject->code."_".$schedule->subject->name."_".$schedule->type->name."_".$schedule->date."_".$schedule->start_time."_".$schedule->lab.'_created_at_'.date('Y-m-d H:i:s').'.xlsx');
+
+        // return redirect('/portal/staff/student/exams/select/schedule/'.$scheduleId);
+        
+    }
+    // /EXPORT SCHEDULE
 
     // EXAM SCHEDULES TABLE
     public function getSchedulesToAssign(Request $request)

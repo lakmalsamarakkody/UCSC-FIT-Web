@@ -75,12 +75,15 @@
                 @endif
                 </div>
               @endif
+              @if($sel_exam_applicants->isEmpty())
+              @else
                 <div class="btn-group float-right">
-                  <button class="btn btn-success" id="btnAssignSelected" onclick="publish_schedule({{ $selSechedule->id }})" style="background-color:rgb(14, 97, 25) !important">
+                  <a class="btn btn-success text-capitalize" href="{{ url('/portal/staff/student/exams/export/schedule/'.$selSechedule->id) }}" style="background-color:rgb(14, 97, 25) !important">
                     <i class="fa fa-file-download"></i> Export List
                     <span id="assingSelectedSpinner" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span>
-                  </button>
+                  </a>
                 </div>
+              @endif
             </div>
             <div class="card-body" >
               <div class="row text-center">
