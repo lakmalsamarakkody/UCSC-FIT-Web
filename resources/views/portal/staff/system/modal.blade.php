@@ -652,8 +652,8 @@
               <label for="labStatus">Lab Status</label>
               <select name="labStatus" id="labStatus" class="form-control">
                 <option value="" selected hidden>Please Select Status</option>
-                <option value="Active">Active</option>
-                <option value="Deactive">Deactive</option>
+                <option value="Active">Activate</option>
+                <option value="Deactive">De-activate</option>
               </select>
               <span class="invalid-feedback" id="error-labStatus" role="alert"></span>
             </div>
