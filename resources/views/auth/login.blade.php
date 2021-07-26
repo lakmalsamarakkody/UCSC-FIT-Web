@@ -17,7 +17,7 @@
     ============================-->
     <section id="hero" style="background-image: url({{ asset('img/background/back.jpg') }}); height:200px">
         <div class="page-hero-container">
-            <h1 style="padding-top:30px">Login to FIT</h1>
+            <h1 style="padding-top:30px">Login to FIT Student Information System</h1>
         </div>
     </section><!-- #hero -->
 
