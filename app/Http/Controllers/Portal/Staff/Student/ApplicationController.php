@@ -96,7 +96,12 @@ class ApplicationController extends Controller
             $idFront = $id->image;
             $idBack = NULL;
             if( $id->type == 'NIC'):
-                $idBack = $student->document->where('type', 'NIC')->where('side', 'back')->first()->image;
+                $idBack = $student->document->where('type', 'NIC')->where('side', 'back')->first();
+                if($idBack==Null):
+                    
+                else:
+                    $idBack = $idBack->image;
+                endif;
             endif;
             $documents = array('bcFront' => $bcFront, 'bcBack' => $bcBack, 'idFront' => $idFront, 'idBack' => $idBack);
         endif;
