@@ -328,10 +328,10 @@
                                                     </tr>
                                                 </table>
                                             </div>
-                                            <div class="col-lg">
+                                            <div class="col">
                                                 <div name="imgIdFront" id="imgIdFront" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
                                             </div>
-                                            <div class="col-lg">
+                                            <div class="col" id="imgIdBackDiv">
                                                 <div name="imgIdBack" id="imgIdBack" class="drop-zone" style="background:no-repeat center; background-size: cover;" ></div>
                                             </div>
                                         </div>

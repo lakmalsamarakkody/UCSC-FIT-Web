@@ -170,29 +170,39 @@ view_modal_applicant = (registration_id) => {
           $('#imgBirthFront').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['bcFront']+')');
           $('#imgBirthBack').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['bcBack']+')');
           $('#imgIdFront').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['idFront']+')');
-          $('#imgIdBack').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+')');
+          
 
           $('#imgBirthFront').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['bcFront']+'")');
           $('#imgBirthBack').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['bcBack']+'")');
           $('#imgIdFront').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['idFront']+'")');
-          $('#imgIdBack').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+'")');
+          //$('#imgIdBack').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+'")');
 
-          if(data['student']['nic_old']){
+          if(data['student']['nic_old']){            
+            $('#imgIdBackDiv').removeClass('d-none')
+            $('#imgIdBack').html('')
+            $('#imgIdBack').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+')');
+            $('#imgIdBack').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+'")');
             $('#spanIdType').html('NIC');
             $('#spanIdentity').html(data['student']['nic_old']);
             var Id_type = 'NIC';
           }
           else if(data['student']['nic_new']){
+            $('#imgIdBackDiv').addClass('d-none')
+            $('#imgIdBack').html('No Image')
             $('#spanIdType').html('NIC');
             $('#spanIdentity').html(data['student']['nic_new']);
             var Id_type = 'NIC';
           }
           else if(data['student']['postal']){
+            $('#imgIdBackDiv').addClass('d-none')
+            $('#imgIdBack').html('No Image')
             $('#spanIdType').html('Postal ID');
             $('#spanIdentity').html(data['student']['postal']);
             var Id_type = 'Postal';
           }
           else if(data['student']['passport']){
+            $('#imgIdBackDiv').addClass('d-none')
+            $('#imgIdBack').html('No Image')
             $('#spanIdType').html('Passport ID');
             $('#spanIdentity').html(data['student']['passport']);
             var Id_type = 'Passport';

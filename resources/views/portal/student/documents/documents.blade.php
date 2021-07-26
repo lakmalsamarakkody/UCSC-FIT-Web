@@ -72,7 +72,7 @@
         @else
 
           {{-- IF ALL COMPLETE SHOW SUBMIT DOCUMENTS BUTTON --}}
-          @if($student->document()->where('type', 'birth')->first() != NULL && $student->document()->where('type', 'NIC')->orWhere('type', 'Postal')->orWhere('type', 'Passport')->first() != NULL)
+          @if($student->document()->where('type', 'birth')->first() != NULL && $student->document()->where('type', $document_type)->first() != NULL)
             {{-- SUBMIT DOCUMENTS --}}
             <div class="col-12 px-0">
               <div class="alert alert-warning" role="alert">
@@ -125,7 +125,7 @@
                       <div class="col-lg">
                         <div class="form-group">
                           <span class="form-text text-muted">Front Image</span>
-                          <div class="drop-zone" style="background: url({{ asset('storage/students/'.$student->id.'/'.$student->document()->where('type', $document_type)->where('side', 'front')->first()->image)}}) no-repeat center; background-size: cover;"></div>
+                          <div class="drop-zone" style="background: url({{ asset('storage/students/'.$student->id.'/'.$student->document()->where('type', $document_type)->where('side', 'front')->first()->image) ?? ''}}) no-repeat center; background-size: cover;"></div>
                         </div>
                       </div>
                       {{-- SHOW BACK IMAGE IF NIC OLD --}}
@@ -133,7 +133,7 @@
                       <div class="col-lg">
                         <div class="form-group">
                           <span class="form-text text-muted">Back Image</span>
-                          <div class="drop-zone" style="background: url({{ asset('storage/students/'.$student->id.'/'.$student->document()->where('type', $document_type)->where('side', 'back')->first()->image)}}) no-repeat center; background-size: cover;"></div>
+                          <div class="drop-zone" style="background: url({{ asset('storage/students/'.$student->id.'/'.$student->document()->where('type', $document_type)->where('side', 'back')->first()->image)?? ''}}) no-repeat center; background-size: cover;"></div>
                         </div>
                       </div>
                       @endif
@@ -356,7 +356,7 @@
         @if($registration->document_submit == 1 && $registration->document_status != 'Declined')
         @else
           {{-- IF ALL COMPLETE SHOW SUBMIT DOCUMENTS BUTTON --}}
-          @if($student->document()->where('type', 'birth')->first() != NULL && $student->document()->where('type', 'NIC')->orWhere('type', 'Postal')->orWhere('type', 'Passport')->first() != NULL)
+          @if($student->document()->where('type', 'birth')->first() != NULL && $student->document()->where('type', $document_type)->first() != NULL)
             {{-- SUBMIT DOCUMENTS --}}
             <div class="col-12 px-0 my-4">
               <div class="alert alert-warning" role="alert">
