@@ -150,7 +150,7 @@ decline_medical = () => {
                         console.log('Error in decline exam issue report.');
                         SwalSystemErrorDanger.fire({
                             title: 'Decline Failed!',
-                            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                         })
                     }
                     else if(data['status'] == 'success') {
@@ -226,7 +226,7 @@ resubmission_enable_decline = () => {
                         console.log('Error in decline exam issue report with resubmit ajax.');
                         SwalSystemErrorDanger.fire({
                             title: 'Decline Failed!',
-                            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                         })
                     }
                     else if(data['status'] == 'success') {

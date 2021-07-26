@@ -87,7 +87,7 @@
 							<div class="col-12 mt-2">
 								<div class="alert alert-danger shadow" role="alert">
 										<h4 class="alert-heading"><i class="far fa-check-circle"></i> Complete your registration! </h4>
-										<p>Complete your registration to continue FIT. If you have any issues with the registration, please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Coordinator (taw@ucsc.cmb.ac.lk)</a></p>
+										<p>Complete your registration to continue FIT. If you have any issues with the registration, please send an email to <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">FIT Coordinator ({{ App\Models\Contact::where('type', 'coordinator')->first()->email }})</a></p>
 										<hr>
 										<a href="{{ route('student.registration') }}" class="px-0 btn btn-link ">Click here to Complete Registration</a>
 								</div>
@@ -106,7 +106,7 @@
 						<div class="col-12 mt-2">
 							<div class="alert alert-danger shadow" role="alert">
 									<h4 class="alert-heading"><i class="far fa-check-circle"></i> Your Registration has Expired! </h4>
-									<p>Complete your registration to continue FIT. If you have any issues with your registration, please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Coordinator (taw@ucsc.cmb.ac.lk)</a></p>
+									<p>Complete your registration to continue FIT. If you have any issues with your registration, please send an email to <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">FIT Coordinator ({{ App\Models\Contact::where('type', 'coordinator')->first()->email }})</a></p>
 									<hr>
 									<a href="{{ route('payment.reregistration') }}" class="px-0 btn btn-link ">Click here to renew your registration</a>
 							</div>

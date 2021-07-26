@@ -38,7 +38,7 @@
         }else if (data['error']){
           SwalNotificationWarning.fire({
             title: 'Email Failed!',
-            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
           })
         }
       },
@@ -47,7 +47,7 @@
         $('#submit').removeAttr('disabled');
         SwalNotificationWarning.fire({
           title: 'Email Failed!',
-          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+          text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
         })
       }
     });

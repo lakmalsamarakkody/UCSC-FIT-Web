@@ -46,7 +46,7 @@
         }else if (data['error']){
           SwalSystemErrorDanger.fire({
             title: 'PaymentFailed!',
-            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
           })
         }
       },
@@ -55,7 +55,7 @@
         $('#btnSavePayment').removeAttr('disabled');
         SwalSystemErrorDanger.fire({
           title: 'PaymentFailed!',
-          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+          text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
         })
       }
     });

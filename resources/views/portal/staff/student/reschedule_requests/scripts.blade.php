@@ -219,7 +219,7 @@ $(document).off('focusin.modal');
                         console.log('Error in decline reschedule request.');
                         SwalSystemErrorDanger.fire({
                             title: 'Decline Failed!',
-                            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                         })
                     }
                     else if(data['status'] == 'success') {
@@ -301,7 +301,7 @@ resubmission_enable_decline = (payment_id) => {
                         console.log('Error in decline reschedule request with resubmit.');
                         SwalSystemErrorDanger.fire({
                             title: 'Decline Failed!',
-                            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                         })
                     }
                     else if(data['status'] == 'success') {
