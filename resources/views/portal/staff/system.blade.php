@@ -395,7 +395,7 @@
                     <td>{{ $lab->id }}</td>
                     <td>{{ $lab->name }}</td>
                     <td>{{ $lab->capacity }}</td>
-                    <td>{{ $lab->status }}</td>
+                    <td>@if($lab->status == 'Deactive') Inactive @else{{ $lab->status }}@endif</td>
                     <td class="text-right">
                       <div class="btn-group">
                         <button type="button" class="btn btn-outline-warning" id="btnEditLab-{{ $lab->id }}" onclick="edit_lab_modal_invoke({{ $lab->id }});"><i class="fas fa-edit"></i></button>
