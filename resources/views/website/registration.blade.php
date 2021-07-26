@@ -27,17 +27,19 @@
     <section id="registration" style="padding-top: 80px;">
         <div class="row about-container mb-5">
             <div class="col-lg-8 content order-lg-1 order-1">
-                <h2 class="title">How to Register for FIT?</h2>
+                <h2 class="title">How to Register for the FIT Programme?</h2>
 
                 <p>There are <b>no conditions</b>  to register for the FIT programme such as age or qualifications.</p>
                 
-                <p>Registration fees will be <b>Rs. 2750.00</b>. All registered students will receive a registration number and will be able to access all online courses. Students do not have to pay all registration, examination and other fees when they register for FIT programme. They can register FIT programme by paying only <b> Rs. 2750.00</b> and when they are ready to take relevant exams they can pay examination fees for relevant subjects.</p>
+                <p>Registration fee is <b>Rs. 2750.00</b>. All registered students will receive a registration number and will be able to access all the online courses in the <a href="https://fitvle.bit.lk/">FITVLE</a>. </p>
+                
+                <p>The prospective applicants do not have to pay all registration, examination and other fees when registering for the FIT programme. They can register for the FIT programme by paying only <b> Rs. 2750.00</b>, and when they are ready to take the examinations they can pay the examination fees for the relevant subjects.</p>
                 
                 <p>
-                    To <b>Register</b>, Sign up your email here and we'll send you an email with <b>login details and steps on how to Register for FIT</b>.
+                    To <b>Register</b>, Sign up here with your email to receive an email with <b>login details and steps on how to Register for the FIT programme</b>.
                 </p>
 
-                <p>Only one account can be created using one email</p>
+                <p>Only one account can be created using one email.</p>
                 <div class="form">
                     <div id="error">
 
