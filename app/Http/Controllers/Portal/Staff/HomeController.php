@@ -7,6 +7,7 @@ use App\Models\Exam;
 use App\Models\Exam\Schedule;
 use App\Models\Student\hasExam;
 use App\Models\Student\Medical;
+use App\Models\Student\Payment;
 use App\Models\Student\Registration;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -44,7 +45,8 @@ class HomeController extends Controller
       //Exams
       $examPaymentReviewCount = hasExam::where('payment_id', '!=', null)->where('payment_status', null)->where('schedule_status', 'Pending')->get()->unique('payment_id')->count();
       $revieweExamsToScheduleCount = hasExam::where('payment_id', '!=', null)->where('payment_status', 'Approved')->where('schedule_status', 'Pending')->get()->unique('payment_id')->count();
-      $medicalReviewCount = Medical::where('status', 'Pending')->get()->count();
+      $medicalReviewCount = Medical::where('status', 'Pending')->where('type', 'medical')->get()->count();
+      $rescheduleReviewCount = Payment::where('status', null)->where('type_id', 3)->get()->count();
       $examToRescheduleCount = Medical::where('status', 'Approved')->get()->count();
       // /CARD COUNTS
       
@@ -68,7 +70,8 @@ class HomeController extends Controller
         'revieweExamsToScheduleCount',
         'medicalReviewCount',
         'examToRescheduleCount',
-        'lastLogins'
+        'lastLogins',
+        'rescheduleReviewCount'
       ));
     }
 }

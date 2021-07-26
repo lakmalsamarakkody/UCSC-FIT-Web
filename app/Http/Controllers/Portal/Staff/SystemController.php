@@ -14,6 +14,7 @@ use App\Models\Student\Payment\Method;
 use App\Models\Student\Payment\Type;
 use App\Models\Student\Phase;
 use App\Models\User\Permission;
+use App\Models\Lab;
 use App\Models\User\Role\hasPermission;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -56,7 +57,8 @@ class SystemController extends Controller
     $phases = Phase::orderby('id')->get();
     $payment_methods = Method::orderby('id')->get();
     $payment_types = Type::orderby('id')->get();
-    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types', 'exam_durations','payment_methods', 'payment_types', 'phases'));
+    $labs = Lab::orderby('id')->get();
+    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types', 'exam_durations','payment_methods', 'payment_types', 'phases', 'labs'));
   }
 
   // PERMISSION
@@ -773,6 +775,77 @@ class SystemController extends Controller
   }
   // /DELETE FUNCTION
   // /PAYMENT TYPE
+
+  // LAB
+  // CREATE FUNCTION
+  public function createLab(Request $request)
+  {
+    //Validatinng form data
+    $lab_validator = Validator::make($request->all(), [
+      'newLabName' => ['required', 'unique:labs,name'],
+      'newLabCapacity' => ['required', 'integer'],
+      'newLabStatus' => ['required', Rule::in(['Active', 'Deactive'])],
+    ]);
+
+    // Check validation errors
+    if($lab_validator->fails()):
+      return response()->json(['errors'=>$lab_validator->errors()]);
+    else:
+      $lab = new Lab();
+      $lab->name = $request->newLabName;
+      $lab->capacity = $request->newLabCapacity;
+      $lab->status = $request->newLabStatus;
+      if($lab->save()):
+        return response()->json(['status'=>'success', 'lab'=>$lab]);
+      endif;
+    endif;
+    return response()->json(['status'=>'error']);
+
+  }
+  // /CREATE FUNCTION
+  // EDIT FUNCTIONS
+  public function editLabGetDetails(Request $request)
+  {
+    //Validate lab id
+    $lab_id_validator = Validator::make($request->all(), [
+      'lab_id'=> ['required', 'integer', 'exists:labs,id']
+    ]);
+
+    //Check validator fails
+    if($lab_id_validator->fails()):
+      return response()->json(['status'=>'error']);
+    else:
+      if($lab = Lab::find($request->lab_id)):
+        return response()->json(['status'=>'success', 'lab'=>$lab]);
+      endif;
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+    
+  }
+
+  public function editLab(Request $request)
+  {
+    //Validate lab data
+    $edit_lab_validator = Validator::make($request->all(), [
+      'labId'=> ['required', 'integer', 'exists:labs,id'],
+      'labCapacity'=> ['required', 'integer'],
+      'labStatus'=> ['required', Rule::in(['Active', 'Deactive'])],
+    ]);
+
+    //Check validator fails
+    if($edit_lab_validator->fails()):
+      return response()->json(['errors'=>$edit_lab_validator->errors()]);
+    else:
+      if(Lab::where('id', $request->labId)->update([
+        'capacity' => $request->labCapacity,
+        'status' => $request->labStatus,
+      ])):
+      return response()->json(['status'=>'success']);
+      endif;
+    endif;
+  }
+  // /EDIT FUNCTIONS
+  // /LAB
 
   // IMPORT STUDENTS
   public function StudentImport(Request $request)

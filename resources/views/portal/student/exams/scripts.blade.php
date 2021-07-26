@@ -1,5 +1,11 @@
 <script type="text/javascript">
 
+$(document).ready(function(){
+    $('#selectAllSchedules').on('change', function () {
+        $('.selected-schedules').not(this).prop('checked', this.checked);
+    })
+})
+
 // APPLY FOR EXAMS
 select_exams = () => {
     // Remove previous validation error messages
@@ -383,5 +389,79 @@ delete_medical = (id) => {
     });
 }
 // /DELETE MEDICAL
+
+
+// REQUEST RESCHEDULE
+submit_reschedule_request = () => {
+    const requestReschduleCheck = [];
+    $('.form-control').removeClass('is-invalid');
+    $('.invalid-feedback').html('');
+    $('.invalid-feedback').hide();
+
+    {{-- $('.selected-schedules').each(function() {
+        if($(this).is(":checked")) {
+            requestReschduleCheck.push($(this).val());
+        }
+    }); --}}
+
+    // FORM PAYLOAD
+    var formData = new FormData($("#requestRescheduleForm")[0]);
+    {{-- formData.append('requestReschduleCheck', requestReschduleCheck); --}}
+
+    $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="x-csrf-token"]').attr('content')},
+        url: "{{ route('student.request.reschedule') }}",
+        type: 'post',
+        data: formData, 
+        processData: false,
+        contentType: false,
+        beforeSend: function() {
+            $('#btnrequestReschdule').attr('disabled', 'disabled');
+            $('#requestReschduleSpinner').removeClass('d-none');
+        },
+        success: function(data) {
+            console.log('Success in request reschedule ajax.');
+            $('#btnrequestReschdule').removeAttr('disabled', 'disabled');
+            $('#requestReschduleSpinner').addClass('d-none');
+            if(data['errors']) {
+                console.log('Errors in validating data.');
+                $.each(data['errors'], function(key, value) {
+                    $('#'+key+'-err').show();
+                    $('#'+key).addClass('is-invalid');
+                    $('#'+key+'-err').append('<strong>'+value+'</strong>');
+                });
+            }else if(data['status'] == 'unselected'){
+                $('#requestReschduleCheck-err').show();
+                $('#requestReschduleCheck-err').append('<strong>Select one or more Schedules</strong>');
+            }else if(data['status'] == 'success'){
+                console.log('Success in select exam.');
+                SwalDoneSuccess.fire({
+                    title: 'Success!',
+                    text: 'Selected exams have been applied.',
+                })
+                .then((result) => {
+                    if(result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            }else{
+                console.log('Error in request reschedule controller.');
+                SwalSystemErrorDanger.fire();
+            }
+
+        },
+        error: function(err) {
+            console.log('Error in request reschedule ajax.');
+            $('#btnrequestReschdule').removeAttr('disabled', 'disabled');
+            $('#requestReschduleSpinner').addClass('d-none');
+            SwalSystemErrorDanger.fire();
+        }
+    });
+
+
+}
+// /REQUEST RESCHEDULE
+
+
 
 </script>

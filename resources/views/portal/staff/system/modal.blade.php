@@ -298,6 +298,7 @@
     </div>
   </div>
   <!--/ CREATE -->
+
   <!-- EDIT -->
   <div class="modal fade" id="modal-edit-exam-type" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
@@ -584,6 +585,91 @@
   </div>
   <!--/ EDIT -->
 {{--/ PAYMENT TYPE --}}
+
+{{-- LAB --}}
+  {{-- CREATE --}}
+  <div class="modal fade" id="modal-create-lab" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Lab</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formCreateLab">
+            <div class="form-group">
+              <label for="newLabName">Lab Name</label>
+              <input type="text" class="form-control" id="newLabName" name="newLabName" />
+              <span class="invalid-feedback" id="error-newLabName" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newLabCapacity">Lab Capacity</label>
+              <input type="text" class="form-control" id="newLabCapacity" name="newLabCapacity" />
+              <span class="invalid-feedback" id="error-newLabCapacity" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newLabStatus">Lab Status</label>
+              <select name="newLabStatus" id="newLabStatus" class="form-control">
+                <option value="" selected hidden>Please Select Status</option>
+                <option value="Active">Active</option>
+                <option value="Deactive">Deactive</option>
+              </select>
+              <span class="invalid-feedback" id="error-newLabStatus" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" id="btnCreateLab" onclick="create_lab();">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- / CREATE --}}
+
+  {{-- EDIT --}}
+  <div class="modal fade" id="modal-edit-lab" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="edit-lab-title">Edit Lab</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditLab">
+            <div class="form-group">
+              <label for="labCapacity">Lab Capacity</label>
+              <input type="hidden" class="form-control" id="labId" name="labId">
+              <span class="invalid-feedback" id="error-labId" role="alert"></span>
+              <input type="text" class="form-control" id="labCapacity" name="labCapacity" />
+              <span class="invalid-feedback" id="error-labCapacity" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="labStatus">Lab Status</label>
+              <select name="labStatus" id="labStatus" class="form-control">
+                <option value="" selected hidden>Please Select Status</option>
+                <option value="Active">Activate</option>
+                <option value="Deactive">De-activate</option>
+              </select>
+              <span class="invalid-feedback" id="error-labStatus" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditLab" onclick="edit_lab();">Apply Changes</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  {{-- / EDIT --}}
+{{-- / LAB --}}
 
 {{-- IMPORT STUDENTS --}}
 <div class="modal fade" id="importStudents" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticimportStudents" aria-hidden="true">

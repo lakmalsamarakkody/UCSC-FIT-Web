@@ -52,10 +52,12 @@ class ExamsController extends Controller
     $exams = Exam::where('year', $today->year)->where('month', '>=', $today->month)->union($next_years_exams)->orderBy('year', 'asc')->orderBy('month', 'asc')->get();
     $student = Student::where('user_id',Auth::user()->id)->first();
     $selected_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', null)->get();
-    $applied_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', '!=', null)->get();
+    $applied_exams = hasExam::where('student_id', $student->id)->where('payment_id', '!=', null)->get();
     $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('schedule_status', 'Approved')->get();
     $held_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('schedule_status', 'Approved')->get();
     ($student->flag->phase_id == 2) ? $isBlocked=true : $isBlocked=false;
+
+    $banks = Bank::orderBy('name')->get();
     
     return view('portal/student/exams',[
       // 'schedules' => $schedules,
@@ -66,7 +68,8 @@ class ExamsController extends Controller
       'applied_exams' => $applied_exams,
       'scheduled_exams' => $scheduled_exams,
       'held_exams' => $held_exams,
-      'isBlocked' => $isBlocked
+      'isBlocked' => $isBlocked,
+      'banks' => $banks
     ]);
   }
 
@@ -313,19 +316,78 @@ class ExamsController extends Controller
     return response()->json(['error'=>'error']);
   }
 
-  public function deleteExamMedical(Request $request)
+  public function requestReschedule(Request $request)
   {
-    $student_id = Auth::user()->student->id;
-    $student_exam = hasExam::where('id',$request->id)->first();
-    $medical = Medical::where('id', $student_exam->medical_id);
+    $reschedule_fee = Fee::where('purpose', 'reschedule')->first()->amount;
+    $validator = Validator::make($request->all(), 
+      [     
+          'rescheduleReason'=> ['required'],
+          'supportDocument'=> ['image', 'max:5000'],
+          'paidBank'=> ['required', 'numeric', 'exists:App\Models\Support\Bank,id', 'size:1'],
+          'paidBankBranch'=>['required', 'numeric', 'exists:App\Models\Support\BankBranch,id'],
+          'paidDate'=>['required', 'before_or_equal:today'],
+          'paidAmount'=>['required', 'numeric', 'size:'.$reschedule_fee],
+          'bankSlip'=>['required', 'image', 'max:5000']
+      ]
+    );
 
-    $medical_image = ($medical->first())->image;
-
-    if( $medical->forceDelete() && Storage::delete('public/medicals/'.$student_id.'/'.$medical_image) && $student_exam->update(['medical_id'=>null])):     
-
-      return response()->json(['status'=>'success']);
+    if($request->requestReschduleCheck == NULL):
+      return response()->json(['status'=>'unselected']);
 
     endif;
-    return response()->json(['error'=>'error']);
+
+    if($validator->fails()):
+      return response()->json(['errors'=>$validator->errors()]);
+    else:
+      $student_id = Auth::user()->student->id;
+      
+      $medical_name = "No File";
+
+      if($request->supportDocument):
+        $ext = $request->file('supportDocument')->getClientOriginalExtension();
+        $medical_name = $student_id.'_reschedule_document_'.date('Y-m-d').'_'.time().'.'. $ext;
+        $request->file('supportDocument')->storeAs('public/reschedules/'.$student_id,$medical_name);
+      endif;
+
+      $file_ext = $request->file('bankSlip')->getClientOriginalExtension();
+      $file_name = $student_id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
+
+      $payment = new Payment();
+      $payment->method_id = 2;
+      $payment->type_id = 3;
+      $payment->student_id = $student_id;
+      $payment->amount = $request->paidAmount;
+      $payment->bank_id = $request->paidBank;
+      $payment->bank_branch_id = $request->paidBankBranch;
+      $payment->paid_date = $request->paidDate;
+      $payment->image = $file_name;
+
+      $request->file('bankSlip')->storeAs('public/payments/reschedules/'.$student_id,$file_name);
+
+      $payment->save();
+ 
+      foreach($request->requestReschduleCheck as $key=>$student_exam_id):
+
+        $medical = new Medical();
+        $medical->student_id = $student_id;
+        $medical->student_exam_id = $student_exam_id;
+        $medical->reason = $request->rescheduleReason;
+        $medical->image = $medical_name;
+        $medical->status = 'Pending';
+        $medical->type = 'reschedule';
+        $medical->payment_id = $payment->id;        
+        
+        // return response()->json([$student_exam_id.'!']);
+        if($medical->save()):
+          $student_exam = hasExam::where('id',$student_exam_id);
+          $student_exam->update(['medical_id'=>$medical->id]);
+        endif;
+
+      endforeach;
+
+      return response()->json(['status'=>'success']);
+    endif;
+
+
   }
 }
