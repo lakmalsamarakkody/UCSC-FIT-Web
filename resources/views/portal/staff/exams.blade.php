@@ -158,11 +158,10 @@
                   
                 </tbody>
               </table>
-              {{-- <div class="pt-4 float-right">
-                {{ $upcoming_schedules->withQueryString()->appends(['upcoming' => $upcoming_schedules->currentPage()])->links("pagination::bootstrap-4") }}
-              </div> --}}
+
+              {{-- Commented below is the Verify All button, Check the Exam Controller for the commented function line --}}
               <div class="text-center">
-                @if(Auth::user()->hasPermission("staff-exam-schedule-allRelease"))<button type="button" class="btn btn-outline-primary" id="btnReleaseAllSchedules" onclick="release_schedules()">RELEASE ALL APPROVED EXAM SESSIONS<span id="spinnerBtnReleaseSchedules" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>@endif
+                @if(Auth::user()->hasPermission("staff-exam-schedule-allRelease"))<button type="button" class="btn btn-outline-primary" id="btnReleaseAllSchedules" onclick="release_schedules()">VERIFY ALL APPROVED EXAM SESSIONS<span id="spinnerBtnReleaseSchedules" class="spinner-border spinner-border-sm d-none " role="status" aria-hidden="true"></span></button>@endif
               </div>
             </div>
           </div>
@@ -174,7 +173,7 @@
         @if(Auth::user()->hasPermission('staff-exam-schedule-scheduled-view'))
         <div class="col-12 mb-5">
           <div class="card">
-            <div class="card-header">Released Exam Sessions</div>
+            <div class="card-header">Verified Exam Sessions</div>
             <div class="card-body">
               <table class="table schedules-after-release-yajradt">
                 <thead>
