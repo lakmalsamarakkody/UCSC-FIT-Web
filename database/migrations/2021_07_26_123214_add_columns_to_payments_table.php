@@ -14,7 +14,7 @@ class AddColumnsToPaymentsTable extends Migration
     public function up()
     {
         Schema::table('payments', function (Blueprint $table) {            
-            $table->string('image_two')->nullable();
+            $table->string('image_two')->nullable()->after('image');
         });
     }
 

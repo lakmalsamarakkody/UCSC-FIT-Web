@@ -47,12 +47,12 @@ class ExamsController extends Controller
     $today = Carbon::today();
 
     // $schedules=Schedule::orderby('date')->take(6)->get();
-    $exams_to_apply = Fee::where('purpose', 'exam')->get();
+    $exams_to_apply = Fee::where('purpose', 'exam')->orderBy('exam_type_id')->get();
     $next_years_exams = Exam::where('year', '>', $today->year);
     $exams = Exam::where('year', $today->year)->where('month', '>=', $today->month)->union($next_years_exams)->orderBy('year', 'asc')->orderBy('month', 'asc')->get();
     $student = Student::where('user_id',Auth::user()->id)->first();
     $selected_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', null)->where('payment_id', null)->get();
-    $applied_exams = hasExam::where('student_id', $student->id)->where('payment_id', '!=', null)->get();
+    $applied_exams = hasExam::where('student_id', $student->id)->where('payment_id', '!=', null)->orderBy('updated_at', 'desc')->get();
     $scheduled_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('schedule_status', 'Approved')->get();
     $held_exams = hasExam::where('student_id', $student->id)->where('exam_schedule_id', '!=', null)->where('schedule_status', 'Approved')->get();
     ($student->flag->phase_id == 2) ? $isBlocked=true : $isBlocked=false;
@@ -97,14 +97,20 @@ class ExamsController extends Controller
                               ->where( 'subject_id', $exam_to_apply->subject_id )
                               ->where( 'exam_type_id', $exam_to_apply->exam_type_id )
                               ->where( 'requested_exam_id', $request->$requested_month )
-                              ->first(); 
+                              ->where( function ($query) {
+                                $query->where('payment_status', '!=', 'Declined')
+                                ->orWhereNull('payment_status');
+                              })->first(); 
 
             $same_exam = hasExam::where( 'student_id', $student_id )
                                 ->where( 'subject_id', $exam_to_apply->subject_id )
                                 ->where( 'exam_type_id', $exam_to_apply->exam_type_id )
                                 ->where( 'exam_schedule_id', null )
                                 ->where( 'mark', null )
-                                ->first(); 
+                                ->where( function ($query) {
+                                  $query->where('payment_status', '!=', 'Declined')
+                                  ->orWhereNull('payment_status');
+                                })->first(); 
   
             $passed_exam = hasExam::where( 'student_id', $student_id )
                               ->where( 'subject_id', $exam_to_apply->subject_id )
@@ -209,7 +215,8 @@ class ExamsController extends Controller
         'paidBankBranch'=>['required', 'numeric', 'exists:App\Models\Support\BankBranch,id'],
         'paidDate'=>['required', 'before_or_equal:today'],
         'paidAmount'=>['required', 'numeric'],
-        'bankSlip'=>['required', 'image', 'max:5120']
+        'bankSlip'=>['required', 'image', 'max:5120'],
+        'bankSlip2'=>['required', 'image', 'max:5120']
       ],
       [
         'max'=>'The profile image may not be greater than 5MB'
@@ -246,7 +253,12 @@ class ExamsController extends Controller
 
       $payment->image = $file_name;
 
-      if($path = $request->file('bankSlip')->storeAs('public/payments/exam/'.$student->id,$file_name)):
+      $file_ext2 = $request->file('bankSlip2')->getClientOriginalExtension();
+      $file_name2 = $student->id.'_2_'.date('Y-m-d').'_'.time().'.'. $file_ext2;
+
+      $payment->image_two = $file_name2;
+
+      if($path = $request->file('bankSlip')->storeAs('public/payments/exam/'.$student->id,$file_name) && $path2 = $request->file('bankSlip2')->storeAs('public/payments/exam/'.$student->id,$file_name2)):
         if($payment->save()):
 
           foreach ($selected_exams as $selected_exam) {

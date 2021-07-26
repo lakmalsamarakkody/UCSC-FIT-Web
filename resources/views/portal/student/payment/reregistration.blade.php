@@ -131,9 +131,10 @@
                       {{-- BANK PAYMENT --}}
                       <div class="tab-pane fade show active mt-4" id="bank" role="tabpanel" aria-labelledby="bank-tab">
                         <ul>
-                          <li>Download and Print the Payment Voucher</li>
-                          <li>Pay the registration fee to the bank with the payment voucher (The bank will sign and certify the EDC Copy-1 and Candidate's Copy-2 of the payment voucher)</li>
-                          <li>Scan your certified EDC Copy-1 of the payment voucher and upload.</li>
+                            <li>Download and Print the Payment Voucher</li>
+                            <li>Pay the registration fee ({{ $reg_fee->amount * $dueRegistrations }}) to the bank with the payment voucher (The bank will sign and certify the EDC Copy-1 and Candidate's Copy-2 of the payment voucher)</li>
+                            <li>Scan your certified EDC Copy-1 <strong>(with the bank seal)</strong> of the payment voucher and the bank slip.</li>
+                            <li>Upload your scanned EDC copy-1 and the Bank slip.</li>
                         </ul>
                         <form enctype="multipart/form-data">
                           <div class="form-row">                    
@@ -213,6 +214,27 @@
                                 <span class="invalid-feedback" id="error-bankSlip" role="alert"></span>
                               </div>
                               {{-- UPLOAD PAYMENT SLIP --}}
+                              
+                              {{-- UPLOAD PAYMENT SLIP 2 --}}
+                              <div class="form-group mx-2">
+                                @if($payment != NULL)
+                                  <span id="InputUploadedBankslip2Help" class="form-text text-muted">Uploaded bank slip</span>
+                                  <div class="drop-zone" onclick="window.open('{{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image_two)}}')" style="background: url({{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image_two)}}) no-repeat center; background-size: cover;"></div>
+                                  <span id="InputBankslip2Help" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format. Maximum file size: 5mb</span>
+                                  <div class="drop-zone">
+                                    <span class="drop-zone__prompt">Re-upload Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
+                                    <input type="file" name="bankSlip2" id="bankSlip2" class="drop-zone__input form-control"/>
+                                  </div>
+                                @else
+                                  <span id="InputBankslip2Help" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format. Maximum file size: 5mb</span>
+                                  <div class="drop-zone">
+                                    <span class="drop-zone__prompt">Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
+                                    <input type="file" name="bankSlip2" id="bankSlip2" class="drop-zone__input form-control"/>
+                                  </div>
+                                @endif
+                                <span class="invalid-feedback" id="error-bankSlip2" role="alert"></span>
+                              </div>
+                              {{-- UPLOAD PAYMENT SLIP 2 --}}
 
                             </div>
                           </div>
