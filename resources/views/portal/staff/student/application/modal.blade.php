@@ -263,8 +263,13 @@
                                                         <th>Paid Amount: </th>
                                                         <td>Rs.<span id="spanPaymentAmount"></span></td>
                                                     </tr>
-                                                </table>
-                                                <div name="imgPaymentBankSlip" id="imgPaymentBankSlip" class="drop-zone text-danger" style="background:no-repeat center; background-size: cover;" ></div>
+                                                </table>                                                
+                                                <div class="col-lg m-1">
+                                                    <div name="imgPaymentBankSlip" id="imgPaymentBankSlip" class="drop-zone text-danger" style="background:no-repeat center; background-size: cover;" ></div>
+                                                </div>
+                                                <div class="col-lg m-1">
+                                                    <div name="imgPaymentBankSlip2" id="imgPaymentBankSlip2" class="drop-zone text-danger" style="background:no-repeat center; background-size: cover;" ></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

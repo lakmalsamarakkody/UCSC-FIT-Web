@@ -68,7 +68,8 @@ class PaymentController extends Controller
     if(!$request->noPaymentSlip):
       $bankSlipValidator = Validator::make($request->all(),
         [
-          'bankSlip'=>['required', 'image', 'max:5120']
+          'bankSlip'=>['required', 'image', 'max:5120'],
+          'bankSlip2'=>['required', 'image', 'max:5120']
         ],
         [
           'max'=>'Image may not be greater than 5MB'
@@ -97,6 +98,13 @@ class PaymentController extends Controller
         $file_name = $student->id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
         $payment->image = $file_name;
         if(!$request->file('bankSlip')->storeAs('public/payments/registration/'.$student->id,$file_name)):
+          return response()->json(['error'=>'error']);
+        endif;
+
+        $file_ext2 = $request->file('bankSlip2')->getClientOriginalExtension();
+        $file_name2 = $student->id.'_2_'.date('Y-m-d').'_'.time().'.'. $file_ext2;
+        $payment->image_two = $file_name2;
+        if(!$request->file('bankSlip2')->storeAs('public/payments/registration/'.$student->id,$file_name2)):
           return response()->json(['error'=>'error']);
         endif;
       else:
@@ -187,7 +195,8 @@ class PaymentController extends Controller
           'paidBankBranch'=>['required', 'numeric', 'exists:App\Models\Support\BankBranch,id'],
           'paidDate'=>['required', 'before_or_equal:today'],
           'paidAmount'=>['required', 'numeric', 'size:'.$totalFee],
-          'bankSlip'=>['required', 'image', 'max:5120']
+          'bankSlip'=>['required', 'image', 'max:5120'],
+          'bankSlip2'=>['required', 'image', 'max:5120']
       ],
       [
         'max'=>'Image may not be greater than 5MB'
@@ -212,6 +221,13 @@ class PaymentController extends Controller
       $file_name = $student->id.'_'.date('Y-m-d').'_'.time().'.'. $file_ext;
       $payment->image = $file_name;
       if(!$request->file('bankSlip')->storeAs('public/payments/registration/'.$student->id,$file_name)):
+        return response()->json(['error'=>'error']);
+      endif;
+
+      $file_ext2 = $request->file('bankSlip2')->getClientOriginalExtension();
+      $file_name2 = $student->id.'_2_'.date('Y-m-d').'_'.time().'.'. $file_ext2;
+      $payment->image_two = $file_name2;
+      if(!$request->file('bankSlip2')->storeAs('public/payments/registration/'.$student->id,$file_name2)):
         return response()->json(['error'=>'error']);
       endif;
       // /SET PAYMENT SLIP

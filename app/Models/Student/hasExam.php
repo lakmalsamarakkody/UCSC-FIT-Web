@@ -66,6 +66,15 @@ class hasExam extends Model
         return $this->belongsTo(Subject::class, 'subject_id', 'id');
     }
 
+    public function payment() {
+        /**
+         * The attributes that are assignable.
+         *
+         * connecting model , foreign_key , local_key
+         */
+        return $this->belongsTo(Payment::class, 'payment_id', 'id');
+    }
+
     public function type() {
         /**
          * The attributes that are assignable.
