@@ -170,7 +170,7 @@
                     <tbody>
                       @foreach ($exams_to_apply as $exam_apply)
                       {{-- {{ App\Models\Student\hasExam::where('student_id', Auth::user()->student->id)->where('subject_id', $exam_apply->subject_id)->where('exam_type_id', $exam_apply->exam_type_id)->get() }} --}}
-                      @if(App\Models\Student\hasExam::where('student_id', Auth::user()->student->id)->where('subject_id', $exam_apply->subject_id)->where('exam_type_id', $exam_apply->exam_type_id)->get() != NULL)
+                      {{-- @if(App\Models\Student\hasExam::where('student_id', Auth::user()->student->id)->where('subject_id', $exam_apply->subject_id)->where('exam_type_id', 1)->first() != NULL) --}}
                       <tr>
                         <td><input type="checkbox" name="{{$exam_apply->id}}" class="apply-exam-check" value="1" /></td>
                         <td>FIT {{ $exam_apply->subject->code}} - {{ $exam_apply->subject->name }}</td>
@@ -185,9 +185,9 @@
                           <span class="invalid-feedback" id="error-requestedExam" role="alert"></span>
                         </td>
                       </tr>
-                      @else
+                      {{-- @else --}}
                         
-                      @endif
+                      {{-- @endif --}}
                       @endforeach
                     </tbody>
                   </table>
@@ -337,6 +337,7 @@
           <div class="card">
             <div class="card-header">Applied Exams</div>
             <div class="card-body">
+              <p>Below are the exams that you applied. You'll be notified once the payment is approved and are scheduled.</p>
               <div class="table-responsive-sm mt-4">
                 <table class="table">
                   <thead>

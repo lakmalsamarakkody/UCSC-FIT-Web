@@ -155,6 +155,18 @@
                         $('#imgExamPaymentBankSlip').attr('style', 'background: url(/storage/payments/exam/'+data['student']['id']+'/'+data['payment']['image']+')');
                         $('#imgExamPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/exam/'+data['student']['id']+'/'+data['payment']['image']+'")');
 
+                        if(data['payment']['image_two'] == null){
+                            $('#imgExamPaymentBankSlip2').attr('style', 'background: none');
+                            $('#imgExamPaymentBankSlip2').html('BANK SLIP NOT FOUND');
+                            $('#imgExamPaymentBankSlip2').attr('onclick', 'window.open("/img/portal/staff/payment/notfound.png")');
+                        }
+                        else{
+                            $('#imgExamPaymentBankSlip2').html('');
+                            $('#imgExamPaymentBankSlip2').attr('style', 'background: url(/storage/payments/exam/'+data['student']['id']+'/'+data['payment']['image_two']+')');
+                            $('#imgExamPaymentBankSlip2').attr('onclick', 'window.open("/storage/payments/exam/'+data['student']['id']+'/'+data['payment']['image_two']+'")');
+                        }
+
+
                         // Buttons
                         if(data['payment']['status'] == 'Approved'){
                             $('#iconPaymentStatus').addClass('fa-check-circle text-success');

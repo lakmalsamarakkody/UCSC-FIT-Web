@@ -124,12 +124,22 @@ view_modal_applicant = (registration_id) => {
           $('#spanPaymentBankBranchCode').html(data['payment']['bankBranch']['code']);
           $('#spanPaymentAmount').html(data['payment']['details']['amount']);
           if(data['payment']['details']['image'] == null){
-            $('#imgPaymentBankSlip').html('BANK PAYMENT SLIP NOT FOUND');
+            $('#imgPaymentBankSlip').html('EDC Copy-1 NOT FOUND');
             $('#imgPaymentBankSlip').attr('onclick', 'window.open("/img/portal/staff/payment/notfound.png")');
           }
           else{
             $('#imgPaymentBankSlip').attr('style', 'background: url(/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+')');
             $('#imgPaymentBankSlip').attr('onclick', 'window.open("/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image']+'")');
+          }
+          if(data['payment']['details']['image_two'] == null){
+            $('#imgPaymentBankSlip2').attr('style', 'background: none');
+            $('#imgPaymentBankSlip2').html('BANK SLIP NOT FOUND');
+            $('#imgPaymentBankSlip2').attr('onclick', 'window.open("/img/portal/staff/payment/notfound.png")');
+          }
+          else{
+            $('#imgPaymentBankSlip2').html('');
+            $('#imgPaymentBankSlip2').attr('style', 'background: url(/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image_two']+')');
+            $('#imgPaymentBankSlip2').attr('onclick', 'window.open("/storage/payments/registration/'+data['student']['id']+'/'+data['payment']['details']['image_two']+'")');
           }
           
           //BUTTONS
