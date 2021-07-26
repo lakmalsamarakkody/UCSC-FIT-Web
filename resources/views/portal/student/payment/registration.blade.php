@@ -24,7 +24,7 @@
             <h4 class="alert-heading"><i class="far fa-check-circle"></i> Payment Submitted Successfully</h4>
             <p>Once your application and the payment has been approved upload the following scanned documents (JPEG/ PNG file format) <br>Birth Certificate <br>Unique Identification images (NIC / Passport / Postal ID)). <br></p> 
             <hr>
-            <p class="font-weight-bold mb-0">If your payment doesn't get approved within 2 weeks please report a complain via an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+            <p class="font-weight-bold mb-0">If your payment doesn't get approved within 2 weeks please report a complain via an email to <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">FIT Co-ordinator ({{ App\Models\Contact::where('type', 'coordinator')->first()->email }})</a></p>
             <hr>
             <p class="font-weight-bold mb-0">Now you may prepare your scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) to upload once your payment has been confirmed.</p>
           </div>
@@ -43,7 +43,7 @@
               <p>{{ $registration->declined_msg }}</p>
               <hr>
               <p class="font-weight-bold mb-0">Please upload correct payment details</p>
-              <p class="font-weight-bold mb-0">If you think this is a mistake, please resubmit your payment details and then email a copy of the original payment slip to FIT coordinator <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+              <p class="font-weight-bold mb-0">If you think this is a mistake, please resubmit your payment details and then email a copy of the original payment slip to FIT coordinator <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">FIT Co-ordinator ({{ App\Models\Contact::where('type', 'coordinator')->first()->email }})</a></p>
               </div>
           </div>
           {{-- /PAYMENT APPROVAL DECLINED --}}

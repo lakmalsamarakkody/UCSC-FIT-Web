@@ -19,9 +19,9 @@
       <div class="col-12 px-0">
         <div class="alert alert-success shadow" role="alert">
           <h4 class="alert-heading"><i class="far fa-check-circle"></i> Registration Renewal Payment Submitted Successfully</h4>
-          <p><a href="{{route ('student.home')}}" class="font-weight-bold">Go Home</a> to check whether your payment has beend approved. If your payment didn't get approved within 2 weeks please send an email to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator</a></p>
+          <p><a href="{{route ('student.home')}}" class="font-weight-bold">Go Home</a> to check whether your payment has beend approved. If your payment didn't get approved within 2 weeks please send an email to <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">FIT Co-ordinator</a></p>
           <hr>
-          <p class="font-weight-bold mb-0">FIT Coordinator : taw@ucsc.cmb.ac.lk</p>
+          <p class="font-weight-bold mb-0">FIT Coordinator : {{ App\Models\Contact::where('type', 'coordinator')->first()->email }}</p>
         </div>
       </div>
       {{-- /PAYMENT APPROVAL PENDING --}}
@@ -35,7 +35,7 @@
             <p>{{ $student->processing_registration()->declined_msg }}</p>
             <hr>
             <p class="font-weight-bold mb-0">Please upload correct payment details</p>
-            <p class="font-weight-bold mb-0">If you think this was mistaken resubmit and send an email attached with your payment slip to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+            <p class="font-weight-bold mb-0">If you think this was mistaken resubmit and send an email attached with your payment slip to <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">FIT Co-ordinator ({{ App\Models\Contact::where('type', 'coordinator')->first()->email }})</a></p>
             </div>
         </div>
         {{-- /PAYMENT APPROVAL DECLINED --}}

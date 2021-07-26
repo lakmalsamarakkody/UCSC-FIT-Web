@@ -591,7 +591,7 @@ let heldExamTable = null;
             if(data['status'] == 'errors') {
               SwalNotificationWarningAutoClose.fire({
                 title: 'Failed!',
-                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
+                text: 'The id of the schedule is not found. Please Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
               })
             }
             else if(data['status'] == 'requested'){
@@ -655,7 +655,7 @@ let heldExamTable = null;
             if(data['status'] == 'errors') {
               SwalNotificationWarningAutoClose.fire({
                 title: 'Failed!',
-                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
+                text: 'The id of the schedule is not found. Please Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
               })
             }
             else if(data['status'] == 'success') {
@@ -799,7 +799,7 @@ let heldExamTable = null;
           $('#btnViewDeclinedMessage-'+schedule_id).removeAttr('disabled', 'disabled');
           SwalNotificationWarningAutoClose.fire({
             title: 'Failed!',
-            text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
+            text: 'The id of the schedule is not found. Please Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
           })
         }
       },
@@ -843,7 +843,7 @@ let heldExamTable = null;
             if(data['status'] == 'errors') {
               SwalNotificationWarningAutoClose.fire({
                 title: 'Failed!',
-                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
+                text: 'The id of the schedule is not found. Please Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
               })
             }
             else if(data['status'] == 'decline') {
@@ -1280,7 +1280,7 @@ let heldExamTable = null;
               console.log('Validation errors in delete schedule.');
               SwalNotificationWarningAutoClose.fire({
                 title: 'Failed!',
-                text: 'The id of the schedule is not found. Please Contact Administrator: admin@fit.bit.lk',
+                text: 'The id of the schedule is not found. Please Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
               })
             }
           },

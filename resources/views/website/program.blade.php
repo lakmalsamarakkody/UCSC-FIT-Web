@@ -120,7 +120,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
                         Please contact the relevant facilitator of the course, through a forum, message or email. Contact details are given in the <a href="{{ url('/contact') }}">contact us</a> page.
-                        <br/>If you are not satisfied with the reply, contact the coordinator of VLE through email  ( <a href="mailto:taw@ucsc.cmb.ac.lk">taw@ucsc.cmb.ac.lk</a> ).
+                        <br/>If you are not satisfied with the reply, contact the coordinator of VLE through email  ( <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}</a> ).
                         <br/>If you are still not satisfied with the reply, send your complaint in writing to the Director, UCSC by using the email (<a href="mailto:director@ucsc.cmb.ac.lk">director@ucsc.cmb.ac.lk</a>)
                     </div>
                 </div>

@@ -492,7 +492,7 @@
                     @endif --}}
                     <div class="text-white text-3xl my-3">
                         {{ __('Contact Administrator:') }}
-                        <a class="text-white" href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a>
+                        <a class="text-white" href="mailto:{{ App\Models\Contact::where('type', 'admin')->first()->email }}">{{ App\Models\Contact::where('type', 'admin')->first()->email }}</a>
                    </div>
                 </div>
             </div>

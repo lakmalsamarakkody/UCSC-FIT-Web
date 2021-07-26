@@ -2192,7 +2192,7 @@ import_student = () => {
           }else{
             SwalNotificationWarningAutoClose.fire({
               title: 'Import Failed!',
-              text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+              text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
             })
             .then(() => {
               //location.reload();
@@ -2205,7 +2205,7 @@ import_student = () => {
           $('#importTempStudent').removeAttr('disabled');
           SwalNotificationWarningAutoClose.fire({
             title: 'Upload Failed!',
-            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
           })
           .then(() => {
             //location.reload();

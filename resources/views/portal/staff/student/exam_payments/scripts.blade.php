@@ -341,7 +341,7 @@
                                     console.log('Errors in decline exam payment.');
                                     SwalSystemErrorDanger.fire({
                                         title: 'Decline Failed!',
-                                        text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                                        text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                                     })
                                 }
                                 else if(data['status'] == 'success') {

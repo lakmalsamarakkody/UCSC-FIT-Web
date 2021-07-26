@@ -156,8 +156,8 @@
                         <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
                                 Please contact the relevant facilitator of the course, through a forum, message or email. Contact details are given in the <a href="{{ url('/contact') }}">contact us</a> page.
-                                <br/>If you are not satisfied with the reply, contact the coordinator of VLE through email  ( <a href="mailto:taw@ucsc.cmb.ac.lk">taw@ucsc.cmb.ac.lk</a> ).
-                                <br/>If you are still not satisfied with the reply, send your complaint in writing to the Director, UCSC by using the email (<a href="mailto:director@ucsc.cmb.ac.lk">director@ucsc.cmb.ac.lk</a>)
+                                <br/>If you are not satisfied with the reply, contact the coordinator of VLE through email  ( <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}</a> ).
+                                <br/>If you are still not satisfied with the reply, send your complaint in writing to the Director, UCSC by using the email (<a href="mailto:{{ App\Models\Contact::where('type', 'director')->first()->email }}">{{ App\Models\Contact::where('type', 'director')->first()->email }}</a>)
                             </div>
                         </div>
                     </div>
@@ -262,7 +262,7 @@
                     
                         <div id="collapse14" class="collapse" aria-labelledby="heading14" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                            It will take 3-4 working days( maximum 7days) after submitting your registration detail via FIT information system. If you have provided a valid email address, we will inform you as soon as we create an account in the online system. If it delays more than seven days, please contact the admin of the FITVLE <a href="mailto:admin@fit.bit.lk">(admin@fit.bit.lk)</a>.
+                            It will take 3-4 working days( maximum 7days) after submitting your registration detail via FIT information system. If you have provided a valid email address, we will inform you as soon as we create an account in the online system. If it delays more than seven days, please contact the admin of the FITVLE <a href="mailto:{{ App\Models\Contact::where('type', 'admin')->first()->email }}">({{ App\Models\Contact::where('type', 'admin')->first()->email }})</a>.
                             </div>
                         </div>
                     </div>

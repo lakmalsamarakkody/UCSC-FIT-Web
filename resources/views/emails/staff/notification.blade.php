@@ -33,8 +33,8 @@
 </div>
 
 <div>
-<h4 style="text-align: center;">Need Help? <br><br> Contact System Admin for any system related assistance <br> Call <a href="tel:+94112591080">+94 11 2591080</a> or Email <a href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a></p>
-<h4 style="text-align: center;">Contact Coordinator for Registration related assistance <br> E-mail <a href="mailto:edc@ucsc.cmb.ac.lk">edc@ucsc.cmb.ac.lk</a></p>
+<h4 style="text-align: center;">Need Help? <br><br> Contact System Admin for any system related assistance <br> Call <a href="tel:+94112591080">+94 11 2591080</a> or Email <a href="mailto:{{ App\Models\Contact::where('type', 'admin')->first()->email }}">{{ App\Models\Contact::where('type', 'admin')->first()->email }}</a></p>
+<h4 style="text-align: center;">Contact Coordinator for Registration related assistance <br> E-mail <a href="mailto:{{ App\Models\Contact::where('type', 'elc-email')->first()->email }}">{{ App\Models\Contact::where('type', 'elc-email')->first()->email }}</a></p>
 </div>
 
 <div style="padding: 0 25px 0 25px; ">

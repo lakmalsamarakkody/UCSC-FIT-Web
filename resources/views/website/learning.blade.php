@@ -36,7 +36,7 @@
                     <br/><b>Tel: <a href="tel:+94112591080">+94 11 2591080 </a></b>(Working Hours Only) 
                 </p>
                 <p>Within two weeks after your registration, we will enrol you on the FITVLE online courses. If you could not access the VLE after two weeks with the given username and password, please contact the VLE administrator.
-                    <b><br/>Email: <a href="mailto:admin@fit.bit.lk">admin@fit.bit.lk</a>  
+                    <b><br/>Email: <a href="mailto:{{ App\Models\Contact::where('type', 'admin')->first()->email }}">{{ App\Models\Contact::where('type', 'admin')->first()->email }}</a>  
                     <br/>Tel: <a href="tel:+94112591080">+94 11 2591080</a> </b>(Working Hours Only) 
                 </p>
                 <p>There are three separate online courses for the FIT Programme. You can access online interactive e-learning content and discuss with other learners and online e-facilitators in the course.</p>
@@ -157,7 +157,7 @@
             
                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
                     <div class="card-body pt-0 pl-md-5">
-                        It will take 3-4 working days( maximum 7days) after submitting your registration detail via FIT information system. If you have provided a valid email address, we will inform you as soon as we create an account in the online system. If it delays more than seven days, please contact the admin of the FITVLE <a href="mailto:admin@fit.bit.lk">(admin@fit.bit.lk)</a>.
+                        It will take 3-4 working days( maximum 7days) after submitting your registration detail via FIT information system. If you have provided a valid email address, we will inform you as soon as we create an account in the online system. If it delays more than seven days, please contact the admin of the FITVLE <a href="mailto:{{ App\Models\Contact::where('type', 'admin')->first()->email }}">({{ App\Models\Contact::where('type', 'admin')->first()->email }})</a>.
                     </div>
                 </div>
             </div>

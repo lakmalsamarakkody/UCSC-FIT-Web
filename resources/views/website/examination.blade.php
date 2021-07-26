@@ -100,11 +100,11 @@
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.2s" style="padding-bottom: 80px; margin-left:0px !important; padding-left: 0px !important;">
                     <h1 class="title">&nbsp;</h1>
                     <p class="description"  style="margin-left:0px !important; padding-left: 0px !important;">
-                        <i class="fa fa-address-card"></i><tab1>University of Colombo School of Computing,
-                        <br><tab2>No. 35, Reid Avenue, 
-                        <br><tab2>Colombo 07,
-                        <br><tab2>Sri Lanka.
-                        <br><i class="fa fa-phone"></i><tab1><a href="tel:+94112591080">+94 11 2591080</a> (Working Hours Only)
+                        <i class="fa fa-address-card"></i><tab1>{{ App\Models\Contact::where('type', 'elc-address')->first()->address_2 }},
+                        <br><tab2>{{ App\Models\Contact::where('type', 'elc-address')->first()->address_3 }}, 
+                        <br><tab2>{{ App\Models\Contact::where('type', 'elc-address')->first()->address_4 }},
+                        <br><tab2>{{ App\Models\Contact::where('type', 'elc-address')->first()->address_5 }}.
+                        <br><i class="fa fa-phone"></i><tab1><a href="tel:{{ App\Models\Contact::where('type', 'elc-telephone')->first()->telephone1 }}">{{ App\Models\Contact::where('type', 'elc-telephone')->first()->telephone1 }}</a> (Working Hours Only)
                     </p>
                 </div>
             </div>

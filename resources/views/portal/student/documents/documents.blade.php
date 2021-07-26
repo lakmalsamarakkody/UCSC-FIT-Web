@@ -37,7 +37,7 @@
               <h4 class="alert-heading"><i class="fas fa-check-circle"></i> Documents Submitted Successfully</h4>
               <p>Your registration will complete only after the documents have been approved.</p>
               <hr>
-              <p class="font-weight-bold mb-0">If your registration has not been approved within  two weeks time, please email the FIT Coordinator <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a> stating your concerns.</p>
+              <p class="font-weight-bold mb-0">If your registration has not been approved within  two weeks time, please email the FIT Coordinator <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">FIT Co-ordinator ({{ App\Models\Contact::where('type', 'coordinator')->first()->email }})</a> stating your concerns.</p>
             </div>
           </div>
           {{-- /DOCUMENT APPROVAL PENDING --}}
@@ -165,7 +165,7 @@
                   <p>{{ $registration->declined_msg }}</p>
                   <hr>
                   <p class="font-weight-bold mb-0">Please upload correct document images</p>
-                  <p class="font-weight-bold mb-0">If you think this was mistaken resubmit documents and send an email attached with your documents and  to <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Co-ordinator (taw@ucsc.cmb.ac.lk)</a></p>
+                  <p class="font-weight-bold mb-0">If you think this was mistaken resubmit documents and send an email attached with your documents and  to <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">FIT Co-ordinator ({{ App\Models\Contact::where('type', 'coordinator')->first()->email }})</a></p>
                   </div>
               </div>
               {{-- /DOCUMENT DECLINED --}}

@@ -51,7 +51,7 @@
         }else if (data['error']){
           SwalErrorDanger.fire({
             title: 'Account Creation Failed!',
-            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
           })
         }
       },
@@ -60,7 +60,7 @@
         $('#submit').removeAttr('disabled');
         SwalErrorDanger.fire({
           title: 'Account Creation Failed!',
-          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+          text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
         })
       }
     });

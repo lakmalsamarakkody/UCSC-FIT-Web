@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="alert alert-info" role="alert">
-                    <p class="font-weight-bold mb-0">If you want to re-apply for exams or get more details about the declined issue please contact <a href="mailto:taw@ucsc.cmb.ac.lk">FIT Coordinator (taw@ucsc.cmb.ac.lk)</a></p>
+                    <p class="font-weight-bold mb-0">If you want to re-apply for exams or get more details about the declined issue please contact <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">FIT Coordinator ({{ App\Models\Contact::where('type', 'coordinator')->first()->email }})</a></p>
                 </div>
             </div>
         </div>

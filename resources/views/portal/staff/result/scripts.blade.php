@@ -219,14 +219,14 @@
                 {
                   SwalNotificationWarning.fire({
                       title: 'Import Failed!',
-                      text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                      text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                   })
                 }
               });    
             }else if (data['error']){
               SwalNotificationWarning.fire({
                 title: 'Import Failed!',
-                text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
               })
             }
           },
@@ -236,7 +236,7 @@
             $('#importTempResults').removeAttr('disabled');
             SwalNotificationWarning.fire({
               title: 'Upload Failed!',
-              text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+              text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
             })
           }
         });
@@ -295,7 +295,7 @@
                   table1.draw()
                   SwalNotificationWarning.fire({
                     title: 'Import Failed!',
-                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                    text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                   })
                 }
               },
@@ -305,7 +305,7 @@
                 $('#importResults').removeAttr('disabled');
                 SwalNotificationWarning.fire({
                     title: 'Import Failed!',
-                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                    text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                 })
               }
             });
@@ -346,7 +346,7 @@
                 }else if (data['error']){
                   SwalNotificationWarning.fire({
                     title: 'Discard Failed!',
-                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                    text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                   })
                 }
               },
@@ -354,7 +354,7 @@
               {
                 SwalNotificationWarning.fire({
                     title: 'Discard Failed!',
-                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                    text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                 })
               }
             });
@@ -405,7 +405,7 @@
               {
                 SwalNotificationWarning.fire({
                     title: 'Release Failed!',
-                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                    text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                 })
               }
             });
@@ -449,7 +449,7 @@
                 }else if (data['error']){
                   SwalNotificationWarning.fire({
                     title: 'Hold Failed!',
-                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                    text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                   })
                 }
               },
@@ -457,7 +457,7 @@
               {
                 SwalNotificationWarning.fire({
                     title: 'Hold Failed!',
-                    text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                    text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
                 })
               }
             });

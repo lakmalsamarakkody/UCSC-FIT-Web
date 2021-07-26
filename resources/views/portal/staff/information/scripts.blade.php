@@ -48,7 +48,7 @@
             }else if (data['error']){
               SwalSystemErrorDanger.fire({
                 title: 'Update Failed!',
-                text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+                text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
               })
             }
           },
@@ -57,7 +57,7 @@
             Swal.hideLoading();
             SwalErrorDanger.fire({
               title: 'Update Failed!',
-              text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+              text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
             })
           }
         });
@@ -122,7 +122,7 @@
         }else if (data['error']){
           SwalSystemErrorDanger.fire({
             title: 'Upload Failed!',
-            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
           })
         }
       },
@@ -131,7 +131,7 @@
         $('#btnUploadProfilePic').removeAttr('disabled');
         SwalErrorDanger.fire({
           title: 'Upload Failed!',
-          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+          text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
         })
       }
     });
@@ -171,7 +171,7 @@
         }else if (data['error']){
           SwalSystemErrorDanger.fire({
             title: 'Upload Failed!',
-            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
           })
         }
       },
@@ -180,7 +180,7 @@
         $('#btnUploadProfilePic').removeAttr('disabled');
         SwalErrorDanger.fire({
           title: 'Upload Failed!',
-          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+          text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
         })
       }
     });
@@ -241,7 +241,7 @@
         }else if (data['error']){
           SwalErrorDanger.fire({
             title: 'Pasword Update Failed!',
-            text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
           })
         }
       },
@@ -250,7 +250,7 @@
         $('#btnChangePassword').removeAttr('disabled');
         SwalErrorDanger.fire({
           title: 'Pasword Update Failed!',
-          text: 'Please Try Again or Contact Administrator: admin@fit.bit.lk',
+          text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
         })
       }
     });
