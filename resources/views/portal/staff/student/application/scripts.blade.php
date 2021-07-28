@@ -179,18 +179,34 @@ view_modal_applicant = (registration_id) => {
 
           if(data['student']['nic_old']){            
             $('#imgIdBackDiv').removeClass('d-none')
-            $('#imgIdBack').html('')
-            $('#imgIdBack').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+')');
-            $('#imgIdBack').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+'")');
+            if(data['documents']['idBack'] == null){
+              $('#imgIdBack').attr('style', 'background: none');
+              $('#imgIdBack').html('No Image');
+              $('#imgIdBack').attr('onclick', 'window.open("/img/portal/staff/payment/notfound.png")');
+            }
+            else{
+              $('#imgIdBack').html('')
+              $('#imgIdBack').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+')');
+              $('#imgIdBack').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+'")');
+            }
             $('#spanIdType').html('NIC');
             $('#spanIdentity').html(data['student']['nic_old']);
             var Id_type = 'NIC';
           }
-          else if(data['student']['nic_new']){
-            $('#imgIdBackDiv').addClass('d-none')
-            $('#imgIdBack').html('No Image')
+          else if(data['student']['nic_new']){    
+            $('#imgIdBackDiv').removeClass('d-none')
+            if(data['documents']['idBack'] == null){
+              $('#imgIdBack').attr('style', 'background: none');
+              $('#imgIdBack').html('No Image');
+              $('#imgIdBack').attr('onclick', 'window.open("/img/portal/staff/payment/notfound.png")');
+            }
+            else{
+              $('#imgIdBack').html('')
+              $('#imgIdBack').attr('style', 'background: url(/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+')');
+              $('#imgIdBack').attr('onclick', 'window.open("/storage/students/'+data['student']['id']+'/'+data['documents']['idBack']+'")');
+            }
             $('#spanIdType').html('NIC');
-            $('#spanIdentity').html(data['student']['nic_new']);
+            $('#spanIdentity').html(data['student']['nic_old']);
             var Id_type = 'NIC';
           }
           else if(data['student']['postal']){

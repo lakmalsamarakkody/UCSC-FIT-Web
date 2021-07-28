@@ -128,8 +128,8 @@
                           <div class="drop-zone" style="background: url({{ asset('storage/students/'.$student->id.'/'.$student->document()->where('type', $document_type)->where('side', 'front')->first()->image)}}) no-repeat center; background-size: cover;"></div>
                         </div>
                       </div>
-                      {{-- SHOW BACK IMAGE IF NIC OLD --}}
-                      @if($student->nic_old != NULL) 
+                      {{-- SHOW BACK IMAGE IF NIC OLD || NIC NEW --}}
+                      @if($student->nic_old != NULL || $student->nic_new != NULL) 
                       <div class="col-lg">
                         <div class="form-group">
                           <span class="form-text text-muted">Back Image</span>
@@ -137,7 +137,7 @@
                         </div>
                       </div>
                       @endif
-                      {{-- /SHOW BACK IMAGE IF NIC OLD --}}
+                      {{-- /SHOW BACK IMAGE IF NIC OLD || NIC NEW --}}
                     </div>
                     <div class="form-row justify-content-end">
                       <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2">
@@ -276,7 +276,7 @@
                               <span class="invalid-feedback id-doc" id="error-documentFront" role="alert"></span>
                             </div>
                           </div>
-                          @if($student->nic_old != NULL) 
+                          @if($student->nic_old != NULL || $student->nic_new != NULL) 
                           <div class="col">
                             <div class="form-group">
                               <small id="documentBackHelp" class="form-text text-muted">Upload your scanned rear (other) side of the {{ $document_type }} here in JPEG/ PNG file format. Maximum file size: 5mb</small>
