@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://reg.fit.bit.lk'),
+    'url' => env('APP_URL', 'https://fit.bit.lk'),
 
     'asset_url' => env('ASSET_URL', null),
 

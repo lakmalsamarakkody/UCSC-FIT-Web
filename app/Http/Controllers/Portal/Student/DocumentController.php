@@ -104,7 +104,7 @@ class DocumentController extends Controller
         ]
     );
 
-        if(Auth::user()->student->nic_old != Null):
+        if(Auth::user()->student->nic_old != Null || Auth::user()->student->nic_new != Null):
             $validator_back = Validator::make($request->all(), 
             [     
                 'documentBack'=> ['required', 'image', 'max:5120']
