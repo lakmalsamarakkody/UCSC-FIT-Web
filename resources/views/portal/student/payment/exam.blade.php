@@ -144,7 +144,7 @@
                           <div class="col-lg-12">
                             {{-- UPLOAD PAYMENT SLIP --}}
                             <div class="form-group mx-2">
-                              <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned payment voucher EDC copy-1 here in JPEG/ PNG file format. Maximum file size: 5mb</span>
+                              <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned payment voucher EDC copy-1 here in JPEG/ PNG file format. Maximum file size: 5MB</span>
                               <div class="drop-zone">
                                 <span class="drop-zone__prompt">Scanned Payment Voucher EDC copy-1 <br><small>Drop image File here or click to upload</small> </span>
                                 <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
@@ -155,7 +155,7 @@
 
                             {{-- UPLOAD PAYMENT SLIP 2 --}}
                             <div class="form-group mx-2">
-                                <span id="InputBankslip2Help" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format. Maximum file size: 5mb</span>
+                                <span id="InputBankslip2Help" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format. Maximum file size: 5MB</span>
                                 <div class="drop-zone">
                                   <span class="drop-zone__prompt">Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
                                   <input type="file" name="bankSlip2" id="bankSlip2" class="drop-zone__input form-control"/>
@@ -171,7 +171,7 @@
                         <div class="form-row justify-content-end">
 
                           <div class="mt-3 col-xl-2 col-md-6 order-sm-1 order-3" id="divResetForm">
-                              <button type="button" class="btn btn-secondary form-control" id="btnResetForm" onclick="reset_form()">Discard</button>
+                              <button type="button" class="btn btn-secondary form-control" id="btnResetForm" onclick="window.location.reload();">Discard</button>
                           </div>
                           <div class="mt-3 col-xl-3 col-md-6 order-sm-2 order-2" id="divSaveInformation">
                               <button type="button" class="btn btn-outline-primary form-control" id="btnSavePayment" role="button" aria-expanded="false" aria-controls="declaration" onclick="save_payment()">
