@@ -98,6 +98,7 @@ class ExamAssignController extends Controller
     // STUDENT LIST
     public function getStudentList(Request $request)
     {
+        ini_set('memory_limit','4096M');
         if($request->ajax()) {
             $scheduled_student_ids = hasExam::select('student_id')->where('exam_schedule_id', $request->schedule_id)->get();
             $student_ids_array = [];
