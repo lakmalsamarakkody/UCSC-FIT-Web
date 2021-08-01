@@ -149,7 +149,7 @@
                     <div class="card border-0">
                         <div class="card-header bg-transparent border-bottom-0" id="headingEight">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
-                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>How can I make a complain about FIT programme?</h4>
+                                <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>How can I make a complaint about FIT programme?</h4>
                             </button>
                         </div>
                     

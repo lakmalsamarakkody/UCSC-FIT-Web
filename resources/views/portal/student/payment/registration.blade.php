@@ -22,9 +22,13 @@
         <div class="col-12 px-0">
           <div class="alert alert-info" role="alert">
             <h4 class="alert-heading"><i class="far fa-check-circle"></i> Payment Submitted Successfully</h4>
-            <p>Once your application and the payment has been approved upload the following scanned documents (JPEG/ PNG file format) <br>Birth Certificate <br>Unique Identification images (NIC / Passport / Postal ID)). <br></p> 
+            <p>Once your application and the payment has been approved upload the following scanned documents (JPEG/ PNG file format).</p>  
+            <ul>
+              <li>Birth Certificate</li>
+              <li>Unique Identification images (NIC / Passport / Postal ID)</li>
+            </ul>
             <hr>
-            <p class="font-weight-bold mb-0">If your payment doesn't get approved within 2 weeks please report a complain via an email to <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">FIT Co-ordinator ({{ App\Models\Contact::where('type', 'coordinator')->first()->email }})</a></p>
+            <p class="font-weight-bold mb-0">If your payment doesn't get approved within 2 weeks please make a complaint via an email to <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">FIT Co-ordinator ({{ App\Models\Contact::where('type', 'coordinator')->first()->email }})</a></p>
             <hr>
             <p class="font-weight-bold mb-0">Now you may prepare your scanned Birth Certificate and Unique Identification images (NIC / Passport / Postal ID) to upload once your payment has been confirmed.</p>
           </div>
@@ -193,13 +197,13 @@
                                   @if($payment != NULL)
                                     <span id="InputUploadedBankslipHelp" class="form-text text-muted">Uploaded payment voucher</span>
                                     <div class="drop-zone" onclick="window.open('{{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image)}}')" style="background: url({{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image)}}) no-repeat center; background-size: cover;"></div>
-                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned payment voucher EDC copy-1 <strong>(with the bank seal)</strong> here in JPEG/ PNG file format. Maximum file size: 5mb</span>
+                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned payment voucher EDC copy-1 <strong>(with the bank seal)</strong> here in JPEG/ PNG file format. Maximum file size: 5MB</span>
                                     <div class="drop-zone">
                                       <span class="drop-zone__prompt">Re-upload Payment Voucher EDC copy-1 <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
                                     </div>
                                   @else
-                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned payment voucher EDC copy-1 <strong>(with the bank seal)</strong> here in JPEG/ PNG file format. Maximum file size: 5mb</span>
+                                    <span id="InputBankslipHelp" class="form-text text-muted">Upload your scanned payment voucher EDC copy-1 <strong>(with the bank seal)</strong> here in JPEG/ PNG file format. Maximum file size: 5MB</span>
                                     <div class="drop-zone">
                                       <span class="drop-zone__prompt">Scanned Payment Voucher EDC copy-1 <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="bankSlip" id="bankSlip" class="drop-zone__input form-control"/>
@@ -214,13 +218,13 @@
                                   @if($payment != NULL)
                                     <span id="InputUploadedBankslip2Help" class="form-text text-muted">Uploaded bank slip</span>
                                     <div class="drop-zone" onclick="window.open('{{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image_two)}}')" style="background: url({{ asset('storage/payments/registration/'.$student->id.'/'.$payment->image_two)}}) no-repeat center; background-size: cover;"></div>
-                                    <span id="InputBankslip2Help" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format. Maximum file size: 5mb</span>
+                                    <span id="InputBankslip2Help" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format. Maximum file size: 5MB</span>
                                     <div class="drop-zone">
                                       <span class="drop-zone__prompt">Re-upload Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="bankSlip2" id="bankSlip2" class="drop-zone__input form-control"/>
                                     </div>
                                   @else
-                                    <span id="InputBankslip2Help" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format. Maximum file size: 5mb</span>
+                                    <span id="InputBankslip2Help" class="form-text text-muted">Upload your scanned bank slip here in JPEG/ PNG file format. Maximum file size: 5MB</span>
                                     <div class="drop-zone">
                                       <span class="drop-zone__prompt">Scanned Bank Slip <br><small>Drop image File here or click to upload</small> </span>
                                       <input type="file" name="bankSlip2" id="bankSlip2" class="drop-zone__input form-control"/>

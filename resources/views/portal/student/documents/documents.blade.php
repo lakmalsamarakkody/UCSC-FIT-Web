@@ -185,7 +185,7 @@
                         @if($student->document()->where('type', 'birth')->where('side', 'front')->first() == NULL)
                         <div class="col-lg">
                           <div class="form-group">
-                            <small id="birthCertificateHelp" class="form-text text-muted">Upload the scanned front side of the birth certificate here (JPEG/ PNG). Maximum file size: 5mb</small>
+                            <small id="birthCertificateHelp" class="form-text text-muted">Upload the scanned front side of the birth certificate here (JPEG/ PNG). Maximum file size: 5MB</small>
                             <div class="drop-zone">
                               <span class="drop-zone__prompt">Scanned Birth Certificate (Front)<br><small>Drop image here or click to select file</small> </span>
                               <input type="file" name="birthCertificateFront" id="birthCertificateFront" class="drop-zone__input form-control"/>
@@ -197,7 +197,7 @@
                         @if($student->document()->where('type', 'birth')->where('side', 'back')->first() == NULL)
                         <div class="col-lg">
                           <div class="form-group">
-                            <small id="birthCertificateHelp" class="form-text text-muted">Upload the scanned rear(other) side of the birth certificate here (JPEG/ PNG). Maximum file size: 5mb</small>
+                            <small id="birthCertificateHelp" class="form-text text-muted">Upload the scanned rear(other) side of the birth certificate here (JPEG/ PNG). Maximum file size: 5MB</small>
                             <div class="drop-zone">
                               <span class="drop-zone__prompt">Scanned Birth Certificate (Back)<br><small>Drop image here or click to select file</small> </span>
                               <input type="file" name="birthCertificateBack" id="birthCertificateBack" class="drop-zone__input form-control"/>
@@ -268,7 +268,7 @@
                         <div class="form-row">               
                           <div class="col">
                             <div class="form-group">
-                              <small id="documentFrontHelp" class="form-text text-muted">Upload your scanned front side of the {{ $document_type }} here in JPEG/ PNG file format. Maximum file size: 5mb</small>
+                              <small id="documentFrontHelp" class="form-text text-muted">Upload your scanned front side of the {{ $document_type }} here in JPEG/ PNG file format. Maximum file size: 5MB</small>
                               <div class="drop-zone">
                                 <span class="drop-zone__prompt">Scanned {{ $document_type }} Front<br><small>Drop image here or click to select file</small> </span>
                                 <input type="file" name="documentFront" id="documentFront" class="drop-zone__input form-control"/>
@@ -279,7 +279,7 @@
                           @if($student->nic_old != NULL || $student->nic_new != NULL) 
                           <div class="col">
                             <div class="form-group">
-                              <small id="documentBackHelp" class="form-text text-muted">Upload your scanned rear (other) side of the {{ $document_type }} here in JPEG/ PNG file format. Maximum file size: 5mb</small>
+                              <small id="documentBackHelp" class="form-text text-muted">Upload your scanned rear (other) side of the {{ $document_type }} here in JPEG/ PNG file format. Maximum file size: 5MB</small>
                               <div class="drop-zone">
                                 <span class="drop-zone__prompt">Scanned {{ $document_type }} Back<br><small>Drop image here or click to select file</small> </span>
                                 <input type="file" name="documentBack" id="documentBack" class="drop-zone__input form-control"/>
