@@ -179,7 +179,9 @@
                           <select name="{{$exam_apply->id}}-requestedExam" class="requested-exam form-control">
                           <option value="" selected hidden disabled>Select Requested Exam</option>
                           @foreach ($exams as $exam)
-                              <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>
+                            @if(App\Models\Exam\Schedule::where('exam_id', $exam->id)->where('subject_id', $exam_apply->subject->id)->where('exam_type_id', $exam_apply->examType->id)->where('date', '>', date('Y-m-d'))->where('schedule_release', 1)->first())
+                              <option value="{{ $exam->id }}">{{ \Carbon\Carbon::createFromDate($exam->year, $exam->month)->monthName }} {{ $exam->year }}</option>                            
+                            @endif
                           @endforeach
                           </select>
                           <span class="invalid-feedback" id="error-requestedExam" role="alert"></span>

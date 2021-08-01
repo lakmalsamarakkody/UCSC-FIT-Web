@@ -186,6 +186,7 @@ class ExamsController extends Controller
             $exam_schedule->start_time = $request->scheduleStartTime;
             $exam_schedule->lab = $selected_lab->name;
             $exam_schedule->lab_capacity = $selected_lab->capacity;
+            $exam_schedule->schedule_approval = 'requested';
 
             //SET EXAM END TIME
             $examDuration = Duration::where('subject_id', $request->scheduleSubject)->where('exam_type_id', $request->scheduleExamType)->first();
