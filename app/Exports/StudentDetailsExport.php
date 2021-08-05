@@ -18,13 +18,17 @@ class StudentDetailsExport implements FromArray, withHeadings
 
     public function headings(): array{
         return [
-            'ID',
-            'Registration Number',
-            'Name',
-            'NIC',
-            'Email',
-            'Telephone',
-            'User ID'
+            'regno',
+            'Fname',
+            'AInitial',
+            'ASName',
+            'title',
+            'ANICNo',
+            'ADOB',
+            'telno',
+            'email',
+            'Qualification',
+            'ver'
         ];
     }
 

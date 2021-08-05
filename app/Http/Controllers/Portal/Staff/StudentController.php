@@ -265,50 +265,69 @@ class StudentController extends Controller
     }
     // /MEDICAL MODAL LOAD
 
-    public function exportStudentDetails($duration)
+    public function exportStudentDetails($download_version=null)
     {
+        // if($duration=='lastday'):
+        //     $date = Carbon::now()->subdays(1)->format('Y-m-d');
+        //     // echo $date;
+        // elseif($duration=='lastweek'):
+        //     $date = Carbon::now()->subdays(7)->format('Y-m-d');
+        //     // echo $date;
+        // elseif($duration=='lastmonth'):
+        //     $date = Carbon::now()->subdays(30)->format('Y-m-d');
+        //     // echo $date;
+        // else
+        if($download_version=='all'):
+            $students = Student::get();
+            // $student_array [] =array(); 
+            // foreach($registrations as $registration):
+            //     $student_array[] = array(
+            //         $registration->student->reg_no,
+            //         $registration->student->full_name,
+            //         $registration->student->initials,
+            //         $registration->student->last_name,
+            //         $registration->student->title,
+            //         $registration->student->nic_old.$registration->student->nic_new.$registration->student->postal.$registration->student->passport,
+            //         $registration->student->dob,
+            //         $registration->student->telephone_country_code. $registration->student->telephone,
+            //         $registration->student->user->email,
+            //         '5',
+            //         $Student_download_version,
+            //     );
+            // endforeach;
 
-        if($duration=='lastday'):
-            $date = Carbon::now()->subdays(1)->format('Y-m-d');
-            // echo $date;
-        elseif($duration=='lastweek'):
-            $date = Carbon::now()->subdays(7)->format('Y-m-d');
-            // echo $date;
-        elseif($duration=='lastmonth'):
-            $date = Carbon::now()->subdays(30)->format('Y-m-d');
-            // echo $date;
-        elseif($duration=='all'):
-            $registrations = Registration::get();
-            $student_array [] =array(); 
-            foreach($registrations as $registration):
-                $student_array[] = array(
-                    $registration->student->id,
-                    $registration->student->reg_no,
-                    $registration->student->full_name,
-                    $registration->student->nic_old.$registration->student->nic_new.$registration->student->postal.$registration->student->passport,
-                    $registration->student->user->email,
-                    $registration->student->telephone_country_code. $registration->student->telephone,
-                    $registration->student->user->id,
-                );
-            endforeach;
-
-            $student_array = new StudentDetailsExport($student_array);
-            return Excel::download($student_array, 'students_All_created_at_'.date('Y-m-d H:i:s').'.xlsx');
+            // $student_array = new StudentDetailsExport($student_array);
+            // return Excel::download($student_array, 'students_All_created_at_'.date('Y-m-d H:i:s').'.xlsx');
     
-            return redirect()->route('students');
+            // return redirect()->route('students');
+        elseif($download_version==null):
+        else:            
+            $students = Student::where('download_version', Null)->get();
         endif;
         
-        $registrations = Registration::where('registered_at', '>=', $date)->get();
+        // $registrations = Registration::where('registered_at', '>=', $date)->get();
         $student_array [] =array(); 
-        foreach($registrations as $registration):
+        foreach($students as $student):
+            if($student->download_version == Null):
+                $Student_download_version = Null;
+                if($download_version != Null && $download_version != 'all'):
+                    $student->update('download_version', $download_version);
+                endif;
+            else:
+                $Student_download_version = 'ver '.$download_version;
+            endif;
             $student_array[] = array(
-                $registration->student->id,
-                $registration->student->reg_no,
-                $registration->student->full_name,
-                $registration->student->nic_old.$registration->student->nic_new.$registration->student->postal.$registration->student->passport,
-                $registration->student->user->email,
-                $registration->student->telephone_country_code. $registration->student->telephone,
-                $registration->student->user->id,
+                $student->reg_no,
+                $student->full_name,
+                $student->initials,
+                $student->last_name,
+                $student->title,
+                $student->nic_old.$student->nic_new.$student->postal.$student->passport,
+                $student->dob,
+                $student->telephone_country_code. $student->telephone,
+                $student->user->email,
+                '5',
+                $Student_download_version,
             );
         endforeach;
 
