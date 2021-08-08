@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Mail\StudentRegistration;
 use App\Models\Student;
+use App\Models\Student\Registration;
 use Illuminate\Database\Seeder;
 
 class SetDownloadVersionSeeder extends Seeder
@@ -14,6 +16,6 @@ class SetDownloadVersionSeeder extends Seeder
      */
     public function run()
     {        
-        Student::where('id', '!=', Null)->update(['download_version'=> 1]);
+        Registration::where('created_at', '>', '2021-08-07')->update(['download_version'=> Null]);
     }
 }
