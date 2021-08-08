@@ -25,7 +25,7 @@ class AddColumnsToPaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('exam_schedules', function (Blueprint $table) {            
+        Schema::table('payments', function (Blueprint $table) {            
             $table->dropColumn(['image_two']);
         });
     }
