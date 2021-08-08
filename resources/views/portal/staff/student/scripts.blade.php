@@ -1,8 +1,17 @@
 @section('script')
 <script type="text/javascript">
     $(function () {
+        $('#ver').on('change', function(){
+            var ver = $(this).val()
+            $('.version').html(ver)
+        })
 
-        
+        download_latest_version = () => {
+            var url = '{{ route("download.students", ":download_version") }}';
+            var id = $('#ver').val()
+            url = url.replace(':download_version', id);
+            location.replace( url,'Student_Profile')
+        }
         
         var table = $('.yajra-datatable').DataTable({
             searching: false,
