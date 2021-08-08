@@ -73,9 +73,9 @@
                         <label for="year">Year</label>
                         <select id="year" name="year" class="form-control form-control-sm">
                           <option value="">select here---</option>
-                          {{-- @foreach($years as $year)                          
-                          <option value="{{ $year->year }}">{{ $year->year }}</option>
-                          @endforeach --}}
+                          @foreach($years as $year)                          
+                          <option value="{{ $year->reg_year }}">{{ $year->reg_year }}</option>
+                          @endforeach
                         </select>
                       </div>
                       <div class="form-group col-xl-2 col-lg-4">
