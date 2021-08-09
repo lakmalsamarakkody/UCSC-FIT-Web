@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Portal\Staff;
 
 use App\Exports\StudentDetailsExport;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Website\Downloads;
 use App\Mail\ChangeEmail;
+use App\Models\DownloadVersion;
 use App\Models\Student;
 use App\Models\Student\Registration;
 use App\Models\Student\hasExam;
@@ -35,14 +37,11 @@ class StudentController extends Controller
 
     public function index(Request $request)
     {
-        $students = Student::orderBy('id', 'desc');
+        $years = Student::select('reg_year')->distinct()->get();
 
-        if ($request->year != null) {
-            $students = $students->where('reg_year', $request->year);
-        }
-
-        $students = $students->paginate(10);
-        return view('portal/staff/students', compact('students'));
+        $current_download_version = DownloadVersion::latest()->first();
+        
+        return view('portal/staff/students', compact('years', 'current_download_version'));
     }
 
     public function getStudentList(Request $request)
@@ -265,57 +264,64 @@ class StudentController extends Controller
     }
     // /MEDICAL MODAL LOAD
 
-    public function exportStudentDetails($duration)
+    public function exportStudentDetails($download_version=null)
     {
+        if($download_version=='all'):
+            $registrations = Registration::where('registered_at', '!=', NULL)->get();
+        elseif($download_version != NULL):
+            $latest_download_version = DownloadVersion::latest()->first();
 
-        if($duration=='lastday'):
-            $date = Carbon::now()->subdays(1)->format('Y-m-d');
-            // echo $date;
-        elseif($duration=='lastweek'):
-            $date = Carbon::now()->subdays(7)->format('Y-m-d');
-            // echo $date;
-        elseif($duration=='lastmonth'):
-            $date = Carbon::now()->subdays(30)->format('Y-m-d');
-            // echo $date;
-        elseif($duration=='all'):
-            $registrations = Registration::get();
-            $student_array [] =array(); 
-            foreach($registrations as $registration):
-                $student_array[] = array(
-                    $registration->student->id,
-                    $registration->student->reg_no,
-                    $registration->student->full_name,
-                    $registration->student->nic_old.$registration->student->nic_new.$registration->student->postal.$registration->student->passport,
-                    $registration->student->user->email,
-                    $registration->student->telephone_country_code. $registration->student->telephone,
-                    $registration->student->user->id,
-                );
-            endforeach;
+            if($download_version > $latest_download_version->id+1):
+                return redirect()->route('students');
+            endif;
 
-            $student_array = new StudentDetailsExport($student_array);
-            return Excel::download($student_array, 'students_All_created_at_'.date('Y-m-d H:i:s').'.xlsx');
-    
-            return redirect()->route('students');
+            if(DownloadVersion::where('id', $download_version)->first()):
+                $registrations = Registration::where('registered_at', '!=', NULL)->where('download_version', $download_version)->get();
+            else:
+                $registrations = Registration::where('registered_at', '!=', NULL)->where('download_version', NULL)->get();
+                if($registrations->first()):
+                    $new_version = new DownloadVersion;
+                    $new_version->id=$download_version;
+                    $new_version->save();
+                endif;
+            endif;
+        else:
+            $registrations = Registration::where('registered_at', '!=', NULL)->where('download_version', NULL)->get();
         endif;
         
-        $registrations = Registration::where('registered_at', '>=', $date)->get();
+        
         $student_array [] =array(); 
         foreach($registrations as $registration):
+            set_time_limit(0);
+            if($registration->download_version == NULL):
+                $Student_download_version = NULL;
+                if($download_version != NULL && $download_version != 'all'):                    
+                    Registration::where('id', $registration->id)->update(['download_version'=> $download_version]);
+                    $Student_download_version = 'ver '.$download_version;
+                endif;
+            else:
+                $Student_download_version = 'ver '.$registration->download_version;
+            endif;
             $student_array[] = array(
-                $registration->student->id,
                 $registration->student->reg_no,
                 $registration->student->full_name,
+                $registration->student->initials,
+                $registration->student->last_name,
+                $registration->student->title,
                 $registration->student->nic_old.$registration->student->nic_new.$registration->student->postal.$registration->student->passport,
-                $registration->student->user->email,
+                $registration->student->dob,
                 $registration->student->telephone_country_code. $registration->student->telephone,
-                $registration->student->user->id,
+                $registration->student->user->email,
+                '5',
+                $Student_download_version,
             );
+            set_time_limit(60);
         endforeach;
 
         
 
         $student_array = new StudentDetailsExport($student_array);
-        return Excel::download($student_array, 'students_'.$duration.'_created_at_'.date('Y-m-d H:i:s').'.xlsx');
+        return Excel::download($student_array, 'students_'.$download_version.'_created_at_'.date('Y-m-d H:i:s').'.xlsx');
 
         return redirect()->route('students');
         
