@@ -16,6 +16,6 @@ class SetDownloadVersionSeeder extends Seeder
      */
     public function run()
     {        
-        Registration::where('created_at', '>', '2021-08-07')->update(['download_version'=> Null]);
+        Registration::where('created_at', '<', '2021-08-09')->update(['download_version'=> 716]);
     }
 }
