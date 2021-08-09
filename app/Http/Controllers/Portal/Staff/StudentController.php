@@ -267,7 +267,7 @@ class StudentController extends Controller
     public function exportStudentDetails($download_version=null)
     {
         if($download_version=='all'):
-            $registrations = Registration::all();
+            $registrations = Registration::where('registered_at', '!=', NULL)->get();
         elseif($download_version != NULL):
             $latest_download_version = DownloadVersion::latest()->first();
 
@@ -276,9 +276,9 @@ class StudentController extends Controller
             endif;
 
             if(DownloadVersion::where('id', $download_version)->first()):
-                $registrations = Registration::where('download_version', $download_version)->get();
+                $registrations = Registration::where('registered_at', '!=', NULL)->where('download_version', $download_version)->get();
             else:
-                $registrations = Registration::where('download_version', NULL)->get();
+                $registrations = Registration::where('registered_at', '!=', NULL)->where('download_version', NULL)->get();
                 if($registrations->first()):
                     $new_version = new DownloadVersion;
                     $new_version->id=$download_version;
@@ -286,7 +286,7 @@ class StudentController extends Controller
                 endif;
             endif;
         else:
-            $registrations = Registration::where('download_version', NULL)->get();
+            $registrations = Registration::where('registered_at', '!=', NULL)->where('download_version', NULL)->get();
         endif;
         
         
