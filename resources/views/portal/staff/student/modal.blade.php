@@ -18,7 +18,7 @@
                     <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">ver </span>
                     </div>
-                    <input type="number" class="form-control" id="ver" aria-describedby="ver" value="{{ $current_download_version->id+1 }}"/>
+                    <input type="number" class="form-control" id="ver" aria-describedby="ver" value="{{ $current_download_version->id+1 }}" min="716"/>
                 </div>
 
                 <a class="btn btn-info w-100 mt-3" href="{{ url('/portal/staff/student/list/export/') }}">Download Version <span class="version">{{ $current_download_version->id+1 }}</span> (Trail)</a>
