@@ -37,16 +37,16 @@
             Filters
             @if(Auth::user()->hasPermission("staff-student-downloadStdList"))
             <div class="btn-group  float-right" role="group">
-              <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle border-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgb(14, 97, 25) !important">
-                <i class="fa fa-file-download"></i> student list
+              <button id="btnGroupDrop1" type="button" class="btn btn-success border-0" data-toggle="modal" data-target="#modal-download-student-list" style="background-color:rgb(14, 97, 25) !important">
+                <i class="fa fa-file-download"></i> Download student list
               </button>
-              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              {{-- <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                 <a class="dropdown-item text-capitalize" href="{{ url('/portal/staff/student/list/export/lastday') }}">Last Day</a>
                 <a class="dropdown-item text-capitalize" href="{{ url('/portal/staff/student/list/export/lastweek') }}">Last Week</a>
                 <a class="dropdown-item text-capitalize" href="{{ url('/portal/staff/student/list/export/lastmonth') }}">Last Month</a>
                 <hr>
                 <a class="dropdown-item text-capitalize" href="{{ url('/portal/staff/student/list/export/all') }}">All</a>
-              </div>
+              </div> --}}
             </div>
             @endif
           </div>
@@ -73,9 +73,9 @@
                         <label for="year">Year</label>
                         <select id="year" name="year" class="form-control form-control-sm">
                           <option value="">select here---</option>
-                          {{-- @foreach($years as $year)                          
-                          <option value="{{ $year->year }}">{{ $year->year }}</option>
-                          @endforeach --}}
+                          @foreach($years as $year)                          
+                          <option value="{{ $year->reg_year }}">{{ $year->reg_year }}</option>
+                          @endforeach
                         </select>
                       </div>
                       <div class="form-group col-xl-2 col-lg-4">
@@ -150,6 +150,8 @@
     <!-- /CONTENT -->
 
 
+
+@include('portal.staff.student.modal')
 @endsection
 
 @include('portal.staff.student.scripts')
