@@ -266,6 +266,7 @@ class StudentController extends Controller
 
     public function exportStudentDetails($download_version=null)
     {
+        ini_set('memory_limit','4096M');
         if($download_version=='all'):
             $registrations = Registration::where('registered_at', '!=', NULL)->get();
         elseif($download_version != NULL):
