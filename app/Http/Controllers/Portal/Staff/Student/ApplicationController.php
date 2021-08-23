@@ -107,9 +107,7 @@ class ApplicationController extends Controller
                 $idBack = NULL;
                 if( $id->type == 'NIC'):
                     $idBack = $student->document->where('type', 'NIC')->where('side', 'back')->first();
-                    if($idBack==Null):
-                        
-                    else:
+                    if($idBack):
                         $idBack = $idBack->image;
                     endif;
                 endif;
