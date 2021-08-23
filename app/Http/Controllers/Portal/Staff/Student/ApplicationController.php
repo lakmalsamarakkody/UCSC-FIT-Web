@@ -98,7 +98,7 @@ class ApplicationController extends Controller
             if($student->document->where('type', 'Birth')->where('side', 'back')->count() > 0):
                 $bcBack = $student->document->where('type', 'Birth')->where('side', 'back')->first()->image;
             else:
-                $bcFront = NULL;            
+                $bcBack = NULL;            
             endif;
             $id = $student->document->whereIn('type', ['NIC', 'Postal', 'Passport'])->where('side', 'front')->first();
             
