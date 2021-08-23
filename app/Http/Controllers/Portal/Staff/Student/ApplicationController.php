@@ -90,20 +90,29 @@ class ApplicationController extends Controller
         endif;
         // DOCUMENT DETAILS
         if($registration->document_submit == 1):
-            $bcFront = $student->document->where('type', 'Birth')->where('side', 'front')->first()->image;
-            $bcBack = $student->document->where('type', 'Birth')->where('side', 'back')->first()->image;
-            $id = $student->document->whereIn('type', ['NIC', 'Postal', 'Passport'])->where('side', 'front')->first();
-            $idFront = $id->image;
-            $idBack = NULL;
-            if( $id->type == 'NIC'):
-                $idBack = $student->document->where('type', 'NIC')->where('side', 'back')->first();
-                if($idBack==Null):
-                    
-                else:
-                    $idBack = $idBack->image;
-                endif;
+            if($student->document->where('type', 'Birth')->where('side', 'front')->count() > 0):
+                $bcFront = $student->document->where('type', 'Birth')->where('side', 'front')->latest()->first()->image;
             endif;
-            $documents = array('bcFront' => $bcFront, 'bcBack' => $bcBack, 'idFront' => $idFront, 'idBack' => $idBack);
+            if($student->document->where('type', 'Birth')->where('side', 'back')->count() > 0):
+                $bcBack = $student->document->where('type', 'Birth')->where('side', 'back')->first()->image;            
+            endif;
+            $id = $student->document->whereIn('type', ['NIC', 'Postal', 'Passport'])->where('side', 'front')->first();
+            
+            if( $id ):
+                $idFront = $id->image;
+                $idBack = NULL;
+                if( $id->type == 'NIC'):
+                    $idBack = $student->document->where('type', 'NIC')->where('side', 'back')->first();
+                    if($idBack==Null):
+                        
+                    else:
+                        $idBack = $idBack->image;
+                    endif;
+                endif;
+                $documents = array('bcFront' => $bcFront, 'bcBack' => $bcBack, 'idFront' => $idFront, 'idBack' => $idBack);
+            endif;
+
+
         endif;
 
         //PERMANENT ADDRESS
