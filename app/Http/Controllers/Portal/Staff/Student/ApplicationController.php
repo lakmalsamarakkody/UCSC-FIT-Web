@@ -90,20 +90,34 @@ class ApplicationController extends Controller
         endif;
         // DOCUMENT DETAILS
         if($registration->document_submit == 1):
-            $bcFront = $student->document->where('type', 'Birth')->where('side', 'front')->first()->image;
-            $bcBack = $student->document->where('type', 'Birth')->where('side', 'back')->first()->image;
+            if($student->document->where('type', 'Birth')->where('side', 'front')->count() > 0):
+                $bcFront = $student->document->where('type', 'Birth')->where('side', 'front')->latest()->first()->image;
+            else:
+                $bcFront = NULL;
+            endif;
+            if($student->document->where('type', 'Birth')->where('side', 'back')->count() > 0):
+                $bcBack = $student->document->where('type', 'Birth')->where('side', 'back')->first()->image;
+            else:
+                $bcBack = NULL;            
+            endif;
             $id = $student->document->whereIn('type', ['NIC', 'Postal', 'Passport'])->where('side', 'front')->first();
-            $idFront = $id->image;
-            $idBack = NULL;
-            if( $id->type == 'NIC'):
-                $idBack = $student->document->where('type', 'NIC')->where('side', 'back')->first();
-                if($idBack==Null):
-                    
-                else:
-                    $idBack = $idBack->image;
+            
+            if( $id ):
+                $idFront = $id->image;
+                $idBack = NULL;
+                if( $id->type == 'NIC'):
+                    $idBack = $student->document->where('type', 'NIC')->where('side', 'back')->first();
+                    if($idBack):
+                        $idBack = $idBack->image;
+                    endif;
                 endif;
+            else:
+                $idFront = NULL;
+                $idBack = NULL;
             endif;
             $documents = array('bcFront' => $bcFront, 'bcBack' => $bcBack, 'idFront' => $idFront, 'idBack' => $idBack);
+
+
         endif;
 
         //PERMANENT ADDRESS
