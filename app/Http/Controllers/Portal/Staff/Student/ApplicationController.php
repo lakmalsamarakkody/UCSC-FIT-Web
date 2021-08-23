@@ -92,9 +92,13 @@ class ApplicationController extends Controller
         if($registration->document_submit == 1):
             if($student->document->where('type', 'Birth')->where('side', 'front')->count() > 0):
                 $bcFront = $student->document->where('type', 'Birth')->where('side', 'front')->latest()->first()->image;
+            else:
+                $bcFront = NULL;
             endif;
             if($student->document->where('type', 'Birth')->where('side', 'back')->count() > 0):
-                $bcBack = $student->document->where('type', 'Birth')->where('side', 'back')->first()->image;            
+                $bcBack = $student->document->where('type', 'Birth')->where('side', 'back')->first()->image;
+            else:
+                $bcFront = NULL;            
             endif;
             $id = $student->document->whereIn('type', ['NIC', 'Postal', 'Passport'])->where('side', 'front')->first();
             
@@ -109,8 +113,11 @@ class ApplicationController extends Controller
                         $idBack = $idBack->image;
                     endif;
                 endif;
-                $documents = array('bcFront' => $bcFront, 'bcBack' => $bcBack, 'idFront' => $idFront, 'idBack' => $idBack);
+            else:
+                $idFront = NULL;
+                $idBack = NULL;
             endif;
+            $documents = array('bcFront' => $bcFront, 'bcBack' => $bcBack, 'idFront' => $idFront, 'idBack' => $idBack);
 
 
         endif;
