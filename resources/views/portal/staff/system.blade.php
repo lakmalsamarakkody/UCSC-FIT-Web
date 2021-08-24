@@ -414,6 +414,46 @@
       </div>
       {{-- /LABS --}}
 
+      {{-- Banks --}}
+      @if(Auth::user()->hasPermission('staff-system-bank'))
+      <div class="col-xl-6 col-lg-12 mt-xl-5">
+        <div class="card h-100">
+          <div class="card-header">PAYMENT TYPES</div>
+          <div class="card-body">
+            <div class="card-text">
+              <table class="table table-responsive-md">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Type Name</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($payment_types as $type)
+                  <tr id="tbl-paymentType-tr-{{$type->id}}">
+                    <th>{{ $type->id }}</th>
+                    <td>{{ $type->name }}</td>
+                    <td class="text-right">
+                      <div class="btn-group">
+                        @if(Auth::user()->hasPermission('staff-system-paymentType-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditPaymentType-{{$type->id}}" onclick="edit_payment_type_modal_invoke({{$type->id}});"><i class="fas fa-edit"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-paymentType-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeletePaymentType-{{$type->id}}" onclick="delete_payment_type({{$type->id}});"><i class="fas fa-trash-alt"></i></button>@endif
+                      </div>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+          @if(Auth::user()->hasPermission('staff-system-paymentType-add'))
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-payment-type"><i class="fas fa-plus"></i></button></div>
+          @endif
+        </div>
+      </div>
+      @endif
+      {{-- Banks --}}
+
       @include('portal.staff.system.modal')
     
     </div>
