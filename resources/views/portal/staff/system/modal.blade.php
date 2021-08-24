@@ -1,3 +1,41 @@
+{{-- IMPORT STUDENTS --}}
+<div class="modal fade" id="importStudents" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticimportStudents" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="staticimportStudents">Import Students</h5>
+              <button type="butoon" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="class-body p-5">
+              <div class="alert alert-danger">Student data in selected file will be merged to your existing production database.</div>
+              <form id="studentImportForm">
+                <div class="form-row">
+                  <div class="form-group col-12">
+                    <label for="studentFile">Student Import File</label>
+                    <div class="drop-zone">
+                      <span class="drop-zone__prompt">Drop Students File here or click to upload</span>
+                      <input type="file" name="studentImportFile" id="studentImportFile" class="drop-zone__input" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                    </div>
+                      <span id="errorStudentFile" class="invalid-feedback" role="alert"></span>
+                  </div>
+                </div>
+              </form>
+
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+              <button id="importTempStudent" onclick="import_student()" type="button" class="btn btn-outline-primary">
+                Import
+                <span id="importTempStudentSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+              </button>
+          </div>
+      </div>
+  </div>
+</div>
+{{-- /IMPORT STUDENTS --}}
+
 {{-- PERMISSION --}}
 
   <!-- CREATE -->
@@ -671,41 +709,33 @@
   {{-- / EDIT --}}
 {{-- / LAB --}}
 
-{{-- IMPORT STUDENTS --}}
-<div class="modal fade" id="importStudents" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticimportStudents" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
+{{-- BANK --}}
+  {{-- CREATE --}}
+  <div class="modal fade" id="modal-create-bank" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="staticimportStudents">Import Students</h5>
-              <button type="butoon" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="class-body p-5">
-              <div class="alert alert-danger">Student data in selected file will be merged to your existing production database.</div>
-              <form id="studentImportForm">
-                <div class="form-row">
-                  <div class="form-group col-12">
-                    <label for="studentFile">Student Import File</label>
-                    <div class="drop-zone">
-                      <span class="drop-zone__prompt">Drop Students File here or click to upload</span>
-                      <input type="file" name="studentImportFile" id="studentImportFile" class="drop-zone__input" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
-                    </div>
-                      <span id="errorStudentFile" class="invalid-feedback" role="alert"></span>
-                  </div>
-                </div>
-              </form>
-
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-              <button id="importTempStudent" onclick="import_student()" type="button" class="btn btn-outline-primary">
-                Import
-                <span id="importTempStudentSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-              </button>
-          </div>
+        <div class="modal-header">
+          <h5 class="modal-title">Create Bank</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formCreateBank">
+            <div class="form-group">
+              <label for="newBankName">Bank Name</label>
+              <input type="text" class="form-control" id="newBankName" name="newBankName" />
+              <span class="invalid-feedback" id="error-newBankName" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" id="btnCreateBank" onclick="create_bank();">Create</button>
+        </div>
       </div>
+    </div>
   </div>
-</div>
-{{-- /IMPORT STUDENTS --}}
+  {{-- / CREATE --}}
+{{-- / BANK --}}
     

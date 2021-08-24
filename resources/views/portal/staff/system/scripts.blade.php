@@ -1,6 +1,98 @@
 <script type="text/javascript">
 
-let permissionTable = null;
+  let permissionTable = null;
+
+  // IMPORT STUDENT
+  import_student = () => {
+
+  SwalQuestionDangerAutoClose.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this import!",
+    confirmButtonText: 'Yes, Import Data!',
+    })
+  .then((result) => {
+    if (result.isConfirmed) {
+
+      //Remove previous validation error messages
+      $('.form-control').removeClass('is-invalid');
+      $('.invalid-feedback').html('');
+      $('.invalid-feedback').hide();
+
+      //Form payload
+      var formData = new FormData($('#studentImportForm')[0]);
+
+      $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url: "{{ route('student.import') }}",
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        beforeSend: function()
+        {
+          $("#importTempStudentSpinner").removeClass('d-none');
+          $('#importTempStudent').attr('disabled', 'disabled');
+        },
+        success: function(data)
+        {
+          $("#importTempStudentSpinner").addClass('d-none');
+          $('#importTempStudent').removeAttr('disabled');
+          if(data['errors']){
+            $.each(data['errors'], function(key, value){
+              SwalNotificationWarning.fire({
+                title: 'Import Failed!',
+                text: key +' : '+value,
+                showConfirmButton : true,
+              })
+              .then(() => {
+                location.reload();
+              })
+            });
+          }else if (data['status'] == 'success'){
+            $('#importStudent').modal('hide');
+            SwalDoneSuccess.fire({
+              title: 'Import Finished!',
+              text: 'Check database for further verification',
+            }).then((result) => {
+              if(result.isConfirmed) {location.reload()}
+            });
+          }else{
+            SwalNotificationWarningAutoClose.fire({
+              title: 'Import Failed!',
+              text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
+            })
+            .then(() => {
+              //location.reload();
+            })
+          }
+        },
+        error: function(err)
+        {
+          $("#importTempStudentSpinner").addClass('d-none');
+          $('#importTempStudent').removeAttr('disabled');
+          SwalNotificationWarningAutoClose.fire({
+            title: 'Upload Failed!',
+            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
+          })
+          .then(() => {
+            //location.reload();
+          })
+        }
+      });
+    }
+    else{
+      SwalNotificationWarningAutoClose.fire({
+        title: 'Cancelled!',
+        text: 'Import process cancelled.',
+      })
+      .then(() => {
+        //location.reload();
+      })
+    }
+  })
+  }
+  // /IMPORT STUDENT
+
 
   // PERMISSION
   $(function(){
@@ -2133,96 +2225,83 @@ let permissionTable = null;
     })
   }
   // /EDIT
-// /LAB
+  // /LAB
 
-// IMPORT STUDENT
-import_student = () => {
-
-  SwalQuestionDangerAutoClose.fire({
+// BANK
+  // CREATE
+  create_bank = () => {
+    SwalQuestionSuccessAutoClose.fire({
     title: "Are you sure?",
-    text: "You wont be able to revert this import!",
-    confirmButtonText: 'Yes, Import Data!',
+    text: "New bank will be created!",
+    confirmButtonText: 'Yes, Create!',
     })
-  .then((result) => {
-    if (result.isConfirmed) {
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Form Payload
+        var formData = new FormData($("#formCreateBank")[0]);
 
-      //Remove previous validation error messages
-      $('.form-control').removeClass('is-invalid');
-      $('.invalid-feedback').html('');
-      $('.invalid-feedback').hide();
-
-      //Form payload
-      var formData = new FormData($('#studentImportForm')[0]);
-
-      $.ajax({
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url: "{{ route('student.import') }}",
-        type: 'post',
-        data: formData,
-        processData: false,
-        contentType: false,
-        beforeSend: function()
-        {
-          $("#importTempStudentSpinner").removeClass('d-none');
-          $('#importTempStudent').attr('disabled', 'disabled');
-        },
-        success: function(data)
-        {
-          $("#importTempStudentSpinner").addClass('d-none');
-          $('#importTempStudent').removeAttr('disabled');
-          if(data['errors']){
-            $.each(data['errors'], function(key, value){
-              SwalNotificationWarning.fire({
-                title: 'Import Failed!',
-                text: key +' : '+value,
-                showConfirmButton : true,
+        //Validate information
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/staff/system/createBank') }}",
+          type: 'post',
+          data:formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreateBank').attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success : create bank ajax.');
+            $('#btnCreateBank').removeAttr('disabled','disabled');
+            if(data['errors']){
+              console.log('errors on validating data');
+              $('small').hide();
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success: create bank.');
+              SwalDoneSuccess.fire({
+                title: 'Created!',
+                text: 'Bank created.',
               })
-              .then(() => {
-                location.reload();
-              })
-            });
-          }else if (data['status'] == 'success'){
-            $('#importStudent').modal('hide');
-            SwalDoneSuccess.fire({
-              title: 'Import Finished!',
-              text: 'Check database for further verification',
-            }).then((result) => {
-              if(result.isConfirmed) {location.reload()}
-            });
-          }else{
-            SwalNotificationWarningAutoClose.fire({
-              title: 'Import Failed!',
-              text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
-            })
-            .then(() => {
-              //location.reload();
-            })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-create-bank').modal('hide');
+                  location.reload();
+                }
+              }); 
+            }else{
+              $('#btnCreateBank').removeAttr('disabled','disabled');
+              console.log('Error : create bank controller.');
+              SwalSystemErrorDanger.fire();
+            }
+          },
+          error: function(err){
+            $('#btnCreateBank').removeAttr('disabled','disabled');
+            console.log('Error : create bank ajax.');
+            SwalSystemErrorDanger.fire();
           }
-        },
-        error: function(err)
-        {
-          $("#importTempStudentSpinner").addClass('d-none');
-          $('#importTempStudent').removeAttr('disabled');
-          SwalNotificationWarningAutoClose.fire({
-            title: 'Upload Failed!',
-            text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
-          })
-          .then(() => {
-            //location.reload();
-          })
-        }
-      });
-    }
-    else{
-      SwalNotificationWarningAutoClose.fire({
-        title: 'Cancelled!',
-        text: 'Import process cancelled.',
-      })
-      .then(() => {
-        //location.reload();
-      })
-    }
-  })
-}
-// /IMPORT STUDENT
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Bank creation cancelled.',
+        })
+      }
+    })
+  }
+  // /CREATE
+// BANK
+
+
 </script>

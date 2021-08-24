@@ -26,6 +26,7 @@ use App\Imports\StudentsImport;
 use App\Mail\Subscribe;
 use App\Models\Student;
 use App\Models\Subscriber;
+use App\Models\Support\Bank;
 use App\Models\Support\BankBranch;
 use App\Models\Support\Fee;
 use App\Models\Support\SlCity;
@@ -58,7 +59,9 @@ class SystemController extends Controller
     $payment_methods = Method::orderby('id')->get();
     $payment_types = Type::orderby('id')->get();
     $labs = Lab::orderby('id')->get();
-    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types', 'exam_durations','payment_methods', 'payment_types', 'phases', 'labs'));
+    $banks = Bank::orderby('name')->get();
+    $bank_branches = BankBranch::orderby('name')->get();
+    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types', 'exam_durations','payment_methods', 'payment_types', 'phases', 'labs', 'banks', 'bank_branches'));
   }
 
   // PERMISSION
@@ -846,6 +849,30 @@ class SystemController extends Controller
   }
   // /EDIT FUNCTIONS
   // /LAB
+
+  // BANK
+  // CREATE FUNCTION
+  public function createBank(Request $request)
+  {
+    //Validatinng form data
+    $bank_validator = Validator::make($request->all(), [
+      'newBankName' => ['required', 'unique:banks,name'],
+    ]);
+
+    // Check validation errors
+    if($bank_validator->fails()):
+      return response()->json(['errors'=>$bank_validator->errors()]);
+    else:
+      $bank = new bank();
+      $bank->name = $request->newBankName;
+      if($bank->save()):
+        return response()->json(['status'=>'success', 'bank'=>$bank]);
+      endif;
+    endif;
+    return response()->json(['status'=>'error']);
+  }
+  // /CREATE FUNCTION
+  // /BANK
 
   // IMPORT STUDENTS
   public function StudentImport(Request $request)

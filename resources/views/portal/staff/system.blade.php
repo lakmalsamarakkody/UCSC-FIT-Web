@@ -374,6 +374,7 @@
       <!-- /PAYMENT TYPES -->
 
       {{-- LABS --}}
+      @if(Auth::user()->hasPermission('staff-system-lab'))
       <div class="col-xl-6 col-lg-12 mt-xl-5">
         <div class="card h-100">
           <div class="card-header">LABS</div>
@@ -398,7 +399,9 @@
                     <td>@if($lab->status == 'Deactive') Inactive @else{{ $lab->status }}@endif</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-warning" id="btnEditLab-{{ $lab->id }}" onclick="edit_lab_modal_invoke({{ $lab->id }});"><i class="fas fa-edit"></i></button>
+                        @if(Auth::user()->hasPermission('staff-system-lab-edit'))
+                          <button type="button" class="btn btn-outline-warning" id="btnEditLab-{{ $lab->id }}" onclick="edit_lab_modal_invoke({{ $lab->id }});"><i class="fas fa-edit"></i></button>
+                        @endif
                       </div>
                     </td>
                   </tr>
@@ -407,37 +410,40 @@
               </table>
             </div>
           </div>
+          @if(Auth::user()->hasPermission('staff-system-lab-add'))
           <div class="card-footer">
             <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-lab"><i class="fas fa-plus"></i></button>
           </div>
+          @endif
         </div>
       </div>
+      @endif
       {{-- /LABS --}}
 
       {{-- Banks --}}
       @if(Auth::user()->hasPermission('staff-system-bank'))
       <div class="col-xl-6 col-lg-12 mt-xl-5">
         <div class="card h-100">
-          <div class="card-header">PAYMENT TYPES</div>
+          <div class="card-header">BANKS</div>
           <div class="card-body">
             <div class="card-text">
               <table class="table table-responsive-md">
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Type Name</th>
+                    <th>Bank Name</th>
                     <th>&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($payment_types as $type)
-                  <tr id="tbl-paymentType-tr-{{$type->id}}">
-                    <th>{{ $type->id }}</th>
-                    <td>{{ $type->name }}</td>
+                  @foreach ($banks as $bank)
+                  <tr id="tbl-bank-tr-{{$bank->id}}">
+                    <th>{{ $bank->id }}</th>
+                    <td>{{ $bank->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        @if(Auth::user()->hasPermission('staff-system-paymentType-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditPaymentType-{{$type->id}}" onclick="edit_payment_type_modal_invoke({{$type->id}});"><i class="fas fa-edit"></i></button>@endif
-                        @if(Auth::user()->hasPermission('staff-system-paymentType-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeletePaymentType-{{$type->id}}" onclick="delete_payment_type({{$type->id}});"><i class="fas fa-trash-alt"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-bank-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditBank-{{$bank->id}}" onclick="edit_bank_modal_invoke({{$bank->id}});"><i class="fas fa-edit"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-bank-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteBank-{{$bank->id}}" onclick="delete_bank({{$bank->id}});"><i class="fas fa-trash-alt"></i></button>@endif
                       </div>
                     </td>
                   </tr>
@@ -446,13 +452,59 @@
               </table>
             </div>
           </div>
-          @if(Auth::user()->hasPermission('staff-system-paymentType-add'))
-          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-payment-type"><i class="fas fa-plus"></i></button></div>
+          @if(Auth::user()->hasPermission('staff-system-bank-add'))
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-bank"><i class="fas fa-plus"></i></button></div>
           @endif
         </div>
       </div>
       @endif
       {{-- Banks --}}
+
+      {{-- Bank Branches --}}
+      @if(Auth::user()->hasPermission('staff-system-bank-branch'))
+      <div class="col-xl-6 col-lg-12 mt-xl-5">
+        <div class="card h-100">
+          <div class="card-header">BANK BRANCHES</div>
+          <div class="card-body">
+            <div class="card-text">
+              <table class="table table-responsive-md bank-branches-yajradt">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Bank</th>
+                    <th>District</th>
+                    <th>Branch Code</th>
+                    <th>Branch Name</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody id="bankBranchesTblBody">
+                  @foreach ($bank_branches as $bank_branch)
+                  <tr id="tbl-bank-tr-{{$bank_branch->id}}">
+                    <th>{{ $bank_branch->id }}</th>
+                    <td>{{ $bank_branch->bank_id }}</td>
+                    <td>{{ $bank_branch->district_id }}</td>
+                    <td>{{ $bank_branch->code }}</td>
+                    <td>{{ $bank_branch->name }}</td>
+                    <td class="text-right">
+                      <div class="btn-group">
+                        @if(Auth::user()->hasPermission('staff-system-bank-branch-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditBank-{{$bank_branch->id}}" onclick="edit_bank_modal_invoke({{$bank_branch->id}});"><i class="fas fa-edit"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-bank-branch-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteBank-{{$bank_branch->id}}" onclick="delete_bank({{$bank_branch->id}});"><i class="fas fa-trash-alt"></i></button>@endif
+                      </div>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+          @if(Auth::user()->hasPermission('staff-system-bank-branch-add'))
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-bank"><i class="fas fa-plus"></i></button></div>
+          @endif
+        </div>
+      </div>
+      @endif
+      {{-- Bank Branches --}}
 
       @include('portal.staff.system.modal')
     

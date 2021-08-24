@@ -1114,7 +1114,95 @@ class PermissionSeeder extends Seeder
                     'description'=>'Can delete a payment type',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
-                ]
+                ],
+                [
+                    'name'=>'staff-system-lab',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can view labs',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-lab-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can add labs',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-lab-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can edit labs',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can view bank',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can add bank',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can edit bank',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can delete bank',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-branch',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can view bank-branch',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-branch-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can add bank-branch',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-branch-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can edit bank-branc',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-branch-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can delete bank-branch',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
                 // /STAFF->SYSTEM
                 // /STAFF PORTAL
             )
