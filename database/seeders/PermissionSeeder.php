@@ -1140,6 +1140,14 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
+                    'name'=>'staff-system-lab-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can delete labs',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
                     'name'=>'staff-system-bank',
                     'portal'=>'staff',
                     'module'=>'system',

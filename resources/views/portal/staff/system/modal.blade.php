@@ -768,4 +768,110 @@
   </div>
   {{-- / EDIT --}}
 {{-- / BANK --}}
+
+{{-- BANK BRANCH --}}
+  {{-- CREATE --}}
+  <div class="modal fade" id="modal-create-bank-branch" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Bank Branch</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formCreateBankBranch">
+            <div class="form-group">
+              <label for="newBankBranchBank">Bank</label>
+              <select class="form-control" id="newBankBranchBank" name="newBankBranchBank">
+                @foreach ($banks as $bank)
+                  <option value="{{ $bank->id }}">{{ $bank->name }}</option>
+                @endforeach
+              </select>
+              <span class="invalid-feedback" id="error-newBankBranchBank" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newBankBranchDistrict">District</label>
+              <select class="form-control" id="newBankBranchDistrict" name="newBankBranchDistrict">
+                @foreach ($districts as $district)
+                  <option value="{{ $district->id }}">{{ $district->name }}</option>
+                @endforeach
+              </select>
+              <span class="invalid-feedback" id="error-newBankBranchDistrict" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newBankBranchCode">Branch Code</label>
+              <input type="number" class="form-control" id="newBankBranchCode" name="newBankBranchCode" min="1"/>
+              <span class="invalid-feedback" id="error-newBankBranchCode" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newBankBranchName">Branch Name</label>
+              <input type="text" class="form-control" id="newBankBranchName" name="newBankBranchName" />
+              <span class="invalid-feedback" id="error-newBankBranchName" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" id="btnCreateBankBranch" onclick="create_bank_branch();">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- / CREATE --}}
+
+  {{-- EDIT --}}
+  <div class="modal fade" id="modal-edit-bank-branch" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="edit-bank-branch-title">Edit Bank Branch</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditBankBranch">
+            <div class="form-group">
+              <label for="editBankBranchBank">Bank</label>
+              <select class="form-control" id="editBankBranchBank" name="editBankBranchBank">
+                @foreach ($banks as $bank)
+                  <option value="{{ $bank->id }}">{{ $bank->name }}</option>
+                @endforeach
+              </select>
+              <span class="invalid-feedback" id="error-editBankBranchBank" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="editBankBranchDistrict">District</label>
+              <select class="form-control" id="editBankBranchDistrict" name="editBankBranchDistrict">
+                @foreach ($districts as $district)
+                  <option value="{{ $district->id }}">{{ $district->name }}</option>
+                @endforeach
+              </select>
+              <span class="invalid-feedback" id="error-editBankBranchDistrict" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="editBankBranchCode">Branch Code</label>
+              <input type="number" class="form-control" id="editBankBranchCode" name="editBankBranchCode" min="1"/>
+              <span class="invalid-feedback" id="error-editBankBranchCode" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <input type="hidden" class="form-control" name="editBankBranchId" id="editBankBranchId">
+              <span class="invalid-feedback" id="error-editBankBranchId" role="alert"></span>
+              <label for="editBankBranchName">Branch Name</label>
+              <input type="text" class="form-control" id="editBankBranchName" name="editBankBranchName" />
+              <span class="invalid-feedback" id="error-editBankBranchName" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditBankBranch" onclick="edit_bank_branch();">Apply Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- / EDIT --}}
+{{-- / BANK BRANCH --}}
     

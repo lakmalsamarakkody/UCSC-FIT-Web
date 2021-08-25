@@ -30,6 +30,7 @@ use App\Models\Support\Bank;
 use App\Models\Support\BankBranch;
 use App\Models\Support\Fee;
 use App\Models\Support\SlCity;
+use App\Models\Support\SlDistrict;
 use App\Models\TempStudent;
 use App\Models\User;
 use Carbon\Carbon;
@@ -61,7 +62,8 @@ class SystemController extends Controller
     $labs = Lab::orderby('id')->get();
     $banks = Bank::orderby('id')->get();
     $bank_branches = BankBranch::orderby('id')->get();
-    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types', 'exam_durations','payment_methods', 'payment_types', 'phases', 'labs', 'banks', 'bank_branches'));
+    $districts = SlDistrict::orderby('id')->get();
+    return view('portal/staff/system',compact('roles','permissions','subjects','exam_types', 'exam_durations','payment_methods', 'payment_types', 'phases', 'labs', 'banks', 'bank_branches', 'districts'));
   }
 
   // PERMISSION
@@ -848,6 +850,24 @@ class SystemController extends Controller
     endif;
   }
   // /EDIT FUNCTIONS
+  // DELETE FUNCTION
+  public function deletelab(Request $request)
+  {
+    // VALIDATE Payment type id
+    $lab_id_validator = Validator::make($request->all(), [
+      'lab_id' => ['required','integer','exists:App\Models\Lab,id'],
+    ]);
+
+    // CHECK VALIDATOR FAILS
+    if($lab_id_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$lab_id_validator->errors()]);
+    else:
+      Lab::destroy($request->lab_id);
+      return response()->json(['status'=>'success']);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+  }
+  // /DELETE FUNCTION
   // /LAB
 
   // BANK
@@ -930,6 +950,98 @@ class SystemController extends Controller
   }
   // /DELETE FUNCTION
   // /BANK
+
+// BANK BRANCH
+  // CREATE FUNCTION
+  public function createBankBranch(Request $request)
+  {
+    //Validatinng form data
+    $bankBranch_validator = Validator::make($request->all(), [
+      'newBankBranchBank' => ['required', 'integer', 'exists:App\Models\Support\Bank,id'],
+      'newBankBranchDistrict' => ['required', 'integer', 'exists:App\Models\Support\SlDistrict,id'],
+      'newBankBranchCode' => ['required'],
+      'newBankBranchName' => ['required'],
+    ]);
+
+    // Check validation errors
+    if($bankBranch_validator->fails()):
+      return response()->json(['errors'=>$bankBranch_validator->errors()]);
+    else:
+      $bankBranch = new BankBranch();
+      $bankBranch->bank_id = $request->newBankBranchBank;
+      $bankBranch->district_id = $request->newBankBranchDistrict;
+      $bankBranch->code = $request->newBankBranchCode;
+      $bankBranch->name = $request->newBankBranchName;
+      if($bankBranch->save()):
+        return response()->json(['status'=>'success', 'bankBranch'=>$bankBranch]);
+      endif;
+    endif;
+    return response()->json(['status'=>'error']);
+  }
+  // /CREATE FUNCTION
+  // EDIT FUNCTIONS
+  public function editBankBranchGetDetails(Request $request)
+  {
+    //Validate payment type id
+    $bank_branchId_validator = Validator::make($request->all(), [
+      'bank_branch_id'=> ['required', 'integer', 'exists:App\Models\Support\BankBranch,id'],
+    ]);
+
+    //Check validator fails
+    if($bank_branchId_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$bank_branchId_validator->errors()]);
+    else:
+      $bank_branch = BankBranch::find($request->bank_branch_id);
+      return response()->json(['status'=>'success', 'bank_branch'=>$bank_branch]);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+  }
+
+  public function editBankBranch(Request $request)
+  {
+    //Validate form data
+    $edit_bank_branch_validator = Validator::make($request->all(), [
+      'editBankBranchId'=> ['required', 'integer', 'exists:App\Models\Support\BankBranch,id'],
+      'editBankBranchBank' => ['required', 'integer', 'exists:App\Models\Support\Bank,id'],
+      'editBankBranchDistrict' => ['required', 'integer', 'exists:App\Models\Support\SlDistrict,id'],
+      'editBankBranchCode' => ['required'],
+      'editBankBranchName' => ['required'],
+    ]);
+
+    //Check validator fails
+    if($edit_bank_branch_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$edit_bank_branch_validator->errors()]);
+    else:
+      if(BankBranch::where('id', $request->editBankBranchId)->update([
+        'bank_id' => $request->editBankBranchBank,
+        'district_id' => $request->editBankBranchDistrict,
+        'code' => $request->editBankBranchCode,
+        'name' => $request->editBankBranchName
+      ])):
+        return response()->json(['status'=>'success']);
+      endif;
+    endif;
+  }
+  // /EDIT FUNCTIONS
+  // DELETE FUNCTION
+  public function deleteBankBranch(Request $request)
+  {
+    // VALIDATE Payment type id
+    $bank_branch_id_validator = Validator::make($request->all(), [
+      'bank_branch_id' => ['required','integer','exists:App\Models\Support\BankBranch,id'],
+    ]);
+
+    // CHECK VALIDATOR FAILS
+    if($bank_branch_id_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$bank_branch_id_validator->errors()]);
+    else:
+      BankBranch::destroy($request->bank_branch_id);
+      return response()->json(['status'=>'success']);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+  }
+  // /DELETE FUNCTION
+// /BANK BRANCH
 
   // IMPORT STUDENTS
   public function StudentImport(Request $request)

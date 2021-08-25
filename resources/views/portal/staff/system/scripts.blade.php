@@ -2,6 +2,9 @@
 
   let permissionTable = null;
 
+  // BANK BRANCHES DATA TABLE
+  $(document).ready(function(){$('#bankBranchTbl').DataTable();});
+
   // IMPORT STUDENT
   import_student = () => {
 
@@ -2225,9 +2228,59 @@
     })
   }
   // /EDIT
+
+  // DELETE
+  delete_lab = (lab_id) => {
+    SwalQuestionDanger.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Delete it!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        // PAYLOAD
+        var formData = new FormData;
+        formData.append('lab_id', lab_id)
+
+        //DELETE ROLE CONTROLLER
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/staff/system/deleteLab') }}",
+          type: 'post',
+          data:formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnDeleteLab-'+lab_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success : delete lab ajax');
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Lab has been deleted.',
+            })
+            .then((result) => {
+              if(result.isConfirmed) {$('#tbl-lab-tr-'+lab_id).remove();}
+            }); 
+          },
+          error: function(err){
+            console.log('Error : delete lab ajax');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'lab has not been deleted.',
+        })
+      }
+    })
+  }
+  // /DELETE
   // /LAB
 
-// BANK
+  // BANK
   // CREATE
   create_bank = () => {
     SwalQuestionSuccessAutoClose.fire({
@@ -2303,9 +2356,9 @@
   // /CREATE
 
   // EDIT
-
   // Fill modal with relevant data
   edit_bank_modal_invoke = (bank_id) => {
+
     //Form payload
     var formData = new FormData();
     formData.append('bank_id',bank_id);
@@ -2459,8 +2512,241 @@
   }
   // /DELETE
 // BANK
-$(document).ready( function () {
-    $('#bankBranchTbl').DataTable();
-} );
+
+// BANK BRANCH
+  // CREATE
+  create_bank_branch = () => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "New bank branch will be created!",
+    confirmButtonText: 'Yes, Create!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedback').hide();
+        //Form Payload
+        var formData = new FormData($("#formCreateBankBranch")[0]);
+
+        //Validate information
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/staff/system/createBankBranch') }}",
+          type: 'post',
+          data:formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnCreateBankBranch').attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success : create bankBranch ajax.');
+            $('#btnCreateBankBranch').removeAttr('disabled','disabled');
+            if(data['errors']){
+              console.log('errors on validating data');
+              $('small').hide();
+              $.each(data['errors'], function(key, value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success: create bank branch.');
+              SwalDoneSuccess.fire({
+                title: 'Created!',
+                text: 'Bank Branch created.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-create-bank-branch').modal('hide');
+                  location.reload();
+                }
+              }); 
+            }else{
+              $('#btnCreateBankBranch').removeAttr('disabled','disabled');
+              console.log('Error : create bank branch controller.');
+              SwalSystemErrorDanger.fire();
+            }
+          },
+          error: function(err){
+            $('#btnCreateBankBranch').removeAttr('disabled','disabled');
+            console.log('Error : create bank branch ajax.');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Bank Branch creation cancelled.',
+        })
+      }
+    })
+  }
+  // /CREATE
+
+  // EDIT
+  // Fill modal with relevant data
+  edit_bank_branch_modal_invoke = (bank_branch_id) => {
+
+    //Form payload
+    var formData = new FormData();
+    formData.append('bank_branch_id',bank_branch_id);
+
+    //Edit Bank Branch get details
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      url: "{{ url('/portal/staff/system/editBankBranchGetDetails') }}",
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(){$('#btnEditBankBranch-'+bank_branch_id).attr('disabled', 'disabled');},
+      success: function(data){
+        console.log('Success in edit Bank branch get details ajax.');
+        if(data['status'] == 'success'){
+          $('#modal-edit-bank-branch-title').html(data['bank_branch']['name']);
+          $('#editBankBranchId').val(data['bank_branch']['id']);
+          $('#editBankBranchBank').val(data['bank_branch']['bank_id']);
+          $('#editBankBranchDistrict').val(data['bank_branch']['district_id']);
+          $('#editBankBranchCode').val(data['bank_branch']['code']);
+          $('#editBankBranchName').val(data['bank_branch']['name']);
+          $('#modal-edit-bank-branch').modal('show');
+          $('#btnEditBankBranch-'+bank_branch_id).removeAttr('disabled','disabled');
+        }
+      },
+      error: function(err){
+        console.log('Error in edit Bank get details ajax.');
+        $('#btnEditBankBranch-'+bank_branch_id).removeAttr('disabled','disabled');
+        SwalSystemErrorDanger.fire();
+      }
+    });
+  }
+  // /Fill modal with relevant data
+
+  edit_bank_branch = () => {
+    SwalQuestionSuccessAutoClose.fire({
+    title: "Are you sure?",
+    text: "Branch will be updated!",
+    confirmButtonText: 'Yes, Update!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        //Remove previous validation error messages
+        $('.form-control').removeClass('is-invalid');
+        $('.invalid-feedback').html('');
+        $('.invalid-feedaback').hide();
+        //Form payload
+        var formData = new FormData($('#formEditBankBranch')[0]);
+
+        //Edit Bank
+        $.ajax({
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          url: "{{ url('/portal/staff/system/editBankBranch') }}",
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btnModalEditBankBranch').attr('disabled', 'disabled');},
+          success: function(data){
+            console.log('Success in edit Bank ajax.');
+            $('#btnModaleditBankBranch').removeAttr('disabled', 'disabled');
+            if(data['errors']){
+              console.log('Errors in validating Bank data.');
+              $('small').hide();
+              $.each(data['errors'], function(key,value){
+                $('#error-'+key).show();
+                $('#'+key).addClass('is-invalid');
+                $('#error-'+key).append('<strong>'+value+'</strong>');
+              });
+            }
+            else if(data['status'] == 'success'){
+              console.log('Success in edit Bank.');
+              SwalDoneSuccess.fire({
+                title: 'Updated!',
+                text: 'Branch has been updated.',
+              })
+              .then((result) => {
+                if(result.isConfirmed) {
+                  $('#modal-edit-bank-branch').modal('hide');
+                  location.reload();
+                }
+              });
+            }
+            else{
+              console.log('Error in edit Branch controller.')
+              $('#btnModaleditBankBranch').removeAttr('disabled', 'disabled');
+              SwalSystemErrorDanger.fire();
+            }
+          },
+          error: function(err){
+            console.log('Error in edit Bank ajax.')
+            $('#btnModaleditBankBranch').removeAttr('disabled', 'disabled');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Branch has not been updated.',
+        })
+      }
+    })
+  }
+  // /EDIT
+  // DELETE
+  delete_bank_branch = (bank_branch_id) => {
+    SwalQuestionDanger.fire({
+    title: "Are you sure?",
+    text: "You wont be able to revert this!",
+    confirmButtonText: 'Yes, Delete it!',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        // PAYLOAD
+        var formData = new FormData;
+        formData.append('bank_branch_id', bank_branch_id)
+
+        //DELETE ROLE CONTROLLER
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ url('/portal/staff/system/deleteBankBranch') }}",
+          type: 'post',
+          data:formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function(){$('#btndeleteBankBranch-'+bank_branch_id).attr('disabled','disabled');},
+          success: function(data){
+            console.log('Success : delete Bank ajax');
+            SwalDoneSuccess.fire({
+              title: 'Deleted!',
+              text: 'Branch has been deleted.',
+            })
+            .then((result) => {
+              if(result.isConfirmed) {location.reload();}
+            }); 
+          },
+          error: function(err){
+            console.log('Error : delete Bank Branch ajax');
+            SwalSystemErrorDanger.fire();
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: 'Cancelled!',
+          text: 'Bank has not been deleted.',
+        })
+      }
+    })
+  }
+  // /DELETE
+// BANK
 
 </script>

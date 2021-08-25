@@ -399,9 +399,8 @@
                     <td>@if($lab->status == 'Deactive') Inactive @else{{ $lab->status }}@endif</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        @if(Auth::user()->hasPermission('staff-system-lab-edit'))
-                          <button type="button" class="btn btn-outline-warning" id="btnEditLab-{{ $lab->id }}" onclick="edit_lab_modal_invoke({{ $lab->id }});"><i class="fas fa-edit"></i></button>
-                        @endif
+                        @if(Auth::user()->hasPermission('staff-system-lab-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditLab-{{ $lab->id }}" onclick="edit_lab_modal_invoke({{ $lab->id }});"><i class="fas fa-edit"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-lab-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteLab-{{$lab->id}}" onclick="delete_lab({{$lab->id}});"><i class="fas fa-trash-alt"></i></button>@endif
                       </div>
                     </td>
                   </tr>
@@ -420,7 +419,7 @@
       @endif
       {{-- /LABS --}}
 
-      {{-- Banks --}}
+      {{-- BANKS --}}
       @if(Auth::user()->hasPermission('staff-system-bank'))
       <div class="col-xl-4 col-lg-12 mt-xl-5">
         <div class="card h-100">
@@ -453,14 +452,14 @@
             </div>
           </div>
           @if(Auth::user()->hasPermission('staff-system-bank-add'))
-          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-bank"><i class="fas fa-plus"></i></button></div>
+            <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-bank"><i class="fas fa-plus"></i></button></div>
           @endif
         </div>
       </div>
       @endif
-      {{-- Banks --}}
+      {{-- BANKS --}}
 
-      {{-- Bank Branches --}}
+      {{-- BANK BRANCHES --}}
       @if(Auth::user()->hasPermission('staff-system-bank-branch'))
       <div class="col-xl-12 col-lg-12 mt-xl-5">
         <div class="card h-100">
@@ -488,8 +487,8 @@
                     <td>{{ $bank_branch->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
-                        @if(Auth::user()->hasPermission('staff-system-bank-branch-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditBank-{{$bank_branch->id}}" onclick="edit_bank_modal_invoke({{$bank_branch->id}});"><i class="fas fa-edit"></i></button>@endif
-                        @if(Auth::user()->hasPermission('staff-system-bank-branch-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteBank-{{$bank_branch->id}}" onclick="delete_bank({{$bank_branch->id}});"><i class="fas fa-trash-alt"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-bank-branch-edit'))<button type="button" class="btn btn-outline-warning" id="btnEditBank-{{$bank_branch->id}}" onclick="edit_bank_branch_modal_invoke({{$bank_branch->id}});"><i class="fas fa-edit"></i></button>@endif
+                        @if(Auth::user()->hasPermission('staff-system-bank-branch-delete'))<button type="button" class="btn btn-outline-danger" id="btnDeleteBank-{{$bank_branch->id}}" onclick="delete_bank_branch({{$bank_branch->id}});"><i class="fas fa-trash-alt"></i></button>@endif
                       </div>
                     </td>
                   </tr>
@@ -499,12 +498,12 @@
             </div>
           </div>
           @if(Auth::user()->hasPermission('staff-system-bank-branch-add'))
-          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-bank"><i class="fas fa-plus"></i></button></div>
+          <div class="card-footer"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-bank-branch"><i class="fas fa-plus"></i></button></div>
           @endif
         </div>
       </div>
       @endif
-      {{-- Bank Branches --}}
+      {{-- BANK BRANCHES --}}
 
       @include('portal.staff.system.modal')
     
