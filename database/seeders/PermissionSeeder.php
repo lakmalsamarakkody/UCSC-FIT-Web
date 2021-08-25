@@ -1119,7 +1119,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-lab',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'Can view labs',
+                    'description'=>'Can view exam labs',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -1127,7 +1127,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-lab-add',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'Can add labs',
+                    'description'=>'Can add exam labs',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -1135,7 +1135,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-lab-edit',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'Can edit labs',
+                    'description'=>'Can edit exam labs',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -1143,7 +1143,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-lab-delete',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'Can delete labs',
+                    'description'=>'Can delete exam labs',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -1151,7 +1151,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-bank',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'Can view bank',
+                    'description'=>'Can view banks',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -1159,7 +1159,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-bank-add',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'Can add bank',
+                    'description'=>'Can add banks',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -1167,7 +1167,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-bank-edit',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'Can edit bank',
+                    'description'=>'Can edit banks',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -1175,7 +1175,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-bank-delete',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'Can delete bank',
+                    'description'=>'Can delete banks',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -1183,7 +1183,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-bank-branch',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'Can view bank-branch',
+                    'description'=>'Can view bank branches',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -1191,7 +1191,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-bank-branch-add',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'Can add bank-branch',
+                    'description'=>'Can add bank branches',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -1199,7 +1199,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-bank-branch-edit',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'Can edit bank-branc',
+                    'description'=>'Can edit bank branches',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
@@ -1207,7 +1207,7 @@ class PermissionSeeder extends Seeder
                     'name'=>'staff-system-bank-branch-delete',
                     'portal'=>'staff',
                     'module'=>'system',
-                    'description'=>'Can delete bank-branch',
+                    'description'=>'Can delete bank branches',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
