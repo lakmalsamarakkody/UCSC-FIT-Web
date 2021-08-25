@@ -59,8 +59,8 @@ class SystemController extends Controller
     $payment_methods = Method::orderby('id')->get();
     $payment_types = Type::orderby('id')->get();
     $labs = Lab::orderby('id')->get();
-    $banks = Bank::orderby('name')->get();
-    $bank_branches = BankBranch::orderby('name')->get();
+    $banks = Bank::orderby('id')->get();
+    $bank_branches = BankBranch::orderby('id')->get();
     return view('portal/staff/system',compact('roles','permissions','subjects','exam_types', 'exam_durations','payment_methods', 'payment_types', 'phases', 'labs', 'banks', 'bank_branches'));
   }
 
@@ -872,6 +872,63 @@ class SystemController extends Controller
     return response()->json(['status'=>'error']);
   }
   // /CREATE FUNCTION
+  // EDIT FUNCTIONS
+  public function editBankGetDetails(Request $request)
+  {
+    //Validate payment type id
+    $bankId_validator = Validator::make($request->all(), [
+      'bank_id'=> ['required', 'integer', 'exists:App\Models\Support\Bank,id'],
+    ]);
+
+    //Check validator fails
+    if($bankId_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$bankId_validator->errors()]);
+    else:
+      $bank = Bank::find($request->bank_id);
+      return response()->json(['status'=>'success', 'bank'=>$bank]);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+
+  }
+
+  public function editBank(Request $request)
+  {
+    //Validate form data
+    $edit_bank_validator = Validator::make($request->all(), [
+      'editBankId'=> ['required', 'integer', 'exists:App\Models\Support\Bank,id'],
+      'editBankName'=> ['required', 'alpha_dash_space'],
+    ]);
+
+    //Check validator fails
+    if($edit_bank_validator->fails()):
+      return response()->json(['status'=> 'error', 'errors'=>$edit_bank_validator->errors()]);
+    else:
+      if(Bank::where('id', $request->editBankId)->update([
+          'name' => $request->editBankName
+        ])):
+        return response()->json(['status'=>'success']);
+      endif;
+    endif;
+  }
+  // /EDIT FUNCTIONS
+  // DELETE FUNCTION
+  public function deleteBank(Request $request)
+  {
+    // VALIDATE Payment type id
+    $bank_id_validator = Validator::make($request->all(), [
+      'bank_id' => ['required','integer','exists:App\Models\Support\Bank,id'],
+    ]);
+
+    // CHECK VALIDATOR FAILS
+    if($bank_id_validator->fails()):
+      return response()->json(['status'=>'error', 'errors'=>$bank_id_validator->errors()]);
+    else:
+      Bank::destroy($request->bank_id);
+      return response()->json(['status'=>'success']);
+    endif;
+    return response()->json(['status'=>'error', 'data'=>$request->all()]);
+  }
+  // /DELETE FUNCTION
   // /BANK
 
   // IMPORT STUDENTS

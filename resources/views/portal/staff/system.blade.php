@@ -335,7 +335,7 @@
 
       <!-- PAYMENT TYPES -->
       @if(Auth::user()->hasPermission('staff-system-paymentType'))
-      <div class="col-xl-6 col-lg-12 mt-xl-5">
+      <div class="col-xl-4 col-lg-12 mt-xl-5">
         <div class="card h-100">
           <div class="card-header">PAYMENT TYPES</div>
           <div class="card-body">
@@ -351,7 +351,7 @@
                 <tbody>
                   @foreach ($payment_types as $type)
                   <tr id="tbl-paymentType-tr-{{$type->id}}">
-                    <th>{{ $type->id }}</th>
+                    <td>{{ $type->id }}</td>
                     <td>{{ $type->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
@@ -375,7 +375,7 @@
 
       {{-- LABS --}}
       @if(Auth::user()->hasPermission('staff-system-lab'))
-      <div class="col-xl-6 col-lg-12 mt-xl-5">
+      <div class="col-xl-4 col-lg-12 mt-xl-5">
         <div class="card h-100">
           <div class="card-header">LABS</div>
           <div class="card-body">
@@ -422,7 +422,7 @@
 
       {{-- Banks --}}
       @if(Auth::user()->hasPermission('staff-system-bank'))
-      <div class="col-xl-6 col-lg-12 mt-xl-5">
+      <div class="col-xl-4 col-lg-12 mt-xl-5">
         <div class="card h-100">
           <div class="card-header">BANKS</div>
           <div class="card-body">
@@ -438,7 +438,7 @@
                 <tbody>
                   @foreach ($banks as $bank)
                   <tr id="tbl-bank-tr-{{$bank->id}}">
-                    <th>{{ $bank->id }}</th>
+                    <td>{{ $bank->id }}</td>
                     <td>{{ $bank->name }}</td>
                     <td class="text-right">
                       <div class="btn-group">
@@ -462,12 +462,12 @@
 
       {{-- Bank Branches --}}
       @if(Auth::user()->hasPermission('staff-system-bank-branch'))
-      <div class="col-xl-6 col-lg-12 mt-xl-5">
+      <div class="col-xl-12 col-lg-12 mt-xl-5">
         <div class="card h-100">
           <div class="card-header">BANK BRANCHES</div>
           <div class="card-body">
             <div class="card-text">
-              <table class="table table-responsive-md bank-branches-yajradt">
+              <table class="table table-responsive-md bank-branch-yajradt" id="bankBranchTbl">
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -481,9 +481,9 @@
                 <tbody id="bankBranchesTblBody">
                   @foreach ($bank_branches as $bank_branch)
                   <tr id="tbl-bank-tr-{{$bank_branch->id}}">
-                    <th>{{ $bank_branch->id }}</th>
-                    <td>{{ $bank_branch->bank_id }}</td>
-                    <td>{{ $bank_branch->district_id }}</td>
+                    <td>{{ $bank_branch->id }}</td>
+                    <td>{{ App\Models\Support\Bank::find($bank_branch->bank_id)->name }}</td>
+                    <td>{{ App\Models\Support\SlDistrict::find($bank_branch->district_id)->name }}</td>
                     <td>{{ $bank_branch->code }}</td>
                     <td>{{ $bank_branch->name }}</td>
                     <td class="text-right">

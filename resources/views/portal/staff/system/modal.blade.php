@@ -737,5 +737,35 @@
     </div>
   </div>
   {{-- / CREATE --}}
+
+  {{-- EDIT --}}
+  <div class="modal fade" id="modal-edit-bank" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="edit-bank-title">Edit Bank</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditBank">
+            <div class="form-group">
+              <label for="editBankName">Bank Name</label>
+              <input type="hidden" class="form-control" name="editBankId" id="editBankId">
+              <span class="invalid-feedback" id="error-editBankId" role="alert"></span>
+              <input type="text" class="form-control" id="editBankName" name="editBankName" />
+              <span class="invalid-feedback" id="error-editBankName" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditBank" onclick="edit_bank();">Apply Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- / EDIT --}}
 {{-- / BANK --}}
     
