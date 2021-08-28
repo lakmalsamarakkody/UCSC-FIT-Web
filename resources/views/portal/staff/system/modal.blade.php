@@ -1,3 +1,41 @@
+{{-- IMPORT STUDENTS --}}
+<div class="modal fade" id="importStudents" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticimportStudents" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="staticimportStudents">Import Students</h5>
+              <button type="butoon" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="class-body p-5">
+              <div class="alert alert-danger">Student data in selected file will be merged to your existing production database.</div>
+              <form id="studentImportForm">
+                <div class="form-row">
+                  <div class="form-group col-12">
+                    <label for="studentFile">Student Import File</label>
+                    <div class="drop-zone">
+                      <span class="drop-zone__prompt">Drop Students File here or click to upload</span>
+                      <input type="file" name="studentImportFile" id="studentImportFile" class="drop-zone__input" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                    </div>
+                      <span id="errorStudentFile" class="invalid-feedback" role="alert"></span>
+                  </div>
+                </div>
+              </form>
+
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+              <button id="importTempStudent" onclick="import_student()" type="button" class="btn btn-outline-primary">
+                Import
+                <span id="importTempStudentSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+              </button>
+          </div>
+      </div>
+  </div>
+</div>
+{{-- /IMPORT STUDENTS --}}
+
 {{-- PERMISSION --}}
 
   <!-- CREATE -->
@@ -671,41 +709,169 @@
   {{-- / EDIT --}}
 {{-- / LAB --}}
 
-{{-- IMPORT STUDENTS --}}
-<div class="modal fade" id="importStudents" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticimportStudents" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
+{{-- BANK --}}
+  {{-- CREATE --}}
+  <div class="modal fade" id="modal-create-bank" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
       <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="staticimportStudents">Import Students</h5>
-              <button type="butoon" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="class-body p-5">
-              <div class="alert alert-danger">Student data in selected file will be merged to your existing production database.</div>
-              <form id="studentImportForm">
-                <div class="form-row">
-                  <div class="form-group col-12">
-                    <label for="studentFile">Student Import File</label>
-                    <div class="drop-zone">
-                      <span class="drop-zone__prompt">Drop Students File here or click to upload</span>
-                      <input type="file" name="studentImportFile" id="studentImportFile" class="drop-zone__input" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
-                    </div>
-                      <span id="errorStudentFile" class="invalid-feedback" role="alert"></span>
-                  </div>
-                </div>
-              </form>
-
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
-              <button id="importTempStudent" onclick="import_student()" type="button" class="btn btn-outline-primary">
-                Import
-                <span id="importTempStudentSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-              </button>
-          </div>
+        <div class="modal-header">
+          <h5 class="modal-title">Create Bank</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formCreateBank">
+            <div class="form-group">
+              <label for="newBankName">Bank Name</label>
+              <input type="text" class="form-control" id="newBankName" name="newBankName" />
+              <span class="invalid-feedback" id="error-newBankName" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" id="btnCreateBank" onclick="create_bank();">Create</button>
+        </div>
       </div>
+    </div>
   </div>
-</div>
-{{-- /IMPORT STUDENTS --}}
+  {{-- / CREATE --}}
+
+  {{-- EDIT --}}
+  <div class="modal fade" id="modal-edit-bank" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="edit-bank-title">Edit Bank</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditBank">
+            <div class="form-group">
+              <label for="editBankName">Bank Name</label>
+              <input type="hidden" class="form-control" name="editBankId" id="editBankId">
+              <span class="invalid-feedback" id="error-editBankId" role="alert"></span>
+              <input type="text" class="form-control" id="editBankName" name="editBankName" />
+              <span class="invalid-feedback" id="error-editBankName" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditBank" onclick="edit_bank();">Apply Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- / EDIT --}}
+{{-- / BANK --}}
+
+{{-- BANK BRANCH --}}
+  {{-- CREATE --}}
+  <div class="modal fade" id="modal-create-bank-branch" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Bank Branch</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formCreateBankBranch">
+            <div class="form-group">
+              <label for="newBankBranchBank">Bank</label>
+              <select class="form-control" id="newBankBranchBank" name="newBankBranchBank">
+                @foreach ($banks as $bank)
+                  <option value="{{ $bank->id }}">{{ $bank->name }}</option>
+                @endforeach
+              </select>
+              <span class="invalid-feedback" id="error-newBankBranchBank" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newBankBranchDistrict">District</label>
+              <select class="form-control" id="newBankBranchDistrict" name="newBankBranchDistrict">
+                @foreach ($districts as $district)
+                  <option value="{{ $district->id }}">{{ $district->name }}</option>
+                @endforeach
+              </select>
+              <span class="invalid-feedback" id="error-newBankBranchDistrict" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newBankBranchCode">Branch Code</label>
+              <input type="number" class="form-control" id="newBankBranchCode" name="newBankBranchCode" min="1"/>
+              <span class="invalid-feedback" id="error-newBankBranchCode" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="newBankBranchName">Branch Name</label>
+              <input type="text" class="form-control" id="newBankBranchName" name="newBankBranchName" />
+              <span class="invalid-feedback" id="error-newBankBranchName" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" id="btnCreateBankBranch" onclick="create_bank_branch();">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- / CREATE --}}
+
+  {{-- EDIT --}}
+  <div class="modal fade" id="modal-edit-bank-branch" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" data-backdrop="static" data-keyboard="false" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="edit-bank-branch-title">Edit Bank Branch</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditBankBranch">
+            <div class="form-group">
+              <label for="editBankBranchBank">Bank</label>
+              <select class="form-control" id="editBankBranchBank" name="editBankBranchBank">
+                @foreach ($banks as $bank)
+                  <option value="{{ $bank->id }}">{{ $bank->name }}</option>
+                @endforeach
+              </select>
+              <span class="invalid-feedback" id="error-editBankBranchBank" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="editBankBranchDistrict">District</label>
+              <select class="form-control" id="editBankBranchDistrict" name="editBankBranchDistrict">
+                @foreach ($districts as $district)
+                  <option value="{{ $district->id }}">{{ $district->name }}</option>
+                @endforeach
+              </select>
+              <span class="invalid-feedback" id="error-editBankBranchDistrict" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="editBankBranchCode">Branch Code</label>
+              <input type="number" class="form-control" id="editBankBranchCode" name="editBankBranchCode" min="1"/>
+              <span class="invalid-feedback" id="error-editBankBranchCode" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <input type="hidden" class="form-control" name="editBankBranchId" id="editBankBranchId">
+              <span class="invalid-feedback" id="error-editBankBranchId" role="alert"></span>
+              <label for="editBankBranchName">Branch Name</label>
+              <input type="text" class="form-control" id="editBankBranchName" name="editBankBranchName" />
+              <span class="invalid-feedback" id="error-editBankBranchName" role="alert"></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Discard</button>
+          <button type="button" class="btn btn-outline-primary" id="btnModalEditBankBranch" onclick="edit_bank_branch();">Apply Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- / EDIT --}}
+{{-- / BANK BRANCH --}}
     

@@ -1114,7 +1114,103 @@ class PermissionSeeder extends Seeder
                     'description'=>'Can delete a payment type',
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
-                ]
+                ],
+                [
+                    'name'=>'staff-system-lab',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can view exam labs',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-lab-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can add exam labs',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-lab-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can edit exam labs',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-lab-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can delete exam labs',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can view banks',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can add banks',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can edit banks',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can delete banks',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-branch',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can view bank branches',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-branch-add',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can add bank branches',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-branch-edit',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can edit bank branches',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-system-bank-branch-delete',
+                    'portal'=>'staff',
+                    'module'=>'system',
+                    'description'=>'Can delete bank branches',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
                 // /STAFF->SYSTEM
                 // /STAFF PORTAL
             )

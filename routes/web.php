@@ -227,6 +227,8 @@ Route::post('/portal/staff/user/permission/change',[App\Http\Controllers\Portal\
 // SYSTEM PAGE
 Route::get('/portal/staff/system', [App\Http\Controllers\Portal\Staff\SystemController::class, 'index'])->name('system');
 
+Route::post('/portal/staff/system/StudentImport', [App\Http\Controllers\Portal\Staff\SystemController::class, 'StudentImport'])->name('student.import');
+
 Route::post('/portal/staff/system/createUserRole', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createUserRole']);
 Route::post('/portal/staff/system/viewUserRoleGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'viewUserRoleGetDetails']);
 Route::post('/portal/staff/system/editUserRolePermissions', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editUserRolePermissions']);
@@ -270,8 +272,17 @@ Route::post('/portal/staff/system/deletePaymentType', [App\Http\Controllers\Port
 Route::post('/portal/staff/system/createLab', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createLab'])->name('create.lab');
 Route::post('/portal/staff/system/editLabGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editLabGetDetails'])->name('edit.lab.details');
 Route::post('/portal/staff/system/editLab', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editLab'])->name('edit.lab');
+Route::post('/portal/staff/system/deleteLab', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteLab'])->name('delete.lab');
 
-Route::post('/portal/staff/system/StudentImport', [App\Http\Controllers\Portal\Staff\SystemController::class, 'StudentImport'])->name('student.import');
+Route::post('/portal/staff/system/createBank', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createBank']);
+Route::post('/portal/staff/system/editBankGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editBankGetDetails']);
+Route::post('/portal/staff/system/editBank', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editBank']);
+Route::post('/portal/staff/system/deleteBank', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteBank']);
+
+Route::post('/portal/staff/system/createBankBranch', [App\Http\Controllers\Portal\Staff\SystemController::class, 'createBankBranch']);
+Route::post('/portal/staff/system/editBankBranchGetDetails', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editBankBranchGetDetails']);
+Route::post('/portal/staff/system/editBankBranch', [App\Http\Controllers\Portal\Staff\SystemController::class, 'editBankBranch']);
+Route::post('/portal/staff/system/deleteBankBranch', [App\Http\Controllers\Portal\Staff\SystemController::class, 'deleteBankBranch']);
 // /SYSTEM PAGE
 
 // INFORMATION PAGE
