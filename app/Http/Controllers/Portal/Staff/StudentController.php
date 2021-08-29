@@ -16,6 +16,7 @@ use App\Models\Exam\Schedule;
 use App\Models\Exam\Types;
 use App\Models\Exam;
 use App\Models\Student\Flag;
+use App\Models\Student\Payment;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -107,6 +108,7 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $registration = Registration::where('student_id', $id)->latest()->first();
+        $payments = Payment::where('student_id', $id)->get();
         $medicals = Medical::where('student_id', $id)->orderBy('created_at','desc')->get();
         $exams = hasExam::where('student_id', $id)->join('exam_schedules', 'student_exams.exam_schedule_id', '=', 'exam_schedules.id')->groupBy('exam_id')->select('exam_id')->get();
         
@@ -128,8 +130,52 @@ class StudentController extends Controller
         }
 
 
-        return view('portal/staff/student/profile', compact('student', 'registration', 'medicals', 'exams', 'schedule_ids'));
+        return view('portal/staff/student/profile', compact('student', 'registration', 'payments', 'medicals', 'exams', 'schedule_ids'));
     }
+
+    // UPDATE INFO
+    public function updateInfo(Request $request)
+    {
+        $validator = Validator::make($request->all(), 
+            [     
+                'id'=> ['required', 'integer', 'exists:students,id'],
+                'coloumnToUpdate' => ['required'],
+                'coloumnDataToUpdate' => ['required']
+            ]
+        );
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        else:
+            if(Student::where('id',$request->id)->update([$request->coloumnToUpdate => $request->coloumnDataToUpdate])):
+                activity()->withProperties(['student_id' => $request->id, $request->coloumnToUpdate => $request->coloumnDataToUpdate])->log('Info Changed');
+                return response()->json(['success'=>'success']);
+            endif;
+        endif;
+        return response()->json(['error'=>'error']);
+    }
+    // /UPDATE INFO
+
+    // UPDATE REGISTRATION
+    public function updateRegistration(Request $request)
+    {
+        $validator = Validator::make($request->all(), 
+            [     
+                'id'=> ['required', 'integer', 'exists:student_registrations,id'],
+                'coloumnToUpdate' => ['required'],
+                'coloumnDataToUpdate' => ['required']
+            ]
+        );
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        else:
+            if(Registration::where('id',$request->id)->update([$request->coloumnToUpdate => $request->coloumnDataToUpdate])):
+                activity()->withProperties(['registration_id' => $request->id, $request->coloumnToUpdate => $request->coloumnDataToUpdate])->log('Registration Info Changed');
+                return response()->json(['success'=>'success']);
+            endif;
+        endif;
+        return response()->json(['error'=>'error']);
+    }
+    // /UPDATE REGISTRATION
 
     // UPDATE EMAIL
     public function emailUpdateRequest(Request $request)

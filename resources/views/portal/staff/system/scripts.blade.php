@@ -2619,7 +2619,7 @@
         }
       },
       error: function(err){
-        console.log('Error in edit Bank get details ajax.');
+        console.log('Error in edit Bank Branch get details ajax.');
         $('#btnEditBankBranch-'+bank_branch_id).removeAttr('disabled','disabled');
         SwalSystemErrorDanger.fire();
       }
@@ -2652,7 +2652,7 @@
           contentType: false,
           beforeSend: function(){$('#btnModalEditBankBranch').attr('disabled', 'disabled');},
           success: function(data){
-            console.log('Success in edit Bank ajax.');
+            console.log('Success in edit Bank bank branch ajax.');
             $('#btnModaleditBankBranch').removeAttr('disabled', 'disabled');
             if(data['errors']){
               console.log('Errors in validating Bank data.');
@@ -2683,7 +2683,7 @@
             }
           },
           error: function(err){
-            console.log('Error in edit Bank ajax.')
+            console.log('Error in edit Bank branch ajax.')
             $('#btnModaleditBankBranch').removeAttr('disabled', 'disabled');
             SwalSystemErrorDanger.fire();
           }
@@ -2723,7 +2723,7 @@
           contentType: false,
           beforeSend: function(){$('#btndeleteBankBranch-'+bank_branch_id).attr('disabled','disabled');},
           success: function(data){
-            console.log('Success : delete Bank ajax');
+            console.log('Success : delete Bank branch ajax');
             SwalDoneSuccess.fire({
               title: 'Deleted!',
               text: 'Branch has been deleted.',
@@ -2741,7 +2741,7 @@
       else{
         SwalNotificationWarningAutoClose.fire({
           title: 'Cancelled!',
-          text: 'Bank has not been deleted.',
+          text: 'Bank Branch has not been deleted.',
         })
       }
     })
