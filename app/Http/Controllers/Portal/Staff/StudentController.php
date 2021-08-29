@@ -110,6 +110,7 @@ class StudentController extends Controller
         $registration = Registration::where('student_id', $id)->latest()->first();
         $payments = Payment::where('student_id', $id)->get();
         $medicals = Medical::where('student_id', $id)->orderBy('created_at','desc')->get();
+        $registrations = Registration::where('student_id', $id)->get();
         $exams = hasExam::where('student_id', $id)->join('exam_schedules', 'student_exams.exam_schedule_id', '=', 'exam_schedules.id')->groupBy('exam_id')->select('exam_id')->get();
         
         $exam_ids = array();
@@ -130,7 +131,7 @@ class StudentController extends Controller
         }
 
 
-        return view('portal/staff/student/profile', compact('student', 'registration', 'payments', 'medicals', 'exams', 'schedule_ids'));
+        return view('portal/staff/student/profile', compact('student', 'registration', 'payments', 'medicals', 'registrations', 'exams', 'schedule_ids'));
     }
 
     // UPDATE INFO

@@ -313,6 +313,11 @@
                                 <a class="nav-link" id="medicals-tab" data-toggle="tab" href="#medicals" role="tab" aria-controls="medicals" aria-selected="false">Medicals</a>
                               </li>
                               @endif
+                              @if(Auth::user()->hasPermission('staff-student-profile-registration-view'))
+                              <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="registrations-tab" data-toggle="tab" href="#registrations" role="tab" aria-controls="registrations" aria-selected="false">Registrations</a>
+                              </li>
+                              @endif
                             </ul>
                             {{-- /TAB LIST --}}
 
@@ -547,6 +552,40 @@
                               </div>
                               @endif
                               {{-- /MEDICAL TAB CONTENT --}}
+
+                              {{-- REGISTRATION TAB CONTENT --}}
+                              @if(Auth::user()->hasPermission('staff-student-profile-registration-view'))
+                              <div class="tab-pane fade card shadow-none mb-4" id="registrations" role="tabpanel" aria-labelledby="registrations-tab">
+                                <div class="col-12 row h5 font-weight-bold pt-2">
+                                  <div class="col-1">ID</div>
+                                  <div class="col-md-1">Validity</div>
+                                  <div class="col-md-2">Application Status<br/><span class="text-small text-muted">(Submission/Approval)</span></div>
+                                  <div class="col-md-2">Payment Status<br/><span class="text-small text-muted">(Submission/Approval)</span></div>
+                                  <div class="col-md-2">Document Status<br/><span class="text-small text-muted">(Submission/Approval)</span></div>
+                                  <div class="col-md-1">Remarks</div>
+                                  <div class="col-md-1">Status</div>
+                                  <div class="col-md-2 text-right pr-0 mr-0">Processed at</div>
+                                </div>
+                                <hr class="bg-dark"/>
+                                @forelse ($registrations as $registration)
+                                <div class="col-12 row">
+                                  <div class="col-1">{{ $registration->id }}</div>
+                                  <div class="col-md-1">{{ $registration->registered_at ?? 'Not Assigned' }}<br/>{{ $registration->registration_expire_at ?? 'Not Assigned' }}</div>
+                                  <div class="col-md-2">@if($registration->application_submit==1) Submitted @else Pending @endif / {{ $registration->application_status ?? "Pending" }}</div>
+                                  <div class="col-md-2">@if($registration->payment_id) Submitted @else Pending @endif / {{ $registration->payment_status ?? "Pending" }}</div>
+                                  <div class="col-md-2">@if($registration->document_submit==1) Submitted @else Pending @endif / {{ $registration->document_status ?? "Pending" }}</div>
+                                  <div class="col-md-1">{{ $registration->declined_msg ?? 'No remarks' }}</div>
+                                  <div class="col-md-1">@if($registration->status==1) Active @else Inactive @endif</div>
+                                  <div class="col-md-2 text-right pr-0 mr-0">Initiated - {{ $registration->created_at}}<br/>Last updated - {{ $registration->updated_at}}</div>
+                                </div>
+                                <hr>
+                                @empty
+                                <div class="col-12 row">No registrations to show</div>
+                                @endforelse
+                              </div>
+                              @endif
+                              {{-- /REGISTRATION TAB CONTENT --}}
+
                             </div>
                           </div>
 
