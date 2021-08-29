@@ -117,20 +117,12 @@ class StudentController extends Controller
         foreach($exams as $exam){
             $exam_ids [] = $exam->exam_id;
         }
-
-        // echo response()->json($exam_ids);
-
-        $schedules = hasExam::where('student_id', $id)->join('exam_schedules', 'student_exams.exam_schedule_id', '=', 'exam_schedules.id')->whereIn('exam_schedules.exam_id', $exam_ids)->get();
-
-        // $schedules=Schedule::where('exam_id',$id)->get();
-
         
+        $schedules = hasExam::where('student_id', $id)->join('exam_schedules', 'student_exams.exam_schedule_id', '=', 'exam_schedules.id')->whereIn('exam_schedules.exam_id', $exam_ids)->get();
         $schedule_ids = array();
         foreach($schedules as $schedule){
             $schedule_ids [] = $schedule->id;
         }
-
-
         return view('portal/staff/student/profile', compact('student', 'registration', 'payments', 'medicals', 'registrations', 'exams', 'schedule_ids'));
     }
 
