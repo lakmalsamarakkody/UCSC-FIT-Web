@@ -481,8 +481,8 @@
                   @foreach ($bank_branches as $bank_branch)
                   <tr id="tbl-bank-tr-{{$bank_branch->id}}">
                     <td>{{ $bank_branch->id }}</td>
-                    <td>{{ App\Models\Support\Bank::find($bank_branch->bank_id)->name }}</td>
-                    <td>{{ App\Models\Support\SlDistrict::find($bank_branch->district_id)->name }}</td>
+                    <td>{{ $bank_branch->bank->name }}</td>
+                    <td>{{ $bank_branch->district->name }}</td>
                     <td>{{ $bank_branch->code }}</td>
                     <td>{{ $bank_branch->name }}</td>
                     <td class="text-right">
