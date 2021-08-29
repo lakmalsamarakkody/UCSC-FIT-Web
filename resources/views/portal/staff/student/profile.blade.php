@@ -231,9 +231,7 @@
                   </div>
                   @endif
                   <div class="col-lg-12">
-                      @if(Auth::user()->hasPermission('staff-student-profile-result-view') || Auth::user()->hasPermission('staff-student-profile-medical-view'))
                       <hr>
-                      @endif
                       <div class="row">                        
                           <div class="col-lg-12">
                             {{-- TAB LIST --}}
@@ -241,6 +239,11 @@
                               @if(Auth::user()->hasPermission('staff-student-profile-result-view'))
                               <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="result-tab" data-toggle="tab" href="#result" role="tab" aria-controls="result" aria-selected="true">Results</a>
+                              </li>
+                              @endif
+                              @if(Auth::user()->hasPermission('staff-student-profile-payment-view'))
+                              <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="payments-tab" data-toggle="tab" href="#payments" role="tab" aria-controls="payments" aria-selected="false">Payments</a>
                               </li>
                               @endif
                               @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
@@ -372,23 +375,60 @@
                                       <td></td>  
                                       <td></td>  
                                       @endif
-
-
                                     </tr>
-
                                   @endforeach
-
                                   </tbody>
                                 </table>
                               </div>
                               @endif
                               {{-- /RESULT TAB CONTENT --}}
 
+                              {{-- PAYMENT TAB CONTENT --}}
+                              @if(Auth::user()->hasPermission('staff-student-profile-payment-view'))
+                              <div class="tab-pane fade card shadow-none mb-4" id="payments" role="tabpanel" aria-labelledby="payments-tab">
+                                <div class="col-12 row h5 font-weight-bold pt-2">
+                                  <div class="col-1">ID</div>
+                                  <div class="col-md-2">Details</div>
+                                  <div class="col-md-1">Amount</div>
+                                  <div class="col-md-2">Paid Thru</div>
+                                  <div class="col-md-1">Paid Date</div>
+                                  <div class="col-md-2">Images</div>
+                                  <div class="col-md-1 text-right">Status</div>
+                                  <div class="col-md-2 text-right">Processed at</div>
+                                </div>
+                                <hr class="bg-dark"/>
+                                @forelse ($payments as $payment)
+                                <div class="col-12 row">
+                                  <div class="col-1">{{ $payment->id }}</div>
+                                  <div class="col-md-2 text-capitalize">{{ $payment->type->name }} ({{ $payment->method->name }})</div>
+                                  <div class="col-md-1">Rs. {{ $payment->amount }}</div>
+                                  <div class="col-md-2">{{ $payment->bank->name }} - {{ $payment->bankBranch->name }}</div>
+                                  <div class="col-md-1">{{ $payment->paid_date}}</div>
+                                  <div class="col-md-2">
+                                    @if($payment->image) <a href="{{ asset('storage/payments/'.$payment->type->name.'/'.$payment->student_id.'/'.$payment->image)}}" target="-blank" ><span class="btn btn-info">Image 1</span></a>@endif 
+                                    @if($payment->image_two) <a href="{{ asset('storage/payments/'.$payment->type->name.'/'.$payment->student_id.'/'.$payment->image_two)}}" target="-blank" ><span class="btn btn-info">Image 2</span></a> @endif
+                                    @if(!$payment->image && !$payment->image_two) No Images Attached @endif
+                                  </div>
+                                  <div class="col-md-1 text-right">
+                                    @if($payment->status == "Approved")
+                                      <span class="badge badge-success"><h6 class="pt-2 px-2"> {{ $payment->status }} </h6 class="pt-1 px-2"></span>
+                                    @else 
+                                      <span class="badge badge-danger"><h6 class="pt-2 px-2"> {{ $payment->status ?? "Pending" }} </h6 class="pt-1 px-2"></span>
+                                    @endif
+                                  </div>
+                                  <div class="col-md-2 text-right"> Payment Initiated - {{ $payment->created_at}} <br/> Last updated - {{ $payment->updated_at}}</div>
+                                </div>
+                                <hr>
+                                @empty
+                                <div class="col-12 row">No payments to show</div>
+                                @endforelse
+                              </div>
+                              @endif
+                              {{-- /PAYMENT TAB CONTENT --}}
+
                               {{-- MEDICAL TAB CONTENT --}}
                               @if(Auth::user()->hasPermission('staff-student-profile-medical-view'))
                               <div class="tab-pane fade" id="medicals" role="tabpanel" aria-labelledby="medicals-tab">
-                                
-                                
                                 <div class="input-group mb-4">
                                   <div class="col-lg-3 col-5">
                                     <span class="badge badge-warning">P</span> <b>Pending</b>

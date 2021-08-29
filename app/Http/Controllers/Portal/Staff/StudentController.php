@@ -16,6 +16,7 @@ use App\Models\Exam\Schedule;
 use App\Models\Exam\Types;
 use App\Models\Exam;
 use App\Models\Student\Flag;
+use App\Models\Student\Payment;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -107,6 +108,7 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $registration = Registration::where('student_id', $id)->latest()->first();
+        $payments = Payment::where('student_id', $id)->get();
         $medicals = Medical::where('student_id', $id)->orderBy('created_at','desc')->get();
         $exams = hasExam::where('student_id', $id)->join('exam_schedules', 'student_exams.exam_schedule_id', '=', 'exam_schedules.id')->groupBy('exam_id')->select('exam_id')->get();
         
@@ -128,7 +130,7 @@ class StudentController extends Controller
         }
 
 
-        return view('portal/staff/student/profile', compact('student', 'registration', 'medicals', 'exams', 'schedule_ids'));
+        return view('portal/staff/student/profile', compact('student', 'registration', 'payments', 'medicals', 'exams', 'schedule_ids'));
     }
 
     // UPDATE EMAIL

@@ -397,6 +397,14 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
+                    'name'=>'staff-student-profile-payment-view',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can view student payments',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
                     'name'=>'staff-student-profile-medical-view',
                     'portal'=>'staff',
                     'module'=>'student',
