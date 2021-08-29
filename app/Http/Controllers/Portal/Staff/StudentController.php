@@ -133,6 +133,50 @@ class StudentController extends Controller
         return view('portal/staff/student/profile', compact('student', 'registration', 'payments', 'medicals', 'exams', 'schedule_ids'));
     }
 
+    // UPDATE INFO
+    public function updateInfo(Request $request)
+    {
+        $validator = Validator::make($request->all(), 
+            [     
+                'id'=> ['required', 'integer', 'exists:students,id'],
+                'coloumnToUpdate' => ['required'],
+                'coloumnDataToUpdate' => ['required']
+            ]
+        );
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        else:
+            if(Student::where('id',$request->id)->update([$request->coloumnToUpdate => $request->coloumnDataToUpdate])):
+                activity()->withProperties(['student_id' => $request->id, $request->coloumnToUpdate => $request->coloumnDataToUpdate])->log('Info Changed');
+                return response()->json(['success'=>'success']);
+            endif;
+        endif;
+        return response()->json(['error'=>'error']);
+    }
+    // /UPDATE INFO
+
+    // UPDATE REGISTRATION
+    public function updateRegistration(Request $request)
+    {
+        $validator = Validator::make($request->all(), 
+            [     
+                'id'=> ['required', 'integer', 'exists:student_registrations,id'],
+                'coloumnToUpdate' => ['required'],
+                'coloumnDataToUpdate' => ['required']
+            ]
+        );
+        if($validator->fails()):
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        else:
+            if(Registration::where('id',$request->id)->update([$request->coloumnToUpdate => $request->coloumnDataToUpdate])):
+                activity()->withProperties(['registration_id' => $request->id, $request->coloumnToUpdate => $request->coloumnDataToUpdate])->log('Registration Info Changed');
+                return response()->json(['success'=>'success']);
+            endif;
+        endif;
+        return response()->json(['error'=>'error']);
+    }
+    // /UPDATE REGISTRATION
+
     // UPDATE EMAIL
     public function emailUpdateRequest(Request $request)
     {

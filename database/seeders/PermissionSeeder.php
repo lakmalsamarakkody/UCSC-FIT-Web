@@ -357,6 +357,22 @@ class PermissionSeeder extends Seeder
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
                 [
+                    'name'=>'staff-student-profile-update-info',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can update student information',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
+                    'name'=>'staff-student-profile-update-registration',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can update student current registration',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
+                [
                     'name'=>'staff-student-downloadStdList',
                     'portal'=>'staff',
                     'module'=>'student',

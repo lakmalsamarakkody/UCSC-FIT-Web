@@ -60,66 +60,123 @@
                     <table class="table">
                         <tr>
                             <th>Registration Number:</th>
-                            <td>{{ $student->reg_no ?? 'Not Registered Yet' }}</td>
+                            <td>
+                              <span id="reg_no">{{ $student->reg_no ?? 'Not Registered Yet' }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('reg_no')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         <tr>
+                          <th>Registered Date:</th>
+                          <td>
+                            <span id="registered_at">{{ $registration->registered_at ?? 'Not Registered Yet' }}</span>
+                            @if(Auth::user()->hasPermission('staff-student-profile-update-registration'))<button onclick="updateRegistration('registered_at')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                          </td>
+                      </tr>
+                        <tr>
                             <th>Registration Expire on:</th>
-                            <td>{{ $registration->registration_expire_at ?? 'Not Registered Yet' }}</td>
+                            <td>
+                              <span id="registration_expire_at">{{ $registration->registration_expire_at ?? 'Not Registered Yet' }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-registration'))<button onclick="updateRegistration('registration_expire_at')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         <tr>
                             <th>Title:</th>
-                            <td>{{ $student->title }}.</td>
+                            <td>
+                              <span id="title">{{ $student->title }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('title')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         <tr>
                             <th>First Name:</th>
-                            <td>{{ $student->first_name }}</td>
+                            <td>
+                              <span id="first_name">{{ $student->first_name }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('first_name')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         <tr>
                             <th>Middle Names:</th>
-                            <td>{{ $student->middle_names ?? '' }}</td>
+                            <td>
+                              <span id="middle_names">{{ $student->middle_names }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('middle_names')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         <tr>
                             <th>Full Name:</th>
-                            <td>{{ $student->full_name }}</td>
+                            <td>
+                              <span id="full_name">{{ $student->full_name }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('full_name')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         <tr>
-                            <th>Name with Initials:</th>
-                            <td>{{ $student->initials }} {{ $student->last_name }}</td>
+                            <th>Initials:</th>
+                            <td>
+                              <span id="initials">{{ $student->initials }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('initials')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Last Name:</th>
+                            <td>
+                              <span id="last_name">{{ $student->last_name }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('last_name')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         <tr>
                             <th>Gender:</th>
-                            <td>@if($student->gender == 'Male')<i class="fa fa-lg fa-male"></i>@elseif($student->gender == 'Female')<i class="fa fa-lg fa-female"></i>@endif</td>
+                            <td>
+                              @if($student->gender == 'Male')<i class="fa fa-lg fa-male"></i>@elseif($student->gender == 'Female')<i class="fa fa-lg fa-female"></i>@endif <span id="gender">{{ $student->gender }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('gender')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button><br/>
+                              <span class="text-muted">*(Male/Female)</span>@endif
+                            </td>
                         </tr>
                         <tr>
                             <th>Date of Birth:</th>
-                            <td>{{ $student->dob }}</td>
+                            <td>
+                              <span id="dob">{{ $student->dob }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('dob')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         <tr>
                             <th>Citizenship:</th>
-                            <td>{{ $student->citizenship }}</td>
+                            <td>
+                              <span id="citizenship">{{ $student->citizenship }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('citizenship')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         @if($student->nic_old)                                        
                         <tr>
                             <th>NIC (old):</th>
-                            <td>{{ $student->nic_old }}</td>
+                            <td>
+                              <span id="nic_old">{{ $student->nic_old }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('nic_old')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         @endif
                         @if($student->nic_new)                                     
                         <tr>
                             <th>NIC (new):</th>
-                            <td>{{ $student->nic_new }}</td>
+                            <td>
+                              <span id="nic_new">{{ $student->nic_new }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('nic_new')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         @endif
                         @if($student->postal)                                     
                         <tr>
                             <th>Postal ID:</th>
-                            <td>{{ $student->postal }}</td>
+                            <td>
+                              <span id="postal">{{ $student->postal }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('postal')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         @endif
                         @if($student->passport)                                     
                         <tr>
                             <th>Passport No:</th>
-                            <td>{{ $student->passport }}</td>
+                            <td>
+                              <span id="passport">{{ $student->passport }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('passport')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                         @endif
                         <tr>
@@ -128,7 +185,12 @@
                         </tr>
                         <tr>
                             <th>Telephone No:</th>
-                            <td>+{{ $student->telephone_country_code ?? '' }}{{ $student->telephone ?? '' }}</td>
+                            <td>
+                              +<span id="telephone_country_code">{{ $student->telephone_country_code ?? '' }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('telephone_country_code')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>&nbsp;@endif
+                              <span id="telephone">{{ $student->telephone }}</span>
+                              @if(Auth::user()->hasPermission('staff-student-profile-update-info'))<button onclick="updateInfo('telephone')" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></button>@endif
+                            </td>
                         </tr>
                     </table>
 
@@ -146,7 +208,7 @@
                             @endif
 
                             {{-- REGISTRATION block/UNblock --}}
-                            @if(!Auth::user()->hasPermission('staff-student-profile-block'))
+                            @if(Auth::user()->hasPermission('staff-student-profile-block'))
                               @if($student->flag->phase_id != 2)
                               <button onclick="block_activities()" class="btn btn-lg btn-outline-danger" data-tooltip="tooltip" data-placement="bottom" title="Block User Activities">
                                 <i class="fa fa-user-lock"></i>

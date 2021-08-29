@@ -1,6 +1,146 @@
 @section('script')
 <script type="text/javascript">
 
+  // UPDATE INFO
+  updateInfo = (editField) => {
+    SwalQuestionDanger.fire({
+      input: 'text',
+      inputPlaceholder: editField,
+      inputValue: $('#'+editField).html(),
+      title: "Are you sure?",
+      text: editField+" will be updated",
+      confirmButtonText: "Yes, Update!",
+    }).then((result) => {
+      event.preventDefault();
+      if (result.isConfirmed) {
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ route('update.info') }}",
+          type: 'post',
+          data: { 'id': "{{ $student->id }}", 'coloumnToUpdate': editField, 'coloumnDataToUpdate': result.value },
+          beforeSend: function(){
+            // Show loader
+            $('body').addClass('freeze');
+            Swal.showLoading();
+          },
+          success: function(data){
+            $('body').removeClass('freeze');
+            Swal.hideLoading();
+            if(data['errors']){
+              $.each(data['errors'], function(key, value){
+                SwalNotificationErrorDanger.fire({
+                  title: 'Error!',
+                  text: value
+                })
+              });
+            }else if (data['success']){
+              SwalDoneSuccess.fire({
+                title: editField+' Updated!',
+                text: editField+' updated successfully',
+              }).then((result) => {
+                if(result.isConfirmed) {
+                  location.reload()
+                }
+              });
+            }else if (data['error']){
+              SwalSystemErrorDanger.fire({
+                title: 'Update Failed!',
+                text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
+              })
+            }
+          },
+          error: function(err){
+            $('body').removeClass('freeze');
+            Swal.hideLoading();
+            SwalErrorDanger.fire({
+              title: 'Update Failed!',
+              text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
+            })
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Update process aborted",
+        })
+      }
+    })
+  }
+  // /UPDATE INFO
+
+  // UPDATE REGISTRATION
+  updateRegistration = (editField) => {
+    SwalQuestionDanger.fire({
+      input: 'text',
+      inputPlaceholder: editField,
+      inputValue: $('#'+editField).html(),
+      title: "Are you sure?",
+      text: editField+" will be updated",
+      confirmButtonText: "Yes, Update!",
+    }).then((result) => {
+      event.preventDefault();
+      if (result.isConfirmed) {
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "{{ route('update.registration') }}",
+          type: 'post',
+          data: { 'id': "{{ $registration->id }}", 'coloumnToUpdate': editField, 'coloumnDataToUpdate': result.value },
+          beforeSend: function(){
+            // Show loader
+            $('body').addClass('freeze');
+            Swal.showLoading();
+          },
+          success: function(data){
+            $('body').removeClass('freeze');
+            Swal.hideLoading();
+            if(data['errors']){
+              $.each(data['errors'], function(key, value){
+                SwalNotificationErrorDanger.fire({
+                  title: 'Error!',
+                  text: value
+                })
+              });
+            }else if (data['success']){
+              SwalDoneSuccess.fire({
+                title: editField+' Updated!',
+                text: editField+' updated successfully',
+              }).then((result) => {
+                if(result.isConfirmed) {
+                  location.reload()
+                }
+              });
+            }else if (data['error']){
+              SwalSystemErrorDanger.fire({
+                title: 'Update Failed!',
+                text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
+              })
+            }
+          },
+          error: function(err){
+            $('body').removeClass('freeze');
+            Swal.hideLoading();
+            SwalErrorDanger.fire({
+              title: 'Update Failed!',
+              text: 'Please Try Again or Contact Administrator: {{ App\Models\Contact::where('type', 'admin')->first()->email }}',
+            })
+          }
+        });
+      }
+      else{
+        SwalNotificationWarningAutoClose.fire({
+          title: "Cancelled!",
+          text: "Update process aborted",
+        })
+      }
+    })
+  }
+  // /UPDATE REGISTRATION
+
   // EMAIL
   reset_email = () => {
     SwalQuestionSuccess.fire({
@@ -21,7 +161,7 @@
           },
           url: "{{ route('update.email.request') }}",
           type: 'post',
-          data: { 'email': result.value, 'id': "{{ $student->id }}"},         
+          data: { 'email': result.value, 'id': "{{ $student->id }}"},
           beforeSend: function(){
             // Show loader
             $('body').addClass('freeze');
