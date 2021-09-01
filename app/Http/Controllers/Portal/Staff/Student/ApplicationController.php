@@ -91,7 +91,7 @@ class ApplicationController extends Controller
         // DOCUMENT DETAILS
         if($registration->document_submit == 1):
             if($student->document->where('type', 'Birth')->where('side', 'front')->count() > 0):
-                $bcFront = $student->document->where('type', 'Birth')->where('side', 'front')->latest()->first()->image;
+                $bcFront = $student->document->where('type', 'Birth')->where('side', 'front')->first()->image;
             else:
                 $bcFront = NULL;
             endif;
