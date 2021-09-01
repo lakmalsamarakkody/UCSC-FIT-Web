@@ -428,6 +428,14 @@ class PermissionSeeder extends Seeder
                     'created_at'=> '2020-11-25 10:13:53',
                     'updated_at'=> '2020-11-25 10:13:53'
                 ],
+                [
+                    'name'=>'staff-student-profile-registration-view',
+                    'portal'=>'staff',
+                    'module'=>'student',
+                    'description'=>'Can view student registration history',
+                    'created_at'=> '2020-11-25 10:13:53',
+                    'updated_at'=> '2020-11-25 10:13:53'
+                ],
                 // /STAFF->STUDENTS
 
                 // STAFF->EXAM
