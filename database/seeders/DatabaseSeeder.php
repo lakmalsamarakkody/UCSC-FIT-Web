@@ -44,7 +44,8 @@ class DatabaseSeeder extends Seeder
             WorldCitiesTableSeeder::class,
             FeeSeeder::class,
             DurationSeeder::class,
-            ContactsSeeder::class
+            ContactsSeeder::class,
+            SetDownloadVersionSeeder::class
         ]);
     }
 }
