@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
             DurationSeeder::class,
             ContactsSeeder::class,
             FAQSeeder::class,
-            DownloadVersion::class,
+            DownloadVersionSeeder::class,
             //SetDownloadVersionSeeder::class
         ]);
     }
