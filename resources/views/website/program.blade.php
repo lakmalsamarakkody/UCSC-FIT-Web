@@ -25,32 +25,33 @@
       Programme Section
     ============================-->
     <section id="programme" style="padding-top: 80px;">
-        <!-- smain header -->
+        <!-- main header -->
         <div class="row about-container">
             <div class="col-lg-8 content order-lg-1 order-1">
                 <h2 class="title">What are the available Courses?</h2>
                 <br/>
-                <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b><br> only in English medium.</b></p>            </div>
+                <p>Foundation in Information Technology (FIT) programme consists of <b>three courses</b> and all examinations are conducted <b><br> only in English medium.</b></p>
+            </div>
         </div><!-- #main header -->
 
         <!-- FIT 103 -->
         <div class="row about-container" style="padding-top: 30px;" id="103">
             <div class="col-lg-8 content order-lg-1 order-1">
-                <p><strong>FIT 103: ICT Applications</strong><br>
+                <p><h4>FIT 103: ICT Applications</h3>
                 This course provides basic ICT (Information and Communication Technology) knowledge and skills required for the office environment. It ensures that the learner possesses required knowledge and skills to use office applications competently. It encompasses eight modules: (1) Computing for the Society, (2) Introduction to Computers, (3) Word Processing for Electronic Documents, (4) Spreadsheets for Calculation, (5) Multimedia and Electronic Presentation, (6) Data and Databases, (7) The Internet and Web Applications, and (8) Programming. Also, students could use Microsoft Office 365 as the office package when they sit for examination. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test and a two-hour practical test for Fundamentals of Computing course.</p>
             </div>
-            <div class="myBox col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit103.png') }});  cursor: pointer;">
-                <a target="_blank" class="" href="{{ asset('documents/FIT-103/FIT-103-Fundamentals_of_Computing.pdf') }}"></a>
+            <div class="col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit103.png.deleted') }});">
+                <!-- <a target="_blank" class="" href="{{ asset('documents/FIT-103/FIT-103-Fundamentals_of_Computing.pdf') }}"></a> -->
             </div>
         </div><!-- #FIT 103 -->
 
         <!-- FIT 203 -->
         <div class="row about-container" id="203">
-            <div class="myBox col-lg-4 background order-lg-1 order-2 wow fadeInLeft" style="background-image: url({{ asset('img/logo/fit203.png') }});  cursor: pointer;">
-                <a target="_blank" href="{{ asset('documents/FIT-203/FIT-203-English_for_Computing.pdf') }}"></a>
+            <div class="col-lg-4 background order-lg-1 order-2 wow fadeInLeft" style="background-image: url({{ asset('img/logo/fit203.png.deleted') }});">
+                <!-- <a target="_blank" href="{{ asset('documents/FIT-203/FIT-203-English_for_Computing.pdf') }}"></a> -->
             </div>
             <div class="col-lg-8 content order-lg-2 order-1" style="text-align: right;">
-                <p><strong>FIT 203: English for ICT</strong><br>
+                <p><h4>FIT 203: English for ICT</h4>
                 This course has been designed to provide language and communication skills in English from beginners to intermediate learners who want to pursue studies as well as careers in Information Communication Technology (ICT). All four areas of competency in English language, such as Reading, Listening, Speaking and Writing will be covered in this syllabus and the learning activities are designed considering ICT working environment. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test to evaluate reading, listening capabilities and a two-hour practical test to evaluate speaking and writing skills.</p>   
             </div>
         </div><!-- FIT #103 -->
@@ -58,14 +59,27 @@
         <!-- FIT 303 -->
         <div class="row about-container" id="303">
             <div class="col-lg-8 content order-lg-1 order-1">
-                <p><strong>FIT 303: Mathematics for ICT</strong><br>
+                <p><h4>FIT 303: Mathematics for ICT</h4>
                 Mathematics plays an important role in Information Technology. The aim of this course is to provide basic mathematical and statistical concepts. After successful completion of this course, the learner will possess problem solving and analytical skills together with required mathematical & statistical knowledge to solve problems in computing. Hence, this will be very useful for anyone who is planning to pursue a carrier in ICT or related sector. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test.
                 </p>
             </div>
-            <div class="myBox col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit303.png') }}); cursor: pointer;">
-                <a target="_blank"  href="{{ asset('documents/FIT-303/FIT-303-Mathematics_for_Computing.pdf') }}"></a>
+            <div class="col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit303.png.deleted') }});">
+                <!-- <a target="_blank"  href="{{ asset('documents/FIT-303/FIT-303-Mathematics_for_Computing.pdf') }}"></a> -->
             </div>
         </div><!-- #FIT 103 -->
+
+        <!-- Full Syllabus -->
+        <div class="row about-container" id="syllabus">
+            <div class="col-lg-4 content order-lg-1 order-1">
+                <h2 class="title">Looking for more information?</h2><br/>
+                <p><strong>Student handBook</strong><br>
+                Click on the Image to view the updated handbook.
+                </p>
+            </div>
+            <div class="myBox col-lg-8 background order-lg-2 order-2 wow fadeInLeft" style="background-image: url({{ asset('img/handbook.png') }});  cursor: pointer;">
+                <a target="_blank" href="{{ asset('documents/FIT-Syllabus-booklet-final.pdf') }}"></a>
+            </div>
+        </div><!-- Full Syllabus -->
 
         <!-- NEXT STEP -->
         <div class="row about-container">
