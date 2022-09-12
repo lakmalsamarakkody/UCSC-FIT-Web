@@ -95,7 +95,7 @@
             <div class="col-lg-8 content order-lg-1 order-1">               
                     <h2 class="title"><a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}"  style="color:#000">Academic Matters</a></h2>
                     <p class="description">If your question is related to administration matters of FIT programme, 
-                        <br>for example <b>registration, submitting applications for examination,</b> etc. please contact External Degrees Centre. 
+                        <br>for example <b>registration, submitting applications for examination,</b> etc. please contact e-Learning Centre.
                         <br>It is recommended to check the FIT website ( <a href="www.fit.bit.lk">www.fit.bit.lk</a> ) or FIT LMS ( <a href="https://fitvle.bit.lk/">https://fitvle.bit.lk/</a> ) before you contact the relevant details.
                     </p>
             </div>

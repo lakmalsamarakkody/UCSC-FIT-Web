@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             SubjectSeeder::class,
             StudentPhaseSeeder::class,
             ExamTypeSeeder::class,
+            LabSeeder::class,
             //LabSeeder::class,
             //ExamScheduleSeeder::class,
             //StudentRegistrationSeeder::class,
@@ -44,7 +45,10 @@ class DatabaseSeeder extends Seeder
             WorldCitiesTableSeeder::class,
             FeeSeeder::class,
             DurationSeeder::class,
-            ContactsSeeder::class
+            ContactsSeeder::class,
+            FAQSeeder::class,
+            DownloadVersionSeeder::class,
+            //SetDownloadVersionSeeder::class
         ]);
     }
 }
