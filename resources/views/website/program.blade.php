@@ -25,8 +25,24 @@
       Programme Section
     ============================-->
     <section id="programme" style="padding-top: 80px;">
+
+        <!-- Full Syllabus -->
+        <div class="row about-container" style="background-color:#eee;" id="syllabus">
+            <div class="col-lg-12 content order-lg-1 order-1 pt-3" style="background-color:#eee;">
+                <h2 class="title py-0 my-0">Looking for more information?</h2><br/>
+                <p>Click here to view the updated student handbook</p>
+            </div>
+            
+            <div class="myBox col-lg-12 background order-lg-2 order-2 wow fadeInLeft" style="background-image: url({{ asset('img/student-handbook.png') }}); cursor: pointer;">
+                <a target="_blank" href="{{ asset('documents/FIT-Syllabus-booklet-final.pdf') }}">
+                    <hr width="100%"/>
+                    <!-- <h5><span class="badge badge-dark">Click to download</span></h5> -->
+                </a>
+            </div>
+        </div><!-- Full Syllabus -->
+
         <!-- main header -->
-        <div class="row about-container">
+        <div class="row about-container mt-4">
             <div class="col-lg-8 content order-lg-1 order-1">
                 <h2 class="title">What are the available Courses?</h2>
                 <br/>
@@ -40,14 +56,14 @@
                 <p><h4>FIT 103: ICT Applications</h3>
                 This course provides basic ICT (Information and Communication Technology) knowledge and skills required for the office environment. It ensures that the learner possesses required knowledge and skills to use office applications competently. It encompasses eight modules: (1) Computing for the Society, (2) Introduction to Computers, (3) Word Processing for Electronic Documents, (4) Spreadsheets for Calculation, (5) Multimedia and Electronic Presentation, (6) Data and Databases, (7) The Internet and Web Applications, and (8) Programming. Also, students could use Microsoft Office 365 as the office package when they sit for examination. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test and a two-hour practical test for Fundamentals of Computing course.</p>
             </div>
-            <div class="col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit103.png.deleted') }});">
+            <div class="col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit103_cropped.png') }});">
                 <!-- <a target="_blank" class="" href="{{ asset('documents/FIT-103/FIT-103-Fundamentals_of_Computing.pdf') }}"></a> -->
             </div>
         </div><!-- #FIT 103 -->
 
         <!-- FIT 203 -->
         <div class="row about-container" id="203">
-            <div class="col-lg-4 background order-lg-1 order-2 wow fadeInLeft" style="background-image: url({{ asset('img/logo/fit203.png.deleted') }});">
+            <div class="col-lg-4 background order-lg-1 order-2 wow fadeInLeft" style="background-image: url({{ asset('img/logo/fit203_cropped.png') }});">
                 <!-- <a target="_blank" href="{{ asset('documents/FIT-203/FIT-203-English_for_Computing.pdf') }}"></a> -->
             </div>
             <div class="col-lg-8 content order-lg-2 order-1" style="text-align: right;">
@@ -63,23 +79,10 @@
                 Mathematics plays an important role in Information Technology. The aim of this course is to provide basic mathematical and statistical concepts. After successful completion of this course, the learner will possess problem solving and analytical skills together with required mathematical & statistical knowledge to solve problems in computing. Hence, this will be very useful for anyone who is planning to pursue a carrier in ICT or related sector. There will be a two-hour Multiple-Choice Questions (MCQs) based e-Test.
                 </p>
             </div>
-            <div class="col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit303.png.deleted') }});">
+            <div class="col-lg-4 background order-lg-2 order-2 wow fadeInRight" style="background-image: url({{ asset('img/logo/fit303_cropped.png') }});">
                 <!-- <a target="_blank"  href="{{ asset('documents/FIT-303/FIT-303-Mathematics_for_Computing.pdf') }}"></a> -->
             </div>
         </div><!-- #FIT 103 -->
-
-        <!-- Full Syllabus -->
-        <div class="row about-container" id="syllabus">
-            <div class="col-lg-4 content order-lg-1 order-1">
-                <h2 class="title">Looking for more information?</h2><br/>
-                <p><strong>Student handBook</strong><br>
-                Click on the Image to view the updated handbook.
-                </p>
-            </div>
-            <div class="myBox col-lg-8 background order-lg-2 order-2 wow fadeInLeft" style="background-image: url({{ asset('img/handbook.png') }});  cursor: pointer;">
-                <a target="_blank" href="{{ asset('documents/FIT-Syllabus-booklet-final.pdf') }}"></a>
-            </div>
-        </div><!-- Full Syllabus -->
 
         <!-- NEXT STEP -->
         <div class="row about-container">
@@ -135,7 +138,7 @@
                     <div class="card-body pt-0 pl-md-5">
                         Please contact the relevant facilitator of the course, through a forum, message or email. Contact details are given in the <a href="{{ url('/contact') }}">contact us</a> page.
                         <br/>If you are not satisfied with the reply, contact the coordinator of VLE through email  ( <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}</a> ).
-                        <br/>If you are still not satisfied with the reply, send your complaint in writing to the Director, UCSC by using the email (<a href="mailto:director@ucsc.cmb.ac.lk">director@ucsc.cmb.ac.lk</a>)
+                        <br/>If you are still not satisfied with the reply, send your complaint in writing to the Director, UCSC by using the email (<a href="mailto:{{ App\Models\Contact::where('type', 'director')->first()->email }}">{{ App\Models\Contact::where('type', 'director')->first()->email }}</a>)
                     </div>
                 </div>
             </div>
