@@ -223,7 +223,7 @@
             <div class="card border-0">
                 <div class="card-header bg-transparent border-bottom-0" id="headingSix">
                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>>Where can I take the FIT exams?</h4>
+                        <h4 class="mb-0"><i class="fa fa-question-circle pr-3"></i>Where can I take the FIT exams?</h4>
                     </button>
                 </div>
             
