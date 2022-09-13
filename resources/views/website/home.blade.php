@@ -165,7 +165,7 @@
                 
                     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                         <div class="card-body pt-0 pl-md-5">
-                            At the moment, FIT is considered as an alternative qualification to register BIT programme. However, it is difficult to say about other programs since conditions of registration vary from one to another. However, if any other institute decides to consider FIT certification equivalent qualification for registration, we will announce them.
+                            At the moment, FIT is considered an alternative qualification to A/L for registration in the BIT programme. However, it is difficult to say about other programmes since conditions of registration vary from one to another. If any other university decides to consider FIT certification as an equivalent qualification to A/L for registration, we will announce them
                         </div>
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                 
                     <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
                         <div class="card-body pt-0 pl-md-5">
-                            When you have completed relevant e-Tests or practical tests successfully, you can apply to obtain a formal certificate by paying Rs. 500. All requests received before the first Monday of the last week of a month will be processed and the certificate will be issued during the first week of next month.
+                            When you have completed relevant e-Tests and practical tests successfully, you can apply to obtain a formal certificate by paying Rs. 500. All requests received before the first Monday of the last week of a month will be processed and the certificate will be issued during the first week of next month.
                         </div>
                     </div>
                 </div>

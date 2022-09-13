@@ -84,7 +84,7 @@
                     
                         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                               At the moment, FIT is considered as an alternative qualification to register BIT programme. However, it is difficult to say about other programs since conditions of registration vary from one to another. However, if any other institute decides to consider FIT certification equivalent qualification for registration, we will announce them.
+                            At the moment, FIT is considered an alternative qualification to A/L for registration in the BIT programme. However, it is difficult to say about other programmes since conditions of registration vary from one to another. If any other university decides to consider FIT certification as an equivalent qualification to A/L for registration, we will announce them.
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                     
                         <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
-                                When you have completed relevant e-Tests or practical tests successfully, you can apply to obtain a formal certificate by paying Rs. 500. All requests received before the first Monday of the last week of a month will be processed and the certificate will be issued during the first week of next month.
+                                When you have completed relevant e-Tests and practical tests successfully, you can apply to obtain a formal certificate by paying Rs. 500. All requests received before the first Monday of the last week of a month will be processed and the certificate will be issued during the first week of next month.
                             </div>
                         </div>
                     </div>
@@ -156,7 +156,7 @@
                         <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
                             <div class="card-body pt-0 pl-md-5">
                                 Please contact the relevant facilitator of the course, through a forum, message or email. Contact details are given in the <a href="{{ url('/contact') }}">contact us</a> page.
-                                <br/>If you are not satisfied with the reply, contact the coordinator of VLE through email  ( <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}</a> ).
+                                <br/>If you are not satisfied with the reply, contact the Coordinator of the FIT programme through email  ( <a href="mailto:{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}">{{ App\Models\Contact::where('type', 'coordinator')->first()->email }}</a> ).
                                 <br/>If you are still not satisfied with the reply, send your complaint in writing to the Director, UCSC by using the email (<a href="mailto:{{ App\Models\Contact::where('type', 'director')->first()->email }}">{{ App\Models\Contact::where('type', 'director')->first()->email }}</a>)
                             </div>
                         </div>
